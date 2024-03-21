@@ -49,7 +49,7 @@ const Forgotpassword = () => {
                 <div className="text-center mb-4">
                   <h3 className="text-left lgtext">Forgot Password</h3> 
                 </div>
-                <p className='para_forget'>No worriest! Just enter your email and we’ll send you a reset password link.</p>
+                <p className='para_forget'>No worries! Just enter your email and we’ll send you a reset password link.</p>
                 <div className="mb-3">
                   <div className="inputWrapper">
                   <input

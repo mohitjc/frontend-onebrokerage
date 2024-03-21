@@ -65,9 +65,12 @@ const Signup = () => {
             autoComplete='off'
             required />
           <div className="relative mb-6">
-            <input type={eyes.password ? 'text' : 'password'} className="shadow-box border-1 border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-blue-500 focus:border-blue-500" placeholder="Password"
+            <input 
+            type={eyes.password ? 'text' : 'password'} 
+            className="shadow-box border-1 border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-blue-500 focus:border-blue-500" placeholder="Password"
              onChange={e => setForm({ ...form, password: e.target.value })}
              value={form.password}
+             minLength={8}
              autoComplete='off'
             required />
 
