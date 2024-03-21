@@ -16,12 +16,14 @@ import AddEditRole from './Pages/Roles/AddEdit';
 import Users from './Pages/Users';
 import UserDetail from './Pages/Users/Profiledetail';
 import AddEditUser from './Pages/Users/AddEditUser';
+import Dashboard from './Pages/Dashboard';
 
 function App() {
 
   const routes=[
     {url:'',element:<Home />},
     {url:'/login',element:<Login />},
+    {url:'/dashboard',element:<Dashboard />},
     {url:'*',element:<NotFoundPage />},
     {url:'/profile',element:<Profile />},
     {url:'/profile/:tab',element:<Settings />},
