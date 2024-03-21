@@ -24,114 +24,12 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
       url:'/dashboard',
       key:'dashboard',
     },
-    // {
-    //   name:'User Management',
-    //   icon:<FiUsers className="text-[#5577FF] shrink-0 text-lg" />,
-    //   key:'roles,users',
-    //   tab:'user',
-    //   menu:[
-    //     {
-    //       name:'Roles',
-    //       url:'/roles',
-    //       key:'roles'
-    //     },
-    //     {
-    //       name:'Users',
-    //       url:'/users',
-    //       key:'users'
-    //     },
-    //   ]
-    // },
-    // {
-    //   name:'Catalogue',
-    //   icon: <GrCatalogOption className="text-[#fd71af] shrink-0 text-lg" />,
-    //   key:'categories,types',
-    //   tab:'catalogue',
-    //   menu:[
-    //     {
-    //       name:'Types',
-    //       url:'/types',
-    //       key:'types'
-    //     },
-    //     {
-    //       name:'Categories',
-    //       url:'/categories',
-    //       key:'categories'
-    //     },
-    //   ]
-    // },
-    // {
-    //   name:'Subscription Plan',
-    //   icon: <i className="material-icons text-[#ffc800] shrink-0 text-lg" >subscriptions</i>,
-    //   key:'features,plans',
-    //   tab:'plan',
-    //   menu:[
-    //     {
-    //       name:'Features',
-    //       url:'/features',
-    //       key:'features'
-    //     },
-    //     {
-    //       name:'Plans',
-    //       url:'/plans',
-    //       key:'plans'
-    //     },
-    //   ]
-    // },
-    // {
-    //   name:'Currency',
-    //   icon:<i className="material-icons text-[#00b884] shrink-0 text-lg" title="">currency_exchange</i>,
-    //   url:'/currency',
-    //   key:'currency',
-    // },
-    // {
-    //   name:'Customers',
-    //   icon:<RiPresentationLine className="text-[#7b68ee] shrink-0 text-lg" />,
-    //   url:'/customer',
-    //   key:'customer',
-    // },
-    // {
-    //   name:'Participant Type',
-    //   icon:<RiHome6Line className="text-[#00b884] shrink-0 text-lg" />,
-    //   url:'/participant-type',
-    //   key:'participant-type',
-    // },
-    // {
-    //   name:'Skills',
-    //   icon:<RiHome6Line className="text-[#00b884] shrink-0 text-lg" />,
-    //   key:'skills,skill-roles',
-    //   tab:'skills',
-    //   menu:[
-    //     {
-    //       name:'Skill Roles',
-    //       url:'/skill-roles',
-    //       key:'skillRoles'
-    //     },
-    //     {
-    //       name:'Skills',
-    //       url:'/skills',
-    //       key:'skills'
-    //     },
-    //   ]
-    // },
-    // {
-    //   name:'Group',
-    //   icon:<span class="material-symbols-outlined text-[#ffc800] shrink-0 text-lg">groups</span>,
-    //   url:'/group',
-    //   key:'group',
-    // },
-    // {
-    //   name:'Certification',
-    //   icon:<span class="material-symbols-outlined text-[#ffc800] shrink-0 text-lg">workspace_premium</span>,
-    //   url:'/certification',
-    //   key:'certification',
-    // },
-    // {
-    //   name:'Content Management',
-    //   icon:<span class="material-symbols-outlined text-[#ffc800] shrink-0 text-lg">content_paste</span>,
-    //   url:'/content',
-    //   key:'content',
-    // },
+      {
+      name:'Events',
+      icon:<span class="material-symbols-outlined text-[#ffc800] shrink-0 text-lg">star</span>,
+      url:'/event',
+      key:'event',
+    },
   ]
 
   return (
@@ -199,7 +97,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                   to={itm.url}
                   className={(isActive) =>
                     "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#00b884] hover:bg-[#00b884]/10 !no-underline transition-all " +
-                    (isActive && " !text-[#00b884] !bg-[#EDECF9] !font-medium")
+                    (location?.pathname == itm.url && " !text-[#00b884] !bg-[#EDECF9] !font-medium")
                   }>
 
                   {itm.icon}

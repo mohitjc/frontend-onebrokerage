@@ -18,6 +18,9 @@ import AddEditUser from './Pages/Users/AddEditUser';
 import Dashboard from './Pages/Dashboard';
 import './scss/main.scss';
 import Signup from './Pages/Signup';
+import Events from './Pages/Events';
+import AddEditEvent from "./Pages/Events/AddEdit";
+import ViewEvent from "./Pages/Events/View";
 function App() {
 
   const routes=[
@@ -37,6 +40,10 @@ function App() {
     {url:'/users',element:<Users />},
     {url:'/users/edit/:id',element:<AddEditUser />},
     {url:'/userDetail/:id',element:<UserDetail />},
+    {url:'/event',element:<Events />},
+    {url:'/event/edit/:id',element:<AddEditEvent />},
+    {url:'/event/add',element:<AddEditEvent />},
+    {url:'/event/detail/:id',element:<ViewEvent />},
   ]
 
   return (
