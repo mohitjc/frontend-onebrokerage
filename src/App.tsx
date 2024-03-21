@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import NotFoundPage from './Pages/NotFoundPage';
-import './scss/main.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-phone-input-2/lib/style.css';
 import Profile from './Pages/Profile';
@@ -17,12 +16,14 @@ import Users from './Pages/Users';
 import UserDetail from './Pages/Users/Profiledetail';
 import AddEditUser from './Pages/Users/AddEditUser';
 import Dashboard from './Pages/Dashboard';
-
+import './scss/main.scss';
+import Signup from './Pages/Signup';
 function App() {
 
   const routes=[
     {url:'',element:<Home />},
     {url:'/login',element:<Login />},
+    {url:'/signup',element:<Signup />},
     {url:'/dashboard',element:<Dashboard />},
     {url:'*',element:<NotFoundPage />},
     {url:'/profile',element:<Profile />},

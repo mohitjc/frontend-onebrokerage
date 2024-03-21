@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './style.scss';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from '../sidebar';
 import Header from '../header';
 import { ToastContainer } from 'react-toastify';
@@ -68,10 +68,12 @@ const Layout = ({ children }) => {
           <div className="main-sidebar scrollbar transition-[width] duration-300">
             <div
               className="sidebar-brand p-3 pt-4 pl-5 text-left">
-              <label className="editLogo">
+                <Link to="/">
+              <div className="editLogo">
                 <img src={logo()} width="250" height="35" className="pl-3 show-logo" />
                 <img src={logos()} className="hide-logo" />
-              </label>
+              </div>
+              </Link>
             </div>
             {user?.logo ? (
               <div

@@ -43,7 +43,7 @@ const Login = () => {
       password
     };
     loader(true)
-    ApiClient.post('api/login/admin', data).then(res => {
+    ApiClient.post('api/user/login', data).then(res => {
       loader(false)
       if (res.success == true) {
         if (remember) {
@@ -87,7 +87,7 @@ const Login = () => {
                   <button type="submit" className="px-4 w-full text-sm font-normal text-white h-12 flex items-center justify-center gap-2 !bg-primary rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed">Sign in</button>
                 </div>
 
-                <p className='accopuntt'></p>
+                <p className='text-sm mt-3 text-center'>Don't have an account? <Link to="/signup" className='text-primary text-sm'>Sign Up</Link></p>
               </form>
       </AuthLayout>
     </>

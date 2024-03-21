@@ -27,7 +27,7 @@ const Forgotpassword = () => {
         e.preventDefault();
         loader(true)
 
-        ApiClient.post('api/forgot/password/admin', form).then(res => {
+        ApiClient.post('api/user/forgot/password', form).then(res => {
             if (res.success) {
                 history('/login');
                 setTimeout(() => {
