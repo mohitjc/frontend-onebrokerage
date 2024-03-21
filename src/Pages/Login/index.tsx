@@ -17,16 +17,15 @@ const Login = () => {
   }, [])
 
 
+  const [ip, setIp] = useState('');
   const [username, setUsername] = useState('');
   const [remember, setRemember] = useState(false);
   const [password, setPassword] = useState('');
   const [eyes, setEyes] = useState({ password: false, confirmPassword: false, currentPassword: false });
-
+  const [step, setStep] = useState(1);
+  const [otp, setOTP] = useState('');
+  const [resp, setRes]:any = useState();
   useEffect(() => {
-    loader(true)
-    setTimeout(() => {
-      loader(false)
-    }, 500);
     let r = localStorage.getItem('remember')
     if (r) {
       let data = JSON.parse(r)
@@ -34,16 +33,48 @@ const Login = () => {
       setPassword(data.password)
       setRemember(true)
     }
+
+    // Using an HTTP GET request to ipinfo.io/json
+
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+        let ip = data.ip
+        localStorage.setItem('IP', ip)
+        setIp(ip)
+      })
+      .catch(error => console.error('Error fetching IP address:', error));
   }, [])
+
+
+  const setLogin=(data:any)=>{
+    localStorage.setItem('token', data.access_token)
+    crendentialModel.setUser(data)
+    let url = '/profile'
+    history(url);
+  }
 
   const hendleSubmit = (e:any) => {
     e.preventDefault()
-    const data = {
+    let data:any = {
       email: username,
-      password
+      password,
+      ip_address:ip
     };
+
+
+    let url='api/user/login'
+    if(step==2){
+      url='api/two-factor/auth'
+      data={
+        id:resp?._id,
+        otp:otp,
+        ip_address: ip
+      }
+    }
+
     loader(true)
-    ApiClient.post('api/user/login', data).then(res => {
+    ApiClient.post(url, data).then(res => {
       loader(false)
       if (res.success == true) {
         if (remember) {
@@ -51,44 +82,86 @@ const Login = () => {
         } else {
           localStorage.removeItem('remember')
         }
-        // toast.success(res.message)
-        localStorage.setItem('token', res.data.access_token)
-        crendentialModel.setUser(res.data)
-
-        let permissions:any = res.data?.role?.permissions?.[0]
-        let url = '/profile'
-        // if (!permissions?.readDashboard) url = '/profile'
-        history(url);
+        if (res.data.two_factor_email_sent || step==1) {
+          setStep(2)
+          setRes(res.data)
+          setLogin(res.data)
+        } else {
+          setLogin(res.data)
+        }
+       
       }
     })
   };
   return (
     <>
       <AuthLayout>
-      <form className="" onSubmit={hendleSubmit}>
-                <h4 className="text-typo mb-6 text-2xl font-bold">Sign in</h4>
-                <input type="email" onChange={e => setUsername(e.target.value)} className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-6 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-blue-500 focus:border-blue-500" placeholder="Email address" required value={username} />
-                <div className="relative mb-6">
-                  <input type={eyes.password ? 'text' : 'password'} className="shadow-box border-1 border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-blue-500 focus:border-blue-500" placeholder="Password" onChange={e => setPassword(e.target.value)} required value={password} />
-
-                  <div className='absolute right-2 inset-y-0 flex items-center text-gray-500 text-sm'>
-                    <i className={eyes.password ? 'fa fa-eye' : 'fa fa-eye-slash'} onClick={() => setEyes({ ...eyes, password: !eyes.password })}></i>
-
+              <form onSubmit={hendleSubmit}>
+                  <h4 className="text-typo mb-6 text-2xl font-medium">
+                    Sign in
+                  </h4>
+                  {step==1?<>
+                    <input
+                    type="email"
+                    className="shadow-box bg-white mb-6 w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
+                    placeholder="Email address"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                  <div className="relative mb-6">
+                    <input
+                      type={eyes.password ? "text" : "password"}
+                      className="shadow-box bg-white w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Password"
+                      required
+                    />
+                    {eyes.password ? (
+                      <i
+                        className="fa fa-eye top-3 right-3 absolute text-gray-600"
+                        onClick={() =>
+                          setEyes({ ...eyes, password: !eyes.password })
+                        }
+                      />
+                    ) : (
+                      <i
+                        className="fa fa-eye-slash top-3 right-3 absolute text-gray-600"
+                        onClick={() =>
+                          setEyes({ ...eyes, password: !eyes.password })
+                        }
+                      />
+                    )}
                   </div>
-
-                </div>
-                <div className='flex'>
+                  </>:<>
+                  <p className="mb-2">OTP sent on email</p>
+                  <input
+                    type="text"
+                    maxLength={6}
+                    minLength={6}
+                    className="shadow-box bg-white mb-6 w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
+                    placeholder="Enter OTP"
+                    value={otp}
+                    onChange={(e) => setOTP(e.target.value)}
+                    required
+                  />
+                  </>}
+                  
+                  <div className='flex'>
                 <label className='flex items-center pointer'><input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="mr-2 h-4 w-4" /> <span className='text-md text-gray-600'>Remember Me</span></label>
                   <Link className="sign_up ml-auto text-primary" to="/forgotpassword"> Forgot Password</Link>
                 </div>
-                
-
-                <div className="mt-8">
-                  <button type="submit" className="px-4 w-full text-sm font-normal text-white h-12 flex items-center justify-center gap-2 !bg-primary rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed">Sign in</button>
-                </div>
-
-                <p className='text-sm mt-3 text-center'>Don't have an account? <Link to="/signup" className='text-primary text-sm'>Sign Up</Link></p>
-              </form>
+                  <div className="mt-8">
+                    {/* <label><input type="checkbox" checked={remember} onChange={(e)=>setRemember(e.target.checked)} className="mr-2" /> Remember Me</label> */}
+                    <button
+                      type="submit"
+                      className="!px-4 w-full text-sm font-normal text-white h-11 flex items-center justify-center gap-2 !bg-primary rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed">
+                      Sign in
+                    </button>
+                  </div>
+                  <p className='text-sm mt-3 text-center'>Don't have an account? <Link to="/signup" className='text-primary text-sm'>Sign Up</Link></p>
+                </form>
       </AuthLayout>
     </>
   );
