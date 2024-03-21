@@ -2,7 +2,7 @@
   "name": "skills-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://calm-mushroom-0589f2d10.5.azurestaticapps.net",
+  "homepage": "https://black-meadow-03e0c5910.4.azurestaticapps.net",
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
