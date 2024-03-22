@@ -170,6 +170,7 @@ useEffect(()=>{
                 required
                 onChange={e => setForm({ ...form, mobileNo: e })}
                 countryCodeEditable={true}
+                minlegth="10"
               />
               {submitted && getError('mobileNo').invalid ? <div className="invalid-feedback d-block">Min Length is 10</div> : <></>}
             </div>
