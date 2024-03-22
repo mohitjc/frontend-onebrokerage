@@ -84,6 +84,27 @@ const Home = () => {
           <section className='py-16 bg-white'>
               <div className='container items-center  px-8 mx-auto xl:px-5'>
                   <div className='heading-data'>
+                      <h2 className='font-bold text-4xl mb-2'>WHAT WE DO?</h2>
+                      <p>A Business Networking Platform Designed to Meet Your Needs</p>
+                  </div>
+                  <div className='mt-20 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+                      <div className='shadow p-4 bg-white'>
+                         
+
+                          
+
+                          <h6>Meeting Administration</h6>
+                          <p>Group facilitators can now easily configure, prepare, and run meetings and spend more time and focus delivering value to their group members.</p>
+                      </div>
+                     
+                  </div>
+              </div>
+          </section>
+
+
+          <section className='py-16 bg-white'>
+              <div className='container items-center  px-8 mx-auto xl:px-5'>
+                  <div className='heading-data'>
                       <h2 className='font-bold text-4xl mb-2'>We create world-class digital products</h2>
                       <p>By information about design the world to the best instructors, heatc helping By information</p>
                   </div>
