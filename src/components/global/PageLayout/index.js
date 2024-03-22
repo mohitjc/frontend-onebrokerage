@@ -20,7 +20,7 @@ const PageLayout = ({ children }) => {
     if (!user) {
 
     } else {
-      let permissions = user.role?.permissions?.[0]
+      let permissions = user.role?.permissions
       if (!permissionModel.urlAllow(permissions)) {
         // history.push("/profile")
       }

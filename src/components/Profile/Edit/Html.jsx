@@ -182,6 +182,7 @@ useEffect(()=>{
                 autoComplete="false"
                 onChange={e => { setForm({ ...form, email: e.target.value }); }}
                 required
+                disabled
               />
 
             </div>

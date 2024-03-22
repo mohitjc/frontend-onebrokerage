@@ -130,6 +130,9 @@ const matchError = (ext, fValue) => {
     if (ext.minLength && kValue) {
         if (kValue.length < ext.minLength) value.minLength = true
     }
+    if (ext.email && kValue) {
+        if (!emailvalidation(kValue)) value.email = true
+    }
     if (ext.maxLength && kValue) {
         if (kValue.length > ext.maxLength) value.maxLength = true
     }
