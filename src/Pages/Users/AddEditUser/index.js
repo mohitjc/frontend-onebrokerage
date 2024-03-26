@@ -129,7 +129,6 @@ const AddEditUser = () => {
                     oarr.map(itm => {
                         payload[itm] = value[itm] || ''
                     })
-                    // payload.role = value.role._id
                     payload.id = id
                     setform({ ...payload })
                     images.image = payload?.image
