@@ -61,7 +61,9 @@ const getCertificates = () => {
 }
 
 const getSkills = () => {
-  ApiClient.get('api/skills/listing', { status: 'active',skillRole:form.customerRole }).then(res => {
+  ApiClient.get('api/skills/listing', { status: 'active',
+  // skillRole:form.customerRole
+ }).then(res => {
     if (res.success) {
       setSkillRoles(res.data)
     }
@@ -87,12 +89,13 @@ const getSubCategories = (p={}) => {
 useEffect(() => {
   getCertificates()
   getCategories()
+  getSkills()
 }, [])
 
 useEffect(() => {
-  if(form.customerRole){
-    getSkills()
-  }
+  // if(form.customerRole){
+  //   getSkills()
+  // }
 }, [form.customerRole])
 
 useEffect(() => {
@@ -300,7 +303,7 @@ useEffect(()=>{
               {submitted && !form.timezone ? <div className="invalid-feedback d-block">State/Province Title is Required</div> : <></>}
             </div>
 
-            <div className="col-span-12 md:col-span-6">
+            {/* <div className="col-span-12 md:col-span-6">
               <label>Customer Role<span className="star">*</span></label>
               <SelectDropdown
                 id="statusDropdown"
@@ -313,7 +316,7 @@ useEffect(()=>{
                 disabled
               />
               {submitted && !form.customerRole ? <div className="invalid-feedback d-block">Customer Role is Required</div> : <></>}
-            </div>
+            </div> */}
 
             <div className="col-span-full">
               <label>Admin Comment</label>
@@ -353,8 +356,7 @@ useEffect(()=>{
 
 
 
-            {form.customerRole ? <>
-              <div className="col-span-12 md:col-span-6">
+            <div className="col-span-12 md:col-span-6">
                 <label>Skills</label>
                 <MultiSelectDropdown
                   displayValue="title"
@@ -369,7 +371,6 @@ useEffect(()=>{
                 />
                 {/* {submitted && !form.skills?.length ? <div className="invalid-feedback d-block">Skills is Required</div> : <></>} */}
               </div>
-            </> : <></>}
 
             <div className="col-span-full">
               <label>Networking Groups</label>

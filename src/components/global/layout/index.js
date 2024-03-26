@@ -26,11 +26,16 @@ const Layout = ({ children }) => {
       }
       let browseload = localStorage.getItem('browseload')
       if (!browseload) {
-        ApiClient.get('api/user/detail', { id: user._id }).then(res => {
+        ApiClient.get('api/user/detail', { id: user._id }).then(async res => {
           if (res.success) {
             let data = { ...user, ...res.data }
-            crendentialModel.setUser(data)
-            localStorage.setItem('browseload', 'true')
+            await ApiClient.get('api/skillRole/detail',{id:data.customerRole}).then(rres=>{
+              if(rres.success){
+                data.customerRoleDetail=rres.data
+                crendentialModel.setUser(data)
+                // localStorage.setItem('browseload', 'true')
+              }
+            })
           }
         })
       }

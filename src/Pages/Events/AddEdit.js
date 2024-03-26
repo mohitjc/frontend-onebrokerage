@@ -9,6 +9,7 @@ import { Tooltip } from "antd";
 import FormControl from "../../components/common/FormControl";
 import timezoneModel from "../../models/timezone.model";
 import crendentialModel from "../../models/credential.model";
+import shared from "./shared";
 
 const AddEdit = () => {
     const { id } = useParams()
@@ -30,14 +31,14 @@ const AddEdit = () => {
         let invalid = methodModel.getFormError(formValidation, form)
         if (invalid) return
         let method = 'post'
-        let url = 'api/event/create'
+        let url = shared.addApi
         let value = {
             ...form,
             ...images
         }
         if (value.id) {
             method = 'put'
-            url = 'api/event/edit'
+            url = shared.editApi
         } else {
             value.addedBy=user._id
             delete value.id
@@ -47,7 +48,7 @@ const AddEdit = () => {
         ApiClient.allApi(url, value, method).then(res => {
             if (res.success) {
                 // ToastsStore.success(res.message)
-                history("/event")
+                history(`/${shared.url}`)
             }
             loader(false)
         })
@@ -56,7 +57,7 @@ const AddEdit = () => {
     useEffect(() => {
         if (id) {
             loader(true)
-            ApiClient.get('api/event/details', { id }).then(res => {
+            ApiClient.get(shared.detailApi, { id }).then(res => {
                 if (res.success) {
                     let value = res.data
                     let payload = form
@@ -106,9 +107,9 @@ const AddEdit = () => {
                         </Tooltip>
                         <div>
                             <h3 className="text-2xl font-semibold text-[#111827]">
-                                {form && form.id ? 'Edit' : 'Add'}  Event
+                                {form && form.id ? 'Edit' : 'Add'}  {shared.title}
                             </h3>
-                            <p class="text-sm font-normal text-[#75757A]">Here you can see all about your Event</p>
+                            <p class="text-sm font-normal text-[#75757A]">Here you can see all about your {shared.title}</p>
                         </div>
                     </div>
 

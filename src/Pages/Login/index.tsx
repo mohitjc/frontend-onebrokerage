@@ -74,8 +74,8 @@ const Login = () => {
     }
 
     loader(true)
-    ApiClient.post(url, data).then(res => {
-      loader(false)
+    ApiClient.post(url, data).then(async res => {
+     
       if (res.success == true) {
         if (remember) {
           localStorage.setItem('remember', JSON.stringify(data))
@@ -87,10 +87,19 @@ const Login = () => {
           setRes(res.data)
           // setLogin(res.data)
         } else {
-          setLogin(res.data)
+          
+           await ApiClient.get('api/skillRole/detail',{id:res.data.customerRole}).then(rres=>{
+              if(rres.success){
+                let udata=res.data
+                udata.customerRoleDetail=rres.data
+                setLogin(udata)
+              }
+            })
+        
         }
        
       }
+      loader(false)
     })
   };
   return (

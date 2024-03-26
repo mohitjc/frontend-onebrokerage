@@ -7,8 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import environment from '../../environment';
 import axios from 'axios';
 import crendentialModel from '../../models/credential.model';
+import shared from './shared';
 
-const Events = (p) => {
+const Events = () => {
     const user = crendentialModel.getUser()
     const searchState = {data:''}
     const [filters, setFilter] = useState({ page: 1, count: 50, search: '', catType: '' })
@@ -51,7 +52,7 @@ const Events = (p) => {
     const getData = (p = {}) => {
         setLoader(true)
         let filter = { ...filters, ...p ,addedBy:user._id}
-        ApiClient.get('api/event/all', filter).then(res => {
+        ApiClient.get(shared.listApi, filter).then(res => {
             if (res.success) {
                 setData(res.data.map(itm => {
                     itm.id = itm._id
@@ -72,7 +73,7 @@ const Events = (p) => {
     const deleteItem = (id) => {
         if (window.confirm("Do you want to delete this")) {
             loader(true)
-            ApiClient.delete('api/event/delete', { id: id }).then(res => {
+            ApiClient.delete(shared.deleteApi, { id: id }).then(res => {
                 if (res.success) {
                     // ToastsStore.success(res.message)
                     clear()
@@ -94,13 +95,12 @@ const Events = (p) => {
 
 
     const statusChange = (itm) => {
-        let modal = 'category'
         let status = 'active'
         if (itm.status == 'active') status = 'deactive'
 
         if (window.confirm(`Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`)) {
             loader(true)
-            ApiClient.put(`api/event/edit`, { id: itm.id, status }).then(res => {
+            ApiClient.put(shared.statusApi, { id: itm.id, status }).then(res => {
                 if (res.success) {
                     getData()
                 }
@@ -110,12 +110,11 @@ const Events = (p) => {
     }
 
     const edit = (id) => {
-        history(`/event/edit/${id}`)
+        history(`/${shared.url}/edit/${id}`)
     }
 
     const view = (id) => {
-        let url=`/event/detail/${id}`
-        console.log("view",url)
+        let url=`/${shared.url}/detail/${id}`
         history(url)
     }
 
@@ -134,16 +133,14 @@ const Events = (p) => {
         });
         const link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
-        link.download = `event.xlsx`;
+        link.download = `${shared.title}.xlsx`;
         link.click();
     }
 
     const isAllow = (key = '') => {
-        let permissions = user.roleDetail?.permissions?.[0]
+        let permissions = user.customerRoleDetail?.permissions
         let value = permissions?.[key]
-        if (user?.roleDetail?._id == environment.adminRoleId) value = true
-        // return value
-        return true
+        return value
     }
 
     return <><Html

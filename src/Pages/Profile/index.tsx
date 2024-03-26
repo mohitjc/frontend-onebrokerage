@@ -85,6 +85,17 @@ const Profile = () => {
               </div>
             </div>
 
+            <div className='col-span-12 md:col-span-2'>
+              <div className='text_head'>
+                <label className='text-typo text-base font-medium max-w-sm w-full block'>Role</label>
+              </div>
+            </div>
+            <div className='col-span-12 md:col-span-10'>
+              <div className='sub_fatch'>
+                <p className='' >{user.customerRoleDetail?.name}</p>
+              </div>
+            </div>
+
 
             <div className='col-span-12 md:col-span-2'>
               <div className='text_head'>
