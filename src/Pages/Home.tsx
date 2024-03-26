@@ -11,7 +11,7 @@ const Home = () => {
       <PageLayout>
         <div className="">
           <div className="">
-            <section className="bg-white py-16">
+            <section className="py-16 md:py-18 lg:py-28 bg-white ">
               <div className="container items-center  px-8 mx-auto xl:px-5">
                 <div className="grid grid-cols-12 gap-4 items-center">
                   <div className="col-span-12 md:col-span-7 lg:col-span-6">
@@ -100,7 +100,7 @@ const Home = () => {
               </div>
             </section>
 
-            <section className="bg-white py-16">
+            <section className=" py-16 md:py-18 lg:py-28 bg-white ">
               <div className="container items-center  px-8 mx-auto xl:px-5">
                 <div className="grid grid-cols-12 gap-4 items-center">
                   <div className="col-span-12">
@@ -122,7 +122,7 @@ const Home = () => {
               </div>
             </section>
 
-            <section className="py-16 bg-white">
+            <section className="py-16 md:py-18 lg:py-28 bg-white">
               <div className="container items-center  px-8 mx-auto xl:px-5">
                 <div className="heading-data">
                   <h2 className="font-bold text-4xl mb-2">WHAT WE DO?</h2>
@@ -193,10 +193,10 @@ const Home = () => {
               </div>
             </section>
 
-            <section className="py-16 bg-white">
+            <section className="py-16 md:py-18 lg:py-28 bg-white">
               <div className="container items-center  px-8 mx-auto xl:px-5">
                 <div className="heading-data">
-                  <h2 className="font-bold text-4xl mb-2">
+                  <h2 className="font-bold text-[#1E1F4B] text-4xl mb-2">
                     We create world-class digital products
                   </h2>
                   <p>
@@ -300,7 +300,50 @@ const Home = () => {
               </div>
             </section>
 
-            <section className=" bg-white py-16">
+            <section className="py-16 md:py-18 lg:py-28 bg-white">
+              <div className="container items-center  px-8 mx-auto xl:px-5">
+                  <div className="text-center">
+                    <h6 className="text-md md:text-3xl lg:text-5xl font-bold text-[#03014C] mx-auto lineheightcustom	w-96">Let’s hear 
+                        What they says</h6>
+                  </div>
+
+                  <div className="slider-main mt-10">
+                      <div className="grid grid-cols-12">
+                          <div className="col-span-12 mx-auto">
+                            <div className="mx-auto w-3/4 ">
+
+                           
+                                <div className="flex justify-center gap-x-4 text-center ">
+                                    <img src="assets/img/skill/te1.png" alt="" className="h-8 " />
+                                    <p className="leading-[5rem]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vel lobortis tincidunt
+                                        fames quisque mauris at diam. Nullam morbi ipsum turpis amet id posuere torto
+                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
+                                  <img src="assets/img/skill/te2.png" className="h-8 " alt="" />
+                                </div>
+
+                                <div className="images_for users mt-12">
+                                    <div className="images_testmonial flex items-center justify-around">
+                                      <img src="assets/img/skill/team1.png" alt="" className="h-14 w-14 object-contain rounded-full" />
+                                      <img src="assets/img/skill/team2.png" alt="" className="h-14 w-14 object-contain rounded-full" />
+                                      <img src="assets/img/skill/team3.png" alt="" className="h-24 w-24 border-4 p-1 border-orange-500 object-contain rounded-full" />
+                                      <img src="assets/img/skill/team4.png" alt="" className="h-14 w-14 object-contain rounded-full" />
+                                      <img src="assets/img/skill/team5.png" alt="" className="h-14 w-14 object-contain rounded-full" />
+                                    </div>
+                                </div>
+                                </div>
+
+
+                          </div>
+                      </div>
+
+                  
+                  </div>
+              </div>
+            </section>
+
+
+            <section className="py-16 md:py-18 lg:py-28  bg-white ">
               <div className="container items-center  px-8 mx-auto xl:px-5">
                 <div className="flex flex-wrap items-center sm:-mx-3">
                   <div className="w-full md:w-1/2 md:px-3">
