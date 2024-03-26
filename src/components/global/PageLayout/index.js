@@ -24,19 +24,24 @@ const PageLayout = ({ children }) => {
 
   useEffect(() => {
     if (!user) {
-
+      
     } else {
-      let permissions = user.role?.permissions
+      let permissions = user.roleDetail?.permissions?.[0]
       if (!permissionModel.urlAllow(permissions)) {
-        // history.push("/profile")
+        // history("/profile")
       }
       let browseload = localStorage.getItem('browseload')
       if (!browseload) {
-        ApiClient.get('api/user/profile', { id: user._id }).then(res => {
+        ApiClient.get('api/user/detail', { id: user._id }).then(async res => {
           if (res.success) {
             let data = { ...user, ...res.data }
-            crendentialModel.setUser(data)
-            localStorage.setItem('browseload', 'true')
+            await ApiClient.get('api/skillRole/detail',{id:data.customerRole}).then(rres=>{
+              if(rres.success){
+                data.customerRoleDetail=rres.data
+                crendentialModel.setUser(data)
+                // localStorage.setItem('browseload', 'true')
+              }
+            })
           }
         })
       }
