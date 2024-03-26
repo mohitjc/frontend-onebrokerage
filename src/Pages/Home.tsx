@@ -88,14 +88,45 @@ const Home = () => {
                       <p>A Business Networking Platform Designed to Meet Your Needs</p>
                   </div>
                   <div className='mt-20 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-                      <div className='shadow p-4 bg-white'>
+                      <div className='shadow-lg p-4 bg-white rounded-lg'>
                          
-
+                            <img src="assets/img/skill/p1.png" className='h-20 w-20 mb-6'/>
                           
 
-                          <h6>Meeting Administration</h6>
+                          <h6 className='text-xl font-bold mb-2'>Meeting Administration</h6>
                           <p>Group facilitators can now easily configure, prepare, and run meetings and spend more time and focus delivering value to their group members.</p>
                       </div>
+                      <div className='shadow-lg p-4 bg-white rounded-lg'>
+                         
+                    
+                      <img src="assets/img/skill/p2.png" className='h-20 w-20 mb-6'/>
+
+                         <h6 className='text-xl font-bold mb-2'>Deep-Dive Small Groups</h6>
+                         <p>Create, manage, and track effectiveness of small groups that offer members the opportunity to establish deeper connections and identify collaboration opportunities.
+
+</p>
+                     </div>
+                     <div className='shadow-lg p-4 bg-white rounded-lg'>
+                         
+                    
+                     <img src="assets/img/skill/p3.png" className='h-20 w-20 mb-6'/>
+
+                         <h6 className='text-xl font-bold mb-2'>Business Referrals
+</h6>
+                         <p>Easily find members in your network with the skills that your clients need so you can make more effective referrals.
+
+</p>
+                     </div>
+                     <div className='shadow-lg p-4 bg-white rounded-lg'>
+                         
+                    
+                     <img src="assets/img/skill/p4.png" className='h-20 w-20 mb-6'/>
+
+                         <h6 className='text-xl font-bold mb-2'>Analytics</h6>
+                         <p>Know the effectiveness of all your meetings, optimize the use of your time, identify your best sources of referrals, and easily access the expertise of your network.
+
+</p>
+                     </div>
                      
                   </div>
               </div>
@@ -222,7 +253,7 @@ const Home = () => {
             </section>
         
 
-            <section className=' bg-white py-16'>
+            <section className=' bg-white py-16' >
             <div className="container items-center  px-8 mx-auto xl:px-5">
               <div className="rounded-lg overflow-hidden  relative">
                 <img
