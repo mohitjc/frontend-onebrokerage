@@ -24,19 +24,24 @@ const PageLayout = ({ children }) => {
 
   useEffect(() => {
     if (!user) {
-
+      
     } else {
-      let permissions = user.role?.permissions?.[0]
+      let permissions = user.roleDetail?.permissions?.[0]
       if (!permissionModel.urlAllow(permissions)) {
-        // history.push("/profile")
+        // history("/profile")
       }
       let browseload = localStorage.getItem('browseload')
       if (!browseload) {
-        ApiClient.get('api/user/profile', { id: user._id }).then(res => {
+        ApiClient.get('api/user/detail', { id: user._id }).then(async res => {
           if (res.success) {
             let data = { ...user, ...res.data }
-            crendentialModel.setUser(data)
-            localStorage.setItem('browseload', 'true')
+            await ApiClient.get('api/skillRole/detail',{id:data.customerRole}).then(rres=>{
+              if(rres.success){
+                data.customerRoleDetail=rres.data
+                crendentialModel.setUser(data)
+                // localStorage.setItem('browseload', 'true')
+              }
+            })
           }
         })
       }
@@ -77,7 +82,7 @@ const PageLayout = ({ children }) => {
                             <img alt="image" src={methodModel.userImg(user.image)} className="h-12 w-12 rounded-full object-cover" />
                             <div className="ml-2 text-left">
                               <b>{user.fullName}</b>
-                              <p className="grayCls mb-0 text-capitalize">{user.roleDetail?.name}</p>
+                              <p className="grayCls mb-0 text-capitalize">{user.customerRoleDetail?.name}</p>
                             </div>
                           </div>
                           <i className="fa fa-angle-down top-1 relative h-5 w-5 text-gray-400" aria-hidden="true" />

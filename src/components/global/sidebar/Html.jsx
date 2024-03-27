@@ -10,7 +10,7 @@ import {  RiPresentationLine } from "react-icons/ri";
 import { GrCatalogOption } from "react-icons/gr";
 
 
-const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
+const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen }) => {
   const location = useLocation();
 
 
@@ -22,13 +22,13 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
       name:'Dashboard',
       icon:<RiHome6Line className="text-[#00b884] shrink-0 text-lg" />,
       url:'/dashboard',
-      key:'dashboard',
+      key:'readDashboard',
     },
       {
       name:'Events',
       icon:<span class="material-symbols-outlined text-[#ffc800] shrink-0 text-lg">star</span>,
       url:'/event',
-      key:'event',
+      key:'readEvents',
     },
   ]
 
@@ -72,7 +72,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                       <ul className="space-y-2">
                         {itm.menu.map(sitm=>{
                           return <>
-                           {urlAllow(sitm.key) ? <li> <NavLink className={(isActive) =>
+                           {isAllow(sitm.key) ? <li> <NavLink className={(isActive) =>
                           "p-2.5 rounded-md block text-sm font-normal text-[#4A545E] cursor-pointer hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
                           (location?.pathname == sitm.url &&
                             " !text-[#5577FF] !bg-[#5577FF]/10 !font-medium")
@@ -91,7 +91,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               )}
             </Disclosure>
             </>:<>
-            {urlAllow(itm.key) ? <>
+            {isAllow(itm.key) ? <>
               <Tooltip placement="right" title={itm.name}>
                 <NavLink
                   to={itm.url}

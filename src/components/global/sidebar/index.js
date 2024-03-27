@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import Html from './Html';
-import permissionModel from '../../../models/permisstion.model';
 import crendentialModel from '../../../models/credential.model';
 
 const Sidebar = ({ isOpen }) => {
   const user = crendentialModel.getUser()
   const history = useNavigate()
+  const [role,setRole]=useState(user.customerRoleDetail)
   const menus = {
     user: ['roles', 'users'],
     catalogue: ['types', 'categories', 'category/'],
@@ -40,17 +40,16 @@ const Sidebar = ({ isOpen }) => {
     return value
   }
 
-  const urlAllow = (url) => {
-    let permissions = user.roleDetail?.permissions?.[0]
+  const isAllow = (url = '') => {
+    let permissions = role?.permissions
     let arr = url.split(',')
     let value = false
     arr.map(itm => {
-      if (permissionModel.urlAllow(permissions, itm)) value = true
+      if(permissions?.[itm]) value = permissions?.[itm]
     })
 
-    // return value
-    return true
-  }
+    return value
+}
 
   const route = (p) => {
     history(p)
@@ -60,7 +59,7 @@ const Sidebar = ({ isOpen }) => {
     <Html
       route={route}
       tabclass={tabclass}
-      urlAllow={urlAllow}
+      isAllow={isAllow}
       ListItemLink={ListItemLink}
       isOpen={isOpen}
     />

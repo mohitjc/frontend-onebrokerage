@@ -7,11 +7,37 @@ import Html from './Html';
 import { useNavigate } from 'react-router-dom';
 import formModel from '../../../models/form.model';
 import crendentialModel from '../../../models/credential.model';
+import environment from '../../../environment';
 
 const EditProfile = () => {
   const user:any = crendentialModel.getUser()
   const [data, setData] = useState('');
-  const [form, setForm]:any = useState(userType);
+  const [form, setForm]:any = useState({
+    id:'',
+     email:'', 
+     mobileNo:'',
+     fullName:'',
+     multiAddress:[{id:String(new Date().getTime())}],
+     profession:'',
+     company:'',
+     companyUrl:'',
+     address:'',
+     address2:'',
+     state:'',
+     postal_code:'',
+     city:'',
+     timezone:'America/Los_Angeles',
+     customerRole:'',
+     adminComment:'',
+     linkedInUrl:'',
+     certification:'',
+     skills:[],
+     networkingGroup:'',
+     category:'',
+     subCategory:'',
+     aboutUs:'',
+     country:'usa'
+    });
   const history=useNavigate()
   const [submitted, setSubmitted] = useState(false)
 
@@ -19,8 +45,21 @@ const EditProfile = () => {
     loader(true)
     ApiClient.get(`api/user/detail`,{id:user._id}).then(res => {
       if (res.success) {
-        setForm({form,...res.data,role:res.data.role.name})
-        setData(res.data)
+        let payload = form
+        let value = res.data
+        let oarr = Object.keys(form)
+        oarr.map(itm => {
+            payload[itm] = value[itm] || ''
+        })
+        payload.id=user._id
+        if(!payload.timezone) payload.timezone='America/Los_Angeles'
+        if(!payload.country) payload.country='usa'
+
+        if(payload.customerRole?._id) payload.customerRole=payload.customerRole._id
+        let multiAddress=value.multiAddress||[]
+        payload.multiAddress=multiAddress.length?multiAddress:[{id:String(new Date().getTime())}]
+        setForm({ ...payload })
+        setData(value)
       }
       loader(false)
     })
@@ -36,10 +75,7 @@ const EditProfile = () => {
     let invalid = formModel.getFormError('profileForm')
     if (invalid) return
 
-    let value = { fullName: form.fullName, dialCode: '', mobileNo: form.mobileNo, image: form.image, id: user._id }
-    if(form?.mobileNo<10){
-      return
-    }
+    let value = { ...form, id: user._id }
 
     loader(true)
     ApiClient.put('api/user/detail', value).then(res => {
@@ -73,9 +109,6 @@ const EditProfile = () => {
     () => {
       if (user) {
         gallaryData();
-        let forms:any=document.forms
-        let field=forms['profileForm'].elements['fullName']
-        console.log("field",field.minLength)
       }
     },[]);
 

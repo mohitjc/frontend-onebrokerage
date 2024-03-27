@@ -24,7 +24,7 @@ const Html = ({ options, dynamicStyle = false, className = null, selectedValues,
                 formatOptionLabel="bordere"
                 onChange={e => handleChange(e?.value || '')}
                 className="text-gray-700 block text-sm options_classs"
-
+                disabled={disabled}
             />
 
         </> : <>
