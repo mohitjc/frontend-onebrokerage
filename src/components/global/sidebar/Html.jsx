@@ -111,9 +111,9 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen }) => {
             </>:<>
             <li>
             <h6
-            className={`${isOpen ? "py-[12px] text-center" : "p-[12px]"
+            className={`${isOpen ? "py-[12px] text-center" : "p-[12px] text-center text-md"
               } text-xs font-medium text-[#7E8B99] mt-[12px]`}>
-            <span className=" sidebar_text"> {itm.name} </span>
+            <span className=" sidebar_text text-center"> {itm.name} </span>
           </h6>
             </li>
             </>}
