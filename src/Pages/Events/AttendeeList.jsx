@@ -7,9 +7,11 @@ import { useEffect, useState } from "react";
 import ApiClient from "../../methods/api/apiClient";
 import crendentialModel from "../../models/credential.model";
 import AddAttendee from "./AddAttendee";
+import loader from "../../methods/loader";
 
 export default function AttendeeList({eventId}){
     const [data,setData]=useState([])
+    const [loading,setLoader]=useState(false)
     const [total,setTotal]=useState(0)
     const [tab,setTab]=useState('list')
     const user=crendentialModel.getUser()
@@ -51,7 +53,7 @@ export default function AttendeeList({eventId}){
                                     <FiEdit3 />
                                 </a>
                             </Tooltip> */}
-                            <Tooltip placement="top" title="Delete"> <span className='border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl'>
+                            <Tooltip placement="top" title="Delete"> <span onClick={()=>deleteItem(itm.id)} className='border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl'>
                             <BsTrash3 />
                         </span> </Tooltip> 
                     </div>
@@ -63,11 +65,13 @@ export default function AttendeeList({eventId}){
 
     const getData=(p={})=>{
         let f={...filters,...p}
+        setLoader(true)
         ApiClient.get('api/attendees/list',f).then(res=>{
             if(res.success){
                 setData(res.data)
                 setTotal(res.total)
             }
+            setLoader(false)
         })
     }
     useEffect(()=>{
@@ -103,6 +107,18 @@ export default function AttendeeList({eventId}){
         getData({ ...f })
     }
 
+    const deleteItem = (id) => {
+        if (window.confirm("Do you want to delete this")) {
+            loader(true)
+            ApiClient.delete('api/attendees', { id: id }).then(res => {
+                if (res.success) {
+                    clear()
+                }
+                loader(false)
+            })
+        }
+    }
+
     return <>
     <div className="flex justify-end gap-2">
         {tab=='list'?<>
@@ -132,6 +148,9 @@ export default function AttendeeList({eventId}){
         } 
     }} />
     </>:<>
+    {loading?<>
+        <div className="text-center">Loading...</div>
+    </>:<>
     <Table
     data={data}
     columns={columns}
@@ -143,6 +162,8 @@ export default function AttendeeList({eventId}){
         if (e.event == 'sort') sorting(e.value)
     }}
    />
+    </>}
+    
     </>}
    
   

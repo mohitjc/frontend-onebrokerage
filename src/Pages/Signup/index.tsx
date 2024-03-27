@@ -29,6 +29,7 @@ const Signup = () => {
     e.preventDefault()
     const data = {
       role:environment.userRoleId,
+      customerRole:environment.customerRoleId,
       ...form
     };
     loader(true)
