@@ -8,14 +8,15 @@ import ApiClient from "../../methods/api/apiClient";
 import crendentialModel from "../../models/credential.model";
 import AddAttendee from "./AddAttendee";
 import loader from "../../methods/loader";
+import environment from "../../environment";
 
-export default function AttendeeList({eventId}){
+export default function AttendeeList({eventId,eventDetail}){
     const [data,setData]=useState([])
     const [loading,setLoader]=useState(false)
     const [total,setTotal]=useState(0)
     const [tab,setTab]=useState('list')
     const user=crendentialModel.getUser()
-    const [filters,setFilter]=useState({page:1,count:50,search:'',addedBy:user._id,eventId:eventId})
+    const [filters,setFilter]=useState({page:1,count:50,search:'',eventId:eventId})
 
     const columns = [
         {
@@ -53,9 +54,12 @@ export default function AttendeeList({eventId}){
                                     <FiEdit3 />
                                 </a>
                             </Tooltip> */}
-                            <Tooltip placement="top" title="Delete"> <span onClick={()=>deleteItem(itm.id)} className='border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl'>
+                            {(itm.addedBy==user._id||itm.addedBy==eventDetail?.addedBy)?<>
+                                <Tooltip placement="top" title="Delete"> <span onClick={()=>deleteItem(itm.id)} className='border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl'>
                             <BsTrash3 />
                         </span> </Tooltip> 
+                            </>:<></>}
+                          
                     </div>
                 </>
             }

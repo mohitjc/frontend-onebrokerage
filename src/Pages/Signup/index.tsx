@@ -8,22 +8,17 @@ import AuthLayout from '../../components/AuthLayout';
 import environment from '../../environment';
 import { toast } from 'react-toastify';
 import crendentialModel from '../../models/credential.model';
+import methodModel from '../../methods/methods';
 
 const Signup = () => {
   const history = useNavigate();
   const user:any = crendentialModel.getUser()
-  useEffect(() => {
-    if (user && user?.loggedIn) {
-      history('/dashboard')
-    }
-  }, [])
+ 
 
-  const [form, setForm] = useState({ email: '', password: '', fullName: '' });
+  const [form, setForm]:any = useState({ email: '', password: '', fullName: '' });
   const [remember, setRemember] = useState(false);
   const [eyes, setEyes] = useState({ password: false, confirmPassword: false, currentPassword: false });
 
-  useEffect(() => {
-  }, [])
 
   const hendleSubmit = (e: any) => {
     e.preventDefault()
@@ -46,6 +41,20 @@ const Signup = () => {
       }
     })
   };
+
+  useEffect(() => {
+    if (user && user?.loggedIn) {
+      history('/dashboard')
+    }
+
+    let email=methodModel.getPrams('email')
+    if(email){
+      setForm({
+        email:email,
+        fullName:methodModel.getPrams('fullName'),
+      })
+    }
+  }, [])
   return (
     <>
       <AuthLayout>

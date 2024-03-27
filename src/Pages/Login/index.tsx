@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import './style.scss';
 import AuthLayout from '../../components/AuthLayout';
 import crendentialModel from '../../models/credential.model';
+import methodModel from '../../methods/methods';
 
 const Login = () => {
   const history = useNavigate();
@@ -44,6 +45,10 @@ const Login = () => {
         setIp(ip)
       })
       .catch(error => console.error('Error fetching IP address:', error));
+
+
+      let email=methodModel.getPrams('email')
+      if(email) setUsername(email)
   }, [])
 
 
@@ -51,6 +56,8 @@ const Login = () => {
     localStorage.setItem('token', data.access_token)
     crendentialModel.setUser(data)
     let url = '/profile'
+    let eventId=methodModel.getPrams('eventId')
+    if(eventId) url=`/event/detail/${eventId}`
     history(url);
   }
 
