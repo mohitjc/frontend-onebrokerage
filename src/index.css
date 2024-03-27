@@ -28,3 +28,12 @@ button[type=submit] {
   background-color: #fd7838 !important;
   background-image: none;
 }
+
+.css-1nmdiq5-menu{
+  z-index: 999;
+}
+
+.tox .tox-editor-container {
+   
+  z-index: 1;
+}

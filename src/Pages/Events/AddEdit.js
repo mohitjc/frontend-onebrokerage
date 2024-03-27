@@ -116,8 +116,8 @@ const AddEdit = () => {
 
 
                     <h3 className="ViewUser mb-3"></h3>
-                    <div className="form-row">
-                        <div className="col-md-6 mb-3">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className=" mb-3">
                             <FormControl
                                 type="text"
                                 name="title"
@@ -128,7 +128,7 @@ const AddEdit = () => {
                             />
                         </div>
 
-                        <div className="col-md-6 mb-3">
+                        <div className=" mb-3">
                         <FormControl
                                 type="select"
                                 name="status"
@@ -143,7 +143,7 @@ const AddEdit = () => {
                             />
                         </div>
 
-                        <div className="col-md-6 mb-3">
+                        <div className=" mb-3">
                             <FormControl
                                 type="datetime-local"
                                 name="date"
@@ -153,8 +153,9 @@ const AddEdit = () => {
                                 required
                             />
                         </div>
-                        <div className="col-md-6 mb-3">
-                        <FormControl
+                        <div className=" mb-3 relative">
+                            <div className="absolute z-[9] w-full">
+                            <FormControl
                                 type="select"
                                 name="timezone"
                                 label="Timezone"
@@ -167,8 +168,10 @@ const AddEdit = () => {
                                 required
                                 error={getError('timezone')}
                             />
+                            </div>
+
                         </div>
-                        <div className="col-md-6 mb-3">
+                        <div className=" mb-3">
                             <FormControl
                                 type="number"
                                 name="capacity"
@@ -179,7 +182,7 @@ const AddEdit = () => {
                                 required
                             />
                         </div>
-                        <div className="col-md-6 mb-3">
+                        <div className=" mb-3">
                             <FormControl
                                type="datetime-local"
                                 name="deadline"
@@ -191,28 +194,7 @@ const AddEdit = () => {
                             />
                         </div>
 
-                        <div className="col-md-6 mb-3">
-                            <FormControl
-                                type="editor"
-                                name="description"
-                                label="Description"
-                                value={form.description}
-                                onChange={e => setform({ ...form, description: e })}
-                                required
-                            />
-                        </div>
-
-                        <div className="col-md-6 mb-3">
-                            <FormControl
-                                type="text"
-                                name="externalLink"
-                                label="External Link"
-                                value={form.externalLink}
-                                onChange={e => setform({ ...form, externalLink: e })}
-                            />
-                        </div>
-
-                        <div className="col-md-6 mb-3">
+                        <div className=" mb-3">
                             <FormControl
                                 type="text"
                                 name="address"
@@ -223,11 +205,40 @@ const AddEdit = () => {
                             />
                         </div>
 
+                       
+
+                        <div className=" mb-3">
+                            <FormControl
+                                type="text"
+                                name="externalLink"
+                                label="External Link"
+                                value={form.externalLink}
+                                onChange={e => setform({ ...form, externalLink: e })}
+                            />
+                        </div>
+
+                      
+
+                        
+
                         {/* <div className="col-span-12 md:col-span-6">
                                 <label className='lablefontcls'>Image</label><br></br>
                                 <ImageUpload model="users" result={e => imageResult(e, 'image')} value={images.image || form.image} />
                             </div> */}
                     </div>
+
+                    <div className="col-span-12 mb-3">
+                            <FormControl
+                                type="editor"
+                                name="description"
+                                label="Description"
+                                value={form.description}
+                                onChange={e => setform({ ...form, description: e })}
+                                required
+                            />
+                        </div>
+
+
                     <div className="text-right">
 
                         <button type="submit" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Save</button>
