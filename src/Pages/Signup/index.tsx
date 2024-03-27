@@ -87,10 +87,10 @@ const Signup = () => {
 
 
           <div className="mt-8">
-            <button type="submit" disabled={!remember} className="px-4 w-full text-sm font-normal text-white h-12 flex items-center justify-center gap-2 !bg-primary rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed">Sign Up</button>
+            <button type="submit" disabled={!remember} className="px-4 w-full text-sm font-normal text-white h-12 flex items-center justify-center gap-2 !bg-orange-500 rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed">Sign Up</button>
           </div>
 
-          <p className='text-sm mt-3 text-center'>Already have an account? <Link to="/login" className='text-primary text-sm'>Sign In</Link></p>
+          <p className='text-sm mt-3 text-center'>Already have an account? <Link to="/login" className='text-orange-500 text-sm'>Sign In</Link></p>
 
         </form>
       </AuthLayout>

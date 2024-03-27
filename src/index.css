@@ -22,3 +22,9 @@ background: -webkit-linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);  /* Ch
 background: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
+
+button[type=submit] {
+  -webkit-appearance: button;
+  background-color: #fd7838 !important;
+  background-image: none;
+}
