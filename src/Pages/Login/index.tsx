@@ -94,8 +94,8 @@ const Login = () => {
           setRes(res.data)
           // setLogin(res.data)
         } else {
-          if(data.customerRole){
-            await ApiClient.get('api/skillRole/detail',{id:res.data.customerRole}).then(rres=>{
+          if(res.data.customerRole){
+           await ApiClient.get('api/skillRole/detail',{id:res.data.customerRole}).then(rres=>{
               if(rres.success){
                 let udata=res.data
                 udata.customerRoleDetail=rres.data
