@@ -20,6 +20,15 @@ const Signup = () => {
   const [eyes, setEyes] = useState({ password: false, confirmPassword: false, currentPassword: false });
 
 
+  const setLogin=(data:any)=>{
+    localStorage.setItem('token', data.access_token)
+    crendentialModel.setUser(data)
+    let url = '/profile'
+    let eventId=methodModel.getPrams('eventId')
+    if(eventId) url=`/event/detail/${eventId}`
+    history(url);
+  }
+
   const hendleSubmit = (e: any) => {
     e.preventDefault()
     const data = {
@@ -28,16 +37,24 @@ const Signup = () => {
       ...form
     };
     loader(true)
-    ApiClient.post('api/user/register', data).then(res => {
+    let url='api/user/register'
+    let eventId=methodModel.getPrams('eventId')
+    if(eventId){
+      url='api/auto/login'
+    }
+    ApiClient.post(url, data).then(res => {
       loader(false)
       if (res.success) {
-        let url = '/login'
-        setTimeout(()=>{
-          toast.success(res.message)
-        },400)
-
-        // if (!permissions?.readDashboard) url = '/profile'
-        history(url);
+        if(eventId){
+          setLogin(res.data)
+        }else{
+          let url = '/login'
+          setTimeout(()=>{
+            toast.success(res.message)
+          },400)
+          history(url);
+        }
+       
       }
     })
   };
