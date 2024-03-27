@@ -39,24 +39,24 @@ const Signup = () => {
     loader(true)
     let url='api/user/register'
     let eventId=methodModel.getPrams('eventId')
-    if(eventId){
-      url='api/auto/login'
-    }
     ApiClient.post(url, data).then(async res => {
    
       if (res.success) {
         if(eventId){
-          if(res.data.customerRole){
-            await ApiClient.get('api/skillRole/detail',{id:res.data.customerRole}).then(rres=>{
-               if(rres.success){
-                 let udata=res.data
-                 udata.customerRoleDetail=rres.data
-                 setLogin(udata)
-               }
-             })
-           }else{
-             setLogin(res.data)
-           }
+          await ApiClient.get('api/auto/login',{id:res.data.id}).then(async res=>{
+            if(res.data.customerRole){
+              await ApiClient.get('api/skillRole/detail',{id:res.data.customerRole}).then(rres=>{
+                 if(rres.success){
+                   let udata=res.data
+                   udata.customerRoleDetail=rres.data
+                   setLogin(udata)
+                 }
+               })
+             }else{
+               setLogin(res.data)
+             }
+          })
+          
         }else{
           let url = '/login'
           setTimeout(()=>{
