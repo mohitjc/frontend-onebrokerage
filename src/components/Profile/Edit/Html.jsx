@@ -10,6 +10,8 @@ import timezoneModel from '../../../models/timezone.model';
 import ImageUpload from '../../common/ImageUpload';
 import ApiClient from '../../../methods/api/apiClient';
 import environment from '../../../environment';
+import { MdDeleteOutline } from "react-icons/md";
+
 
 const Html = ({ handleSubmit, setForm, form, getError, uploadImage, submitted }) => {
 
@@ -138,7 +140,7 @@ useEffect(()=>{
         <form name="profileForm" className="" onSubmit={handleSubmit} >
 
 
-        <div className="grid grid-cols-12 gap-4">
+        <div className="grid grid-cols-12 mb-4 gap-4 shadow p-4 mt-6 gap-4">
             <div className="col-span-12 md:col-span-6">
               <label>Name<span className="star">*</span></label>
               <input
@@ -327,6 +329,9 @@ useEffect(()=>{
 
               ></textarea>
             </div>
+
+
+
             <div className="col-span-full">
               <h4 className="text-1xl font-semibold text-[#111827]">Public Profile Info</h4>
             </div>
@@ -353,80 +358,94 @@ useEffect(()=>{
               {submitted && !form.certification ? <div className="invalid-feedback d-block">Certification is Required</div> : <></>}
             </div>
 
+           
+           
+          </div>
 
 
 
-            <div className="col-span-12 md:col-span-6">
-                <label>Skills</label>
-                <MultiSelectDropdown
-                  displayValue="title"
-                  placeholder="Select Skills"
-                  intialValue={form.skills}
-                  result={e => {
-                    setForm({ ...form, skills: e.value })
-                    console.log("e", e)
-                  }}
-                  options={skillRoles}
-                  theme="search"
-                />
-                {/* {submitted && !form.skills?.length ? <div className="invalid-feedback d-block">Skills is Required</div> : <></>} */}
-              </div>
-
-            <div className="col-span-full">
-              <label>Networking Groups</label>
-              <textarea
-                className="relative shadow-box bg-white w-full rounded-lg flex items-center gap-2 overflow-hidden px-2"
-                value={form.networkingGroup}
-                onChange={e => setForm({ ...form, networkingGroup: e.target.value })}
-
-              ></textarea>
-            </div>
-
-            <div className="col-span-12 md:col-span-6">
-              <label>Profession Category</label>
-              <SelectDropdown
-                id="statusDropdown"
-                displayValue="name"
-                placeholder="Select Profession Category"
-                intialValue={form.category}
-                result={e => { setForm({ ...form, category: e.value,subCategory:'' }) }}
-                options={categories}
-                theme="search"
-              />
-              {submitted && !form.category ? <div className="invalid-feedback d-block">Profession Category is Required</div> : <></>}
-            </div>
-
-            <div className="col-span-12 md:col-span-6">
-              <label>Profession Sub Category</label>
-              <SelectDropdown
-                id="statusDropdown"
-                displayValue="name"
-                placeholder="Select Profession Sub Category"
-                intialValue={form.subCategory}
-                result={e => { setForm({ ...form, subCategory: e.value }) }}
-                options={subcategories}
-                theme="search"
-              />
-              {/* {submitted && !form.subCategory ? <div className="invalid-feedback d-block">Profession Sub Category is Required</div> : <></>} */}
-            </div>
+          <div className='shadow grid grid-cols-12 gap-4 mb-4 p-4'>
+             
 
 
-            <div className="col-span-full">
-              <label>Short Bio</label>
-              <textarea
-                className="relative shadow-box bg-white w-full rounded-lg flex items-center gap-2 overflow-hidden px-2"
-                value={form.aboutUs}
-                onChange={e => setForm({ ...form, aboutUs: e.target.value })}
 
-              ></textarea>
-            </div>
+             <div className="col-span-12 md:col-span-6">
+                 <label>Skills</label>
+                 <MultiSelectDropdown
+                   displayValue="title"
+                   placeholder="Select Skills"
+                   intialValue={form.skills}
+                   result={e => {
+                     setForm({ ...form, skills: e.value })
+                     console.log("e", e)
+                   }}
+                   options={skillRoles}
+                   theme="search"
+                 />
+                 {/* {submitted && !form.skills?.length ? <div className="invalid-feedback d-block">Skills is Required</div> : <></>} */}
+               </div>
+ 
+             <div className="col-span-full">
+               <label>Networking Groups</label>
+               <textarea
+                 className="relative shadow-box bg-white w-full rounded-lg flex items-center gap-2 overflow-hidden px-2"
+                 value={form.networkingGroup}
+                 onChange={e => setForm({ ...form, networkingGroup: e.target.value })}
+ 
+               ></textarea>
+             </div>
+ 
+             <div className="col-span-12 md:col-span-6">
+               <label>Profession Category</label>
+               <SelectDropdown
+                 id="statusDropdown"
+                 displayValue="name"
+                 placeholder="Select Profession Category"
+                 intialValue={form.category}
+                 result={e => { setForm({ ...form, category: e.value,subCategory:'' }) }}
+                 options={categories}
+                 theme="search"
+               />
+               {submitted && !form.category ? <div className="invalid-feedback d-block">Profession Category is Required</div> : <></>}
+             </div>
+ 
+             <div className="col-span-12 md:col-span-6">
+               <label>Profession Sub Category</label>
+               <SelectDropdown
+                 id="statusDropdown"
+                 displayValue="name"
+                 placeholder="Select Profession Sub Category"
+                 intialValue={form.subCategory}
+                 result={e => { setForm({ ...form, subCategory: e.value }) }}
+                 options={subcategories}
+                 theme="search"
+               />
+               {/* {submitted && !form.subCategory ? <div className="invalid-feedback d-block">Profession Sub Category is Required</div> : <></>} */}
+             </div>
+ 
+ 
+             <div className="col-span-full">
+               <label>Short Bio</label>
+               <textarea
+                 className="relative shadow-box bg-white w-full rounded-lg flex items-center gap-2 overflow-hidden px-2"
+                 value={form.aboutUs}
+                 onChange={e => setForm({ ...form, aboutUs: e.target.value })}
+ 
+               ></textarea>
+             </div>
+             </div>
 
+             <div className='shadow grid grid-cols-12 gap-4 mb-4 p-4'>
             <div className="col-span-full ">
+            <div className=" ">
               <h4 className="text-1xl font-semibold text-[#111827]">Addresses</h4>
+              <div className=''>
+
+             
               <div className="">
                 {form?.multiAddress?.map((itm, i) => {
                   return <>
-                    <div className="grid grid-cols-2 gap-2 shadow-2xl p-3 mb-3 bg-white rounded-md">
+                    <div className="grid grid-cols-2 gap-2 shadow bg-white p-4 p-3 mb-3 bg-white rounded-md">
                       <div className="">
                         <label>First Name</label>
                         <input type="text"
@@ -474,8 +493,11 @@ useEffect(()=>{
                           required
                         />
                       </div>
-                      <div>
-                        <span class="material-symbols-outlined cursor-pointer text-red-500" onClick={() => removeAddress(i)}>close</span>
+                      <div className='relative'>
+                          <div className='bg-red-500 absolute right-0 top-6  rounded-md p-2 cursor-pointer' onClick={() => removeAddress(i)}>
+                           
+                            <p className='flex items-center gap-x-2 text-white'>  <MdDeleteOutline className=" text-white"  /> Delete</p>
+                          </div>
                       </div>
                     </div>
                   </>
@@ -486,9 +508,11 @@ useEffect(()=>{
               <div className="text-right mt-3">
                 <button type="button" onClick={addAddress} className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Address</button>
               </div>
+               </div>
+              </div>
+            </div>
             </div>
 
-          </div>
 
           <div className="text-right mt-3">
                 <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>

@@ -50,63 +50,63 @@ const Profile = () => {
 
         <div className='inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white'>
           <div className='grid items-center grid-cols-12 gap-4'>
-            <div className='col-span-12 md:col-span-2'>
-              <div className='text_head'>
-                <label className='text-typo text-base font-medium max-w-sm w-full block' >Image</label>
-              </div>
+
+            <div className='col-span-12 md:col-span-3 lg:col-span-2'>
+              <img src={methodModel.userImg(data && data.image)} className="h-28 w-28 mx-auto" />
             </div>
-            <div className='col-span-12 md:col-span-10'>
-              <div className='sub_fatch'>
-                <img src={methodModel.userImg(data && data.image)} className="profileImage" />
-              </div>
+
+            <div className='col-span-12 md:col-span-9 lg:col-span-10 pl-5 border-l border-gray-300'>
+                <div className='grid grid-cols-2 gap-4'>
+                   
+
+
+                    <div className=''>
+                      <div className='text_head'>
+                        <label className='text-typo text-base font-normal max-w-sm w-full block'>Name</label>
+                      </div>
+                      <div className='sub_fatch'>
+                        <p className='text-sm text-gray-500'>{data && data.fullName}</p>
+                      </div>
+                    </div>
+                   
+
+
+                    <div className=''>
+                      <div className='text_head'>
+                        <label className='text-typo text-base font-normal max-w-sm w-full block'>Email</label>
+                      </div>
+                      <div className='sub_fatch'>
+                        <p className='text-sm text-gray-500' >{data && data.email}</p>
+                      </div>
+                    </div>
+                  
+
+                    <div className=''>
+                      <div className='text_head'>
+                        <label className='text-typo text-base font-normal max-w-sm w-full block'>Role</label>
+                      </div>
+                      <div className='sub_fatch'>
+                        <p className='text-sm text-gray-500' >{user.customerRoleDetail?.name}</p>
+                      </div>
+                    </div>
+                  
+
+
+                    <div className=''>
+                      <div className='text_head'>
+                        <label className='text-typo text-base font-normal max-w-sm w-full block'>Mobile No</label>
+                      </div>
+                      <div className='sub_fatch'>
+                        <p className='text-sm text-gray-500'>{String(data.mobileNo?'+'+data.mobileNo:'')}</p>
+                      </div>
+                    </div>
+                    
+                </div>
             </div>
 
 
-            <div className='col-span-12 md:col-span-2'>
-              <div className='text_head'>
-                <label className='text-typo text-base font-medium max-w-sm w-full block'>Name</label>
-              </div>
-            </div>
-            <div className='col-span-12 md:col-span-10'>
-              <div className='sub_fatch'>
-                <p className=''>{data && data.fullName}</p>
-              </div>
-            </div>
-
-
-            <div className='col-span-12 md:col-span-2'>
-              <div className='text_head'>
-                <label className='text-typo text-base font-medium max-w-sm w-full block'>Email</label>
-              </div>
-            </div>
-            <div className='col-span-12 md:col-span-10'>
-              <div className='sub_fatch'>
-                <p className='' >{data && data.email}</p>
-              </div>
-            </div>
-
-            <div className='col-span-12 md:col-span-2'>
-              <div className='text_head'>
-                <label className='text-typo text-base font-medium max-w-sm w-full block'>Role</label>
-              </div>
-            </div>
-            <div className='col-span-12 md:col-span-10'>
-              <div className='sub_fatch'>
-                <p className='' >{user.customerRoleDetail?.name}</p>
-              </div>
-            </div>
-
-
-            <div className='col-span-12 md:col-span-2'>
-              <div className='text_head'>
-                <label className='text-typo text-base font-medium max-w-sm w-full block'>Mobile No</label>
-              </div>
-            </div>
-            <div className='col-span-12 md:col-span-10'>
-              <div className='sub_fatch'>
-                <p className=''>{String(data.mobileNo?'+'+data.mobileNo:'')}</p>
-              </div>
-            </div>
+           
+          
 
 
           </div>
