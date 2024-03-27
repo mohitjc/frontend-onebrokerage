@@ -10,13 +10,13 @@ import AddAttendee from "./AddAttendee";
 import loader from "../../methods/loader";
 import environment from "../../environment";
 
-export default function AttendeeList({eventId,eventDetail}){
-    const [data,setData]=useState([])
-    const [loading,setLoader]=useState(false)
-    const [total,setTotal]=useState(0)
-    const [tab,setTab]=useState('list')
-    const user=crendentialModel.getUser()
-    const [filters,setFilter]=useState({page:1,count:50,search:'',eventId:eventId})
+export default function AttendeeList({ eventId, eventDetail }) {
+    const [data, setData] = useState([])
+    const [loading, setLoader] = useState(false)
+    const [total, setTotal] = useState(0)
+    const [tab, setTab] = useState('list')
+    const user = crendentialModel.getUser()
+    const [filters, setFilter] = useState({ page: 1, count: 50, search: '', eventId: eventId })
 
     const columns = [
         {
@@ -32,6 +32,18 @@ export default function AttendeeList({eventId,eventDetail}){
             }
         },
         {
+            key: 'isConnectedMeating', name: 'Connected Meating',
+            render: (row) => {
+                return <>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer" onChange={e=>connectToggle(row)} checked={row.isConnectedMeating} />
+                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">{row.isConnectedMeating ? 'Conneted' : 'Disconneted'}</span>
+                    </label>
+                </>
+            }
+        },
+        {
             key: 'createdAt', name: 'Created At',
             render: (row) => {
                 return <>
@@ -44,22 +56,22 @@ export default function AttendeeList({eventId,eventDetail}){
             render: (itm) => {
                 return <>
                     <div className="flex items-center justify-start gap-1.5">
-                    {/* <Tooltip placement="top" title="View">
+                        {/* <Tooltip placement="top" title="View">
                                 <a className="border cursor-pointer border-[#6956E5] hover:opacity-70 rounded-lg bg-[#6956E514] w-10 h-10 !text-primary flex items-center justify-center text-xl">
                                 <span class="material-symbols-outlined">visibility</span>
                                 </a>
                             </Tooltip> */}
-                            {/* <Tooltip placement="top" title="Edit">
+                        {/* <Tooltip placement="top" title="Edit">
                                 <a className="border cursor-pointer border-[#6956E5] hover:opacity-70 rounded-lg bg-[#6956E514] w-10 h-10 !text-primary flex items-center justify-center text-xl">
                                     <FiEdit3 />
                                 </a>
                             </Tooltip> */}
-                            {(itm.addedBy==user._id||itm.addedBy==eventDetail?.addedBy)?<>
-                                <Tooltip placement="top" title="Delete"> <span onClick={()=>deleteItem(itm.id)} className='border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl'>
-                            <BsTrash3 />
-                        </span> </Tooltip> 
-                            </>:<></>}
-                          
+                        {(itm.addedBy == user._id || itm.addedBy == eventDetail?.addedBy) ? <>
+                            <Tooltip placement="top" title="Delete"> <span onClick={() => deleteItem(itm.id)} className='border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl'>
+                                <BsTrash3 />
+                            </span> </Tooltip>
+                        </> : <></>}
+
                     </div>
                 </>
             }
@@ -67,20 +79,31 @@ export default function AttendeeList({eventId,eventDetail}){
     ]
 
 
-    const getData=(p={})=>{
-        let f={...filters,...p}
-        setLoader(true)
-        ApiClient.get('api/attendees/list',f).then(res=>{
+    const connectToggle=(row)=>{
+        let isConnectedMeating=row.isConnectedMeating?false:true
+        loader(true)
+        ApiClient.put('api/attendees/update',{id:row.id,isConnectedMeating:isConnectedMeating}).then(res=>{
             if(res.success){
+                getData()
+            }
+            loader(false)
+        })
+    }
+
+    const getData = (p = {}) => {
+        let f = { ...filters, ...p }
+        setLoader(true)
+        ApiClient.get('api/attendees/list', f).then(res => {
+            if (res.success) {
                 setData(res.data)
                 setTotal(res.total)
             }
             setLoader(false)
         })
     }
-    useEffect(()=>{
+    useEffect(() => {
         getData()
-    },[])
+    }, [])
 
     const pageChange = (e) => {
         setFilter({ ...filters, page: e })
@@ -102,12 +125,12 @@ export default function AttendeeList({eventId,eventDetail}){
         getData({ sortBy, key, sorder })
     }
 
-    const clear=()=>{
-        let f={
-            search:'',
-            page:1
+    const clear = () => {
+        let f = {
+            search: '',
+            page: 1
         }
-        setFilter({ ...filters, ...f})
+        setFilter({ ...filters, ...f })
         getData({ ...f })
     }
 
@@ -124,52 +147,52 @@ export default function AttendeeList({eventId,eventDetail}){
     }
 
     return <>
-    <div className="flex justify-end gap-2">
-        {tab=='list'?<>
-        <button onClick={()=>setTab('add')} className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2">
-                            <FiPlus className="text-xl text-white" /> Add Attendee
-                        </button>
-        </>:<>
-        <button onClick={()=>{setTab('list');clear()}} className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2">
-                            Back
-                        </button>
+        <div className="flex justify-end gap-2">
+            {tab == 'list' ? <>
+                <button onClick={() => setTab('add')} className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2">
+                    <FiPlus className="text-xl text-white" /> Add Attendee
+                </button>
+            </> : <>
+                <button onClick={() => { setTab('list');}} className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2">
+                    Back
+                </button>
+            </>}
+
+            {filters.search ? <>
+                <button onClick={() => clear()} className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2">
+                    Reset
+                </button>
+            </> : <></>}
+
+
+        </div>
+
+        {tab == 'add' ? <>
+            <AddAttendee eventId={eventId} result={e => {
+                if (e.event == 'submit') {
+                    clear()
+                    setTab('list')
+                }
+            }} />
+        </> : <>
+            {loading ? <>
+                <div className="text-center">Loading...</div>
+            </> : <>
+                <Table
+                    data={data}
+                    columns={columns}
+                    page={filters.page}
+                    count={filters.count}
+                    total={total}
+                    result={(e) => {
+                        if (e.event == 'page') pageChange(e.value)
+                        if (e.event == 'sort') sorting(e.value)
+                    }}
+                />
+            </>}
+
         </>}
 
-        {filters.search?<>
-            <button onClick={()=>clear()} className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2">
-                            Reset
-                        </button>
-        </>:<></>}
-      
 
-    </div>
-
-    {tab=='add'?<>
-    <AddAttendee eventId={eventId} result={e=>{
-        if(e.event=='submit'){
-            clear()
-            setTab('list')
-        } 
-    }} />
-    </>:<>
-    {loading?<>
-        <div className="text-center">Loading...</div>
-    </>:<>
-    <Table
-    data={data}
-    columns={columns}
-    page={filters.page}
-    count={filters.count}
-    total={total}
-    result={(e) => {
-        if (e.event == 'page') pageChange(e.value)
-        if (e.event == 'sort') sorting(e.value)
-    }}
-   />
-    </>}
-    
-    </>}
-   
-  
     </>
 }

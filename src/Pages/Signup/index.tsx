@@ -42,11 +42,21 @@ const Signup = () => {
     if(eventId){
       url='api/auto/login'
     }
-    ApiClient.post(url, data).then(res => {
-      loader(false)
+    ApiClient.post(url, data).then(async res => {
+   
       if (res.success) {
         if(eventId){
-          setLogin(res.data)
+          if(res.data.customerRole){
+            await ApiClient.get('api/skillRole/detail',{id:res.data.customerRole}).then(rres=>{
+               if(rres.success){
+                 let udata=res.data
+                 udata.customerRoleDetail=rres.data
+                 setLogin(udata)
+               }
+             })
+           }else{
+             setLogin(res.data)
+           }
         }else{
           let url = '/login'
           setTimeout(()=>{
@@ -56,6 +66,7 @@ const Signup = () => {
         }
        
       }
+      loader(false)
     })
   };
 
