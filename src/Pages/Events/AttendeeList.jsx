@@ -15,7 +15,7 @@ export default function AttendeeList({eventId}){
     const [total,setTotal]=useState(0)
     const [tab,setTab]=useState('list')
     const user=crendentialModel.getUser()
-    const [filters,setFilter]=useState({page:1,count:50,search:'',addedBy:user._id})
+    const [filters,setFilter]=useState({page:1,count:50,search:'',addedBy:user._id,eventId:eventId})
 
     const columns = [
         {
