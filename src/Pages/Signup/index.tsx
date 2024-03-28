@@ -63,17 +63,7 @@ const Signup = () => {
       if (res.success) {
         if(eventId){
           await ApiClient.post('api/auto/login',{id:res.data._id}).then(async res=>{
-            if(res.data.customerRole){
-              await ApiClient.get('api/skillRole/detail',{id:res.data.customerRole}).then(rres=>{
-                 if(rres.success){
-                   let udata=res.data
-                   udata.customerRoleDetail=rres.data
-                   setLogin(udata)
-                 }
-               })
-             }else{
-               setLogin(res.data)
-             }
+            setLogin(res.data)
           })
           
         }else{

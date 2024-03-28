@@ -35,13 +35,7 @@ const PageLayout = ({ children }) => {
         ApiClient.get('api/user/detail', { id: user._id }).then(async res => {
           if (res.success) {
             let data = { ...user, ...res.data }
-            await ApiClient.get('api/skillRole/detail',{id:data.customerRole}).then(rres=>{
-              if(rres.success){
-                data.customerRoleDetail=rres.data
-                crendentialModel.setUser(data)
-                // localStorage.setItem('browseload', 'true')
-              }
-            })
+            crendentialModel.setUser(data)
           }
         })
       }
@@ -82,7 +76,7 @@ const PageLayout = ({ children }) => {
                             <img alt="image" src={methodModel.userImg(user.image)} className="h-12 w-12 rounded-full object-cover" />
                             <div className="ml-2 text-left">
                               <b>{user.fullName}</b>
-                              <p className="grayCls mb-0 text-capitalize">{user.customerRoleDetail?.name}</p>
+                              <p className="grayCls mb-0 text-capitalize">{user.customerRole?.name}</p>
                             </div>
                           </div>
                           <i className="fa fa-angle-down top-1 relative h-5 w-5 text-gray-400" aria-hidden="true" />

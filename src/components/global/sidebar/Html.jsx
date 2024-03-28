@@ -8,9 +8,10 @@ import { FiPackage, FiSettings, FiThumbsUp, FiUsers } from "react-icons/fi";
 import { TiArrowSortedDown } from "react-icons/ti";
 import {  RiPresentationLine } from "react-icons/ri";
 import { GrCatalogOption } from "react-icons/gr";
+import environment from "../../../environment";
 
 
-const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen }) => {
+const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
   const location = useLocation();
 
 
@@ -38,6 +39,9 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen }) => {
       <div className={`px-[8px] ${isOpen && styles.sm_sidebar}`} component="siderbar">
 
         <ul className="space-y-2 px-2" >
+          {user?.verifiedGroupLeader!='approve'&&user.customerRole?._id==environment.glRoleId?<>
+          <div className="py-4 text-red-600">{user?.verifiedGroupLeader=='decline'?'Your Request is declined':'Your request approvel is under progress'}</div>
+          </>:<>
           {menus.map(itm=>{
             return <>
             {itm.icon?<>
@@ -120,6 +124,8 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen }) => {
             
             </>
           })}
+          </>}
+        
 
         </ul>
       </div>
