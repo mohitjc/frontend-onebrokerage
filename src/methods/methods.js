@@ -117,8 +117,6 @@ const emailvalidation = (val) => {
 }
 // match errors for fields
 const matchError = (ext, fValue) => {
-    console.log("ext",ext)
-    console.log("fValue",ext)
     let invalid = false
     let kValue = fValue[ext.key]
     let value = { minLength: false, maxLength: false, confirmMatch: false ,required:false}

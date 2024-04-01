@@ -138,7 +138,7 @@ const Events = () => {
     }
 
     const isAllow = (key = '') => {
-        let permissions = user.customerRoleDetail?.permissions
+        let permissions = user.customerRole?.permissions
         let value = permissions?.[key]
         return value
     }

@@ -7,7 +7,7 @@ import crendentialModel from '../../../models/credential.model';
 const Sidebar = ({ isOpen }) => {
   const user = crendentialModel.getUser()
   const history = useNavigate()
-  const [role,setRole]=useState(user.customerRoleDetail)
+  const [role,setRole]=useState(user.customerRole)
   const menus = {
     user: ['roles', 'users'],
     catalogue: ['types', 'categories', 'category/'],
@@ -48,6 +48,7 @@ const Sidebar = ({ isOpen }) => {
       if(permissions?.[itm]) value = permissions?.[itm]
     })
 
+    if(!url) value=true
     return value
 }
 
@@ -57,6 +58,7 @@ const Sidebar = ({ isOpen }) => {
 
   return <>
     <Html
+      user={user}
       route={route}
       tabclass={tabclass}
       isAllow={isAllow}

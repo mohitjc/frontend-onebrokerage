@@ -8,43 +8,92 @@ import AuthLayout from '../../components/AuthLayout';
 import environment from '../../environment';
 import { toast } from 'react-toastify';
 import crendentialModel from '../../models/credential.model';
+import methodModel from '../../methods/methods';
+import FormControl from '../../components/common/FormControl';
 
 const Signup = () => {
   const history = useNavigate();
   const user:any = crendentialModel.getUser()
-  useEffect(() => {
-    if (user && user?.loggedIn) {
-      history('/dashboard')
-    }
-  }, [])
+ 
 
-  const [form, setForm] = useState({ email: '', password: '', fullName: '' });
+  const [form, setForm]:any = useState({ email: '', password: '', fullName: '',customerRole:environment.customerRoleId });
   const [remember, setRemember] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [groups, setGroups] = useState([]);
   const [eyes, setEyes] = useState({ password: false, confirmPassword: false, currentPassword: false });
 
-  useEffect(() => {
-  }, [])
+
+  const setLogin=(data:any)=>{
+    localStorage.setItem('token', data.access_token)
+    crendentialModel.setUser(data)
+    let url = '/profile'
+    let eventId=methodModel.getPrams('eventId')
+    if(eventId) url=`/event/detail/${eventId}`
+    history(url);
+  }
+
+  const getGroups=()=>{
+    ApiClient.get('api/group/list',{status:'active'}).then((res:any)=>{
+      if(res.success){
+        setGroups(res.data)
+      }
+    })
+  }
 
   const hendleSubmit = (e: any) => {
     e.preventDefault()
+    setSubmitted(true)
     const data = {
       role:environment.userRoleId,
       ...form
     };
-    loader(true)
-    ApiClient.post('api/user/register', data).then(res => {
-      loader(false)
-      if (res.success) {
-        let url = '/login'
-        setTimeout(()=>{
-          toast.success(res.message)
-        },400)
 
-        // if (!permissions?.readDashboard) url = '/profile'
-        history(url);
+
+    if(data.customerRole==environment.glRoleId){
+      if(!data.groupId){
+        return
       }
+    }
+
+    loader(true)
+    let url='api/user/register'
+    let eventId=methodModel.getPrams('eventId')
+    ApiClient.post(url, data).then(async res => {
+   
+      if (res.success) {
+        if(eventId){
+          await ApiClient.post('api/auto/login',{id:res.data._id}).then(async res=>{
+            setLogin(res.data)
+          })
+          
+        }else{
+          let url = '/login'
+          setTimeout(()=>{
+            toast.success(res.message)
+          },400)
+          history(url);
+        }
+       
+      }
+      loader(false)
     })
   };
+
+  useEffect(() => {
+    if (user && user?.loggedIn) {
+      history('/dashboard')
+    }
+
+    let email=methodModel.getPrams('email')
+    if(email){
+      setForm({
+        email:email,
+        fullName:methodModel.getPrams('fullName'),
+      })
+    }
+
+    getGroups()
+  }, [])
   return (
     <>
       <AuthLayout>
@@ -80,10 +129,48 @@ const Signup = () => {
             </div>
 
           </div>
+
+          <div className='mb-3'>
+            <FormControl
+            type='radio'
+            options={[
+              {id:environment.customerRoleId,name:'No'},
+              {id:environment.glRoleId,name:'Yes'},
+            ]}
+            label="Do You Want To Be A Group Leader"
+            value={form.customerRole}
+            onChange={(e:any)=>{
+              setForm({...form,customerRole:e,groupId:null})
+            }}
+            />
+          </div>
+
+{form.customerRole==environment.glRoleId?<>
+  <div className='mb-3'>
+           
+           <FormControl
+           type='select'
+           options={groups}
+           displayValue="name"
+           placeholder="Select Group"
+           label="Group"
+           value={form.groupId}
+           onChange={(e:any)=>{
+             setForm({...form,groupId:e})
+           }}
+           />
+           {submitted&&!form.groupId?<>
+           <div className='text-red-600 text-sm'>Group is required</div>
+           </>:<></>}
+         </div>
+</>:<></>}
+          
           <div className='flex'>
             <label className='flex items-center pointer'><input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="mr-2 h-4 w-4" /> <span className='text-xs text-gray-600'>By clicking Create account, I agree that I have read and accepted the Terms of Use and Privacy Policy.</span></label>
             {/* <Link className="sign_up ml-auto text-primary" to="/forgotpassword"> Forgot Password</Link> */}
           </div>
+
+          
 
 
           <div className="mt-8">

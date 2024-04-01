@@ -86,7 +86,7 @@ const Profile = () => {
                         <label className='text-typo text-base font-normal max-w-sm w-full block'>Role</label>
                       </div>
                       <div className='sub_fatch'>
-                        <p className='text-sm text-gray-500' >{user.customerRoleDetail?.name}</p>
+                        <p className='text-sm text-gray-500' >{user.customerRole?.name}</p>
                       </div>
                     </div>
                   

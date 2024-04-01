@@ -17,7 +17,7 @@ const EditProfile = () => {
      email:'', 
      mobileNo:'',
      fullName:'',
-     multiAddress:[{id:String(new Date().getTime())}],
+     multiAddress:[],
      profession:'',
      company:'',
      companyUrl:'',
@@ -57,7 +57,7 @@ const EditProfile = () => {
 
         if(payload.customerRole?._id) payload.customerRole=payload.customerRole._id
         let multiAddress=value.multiAddress||[]
-        payload.multiAddress=multiAddress.length?multiAddress:[{id:String(new Date().getTime())}]
+        payload.multiAddress=multiAddress.length?multiAddress:[]
         setForm({ ...payload })
         setData(value)
       }
