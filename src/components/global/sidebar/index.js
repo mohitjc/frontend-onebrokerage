@@ -3,6 +3,7 @@ import './style.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import Html from './Html';
 import crendentialModel from '../../../models/credential.model';
+import environment from '../../../environment';
 
 const Sidebar = ({ isOpen }) => {
   const user = crendentialModel.getUser()
@@ -48,7 +49,7 @@ const Sidebar = ({ isOpen }) => {
       if(permissions?.[itm]) value = permissions?.[itm]
     })
 
-    if(user?.verifiedGroupLeader!='approve'){
+    if(user?.verifiedGroupLeader!='approve'&&user.customerRole?._id==environment.glRoleId){
       value=false
     }
 
