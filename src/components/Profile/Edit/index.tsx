@@ -35,6 +35,7 @@ const EditProfile = () => {
      networkingGroup:'',
      category:'',
      subCategory:'',
+     subSubCategory:'',
      aboutUs:'',
      country:'usa'
     });

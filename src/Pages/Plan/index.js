@@ -22,7 +22,7 @@ const Plans = (p) => {
   const history = useNavigate()
   const [pricing, setpricing] = useState()
   const [appliedcurrency, setappliedcurrency] = useState()
-  const [currencyiso, setcurrencyiso] = useState('aud')
+  const [currencyiso, setcurrencyiso] = useState('usd')
   const [features, setFeatures] = useState()
   const [interval, setInterval] = useState(1)
 
@@ -55,7 +55,7 @@ const Plans = (p) => {
           ApiClient.get(`api/user/profile`, { id: user?._id }).then(response => {
             if (response.success) {
               userData = response.data
-              setcurrencyiso(userData?.subscription_currency || 'aud')
+              setcurrencyiso(userData?.subscription_currency || 'usd')
               if (res?.data?.isActive) {
                 userDetail = { ...userData, subscriptionId: res?.data?.subscriptionId, subRole: { ...userData.subRole, id: userData?.subRole?._id } }
               } else {
@@ -212,32 +212,31 @@ const Plans = (p) => {
       return
     }
     else {
+
+      console.log("p",p)
+
       let price = getPrice(p)
       if (!price) {
         toast.error('Please Select Another Currency.')
         return
       }
-      if (!user?.trial_ended && !user?.on_trial) {
-        let payload = {
-          customer:user._id,
-          planId: p.id,
-          planType: 'month',
-          planInterval: interval,
-          subscription_currency: currencyiso,
-          stripe_price_id: p?.pricing.find(item => item?.interval_count == interval && item?.currency == currencyiso.toLowerCase()).stripe_price_id
-        }
-        setLoader(true)
-        ApiClient.post(`api/purchase/plan`, payload).then(res => {
-          if (res.success) {
-            let UserDetail = { ...user, on_trial: true }
-            crendentialModel.setUser(UserDetail)
-            history('/pos')
-          }
-          setLoader(false)
-        })
-      } else {
-        history(`detailcards/${p.id}/${interval}/${currencyiso}`)
+      let payload = {
+        user_id:user._id,
+        planId: p.id,
+        planType: 'month',
+        planInterval: interval,
+        subscription_currency: currencyiso,
+        stripe_price_id: p?.pricing.find(item => item?.interval_count == interval && item?.currency == currencyiso.toLowerCase()).stripe_price_id
       }
+      setLoader(true)
+      ApiClient.post(`api/payOnStripe`, payload).then(res => {
+        if (res.success) {
+          // let UserDetail = { ...user, on_trial: true }
+          // crendentialModel.setUser(UserDetail)
+          history('/activeplan')
+        }
+        setLoader(false)
+      })
     }
   }
 
