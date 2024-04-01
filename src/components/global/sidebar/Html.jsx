@@ -31,6 +31,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
       url:'/event',
       key:'readEvents',
     },
+    {
+      name:'Plan',
+      icon:<span class="material-symbols-outlined text-[#ffc800] shrink-0 text-lg">star</span>,
+      url:'/plan',
+      key:'',
+    },
   ]
 
   return (

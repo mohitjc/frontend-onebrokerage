@@ -48,6 +48,7 @@ const Sidebar = ({ isOpen }) => {
       if(permissions?.[itm]) value = permissions?.[itm]
     })
 
+    if(!url) value=true
     return value
 }
 

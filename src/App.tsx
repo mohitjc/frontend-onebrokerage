@@ -21,6 +21,8 @@ import Signup from './Pages/Signup';
 import Events from './Pages/Events';
 import AddEditEvent from "./Pages/Events/AddEdit";
 import ViewEvent from "./Pages/Events/View";
+import Plan from "./Pages/Plan";
+// import ActivePlan from "./Pages/Plan/ActivePlan";
 function App() {
 
   const routes=[
@@ -44,6 +46,8 @@ function App() {
     {url:'/event/edit/:id',element:<AddEditEvent />},
     {url:'/event/add',element:<AddEditEvent />},
     {url:'/event/detail/:id',element:<ViewEvent />},
+    {url:'/plan',element:<Plan />},
+    // {url:'/activeplan',element:<ActivePlan />},
   ]
 
   return (

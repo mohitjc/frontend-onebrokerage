@@ -41,6 +41,7 @@ const Html = ({ handleSubmit, setForm, form, getError, uploadImage, submitted })
   const [categories, setCategories] = useState([])
   const [states, setState] = useState([])
   const [subcategories, setSubCategories] = useState([])
+  const [subsubcategories, setSubSubCategories] = useState([])
   const [eyes, setEyes] = useState({})
   const countries=countryStateModel.list
   const timezones=timezoneModel.list
@@ -88,6 +89,15 @@ const getSubCategories = (p={}) => {
 }
 
 
+const getSubSubCategories = (p={}) => {
+  ApiClient.get('api/categorie/list', { status: 'active',catType:environment.professionType,...p }).then(res => {
+    if (res.success) {
+      setSubSubCategories(res.data)
+    }
+  })
+}
+
+
 useEffect(() => {
   getCertificates()
   getCategories()
@@ -105,6 +115,12 @@ useEffect(() => {
     getSubCategories({parentCategory:form.category})
   }
 }, [form.category])
+
+useEffect(() => {
+  if(form.subCategory){
+    getSubSubCategories({parentCategory:form.subCategory})
+  }
+}, [form.subCategory])
 
 useEffect(() => {
   if(form.country){
@@ -418,6 +434,20 @@ useEffect(()=>{
                  intialValue={form.subCategory}
                  result={e => { setForm({ ...form, subCategory: e.value }) }}
                  options={subcategories}
+                 theme="search"
+               />
+               {/* {submitted && !form.subCategory ? <div className="invalid-feedback d-block">Profession Sub Category is Required</div> : <></>} */}
+             </div>
+
+             <div className="col-span-12 md:col-span-6">
+               <label>Profession Sub Sub Category</label>
+               <SelectDropdown
+                 id="statusDropdown"
+                 displayValue="name"
+                 placeholder="Select Profession Sub Sub Category"
+                 intialValue={form.subSubCategory}
+                 result={e => { setForm({ ...form, subSubCategory: e.value }) }}
+                 options={subsubcategories}
                  theme="search"
                />
                {/* {submitted && !form.subCategory ? <div className="invalid-feedback d-block">Profession Sub Category is Required</div> : <></>} */}
