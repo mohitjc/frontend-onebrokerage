@@ -4,10 +4,7 @@ import styles from "./index.module.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { Tooltip } from "antd";
 import { RiHome6Line } from "react-icons/ri";
-import { FiPackage, FiSettings, FiThumbsUp, FiUsers } from "react-icons/fi";
 import { TiArrowSortedDown } from "react-icons/ti";
-import {  RiPresentationLine } from "react-icons/ri";
-import { GrCatalogOption } from "react-icons/gr";
 import environment from "../../../environment";
 
 
@@ -46,8 +43,9 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
 
         <ul className="space-y-2 px-2" >
           {user?.verifiedGroupLeader!='approve'&&user.customerRole?._id==environment.glRoleId?<>
-          <div className="py-4 text-red-600">{user?.verifiedGroupLeader=='decline'?'Your Request is declined':'Your request approvel is under progress'}</div>
-          </>:<>
+          <div className="py-4 text-red-600 mb-3">{user?.verifiedGroupLeader=='decline'?'Your Request is declined':'Your request approvel is under progress'}</div>
+          </>:<></>}
+        
           {menus.map(itm=>{
             return <>
             {itm.icon?<>
@@ -130,9 +128,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
             
             </>
           })}
-          </>}
-        
-
         </ul>
       </div>
     </>

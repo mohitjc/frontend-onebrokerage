@@ -48,6 +48,10 @@ const Sidebar = ({ isOpen }) => {
       if(permissions?.[itm]) value = permissions?.[itm]
     })
 
+    if(user?.verifiedGroupLeader!='approve'){
+      value=false
+    }
+
     if(!url) value=true
     return value
 }

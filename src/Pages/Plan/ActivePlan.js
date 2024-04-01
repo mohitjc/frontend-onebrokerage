@@ -1,23 +1,20 @@
 import { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../../components/global/layout";
 import ApiClient from "../../methods/api/apiClient";
 import loader from "../../methods/loader";
 // import './style.scss'
 import pipeModel from "../../models/pipeModel";
-import { useDispatch, useSelector } from "react-redux";
-import { login_success } from "../../actions/user";
 import { FiCheck } from "react-icons/fi";
-import Breadcrumb from "../../components/common/Breadcrumb";
 import datepipeModel from "../../models/datepipemodel";
 import environment from "../../environment";
+import crendentialModel from "../../models/credential.model";
 
 const ActivePlan = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = crendentialModel.getUser();
   const [activeplan, setActivePlan] = useState();
   const [card, setCard] = useState();
-  const history = useHistory();
+  const history = useNavigate();
 
   useEffect(() => {
     loader(true);
@@ -26,7 +23,7 @@ const ActivePlan = () => {
       if (res.success) {
         setActivePlan(res.data);
         if (!res.data.id) {
-          history.push("/plans");
+          history("/plan");
         }
         let userDetail = {};
         if (res?.data?.isActive) {
@@ -34,11 +31,12 @@ const ActivePlan = () => {
         } else {
           userDetail = { ...user, subscriptionId: "" };
         }
-        dispatch(login_success(userDetail));
+        crendentialModel.setUser(userDetail)
       }
       loader(false);
     }
-    ApiClient.getAll({url:'api/my/plan',params:user?.subRole?.id==environment.SubRolePartner?{id:user.id||user?._id}:{},response})
+
+    ApiClient.get('api/my/plan',{id:user.id||user?._id}).then(response)
 
     const listresponse=(res)=>{
       if (res.success) {
@@ -48,20 +46,11 @@ const ActivePlan = () => {
       }
       loader(false);
     }
-    ApiClient.getAll({url:'api/cards/listing',params:{ isDefault: true },response:listresponse})
+    ApiClient.get('api/card/list',{ isDefault: true }).then(listresponse)
   }, []);
 
   return (
     <Layout>
-      <Breadcrumb
-        links={[
-          {
-            name: "Settings",
-            link: "/company",
-          },
-        ]}
-        currentPage={`Plan`}
-      />
       <div className="my-6">
         <h5 className="text-typo text-2xl font-semibold">Plan</h5>
         <p className="text-sm font-normal text-[#75757A]">
