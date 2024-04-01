@@ -209,7 +209,7 @@ const Plans = (p) => {
         planType: 'month',
         planInterval: interval,
         subscription_currency: currencyiso,
-        stripe_price_id: p?.pricing.find(item => item?.interval_count == interval && item?.currency == currencyiso.toLowerCase()).stripe_price_id
+        stripe_price_id: p?.pricing?.find(item => item?.interval_count == interval && item?.currency == currencyiso.toLowerCase())?.stripe_price_id||''
       }
       setLoader(true)
       loader(true)
@@ -219,6 +219,8 @@ const Plans = (p) => {
           // let UserDetail = { ...user, on_trial: true }
           // crendentialModel.setUser(UserDetail)
           history('/activeplan')
+        }else{
+          toast.error(res.message)
         }
         setLoader(false)
       })

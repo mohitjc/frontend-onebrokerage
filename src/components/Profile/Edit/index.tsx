@@ -79,7 +79,7 @@ const EditProfile = () => {
     let value = { ...form, id: user._id }
 
     loader(true)
-    ApiClient.put('api/user/detail', value).then(res => {
+    ApiClient.put('api/user', value).then(res => {
       if (res.success) {
         let uUser = { ...user, ...value }
         crendentialModel.setUser(uUser)
