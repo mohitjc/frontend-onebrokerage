@@ -53,7 +53,7 @@ export default function FormControl({
     }
 
     return <>
-        <div className="formWrapper">
+        <div className="formWrapper mb-6">
             {label ? <>
                 <label className='text-sm'>{label} {required ? <><span className="star">*</span></> : <></>}</label>
             </> : <></>}
@@ -98,14 +98,16 @@ export default function FormControl({
                 
             </div>
             </>:type=='radio'?<>
+            <div className='flex items-center gap-x-4 mt-3'>
             {options.map((itm:any) => {
-                                return <label className="flex">
+                                return<div className=''> <label className="border border-gray-300 px-6 py-2 rounded-lg flex cursor-pointer">
                                     <input type="radio"
                                         checked={value == itm.id ? true : false}
                                         onChange={e => onChange(itm.id)}
                                         className="mr-2" name={name} />
-                                    {itm.name}</label>
+                                    {itm.name}</label></div>
                             })}
+                            </div>
             </>:type=='editor'?<>
             <Editor
                             textareaName="description"
