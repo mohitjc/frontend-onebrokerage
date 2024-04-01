@@ -8,7 +8,7 @@ const AuthLayout=({children}:any)=>{
         <div className="col-span-6 md:col-span-6 lg:col-span-6">
           <div className="relative flex flex-col items-center justify-center h-screen py-8 overflow-auto">
             
-            <div className="shadow-box w-full max-w-md px-8 py-6 mx-auto overflow-hidden bg-white rounded-lg">
+            <div className="shadow-box w-full max-w-md px-8 py-6 mx-auto overflow-y-auto bg-white rounded-lg">
             <Link to="/"><img src="/assets/img/logo.png" className="w-[150px] mb-6 mx-auto" alt="logo" /></Link>
               {children}
             </div>
