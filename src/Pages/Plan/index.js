@@ -17,7 +17,6 @@ const Plans = (p) => {
   const [tab, setTab] = useState('list')
   const [total, setTotal] = useState(0)
   const [loaging, setLoader] = useState(true)
-  const [cardsData, setcardsaData] = useState()
   const [activeplan, setActiveplan] = useState()
   const history = useNavigate()
   const [pricing, setpricing] = useState()
@@ -27,7 +26,6 @@ const Plans = (p) => {
   const [interval, setInterval] = useState(1)
 
   useEffect(() => {
-    getCards()
     getappliedcurrency()
     getFeatures()
   }, [])
@@ -190,21 +188,6 @@ const Plans = (p) => {
     link.click();
   }
 
-  const getCards = () => {
-    ApiClient.get(`api/cards/listing`).then(res => {
-      if (res.success) {
-        setcardsaData(res.data)
-      }
-    })
-  }
-
-  const setprimary = (id) => {
-    if (window.confirm(`Do you want to set this card primary`)) {
-      ApiClient.put(`api/primary/card`, { card_id: id }).then(res => {
-        getCards()
-      })
-    }
-  }
 
   const getplandetails = (p) => {
     if (!currencyiso) {
@@ -229,7 +212,9 @@ const Plans = (p) => {
         stripe_price_id: p?.pricing.find(item => item?.interval_count == interval && item?.currency == currencyiso.toLowerCase()).stripe_price_id
       }
       setLoader(true)
+      loader(true)
       ApiClient.post(`api/payOnStripe`, payload).then(res => {
+        loader(false)
         if (res.success) {
           // let UserDetail = { ...user, on_trial: true }
           // crendentialModel.setUser(UserDetail)
@@ -283,8 +268,6 @@ const Plans = (p) => {
     total={total}
     appliedcurrency={appliedcurrency}
     exportfun={exportfun}
-    cardsData={cardsData}
-    setprimary={setprimary}
     getplandetails={getplandetails}
     setpricing={setpricing}
     pricing={pricing}
