@@ -218,7 +218,7 @@ const Plans = (p) => {
         if (res.success) {
           // let UserDetail = { ...user, on_trial: true }
           // crendentialModel.setUser(UserDetail)
-          window.open(res.data.url)
+          window.location.assign(res.data.url)
           // history('/activeplan')
         }else{
           toast.error(res.message)
