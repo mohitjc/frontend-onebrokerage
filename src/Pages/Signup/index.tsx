@@ -80,11 +80,12 @@ const Signup = () => {
   };
 
   useEffect(() => {
+    let email=methodModel.getPrams('email')
     if (user && user?.loggedIn) {
       history('/dashboard')
     }
 
-    let email=methodModel.getPrams('email')
+    
     if(email){
       setForm({
         ...form,

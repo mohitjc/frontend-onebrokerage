@@ -154,7 +154,7 @@ const Html = ({
                           0% off
                         </div>
                         <p>
-                          {item.id == activeplan?.planId?._id &&
+                          {item.id == activeplan?.planId &&
                             activeplan?.isActive ? (
                             <>
                               {activeplan?.on_trial ? (
@@ -222,14 +222,14 @@ const Html = ({
                             );
                           })}
                       </div>
-                      {item.id == activeplan?.planId?._id &&
+                      {item.id == activeplan?.planId &&
                         activeplan?.isActive ? (
                         <>
                           {activeplan?.isActive &&
-                            activeplan?.planInterval == interval ? (
+                            (activeplan?.planInterval == interval||item.planType=='free') ? (
                             <>
                               <button
-                                className=" !bg-primary hover:opacity-80 w-full h-10 flex items-center justify-center text-sm font-normal text-white shadow-btn rounded-lg mt-8"
+                                className="!px-4 text-typo text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed w-full mt-8"
                                 onClick={(e) => cancelplan(item.id)}>
                                 Cancel Subscription
                               </button>
@@ -257,7 +257,7 @@ const Html = ({
                           ) : null}
                           <button
                             className="!px-4 text-typo text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed w-full mt-8"
-                            disabled={getPrice(item) ? false : true}
+                            disabled={getPrice(item)||item.planType=='free' ? false : true}
                             onClick={(e) => getplandetails(item)}>
                             {activeplan?.isActive ? "Upgrade" : "Get Started"}
                           </button>

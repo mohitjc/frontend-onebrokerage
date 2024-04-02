@@ -44,25 +44,9 @@ const Plans = (p) => {
     }else{
       filter={}
     }
-    ApiClient.get('api/my/plan', filter).then(res => {
+    ApiClient.get('api/getMyPlan', filter).then(res => {
       if (res.success) {
         setActiveplan(res.data)
-        let userDetail = {}
-        let userData = {}
-        if (user?._id) {
-          ApiClient.get(`api/user/profile`, { id: user?._id }).then(response => {
-            if (response.success) {
-              userData = response.data
-              setcurrencyiso(userData?.subscription_currency || 'usd')
-              if (res?.data?.isActive) {
-                userDetail = { ...userData, subscriptionId: res?.data?.subscriptionId, subRole: { ...userData.subRole, id: userData?.subRole?._id } }
-              } else {
-                userDetail = { ...userData, subscriptionId: '',subRole:{...userData.subRole,id:userData?.subRole?._id} }
-              }
-              crendentialModel.setUser(userDetail)
-            }
-          })
-        }
       }
     })
   }
@@ -189,7 +173,22 @@ const Plans = (p) => {
   }
 
 
+  const freePlanSubmit=(p)=>{
+    loader(true)
+    ApiClient.post('api/purchase/free-plan',{ userId:user._id,
+      planId: p.id,}).then(res=>{
+        loader(false)
+        if(res.success){
+         getData()
+        }
+      })
+  }
+
   const getplandetails = (p) => {
+    if(p.planType=='free'){
+        freePlanSubmit(p)
+        return
+    }
     if (!currencyiso) {
       toast.error('Please Select Currency.')
       return
