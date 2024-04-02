@@ -8,6 +8,7 @@ import shared from "./shared";
 import AttendeeList from "./AttendeeList";
 
 const View = () => {
+    const [host, setHost] = useState()
     const [data, setData] = useState()
     const history = useNavigate()
     const {id}=useParams()
@@ -16,6 +17,15 @@ const View = () => {
         ApiClient.get(shared.detailApi,{id:id}).then(res=>{
             if(res.success){
                 setData(res.data)
+                getHostDetail(res.data.addedBy)
+            }
+        })
+    }
+
+    const getHostDetail=(id)=>{
+        ApiClient.get('api/user/detail',{id:id}).then(res=>{
+            if(res.success){
+                setHost(res.data)
             }
         })
     }
@@ -70,6 +80,14 @@ const View = () => {
                                 <label className="profileheddingcls">Location</label>
                                 <div className='profiledetailscls'>{data?.address || '--'}</div>
                             </div>
+                            <div className="col-span-12 md:col-span-6">
+                                <label className="profileheddingcls">Host</label>
+                                <div className='profiledetailscls'>{host?.fullName || '--'}</div>
+                            </div>
+                            {/* <div className="col-span-12 md:col-span-6">
+                                <label className="profileheddingcls">Host Group</label>
+                                <div className='profiledetailscls'>{host?.fullName || '--'}</div>
+                            </div> */}
                         </div>
 
 

@@ -87,6 +87,7 @@ const Signup = () => {
     let email=methodModel.getPrams('email')
     if(email){
       setForm({
+        ...form,
         email:email,
         fullName:methodModel.getPrams('fullName'),
       })
@@ -130,7 +131,10 @@ const Signup = () => {
 
           </div>
 
-          <div className='mb-3'>
+{methodModel.getPrams('eventId')?<>
+
+</>:<>
+<div className='mb-3'>
             <FormControl
             type='radio'
             options={[
@@ -144,6 +148,8 @@ const Signup = () => {
             }}
             />
           </div>
+</>}
+          
 
 {form.customerRole==environment.glRoleId?<>
   <div className='mb-3 relative'>

@@ -49,7 +49,7 @@ const Sidebar = ({ isOpen }) => {
       if(permissions?.[itm]) value = permissions?.[itm]
     })
 
-    if(user?.verifiedGroupLeader!='approve'&&user.customerRole?._id==environment.glRoleId){
+    if(user?.verifiedGroupLeader!='approved'&&user.customerRole?._id==environment.glRoleId){
       value=false
     }
 

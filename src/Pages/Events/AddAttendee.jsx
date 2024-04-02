@@ -27,6 +27,8 @@ export default function AddAttendee({id,eventId,result=()=>{}}){
             method = 'put'
             url = 'api/attendees/update'
         } else {
+            value.isConnectedMeating=true
+            value.attendeeRole='member'
             value.addedBy=user._id
             delete value.id
         }
