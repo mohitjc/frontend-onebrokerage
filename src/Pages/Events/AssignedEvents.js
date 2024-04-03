@@ -14,7 +14,7 @@ import datepipeModel from '../../models/datepipemodel';
 const AssignedEvents = () => {
     const user = crendentialModel.getUser()
     const searchState = {data:''}
-    const [filters, setFilter] = useState({ page: 1, count: 50, search: '', catType: '' })
+    const [filters, setFilter] = useState({ page: 1, count: 50, search: '', catType: '',type:'ongoing' })
     const [data, setData] = useState([])
     const [total, setTotal] = useState(0)
     const [loaging, setLoader] = useState(true)
@@ -132,11 +132,20 @@ const AssignedEvents = () => {
         },
     ]
 
+    const typeFilter=(t='')=>{
+        let f={
+            page:1,
+            type:t
+        }
+        setFilter({...filters,...f})
+        getData(f)
+    }
+
     return <>
     <Layout>
             <div className="flex justify-between items-center">
                 <div>
-                    <h3 className="text-2xl font-semibold text-[#111827]">Assinged Event</h3>
+                    <h3 className="text-2xl font-semibold text-[#111827]">My Events</h3>
                     <p class="text-sm font-normal text-[#75757A]">Here you can see all about your Event</p>
                 </div>
 
@@ -174,7 +183,28 @@ const AssignedEvents = () => {
                     </div>
                 </div>
 
-
+                <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-3">
+    <ul className="flex flex-wrap -mb-px">
+        <li className="me-2">
+            <span 
+            onClick={()=>typeFilter('ongoing')}
+            className={`cursor-pointer ${filters.type=='ongoing'?'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500':'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+            >Ongoing</span>
+        </li>
+        <li className="me-2">
+            <span 
+            onClick={()=>typeFilter('upcoming')}
+            className={`cursor-pointer ${filters.type=='upcoming'?'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500':'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+            >Upcoming</span>
+        </li>
+        <li className="me-2">
+            <span 
+            onClick={()=>typeFilter('completed')}
+            className={`cursor-pointer ${filters.type=='completed'?'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500':'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+            >Completed</span>
+        </li>
+    </ul>
+</div>
 
                 {!loaging ? <>
                     <Table

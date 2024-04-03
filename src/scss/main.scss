@@ -569,10 +569,13 @@ h3.text-left.lgtext {
   color: #F6F6F6;
 }
 
+.modal{
+  background-color:#0000008a;
+}
 
 .modal {
   overflow-y: auto;
-
+  background-color:#0000008a;
   .card-body,
   .modal-boldy {
     max-height: calc(100vh - 200px);

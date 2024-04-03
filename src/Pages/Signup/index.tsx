@@ -28,7 +28,7 @@ const Signup = () => {
     crendentialModel.setUser(data)
     let url = '/profile'
     let eventId=methodModel.getPrams('eventId')
-    if(eventId) url=`/event/detail/${eventId}`
+    if(eventId) url=`/dashboard?eventId=${eventId}`
     history(url);
   }
 
