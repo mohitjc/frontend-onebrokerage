@@ -294,7 +294,7 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
     </div>
 
     {tab=='add'?<>
-    <AddAttendee eventId={eventId} result={(e:any) => {
+    <AddAttendee eventId={eventId} eventDetail={eventDetail} result={(e:any) => {
                 if (e.event == 'submit') {
                     clear()
                     setTab('list')

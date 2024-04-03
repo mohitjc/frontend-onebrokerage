@@ -4,8 +4,9 @@ import FormControl from "../../components/common/FormControl";
 import methodModel from "../../methods/methods";
 import loader from "../../methods/loader";
 import ApiClient from "../../methods/api/apiClient";
+import SelectDropdown from "../../components/common/SelectDropdown";
 
-export default function AddAttendee({ id = '', eventId, result = (e) => { } }) {
+export default function AddAttendee({ id = '', eventId, result = (e) => { },eventDetail }) {
     const user = crendentialModel.getUser()
     const [submitted, setSubmitted] = useState(false)
     const [members, setMember] = useState([{fullName: '', email: '',
@@ -115,6 +116,23 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { } }) {
                                     label="Email"
                                     value={itm.email}
                                     onChange={e => updateMember(i,'email',e)}
+                                    required
+                                />
+                            </div>
+                            <div>
+                            <FormControl
+                                    type="select"
+                                    name="attendeeRole"
+                                    label="Role"
+                                    options={
+                                        [
+                                            { id: 'assistent', name: 'Assistent' },
+                                            { id: 'meetManager', name: 'Meet Manager' },
+                                            { id: 'member', name: 'Member' },
+                                        ]
+                                    }
+                                    value={itm.attendeeRole}
+                                    onChange={e => updateMember(i,'attendeeRole',e)}
                                     required
                                 />
                             </div>

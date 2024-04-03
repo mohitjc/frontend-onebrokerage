@@ -27,7 +27,7 @@ const EditProfile = () => {
      postal_code:'',
      city:'',
      timezone:'America/Los_Angeles',
-     customerRole:'',
+    //  customerRole:'',
      adminComment:'',
      linkedInUrl:'',
      certification:'',
@@ -56,7 +56,7 @@ const EditProfile = () => {
         if(!payload.timezone) payload.timezone='America/Los_Angeles'
         if(!payload.country) payload.country='usa'
 
-        if(payload.customerRole?._id) payload.customerRole=payload.customerRole._id
+        // if(payload.customerRole?._id) payload.customerRole=payload.customerRole._id
         let multiAddress=value.multiAddress||[]
         payload.multiAddress=multiAddress.length?multiAddress:[]
         setForm({ ...payload })

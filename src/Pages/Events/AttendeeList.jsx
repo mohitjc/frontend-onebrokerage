@@ -270,7 +270,7 @@ export default function AttendeeList({ eventId, eventDetail }) {
         </div>
 
         {tab == 'add' ? <>
-            <AddAttendee eventId={eventId} result={e => {
+            <AddAttendee eventId={eventId} eventDetail={eventDetail} result={e => {
                 if (e.event == 'submit') {
                     clear()
                     setTab('list')
