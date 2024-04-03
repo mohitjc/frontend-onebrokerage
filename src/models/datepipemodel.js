@@ -145,7 +145,7 @@ const datetodatepicker = (p) => {
     let time=isototime(p)
     if(time){
         time=time.split(':')
-        time.pop()
+        // time.pop()
         time=time.join(':')
     }
     return `${datetostring(p)}T${time}`
