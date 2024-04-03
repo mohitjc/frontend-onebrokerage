@@ -100,7 +100,18 @@ const Profile = () => {
                         <p className='text-sm text-gray-500'>{String(data.mobileNo?'+'+data.mobileNo:'')}</p>
                       </div>
                     </div>
-                    
+
+{data?.groupId?<>
+  <div className=''>
+                      <div className='text_head'>
+                        <label className='text-typo text-base font-normal max-w-sm w-full block'>Group</label>
+                      </div>
+                      <div className='sub_fatch'>
+                        <p className='text-sm text-gray-500' >{data?.groupId?.name||'--'}</p>
+                      </div>
+                    </div>   
+</>:<></>}
+                                     
                 </div>
             </div>
 

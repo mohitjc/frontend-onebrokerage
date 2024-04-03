@@ -84,6 +84,10 @@ const View = () => {
                                 <label className="profileheddingcls">Host</label>
                                 <div className='profiledetailscls'>{host?.fullName || '--'}</div>
                             </div>
+                            <div className="col-span-12 md:col-span-6">
+                                <label className="profileheddingcls">Group</label>
+                                <div className='profiledetailscls'>{host?.groupId?.name || '--'}</div>
+                            </div>
                             {/* <div className="col-span-12 md:col-span-6">
                                 <label className="profileheddingcls">Host Group</label>
                                 <div className='profiledetailscls'>{host?.fullName || '--'}</div>
