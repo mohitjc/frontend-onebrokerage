@@ -11,7 +11,7 @@ import methodModel from "../../methods/methods"
 
 const Dashboard = () => {
     const [events, setEvents] = useState([])
-    const [filters, setFilter] = useState({ page: 1, count: 50, status: 'active', key: '', sorder: '', sortBy: '', type: 'ongoing' })
+    const [filters, setFilter] = useState({ page: 1, count: 50, status: '', key: '', sorder: '', sortBy: '', type: 'ongoing' })
     const [loading, setLoader] = useState(false)
     const [total, setTotal] = useState(0)
     const [modalData, setModalData]: any = useState()

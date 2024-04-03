@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import crendentialModel from "../../models/credential.model";
 import FormControl from "../../components/common/FormControl";
-import methodModel from "../../methods/methods";
 import loader from "../../methods/loader";
 import ApiClient from "../../methods/api/apiClient";
-import SelectDropdown from "../../components/common/SelectDropdown";
 
 export default function AddAttendee({ id = '', eventId, result = (e) => { },eventDetail }) {
     const user = crendentialModel.getUser()
