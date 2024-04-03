@@ -85,7 +85,7 @@ const time = (p) => {
 }
 
 const datetime = (p) => {
-    return `${date(p)}, ${time(p)}`
+    return `${date(p)}, ${time(isototime(p))}`
 }
 
 const timeString = (p) => {
@@ -142,7 +142,7 @@ const isotodate = (p) => {
 }
 
 const datetodatepicker = (p) => {
-    let time=timeString(p)
+    let time=isototime(p)
     if(time){
         time=time.split(':')
         time.pop()
