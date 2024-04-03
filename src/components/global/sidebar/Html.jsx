@@ -49,9 +49,9 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
       <div className={`px-[8px] ${isOpen && styles.sm_sidebar}`} component="siderbar">
 
         <ul className="space-y-2 px-2" >
-          {user?.verifiedGroupLeader!='approved'&&user.customerRole?._id==environment.glRoleId?<>
+          {/* {user?.verifiedGroupLeader!='approved'&&user.customerRole?._id==environment.glRoleId?<>
           <div className="py-4 text-red-600 mb-3">{user?.verifiedGroupLeader=='decline'?'Your Request is declined':'Your request approvel is under progress'}</div>
-          </>:<></>}
+          </>:<></>} */}
         
           {menus.map(itm=>{
             return <>

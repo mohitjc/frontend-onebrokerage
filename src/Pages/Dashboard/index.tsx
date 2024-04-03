@@ -38,7 +38,7 @@ const Dashboard = () => {
                     }
                 }))
                 console.log("setEvents", data)
-                setTotal(res.total || 0)
+                setTotal(res.total || data.length)
             }
         })
     }

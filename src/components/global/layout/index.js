@@ -8,6 +8,7 @@ import permissionModel from '../../../models/permisstion.model';
 import ApiClient from '../../../methods/api/apiClient';
 import methodModel from '../../../methods/methods';
 import crendentialModel from '../../../models/credential.model';
+import environment from '../../../environment';
 
 
 const Layout = ({ children }) => {
@@ -61,6 +62,7 @@ const Layout = ({ children }) => {
       <div component="layout">
         <div onClick={e => router()} id="routerDiv"></div>
         <Header isOpen={isOpen} setIsOpen={setIsopen} />
+
         <div className={`main-wrapper flex ${isOpen ? "active-sidebar" : ""
           }`}>
 
@@ -113,7 +115,12 @@ const Layout = ({ children }) => {
             <Sidebar />
           </div> */}
           <main className="main">
-            <div className="mainarea">{children}</div>
+        
+            <div className="mainarea">
+            {user?.verifiedGroupLeader!='approved'&&user.customerRole?._id==environment.glRoleId?<>
+          <div className="py-4 text-red-600 mb-3 text-center">{user?.verifiedGroupLeader=='decline'?'Your Request is declined':'Your request approvel is under progress'}</div>
+          </>:<></>}
+              {children}</div>
           </main>
         </div>
       </div>
