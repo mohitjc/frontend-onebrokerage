@@ -94,8 +94,8 @@ export default function AttendeeList({ eventId, eventDetail }) {
                     disabled={(eventDetail?.addedBy===user._id)?false:true}
                     options={
                         [
-                            {id:'assistant',name:'Assistant'},
-                            {id:'meetManager',name:'Meet Manager'},
+                            { id: 'assistant', name: 'Assistant Group Leader' },
+                                { id: 'meetManager', name: 'Connect Meet Manager' },
                             {id:'member',name:'Member'},
                         ]
                     }

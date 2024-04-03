@@ -124,8 +124,8 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                                     label="Role"
                                     options={
                                         [
-                                            { id: 'assistant', name: 'Assistant' },
-                                            { id: 'meetManager', name: 'Meet Manager' },
+                                            { id: 'assistant', name: 'Assistant Group Leader' },
+                                { id: 'meetManager', name: 'Connect Meet Manager' },
                                             { id: 'member', name: 'Member' },
                                         ]
                                     }
