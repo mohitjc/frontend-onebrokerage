@@ -6,6 +6,7 @@ import ApiClient from "../../methods/api/apiClient";
 import { useParams } from "react-router-dom";
 import shared from "./shared";
 import AttendeeList from "./AttendeeList";
+import loader from "../../methods/loader";
 
 const View = () => {
     const [host, setHost] = useState()
@@ -14,7 +15,9 @@ const View = () => {
     const {id}=useParams()
 
     const getDetail=()=>{
+        loader(true)
         ApiClient.get(shared.detailApi,{id:id}).then(res=>{
+            loader(false)
             if(res.success){
                 setData(res.data)
                 getHostDetail(res.data.addedBy)
@@ -38,7 +41,7 @@ const View = () => {
         <Layout>
             <div className="text-right">
                 <div>
-                    <a to="/users" onClick={() => history(`/${shared.url}`)}>  <i className="fa fa-arrow-left mr-4 mb-3 " title='Back' aria-hidden="true"></i></a>
+                    <span className="cursor-pointer" onClick={() => history(-1)}>  <i className="fa fa-arrow-left mr-4 mb-3 " title='Back' aria-hidden="true"></i></span>
                 </div>
             </div>
             <div className='bg-white shadow-box rounded-lg w-full p-4 mt-6'>
@@ -50,6 +53,10 @@ const View = () => {
                             <div className="col-span-12 md:col-span-6">
                                 <label className="profileheddingcls">Title</label>
                                 <div className='profiledetailscls'>{data?.title || '--'}</div>
+                            </div>
+                            <div className="col-span-12 md:col-span-6">
+                                <label className="profileheddingcls">Type</label>
+                                <div className='profiledetailscls capitalize'>{data?.type || '--'}</div>
                             </div>
                             <div className="col-span-12 md:col-span-6">
                                 <label className="profileheddingcls">Event Date</label>
@@ -71,15 +78,16 @@ const View = () => {
                                 <label className="profileheddingcls">External Link</label>
                                 <div className='profiledetailscls'>{data?.externalLink || '--'}</div>
                             </div>
+                            <div className="col-span-12 md:col-span-6">
+                                <label className="profileheddingcls">Location</label>
+                                <div className='profiledetailscls'>{data?.address || '--'}</div>
+                            </div>
                             <div className="col-span-12 col-span-full">
                                 <label className="profileheddingcls">Description</label>
                                 <div className='profiledetailscls' dangerouslySetInnerHTML={{__html:data?.description || '--'}}></div>
                             </div>
                            
-                            <div className="col-span-12 md:col-span-6">
-                                <label className="profileheddingcls">Location</label>
-                                <div className='profiledetailscls'>{data?.address || '--'}</div>
-                            </div>
+                          
                             <div className="col-span-12 md:col-span-6">
                                 <label className="profileheddingcls">Host</label>
                                 <div className='profiledetailscls'>{host?.fullName || '--'}</div>
