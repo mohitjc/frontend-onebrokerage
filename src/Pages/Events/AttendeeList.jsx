@@ -23,14 +23,14 @@ export default function AttendeeList({ eventId, eventDetail }) {
     const attendPremit=(row)=>{
         let value=false
         if(row?.addedBy === user._id||eventDetail?.addedBy===user._id) value=true
-        if(role=='meetManager'||role=='assistent')value=true
+        if(role=='meetManager'||role=='assistant')value=true
         return value
     }
 
     const deletePremit=(row)=>{
         let value=false
         if(row?.addedBy === user._id||eventDetail?.addedBy===user._id) value=true
-        if(role=='assistent')value=true
+        if(role=='assistant')value=true
         return value
     }
 
@@ -94,7 +94,7 @@ export default function AttendeeList({ eventId, eventDetail }) {
                     disabled={(eventDetail?.addedBy===user._id)?false:true}
                     options={
                         [
-                            {id:'assistent',name:'Assistent'},
+                            {id:'assistant',name:'Assistant'},
                             {id:'meetManager',name:'Meet Manager'},
                             {id:'member',name:'Member'},
                         ]

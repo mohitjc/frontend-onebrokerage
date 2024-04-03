@@ -22,14 +22,14 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
     const attendPremit = (row: any) => {
         let value = false
         if (row?.addedBy === user._id || eventDetail?.addedBy === user._id) value = true
-        if (role == 'meetManager' || role == 'assistent') value = true
+        if (role == 'meetManager' || role == 'assistant') value = true
         return value
     }
 
     const deletePremit = (row: any) => {
         let value = false
         if (row?.addedBy === user._id || eventDetail?.addedBy === user._id) value = true
-        if (role == 'assistent') value = true
+        if (role == 'assistant') value = true
         return value
     }
 
@@ -85,7 +85,7 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
                         disabled={(eventDetail?.addedBy === user._id) ? false : true}
                         options={
                             [
-                                { id: 'assistent', name: 'Assistent' },
+                                { id: 'assistant', name: 'Assistant' },
                                 { id: 'meetManager', name: 'Meet Manager' },
                                 { id: 'member', name: 'Member' },
                             ]
@@ -280,7 +280,7 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
     return <>
     <div>
     {tab == 'list' ? <>
-            {eventDetail?.addedBy==user._id||role == 'meetManager' || role == 'assistent'?<>
+            {eventDetail?.addedBy==user._id||role == 'meetManager' || role == 'assistant'?<>
                 <button onClick={() => setTab('add')} className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2">
                     <FiPlus className="text-xl text-white" /> Add Member
                 </button>
