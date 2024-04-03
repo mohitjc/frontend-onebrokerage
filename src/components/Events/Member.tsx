@@ -280,7 +280,7 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
     return <>
     <div>
     {tab == 'list' ? <>
-            {eventDetail?.addedBy==user._id?<>
+            {eventDetail?.addedBy==user._id||role == 'meetManager' || role == 'assistent'?<>
                 <button onClick={() => setTab('add')} className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2">
                     <FiPlus className="text-xl text-white" /> Add Member
                 </button>
