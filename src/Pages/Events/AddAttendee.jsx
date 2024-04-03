@@ -115,7 +115,7 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                                     name="email"
                                     label="Email"
                                     value={itm.email}
-                                    onChange={e => updateMember(i,'email',e)}
+                                    onChange={e => updateMember(i,'email',e?.toLowerCase()||'')}
                                     required
                                 />
                             </div>
