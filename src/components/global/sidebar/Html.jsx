@@ -6,6 +6,10 @@ import { Tooltip } from "antd";
 import { RiHome6Line } from "react-icons/ri";
 import { TiArrowSortedDown } from "react-icons/ti";
 import environment from "../../../environment";
+import { LuTimerReset } from "react-icons/lu";
+import { FiAlertTriangle } from "react-icons/fi";
+import { SiPlanet } from "react-icons/si";
+import { MdEventAvailable, MdOutlineEmojiEvents, MdOutlineEventAvailable } from "react-icons/md";
 
 
 const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
@@ -24,19 +28,19 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
     },
       {
       name:'Events',
-      icon:<span class="material-symbols-outlined text-[#ffc800] shrink-0 text-lg">star</span>,
+      icon:<MdOutlineEmojiEvents className="text-[#00b184] shrink-0 text-lg" />      ,
       url:'/event',
       key:'readEvents',
     },
     {
       name:'Plan',
-      icon:<span class="material-symbols-outlined text-[#ffc800] shrink-0 text-lg">star</span>,
+      icon:<SiPlanet className="text-[#00f884] shrink-0 text-lg" />      ,
       url:'/plan',
       key:'',
     },
     {
       name:'Assinged Event',
-      icon:<span class="material-symbols-outlined text-[#ffc800] shrink-0 text-lg">star</span>,
+      icon:<MdEventAvailable className="text-[#00g884] shrink-0 text-lg" />      ,
       url:'/assinged-event',
       key:'',
     },
@@ -50,7 +54,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
 
         <ul className="space-y-2 px-2" >
           {user?.verifiedGroupLeader!='approved'&&user.customerRole?._id==environment.glRoleId?<>
-          <div className="py-4 text-red-600 mb-3">{user?.verifiedGroupLeader=='decline'?'Your Request is declined':'Your request approvel is under progress'}</div>
+          <div className=" text-[12px] text-red-600 text-left bg-white shadow rounded-full py-2 px-4  mt-3 inline-flex">{user?.verifiedGroupLeader=='decline'? <p className="m-0 flex items-center gap-x-1 break-after-auto	"><FiAlertTriangle className="text-lg" />Your Request is declined</p>:<p className="m-0 break-after-auto	 flex items-center gap-x-1"><LuTimerReset className="text-lg" />Your request approvel is under progress</p>}</div>
           </>:<></>}
         
           {menus.map(itm=>{
