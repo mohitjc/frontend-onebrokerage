@@ -11,7 +11,7 @@ import methodModel from "../../methods/methods"
 
 const Dashboard = () => {
     const [events, setEvents] = useState([])
-    const [filters, setFilter] = useState({ page: 1, count: 50,status:'active',key:'',sorder:'',sortBy:'',type:'ongoing' })
+    const [filters, setFilter] = useState({ page: 1, count: 50, status: 'active', key: '', sorder: '', sortBy: '', type: 'ongoing' })
     const [loading, setLoader] = useState(false)
     const [total, setTotal] = useState(0)
     const [modalData, setModalData]: any = useState()
@@ -25,10 +25,10 @@ const Dashboard = () => {
             addedBy: user._id,
         }
         setLoader(true)
-        ApiClient.get('api/user-events', f).then((res:any) => {
+        ApiClient.get('api/user-events', f).then((res: any) => {
             setLoader(false)
             if (res.success) {
-                let data=res?.data?.[0]?.eventDetails||[]
+                let data = res?.data?.[0]?.eventDetails || []
                 // let data = res?.data
                 setEvents(data.map((itm: any) => {
                     itm.id = itm._id
@@ -37,18 +37,18 @@ const Dashboard = () => {
                         // ...itm.eventDetails
                     }
                 }))
-                console.log("setEvents",data)
-                setTotal(res.total||0)
+                console.log("setEvents", data)
+                setTotal(res.total || 0)
             }
         })
     }
 
-    const typeFilter=(t='')=>{
-        let f={
-            page:1,
-            type:t
+    const typeFilter = (t = '') => {
+        let f = {
+            page: 1,
+            type: t
         }
-        setFilter({...filters,...f})
+        setFilter({ ...filters, ...f })
         getEvents(f)
     }
 
@@ -73,51 +73,68 @@ const Dashboard = () => {
         getEvents({ sortBy, key, sorder })
     }
 
-    const eventDetail=(id:any)=>{
+    const eventDetail = (id: any) => {
         loader(true)
-        ApiClient.get('api/event/details',{id:id}).then(res=>{
+        ApiClient.get('api/event/details', { id: id }).then(res => {
             loader(false)
-            if(res.success){
-                let data=res.data
-                data.id=data._id
+            if (res.success) {
+                let data = res.data
+                data.id = data._id
                 setModalData(data)
             }
         })
     }
 
+    const endEvent = (id: any) => {
+        if (window.confirm("Do you want to End this Event")) {
+            loader(true)
+            ApiClient.put('api/event/edit', { id: id, meetingStatus: "completed" }).then(res => {
+                loader(false)
+                if (res.success) {
+                    getEvents()
+                }
+            })
+        }
+    }
+
     useEffect(() => {
         getEvents()
-        let eventId=methodModel.getPrams('eventId')
-        if(eventId) eventDetail(eventId)
+        let eventId = methodModel.getPrams('eventId')
+        if (eventId) eventDetail(eventId)
     }, [])
 
-    const ListHtml=({row}:any)=>{
-        let itm=row
+    const ListHtml = ({ row }: any) => {
+        let itm = row
         return <>
-        <div className="border border-gray-300 bg-white rounded p-4 flex flex-col justify-between leading-normal">
-                                <div className="mb-8">
-                                    <p className="text-sm text-gray-600 flex items-center">
-                                        <span className="material-symbols-outlined mr-1">calendar_today</span>
-                                        {datepipeModel.datetime(itm?.date)}
-                                    </p>
-                                    <div className="text-gray-900 font-bold text-xl mb-2">{itm?.title}</div>
-                                    <p className="text-gray-700 text-base" dangerouslySetInnerHTML={{ __html: itm?.address }}></p>
-                                    <p className="text-sm">Max Member: {itm?.capacity}</p>
-                                </div>
-                                <div>
-                                    <button type="button"
-                                        onClick={() => setModalData(itm)}
-                                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">View Members</button>
+            <div className="border border-gray-300 bg-white rounded p-4 flex flex-col justify-between leading-normal">
+                <div className="mb-8">
+                    <p className="text-sm text-gray-600 flex items-center">
+                        <span className="material-symbols-outlined mr-1">calendar_today</span>
+                        {datepipeModel.datetime(itm?.date)}
+                    </p>
+                    <div className="text-gray-900 font-bold text-xl mb-2">{itm?.title}</div>
+                    <p className="text-gray-700 text-base" dangerouslySetInnerHTML={{ __html: itm?.address }}></p>
+                    <p className="text-sm">Max Member: {itm?.capacity}</p>
+                </div>
+                <div className="flex gap-2">
+                    <button type="button"
+                        onClick={() => setModalData(itm)}
+                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">View Members</button>
+                    {itm.meetingStatus == 'completed' || filters.type != 'ongoing'? <></> : <>
+                        <button type="button" onClick={() => endEvent(itm.id)}
+                            className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">End Event</button>
+                    </>}
 
-                                </div>
-                                {/* <div className="flex items-center">
+
+                </div>
+                {/* <div className="flex items-center">
                             <img className="w-10 h-10 rounded-full mr-4" src="/img/jonathan.jpg" alt="Avatar of Jonathan Reinink"/>
                                 <div className="text-sm">
                                     <p className="text-gray-900 leading-none">Jonathan Reinink</p>
                                     <p className="text-gray-600">Aug 18</p>
                                 </div>
                         </div> */}
-                            </div>
+            </div>
         </>
     }
 
@@ -126,28 +143,28 @@ const Dashboard = () => {
             <h4 className="text-lg font-bold mb-3">My Events</h4>
 
 
-<div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-3">
-    <ul className="flex flex-wrap -mb-px">
-        <li className="me-2">
-            <span 
-            onClick={()=>typeFilter('ongoing')}
-            className={`cursor-pointer ${filters.type=='ongoing'?'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500':'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
-            >Ongoing</span>
-        </li>
-        <li className="me-2">
-            <span 
-            onClick={()=>typeFilter('upcoming')}
-            className={`cursor-pointer ${filters.type=='upcoming'?'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500':'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
-            >Upcoming</span>
-        </li>
-        <li className="me-2">
-            <span 
-            onClick={()=>typeFilter('completed')}
-            className={`cursor-pointer ${filters.type=='completed'?'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500':'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
-            >Completed</span>
-        </li>
-    </ul>
-</div>
+            <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-3">
+                <ul className="flex flex-wrap -mb-px">
+                    <li className="me-2">
+                        <span
+                            onClick={() => typeFilter('ongoing')}
+                            className={`cursor-pointer ${filters.type == 'ongoing' ? 'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+                        >Ongoing</span>
+                    </li>
+                    <li className="me-2">
+                        <span
+                            onClick={() => typeFilter('upcoming')}
+                            className={`cursor-pointer ${filters.type == 'upcoming' ? 'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+                        >Upcoming</span>
+                    </li>
+                    <li className="me-2">
+                        <span
+                            onClick={() => typeFilter('completed')}
+                            className={`cursor-pointer ${filters.type == 'completed' ? 'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+                        >Completed</span>
+                    </li>
+                </ul>
+            </div>
 
             {loading ? <>
                 <div className="grid grid-cols-4 gap-3">
@@ -158,20 +175,20 @@ const Dashboard = () => {
                 </div>
             </> : <>
 
-            <Table
-                data={events}
-                columns={[]}
-                page={filters.page}
-                count={filters.count}
-                total={total}
-                theme="list"
-                ListHtml={ListHtml}
-                rowClass="grid grid-cols-4 gap-2"
-                result={(e) => {
-                    if (e.event == 'page') pageChange(e.value)
-                    if (e.event == 'sort') sorting(e.value)
-                }}
-            />
+                <Table
+                    data={events}
+                    columns={[]}
+                    page={filters.page}
+                    count={filters.count}
+                    total={total}
+                    theme="list"
+                    ListHtml={ListHtml}
+                    rowClass="grid grid-cols-4 gap-2"
+                    result={(e) => {
+                        if (e.event == 'page') pageChange(e.value)
+                        if (e.event == 'sort') sorting(e.value)
+                    }}
+                />
             </>}
 
         </Layout>
