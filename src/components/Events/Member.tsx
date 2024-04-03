@@ -8,6 +8,7 @@ import crendentialModel from "../../models/credential.model"
 import { Tooltip } from "antd"
 import methodModel from "../../methods/methods"
 import { FiPlus } from "react-icons/fi"
+import AddAttendee from "../../Pages/Events/AddAttendee"
 
 export default function Members({ eventDetail = '', eventId = '' }: any) {
     const [data, setData] = useState([])
@@ -291,7 +292,16 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
                 </button>
             </>}
     </div>
-        {loading ? <>
+
+    {tab=='add'?<>
+    <AddAttendee eventId={eventId} result={(e:any) => {
+                if (e.event == 'submit') {
+                    clear()
+                    setTab('list')
+                }
+            }} />
+    </>:<>
+    {loading ? <>
             <div className="text-center">Loading...</div>
         </> : <>
             <Table
@@ -308,5 +318,7 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
                 }}
             />
         </>}
+    </>}
+        
     </>
 }

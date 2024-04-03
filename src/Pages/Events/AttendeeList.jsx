@@ -250,7 +250,7 @@ export default function AttendeeList({ eventId, eventDetail }) {
             {tab == 'list' ? <>
             {eventDetail?.addedBy==user._id?<>
                 <button onClick={() => setTab('add')} className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2">
-                    <FiPlus className="text-xl text-white" /> Add Attendee
+                    <FiPlus className="text-xl text-white" /> Add Member
                 </button>
             </>:<></>}
                 

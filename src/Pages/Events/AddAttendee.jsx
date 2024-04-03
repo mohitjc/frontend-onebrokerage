@@ -5,7 +5,7 @@ import methodModel from "../../methods/methods";
 import loader from "../../methods/loader";
 import ApiClient from "../../methods/api/apiClient";
 
-export default function AddAttendee({id,eventId,result=()=>{}}){
+export default function AddAttendee({id='',eventId,result=(e)=>{}}){
     const [form, setform] = useState({ id: '', fullName: '', email:'' })
     const [submitted, setSubmitted] = useState(false)
     const user = crendentialModel.getUser()
@@ -76,7 +76,7 @@ export default function AddAttendee({id,eventId,result=()=>{}}){
     <form onSubmit={handleSubmit}>
                 <div className="pprofile1">
                 <h3 className="text-2xl font-semibold text-[#111827] mb-3">
-                                {form && form.id ? 'Edit' : 'Add'}  Attendee
+                                {form && form.id ? 'Edit' : 'Add'}  Member
                             </h3>
                     <div className="form-row">
                         <div className="col-md-6 mb-3">

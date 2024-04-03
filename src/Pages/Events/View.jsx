@@ -109,7 +109,7 @@ const View = () => {
             <div className='bg-white shadow-box rounded-lg w-full p-4 mt-6'>
                 <div className="grid grid-cols-12 gap-4">
                     <div className="sideclass col-span-12 md:col-span-12">
-                        <h3 className="mt-3 mb-6 py-2 bg-gray-300 px-3">Attendeee</h3>
+                        <h3 className="mt-3 mb-6 py-2 bg-gray-300 px-3">Members</h3>
                        <AttendeeList eventId={id} eventDetail={data} />
                     </div>
                 </div>
