@@ -35,15 +35,15 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
 
     const columns = [
         {
-            key: 'fullName', name: 'Name', sort: true,
+            key: 'fullName', name: 'Name',
             render: (row: any) => {
-                return <>{row?.fullName}</>
+                return <>{row?.memberDetails?.fullName}</>
             }
         },
         {
             key: 'email', name: 'Email',
             render: (row: any) => {
-                return <>{row?.email}</>
+                return <>{row?.memberDetails?.email}</>
             }
         },
         {
@@ -240,10 +240,10 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
                         </div>
                         <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                {row.fullName}
+                                {row.memberDetails.fullName}
                             </p>
                             <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                                {row.email}
+                                {row.memberDetails.email}
                             </p>
                         </div>
                         <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white gap-2">

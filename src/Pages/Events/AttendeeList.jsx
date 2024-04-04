@@ -36,15 +36,15 @@ export default function AttendeeList({ eventId, eventDetail }) {
 
     const columns = [
         {
-            key: 'fullName', name: 'Name', sort: true,
+            key: 'fullName', name: 'Name',
             render: (row) => {
-                return <span className="capitalize">{row?.fullName}</span>
+                return <span className="capitalize">{row?.memberDetails?.fullName}</span>
             }
         },
         {
             key: 'email', name: 'Email',
             render: (row) => {
-                return <>{row?.email}</>
+                return <>{row?.memberDetails?.email}</>
             }
         },
         {
