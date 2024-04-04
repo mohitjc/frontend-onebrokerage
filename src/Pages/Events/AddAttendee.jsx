@@ -121,15 +121,18 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                             <div className="col-md-6">
                                 <FormControl
                                     type="select"
-                                    displayValue="fullName"
+                                    displayValue="email"
                                     valueType="object"
                                     placeholder="Select Member"
                                     label="Member"
                                     theme="search"
                                     value={itm.memberId}
-                                    options={users}
+                                    options={[
+                                        // {id:'',email:'Add New Member'},
+                                        ...users
+                                    ]}
                                     onChange={e => {
-                                        if(e){
+                                        if(e.id){
                                             updateMemberAll(i,{...itm,memberId:e.id,email:e.email,fullName:e.fullName})
                                         }else{
                                             updateMemberAll(i,{...itm,memberId:'',email:'',fullName:''})
@@ -138,7 +141,8 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                                     required
                                 />
                             </div>
-                            <div className="col-md-6">
+                            {/* {!itm.memberId?<>
+                                <div className="col-md-6">
                                 <FormControl
                                     type="email"
                                     label="Email"
@@ -147,6 +151,8 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                                     required
                                 />
                             </div>
+                            </>:<></>} */}
+                           
                             <div className="col-md-6">
                                 <FormControl
                                     type="text"

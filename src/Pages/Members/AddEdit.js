@@ -143,7 +143,7 @@ const AddEdit = () => {
                         <div className="col-md-6">
                                 <FormControl
                                     type="select"
-                                    displayValue="fullName"
+                                    displayValue="email"
                                     valueType="object"
                                     label="Select Member"
                                     theme="search"
@@ -154,7 +154,7 @@ const AddEdit = () => {
                                         // updateMember(i,'email',e)
                                     }}
                                     options={[
-                                        {id:'',fullName:'Add New Member'},
+                                        {id:'',email:'Add New Member'},
                                         ...users
                                     ]}
                                     onChange={e => {
@@ -169,8 +169,8 @@ const AddEdit = () => {
                                 />
                             </div>
 
-                            {!itm.memberId?<>
-                                <div className="col-md-6">
+                            {itm.memberId?<></>:<>
+                            <div className="col-md-6">
                                 <FormControl
                                     type="email"
                                     label="Email"
@@ -179,6 +179,8 @@ const AddEdit = () => {
                                     required
                                 />
                             </div>
+                            </>}
+
                             <div className="col-md-6">
                                 <FormControl
                                     type="text"
@@ -189,7 +191,6 @@ const AddEdit = () => {
                                     required
                                 />
                             </div>
-                            </>:<></>}
                         
                             
                             <div className="col-span-full text-right">
