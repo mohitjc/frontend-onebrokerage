@@ -25,7 +25,7 @@ const AddEdit = () => {
         e.preventDefault()
         setSubmitted(true)
         let method = 'post'
-        let url = 'api/assignGroup'
+        let url = shared.addApi
         let value = {
            data:members.map(itm=>{
             return {
@@ -140,30 +140,13 @@ const AddEdit = () => {
                 {members.map((itm,i) => {
                     return <>
                         <div className="grid grid-cols-2 gap-3">
-                           
+                        
                             <div className="col-md-6">
                                 <FormControl
-                                    type="select"
-                                    displayValue="email"
-                                    valueType="object"
-                                    name="email"
+                                    type="email"
                                     label="Email"
-                                    theme="search"
-                                    value={itm.memberId}
-                                    placeholder="Select Member"
-                                    onInputChange={e=>{
-                                        console.log("onInputChange",e)
-                                        // updateMember(i,'email',e)
-                                    }}
-                                    options={users}
-                                    onChange={e => {
-                                        console.log("onChange",e)
-                                        if(e){
-                                            updateMemberAll(i,{...itm,memberId:e.id,email:e.email,fullName:e.fullName})
-                                        }else{
-                                            updateMemberAll(i,{...itm,memberId:'',email:'',fullName:''})
-                                        }
-                                    }}
+                                    value={itm.email}
+                                    onChange={e => updateMember(i,'email',e)}
                                     required
                                 />
                             </div>
