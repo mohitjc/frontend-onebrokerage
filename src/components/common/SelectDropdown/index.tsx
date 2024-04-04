@@ -1,7 +1,7 @@
 import React from "react";
 import HtmlT from "./html";
 
-const SelectDropdown = ({intialValue,options,isSingle,valueType='string', result,displayValue='name',id,placeholder="Select Status",disabled=false,name,required=false,theme='normal'}:any) => {
+const SelectDropdown = ({intialValue,options,isSingle,valueType='string',onInputChange=(e:any)=>{}, result,displayValue='name',id,placeholder="Select Status",disabled=false,name,required=false,theme='normal'}:any) => {
     const handleChange=(e:any)=>{
         let v=e
         if(valueType=='object'){
@@ -15,6 +15,7 @@ const SelectDropdown = ({intialValue,options,isSingle,valueType='string', result
         id={id}
         name={name}
         required={required}
+        onInputChange={onInputChange}
         theme={theme}
         disabled={disabled}
         placeholder={placeholder}

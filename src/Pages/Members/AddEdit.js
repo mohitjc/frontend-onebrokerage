@@ -11,38 +11,36 @@ import timezoneModel from "../../models/timezone.model";
 import crendentialModel from "../../models/credential.model";
 import shared from "./shared";
 import datepipeModel from "../../models/datepipemodel";
+import environment from "../../environment";
 
 const AddEdit = () => {
-    const { id } = useParams()
-    const [images, setImages] = useState({ image: ''});
-    const [form, setform] = useState({ id: '', title: '',type:'', date:'',timezone:'',capacity:'',description:'',deadline:'',externalLink:'',address:'',status: 'active' })
-    const history = useNavigate()
-    const [submitted, setSubmitted] = useState(false)
+    const {id}=useParams()
+    const history=useNavigate()
     const user = crendentialModel.getUser()
-    const formValidation = [
-        { key: 'status', required: true },
-        { key: 'type', required: true ,message:'Type is required'},
-        { key: 'timezone', required: true }
-    ]
-
-    const timezones=timezoneModel.list
-
+    const [submitted, setSubmitted] = useState(false)
+    const [users, setUsers] = useState([])
+    const [members, setMember] = useState([{fullName: '', email: '' }])
+  
     const handleSubmit = (e) => {
         e.preventDefault()
         setSubmitted(true)
-        let invalid = methodModel.getFormError(formValidation, form)
-        if (invalid) return
         let method = 'post'
-        let url = shared.addApi
+        // let url = 'api/attendees'
+        let url = 'api/assignGroup'
         let value = {
-            ...form,
-            ...images
+           data:members.map(itm=>{
+            return {
+                ...itm,
+                role: 'member',
+                addedBy: user._id,
+                groupId: user.groupId._id,
+            }
+           })
         }
         if (value.id) {
             method = 'put'
-            url = shared.editApi
+            url = 'api/attendees/update'
         } else {
-            value.addedBy=user._id
             delete value.id
         }
 
@@ -56,44 +54,66 @@ const AddEdit = () => {
         })
     }
 
+    const getUsers=(p={})=>{
+        let f={
+            ...p,
+            role:environment.userRoleId,
+            isDeleted:false
+        }
+        ApiClient.get('api/users/listing',f).then(res=>{
+            if(res.success){
+                setUsers(res.data)
+            }
+        })
+    }
+
     useEffect(() => {
         if (id) {
             loader(true)
-            ApiClient.get(shared.detailApi, { id }).then(res => {
+            ApiClient.get('api/attendees/detail', { id }).then(res => {
                 if (res.success) {
                     let value = res.data
-                    let payload = form
+                    // let payload = form
 
-                    Object.keys(payload).map(itm => {
-                        payload[itm] = value[itm]
-                    })
+                    // Object.keys(payload).map(itm => {
+                    //     payload[itm] = value[itm]
+                    // })
 
-                    payload.id=id
-                    setform({
-                        ...payload
-                    })
-
-                    let img=images
-                    Object.keys(img).map(itm => {
-                        img[itm] = value[itm]
-                    })
-                    setImages({...img})
-
+                    // payload.id = id
+                    // setform({
+                    //     ...payload
+                    // })
 
                 }
                 loader(false)
             })
         }
-
+        getUsers()
     }, [id])
 
-    const imageResult = (e, key) => {
-        images[key] = e.value
-        setImages(images)
+    const addMore = () => {
+        let arr = members
+        let payload = { fullName: '', email: '' }
+        arr.push(payload)
+        setMember([...arr])
     }
 
-    const getError = (key) => {
-        return submitted?methodModel.getError(key, form, formValidation)?.message:''
+    const updateMember = (i,key='',value='') => {
+        let arr = members
+        arr[i][key]=value
+        setMember([...arr])
+    }
+
+    const updateMemberAll = (i,values) => {
+        let arr = members
+        arr[i]=values
+        setMember([...arr])
+    }
+
+    const removeMember=(i)=>{
+        let arr=members
+        arr=arr.filter((itm,ind)=>ind!=i)
+        setMember([...arr])
     }
 
     return <>
@@ -109,155 +129,74 @@ const AddEdit = () => {
                         </Tooltip>
                         <div>
                             <h3 className="text-2xl font-semibold text-[#111827]">
-                                {form && form.id ? 'Edit' : 'Add'}  {shared.title}
+                                {id ? 'Edit' : 'Add'}  {shared.title}
                             </h3>
                             <p class="text-sm font-normal text-[#75757A]">Here you can see all about your {shared.title}</p>
                         </div>
                     </div>
 
 
-
-                    <h3 className="ViewUser mb-3"></h3>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className=" mb-3">
-                            <FormControl
-                                type="text"
-                                name="title"
-                                label="Title"
-                                value={form.title}
-                                onChange={e => setform({ ...form, title: e })}
-                                required
-                            />
-                        </div>
-
-                        <div className=" mb-3">
-                        <FormControl
-                                type="select"
-                                name="type"
-                                label="Type"
-                                displayValue="name"
-                                placeholder="Select Type"
-                                value={form.type}
-                                onChange={e => setform({ ...form, type: e })}
-                                options={[
-                                    {id:'inPerson',name:'In-Person'},
-                                    {id:'virtual',name:'Virtual'},
-                                ]}
-                                required
-                                error={getError('type')}
-                            />
-                        </div>
-
-                        <div className=" mb-3">
-                        <FormControl
-                                type="select"
-                                name="status"
-                                label="Status"
-                                displayValue="name"
-                                placeholder="Select Status"
-                                value={form.status}
-                                onChange={e => setform({ ...form, status: e })}
-                                options={statusModel.list}
-                                required
-                                error={getError('status')}
-                            />
-                        </div>
-
-                        <div className=" mb-3">
-                            <FormControl
-                                type="datetime-local"
-                                name="date"
-                                label="Event Date"
-                                value={datepipeModel.datetodatepicker(form.date)}
-                                onChange={e => setform({ ...form, date: e })}
-                                required
-                            />
-                        </div>
-                        <div className=" mb-3 relative">
-                            <div className="absolute z-[9] w-full">
-                            <FormControl
-                                type="select"
-                                name="timezone"
-                                label="Timezone"
-                                displayValue="name"
-                                placeholder="Select Timezone"
-                                value={form.timezone}
-                                onChange={e => setform({ ...form, timezone: e })}
-                                options={timezones}
-                                theme="search"
-                                required
-                                error={getError('timezone')}
-                            />
+                    <div className="">
+                <h3 className="text-2xl font-semibold text-[#111827] mb-3">
+                    Add Member
+                </h3>
+                {members.map((itm,i) => {
+                    return <>
+                        <div className="grid grid-cols-2 gap-3">
+                           
+                            <div className="col-md-6">
+                                <FormControl
+                                    type="select"
+                                    displayValue="email"
+                                    valueType="object"
+                                    name="email"
+                                    label="Email"
+                                    theme="search"
+                                    value={itm.memberId}
+                                    options={users}
+                                    onChange={e => {
+                                        if(e){
+                                            updateMemberAll(i,{...itm,memberId:e.id,email:e.email,fullName:e.fullName})
+                                        }else{
+                                            updateMemberAll(i,{...itm,memberId:'',email:'',fullName:''})
+                                        }
+                                        
+                                    }}
+                                    required
+                                />
+                            </div>
+                            <div className="col-md-6">
+                                <FormControl
+                                    type="text"
+                                    name="fullName"
+                                    label="Name"
+                                    value={itm.fullName}
+                                    onChange={e => updateMember(i,'fullName',e)}
+                                    required
+                                />
+                            </div>
+                            <div className="col-span-full text-right">
+                                {members.length>1?<>
+                                    <button type="button" onClick={()=>removeMember(i)} className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                            <span className="material-symbols-outlined">delete</span>
+                                </button> 
+                                </>:<></>}
+                           
                             </div>
 
                         </div>
-                        <div className=" mb-3">
-                            <FormControl
-                                type="number"
-                                name="capacity"
-                                label="Max Capacity"
-                                value={form.capacity}
-                                maxlength="8"
-                                onChange={e => setform({ ...form, capacity: e })}
-                                required
-                            />
-                        </div>
-                        <div className=" mb-3">
-                            <FormControl
-                               type="datetime-local"
-                                name="deadline"
-                                label="RSVP Deadline"
-                                value={datepipeModel.datetodatepicker(form.deadline)}
-                                maxlength="8"
-                                onChange={e => setform({ ...form, deadline: e })}
-                                required
-                            />
-                        </div>
+                    </>
+                })}
 
-                        <div className=" mb-3">
-                            <FormControl
-                                type="text"
-                                name="address"
-                                label="Location"
-                                value={form.address}
-                                onChange={e => setform({ ...form, address: e })}
-                                required
-                            />
-                        </div>
+                <div className="text-right mt-3">
+                <button type="button" onClick={addMore} className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add More</button> 
+                </div>
 
-                       
+                <div className="text-right mt-3">
 
-                        <div className=" mb-3">
-                            <FormControl
-                                type="text"
-                                name="externalLink"
-                                label="External Link"
-                                value={form.externalLink}
-                                onChange={e => setform({ ...form, externalLink: e })}
-                            />
-                        </div>
-
-                      
-
-                        
-
-                        {/* <div className="col-span-12 md:col-span-6">
-                                <label className='lablefontcls'>Image</label><br></br>
-                                <ImageUpload model="users" result={e => imageResult(e, 'image')} value={images.image || form.image} />
-                            </div> */}
-                    </div>
-
-                    <div className="col-span-full mb-3">
-                            <FormControl
-                                type="editor"
-                                name="description"
-                                label="Description"
-                                value={form.description}
-                                onChange={e => setform({ ...form, description: e })}
-                                required
-                            />
-                        </div>
-
+                    <button type="submit" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
+                </div>
+            </div>
 
                     <div className="text-right">
 

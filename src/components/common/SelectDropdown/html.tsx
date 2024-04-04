@@ -5,7 +5,7 @@ import Select from "react-select";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-const Html = ({ options, dynamicStyle = false, className = null, selectedValues, handleChange=()=>{}, displayValue, id='', placeholder, required, disabled, name='', noDefault, theme = 'normal' }:any) => {
+const Html = ({ options, dynamicStyle = false, className = null, selectedValues,onInputChange=(e:any)=>{}, handleChange=()=>{}, displayValue, id='', placeholder, required, disabled, name='', noDefault, theme = 'normal' }:any) => {
 
     const categoryVal = () => {
         let ext = options && options.find((item:any) => item.id == selectedValues)
@@ -22,6 +22,7 @@ const Html = ({ options, dynamicStyle = false, className = null, selectedValues,
                 isClearable={true}
                 name={name}
                 // formatOptionLabel="bordere"
+                onInputChange={onInputChange}
                 onChange={(e:any) => handleChange(e?.value || '')}
                 className="text-gray-700 block text-sm options_classs"
                 isDisabled={disabled?true:false}

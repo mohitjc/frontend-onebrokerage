@@ -8,6 +8,7 @@ export default function FormControl({
     name,
     id = "",
     valueType='string',
+    onInputChange=(e:any)=>{},
     displayValue = 'name',
     placeholder = "",
     type = 'text',
@@ -63,6 +64,7 @@ export default function FormControl({
                 id={`statusDropdown_${id}`}
                 displayValue={displayValue}
                 valueType={valueType}
+                onInputChange={onInputChange}
                 placeholder={placeholder}
                 intialValue={value||''}
                 name={name}
