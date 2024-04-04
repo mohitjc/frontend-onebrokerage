@@ -121,7 +121,7 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                             <div className="col-md-6">
                                 <FormControl
                                     type="select"
-                                    displayValue="email"
+                                    displayValue="fullName"
                                     valueType="object"
                                     placeholder="Select Member"
                                     label="Member"

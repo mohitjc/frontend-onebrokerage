@@ -26,12 +26,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
       url:'/dashboard',
       key:'readDashboard',
     },
-    {
-      name:'Assign Members',
-      icon:<SiSuperuser className="text-[#00f884] shrink-0 text-lg" />      ,
-      url:'/assign-member',
-      key:'readMembers',
-    },
+    // {
+    //   name:'Assign Members',
+    //   icon:<SiSuperuser className="text-[#00f884] shrink-0 text-lg" />      ,
+    //   url:'/assign-member',
+    //   key:'readMembers',
+    // },
     {
       name:'Members',
       icon:<SiSuperuser className="text-[#00f884] shrink-0 text-lg" />      ,

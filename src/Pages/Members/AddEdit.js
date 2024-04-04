@@ -140,6 +140,31 @@ const AddEdit = () => {
                 {members.map((itm,i) => {
                     return <>
                         <div className="grid grid-cols-2 gap-3">
+                        <div className="col-md-6">
+                                <FormControl
+                                    type="select"
+                                    displayValue="fullName"
+                                    valueType="object"
+                                    label="Member"
+                                    theme="search"
+                                    value={itm.memberId}
+                                    placeholder="Select Member"
+                                    onInputChange={e=>{
+                                        console.log("onInputChange",e)
+                                        // updateMember(i,'email',e)
+                                    }}
+                                    options={users}
+                                    onChange={e => {
+                                        console.log("onChange",e)
+                                        if(e){
+                                            updateMemberAll(i,{...itm,memberId:e.id,email:e.email,fullName:e.fullName})
+                                        }else{
+                                            updateMemberAll(i,{...itm,memberId:'',email:'',fullName:''})
+                                        }
+                                    }}
+                                    required
+                                />
+                            </div>
                         
                             <div className="col-md-6">
                                 <FormControl
