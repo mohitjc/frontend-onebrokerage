@@ -145,11 +145,27 @@ const AssignMembers = () => {
         return value
     }
 
+    const roleUpdate=(row,role)=>{
+        let payload={
+            id:row.id,
+            role:role
+        }
+        if(!role) return
+        loader(true)
+        ApiClient.put('api/members/update',payload).then(res=>{
+            loader(false)
+            if(res.success){
+                clear()
+            }
+        })
+    }
+
     return <><Html
         edit={edit}
         view={view}
         clear={clear}
         sortClass={sortClass}
+        roleUpdate={roleUpdate}
         sorting={sorting}
         isAllow={isAllow}
         pageChange={pageChange}

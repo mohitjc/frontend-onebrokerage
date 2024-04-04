@@ -10,11 +10,13 @@ import SelectDropdown from '../../components/common/SelectDropdown';
 import statusModel from '../../models/status.model';
 import datepipeModel from '../../models/datepipemodel';
 import shared from "./shared";
+import ApiClient from '../../methods/api/apiClient';
 const Html = ({
     sorting,
     edit,
     view,
     statusChange,
+    roleUpdate,
     pageChange,
     deleteItem,
     clear,
@@ -28,15 +30,36 @@ const Html = ({
 
     const columns = [
         {
-            key: 'name', name: 'Name',
+            key: 'fullName', name: 'Name',sort:true,
             render: (row) => {
-                return <>{row?.memberDetails?.fullName}</>
+                return <>{row?.fullName}</>
             }
         },
         {
             key: 'email', name: 'Email',
             render: (row) => {
-                return <>{row?.memberDetails?.email}</>
+                return <>{row?.email}</>
+            }
+        },
+         {
+            key: 'role', name: 'Role',
+            render: (row) => {
+                return <>
+                    <SelectDropdown
+                    placeholder="Select Role"
+                    intialValue={row.role}
+                    options={
+                        [
+                            { id: 'assistant', name: 'Assistant Group Leader' },
+                                { id: 'meetManager', name: 'Connect Meet Manager' },
+                            {id:'member',name:'Member'},
+                        ]
+                    }
+                    result={e=>{
+                        roleUpdate(row,e.value)
+                    }}
+                    />
+                </>
             }
         },
         {
@@ -49,13 +72,13 @@ const Html = ({
                                 <span class="material-symbols-outlined">visibility</span>
                                 </a>
                             </Tooltip> */}
-                        {isAllow(`edit${shared.check}`) ?
+                        {/* {isAllow(`edit${shared.check}`) ?
                             <Tooltip placement="top" title="Edit">
                                 <a className="border cursor-pointer border-[#ff7641] hover:opacity-70 rounded-lg bg-[#ff764114] w-10 h-10 !text-primary flex items-center justify-center text-xl" onClick={e => edit(itm.id)}>
                                     <FiEdit3 />
                                 </a>
                             </Tooltip>
-                            : <></>}
+                            : <></>} */}
                         {isAllow(`delete${shared.check}`) ? <Tooltip placement="top" title="Delete"> <span className='border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl ' onClick={() => deleteItem(itm.id)}>
                             <BsTrash3 />
                         </span> </Tooltip> : <></>}
@@ -64,6 +87,8 @@ const Html = ({
             }
         },
     ]
+
+
 
 
     return (
@@ -98,14 +123,14 @@ const Html = ({
             <div className='shadow-box w-full bg-white rounded-lg mt-6'>
                 <div className='flex p-4 justify-end'>
                     <div className="flex gap-2">
-                        <SelectDropdown
+                        {/* <SelectDropdown
                             id="statusDropdown"
                             displayValue="name"
                             placeholder='All Status'
                             intialValue={filters.status}
                             result={e => { changestatus(e.value) }}
                             options={statusModel.list}
-                        />
+                        /> */}
                         {filters.status ? <>
                             <button
                                 className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"

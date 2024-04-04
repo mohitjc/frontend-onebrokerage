@@ -15,8 +15,7 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
         e.preventDefault()
         setSubmitted(true)
         let method = 'post'
-        // let url = 'api/attendees'
-        let url = 'api/assignGroup'
+        let url = 'api/attendees'
         let value = {
            data:members.map(itm=>{
             return {
@@ -50,10 +49,10 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
     const getUsers=(p={})=>{
         let f={
             ...p,
-            role:environment.userRoleId,
+            groupId:user.groupId._id,
             isDeleted:false
         }
-        ApiClient.get('api/users/listing',f).then(res=>{
+        ApiClient.get('api/members/list',f).then(res=>{
             if(res.success){
                 setUsers(res.data)
             }
@@ -124,8 +123,8 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                                     type="select"
                                     displayValue="email"
                                     valueType="object"
-                                    name="email"
-                                    label="Email"
+                                    placeholder="Select Member"
+                                    label="Member"
                                     theme="search"
                                     value={itm.memberId}
                                     options={users}
@@ -135,8 +134,16 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                                         }else{
                                             updateMemberAll(i,{...itm,memberId:'',email:'',fullName:''})
                                         }
-                                        
                                     }}
+                                    required
+                                />
+                            </div>
+                            <div className="col-md-6">
+                                <FormControl
+                                    type="email"
+                                    label="Email"
+                                    value={itm.email}
+                                    onChange={e => updateMember(i,'email',e)}
                                     required
                                 />
                             </div>

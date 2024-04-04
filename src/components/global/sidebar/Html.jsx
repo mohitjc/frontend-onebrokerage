@@ -31,13 +31,13 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
       name:'Assign Members',
       icon:<SiSuperuser className="text-[#00f884] shrink-0 text-lg" />      ,
       url:'/assign-member',
-      key:'',
+      key:'readMembers',
     },
     {
       name:'Members',
       icon:<LuUser2 className="text-[#00f884] shrink-0 text-lg" />      ,
       url:'/members',
-      key:'',
+      key:'readMembers',
     },
       {
       name:'Events',

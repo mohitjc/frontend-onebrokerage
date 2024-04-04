@@ -2,12 +2,12 @@ const shared={
     check:'Members',
     title:'Member',
     url:'members',
-    addApi:'api/event/create',
+    addApi:'api/members/add',
     editApi:'api/event/edit',
     detailApi:'api/event/details',
-    listApi:'api/assign-group/member/listing',
+    listApi:'api/members/list',
     statusApi:'api/event/edit',
-    deleteApi:'api/assign-group/member'
+    deleteApi:'api/members'
 }
 
 export default shared

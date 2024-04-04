@@ -15,6 +15,7 @@ const Html = ({
     edit,
     view,
     statusChange,
+    roleUpdate,
     pageChange,
     deleteItem,
     clear,
@@ -39,6 +40,27 @@ const Html = ({
                 return <>{row?.memberDetails?.email}</>
             }
         },
+        // {
+        //     key: 'role', name: 'Role',
+        //     render: (row) => {
+        //         return <>
+        //             <SelectDropdown
+        //             placeholder="Select Role"
+        //             intialValue={row.role}
+        //             options={
+        //                 [
+        //                     { id: 'assistant', name: 'Assistant Group Leader' },
+        //                         { id: 'meetManager', name: 'Connect Meet Manager' },
+        //                     {id:'member',name:'Member'},
+        //                 ]
+        //             }
+        //             result={e=>{
+        //                 roleUpdate(row,e.value)
+        //             }}
+        //             />
+        //         </>
+        //     }
+        // },
         {
             key: 'action', name: 'Action',
             render: (itm) => {
