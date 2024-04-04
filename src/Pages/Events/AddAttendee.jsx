@@ -117,7 +117,7 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                                     required
                                 />
                             </div>
-                            <div>
+                            {/* <div>
                             <FormControl
                                     type="select"
                                     name="attendeeRole"
@@ -133,7 +133,7 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                                     onChange={e => updateMember(i,'attendeeRole',e)}
                                     required
                                 />
-                            </div>
+                            </div> */}
                             <div className="col-span-full text-right">
                                 {members.length>1?<>
                                     <button type="button" onClick={()=>removeMember(i)} className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
