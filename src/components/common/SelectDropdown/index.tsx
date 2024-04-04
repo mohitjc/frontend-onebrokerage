@@ -1,9 +1,13 @@
 import React from "react";
 import HtmlT from "./html";
 
-const SelectDropdown = ({intialValue,options,isSingle,result,displayValue='name',id,placeholder="Select Status",disabled=false,name,required=false,theme='normal'}:any) => {
+const SelectDropdown = ({intialValue,options,isSingle,valueType='string', result,displayValue='name',id,placeholder="Select Status",disabled=false,name,required=false,theme='normal'}:any) => {
     const handleChange=(e:any)=>{
-        result({event:"value",value:e})
+        let v=e
+        if(valueType=='object'){
+            v=options.find((itm:any)=>itm.id==e)
+        }
+        result({event:"value",value:v})
     }
 
     return <>

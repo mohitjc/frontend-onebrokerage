@@ -118,7 +118,7 @@ const Layout = ({ children }) => {
         
             <div className="mainarea">
             {user?.verifiedGroupLeader!='approved'&&user.customerRole?._id==environment.glRoleId?<>
-          <div className="py-4 text-red-600 mb-3 text-center">{user?.verifiedGroupLeader=='decline'?'Your Request is declined':'Your request approvel is under progress'}</div>
+          <div className="py-4 text-red-600 mb-3 text-center">{user?.verifiedGroupLeader=='decline'?'Your Request is declined':'Your request approval is under progress'}</div>
           </>:<></>}
               {children}</div>
           </main>

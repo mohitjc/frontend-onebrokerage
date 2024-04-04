@@ -8,7 +8,7 @@ import { TiArrowSortedDown } from "react-icons/ti";
 import environment from "../../../environment";
 import { LuTimerReset } from "react-icons/lu";
 import { FiAlertTriangle } from "react-icons/fi";
-import { SiPlanet } from "react-icons/si";
+import { SiPlanet, SiSuperuser } from "react-icons/si";
 import { MdEventAvailable, MdOutlineEmojiEvents, MdOutlineEventAvailable } from "react-icons/md";
 
 
@@ -25,6 +25,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
       icon:<RiHome6Line className="text-[#00b884] shrink-0 text-lg" />,
       url:'/dashboard',
       key:'readDashboard',
+    },
+    {
+      name:'Members',
+      icon:<SiSuperuser className="text-[#00f884] shrink-0 text-lg" />      ,
+      url:'/members',
+      key:'',
     },
       {
       name:'Events',
@@ -53,9 +59,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
       <div className={`px-[8px] ${isOpen && styles.sm_sidebar}`} component="siderbar">
 
         <ul className="space-y-2 px-2" >
-          {/* {user?.verifiedGroupLeader!='approved'&&user.customerRole?._id==environment.glRoleId?<>
-          <div className="py-4 text-red-600 mb-3">{user?.verifiedGroupLeader=='decline'?'Your Request is declined':'Your request approvel is under progress'}</div>
-          </>:<></>} */}
         
           {menus.map(itm=>{
             return <>

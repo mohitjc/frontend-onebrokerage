@@ -7,6 +7,7 @@ import tinymcModel from '../../../models/tinymc.model';
 export default function FormControl({
     name,
     id = "",
+    valueType='string',
     displayValue = 'name',
     placeholder = "",
     type = 'text',
@@ -61,6 +62,7 @@ export default function FormControl({
             {type == 'select' ? <SelectDropdown
                 id={`statusDropdown_${id}`}
                 displayValue={displayValue}
+                valueType={valueType}
                 placeholder={placeholder}
                 intialValue={value||''}
                 name={name}

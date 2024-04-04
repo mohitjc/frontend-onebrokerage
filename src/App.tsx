@@ -13,9 +13,6 @@ import Forgotpassword from './Pages/Forgotpassword';
 import Resetpassword from './Pages/Resetpassword';
 import Roles from './Pages/Roles';
 import AddEditRole from './Pages/Roles/AddEdit';
-import Users from './Pages/Users';
-import UserDetail from './Pages/Users/Profiledetail';
-import AddEditUser from './Pages/Users/AddEditUser';
 import Dashboard from './Pages/Dashboard';
 
 import Signup from './Pages/Signup';
@@ -25,6 +22,8 @@ import ViewEvent from "./Pages/Events/View";
 import Plan from "./Pages/Plan";
 import ActivePlan from "./Pages/Plan/ActivePlan";
 import AssignedEvents from './Pages/Events/AssignedEvents';
+import Members from './Pages/Members';
+import AddEdiMember from './Pages/Members/AddEdit';
 function App() {
 
   const routes=[
@@ -40,10 +39,9 @@ function App() {
     {url:'/roles',element:<Roles />},
     {url:'/roles/add',element:<AddEditRole />},
     {url:'/roles/edit/:id',element:<AddEditRole />},
-    {url:'/users/add',element:<AddEditUser />},
-    {url:'/users',element:<Users />},
-    {url:'/users/edit/:id',element:<AddEditUser />},
-    {url:'/userDetail/:id',element:<UserDetail />},
+    {url:'/members/add',element:<AddEdiMember />},
+    {url:'/members',element:<Members />},
+    {url:'/members/edit/:id',element:<AddEdiMember />},
     {url:'/event',element:<Events />},
     {url:'/event/edit/:id',element:<AddEditEvent />},
     {url:'/event/add',element:<AddEditEvent />},
