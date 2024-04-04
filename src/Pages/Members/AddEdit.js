@@ -145,7 +145,7 @@ const AddEdit = () => {
                                     type="select"
                                     displayValue="fullName"
                                     valueType="object"
-                                    label="Member"
+                                    label="Select Member"
                                     theme="search"
                                     value={itm.memberId}
                                     placeholder="Select Member"
@@ -153,10 +153,13 @@ const AddEdit = () => {
                                         console.log("onInputChange",e)
                                         // updateMember(i,'email',e)
                                     }}
-                                    options={users}
+                                    options={[
+                                        {id:'',fullName:'Add New Member'},
+                                        ...users
+                                    ]}
                                     onChange={e => {
                                         console.log("onChange",e)
-                                        if(e){
+                                        if(e.id){
                                             updateMemberAll(i,{...itm,memberId:e.id,email:e.email,fullName:e.fullName})
                                         }else{
                                             updateMemberAll(i,{...itm,memberId:'',email:'',fullName:''})
@@ -165,8 +168,9 @@ const AddEdit = () => {
                                     required
                                 />
                             </div>
-                        
-                            <div className="col-md-6">
+
+                            {!itm.memberId?<>
+                                <div className="col-md-6">
                                 <FormControl
                                     type="email"
                                     label="Email"
@@ -185,6 +189,9 @@ const AddEdit = () => {
                                     required
                                 />
                             </div>
+                            </>:<></>}
+                        
+                            
                             <div className="col-span-full text-right">
                                 {members.length>1?<>
                                     <button type="button" onClick={()=>removeMember(i)} className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
