@@ -9,6 +9,8 @@ import ApiClient from '../../../methods/api/apiClient';
 import methodModel from '../../../methods/methods';
 import crendentialModel from '../../../models/credential.model';
 import environment from '../../../environment';
+import { FcOvertime } from "react-icons/fc";
+import { BsExclamationTriangle } from "react-icons/bs";
 
 
 const Layout = ({ children }) => {
@@ -43,7 +45,7 @@ const Layout = ({ children }) => {
   }
 
   const logos = () => {
-    let value = '/assets/img/logo-small.png'
+    let value = '/assets/img/logo-small1.png'
     return value
   }
 
@@ -116,9 +118,9 @@ const Layout = ({ children }) => {
           </div> */}
           <main className="main">
         
-            <div className="mainarea">
+            <div className="mainarea ">
             {user?.verifiedGroupLeader!='approved'&&user.customerRole?._id==environment.glRoleId?<>
-          <div className="py-4 text-red-600 mb-3 text-center">{user?.verifiedGroupLeader=='decline'?'Your Request is declined':'Your request approval is under progress'}</div>
+          <div className="py-3 shadow-md mb-4 bg-gray-100 rounded-md text-red-600 mb-3 text-center"> {user?.verifiedGroupLeader=='decline'?<p className='flex items-center gap-x-2 text-lg capitalize justify-center'> <BsExclamationTriangle className='text-4xl animate-bounce' />Your Request is declined </p>: <p className='flex items-center gap-x-2 text-lg capitalize justify-center'><FcOvertime className='text-4xl animate-bounce' />Your profile still is under review</p> }</div>
           </>:<></>}
               {children}</div>
           </main>

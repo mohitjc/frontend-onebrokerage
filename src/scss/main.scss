@@ -209,7 +209,7 @@ body {
 }
 
 a {
-  color: #645dde;
+  color: #ff7641;
 }
 
 h1,
@@ -474,8 +474,8 @@ img.loaderlogo {
 
 
 .btn-outline-primary {
-  color: #645dde;
-  border-color: #645dde;
+  color: #ff7641;
+  border-color: #ff7641;
 }
 
 a {
@@ -487,7 +487,7 @@ a {
 }
 
 button.btn.btn-primary.loginclass {
-  background: #645dde;
+  background: #ff7641;
   border-radius: 5px;
   width: 100%;
   height: 49px;
@@ -548,7 +548,7 @@ h3.text-left.lgtext {
   font-weight: 400;
   font-size: 20px;
   line-height: 29px;
-  color: #645dde !important;
+  color: #ff7641 !important;
 }
 
 
@@ -1650,7 +1650,7 @@ p.profile_data {
 
 button[type='submit'] {
   -webkit-appearance: button;
-  background-color: #694ee5;
+  background-color: #ff7641;
   background-image: none;
 }
 
@@ -1668,7 +1668,7 @@ html {
 
 
 .shadow-box {
-  --tw-shadow: 0px 0px 0px 1px rgba(18, 55, 105, 0.08), 0px 1px 2px 0px rgba(164, 172, 185, 0.24) !important;
+  --tw-shadow: 0px 0px 0px 1px rgba(218, 186, 48, 0.08), 0px 1px 2px 0px rgba(164, 172, 185, 0.24) !important;
   --tw-shadow-colored: 0px 0px 0px 1px var(--tw-shadow-color), 0px 1px 2px 0px var(--tw-shadow-color) !important;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
@@ -1701,7 +1701,7 @@ input:focus-visible {
 }
 
 .ancortag:hover {
-  color: #4144f1 !important;
+  color: #ff7641 !important;
   text-decoration: underline !important;
 }
 
@@ -1886,7 +1886,7 @@ li.page.disabled {
 
 
 .react-pagination-js-default ul>li:last-child:not(.disabled) {
-  color: #6956e5 !important;
+  color: #ff7641 !important;
   font-size: 14px !important;
   font-weight: 500 !important;
 }
@@ -1924,31 +1924,7 @@ li.page.disabled {
   display: none;
 }
 
-.mobile_number .form-control {
-  width: 100% !important;
-  position: relative;
-  height: 2.5rem !important;
-  align-items: center;
-  border: none;
-  display: flex;
-  border-radius: 0.5rem !important;
-  --tw-bg-opacity: 1 !important;
-  background-color: rgba(255, 255, 255, var(--tw-bg-opacity)) !important;
-  --tw-shadow: 0px 0px 0px 1px rgba(18, 55, 105, 0.08), 0px 1px 2px 0px rgba(164, 172, 185, 0.24) !important;
-  --tw-shadow-colored: 0px 0px 0px 1px var(--tw-shadow-color), 0px 1px 2px 0px var(--tw-shadow-color) !important;
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
-}
 
-
-.mobile_number .react-tel-input .flag-dropdown {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  padding: 0;
-  background-color: #f5f5f5;
-  border: 1px solid #fff;
-  border-radius: 0.5rem 0 0 0.5rem !important;
-}
 
 .custom_dropdown .removeBg {
   width: 100% !important;
@@ -1967,7 +1943,7 @@ li.page.disabled {
 }
 
 .list_box_active_state button[data-headlessui-state="open"] {
-  outline-color: #6956e5;
+  outline-color: #ff7641;
   outline-width: 2px;
   outline-style: solid !important;
 }
@@ -1996,17 +1972,79 @@ li.page.disabled {
 }
 
 .list_box_active_state a:hover {
-  background-color: #645dde;
+  background-color: #ff7641;
   color: #fff;
 }
 
 .options_classs .css-1nmdiq5-menu {
   border: 2px solid;
-  border-color: #6956E5;
+  border-color: #ff7641;
   width: 100% !important;
 }
 
 
 td.\!text-typo.\!border-l-0.\!px-3\.5.text-sm.font-normal.\!py-4.\!border.text-center.border-\[\#EAECF0\] {
   text-transform: capitalize;
+}
+
+
+.css-tr4s17-option {
+ 
+  background-color: #ff7641 !important;
+ 
+}
+
+.css-t3ipsp-control:hover {
+  border-color: #ff7641 !important;
+}
+
+.css-t3ipsp-control {
+
+  box-shadow: 0 0 0 1px #ff7641 !important;
+ 
+}
+
+.css-13cymwt-control{
+  gap: .5rem;
+  width: 100%;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  position: relative;
+  overflow: hidden;
+  height: 2.5rem;
+  align-items: center;
+  display: flex;
+  border: 0px !important;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  border-radius: 0.5rem !important;
+  --tw-shadow: 0px 0px 0px 1px rgba(218, 186, 48, 0.08), 0px 1px 2px 0px rgba(164, 172, 185, 0.24) !important;
+  --tw-shadow-colored: 0px 0px 0px 1px var(--tw-shadow-color), 0px 1px 2px 0px var(--tw-shadow-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow) !important;
+}
+
+.mobile_number .form-control {
+  width: 100% !important;
+  position: relative;
+  height: 2.5rem !important;
+  align-items: center;
+  border: none;
+  display: flex;
+  border-radius: 0.5rem !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity)) !important;
+  --tw-shadow: 0px 0px 0px 1px rgba(18, 55, 105, 0.08), 0px 1px 2px 0px rgba(164, 172, 185, 0.24) !important;
+  --tw-shadow-colored: 0px 0px 0px 1px var(--tw-shadow-color), 0px 1px 2px 0px var(--tw-shadow-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}
+
+
+.mobile_number .react-tel-input .flag-dropdown {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  border: 1px solid #fff;
+  border-radius: 0.5rem 0 0 0.5rem !important;
 }

@@ -106,23 +106,23 @@ const Dashboard = () => {
     const ListHtml = ({ row }: any) => {
         let itm = row
         return <>
-            <div className="border border-gray-300 bg-white rounded p-4 flex flex-col justify-between leading-normal">
-                <div className="mb-8">
+            <div className="border border-gray-100 shadow-lg  bg-white rounded p-4 flex flex-col  justify-between leading-normal">
+                <div className="mb-8 flex flex-col gap-y-2">
                     <p className="text-sm text-gray-600 flex items-center">
                         <span className="material-symbols-outlined mr-1">calendar_today</span>
                         {datepipeModel.datetime(itm?.date)}
                     </p>
-                    <div className="text-gray-900 font-bold text-xl mb-2">{itm?.title}</div>
+                    <div className="text-gray-900 font-bold text-xl mb-2 capitalize">{itm?.title}</div>
                     <p className="text-gray-700 text-base" dangerouslySetInnerHTML={{ __html: itm?.address }}></p>
                     <p className="text-sm">Max Member: {itm?.capacity}</p>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex  gap-4">
                     <button type="button"
                         onClick={() => setModalData(itm)}
-                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">View Members</button>
+                        className="text-white bg-orange-500 w-[49%] hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">View Members</button>
                     {itm.meetingStatus == 'completed' || filters.type != 'ongoing'? <></> : <>
                         <button type="button" onClick={() => endEvent(itm.id)}
-                            className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">End Event</button>
+                            className="text-white bg-gradient-to-r w-[49%] from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">End Event</button>
                     </>}
 
 
@@ -143,24 +143,24 @@ const Dashboard = () => {
             <h4 className="text-lg font-bold mb-3">My Events</h4>
 
 
-            <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-3">
+            <div className="text-sm mb-8 font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-3">
                 <ul className="flex flex-wrap -mb-px">
                     <li className="me-2">
                         <span
                             onClick={() => typeFilter('ongoing')}
-                            className={`cursor-pointer ${filters.type == 'ongoing' ? 'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+                            className={`cursor-pointer ${filters.type == 'ongoing' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
                         >Ongoing</span>
                     </li>
                     <li className="me-2">
                         <span
                             onClick={() => typeFilter('upcoming')}
-                            className={`cursor-pointer ${filters.type == 'upcoming' ? 'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+                            className={`cursor-pointer ${filters.type == 'upcoming' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
                         >Upcoming</span>
                     </li>
                     <li className="me-2">
                         <span
                             onClick={() => typeFilter('completed')}
-                            className={`cursor-pointer ${filters.type == 'completed' ? 'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+                            className={`cursor-pointer ${filters.type == 'completed' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
                         >Completed</span>
                     </li>
                 </ul>
@@ -183,7 +183,7 @@ const Dashboard = () => {
                     total={total}
                     theme="list"
                     ListHtml={ListHtml}
-                    rowClass="grid grid-cols-4 gap-2"
+                    rowClass="grid grid-cols-4 gap-4"
                     result={(e) => {
                         if (e.event == 'page') pageChange(e.value)
                         if (e.event == 'sort') sorting(e.value)

@@ -10,6 +10,7 @@ import { LuTimerReset } from "react-icons/lu";
 import { FiAlertTriangle } from "react-icons/fi";
 import { SiPlanet, SiSuperuser } from "react-icons/si";
 import { MdEventAvailable, MdOutlineEmojiEvents, MdOutlineEventAvailable } from "react-icons/md";
+import { LuUser2 } from "react-icons/lu";
 
 
 const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
@@ -34,7 +35,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
     },
     {
       name:'Members',
-      icon:<SiSuperuser className="text-[#00f884] shrink-0 text-lg" />      ,
+      icon:<LuUser2 className="text-[#00f884] shrink-0 text-lg" />      ,
       url:'/members',
       key:'',
     },

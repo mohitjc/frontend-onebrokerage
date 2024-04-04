@@ -76,7 +76,7 @@ export default function FormControl({
             /> : type == 'number' ? <input
                 type="text"
                 name={name}
-                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 z-9 overflow-hidden px-2"
+                className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 z-9 overflow-hidden px-2"
                 required={required}
                 placeholder={placeholder}
                 value={value||''}
