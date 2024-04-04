@@ -28,6 +28,7 @@ const Html = ({
   return (
     <Layout>
       <div className="">
+      <div className="flex justify-between items-center">
         <div className="flex flex-col">
           <h4 className="text-typo text-2xl font-semibold">Plan</h4>
           {!user?.on_trial && !user?.trial_ended ? (
@@ -35,8 +36,11 @@ const Html = ({
                               Please choose your plan to start free trial
                               </p>
                           ) : <></>}
+
+
          
         </div>
+
         <p>
           {user?.subscription_currency ? null : (
             <span className="div_section flex justify-end ">
@@ -44,7 +48,7 @@ const Html = ({
                 appliedcurrency.map((item) => {
                   return (
                     <span
-                      className="span_section text-uppercase text-primary h6 currency-format pointer bg-white shadow-btn text-center !px-2 !py-2 ml-3"
+                      className="span_section flex gap-x-1 text-uppercase text-primary h6 currency-format pointer bg-white shadow-btn text-center !px-2 !py-2 ml-3"
                       onClick={(e) =>
                         setcurrencyiso(item?.isoCode.toLowerCase())
                       }>
@@ -70,6 +74,7 @@ const Html = ({
             </span>
           )}
         </p>
+        </div>
       </div>
       <div className="border !border-[#EBEBEB] bg-white rounded-[10px] !p-5 mt-6">
         <div className="flex items-center justify-between border-b border-[#EBEBEB] pb-6 mb-6">
@@ -80,7 +85,7 @@ const Html = ({
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 1
-                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-blue-500 text-white"
+                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-orange-500 text-white"
                   : "!text-[#667085] hover:!text-[#667085]"
                   }`}
                 onClick={(e) => changeInterval(1)}>
@@ -90,7 +95,7 @@ const Html = ({
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 3
-                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-blue-500 text-white"
+                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-orange-500 text-white"
                   : "!text-[#667085] hover:!text-[#667085]"
                   }`}
                 onClick={(e) => changeInterval(3)}>
@@ -100,7 +105,7 @@ const Html = ({
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 6
-                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-blue-500 text-white"
+                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-orange-500 text-white"
                   : "!text-[#667085] hover:!text-[#667085]"
                   }`}
                 onClick={(e) => changeInterval(6)}>
@@ -110,7 +115,7 @@ const Html = ({
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 12
-                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-blue-500 text-white"
+                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-orange-500 text-white"
                   : "!text-[#667085] hover:!text-[#667085]"
                   }`}
                 onClick={(e) => changeInterval(12)}>
@@ -125,7 +130,7 @@ const Html = ({
               return (
                 <>
                   <div>
-                    <div className={`shadow-box !rounded-xl !p-5 ${item.id == activeplan?.planId?'border border-blue-400':''}`}>
+                    <div className={`shadow-xl !rounded-xl hover:shadow-2xl !p-5 ${item.id == activeplan?.planId?'border border-orange-400 shadow-2xl':''}`}>
                       <div className="flex !gap-3 items-center mb-6">
                         <div className="w-12 h-12 shrink-0 flex items-center justify-center border-4 !border-[#ECEAFC] !rounded-xl bg-[#F7F7FE] shadow-[0_0.5px_1px_0_rgba(0,0,0,0.05)]">
                           {item.name === "Advance" ? (
@@ -147,10 +152,10 @@ const Html = ({
                         </h5>
                       </div>
                       <div className="flex !gap-1 items-center">
-                        <h2 className="text-typo text-2xl font-semibold">
+                        <h2 className="text-typo text-3xl font-semibold">
                           {getPrice(item)} {currencyiso?.toUpperCase()}
                         </h2>
-                        <div className="border !border-[#E9E7FB] !rounded-md bg-[#F7F7FE] !px-2 py-0.5 text-xs font-medium !text-primary">
+                        <div className="border !border-[#E9E7FB]  !rounded-md bg-orange-500 !px-2 py-0.5 text-xs font-medium !text-[#fff]">
                           0% off
                         </div>
                         <p>
@@ -191,9 +196,9 @@ const Html = ({
                                       <li>
                                         <div className="flex items-center gap-1.5 text-[#3C3E49] capitalize">
                                           {isChecked(item, fitm) ? (
-                                            <IoCheckmarkCircle className="text-xl text-green-400" />
+                                            <IoCheckmarkCircle className="text-xl text-green-700" />
                                           ) : (
-                                            <IoCloseCircle className="text-xl text-red-400" />
+                                            <IoCloseCircle className="text-xl text-red-600" />
                                           )}
                                           {/* <i class={`material-icons ${isChecked(item, fitm) ? 'text-success' : 'text-danger'} planIcon`}>{isChecked(item, fitm) ? 'check' : 'close'}</i> */}
                                           {fitm.name}
@@ -256,7 +261,7 @@ const Html = ({
                             </p>
                           ) : null}
                           <button
-                            className="!px-4 text-typo text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed w-full mt-8"
+                            className="!px-4 bg-[#fff] text-black hover:text-black  text-typo text-sm font-normal py-2.5 flex items-center justify-center gap-2 border-orange-500  rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed w-full mt-8"
                             disabled={getPrice(item)||item.planType=='free' ? false : true}
                             onClick={(e) => getplandetails(item)}>
                             {activeplan?.isActive ? "Upgrade" : "Get Started"}

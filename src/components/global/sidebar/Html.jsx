@@ -6,6 +6,10 @@ import { Tooltip } from "antd";
 import { RiHome6Line } from "react-icons/ri";
 import { TiArrowSortedDown } from "react-icons/ti";
 import environment from "../../../environment";
+import { LuTimerReset } from "react-icons/lu";
+import { FiAlertTriangle } from "react-icons/fi";
+import { SiPlanet } from "react-icons/si";
+import { MdEventAvailable, MdOutlineEmojiEvents, MdOutlineEventAvailable } from "react-icons/md";
 
 
 const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
@@ -24,13 +28,13 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
     },
       {
       name:'Events',
-      icon:<span class="material-symbols-outlined text-[#ffc800] shrink-0 text-lg">star</span>,
+      icon:<MdOutlineEmojiEvents className="text-[#00b184] shrink-0 text-lg" />      ,
       url:'/event',
       key:'readEvents',
     },
     {
       name:'Plan',
-      icon:<span class="material-symbols-outlined text-[#ffc800] shrink-0 text-lg">star</span>,
+      icon:<SiPlanet className="text-[#00f884] shrink-0 text-lg" />      ,
       url:'/plan',
       key:'',
     },
