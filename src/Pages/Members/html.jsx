@@ -28,37 +28,15 @@ const Html = ({
 
     const columns = [
         {
-            key: 'title', name: 'Title', sort: true,
+            key: 'name', name: 'Name',
             render: (row) => {
-                return <>{row?.title}</>
+                return <>{row?.memberDetails?.fullName}</>
             }
         },
         {
-            key: 'date', name: 'Event Date',
+            key: 'email', name: 'Email',
             render: (row) => {
-                return <>
-                    {datepipeModel.datetime(row?.date)}
-                </>
-            }
-        },
-        {
-            key: 'timezone', name: 'Timezone',
-            render: (row) => {
-                return <>{row?.timezone}</>
-            }
-        },
-        {
-            key: 'status', name: 'Status',
-            render: (row) => {
-                return <>
-                    <div className='w-32' onClick={() => statusChange(row)}>
-                        <Tooltip placement="top" title="Active / Inactive">
-                            <span className='bg-[#EEE] text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize'>
-                                {row.status == 'deactive' ? 'inactive' : 'active'}
-                            </span>
-                        </Tooltip>
-                    </div>
-                </>
+                return <>{row?.memberDetails?.email}</>
             }
         },
         {
@@ -66,11 +44,11 @@ const Html = ({
             render: (itm) => {
                 return <>
                     <div className="flex items-center justify-start gap-1.5">
-                    <Tooltip placement="top" title="View">
+                    {/* <Tooltip placement="top" title="View">
                                 <a className="border cursor-pointer border-[#6956E5] hover:opacity-70 rounded-lg bg-[#6956E514] w-10 h-10 !text-primary flex items-center justify-center text-xl" onClick={e => view(itm.id)}>
                                 <span class="material-symbols-outlined">visibility</span>
                                 </a>
-                            </Tooltip>
+                            </Tooltip> */}
                         {isAllow(`edit${shared.check}`) ?
                             <Tooltip placement="top" title="Edit">
                                 <a className="border cursor-pointer border-[#6956E5] hover:opacity-70 rounded-lg bg-[#6956E514] w-10 h-10 !text-primary flex items-center justify-center text-xl" onClick={e => edit(itm.id)}>

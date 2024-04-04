@@ -9,6 +9,7 @@ export default function FormControl({
     id = "",
     valueType='string',
     onInputChange=(e:any)=>{},
+    inputValue='',
     displayValue = 'name',
     placeholder = "",
     type = 'text',
@@ -65,6 +66,7 @@ export default function FormControl({
                 displayValue={displayValue}
                 valueType={valueType}
                 onInputChange={onInputChange}
+                inputValue={inputValue}
                 placeholder={placeholder}
                 intialValue={value||''}
                 name={name}

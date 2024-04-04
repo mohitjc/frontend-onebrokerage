@@ -51,7 +51,9 @@ const Members = () => {
 
     const getData = (p = {}) => {
         setLoader(true)
-        let filter = { ...filters, ...p ,addedBy:user._id}
+        let filter = { ...filters, ...p ,
+            // addedBy:user._id,
+            groupId:user.groupId._id}
         ApiClient.get(shared.listApi, filter).then(res => {
             if (res.success) {
                 setData(res.data.map(itm => {

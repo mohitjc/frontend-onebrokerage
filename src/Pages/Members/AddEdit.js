@@ -25,7 +25,6 @@ const AddEdit = () => {
         e.preventDefault()
         setSubmitted(true)
         let method = 'post'
-        // let url = 'api/attendees'
         let url = 'api/assignGroup'
         let value = {
            data:members.map(itm=>{
@@ -129,17 +128,15 @@ const AddEdit = () => {
                         </Tooltip>
                         <div>
                             <h3 className="text-2xl font-semibold text-[#111827]">
-                                {id ? 'Edit' : 'Add'}  {shared.title}
+                                {/* {id ? 'Edit' : 'Add'}  */}
+                                 {shared.title}
                             </h3>
-                            <p class="text-sm font-normal text-[#75757A]">Here you can see all about your {shared.title}</p>
+                            {/* <p class="text-sm font-normal text-[#75757A]">Here you can see all about your {shared.title}</p> */}
                         </div>
                     </div>
 
 
                     <div className="">
-                <h3 className="text-2xl font-semibold text-[#111827] mb-3">
-                    Add Member
-                </h3>
                 {members.map((itm,i) => {
                     return <>
                         <div className="grid grid-cols-2 gap-3">
@@ -153,14 +150,19 @@ const AddEdit = () => {
                                     label="Email"
                                     theme="search"
                                     value={itm.memberId}
+                                    placeholder="Select Member"
+                                    onInputChange={e=>{
+                                        console.log("onInputChange",e)
+                                        // updateMember(i,'email',e)
+                                    }}
                                     options={users}
                                     onChange={e => {
+                                        console.log("onChange",e)
                                         if(e){
                                             updateMemberAll(i,{...itm,memberId:e.id,email:e.email,fullName:e.fullName})
                                         }else{
                                             updateMemberAll(i,{...itm,memberId:'',email:'',fullName:''})
                                         }
-                                        
                                     }}
                                     required
                                 />
@@ -198,10 +200,7 @@ const AddEdit = () => {
                 </div>
             </div>
 
-                    <div className="text-right">
 
-                        <button type="submit" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Save</button>
-                    </div>
                 </div>
 
 

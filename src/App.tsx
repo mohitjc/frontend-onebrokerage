@@ -22,6 +22,8 @@ import ViewEvent from "./Pages/Events/View";
 import Plan from "./Pages/Plan";
 import ActivePlan from "./Pages/Plan/ActivePlan";
 import AssignedEvents from './Pages/Events/AssignedEvents';
+import AssignMembers from './Pages/AssignMembers';
+import AddEditAssignMembers from './Pages/AssignMembers/AddEdit';
 import Members from './Pages/Members';
 import AddEdiMember from './Pages/Members/AddEdit';
 import EventDetail from './Pages/EventDetail';
@@ -43,6 +45,9 @@ function App() {
     {url:'/members/add',element:<AddEdiMember />},
     {url:'/members',element:<Members />},
     {url:'/members/edit/:id',element:<AddEdiMember />},
+    {url:'/assign-member/add',element:<AddEditAssignMembers />},
+    {url:'/assign-member',element:<AssignMembers />},
+    {url:'/assign-member/edit/:id',element:<AddEditAssignMembers />},
     {url:'/event',element:<Events />},
     {url:'/event/edit/:id',element:<AddEditEvent />},
     {url:'/event/add',element:<AddEditEvent />},

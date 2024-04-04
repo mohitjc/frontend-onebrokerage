@@ -27,6 +27,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
       key:'readDashboard',
     },
     {
+      name:'Assign Members',
+      icon:<SiSuperuser className="text-[#00f884] shrink-0 text-lg" />      ,
+      url:'/assign-member',
+      key:'',
+    },
+    {
       name:'Members',
       icon:<SiSuperuser className="text-[#00f884] shrink-0 text-lg" />      ,
       url:'/members',

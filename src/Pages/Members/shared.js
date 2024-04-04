@@ -5,9 +5,9 @@ const shared={
     addApi:'api/event/create',
     editApi:'api/event/edit',
     detailApi:'api/event/details',
-    listApi:'api/group-members/list',
+    listApi:'api/assign-group/member/listing',
     statusApi:'api/event/edit',
-    deleteApi:'api/event/delete'
+    deleteApi:'api/assign-group/member'
 }
 
 export default shared
