@@ -43,12 +43,18 @@ const Signup = () => {
   const hendleSubmit = (e: any) => {
     e.preventDefault()
     setSubmitted(true)
-    const data = {
+
+    let url='api/user/register'
+    let eventId=methodModel.getPrams('eventId')
+    let groupId=methodModel.getPrams('groupId')
+
+
+    let data:any = {
       role:environment.userRoleId,
       ...form
     };
 
-
+    if(groupId) data.groupId=groupId
     if(data.customerRole==environment.glRoleId){
       if(!data.groupId){
         return
@@ -56,12 +62,12 @@ const Signup = () => {
     }
 
     loader(true)
-    let url='api/user/register'
-    let eventId=methodModel.getPrams('eventId')
+  
+    
     ApiClient.post(url, data).then(async res => {
    
       if (res.success) {
-        if(eventId){
+        if(eventId||groupId){
           await ApiClient.post('api/auto/login',{id:res.data._id}).then(async res=>{
             setLogin(res.data)
           })
@@ -90,7 +96,7 @@ const Signup = () => {
       setForm({
         ...form,
         email:email,
-        fullName:methodModel.getPrams('fullName'),
+        fullName:methodModel.getPrams('name'),
       })
     }
 
@@ -131,8 +137,8 @@ const Signup = () => {
             </div>
 
           </div>
-
-{methodModel.getPrams('eventId')?<>
+          
+{methodModel.getPrams('eventId')||methodModel.getPrams('groupId')?<>
 
 </>:<>
 <div className='mb-3'>
