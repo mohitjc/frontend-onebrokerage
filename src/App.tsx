@@ -27,6 +27,7 @@ import AddEditAssignMembers from './Pages/AssignMembers/AddEdit';
 import Members from './Pages/Members';
 import AddEdiMember from './Pages/Members/AddEdit';
 import EventDetail from './Pages/EventDetail';
+import Thanku from './Pages/Thanku';
 function App() {
 
   const routes=[
@@ -56,6 +57,7 @@ function App() {
     {url:'/activeplan',element:<ActivePlan />},
     {url:'/assinged-event',element:<AssignedEvents />},
     {url:'/event-detail',element:<EventDetail />},
+    {url:'/thanku',element:<Thanku />},
   ]
 
   return (
