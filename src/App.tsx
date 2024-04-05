@@ -52,11 +52,11 @@ function App() {
     {url:'/event',element:<Events />},
     {url:'/event/edit/:id',element:<AddEditEvent />},
     {url:'/event/add',element:<AddEditEvent />},
-    {url:'/event/detail/:id',element:<ViewEvent />},
+    // {url:'/event/detail/:id',element:<ViewEvent />},
     {url:'/plan',element:<Plan />},
     {url:'/activeplan',element:<ActivePlan />},
     {url:'/assinged-event',element:<AssignedEvents />},
-    {url:'/event-detail/:id',element:<EventDetail />},
+    {url:'/event/detail/:id',element:<EventDetail />},
     {url:'/thanku',element:<Thanku />},
   ]
 

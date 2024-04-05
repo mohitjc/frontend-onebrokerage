@@ -61,7 +61,9 @@ const AddEdit = () => {
         }
         ApiClient.get('api/users/listing',f).then(res=>{
             if(res.success){
-                setUsers(res.data)
+                let data=res.data
+                data=data.filter(itm=>itm.email!=user.email)
+                setUsers(data)
             }
         })
     }

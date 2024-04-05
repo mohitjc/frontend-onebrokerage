@@ -111,9 +111,9 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
     return <>
         <form onSubmit={handleSubmit}>
             <div className="">
-                <h3 className="text-2xl font-semibold text-[#111827] mb-3">
+                {/* <h3 className="text-2xl font-semibold text-[#111827] mb-3">
                     Add Member
-                </h3>
+                </h3> */}
                 {members.map((itm,i) => {
                     return <>
                         <div className="grid grid-cols-2 gap-3">

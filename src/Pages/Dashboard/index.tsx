@@ -8,6 +8,7 @@ import Members from "../../components/Events/Member"
 import Table from "../../components/Table"
 import loader from "../../methods/loader"
 import methodModel from "../../methods/methods"
+import { useNavigate } from "react-router-dom"
 
 const Dashboard = () => {
     const [events, setEvents] = useState([])
@@ -16,6 +17,7 @@ const Dashboard = () => {
     const [total, setTotal] = useState(0)
     const [modalData, setModalData]: any = useState()
     const user: any = crendentialModel.getUser()
+    const history=useNavigate()
 
     const getEvents = (p = {}) => {
         let f = {
@@ -118,8 +120,8 @@ const Dashboard = () => {
                 </div>
                 <div className="flex  gap-4">
                     <button type="button"
-                        onClick={() => setModalData(itm)}
-                        className="text-white bg-orange-500 w-[49%] hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">View Members</button>
+                        onClick={() => history(`/event/detail/${itm.id}`)}
+                        className="text-white bg-orange-500 w-[49%] hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">View Event</button>
                     {itm.meetingStatus == 'completed' || filters.type != 'ongoing'? <></> : <>
                         <button type="button" onClick={() => endEvent(itm.id)}
                             className="text-white bg-gradient-to-r w-[49%] from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">End Event</button>

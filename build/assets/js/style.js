@@ -12,10 +12,10 @@ document.body.onclick = function (e) {   //when the document body is clicked
 
     if (e.className) {
         if (e.classList.contains('modal') || e.classList.contains('modalCloseJS')) {
-            document.getElementById("modalJS").setAttribute('value', 'hide')
+            document.getElementById("modalJS")?.setAttribute('value', 'hide')
             let el = document.getElementById("modalClicked")
             let el2 = document.getElementById("modalJS")
-            if (el && el2) el.click(); el2.click()
+            if (el && el2) el?.click(); el2?.click()
         }
     }
 }
