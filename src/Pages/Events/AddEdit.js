@@ -31,7 +31,7 @@ const AddEdit = () => {
         e.preventDefault()
         setSubmitted(true)
         let invalid = methodModel.getFormError(formValidation, form)
-        if (invalid) return
+        if (invalid||getDateErrr(form.date)||getDateErrr(form.deadline)) return
         let method = 'post'
         let url = shared.addApi
         let value = {
@@ -45,6 +45,8 @@ const AddEdit = () => {
             value.addedBy=user._id
             delete value.id
         }
+
+        
 
         loader(true)
         ApiClient.allApi(url, value, method).then(res => {
@@ -94,6 +96,17 @@ const AddEdit = () => {
 
     const getError = (key) => {
         return submitted?methodModel.getError(key, form, formValidation)?.message:''
+    }
+
+    const getDateErrr=(date)=>{
+        let value=false
+        if(date){
+            if(new Date(date).getTime()<new Date().getTime()){
+                value=true
+            }
+        }
+
+        return value
     }
 
     return <>
@@ -168,10 +181,10 @@ const AddEdit = () => {
                                 type="datetime-local"
                                 name="date"
                                 label="Event Date"
-                                min={datepipeModel.datetodatepicker(new Date().toISOString())}
                                 value={datepipeModel.datetodatepicker(form.date)}
                                 onChange={e => setform({ ...form, date: e })}
                                 required
+                                error={getDateErrr(form.date)&&submitted?'Entered date is less then Current Date':''}
                             />
                         </div>
                         <div className=" mb-3 relative">
@@ -208,10 +221,10 @@ const AddEdit = () => {
                                type="datetime-local"
                                 name="deadline"
                                 label="RSVP Deadline"
-                                min={datepipeModel.datetodatepicker(new Date().toISOString())}
-                                value={datepipeModel.datetodatepicker(form.deadline)}
+                                value={datepipeModel.datetodatepicker(form.deadline||'')}
                                 maxlength="8"
                                 onChange={e => setform({ ...form, deadline: e })}
+                                error={getDateErrr(form.deadline)&&submitted?'Entered date is less then Current Date':''}
                                 required
                             />
                         </div>

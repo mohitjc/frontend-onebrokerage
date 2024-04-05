@@ -5,7 +5,7 @@ import Select from "react-select";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-const Html = ({ options, dynamicStyle = false, className = null,inputValue='', selectedValues,onInputChange=(e:any)=>{}, handleChange=()=>{}, displayValue, id='', placeholder, required, disabled, name='', noDefault, theme = 'normal' }:any) => {
+const Html = ({ options, dynamicStyle = false, className = '',inputValue='', selectedValues,onInputChange=(e:any)=>{}, handleChange=()=>{}, displayValue, id='', placeholder, required, disabled, name='', noDefault, theme = 'normal' }:any) => {
 
     const categoryVal = () => {
         let ext = options && options.find((item:any) => item.id == selectedValues)
@@ -14,7 +14,7 @@ const Html = ({ options, dynamicStyle = false, className = null,inputValue='', s
 
     return <>
         {theme == 'search' ? <>
-    <div className="capitalize">
+    <div className={`${className||'capitalize'}`}>
     <Select
                 options={options?.map((itm:any) => { return { value: itm.id, label: itm[displayValue] } }) || []}
                 placeholder={placeholder}

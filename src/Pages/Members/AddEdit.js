@@ -146,6 +146,7 @@ const AddEdit = () => {
                                 <FormControl
                                     type="select"
                                     displayValue="email"
+                                    className="lowecase"
                                     valueType="object"
                                     label="Select Member"
                                     theme="search"

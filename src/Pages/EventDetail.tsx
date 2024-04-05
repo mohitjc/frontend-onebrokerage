@@ -10,6 +10,7 @@ import crendentialModel from "../models/credential.model";
 import { BsTrash3 } from "react-icons/bs";
 import Modal from "../components/common/Modal";
 import AddAttendee from "./Events/AddAttendee";
+import { toast } from "react-toastify";
 
 const EventDetail = () => {
   const [host, setHost]: any = useState()
@@ -112,6 +113,16 @@ const EventDetail = () => {
     }
   }
 
+  const markAttendance=()=>{
+    loader(true)
+    ApiClient.post('api/sentEmail',{eventId:id}).then(res=>{
+      loader(false)
+      if(res.success){
+        toast.success(res.message)
+      }
+    })
+  }
+
   useEffect(() => {
     getDetail()
     getRole()
@@ -176,7 +187,7 @@ const EventDetail = () => {
 
                         {data?.meetingStatus != 'completed' ? <>
                           <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={endEvent}>End Meeting</button>
-                          <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg">Mark Attendance</button>
+                          <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg" onClick={markAttendance}>Mark Attendance</button>
                         <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={()=>setModal(true)}>Add Attendee</button>
                         </> : <>
                           <div className="text-red-500">Meeting Ended</div>

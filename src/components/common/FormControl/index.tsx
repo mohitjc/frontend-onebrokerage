@@ -21,6 +21,7 @@ export default function FormControl({
     maxlength = '',
     minlength = '',
     min='',
+    className='',
     value,
     theme=''
 }:any) {
@@ -65,6 +66,7 @@ export default function FormControl({
             {type == 'select' ? <SelectDropdown
                 id={`statusDropdown_${id}`}
                 displayValue={displayValue}
+                className={className}
                 valueType={valueType}
                 onInputChange={onInputChange}
                 inputValue={inputValue}
