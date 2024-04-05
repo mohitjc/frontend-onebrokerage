@@ -56,7 +56,7 @@ function App() {
     {url:'/plan',element:<Plan />},
     {url:'/activeplan',element:<ActivePlan />},
     {url:'/assinged-event',element:<AssignedEvents />},
-    {url:'/event-detail',element:<EventDetail />},
+    {url:'/event-detail/:id',element:<EventDetail />},
     {url:'/thanku',element:<Thanku />},
   ]
 

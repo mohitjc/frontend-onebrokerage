@@ -1,7 +1,63 @@
 import { IoLocationSharp } from "react-icons/io5";
 import PageLayout from "../components/global/PageLayout";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import loader from "../methods/loader";
+import ApiClient from "../methods/api/apiClient";
+import datepipeModel from "../models/datepipemodel";
 
 const EventDetail = () => {
+  const [host, setHost]:any = useState()
+  const [data, setData]:any = useState()
+  const [attendee, setAttendee]:any = useState([])
+  const history = useNavigate()
+  const {id}=useParams()
+
+  const getDetail=()=>{
+      loader(true)
+      ApiClient.get('api/event/details',{id:id}).then(res=>{
+          loader(false)
+          if(res.success){
+              setData(res.data)
+              getHostDetail(res.data.addedBy._id)
+          }
+      })
+  }
+
+  const getHostDetail=(id:any)=>{
+      ApiClient.get('api/user/detail',{id:id}).then(res=>{
+          if(res.success){
+              setHost(res.data)
+          }
+      })
+  }
+
+  const getAttendee=()=>{
+    let f={
+
+    }
+    ApiClient.get('api/attendees/list',f).then(res=>{
+      if(res.success){
+        setAttendee(res.data)
+      }
+    })
+  }
+
+  const attendeeFilter=(meetConfirm:any)=>{
+    let arr=attendee||[]
+
+    if(meetConfirm=='Pending'){
+      arr=attendee.filter((itm:any)=>itm.meetConfirm=='Pending'||!itm.meetConfirm)
+    }else{
+      arr=attendee.filter((itm:any)=>itm.meetConfirm==meetConfirm)
+    }
+    return arr
+  }
+
+  useEffect(()=>{
+      getDetail()
+      getAttendee()
+  },[])
   return (
     <>
       <PageLayout>
@@ -20,20 +76,21 @@ const EventDetail = () => {
                         <div className="col-span-12 md:col-span-7 lg:col-span-8">
                             <div className="flex flex-col lg:gap-y-3 py-2 lg:py-4">
                             <div className="date_text">
-                                  <h6 className="text-[#EF7A2B] text-[24px] font-[400]"> <span className="mr-1">Wednesday April 03, 2024</span>|<span className="ml-1">Time 8:30 AM - 11:00 AM</span></h6>
+                                  <h6 className="text-[#EF7A2B] text-[24px] font-[400]"> <span className="mr-1">{datepipeModel.datetime(data?.date)}</span>
+                                  {/* |<span className="ml-1">Time 8:30 AM - 11:00 AM</span> */}
+                                  </h6>
                             </div>
                             <div>
-                              <p className="text-[#393C3D] text-[33px] font-[600]"> Please RSVP, Sales Management Meeting</p>
+                              <p className="text-[#393C3D] text-[33px] font-[600]">{data?.title}</p>
                             </div>
                             <div className="flex justify-between items-center">
-                              <p className="flex gap-x-2 items-center"><IoLocationSharp className="text-orange-500 text-2xl lg:text-3xl" /> SAS Nagar, Mohali, Punjab, India.</p>
-                              <p className="lg:mr-20">Event Type: <span className="text-orange-500">Meeting</span></p>
+                              <p className="flex gap-x-2 items-center capitalize"><IoLocationSharp className="text-orange-500 text-2xl lg:text-3xl" />{data?.address}</p>
+                              <p className="lg:mr-20">Event Type: <span className="text-orange-500 capitalize">{data?.type}</span></p>
                             
                             </div>
                             </div>
                             <div className="main_decription flex flex-col lg:gap-y-10 py-8 lg:py-15">
-                                  <p className="text-[#0B0A0A] text-[19px] leading-5 lg:leading-8	 font-[400]">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                  <p className="text-[#0B0A0A] text-[19px] leading-5  lg:leading-8	 font-[400]">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                                  <p className="text-[#0B0A0A] text-[19px] leading-5 lg:leading-8	 font-[400]" dangerouslySetInnerHTML={{__html:data?.description}}></p>
                             </div>
                         </div>
 
@@ -43,9 +100,9 @@ const EventDetail = () => {
                                   <img className="h-28 w-28 rounded-full object-cover " src="/assets/img/event-banner.png" alt="" />
                                 </div>
                                 <div className="teaxings">
-                                    <h6 className="text-[#3F3F3F] text-[18px] font-[700]">Terry Chambells</h6>
+                                    <h6 className="text-[#3F3F3F] text-[18px] font-[700] capitalize">{data?.addedBy?.fullName}</h6>
                                     <div className="flex flex-col gap-y-2 mb-2">
-                                        <p className=""> <span className="relative text-orange-500">Supervisor</span></p>
+                                        <p className=""> <span className="relative text-orange-500 capitalize">{host?.customerRole?.name}</span></p>
                                         <span className="block h-1 w-12 bg-orange-500 "></span>
                                     </div>
                                     <div className="text-[12px] flex flex-col gap-y-1 mt-4">
@@ -62,23 +119,36 @@ const EventDetail = () => {
                                    </div>
 
                                    <div className="mt-6 mb-6">
-                                      <h6 className="text-[#2B91EF] text-[19px] leading-2  lg:leading-6	 font-[600]">YES (05)</h6>
+                                      <h6 className="text-[#2B91EF] text-[19px] leading-2  lg:leading-6	 font-[600]">YES ({attendeeFilter('Yes').length})</h6>
                                       <ul className="mt-3">
-                                        <li className="text-[#3F3F3F] text-[14px]">Terry Chambells</li>
+                                        {attendeeFilter('Yes').map((itm:any)=>{
+                                          return <>
+                                            <li className="text-[#3F3F3F] text-[14px] capitalize">{itm.memberDetails.fullName}</li>
+                                          </>
+                                        })}
+                                      
                                       </ul>
                                    </div>
 
                                     <div className="mt-6 mb-6">
-                                      <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">No (05)</h6>
+                                      <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">No ({attendeeFilter('No').length})</h6>
                                       <ul className="mt-3">
-                                        <li className="text-[#3F3F3F] text-[14px]">Terry Chambells</li>
+                                      {attendeeFilter('No').map((itm:any)=>{
+                                          return <>
+                                            <li className="text-[#3F3F3F] text-[14px] capitalize">{itm.memberDetails.fullName}</li>
+                                          </>
+                                        })}
                                       </ul>
                                    </div>
 
                                     <div className="mt-6 mb-6">
-                                      <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">VIEWED/NO RESPONSE YET (01)</h6>
+                                      <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">VIEWED/NO RESPONSE YET ({attendeeFilter('Pending').length})</h6>
                                       <ul className="mt-3">
-                                        <li className="text-[#3F3F3F] text-[14px]">Terry Chambells</li>
+                                      {attendeeFilter('Pending').map((itm:any)=>{
+                                          return <>
+                                            <li className="text-[#3F3F3F] text-[14px] capitalize">{itm.memberDetails.fullName}</li>
+                                          </>
+                                        })}
                                       </ul>
                                    </div>
                                 
