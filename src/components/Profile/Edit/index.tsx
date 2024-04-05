@@ -55,9 +55,9 @@ const EditProfile = () => {
         payload.id=user._id
         if(!payload.timezone) payload.timezone='America/Los_Angeles'
         if(!payload.country) payload.country='usa'
-        if(payload.category._id) payload.category=payload.category._id
-        if(payload.subCategory._id) payload.subCategory=payload.subCategory._id
-        if(payload.subSubCategory._id) payload.subSubCategory=payload.subSubCategory._id
+        if(payload.category?._id) payload.category=payload.category._id
+        if(payload.subCategory?._id) payload.subCategory=payload.subCategory._id
+        if(payload.subSubCategory?._id) payload.subSubCategory=payload.subSubCategory._id
 
         // if(payload.customerRole?._id) payload.customerRole=payload.customerRole._id
         let multiAddress=value.multiAddress||[]
