@@ -11,6 +11,7 @@ import { BsTrash3 } from "react-icons/bs";
 import Modal from "../components/common/Modal";
 import AddAttendee from "./Events/AddAttendee";
 import { toast } from "react-toastify";
+import Members from "../components/Events/Member";
 
 const EventDetail = () => {
   const [host, setHost]: any = useState()
@@ -18,6 +19,7 @@ const EventDetail = () => {
   const [attendee, setAttendee]: any = useState([])
   const [aloading, setALoader] = useState(false)
   const [isModal, setModal] = useState(false)
+  const [isRModal, setRModal] = useState(false)
   const user: any = crendentialModel.getUser()
   const history = useNavigate()
   const [role, setRole] = useState()
@@ -177,7 +179,7 @@ const EventDetail = () => {
                       </div>
                       <div className="text-[12px] flex flex-col gap-y-1 mt-4">
                         {/* <p className="font-[400]">You Have RSVP’d . Yes to this event</p> */}
-                        {/* <p className="text-[#2B91EF] font-[600]">Change My RSVP</p> */}
+                        <p className="text-[#2B91EF] font-[600] cursor-pointer" onClick={()=>setRModal(true)}>RSVP List</p>
                       </div>
                     </div>
                   </div>
@@ -186,9 +188,13 @@ const EventDetail = () => {
                       <div className="flex flex-col gap-y-4">
 
                         {data?.meetingStatus != 'completed' ? <>
-                          <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={endEvent}>End Meeting</button>
-                          <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg" onClick={markAttendance}>Mark Attendance</button>
-                        <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={()=>setModal(true)}>Add Attendee</button>
+                          
+                        
+                        <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={()=>setModal(true)}>Invite Member</button>
+                        {attendeeFilter('Yes').length?<>
+                         <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg" onClick={markAttendance}>Mark Attendance</button>
+                         <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={endEvent}>End Meeting</button>
+                         </>:<></>}
                         </> : <>
                           <div className="text-red-500">Meeting Ended</div>
                         </>}
@@ -282,7 +288,7 @@ const EventDetail = () => {
 
       {isModal ? <>
         <Modal
-        title="Add Attendee"
+        title="Invite Member"
         result={e=>{
           setModal(false)
         }}
@@ -300,6 +306,21 @@ const EventDetail = () => {
           </>}
         />
       </> : <></>}
+
+      {isRModal ? <>
+            <Modal
+                title="RSVP List"
+                body={<>
+                    <Members
+                        eventId={id}
+                        eventDetail={data}
+                    />
+                </>}
+                result={e => {
+                    setRModal(false)
+                }}
+            />
+        </> : <></>}
 
     </>
   );

@@ -17,7 +17,7 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
     const [tab, setTab] = useState('list')
     const [role, setRole] = useState()
     const user: any = crendentialModel.getUser()
-    const [filters, setFilter] = useState({ page: 1, count: 50, search: '', eventId: eventId, sortBy: '', key: '', sorder: '' })
+    const [filters, setFilter] = useState({ page: 1, count: 50, search: '', eventId: eventId, sortBy: '', key: '', sorder: '',meetConfirm:'Yes' })
 
     const attendPremit = (row: any) => {
         let value = false
@@ -62,13 +62,13 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
             }
         },
         {
-            key: 'attended', name: 'Attended',
+            key: 'isPresent', name: 'Present',
             render: (row: any) => {
                 return <>
                     <label className={`inline-flex items-center cursor-pointer ${attendPremit(row) ? '' : 'opacity-50'}`}>
                         <input type="checkbox" value="" className="sr-only peer"
                             disabled={attendPremit(row) ? false : true}
-                            onChange={e => attend(row)} checked={row.attended} />
+                            onChange={e => attend(row)} checked={row.isPresent} />
                         <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                         <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
                     </label>
@@ -137,9 +137,9 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
     }
 
     const attend = (row: any) => {
-        let attended = row.attended ? false : true
+        let isPresent = row.isPresent ? false : true
         loader(true)
-        ApiClient.put('api/attendees/update', { id: row.id, attended: attended }).then(res => {
+        ApiClient.put('api/attendees/update', { id: row.id, isPresent: isPresent }).then(res => {
             if (res.success) {
                 getData()
             }
@@ -254,20 +254,23 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
                         <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                         <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Connect Meet</span>
                     </label> */}
-                            <label className={`inline-flex items-center cursor-pointer ${attendPremit(row) ? '' : 'opacity-70'}`}>
+                    {/* <div className="text-sm">Registered: Yes</div> */}
+                    <div className="text-sm">Present: {row.isPresent?'Yes':'No'}</div>
+                            {/* <label className={`inline-flex items-center cursor-pointer ${attendPremit(row) ? '' : 'opacity-70'}`}>
                                 <input type="checkbox" value="" className="sr-only peer"
                                     disabled={attendPremit(row) ? false : true}
-                                    onChange={e => attend(row)} checked={row.attended} />
+                                    onChange={e => attend(row)} checked={row.isPresent} />
                                 <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                                <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Attended</span>
-                            </label>
+                                <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Present</span>
+                            </label> */}
 
-                            {deletePremit(row)?<>
+
+                            {/* {deletePremit(row)?<>
                                 <Tooltip placement="top" title="Delete"> <button
                             type="button" onClick={() => deleteItem(row.id)} className='border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl'>
                                     <BsTrash3 />
                                 </button> </Tooltip>
-                            </>:<></>}
+                            </>:<></>} */}
                             
                         </div>
                     </div>
