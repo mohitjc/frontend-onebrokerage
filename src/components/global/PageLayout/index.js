@@ -45,7 +45,7 @@ const PageLayout = ({ children }) => {
   const menus = [
     { name: 'Home', url: '/' },
     { name: 'Projects', url: '/' },
-    { name: 'Makrket', url: '/' },
+    { name: 'Market', url: '/' },
     { name: 'About', url: '/' },
   ]
 
@@ -179,7 +179,7 @@ const PageLayout = ({ children }) => {
 
 
         <footer className="bg-black	py-20">
-              <div className="container items-center  px-4 px-10 mx-auto sm:px-20 md:px-32 lg:px-16">
+              <div className="container items-center  mx-auto">
                 <div className="grid grid-cols-12 gap-4">
                   <div className="col-span-12 lg:col-span-4">
                     <div>
