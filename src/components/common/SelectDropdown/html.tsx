@@ -14,8 +14,8 @@ const Html = ({ options, dynamicStyle = false, className = null,inputValue='', s
 
     return <>
         {theme == 'search' ? <>
-
-            <Select
+    <div className="capitalize">
+    <Select
                 options={options?.map((itm:any) => { return { value: itm.id, label: itm[displayValue] } }) || []}
                 placeholder={placeholder}
                 value={categoryVal()}
@@ -30,6 +30,8 @@ const Html = ({ options, dynamicStyle = false, className = null,inputValue='', s
                 
                 required
             />
+    </div>
+           
 
         </> : <>
             <div className="selectDropdown">

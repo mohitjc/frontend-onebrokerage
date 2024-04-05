@@ -11,6 +11,7 @@ import ImageUpload from '../../common/ImageUpload';
 import ApiClient from '../../../methods/api/apiClient';
 import environment from '../../../environment';
 import { MdDeleteOutline } from "react-icons/md";
+import FormControl from '../../common/FormControl';
 
 
 const Html = ({ handleSubmit, setForm, form, getError, uploadImage, submitted }) => {
@@ -158,24 +159,22 @@ useEffect(()=>{
 
         <div className="grid grid-cols-12 mb-4 gap-4 shadow p-4 mt-6 gap-4">
             <div className="col-span-12 md:col-span-6">
-              <label>Name<span className="star">*</span></label>
-              <input
-                type="text"
-                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
-                value={form.fullName}
-                onChange={e => setForm({ ...form, fullName: e.target.value })}
-                required
+              <FormControl
+              type="text"
+              label="Name"
+              value={form.fullName}
+              onChange={e => setForm({ ...form, fullName: e })}
+              required
               />
             </div>
 
             <div className="col-span-12 md:col-span-6">
-              <label>Profession Title<span className="star">*</span></label>
-              <input
-                type="text"
-                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
-                value={form.profession}
-                onChange={e => setForm({ ...form, profession: e.target.value })}
-                required
+              <FormControl
+              type="text"
+              label="Profession Title"
+              value={form.profession}
+              onChange={e => setForm({ ...form, profession: e })}
+              required
               />
             </div>
 
@@ -422,7 +421,7 @@ useEffect(()=>{
                  options={categories}
                  theme="search"
                />
-               {submitted && !form.category ? <div className="invalid-feedback d-block">Profession Category is Required</div> : <></>}
+               {/* {submitted && !form.category ? <div className="invalid-feedback d-block">Profession Category is Required</div> : <></>} */}
              </div>
  
              <div className="col-span-12 md:col-span-6">

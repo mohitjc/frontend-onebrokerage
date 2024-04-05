@@ -48,6 +48,7 @@ const Signup = () => {
     let eventId=methodModel.getPrams('eventId')
     let groupId=methodModel.getPrams('groupId')
 
+    if(!remember) return
 
     let data:any = {
       role:environment.userRoleId,
@@ -75,7 +76,7 @@ const Signup = () => {
         }else{
           let url = '/login'
           setTimeout(()=>{
-            toast.success(res.message)
+            toast.success("Please verify your email")
           },400)
           history(url);
         }
@@ -183,11 +184,13 @@ const Signup = () => {
             {/* <Link className="sign_up ml-auto text-primary" to="/forgotpassword"> Forgot Password</Link> */}
           </div>
 
-          
+          {submitted&&!remember?<>
+           <div className='text-red-600 text-sm capitalize mt-3'>Please agree our Terms Of Use And Privacy Policy</div>
+           </>:<></>}
 
 
           <div className="mt-8">
-            <button type="submit" disabled={!remember} className="px-4 w-full text-sm font-normal text-white h-12 flex items-center justify-center gap-2 !bg-orange-500 rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed">Sign Up</button>
+            <button type="submit" className="px-4 w-full text-sm font-normal text-white h-12 flex items-center justify-center gap-2 !bg-orange-500 rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed">Sign Up</button>
           </div>
 
           <p className='text-sm mt-3 text-center'>Already have an account? <Link to="/login" className='text-orange-500 text-sm'>Sign In</Link></p>
