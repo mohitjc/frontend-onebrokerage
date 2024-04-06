@@ -7,7 +7,7 @@ import ApiClient from "../methods/api/apiClient";
 import datepipeModel from "../models/datepipemodel";
 import { Tooltip } from "antd";
 import crendentialModel from "../models/credential.model";
-import { BsTrash3 } from "react-icons/bs";
+import { BsCheck, BsCrosshair, BsTrash3 } from "react-icons/bs";
 import Modal from "../components/common/Modal";
 import AddAttendee from "./Events/AddAttendee";
 import { toast } from "react-toastify";
@@ -20,6 +20,7 @@ const EventDetail = () => {
   const [aloading, setALoader] = useState(false)
   const [isModal, setModal] = useState('')
   const [isRModal, setRModal] = useState(false)
+  const [invites, setInvites] = useState([])
   const user: any = crendentialModel.getUser()
   const history = useNavigate()
   const [role, setRole] = useState()
@@ -58,6 +59,18 @@ const EventDetail = () => {
       setALoader(false)
       if (res.success) {
         setAttendee(res.data)
+      }
+    })
+  }
+
+  const getInvites = () => {
+    let f = {
+      eventId: id,
+      joinRequest:'pending'
+    }
+    ApiClient.get('api/attendees/list', f).then(res => {
+      if (res.success) {
+        setInvites(res.data)
       }
     })
   }
@@ -158,6 +171,7 @@ const EventDetail = () => {
     getDetail()
     getRole()
     getAttendee()
+    getInvites()
   }, [])
 
   const requestCheck=()=>{
@@ -184,6 +198,21 @@ const EventDetail = () => {
         toast.success(res.message)
       }
     })
+  }
+
+  const acceptReject=(id:any,joinRequest='')=>{
+    if(window.confirm(`Do you want to ${joinRequest=='accepted'?'Accept':'Reject'} this request`)){
+      loader(true)
+      ApiClient.put('api/accept-reject/request',{id:id,status:joinRequest}).then(res=>{
+        loader(false)
+        if(res.success){
+          toast.success(`Request ${joinRequest} successfully`)
+          getAttendee()
+          getInvites()
+        }
+      })
+    }
+    
   }
 
   return (
@@ -333,6 +362,31 @@ const EventDetail = () => {
                             })}
                           </ul>
                         </div>
+
+                        {addPremit()&&invites.length?<>
+                          <div className="mt-6 mb-6">
+                          <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">Invite Requests ({invites.length})</h6>
+                          <ul className="mt-3">
+                            {invites.map((itm: any) => {
+                              return <>
+                                <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3 gap-3">
+                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?'':'(Guest)'}</span>
+
+                                  {deletePremit(itm) ? <>
+                                    <Tooltip placement="top" title="Accept" className='cursor-pointer ml-auto text-green-500 text-lg'> <span onClick={() => acceptReject(itm.id,'accepted')} >
+                                    <span className="material-symbols-outlined  text-base">done</span>
+                                    </span> </Tooltip>
+                                    <Tooltip placement="top" title="Reject" className='cursor-pointer text-red-500'> <span onClick={() => acceptReject(itm.id,'rejected')} >
+                                    <span className="material-symbols-outlined  text-base">close</span>
+                                    </span> </Tooltip>
+                                  </> : <></>}
+                                </li>
+                              </>
+                            })}
+                          </ul>
+                        </div>
+                        </>:<></>}
+        
                       </>}
 
 
