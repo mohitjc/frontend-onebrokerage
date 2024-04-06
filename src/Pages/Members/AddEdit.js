@@ -57,7 +57,7 @@ const AddEdit = () => {
         let f={
             ...p,
             role:environment.userRoleId,
-            groupId:user?.groupId?._id||'',
+            // groupId:user?.groupId?._id||'',
             isDeleted:false
         }
         ApiClient.get('api/user/members',f).then(res=>{
