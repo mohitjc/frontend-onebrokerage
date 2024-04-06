@@ -306,7 +306,7 @@ const EventDetail = () => {
                         <div className="shine mb-3"></div>
                       </> : <>
                         <div className="mt-6 mb-6">
-                          <h6 className="text-[#2B91EF] text-[19px] leading-2  lg:leading-6	 font-[600]">YES ({attendeeFilter('Yes').length})</h6>
+                          <h6 className="text-green-600 text-[19px] leading-2  lg:leading-6	 font-[600]">YES ({attendeeFilter('Yes').length})</h6>
                           <ul className="mt-3">
                             {attendeeFilter('Yes').map((itm: any) => {
                               return <>
