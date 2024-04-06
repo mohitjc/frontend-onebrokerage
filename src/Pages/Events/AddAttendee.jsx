@@ -133,7 +133,7 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                                         ...users
                                     ]}
                                     onChange={e => {
-                                        if(e.id){
+                                        if(e?.id){
                                             updateMemberAll(i,{...itm,memberId:e.id,email:e.email,fullName:e.fullName})
                                         }else{
                                             updateMemberAll(i,{...itm,memberId:'',email:'',fullName:''})

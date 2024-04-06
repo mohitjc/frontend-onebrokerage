@@ -162,7 +162,7 @@ const AddEdit = () => {
                                     ]}
                                     onChange={e => {
                                         console.log("onChange",e)
-                                        if(e.id){
+                                        if(e?.id){
                                             updateMemberAll(i,{...itm,memberId:e.id,email:e.email,fullName:e.fullName})
                                         }else{
                                             updateMemberAll(i,{...itm,memberId:'',email:'',fullName:''})

@@ -141,7 +141,7 @@ const EventDetail = () => {
   }, [])
 
   const requestCheck=()=>{
-    let value=true
+    let value=false
     if(data?.addedBy?._id!=user._id && !me) value=true
     return value
   }
@@ -152,7 +152,9 @@ const EventDetail = () => {
       groupId:data?.groupId?._id||'',
       memberId:user._id
     }
+    loader(true)
     ApiClient.post('api/event/request',payload).then(res=>{
+      loader(false)
       if(res.success){
 
       }
@@ -254,7 +256,7 @@ const EventDetail = () => {
                             {attendeeFilter('Yes').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails.fullName}</span>
+                                  <span>{itm.memberDetails?.fullName}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -274,7 +276,7 @@ const EventDetail = () => {
                             {attendeeFilter('No').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails.fullName}</span>
+                                  <span>{itm.memberDetails?.fullName}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -293,7 +295,7 @@ const EventDetail = () => {
                             {attendeeFilter('Pending').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails.fullName}</span>
+                                  <span>{itm.memberDetails?.fullName}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
