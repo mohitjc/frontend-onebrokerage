@@ -50,8 +50,12 @@ const Events = () => {
     }
 
     const getData = (p = {}) => {
+        if(!user?.groupId?._id) return
         setLoader(true)
-        let filter = { ...filters, ...p ,addedBy:user._id}
+        let filter = { ...filters, ...p ,
+            // groupId:user.groupId._id
+        }
+     
         ApiClient.get(shared.listApi, filter).then(res => {
             if (res.success) {
                 setData(res.data.map(itm => {
@@ -68,6 +72,15 @@ const Events = () => {
     const clear = () => {
         setFilter({ ...filters, search: '',status:'', page: 1 })
         getData({ search: '', status:'',page: 1 })
+    }
+
+    const filter = (p={}) => {
+        let f={
+            page:1,
+            ...p
+        }
+        setFilter({ ...filters, ...f})
+        getData({ ...f})
     }
 
     const deleteItem = (id) => {
@@ -95,6 +108,8 @@ const Events = () => {
 
 
     const statusChange = (itm) => {
+
+        if(!(isAllow(`edit${shared.check}`)&&itm.addedBy==user._id)) return
         let status = 'active'
         if (itm.status == 'active') status = 'deactive'
 
@@ -153,6 +168,7 @@ const Events = () => {
         pageChange={pageChange}
         deleteItem={deleteItem}
         filters={filters}
+        filter={filter}
         loaging={loaging}
         data={data}
         total={total}

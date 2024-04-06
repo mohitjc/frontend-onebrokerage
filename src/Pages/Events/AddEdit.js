@@ -36,13 +36,14 @@ const AddEdit = () => {
         let url = shared.addApi
         let value = {
             ...form,
-            ...images
+            ...images,
         }
         if (value.id) {
             method = 'put'
             url = shared.editApi
         } else {
             value.addedBy=user._id
+            value.groupId=user?.groupId?._id
             delete value.id
         }
 

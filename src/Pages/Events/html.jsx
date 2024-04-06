@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../../components/global/layout';
 import './style.scss';
 import { Link } from 'react-router-dom';
@@ -10,8 +10,11 @@ import SelectDropdown from '../../components/common/SelectDropdown';
 import statusModel from '../../models/status.model';
 import datepipeModel from '../../models/datepipemodel';
 import shared from "./shared";
+import ApiClient from '../../methods/api/apiClient';
+import crendentialModel from '../../models/credential.model';
 const Html = ({
     sorting,
+    filter,
     edit,
     view,
     statusChange,
@@ -25,7 +28,7 @@ const Html = ({
     isAllow,
     total = { total }
 }) => {
-
+    const user=crendentialModel.getUser()
     const columns = [
         {
             key: 'title', name: 'Title', sort: true,
@@ -39,6 +42,12 @@ const Html = ({
                 return <>
                     {datepipeModel.datetime(row?.date)}
                 </>
+            }
+        },
+        {
+            key: 'groupId', name: 'Group',
+            render: (row) => {
+                return <>{row?.groupDetails?.name}</>
             }
         },
         {
@@ -71,14 +80,14 @@ const Html = ({
                                 <span class="material-symbols-outlined">visibility</span>
                                 </a>
                             </Tooltip>
-                        {isAllow(`edit${shared.check}`) ?
+                        {isAllow(`edit${shared.check}`)&&itm.addedBy==user._id ?
                             <Tooltip placement="top" title="Edit">
                                 <a className="border cursor-pointer border-[#ff7641] hover:opacity-70 rounded-lg bg-[#ff764114] w-10 h-10 !text-primary flex items-center justify-center text-xl" onClick={e => edit(itm.id)}>
                                     <FiEdit3 />
                                 </a>
                             </Tooltip>
                             : <></>}
-                        {isAllow(`delete${shared.check}`) ? <Tooltip placement="top" title="Delete"> <span className='border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl ' onClick={() => deleteItem(itm.id)}>
+                        {isAllow(`delete${shared.check}`)&&itm.addedBy==user._id? <Tooltip placement="top" title="Delete"> <span className='border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl ' onClick={() => deleteItem(itm.id)}>
                             <BsTrash3 />
                         </span> </Tooltip> : <></>}
                     </div>
@@ -86,6 +95,24 @@ const Html = ({
             }
         },
     ]
+
+    const [groups,setGroup]=useState([])
+
+    const getGroups=()=>{
+        let f={
+            page:1,
+            count:50
+        }
+        ApiClient.get('api/group/list',f).then(res=>{
+            if(res.success){
+                setGroup(res.data)
+            }
+        })
+    }
+
+    useEffect(()=>{
+            getGroups()
+    },[])
 
 
     return (
@@ -118,8 +145,27 @@ const Html = ({
 
 
             <div className='shadow-box w-full bg-white rounded-lg mt-6'>
-                <div className='flex p-4 justify-end'>
-                    <div className="flex gap-2">
+                <div className='flex p-4'>
+
+<form class="flex items-center max-w-sm">   
+    <label for="simple-search" class="sr-only">Search</label>
+    <div class="relative w-full">
+        {/* <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
+            </svg>
+        </div> */}
+        <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search branch name..." required />
+    </div>
+    <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+        </svg>
+        <span class="sr-only">Search</span>
+    </button>
+</form>
+
+                    <div className="flex gap-2 ml-auto">
                         <SelectDropdown
                             id="statusDropdown"
                             displayValue="name"
@@ -127,6 +173,15 @@ const Html = ({
                             intialValue={filters.status}
                             result={e => { changestatus(e.value) }}
                             options={statusModel.list}
+                        />
+                        <SelectDropdown
+                            id="statusDropdown"
+                            displayValue="name"
+                            placeholder='All Groups'
+                            intialValue={filters.groupId}
+                            theme="search"
+                            result={e => filter({groupId:e.value})}
+                            options={groups}
                         />
                         {filters.status ? <>
                             <button

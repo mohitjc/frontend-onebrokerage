@@ -23,6 +23,7 @@ const EventDetail = () => {
   const user: any = crendentialModel.getUser()
   const history = useNavigate()
   const [role, setRole] = useState()
+  const [me, setMe] = useState()
   const { id } = useParams()
 
   const getDetail = () => {
@@ -31,7 +32,7 @@ const EventDetail = () => {
       loader(false)
       if (res.success) {
         setData(res.data)
-        getHostDetail(res.data.addedBy._id)
+        if(res.data?.addedBy?._id) getHostDetail(res.data.addedBy._id)
       }
     })
   }
@@ -82,11 +83,18 @@ const EventDetail = () => {
 
   const deletePremit = (row: any) => {
     let value = false
-    if (row?.addedBy === user._id || data?.addedBy._id === user?._id) value = true
+    if (row?.addedBy === user._id || data?.addedBy?._id === user?._id) value = true
     if (role == 'assistant') value = true
     if(data?.meetingStatus == 'completed') value=false
     return value
   }
+
+  const addPremit=()=>{
+    let value=false
+    if(data?.addedBy?._id===user._id) value=true
+    if(role=='assistant')value=true
+    return value
+}
 
 
   const getRole = () => {
@@ -99,6 +107,7 @@ const EventDetail = () => {
       if (res.success) {
         let data = res.data?.[0]
         setRole(data?.memberDetails?.role || 'member')
+        setMe(data)
       }
     })
   }
@@ -130,6 +139,26 @@ const EventDetail = () => {
     getRole()
     getAttendee()
   }, [])
+
+  const requestCheck=()=>{
+    let value=true
+    if(data?.addedBy?._id!=user._id && !me) value=true
+    return value
+  }
+
+  const request=()=>{
+    let payload={
+      eventId:id,
+      groupId:data?.groupId?._id||'',
+      memberId:user._id
+    }
+    ApiClient.post('api/event/request',payload).then(res=>{
+      if(res.success){
+
+      }
+    })
+  }
+
   return (
     <>
       <PageLayout>
@@ -187,13 +216,21 @@ const EventDetail = () => {
                     <div className="borders_data p-6">
                       <div className="flex flex-col gap-y-4">
 
+                        {requestCheck()?<>
+                          <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={request}>Request to Join</button>
+                        </>:<></>}
+
                         {data?.meetingStatus != 'completed' ? <>
                           
-                        
+                        {addPremit()?<>
                         <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={()=>setModal(true)}>Invite Member</button>
+                        </>:<></>}
                         {attendeeFilter('Yes').length?<>
-                         <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg" onClick={markAttendance}>Mark Attendance</button>
+                        {addPremit()?<>
+                          <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg" onClick={markAttendance}>Mark Attendance</button>
                          <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={endEvent}>End Meeting</button>
+                        </>:<></>}
+                      
                          </>:<></>}
                         </> : <>
                           <div className="text-red-500">Meeting Ended</div>
