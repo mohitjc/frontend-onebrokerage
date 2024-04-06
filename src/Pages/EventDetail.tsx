@@ -101,7 +101,7 @@ const EventDetail = () => {
   const deletePremit = (row: any) => {
     let value = false
     if (row?.addedBy === user._id || data?.addedBy?._id === user?._id) value = true
-    if (role == 'assistant') value = true
+    if (role == 'assistant'||role=='meetManager') value = true
     if(data?.meetingStatus == 'completed') value=false
     return value
   }
@@ -109,7 +109,7 @@ const EventDetail = () => {
   const addPremit=()=>{
     let value=false
     if(data?.addedBy?._id===user._id) value=true
-    if(role=='assistant')value=true
+    if(role=='assistant'||role=='meetManager')value=true
     return value
 }
 
@@ -365,7 +365,7 @@ const EventDetail = () => {
 
                         {addPremit()&&invites.length?<>
                           <div className="mt-6 mb-6">
-                          <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">Invite Requests ({invites.length})</h6>
+                          <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">Invitations ({invites.length})</h6>
                           <ul className="mt-3">
                             {invites.map((itm: any) => {
                               return <>
