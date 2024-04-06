@@ -5,7 +5,7 @@ import loader from "../../methods/loader";
 import ApiClient from "../../methods/api/apiClient";
 import environment from "../../environment";
 
-export default function AddAttendee({ id = '', eventId, result = (e) => { },eventDetail }) {
+export default function AddAttendee({ id = '', eventId, guest=false,result = (e) => { },eventDetail }) {
     const user = crendentialModel.getUser()
     const [submitted, setSubmitted] = useState(false)
     const [users, setUsers] = useState([])
@@ -23,16 +23,25 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                 eventId: eventId,
                 attendeeRole: 'member',
                 addedBy: user._id,
-                groupId: user.groupId._id,
+                groupId: eventDetail?.groupId?._id||'',
                 isConnectedMeating: true
             }
            })
         }
+
+       
+
+
         if (value.id) {
             method = 'put'
             url = 'api/attendees/update'
         } else {
             delete value.id
+        }
+
+        if(guest){
+            url='api/add/guest/attendee'
+            value=value.data[0]
         }
 
         loader(true)
@@ -49,7 +58,7 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
     const getUsers=(p={})=>{
         let f={
             ...p,
-            groupId:user.groupId._id,
+            groupId:eventDetail?.groupId?._id||'',
             isDeleted:false
         }
         ApiClient.get('api/members/list',f).then(res=>{
@@ -118,6 +127,18 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                     return <>
                         <div className="grid grid-cols-2 gap-3">
                            
+                            
+                            {guest?<>
+                                <div className="col-md-6">
+                                <FormControl
+                                    type="email"
+                                    label="Email"
+                                    value={itm.email}
+                                    onChange={e => updateMember(i,'email',e)}
+                                    required
+                                />
+                            </div>
+                            </>:<>
                             <div className="col-md-6">
                                 <FormControl
                                     type="select"
@@ -142,17 +163,7 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                                     required
                                 />
                             </div>
-                            {/* {!itm.memberId?<>
-                                <div className="col-md-6">
-                                <FormControl
-                                    type="email"
-                                    label="Email"
-                                    value={itm.email}
-                                    onChange={e => updateMember(i,'email',e)}
-                                    required
-                                />
-                            </div>
-                            </>:<></>} */}
+                            </>}
                            
                             <div className="col-md-6">
                                 <FormControl
@@ -164,23 +175,6 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                                     required
                                 />
                             </div>
-                            {/* <div>
-                            <FormControl
-                                    type="select"
-                                    name="attendeeRole"
-                                    label="Role"
-                                    options={
-                                        [
-                                            { id: 'assistant', name: 'Assistant Group Leader' },
-                                { id: 'meetManager', name: 'Connect Meet Manager' },
-                                            { id: 'member', name: 'Member' },
-                                        ]
-                                    }
-                                    value={itm.attendeeRole}
-                                    onChange={e => updateMember(i,'attendeeRole',e)}
-                                    required
-                                />
-                            </div> */}
                             <div className="col-span-full text-right">
                                 {members.length>1?<>
                                     <button type="button" onClick={()=>removeMember(i)} className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
@@ -198,9 +192,13 @@ export default function AddAttendee({ id = '', eventId, result = (e) => { },even
                     </>
                 })}
 
+                {guest?<></>:<>
                 <div className="text-right mt-3">
                 <button type="button" onClick={addMore} className="text-white bg-orange-400 bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add More</button> 
                 </div>
+                </>}
+
+               
 
                 <div className="text-right mt-3">
 

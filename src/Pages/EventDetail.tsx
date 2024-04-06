@@ -18,7 +18,7 @@ const EventDetail = () => {
   const [data, setData]: any = useState()
   const [attendee, setAttendee]: any = useState([])
   const [aloading, setALoader] = useState(false)
-  const [isModal, setModal] = useState(false)
+  const [isModal, setModal] = useState('')
   const [isRModal, setRModal] = useState(false)
   const user: any = crendentialModel.getUser()
   const history = useNavigate()
@@ -50,7 +50,8 @@ const EventDetail = () => {
 
   const getAttendee = () => {
     let f = {
-      eventId: id
+      eventId: id,
+      joinRequest:''
     }
     setALoader(true)
     ApiClient.get('api/attendees/list', f).then(res => {
@@ -180,7 +181,7 @@ const EventDetail = () => {
     ApiClient.post('api/event/request',payload).then(res=>{
       loader(false)
       if(res.success){
-
+        toast.success(res.message)
       }
     })
   }
@@ -249,7 +250,8 @@ const EventDetail = () => {
                         {data?.meetingStatus != 'completed' ? <>
                           
                         {addPremit()?<>
-                        <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={()=>setModal(true)}>Invite Member</button>
+                        <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={()=>setModal('member')}>Invite Member</button>
+                        <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={()=>setModal('guest')}>Invite Guest</button>
                         </>:<></>}
                         {attendeeFilter('Yes').length?<>
                         {addPremit()?<>
@@ -280,7 +282,7 @@ const EventDetail = () => {
                             {attendeeFilter('Yes').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName}</span>
+                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?'':'(Guest)'}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -300,7 +302,7 @@ const EventDetail = () => {
                             {attendeeFilter('No').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName}</span>
+                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?'':'(Guest)'}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -319,7 +321,7 @@ const EventDetail = () => {
                             {attendeeFilter('Pending').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName}</span>
+                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?'':'(Guest)'}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -351,17 +353,18 @@ const EventDetail = () => {
 
       {isModal ? <>
         <Modal
-        title="Invite Member"
+        title={`Invite ${isModal}`} 
         result={e=>{
-          setModal(false)
+          setModal('')
         }}
           body={<>
             <AddAttendee
               eventDetail={data}
               eventId={id}
+              guest={isModal=='guest'?true:false}
               result={e => {
                 if (e.event == 'submit') {
-                  setModal(false)
+                  setModal('')
                   getAttendee()
                 }
               }}
