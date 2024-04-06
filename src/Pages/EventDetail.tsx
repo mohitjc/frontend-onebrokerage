@@ -215,6 +215,12 @@ const EventDetail = () => {
     
   }
 
+  const meetingStart=()=>{
+    let value=false
+    if(data&& new Date(datepipeModel.datetodatepicker(data.date)).getTime()<=new Date().getTime()) value=true
+    return value
+  }
+
   return (
     <>
       <PageLayout>
@@ -285,7 +291,9 @@ const EventDetail = () => {
                         {attendeeFilter('Yes').length?<>
                         {addPremit()?<>
                           <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg" onClick={markAttendance}>Mark Attendance</button>
+                          {meetingStart()?<>
                          <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={endEvent}>End Meeting</button>
+                          </>:<></>}
                         </>:<></>}
                       
                          </>:<></>}
