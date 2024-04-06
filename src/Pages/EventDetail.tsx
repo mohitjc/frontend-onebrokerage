@@ -24,6 +24,7 @@ const EventDetail = () => {
   const history = useNavigate()
   const [role, setRole] = useState()
   const [me, setMe] = useState()
+  const [member, setMember]:any = useState()
   const { id } = useParams()
 
   const getDetail = () => {
@@ -33,6 +34,8 @@ const EventDetail = () => {
       if (res.success) {
         setData(res.data)
         if(res.data?.addedBy?._id) getHostDetail(res.data.addedBy._id)
+        if(res.data?.groupId?._id) getMember(res.data.groupId._id)
+        
       }
     })
   }
@@ -101,13 +104,29 @@ const EventDetail = () => {
     let f = {
       search: user.email,
       eventId: id,
-      count: 1
+      count: 1,
+      page:1
     }
     ApiClient.get('api/attendees/list', f).then(res => {
       if (res.success) {
         let data = res.data?.[0]
         setRole(data?.memberDetails?.role || 'member')
         setMe(data)
+      }
+    })
+  }
+
+  const getMember = (groupId='') => {
+    let f = {
+      search: user.email,
+      groupId: groupId,
+      count: 1,
+      page:1
+    }
+    ApiClient.get('api/members/list', f).then(res => {
+      if (res.success) {
+        let data = res.data?.[0]
+        setMember(data)
       }
     })
   }
@@ -147,11 +166,16 @@ const EventDetail = () => {
   }
 
   const request=()=>{
+    if(!member){
+      toast.error("You are not a member of this Group")
+      return
+    } 
     let payload={
       eventId:id,
       groupId:data?.groupId?._id||'',
-      memberId:user._id
+      memberId:member._id
     }
+  
     loader(true)
     ApiClient.post('api/event/request',payload).then(res=>{
       loader(false)

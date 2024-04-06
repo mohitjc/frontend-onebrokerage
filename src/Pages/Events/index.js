@@ -12,7 +12,7 @@ import shared from './shared';
 const Events = () => {
     const user = crendentialModel.getUser()
     const searchState = {data:''}
-    const [filters, setFilter] = useState({ page: 1, count: 50, search: '', catType: '' })
+    const [filters, setFilter] = useState({ page: 1, count: 50, search: '' })
     const [data, setData] = useState([])
     const [total, setTotal] = useState(0)
     const [loaging, setLoader] = useState(true)
@@ -53,7 +53,8 @@ const Events = () => {
         if(!user?.groupId?._id) return
         setLoader(true)
         let filter = { ...filters, ...p ,
-            // groupId:user.groupId._id
+            email:user.email,
+            groupId:user.groupId?._id||'',
         }
      
         ApiClient.get(shared.listApi, filter).then(res => {
@@ -70,8 +71,13 @@ const Events = () => {
 
 
     const clear = () => {
-        setFilter({ ...filters, search: '',status:'', page: 1 })
-        getData({ search: '', status:'',page: 1 })
+        let f={
+            groupId:'',
+            search: '',status:'', page: 1,
+
+        }
+        setFilter({ ...filters, ...f })
+        getData({ ...f})
     }
 
     const filter = (p={}) => {
@@ -168,6 +174,7 @@ const Events = () => {
         pageChange={pageChange}
         deleteItem={deleteItem}
         filters={filters}
+        setFilter={setFilter}
         filter={filter}
         loaging={loaging}
         data={data}

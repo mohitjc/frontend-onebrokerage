@@ -23,8 +23,8 @@ const Dashboard = () => {
         let f = {
             ...filters,
             ...p,
-            email: user.email,
-            addedBy: user._id,
+            email:user.email,
+            groupId:user.groupId?._id||'',
         }
         setLoader(true)
         ApiClient.get('api/user-events', f).then((res: any) => {
