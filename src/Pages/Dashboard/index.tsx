@@ -24,7 +24,7 @@ const Dashboard = () => {
             ...filters,
             ...p,
             email:user.email,
-            groupId:user.groupId?._id||'',
+            addedBy:user?._id||'',
         }
         setLoader(true)
         ApiClient.get('api/user-events', f).then((res: any) => {
