@@ -66,8 +66,9 @@ const EventDetail = () => {
         })
 
         setAttendee(data)
-        let ext=data.filter((itm:any)=>itm.email==user.email)
+        let ext=data.find((itm:any)=>itm.email==user.email)
         if(ext){
+          console.log("ext",ext)
           setRole(ext?.memberDetails?.role || 'member')
           setMe(ext)
         }
