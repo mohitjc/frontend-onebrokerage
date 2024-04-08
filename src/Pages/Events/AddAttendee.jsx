@@ -16,6 +16,8 @@ export default function AddAttendee({ id = '', eventId, guest=false,result = (e)
         setSubmitted(true)
         let method = 'post'
         let url = 'api/attendees'
+        
+        
         let value = {
            data:members.map(itm=>{
             return {
@@ -30,7 +32,9 @@ export default function AddAttendee({ id = '', eventId, guest=false,result = (e)
         }
 
        
-
+        let ext=value.data.find(itm=>!itm.memberId)
+    
+        if(ext && !guest) return
 
         if (value.id) {
             method = 'put'
@@ -160,7 +164,8 @@ export default function AddAttendee({ id = '', eventId, guest=false,result = (e)
                                             updateMemberAll(i,{...itm,memberId:'',email:'',fullName:''})
                                         }
                                     }}
-                                    required
+                                    required={true}
+                                    error={submitted&&!itm.memberId?'Member is required':''}
                                 />
                             </div>
                             </>}

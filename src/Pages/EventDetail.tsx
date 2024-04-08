@@ -275,7 +275,7 @@ const EventDetail = () => {
                       <div className="flex flex-col gap-y-4">
 
                         {requestCheck()?<>
-                          <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={request}>Request to Join</button>
+                          <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" disabled={data?.isRequested?true:false} onClick={request}>{data?.isRequested?'Requested':'Request to Join'}</button>
                         </>:<></>}
 
                         {meetingStart()?<>
