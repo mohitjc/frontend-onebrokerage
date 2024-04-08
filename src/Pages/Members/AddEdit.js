@@ -57,12 +57,14 @@ const AddEdit = () => {
         let f={
             ...p,
             role:environment.userRoleId,
-            // groupId:user?.groupId?._id||'',
+            groupId:user?.groupId?._id||'',
             isDeleted:false
         }
         ApiClient.get('api/user/members',f).then(res=>{
             if(res.success){
-                let data=res.data
+                let data=res.data.map(itm=>{
+                    return {...itm,id:itm._id}
+                })
                 data=data.filter(itm=>itm.email!=user.email)
                 setUsers(data)
             }
