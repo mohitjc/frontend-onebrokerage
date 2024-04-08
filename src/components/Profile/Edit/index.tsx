@@ -50,7 +50,7 @@ const EditProfile = () => {
         let value = res.data
         let oarr = Object.keys(form)
         oarr.map(itm => {
-            payload[itm] = value[itm] || ''
+            payload[itm] = value[itm] || null
         })
         payload.id=user._id
         if(!payload.timezone) payload.timezone='America/Los_Angeles'
@@ -82,6 +82,9 @@ const EditProfile = () => {
     let value = { ...form, id: user._id,
       // verifiedGroupLeader:'approved'
      }
+   Object.keys(value).map(itm=>{
+    if(!value[itm]) value[itm]=null
+   })
 
     loader(true)
     ApiClient.put('api/user', value).then(res => {

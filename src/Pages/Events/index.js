@@ -50,7 +50,6 @@ const Events = () => {
     }
 
     const getData = (p = {}) => {
-        if(!user?.groupId?._id) return
         setLoader(true)
         let filter = { ...filters, ...p ,
             email:user.email,
