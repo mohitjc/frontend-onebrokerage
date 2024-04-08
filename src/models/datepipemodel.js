@@ -183,7 +183,11 @@ function getHoursAndMinutes(s, e) {
     var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
 
     let value=''
-    if(hours){
+    if(hours>24){
+        let days=hours/24
+        days=Math.round(days)
+        value=`${days} days`
+    }else if(hours){
         value=`${hours} hours ${minutes?`and ${minutes} minutes`:''}`
     }else{
         value=`${minutes?`${minutes} minutes`:''}`
