@@ -232,7 +232,7 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
     const ListHtml = ({ row }: any) => {
         return <>
 
-            <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+            <ul className={`divide-y divide-gray-200 dark:divide-gray-700 ${row.isPresent?'bg-green-200 text-green-500':''} p-2`}>
                 <li className="pb-3 sm:pb-4">
                     <div className="flex items-center space-x-4 rtl:space-x-reverse">
                         <div className="flex-shrink-0">

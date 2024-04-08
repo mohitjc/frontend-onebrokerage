@@ -370,7 +370,7 @@ useEffect(()=>{
                 options={certificate}
                 theme="search"
               />
-              {submitted && !form.certification ? <div className="invalid-feedback d-block">Certification is Required</div> : <></>}
+              {/* {submitted && !form.certification ? <div className="invalid-feedback d-block">Certification is Required</div> : <></>} */}
             </div>
 
            
@@ -380,10 +380,6 @@ useEffect(()=>{
 
 
           <div className='shadow grid grid-cols-12 gap-4 mb-4 p-4'>
-             
-
-
-
              <div className="col-span-12 md:col-span-6">
                  <label>Skills</label>
                  <MultiSelectDropdown

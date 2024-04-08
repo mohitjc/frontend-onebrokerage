@@ -58,7 +58,20 @@ const EventDetail = () => {
     ApiClient.get('api/attendees/list', f).then(res => {
       setALoader(false)
       if (res.success) {
-        setAttendee(res.data)
+        let data:any=res.data.map((itm:any)=>{
+          return {
+            ...itm,
+            email:itm?.memberDetails?.email||itm.email
+          }
+        })
+
+        setAttendee(data)
+        let ext=data.find((itm:any)=>itm.email==user.email)
+        if(ext){
+          console.log("ext",ext)
+          setRole(ext?.memberDetails?.role || 'member')
+          setMe(ext)
+        }
       }
     })
   }
@@ -101,7 +114,7 @@ const EventDetail = () => {
   const deletePremit = (row: any) => {
     let value = false
     if (row?.addedBy === user._id || data?.addedBy?._id === user?._id) value = true
-    if (role == 'assistant') value = true
+    if (role == 'assistant'||role=='meetManager') value = true
     if(data?.meetingStatus == 'completed') value=false
     return value
   }
@@ -109,26 +122,9 @@ const EventDetail = () => {
   const addPremit=()=>{
     let value=false
     if(data?.addedBy?._id===user._id) value=true
-    if(role=='assistant')value=true
+    if(role=='assistant'||role=='meetManager')value=true
     return value
 }
-
-
-  const getRole = () => {
-    let f = {
-      search: user.email,
-      eventId: id,
-      count: 1,
-      page:1
-    }
-    ApiClient.get('api/attendees/list', f).then(res => {
-      if (res.success) {
-        let data = res.data?.[0]
-        setRole(data?.memberDetails?.role || 'member')
-        setMe(data)
-      }
-    })
-  }
 
   const getMember = (groupId='') => {
     let f = {
@@ -169,7 +165,6 @@ const EventDetail = () => {
 
   useEffect(() => {
     getDetail()
-    getRole()
     getAttendee()
     getInvites()
   }, [])
@@ -213,6 +208,12 @@ const EventDetail = () => {
       })
     }
     
+  }
+
+  const meetingStart=()=>{
+    let value=false
+    if(data&& new Date(datepipeModel.datetodatepicker(data.date)).getTime()<=new Date().getTime()) value=true
+    return value
   }
 
   return (
@@ -285,7 +286,9 @@ const EventDetail = () => {
                         {attendeeFilter('Yes').length?<>
                         {addPremit()?<>
                           <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg" onClick={markAttendance}>Mark Attendance</button>
+                          {meetingStart()?<>
                          <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={endEvent}>End Meeting</button>
+                          </>:<></>}
                         </>:<></>}
                       
                          </>:<></>}
@@ -306,7 +309,7 @@ const EventDetail = () => {
                         <div className="shine mb-3"></div>
                       </> : <>
                         <div className="mt-6 mb-6">
-                          <h6 className="text-[#2B91EF] text-[19px] leading-2  lg:leading-6	 font-[600]">YES ({attendeeFilter('Yes').length})</h6>
+                          <h6 className="text-green-600 text-[19px] leading-2  lg:leading-6	 font-[600]">YES ({attendeeFilter('Yes').length})</h6>
                           <ul className="mt-3">
                             {attendeeFilter('Yes').map((itm: any) => {
                               return <>
@@ -365,7 +368,7 @@ const EventDetail = () => {
 
                         {addPremit()&&invites.length?<>
                           <div className="mt-6 mb-6">
-                          <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">Invite Requests ({invites.length})</h6>
+                          <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">Invitations ({invites.length})</h6>
                           <ul className="mt-3">
                             {invites.map((itm: any) => {
                               return <>
