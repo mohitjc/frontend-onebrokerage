@@ -178,8 +178,8 @@ const PageLayout = ({ children }) => {
         </main>
 
 
-        <footer className="bg-black	py-20">
-              <div className="container items-center  mx-auto">
+        <footer className="bg-black	py-20 px-20">
+              <div className="container items-center mx-auto">
                 <div className="grid grid-cols-12 gap-4">
                   <div className="col-span-12 lg:col-span-4">
                     <div>
