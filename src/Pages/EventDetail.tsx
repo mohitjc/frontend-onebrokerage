@@ -277,6 +277,12 @@ const EventDetail = () => {
                           <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={request}>Request to Join</button>
                         </>:<></>}
 
+                        {meetingStart()?<>
+                          <div className="text-green-500">Meeting Started</div>
+                        </>:<>
+                        <div className="text-red-500">Meeting will start in {datepipeModel.getHoursAndMinutes(new Date().toISOString(),datepipeModel.datetodatepicker(data?.date))}</div>
+                        </>}
+
                         {data?.meetingStatus != 'completed' ? <>
                           
                         {addPremit()?<>
@@ -285,7 +291,10 @@ const EventDetail = () => {
                         </>:<></>}
                         {attendeeFilter('Yes').length?<>
                         {addPremit()?<>
+                        {meetingStart()?<>
                           <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg" onClick={markAttendance}>Mark Attendance</button>
+                        </>:<></>}
+                         
                           {meetingStart()?<>
                          <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={endEvent}>End Meeting</button>
                           </>:<></>}

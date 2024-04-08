@@ -168,9 +168,34 @@ const DaysNo = (s, e) => {
     return Difference_In_Days + 1
 }
 
+function getHoursAndMinutes(s, e) {
+    let startDate=new Date(s)
+    let endDate=new Date(e)
+    // Convert dates to timestamps
+    var startTimestamp = startDate.getTime();
+    var endTimestamp = endDate.getTime();
+
+    // Calculate the difference in milliseconds
+    var difference = Math.abs(endTimestamp - startTimestamp);
+
+    // Convert milliseconds to hours and minutes
+    var hours = Math.floor(difference / (1000 * 60 * 60));
+    var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let value=''
+    if(hours){
+        value=`${hours} hours ${minutes?`and ${minutes} minutes`:''}`
+    }else{
+        value=`${minutes?`${minutes} minutes`:''}`
+    }
+
+    return value;
+}
+
 const datepipeModel = {
     DaysNo,
     date,
+    getHoursAndMinutes,
     stringToDate,
     day,
     datetostring,
