@@ -58,7 +58,19 @@ const EventDetail = () => {
     ApiClient.get('api/attendees/list', f).then(res => {
       setALoader(false)
       if (res.success) {
-        setAttendee(res.data)
+        let data:any=res.data.map((itm:any)=>{
+          return {
+            ...itm,
+            email:itm?.memberDetails?.email||itm.email
+          }
+        })
+
+        setAttendee(data)
+        let ext=data.filter((itm:any)=>itm.email==user.email)
+        if(ext){
+          setRole(ext?.memberDetails?.role || 'member')
+          setMe(ext)
+        }
       }
     })
   }
@@ -113,23 +125,6 @@ const EventDetail = () => {
     return value
 }
 
-
-  const getRole = () => {
-    let f = {
-      search: user.email,
-      eventId: id,
-      count: 1,
-      page:1
-    }
-    ApiClient.get('api/attendees/list', f).then(res => {
-      if (res.success) {
-        let data = res.data?.[0]
-        setRole(data?.memberDetails?.role || 'member')
-        setMe(data)
-      }
-    })
-  }
-
   const getMember = (groupId='') => {
     let f = {
       search: user.email,
@@ -169,7 +164,6 @@ const EventDetail = () => {
 
   useEffect(() => {
     getDetail()
-    getRole()
     getAttendee()
     getInvites()
   }, [])
