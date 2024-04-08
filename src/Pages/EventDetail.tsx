@@ -104,9 +104,10 @@ const EventDetail = () => {
     if (window.confirm("Do you want to End this Event")) {
       loader(true)
       ApiClient.put('api/event/edit', { id: id, meetingStatus: "completed" }).then(res => {
-        loader(false)
         if (res.success) {
           getDetail()
+        }else{
+          loader(false)
         }
       })
     }
@@ -180,7 +181,7 @@ const EventDetail = () => {
     if(!member){
       toast.error("You are not a member of this Group")
       return
-    } 
+    }
     let payload={
       eventId:id,
       groupId:data?.groupId?._id||'',
@@ -191,6 +192,7 @@ const EventDetail = () => {
     ApiClient.post('api/event/request',payload).then(res=>{
       loader(false)
       if(res.success){
+        getDetail()
         toast.success(res.message)
       }
     })
