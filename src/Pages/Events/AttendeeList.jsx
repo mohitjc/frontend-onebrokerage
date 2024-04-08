@@ -85,28 +85,6 @@ export default function AttendeeList({ eventId, eventDetail }) {
                 </>
             }
         },
-        // {
-        //     key: 'role', name: 'Role',
-        //     render: (row) => {
-        //         return <>
-        //             <SelectDropdown
-        //             placeholder="Select Role"
-        //             intialValue={row.attendeeRole}
-        //             disabled={(eventDetail?.addedBy===user._id)?false:true}
-        //             options={
-        //                 [
-        //                     { id: 'assistant', name: 'Assistant Group Leader' },
-        //                         { id: 'meetManager', name: 'Connect Meet Manager' },
-        //                     {id:'member',name:'Member'},
-        //                 ]
-        //             }
-        //             result={e=>{
-        //                 roleUpdate(row,e.value)
-        //             }}
-        //             />
-        //         </>
-        //     }
-        // },
         {
             key: 'createdAt', name: 'Created At',
             render: (row) => {

@@ -12,6 +12,7 @@ import Modal from "../components/common/Modal";
 import AddAttendee from "./Events/AddAttendee";
 import { toast } from "react-toastify";
 import Members from "../components/Events/Member";
+import rolesModel from "../models/roles.model";
 
 const EventDetail = () => {
   const [host, setHost]: any = useState()
@@ -30,7 +31,7 @@ const EventDetail = () => {
 
   const getDetail = () => {
     loader(true)
-    ApiClient.get('api/event/details', { id: id }).then(res => {
+    ApiClient.get('api/event/details', { id: id,email:user?.email }).then(res => {
       loader(false)
       if (res.success) {
         setData(res.data)
@@ -323,7 +324,7 @@ const EventDetail = () => {
                             {attendeeFilter('Yes').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?'':'(Guest)'}</span>
+                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?`(${rolesModel.name(itm.memberDetails.role)})`:'(Guest)'}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -343,7 +344,7 @@ const EventDetail = () => {
                             {attendeeFilter('No').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?'':'(Guest)'}</span>
+                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?`(${rolesModel.name(itm.memberDetails.role)})`:'(Guest)'}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -362,7 +363,7 @@ const EventDetail = () => {
                             {attendeeFilter('Pending').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?'':'(Guest)'}</span>
+                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?`(${rolesModel.name(itm.memberDetails.role)})`:'(Guest)'}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -382,7 +383,7 @@ const EventDetail = () => {
                             {invites.map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3 gap-3">
-                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?'':'(Guest)'}</span>
+                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?`(${rolesModel.name(itm.memberDetails.role)})`:'(Guest)'}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Accept" className='cursor-pointer ml-auto text-green-500 text-lg'> <span onClick={() => acceptReject(itm.id,'accepted')} >

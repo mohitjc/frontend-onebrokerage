@@ -9,6 +9,7 @@ import { Tooltip } from "antd"
 import methodModel from "../../methods/methods"
 import { FiPlus } from "react-icons/fi"
 import AddAttendee from "../../Pages/Events/AddAttendee"
+import rolesModel from "../../models/roles.model"
 
 export default function Members({ eventDetail = '', eventId = '' }: any) {
     const [data, setData] = useState([])
@@ -83,13 +84,7 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
                         placeholder="Select Role"
                         intialValue={row.attendeeRole}
                         disabled={(eventDetail?.addedBy === user._id) ? false : true}
-                        options={
-                            [
-                                { id: 'assistant', name: 'Assistant Group Leader' },
-                                { id: 'meetManager', name: 'Connect Meet Manager' },
-                                { id: 'member', name: 'Member' },
-                            ]
-                        }
+                        options={rolesModel.list}
                         result={(e: any) => {
                             roleUpdate(row, e.value)
                         }}

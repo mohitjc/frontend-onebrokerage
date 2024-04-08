@@ -1,16 +1,17 @@
 const list = [
-    { key: 'subAdmin', name: 'Admin User' },
-    { key: 'user', name: 'User' },
+    { id: 'assistant', name: 'Assistant Group Leader' },
+        { id: 'meetManager', name: 'Connect Meet Manager' },
+    {id:'member',name:'Member'},
 ]
 
-const find = (key) => {
-    let ext = list.find(itm=>itm.key == key)
+const find = (id) => {
+    let ext = list.find(itm=>itm.id == id)
     return ext
 }
 
-const name = (key) => {
-    let ext = list.find(itm=>itm.key == key)
-    return ext?ext.name:key
+const name = (id) => {
+    let ext = list.find(itm=>itm.id == id)
+    return ext?ext.name:id
 }
 
 const rolesModel = { list, find,name }

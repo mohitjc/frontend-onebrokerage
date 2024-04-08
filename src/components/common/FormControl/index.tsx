@@ -152,7 +152,10 @@ export default function FormControl({
                 maxLength={maxlength}
                 minLength={minlength}
                 min={min}
-                onChange={e => onChange(e.target.value)}
+                onChange={e => {
+                    console.log("e",e.target)
+                    onChange(e.target.value)
+                }}
             />
             }
 

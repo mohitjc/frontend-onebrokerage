@@ -11,6 +11,7 @@ import statusModel from '../../models/status.model';
 import datepipeModel from '../../models/datepipemodel';
 import shared from "./shared";
 import ApiClient from '../../methods/api/apiClient';
+import rolesModel from '../../models/roles.model';
 const Html = ({
     sorting,
     edit,
@@ -48,13 +49,7 @@ const Html = ({
                     <SelectDropdown
                     placeholder="Select Role"
                     intialValue={row.role}
-                    options={
-                        [
-                            { id: 'assistant', name: 'Assistant Group Leader' },
-                                { id: 'meetManager', name: 'Connect Meet Manager' },
-                            {id:'member',name:'Member'},
-                        ]
-                    }
+                    options={rolesModel.list}
                     result={e=>{
                         roleUpdate(row,e.value)
                     }}

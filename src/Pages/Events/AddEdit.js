@@ -183,7 +183,9 @@ const AddEdit = () => {
                                 name="date"
                                 label="Event Date"
                                 value={datepipeModel.datetodatepicker(form.date)}
-                                onChange={e => setform({ ...form, date: e })}
+                                onChange={e => {
+                                    setform({ ...form, date: e })
+                                }}
                                 required
                                 error={getDateErrr(form.date)&&submitted?'Entered date is less then Current Date':''}
                             />
