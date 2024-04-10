@@ -22,7 +22,8 @@ const AddEdit = () => {
     const formValidation = [
         { key: 'status', required: true },
         { key: 'type', required: true ,message:'Type is required'},
-        { key: 'timezone', required: true }
+        { key: 'timezone', required: true },
+        { key:'description' , required:true ,message:'Description is required'}
     ]
 
     const timezones=timezoneModel.list
@@ -273,6 +274,7 @@ const AddEdit = () => {
                                 value={form.description}
                                 onChange={e => setform({ ...form, description: e })}
                                 required
+                                error={getError('description')}
                             />
                         </div>
 
