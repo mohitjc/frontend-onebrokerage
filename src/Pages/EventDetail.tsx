@@ -1,7 +1,7 @@
 import { IoLocationSharp } from "react-icons/io5";
 import PageLayout from "../components/global/PageLayout";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams,Link } from "react-router-dom";
 import loader from "../methods/loader";
 import ApiClient from "../methods/api/apiClient";
 import datepipeModel from "../models/datepipemodel";
@@ -222,6 +222,19 @@ const EventDetail = () => {
   return (
     <>
       <PageLayout>
+      <Link to="/event" >
+        <div
+            className="mb-4 cp pt-1 ms-2 pointer"
+            // onClick={() => history.go(-1)}
+          >
+            <span>
+           
+             
+              <i className="fa fa-arrow-left mr-2"></i>
+            </span>
+            Back
+          </div>
+          </Link>
         <div className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
           <div className="container mx-auto">
             <div className="banner-sectin">

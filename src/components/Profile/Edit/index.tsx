@@ -79,7 +79,7 @@ const EditProfile = () => {
     let invalid = formModel.getFormError('profileForm')
     if (invalid) return
 
-    let value = { ...form, id: user._id,
+    let value = { ...form, id: user._id,addedBy: user._id
       // verifiedGroupLeader:'approved'
      }
    Object.keys(value).map(itm=>{
