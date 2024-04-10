@@ -289,7 +289,7 @@ useEffect(()=>{
             <div className="col-span-12 md:col-span-6">
               <label>Zip/Postal Code<span className="star">*</span></label>
               <input
-                type="text"
+                type="number"
                 className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
                 value={form.postal_code}
                 onChange={e => setForm({ ...form, postal_code: e.target.value })}

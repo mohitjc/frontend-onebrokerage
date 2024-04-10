@@ -29,10 +29,11 @@ const Dashboard = () => {
         }
         if(user.customerRole?._id==environment.glRoleId) f.groupId=user.groupId?._id||''
         setLoader(true)
-        ApiClient.get('api/user/group-events', f).then((res: any) => {
+        ApiClient.get('api/user-events', f).then((res: any) => {
             setLoader(false)
             if (res.success) {
-                let data = res?.data?.[0]?.eventDetails || []
+                console.log(res,"res")
+                let data = res?.data || []
                 // let data = res?.data
                 setEvents(data.map((itm: any) => {
                     itm.id = itm._id
