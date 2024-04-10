@@ -9,6 +9,7 @@ import Table from "../../components/Table"
 import loader from "../../methods/loader"
 import methodModel from "../../methods/methods"
 import { useNavigate } from "react-router-dom"
+import environment from "../../environment"
 
 const Dashboard = () => {
     const [events, setEvents] = useState([])
@@ -20,12 +21,13 @@ const Dashboard = () => {
     const history=useNavigate()
 
     const getEvents = (p = {}) => {
-        let f = {
+        let f:any = {
             ...filters,
             ...p,
             email:user.email,
-            addedBy:user?._id||'',
+            // addedBy:user?._id||'',
         }
+        if(user.customerRole?._id==environment.glRoleId) f.groupId=user.groupId?._id||''
         setLoader(true)
         ApiClient.get('api/user/group-events', f).then((res: any) => {
             setLoader(false)
