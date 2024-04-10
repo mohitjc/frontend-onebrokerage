@@ -32,7 +32,7 @@ const Dashboard = () => {
         ApiClient.get('api/user/group-events', f).then((res: any) => {
             setLoader(false)
             if (res.success) {
-                let data = res?.data?.[0]?.eventDetails || []
+                let data = res?.data || []
                 // let data = res?.data
                 setEvents(data.map((itm: any) => {
                     itm.id = itm._id
