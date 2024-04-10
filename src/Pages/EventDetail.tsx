@@ -218,7 +218,7 @@ const EventDetail = () => {
     if(data&& new Date(datepipeModel.datetodatepicker(data.date)).getTime()<=new Date().getTime()) value=true
     return value
   }
-
+console.log(data?.meetingStatus ,"meeting")
   return (
     <>
       <PageLayout>
@@ -292,12 +292,19 @@ const EventDetail = () => {
                         {requestCheck()?<>
                           <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" disabled={data?.isRequested?true:false} onClick={request}>{data?.isRequested?'Requested':'Request to Join'}</button>
                         </>:<></>}
-
-                        {meetingStart()?<>
+{/* 
+                        {meetingStart() ?<>
                           <div className="text-green-500">Meeting Started</div>
                         </>:<>
                         <div className="text-red-500">Meeting will start in {datepipeModel.getHoursAndMinutes(new Date().toISOString(),datepipeModel.datetodatepicker(data?.date))}</div>
-                        </>}
+                        </>} */}
+{data?.meetingStatus !== "completed" ? (
+  meetingStart() ? (
+    <div className="text-green-500">Meeting Started</div>
+  ) : (
+    <div className="text-red-500">Meeting will start in {datepipeModel.getHoursAndMinutes(new Date().toISOString(), datepipeModel.datetodatepicker(data?.date))}</div>
+  )
+) : null}
 
                         {data?.meetingStatus != 'completed' ? <>
                           
