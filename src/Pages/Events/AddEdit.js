@@ -15,7 +15,7 @@ import datepipeModel from "../../models/datepipemodel";
 const AddEdit = () => {
     const { id } = useParams()
     const [images, setImages] = useState({ image: ''});
-    const [form, setform] = useState({ id: '', title: '',type:'', date:'',timezone:'',capacity:'',description:'',deadline:'',externalLink:'',address:'',status: 'active' })
+    const [form, setform] = useState({ id: '', title: '',type:'', date: "",timezone:'',capacity:'',description:'',deadline:'',externalLink:'',address:'',status: 'active' })
     const history = useNavigate()
     const [submitted, setSubmitted] = useState(false)
     const user = crendentialModel.getUser()
@@ -103,14 +103,18 @@ const AddEdit = () => {
     const getDateErrr=(date)=>{
         let value=false
         if(date){
-            if(new Date(date).getTime()<new Date().getTime()){
+            if(new Date(form?.deadline).getTime() > new Date().getTime(form?.date)){
                 value=true
             }
+            // else if(new Date(form?.deadline).getTime() < new Date().getTime()){
+            //     value=true
+            // }
         }
 
         return value
     }
-
+console.log(form?.date,"dateeeeee")
+console.log(form?.deadline,"deadline")
     return <>
         <Layout>
             <form onSubmit={handleSubmit}>
@@ -178,7 +182,7 @@ const AddEdit = () => {
                             />
                         </div>
 
-                        <div className=" mb-3">
+                        {/* <div className=" mb-3">
                             <FormControl
                                 type="datetime-local"
                                 name="date"
@@ -190,7 +194,22 @@ const AddEdit = () => {
                                 required
                                 error={getDateErrr(form.date)&&submitted?'Entered date is less then Current Date':''}
                             />
-                        </div>
+                        </div> */}
+                          <div className="mb-3">
+            <FormControl
+                type="datetime-local"
+                name="date"
+                label="Event Date"
+                value={datepipeModel.datetodatepicker(form.date)}
+                onChange={e => {
+                    setform({ ...form, date: e });
+                    getDateErrr(form.date)
+                }}
+                required
+                min={new Date().toISOString().slice(0, 16)} 
+                // error={getDateErrr(form.date) && submitted ? 'Entered date is less than Current Date' : ''}
+            />
+        </div>
                         <div className=" mb-3 relative">
                             <div className="absolute z-[9] w-full">
                             <FormControl
@@ -227,8 +246,10 @@ const AddEdit = () => {
                                 label="RSVP Deadline"
                                 value={datepipeModel.datetodatepicker(form.deadline||'')}
                                 maxlength="8"
+                                maxDate={form.date}
+                                min={new Date().toISOString().slice(0, 16)} 
                                 onChange={e => setform({ ...form, deadline: e })}
-                                error={getDateErrr(form.deadline)&&submitted?'Entered date is less then Current Date':''}
+                                error={getDateErrr(form.deadline) && submitted ? 'Entered date is greater than Event Date':''}
                                 required
                             />
                         </div>

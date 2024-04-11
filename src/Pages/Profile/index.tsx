@@ -81,14 +81,14 @@ const Profile = () => {
                     </div>
                   
 
-                    <div className=''>
+                    {/* <div className=''>
                       <div className='text_head'>
                         <label className='text-typo text-base font-normal max-w-sm w-full block'>Role</label>
                       </div>
                       <div className='sub_fatch'>
                         <p className='text-sm text-gray-500' >{user.customerRole?.name}</p>
                       </div>
-                    </div>
+                    </div> */}
                   
 
 
@@ -101,7 +101,7 @@ const Profile = () => {
                       </div>
                     </div>
 
-{data?.groupId?<>
+{/* {data?.groupId?<>
   <div className=''>
                       <div className='text_head'>
                         <label className='text-typo text-base font-normal max-w-sm w-full block'>Group</label>
@@ -110,7 +110,30 @@ const Profile = () => {
                         <p className='text-sm text-gray-500' >{data?.groupId?.name||'--'}</p>
                       </div>
                     </div>   
-</>:<></>}
+</>:<></>} */}
+<table>
+  <thead>
+    <th><label className='text-typo text-base font-normal max-w-sm w-full block'>Role</label></th>
+    <th><label className='text-typo text-base font-normal max-w-sm w-full block'>Group</label></th>
+  </thead>
+ <tbody>
+
+ {
+  data?.allGroupDetails?.map((e :any)=>{
+    return(
+      <tr>
+        <td>{e?.role}</td>
+        <td>{e?.groupId?.name}</td>
+      </tr>
+    
+    )
+
+  })
+}
+ </tbody>
+</table>
+
+
                                      
                 </div>
             </div>
