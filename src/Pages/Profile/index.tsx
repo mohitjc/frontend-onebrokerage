@@ -49,20 +49,20 @@ const Profile = () => {
         </div>
 
         <div className='inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white'>
-          <div className='grid items-center grid-cols-12 gap-4'>
+          <div className='grid items-start grid-cols-12 gap-4'>
 
             <div className='col-span-12 md:col-span-3 lg:col-span-2'>
-              <img src={methodModel.userImg(data && data.image)} className="h-28 w-28 mx-auto" />
+              <img src={methodModel.userImg(data && data.image)} className="h-32 w-32 mx-auto" />
             </div>
 
-            <div className='col-span-12 md:col-span-9 lg:col-span-10 pl-5 border-l border-gray-300'>
-                <div className='grid grid-cols-2 gap-4'>
+            <div className='col-span-12 md:col-span-9 lg:col-span-10 pl-5 ml-6 border-l  border-gray-300'>
+                <div className='grid grid-cols-2 gap-4 '>
                    
 
 
                     <div className=''>
                       <div className='text_head'>
-                        <label className='text-typo text-base font-normal max-w-sm w-full block'>Name</label>
+                        <label className='text-typo text-base font-normal max-w-sm w-full block mb-1'>Name</label>
                       </div>
                       <div className='sub_fatch'>
                         <p className='text-sm text-gray-500'>{data && data.fullName}</p>
@@ -73,7 +73,7 @@ const Profile = () => {
 
                     <div className=''>
                       <div className='text_head'>
-                        <label className='text-typo text-base font-normal max-w-sm w-full block'>Email</label>
+                        <label className='text-typo text-base font-normal max-w-sm w-full block mb-1'>Email</label>
                       </div>
                       <div className='sub_fatch'>
                         <p className='text-sm text-gray-500' >{data && data.email}</p>
@@ -83,7 +83,7 @@ const Profile = () => {
 
                     {/* <div className=''>
                       <div className='text_head'>
-                        <label className='text-typo text-base font-normal max-w-sm w-full block'>Role</label>
+                        <label className='text-typo text-base font-normal max-w-sm w-full block mb-1'>Role</label>
                       </div>
                       <div className='sub_fatch'>
                         <p className='text-sm text-gray-500' >{user.customerRole?.name}</p>
@@ -94,47 +94,61 @@ const Profile = () => {
 
                     <div className=''>
                       <div className='text_head'>
-                        <label className='text-typo text-base font-normal max-w-sm w-full block'>Mobile No</label>
+                        <label className='text-typo text-base font-normal max-w-sm w-full block mb-1'>Mobile No</label>
                       </div>
                       <div className='sub_fatch'>
-                        <p className='text-sm text-gray-500'>{String(data.mobileNo?'+'+data.mobileNo:'')}</p>
+                        <p className='text-sm text-gray-500'>{String(data.mobileNo?'+'+data.mobileNo:'N/A')}</p>
                       </div>
                     </div>
 
 {/* {data?.groupId?<>
   <div className=''>
                       <div className='text_head'>
-                        <label className='text-typo text-base font-normal max-w-sm w-full block'>Group</label>
+                        <label className='text-typo text-base font-normal max-w-sm w-full block mb-1'>Group</label>
                       </div>
                       <div className='sub_fatch'>
                         <p className='text-sm text-gray-500' >{data?.groupId?.name||'--'}</p>
                       </div>
                     </div>   
 </>:<></>} */}
-<table>
-  <thead>
-    <th><label className='text-typo text-base font-normal max-w-sm w-full block'>Role</label></th>
-    <th><label className='text-typo text-base font-normal max-w-sm w-full block'>Group</label></th>
-  </thead>
- <tbody>
 
- {
-  data?.allGroupDetails?.map((e :any)=>{
-    return(
-      <tr>
-        <td>{e?.role}</td>
-        <td>{e?.groupId?.name}</td>
-      </tr>
-    
-    )
-
-  })
-}
- </tbody>
-</table>
 
 
                                      
+                </div>
+
+                <div className='mt-8'>
+                  <div className='overflow-auto'>
+                  <table className='w-full'>
+                  <thead className='border-y border-[#EAECF0]'>
+                    <tr className='border-y border-[#EAECF0]'>
+                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block '>Group</label></th>
+                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block '>Role</label></th>
+
+                    </tr>
+                   
+                 
+                  
+                  </thead>
+                <tbody>
+
+                {
+                  data?.allGroupDetails?.map((e :any)=>{
+                    return(
+                      <tr>
+                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'>{e?.groupId?.name}</td>
+                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'>{e?.role}</td>
+
+                      </tr>
+                    
+                    )
+
+                  })
+                }
+                </tbody>
+                </table>
+                </div>
+
                 </div>
             </div>
 

@@ -10,6 +10,9 @@ import loader from "../../methods/loader"
 import methodModel from "../../methods/methods"
 import { useNavigate } from "react-router-dom"
 import environment from "../../environment"
+import { BsPersonGear } from "react-icons/bs"
+import { MdOutlineSystemUpdateAlt } from "react-icons/md"
+import { FaRegCalendarCheck } from "react-icons/fa"
 
 const Dashboard = () => {
     const [events, setEvents] = useState([])
@@ -153,20 +156,23 @@ const Dashboard = () => {
                     <li className="me-2">
                         <span
                             onClick={() => typeFilter('ongoing')}
-                            className={`cursor-pointer ${filters.type == 'ongoing' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
-                        >Ongoing</span>
+                            className={`cursor-pointer flex items-center gap-2 ${filters.type == 'ongoing' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+                        ><BsPersonGear />
+                        Ongoing</span>
                     </li>
                     <li className="me-2">
                         <span
                             onClick={() => typeFilter('upcoming')}
-                            className={`cursor-pointer ${filters.type == 'upcoming' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
-                        >Upcoming</span>
+                            className={`cursor-pointer flex items-center gap-2 ${filters.type == 'upcoming' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+                        > <MdOutlineSystemUpdateAlt />
+                        Upcoming</span>
                     </li>
                     <li className="me-2">
                         <span
                             onClick={() => typeFilter('completed')}
-                            className={`cursor-pointer ${filters.type == 'completed' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
-                        >Completed</span>
+                            className={`cursor-pointer flex items-center gap-2 ${filters.type == 'completed' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+                        ><FaRegCalendarCheck />
+                        Completed</span>
                     </li>
                 </ul>
             </div>
