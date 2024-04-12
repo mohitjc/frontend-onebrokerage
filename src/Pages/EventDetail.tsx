@@ -13,6 +13,8 @@ import AddAttendee from "./Events/AddAttendee";
 import { toast } from "react-toastify";
 import Members from "../components/Events/Member";
 import rolesModel from "../models/roles.model";
+import { FiPrinter } from "react-icons/fi";
+import { MdOutlineShare } from "react-icons/md";
 
 const EventDetail = () => {
   const [host, setHost]: any = useState()
@@ -219,10 +221,19 @@ const EventDetail = () => {
     return value
   }
   console.log(data?.qrCode, "qrCode")
-  const handlePrint = () => {
-    const printWindow = window.open(data?.qrCode, '_blank'); 
-   
-  };
+  function handlePrint() {
+    const imgElement = document.createElement("img");
+    imgElement.src = data?.qrCode;
+    const printWindow = window.open("", "_blank") as Window;
+    if (printWindow) {
+        printWindow.document.write(`<html><head><title>Print Image</title></head><body style='margin: 0; text-align: center;'><img src='${data?.qrCode}' style='max-width: 100%; max-height: 100%;'></body></html>`);
+        printWindow.document.close();
+        printWindow.print();
+        printWindow.close();
+    } else {
+        console.error("Failed to open print window.");
+    }
+}
   return (
     <>
       <PageLayout>
@@ -433,16 +444,29 @@ const EventDetail = () => {
                     </div>
 
                   </div>
+
+
+                  <div className="md:mt-8 lg:mt-10">
+                      <div className="borders_data p-6 flex items-center justify-between gap-x-4">
+                        {data?.qrCode && data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager"? <>
+                          <div>
+                            <img className="w-full" src={data?.qrCode}></img>
+                          </div>
+                      <div>
+                        
+                      <div className="flex flex-col items-center justify-center gap-y-4">
+                          <button className="bg-[#EF7A2B] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" onClick={handlePrint}><FiPrinter /> Print</button>
+                          <button className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl"><MdOutlineShare />Share</button>
+                        </div>
+                      </div>
+                    
+                      </>  : ""}
+
+                      </div>
+                  </div>
                 </div>
-                <></>
-                {data?.qrCode && data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager"? <>
-                  <div style={{width: "100px"}}>
-                  <img src={data?.qrCode}></img>
-                </div>
-                <div> <button onClick={handlePrint}>Print</button></div>
-                <button >Share</button>
                
-                </>  : ""}
+                
 
 
               </div>

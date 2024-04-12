@@ -51,28 +51,29 @@ const Login = () => {
       if(email) setUsername(email)
   }, [])
 
-  console.log(resp,"email")
-  const setLogin=(data:any)=>{
-    console.log(data?.email,"dataaaaaaaaa")
+  const setLogin = async (data: any) => {
 
     localStorage.setItem('token', data.access_token)
     crendentialModel.setUser(data)
     let url = '/profile'
-    let eventId=methodModel.getPrams('eventId')
-    if(eventId){
+    let eventId = methodModel.getPrams('eventId')
+    if (eventId) {
 
-      ApiClient.get(`api/attandance?email=${data?.email}&eventId=${eventId}`).then(res=>{
-        if(res.success){
-          // url=`/dashboard?eventId=${eventId}`
-          url = `/event/detail/${eventId}`
-         
+        try {
+            const res = await ApiClient.get(`api/attandance?email=${data?.email}&eventId=${eventId}`);
+            console.log(res.success, "res.success");
+            if (res.success === true) {
+                url = `/thanku`
+            }
+        } catch (error) {
+            console.error("Error fetching attendance:", error);
         }
-    })
-    }
-    // if(eventId) url=`/dashboard?eventId=${eventId}`
-    history(url);
-  }
 
+    }
+    history(url);
+}
+
+  
   const hendleSubmit = (e:any) => {
     e.preventDefault()
     let data:any = {
