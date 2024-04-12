@@ -100,21 +100,17 @@ const AddEdit = () => {
         return submitted?methodModel.getError(key, form, formValidation)?.message:''
     }
 
-    const getDateErrr=(date)=>{
+    const getDateErrr=(start,end=new Date())=>{
         let value=false
-        if(date){
-            if(new Date(form?.deadline).getTime() > new Date().getTime(form?.date)){
+        if(start&&end){
+            if(new Date(start).getTime() < new Date(end).getTime()){
                 value=true
             }
-            // else if(new Date(form?.deadline).getTime() < new Date().getTime()){
-            //     value=true
-            // }
         }
 
         return value
     }
-console.log(form?.date,"dateeeeee")
-console.log(form?.deadline,"deadline")
+
     return <>
         <Layout>
             <form onSubmit={handleSubmit}>
@@ -203,11 +199,9 @@ console.log(form?.deadline,"deadline")
                 value={datepipeModel.datetodatepicker(form.date)}
                 onChange={e => {
                     setform({ ...form, date: e });
-                    getDateErrr(form.date)
                 }}
                 required
-                min={new Date().toISOString().slice(0, 16)} 
-                // error={getDateErrr(form.date) && submitted ? 'Entered date is less than Current Date' : ''}
+                error={getDateErrr(form.date) && submitted ? 'Entered date is less than Current Date' : ''}
             />
         </div>
                         <div className=" mb-3 relative">
@@ -247,9 +241,8 @@ console.log(form?.deadline,"deadline")
                                 value={datepipeModel.datetodatepicker(form.deadline||'')}
                                 maxlength="8"
                                 maxDate={form.date}
-                                min={new Date().toISOString().slice(0, 16)} 
                                 onChange={e => setform({ ...form, deadline: e })}
-                                error={getDateErrr(form.deadline) && submitted ? 'Entered date is greater than Event Date':''}
+                                error={getDateErrr(form.date,form.deadline) && submitted ? 'Entered date is greater than Event Date':''}
                                 required
                             />
                         </div>
