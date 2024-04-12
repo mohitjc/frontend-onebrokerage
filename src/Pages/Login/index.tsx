@@ -50,13 +50,15 @@ const Login = () => {
       let email=methodModel.getPrams('email')
       if(email) setUsername(email)
   }, [])
-
+  let attendance = methodModel.getPrams('attendance')
+  console.log(attendance,"attendance")
   const setLogin = async (data: any) => {
 
     localStorage.setItem('token', data.access_token)
     crendentialModel.setUser(data)
     let url = '/profile'
     let eventId = methodModel.getPrams('eventId')
+   
     if (eventId) {
 
         try {
@@ -114,10 +116,59 @@ const Login = () => {
       loader(false)
     })
   };
+  const handleAttendence =(e: any)=>{
+    e.preventDefault()
+    let eventId = methodModel.getPrams('eventId')
+    ApiClient.get(`api/attandance?email=${username}&eventId=${eventId}`).then(async res => {
+     
+      if (res.success == true) {
+        let url = `/thanku`
+        history(url);
+        }
+       
+       
+    
+    }
+  )
+  };
+    // if (eventId) {
+
+    //     // try {
+    //     //     const res =  ApiClient.get(`api/attandance?email=${data?.email}&eventId=${eventId}`);
+    //     //     if (res?.success  === true) {
+    //     //     let url = `/thanku`
+    //     //     }
+    //     // } catch (error) {
+    //     //     console.error("Error fetching attendance:", error);
+    //     // }
+
+
+    // }
+  
   return (
     <>
       <AuthLayout>
-              <form onSubmit={hendleSubmit}>
+        {attendance === "true" ?   <form onSubmit={handleAttendence}>
+                  <div>
+                  <input
+                    type="email"
+                    className="shadow-box bg-white mb-6 w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
+                    placeholder="Email address"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                  </div>
+                  <div className="mt-8">
+                    {/* <label><input type="checkbox" checked={remember} onChange={(e)=>setRemember(e.target.checked)} className="mr-2" /> Remember Me</label> */}
+                    <button
+                      type="submit"
+                      className="!px-4 w-full text-sm font-normal text-white h-11 flex items-center justify-center gap-2 !bg-orange-500 rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed">
+                     Mark Attendence
+                    </button>
+                  </div>
+                </form> :  
+                  <form onSubmit={hendleSubmit}>
                   <h4 className="text-typo mb-6 text-2xl font-medium">
                     Sign in
                   </h4>
@@ -156,6 +207,7 @@ const Login = () => {
                     )}
                   </div>
                   </>:<>
+              
                   <p className="mb-2">OTP sent on email</p>
                   <input
                     type="text"
@@ -167,6 +219,8 @@ const Login = () => {
                     onChange={(e) => setOTP(e.target.value)}
                     required
                   />
+                  
+                 
                   </>}
                   
                   <div className='flex'>
@@ -182,7 +236,10 @@ const Login = () => {
                     </button>
                   </div>
                   <p className='text-sm mt-3 text-center'>Don't have an account? <Link to="/signup" className='text-orange-500 text-sm'>Sign Up</Link></p>
-                </form>
+                </form>}
+           
+
+              
       </AuthLayout>
     </>
   );

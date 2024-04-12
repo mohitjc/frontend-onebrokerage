@@ -24,13 +24,14 @@ const EventDetail = () => {
   const [isModal, setModal] = useState('')
   const [isRModal, setRModal] = useState(false)
   const [invites, setInvites] = useState([])
+  const [attendeesGroup , setattendeesGroup] = useState([])
   const user: any = crendentialModel.getUser()
   const history = useNavigate()
   const [role, setRole] = useState()
   const [me, setMe] = useState()
   const [member, setMember]: any = useState()
   const { id } = useParams()
-
+console.log(attendeesGroup,"attendeesGroup")
   const getDetail = () => {
     loader(true)
     ApiClient.get('api/event/details', { id: id, email: user?.email }).then(res => {
@@ -90,6 +91,18 @@ const EventDetail = () => {
       }
     })
   }
+
+
+
+  const getAttendeesGroupPair  = () => {
+    ApiClient.get(`api/event/groups?eventId=${id}`).then(res => {
+      if (res.success) {
+        setattendeesGroup(res?.data)
+      }
+    })
+  }
+
+
 
   const attendeeFilter = (meetConfirm: any) => {
     let arr = attendee || []
@@ -171,6 +184,7 @@ const EventDetail = () => {
     getDetail()
     getAttendee()
     getInvites()
+    getAttendeesGroupPair()
   }, [])
 
   const requestCheck = () => {
@@ -445,10 +459,10 @@ const EventDetail = () => {
 
                   </div>
 
-
+                  {data?.qrCode && data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager"? <>
                   <div className="md:mt-8 lg:mt-10">
                       <div className="borders_data p-6 flex items-center justify-between gap-x-4">
-                        {data?.qrCode && data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager"? <>
+                       
                           <div>
                             <img className="w-full" src={data?.qrCode}></img>
                           </div>
@@ -456,14 +470,18 @@ const EventDetail = () => {
                         
                       <div className="flex flex-col items-center justify-center gap-y-4">
                           <button className="bg-[#EF7A2B] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" onClick={handlePrint}><FiPrinter /> Print</button>
-                          <button className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl"><MdOutlineShare />Share</button>
+                          <button className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl"  onClick={() => window.open(data?.qrCode, '_blank')}><MdOutlineShare />Share</button>
                         </div>
                       </div>
                     
-                      </>  : ""}
+                    
 
                       </div>
                   </div>
+                  </>  : ""}
+
+
+                  
                 </div>
                
                 
