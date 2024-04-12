@@ -1,7 +1,7 @@
 import { IoLocationSharp } from "react-icons/io5";
 import PageLayout from "../components/global/PageLayout";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams,Link } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import loader from "../methods/loader";
 import ApiClient from "../methods/api/apiClient";
 import datepipeModel from "../models/datepipemodel";
@@ -26,18 +26,18 @@ const EventDetail = () => {
   const history = useNavigate()
   const [role, setRole] = useState()
   const [me, setMe] = useState()
-  const [member, setMember]:any = useState()
+  const [member, setMember]: any = useState()
   const { id } = useParams()
 
   const getDetail = () => {
     loader(true)
-    ApiClient.get('api/event/details', { id: id,email:user?.email }).then(res => {
+    ApiClient.get('api/event/details', { id: id, email: user?.email }).then(res => {
       loader(false)
       if (res.success) {
         setData(res.data)
-        if(res.data?.addedBy?._id) getHostDetail(res.data.addedBy._id)
-        if(res.data?.groupId?._id) getMember(res.data.groupId._id)
-        
+        if (res.data?.addedBy?._id) getHostDetail(res.data.addedBy._id)
+        if (res.data?.groupId?._id) getMember(res.data.groupId._id)
+
       }
     })
   }
@@ -53,23 +53,23 @@ const EventDetail = () => {
   const getAttendee = () => {
     let f = {
       eventId: id,
-      joinRequest:''
+      joinRequest: ''
     }
     setALoader(true)
     ApiClient.get('api/attendees/list', f).then(res => {
       setALoader(false)
       if (res.success) {
-        let data:any=res.data.map((itm:any)=>{
+        let data: any = res.data.map((itm: any) => {
           return {
             ...itm,
-            email:itm?.memberDetails?.email||itm.email
+            email: itm?.memberDetails?.email || itm.email
           }
         })
 
         setAttendee(data)
-        let ext=data.find((itm:any)=>itm.email==user.email)
-        if(ext){
-          console.log("ext",ext)
+        let ext = data.find((itm: any) => itm.email == user.email)
+        if (ext) {
+          console.log("ext", ext)
           setRole(ext?.memberDetails?.role || 'member')
           setMe(ext)
         }
@@ -80,7 +80,7 @@ const EventDetail = () => {
   const getInvites = () => {
     let f = {
       eventId: id,
-      joinRequest:'pending'
+      joinRequest: 'pending'
     }
     ApiClient.get('api/attendees/list', f).then(res => {
       if (res.success) {
@@ -106,7 +106,7 @@ const EventDetail = () => {
       ApiClient.put('api/event/edit', { id: id, meetingStatus: "completed" }).then(res => {
         if (res.success) {
           getDetail()
-        }else{
+        } else {
           loader(false)
         }
       })
@@ -116,24 +116,24 @@ const EventDetail = () => {
   const deletePremit = (row: any) => {
     let value = false
     if (row?.addedBy === user._id || data?.addedBy?._id === user?._id) value = true
-    if (role == 'assistant'||role=='meetManager') value = true
-    if(data?.meetingStatus == 'completed') value=false
+    if (role == 'assistant' || role == 'meetManager') value = true
+    if (data?.meetingStatus == 'completed') value = false
     return value
   }
 
-  const addPremit=()=>{
-    let value=false
-    if(data?.addedBy?._id===user._id) value=true
-    if(role=='assistant'||role=='meetManager')value=true
+  const addPremit = () => {
+    let value = false
+    if (data?.addedBy?._id === user._id) value = true
+    if (role == 'assistant' || role == 'meetManager') value = true
     return value
-}
+  }
 
-  const getMember = (groupId='') => {
+  const getMember = (groupId = '') => {
     let f = {
       search: user.email,
       groupId: groupId,
       count: 1,
-      page:1
+      page: 1
     }
     ApiClient.get('api/members/list', f).then(res => {
       if (res.success) {
@@ -155,11 +155,11 @@ const EventDetail = () => {
     }
   }
 
-  const markAttendance=()=>{
+  const markAttendance = () => {
     loader(true)
-    ApiClient.post('api/sentEmail',{eventId:id}).then(res=>{
+    ApiClient.post('api/sentEmail', { eventId: id }).then(res => {
       loader(false)
-      if(res.success){
+      if (res.success) {
         toast.success(res.message)
       }
     })
@@ -171,70 +171,74 @@ const EventDetail = () => {
     getInvites()
   }, [])
 
-  const requestCheck=()=>{
-    let value=false
-    if(data?.addedBy?._id!=user._id && !me) value=true
+  const requestCheck = () => {
+    let value = false
+    if (data?.addedBy?._id != user._id && !me) value = true
     return value
   }
 
-  const request=()=>{
-    if(!member){
+  const request = () => {
+    if (!member) {
       toast.error("You are not a member of this Group")
       return
     }
-    let payload={
-      eventId:id,
-      groupId:data?.groupId?._id||'',
-      memberId:member._id
+    let payload = {
+      eventId: id,
+      groupId: data?.groupId?._id || '',
+      memberId: member._id
     }
-  
+
     loader(true)
-    ApiClient.post('api/event/request',payload).then(res=>{
+    ApiClient.post('api/event/request', payload).then(res => {
       loader(false)
-      if(res.success){
+      if (res.success) {
         getDetail()
         toast.success(res.message)
       }
     })
   }
 
-  const acceptReject=(id:any,joinRequest='')=>{
-    if(window.confirm(`Do you want to ${joinRequest=='accepted'?'Accept':'Reject'} this request`)){
+  const acceptReject = (id: any, joinRequest = '') => {
+    if (window.confirm(`Do you want to ${joinRequest == 'accepted' ? 'Accept' : 'Reject'} this request`)) {
       loader(true)
-      ApiClient.put('api/accept-reject/request',{id:id,status:joinRequest}).then(res=>{
+      ApiClient.put('api/accept-reject/request', { id: id, status: joinRequest }).then(res => {
         loader(false)
-        if(res.success){
+        if (res.success) {
           toast.success(`Request ${joinRequest} successfully`)
           getAttendee()
           getInvites()
         }
       })
     }
-    
+
   }
 
-  const meetingStart=()=>{
-    let value=false
-    if(data&& new Date(datepipeModel.datetodatepicker(data.date)).getTime()<=new Date().getTime()) value=true
+  const meetingStart = () => {
+    let value = false
+    if (data && new Date(datepipeModel.datetodatepicker(data.date)).getTime() <= new Date().getTime()) value = true
     return value
   }
-console.log(data?.meetingStatus ,"meeting")
+  console.log(data?.qrCode, "qrCode")
+  const handlePrint = () => {
+    const printWindow = window.open(data?.qrCode, '_blank'); 
+   
+  };
   return (
     <>
       <PageLayout>
-      <Link to="/event" >
-        <div
+        <Link to="/event" >
+          <div
             className="mb-4 cp pt-1 ms-2 pointer"
-            // onClick={() => history.go(-1)}
+          // onClick={() => history.go(-1)}
           >
             <span>
-           
-             
+
+
               <i className="fa fa-arrow-left mr-2"></i>
             </span>
             Back
           </div>
-          </Link>
+        </Link>
         <div className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
           <div className="container mx-auto">
             <div className="banner-sectin">
@@ -281,7 +285,7 @@ console.log(data?.meetingStatus ,"meeting")
                       </div>
                       <div className="text-[12px] flex flex-col gap-y-1 mt-4">
                         {/* <p className="font-[400]">You Have RSVP’d . Yes to this event</p> */}
-                        <p className="text-[#2B91EF] font-[600] cursor-pointer" onClick={()=>setRModal(true)}>RSVP List</p>
+                        <p className="text-[#2B91EF] font-[600] cursor-pointer" onClick={() => setRModal(true)}>RSVP List</p>
                       </div>
                     </div>
                   </div>
@@ -289,46 +293,46 @@ console.log(data?.meetingStatus ,"meeting")
                     <div className="borders_data p-6">
                       <div className="flex flex-col gap-y-4">
 
-                        {requestCheck()?<>
-                          <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" disabled={data?.isRequested?true:false} onClick={request}>{data?.isRequested?'Requested':'Request to Join'}</button>
-                        </>:<></>}
-{/* 
+                        {requestCheck() ? <>
+                          <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" disabled={data?.isRequested ? true : false} onClick={request}>{data?.isRequested ? 'Requested' : 'Request to Join'}</button>
+                        </> : <></>}
+                        {/* 
                         {meetingStart() ?<>
                           <div className="text-green-500">Meeting Started</div>
                         </>:<>
                         <div className="text-red-500">Meeting will start in {datepipeModel.getHoursAndMinutes(new Date().toISOString(),datepipeModel.datetodatepicker(data?.date))}</div>
                         </>} */}
-{data?.meetingStatus !== "completed" ? (
-  meetingStart() ? (
-    <div className="text-green-500">Meeting Started</div>
-  ) : (
-    <div className="text-red-500">Meeting will start in {datepipeModel.getHoursAndMinutes(new Date().toISOString(), datepipeModel.datetodatepicker(data?.date))}</div>
-  )
-) : null}
+                        {data?.meetingStatus !== "completed" ? (
+                          meetingStart() ? (
+                            <div className="text-green-500">Meeting Started</div>
+                          ) : (
+                            <div className="text-red-500">Meeting will start in {datepipeModel.getHoursAndMinutes(new Date().toISOString(), datepipeModel.datetodatepicker(data?.date))}</div>
+                          )
+                        ) : null}
 
                         {data?.meetingStatus != 'completed' ? <>
-                          
-                        {addPremit()?<>
-                        <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={()=>setModal('member')}>Invite Member</button>
-                        <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={()=>setModal('guest')}>Invite Guest</button>
-                        </>:<></>}
-                        {attendeeFilter('Yes').length?<>
-                        {addPremit()?<>
-                        {meetingStart()?<>
-                          <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg" onClick={markAttendance}>Mark Attendance</button>
-                        </>:<></>}
-                         
-                          {meetingStart()?<>
-                         <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={endEvent}>End Meeting</button>
-                          </>:<></>}
-                        </>:<></>}
-                      
-                         </>:<></>}
+
+                          {addPremit() ? <>
+                            <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={() => setModal('member')}>Invite Member</button>
+                            <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={() => setModal('guest')}>Invite Guest</button>
+                          </> : <></>}
+                          {attendeeFilter('Yes').length ? <>
+                            {addPremit() ? <>
+                              {meetingStart() ? <>
+                                <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg" onClick={markAttendance}>Mark Attendance</button>
+                              </> : <></>}
+
+                              {meetingStart() ? <>
+                                <button className="bg-[#46454E] py-3 px-2 text-center text-white rounded-lg" onClick={endEvent}>End Meeting</button>
+                              </> : <></>}
+                            </> : <></>}
+
+                          </> : <></>}
                         </> : <>
                           <div className="text-red-500">Meeting Ended</div>
                         </>}
 
-                        
+
                       </div>
 
 
@@ -346,7 +350,7 @@ console.log(data?.meetingStatus ,"meeting")
                             {attendeeFilter('Yes').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?`(${rolesModel.name(itm.memberDetails.role)})`:'(Guest)'}</span>
+                                  <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -366,7 +370,7 @@ console.log(data?.meetingStatus ,"meeting")
                             {attendeeFilter('No').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?`(${rolesModel.name(itm.memberDetails.role)})`:'(Guest)'}</span>
+                                  <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -385,7 +389,7 @@ console.log(data?.meetingStatus ,"meeting")
                             {attendeeFilter('Pending').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?`(${rolesModel.name(itm.memberDetails.role)})`:'(Guest)'}</span>
+                                  <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -398,30 +402,30 @@ console.log(data?.meetingStatus ,"meeting")
                           </ul>
                         </div>
 
-                        {addPremit()&&invites.length?<>
+                        {addPremit() && invites.length ? <>
                           <div className="mt-6 mb-6">
-                          <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">Invitations ({invites.length})</h6>
-                          <ul className="mt-3">
-                            {invites.map((itm: any) => {
-                              return <>
-                                <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3 gap-3">
-                                  <span>{itm.memberDetails?.fullName||itm?.fullName} {itm.memberDetails?.fullName?`(${rolesModel.name(itm.memberDetails.role)})`:'(Guest)'}</span>
+                            <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">Invitations ({invites.length})</h6>
+                            <ul className="mt-3">
+                              {invites.map((itm: any) => {
+                                return <>
+                                  <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3 gap-3">
+                                    <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span>
 
-                                  {deletePremit(itm) ? <>
-                                    <Tooltip placement="top" title="Accept" className='cursor-pointer ml-auto text-green-500 text-lg'> <span onClick={() => acceptReject(itm.id,'accepted')} >
-                                    <span className="material-symbols-outlined  text-base">done</span>
-                                    </span> </Tooltip>
-                                    <Tooltip placement="top" title="Reject" className='cursor-pointer text-red-500'> <span onClick={() => acceptReject(itm.id,'rejected')} >
-                                    <span className="material-symbols-outlined  text-base">close</span>
-                                    </span> </Tooltip>
-                                  </> : <></>}
-                                </li>
-                              </>
-                            })}
-                          </ul>
-                        </div>
-                        </>:<></>}
-        
+                                    {deletePremit(itm) ? <>
+                                      <Tooltip placement="top" title="Accept" className='cursor-pointer ml-auto text-green-500 text-lg'> <span onClick={() => acceptReject(itm.id, 'accepted')} >
+                                        <span className="material-symbols-outlined  text-base">done</span>
+                                      </span> </Tooltip>
+                                      <Tooltip placement="top" title="Reject" className='cursor-pointer text-red-500'> <span onClick={() => acceptReject(itm.id, 'rejected')} >
+                                        <span className="material-symbols-outlined  text-base">close</span>
+                                      </span> </Tooltip>
+                                    </> : <></>}
+                                  </li>
+                                </>
+                              })}
+                            </ul>
+                          </div>
+                        </> : <></>}
+
                       </>}
 
 
@@ -430,6 +434,15 @@ console.log(data?.meetingStatus ,"meeting")
 
                   </div>
                 </div>
+                <></>
+                {data?.qrCode && data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager"? <>
+                  <div style={{width: "100px"}}>
+                  <img src={data?.qrCode}></img>
+                </div>
+                <div> <button onClick={handlePrint}>Print</button></div>
+                <button >Share</button>
+               
+                </>  : ""}
 
 
               </div>
@@ -442,15 +455,15 @@ console.log(data?.meetingStatus ,"meeting")
 
       {isModal ? <>
         <Modal
-        title={`Invite ${isModal}`} 
-        result={e=>{
-          setModal('')
-        }}
+          title={`Invite ${isModal}`}
+          result={e => {
+            setModal('')
+          }}
           body={<>
             <AddAttendee
               eventDetail={data}
               eventId={id}
-              guest={isModal=='guest'?true:false}
+              guest={isModal == 'guest' ? true : false}
               result={e => {
                 if (e.event == 'submit') {
                   setModal('')
@@ -463,19 +476,19 @@ console.log(data?.meetingStatus ,"meeting")
       </> : <></>}
 
       {isRModal ? <>
-            <Modal
-                title="RSVP List"
-                body={<>
-                    <Members
-                        eventId={id}
-                        eventDetail={data}
-                    />
-                </>}
-                result={e => {
-                    setRModal(false)
-                }}
+        <Modal
+          title="RSVP List"
+          body={<>
+            <Members
+              eventId={id}
+              eventDetail={data}
             />
-        </> : <></>}
+          </>}
+          result={e => {
+            setRModal(false)
+          }}
+        />
+      </> : <></>}
 
     </>
   );

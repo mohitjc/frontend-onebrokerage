@@ -59,7 +59,17 @@ const Login = () => {
     crendentialModel.setUser(data)
     let url = '/profile'
     let eventId=methodModel.getPrams('eventId')
-    if(eventId) url=`/dashboard?eventId=${eventId}`
+    if(eventId){
+
+      ApiClient.get(`api/attandance?email=${data?.email}&eventId=${eventId}`).then(res=>{
+        if(res.success){
+          // url=`/dashboard?eventId=${eventId}`
+          url = `/event/detail/${eventId}`
+         
+        }
+    })
+    }
+    // if(eventId) url=`/dashboard?eventId=${eventId}`
     history(url);
   }
 
