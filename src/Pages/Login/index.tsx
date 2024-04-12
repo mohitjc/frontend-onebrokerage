@@ -51,8 +51,10 @@ const Login = () => {
       if(email) setUsername(email)
   }, [])
 
-
+  console.log(resp,"email")
   const setLogin=(data:any)=>{
+    console.log(data?.email,"dataaaaaaaaa")
+
     localStorage.setItem('token', data.access_token)
     crendentialModel.setUser(data)
     let url = '/profile'

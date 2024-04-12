@@ -146,9 +146,11 @@ const Members = () => {
     }
 
     const roleUpdate=(row,role)=>{
+        console.log(row,"roleUpdate")
         let payload={
             id:row.id,
-            role:role
+            role:role,
+            groupId:row?.groupId
         }
         if(!role) return
         loader(true)
