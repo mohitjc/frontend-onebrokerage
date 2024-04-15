@@ -4,10 +4,12 @@ import ApiClient from '../../../methods/api/apiClient';
 import loader from '../../../methods/loader';
 import methodModel from '../../../methods/methods';
 import crendentialModel from '../../../models/credential.model';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../../Pages/actions/user';
 
 const ChangePassword = p => {
-  const user=crendentialModel.getUser()
-
+  const user = useSelector((state) => state.user);
+  const dispatch=useDispatch()
   const history = useNavigate()
   const [form, setForm] = useState({ confirmPassword: '', currentPassword: '', newPassword: '' })
   const [submitted, setSubmitted] = useState(false)
@@ -37,6 +39,7 @@ const ChangePassword = p => {
       if (res.success) {
         // ToastsStore.success(res.message)
         crendentialModel.setUser('')
+        dispatch(logout())
         localStorage.removeItem('token')
         localStorage.removeItem('persist:admin-app')
         history('/login');

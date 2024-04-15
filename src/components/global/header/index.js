@@ -3,19 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import './style.scss';
 import Html from './Html';
 import crendentialModel from '../../../models/credential.model';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../../Pages/actions/user';
 
 
 const Header = ({ setIsOpen, isOpen }) => {
-  const user = crendentialModel.getUser()
+  const user = useSelector((state) => state.user);
   const toggle = () => { setIsOpen(!isOpen); localStorage.setItem('sidebar', !isOpen) };
   const [isOpen1, setIsOpen1] = useState(false);
   const toggle1 = () => setIsOpen1(!isOpen1);
   const history = useNavigate();
+  const dispatch=useDispatch()
 
   const searchState={data:''};
 
   const Logout = () => {
     crendentialModel.setUser('')
+    dispatch(logout())
     localStorage.removeItem("persist:admin-app")
     localStorage.removeItem("token")
     history('/login');

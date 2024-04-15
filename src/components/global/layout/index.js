@@ -11,12 +11,15 @@ import crendentialModel from '../../../models/credential.model';
 import environment from '../../../environment';
 import { FcOvertime } from "react-icons/fc";
 import { BsExclamationTriangle } from "react-icons/bs";
+import { useDispatch, useSelector } from 'react-redux';
+import { login_success } from '../../../Pages/actions/user';
 
 
 const Layout = ({ children }) => {
-  const user = crendentialModel.getUser()
+  const user = useSelector((state) => state.user);
   const history = useNavigate();
   const [isOpen, setIsopen] = useState(false)
+  const dispatch=useDispatch()
 
 
   useEffect(() => {
@@ -33,6 +36,7 @@ const Layout = ({ children }) => {
           if (res.success) {
             let data = { ...user, ...res.data }
             crendentialModel.setUser(data)
+            dispatch(login_success(data))
           }
         })
       }

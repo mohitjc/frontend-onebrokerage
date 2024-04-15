@@ -8,15 +8,15 @@ import statusModel from "../../models/status.model";
 import { Tooltip } from "antd";
 import FormControl from "../../components/common/FormControl";
 import timezoneModel from "../../models/timezone.model";
-import crendentialModel from "../../models/credential.model";
 import shared from "./shared";
 import datepipeModel from "../../models/datepipemodel";
 import environment from "../../environment";
+import { useSelector } from "react-redux";
 
 const AddEdit = () => {
     const {id}=useParams()
     const history=useNavigate()
-    const user = crendentialModel.getUser()
+    const user = useSelector((state) => state.user);
     const [submitted, setSubmitted] = useState(false)
     const [users, setUsers] = useState([])
     const [members, setMember] = useState([{fullName: '', email: '' }])

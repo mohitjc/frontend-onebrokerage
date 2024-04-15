@@ -28,6 +28,11 @@ import Members from './Pages/Members';
 import AddEdiMember from './Pages/Members/AddEdit';
 import EventDetail from './Pages/EventDetail';
 import Thanku from './Pages/Thanku';
+import configureStoreProd from './Pages/config/configureStore.prod';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+const { persistor, store } = configureStoreProd();
+
 function App() {
 
   const routes=[
@@ -62,6 +67,8 @@ function App() {
 
   return (
     <>
+      <Provider store={store}>
+        <PersistGate loading={"loading ..."} persistor={persistor}>
     <Router>
       <Routes>
         {routes.map(itm=>{
@@ -69,6 +76,8 @@ function App() {
         })}
       </Routes>
     </Router>
+    </PersistGate>
+    </Provider>
      <div id="loader" className="loaderDiv d-none">
             <div>
                 <img src="/assets/img/loader.gif" alt="logo" className="loaderlogo" />

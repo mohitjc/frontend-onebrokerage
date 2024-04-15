@@ -6,7 +6,6 @@ import loader from "../methods/loader";
 import ApiClient from "../methods/api/apiClient";
 import datepipeModel from "../models/datepipemodel";
 import { Tooltip } from "antd";
-import crendentialModel from "../models/credential.model";
 import { BsCheck, BsCrosshair, BsTrash3 } from "react-icons/bs";
 import Modal from "../components/common/Modal";
 import AddAttendee from "./Events/AddAttendee";
@@ -17,6 +16,7 @@ import { FiPrinter } from "react-icons/fi";
 import { MdOutlineShare } from "react-icons/md";
 import Groups from "./Groups";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 const EventDetail = () => {
   const [host, setHost]: any = useState()
@@ -28,7 +28,7 @@ const EventDetail = () => {
   const [group, setGroup] = useState(false)
   const [invites, setInvites] = useState([])
   const [attendeesGroup , setattendeesGroup] = useState()
-  const user: any = crendentialModel.getUser()
+  const user = useSelector((state:any) => state.user);
   const history = useNavigate()
   const [role, setRole] = useState()
   const [me, setMe] = useState()

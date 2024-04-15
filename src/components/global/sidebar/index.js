@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './style.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import Html from './Html';
-import crendentialModel from '../../../models/credential.model';
 import environment from '../../../environment';
+import { useSelector } from 'react-redux';
 
 const Sidebar = ({ isOpen }) => {
-  const user = crendentialModel.getUser()
+  const user = useSelector((state) => state.user);
   const history = useNavigate()
   const [role,setRole]=useState(user.customerRole)
   const menus = {

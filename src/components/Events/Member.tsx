@@ -4,12 +4,12 @@ import loader from "../../methods/loader"
 import Table from "../Table"
 import { BsTrash3 } from "react-icons/bs"
 import SelectDropdown from "../common/SelectDropdown"
-import crendentialModel from "../../models/credential.model"
 import { Tooltip } from "antd"
 import methodModel from "../../methods/methods"
 import { FiPlus } from "react-icons/fi"
 import AddAttendee from "../../Pages/Events/AddAttendee"
 import rolesModel from "../../models/roles.model"
+import { useSelector } from "react-redux"
 
 export default function Members({ eventDetail = '', eventId = '' }: any) {
     const [data, setData] = useState([])
@@ -17,7 +17,7 @@ export default function Members({ eventDetail = '', eventId = '' }: any) {
     const [total, setTotal] = useState(0)
     const [tab, setTab] = useState('list')
     const [role, setRole] = useState()
-    const user: any = crendentialModel.getUser()
+    const user = useSelector((state:any) => state.user);
     const [filters, setFilter] = useState({ page: 1, count: 50, search: '', eventId: eventId, sortBy: '', key: '', sorder: '',meetConfirm:'Yes' })
 
     const attendPremit = (row: any) => {

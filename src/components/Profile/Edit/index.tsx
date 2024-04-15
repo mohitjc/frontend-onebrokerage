@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import ApiClient from '../../../methods/api/apiClient';
 import loader from '../../../methods/loader';
 import './style.scss';
-import { userType } from '../../../models/type.model';
 import Html from './Html';
 import { useNavigate } from 'react-router-dom';
 import formModel from '../../../models/form.model';
 import crendentialModel from '../../../models/credential.model';
-import environment from '../../../environment';
+import { useDispatch, useSelector } from 'react-redux';
+import { login_success } from '../../../Pages/actions/user';
 
 const EditProfile = () => {
-  const user:any = crendentialModel.getUser()
+  const user = useSelector((state:any) => state.user);
+  const dispatch=useDispatch()
   const [data, setData] = useState('');
   const [form, setForm]:any = useState({
     id:'',
@@ -91,6 +92,7 @@ const EditProfile = () => {
       if (res.success) {
         let uUser = { ...user, ...value }
         crendentialModel.setUser(uUser)
+        dispatch(login_success(uUser))
         history("/profile")
         // ToastsStore.success(res.message)
       }
