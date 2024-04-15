@@ -540,6 +540,7 @@ console.log(attendeesGroup,"attendeesGroup")
 
       {group ? <>
         <Modal
+          
           title="Group List"
           body={<>
          <Groups
