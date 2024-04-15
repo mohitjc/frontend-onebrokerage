@@ -50,19 +50,19 @@ const Groups = ({ eventDetail = '' }: any) => {
                 return (
                     <>
 
-                        <div className='brouplists border border-1 p-3 '>
+                        <div className='brouplists border rounded-2xl shadow border-1 p-3 '>
 
                             <h2 className='font-bold text-[#2b2b2b] text-lg border-b border-1 pb-2'> Group{ele?.groupNo}</h2>
                             <p className=''>{ele?.attendees?.map((element: any) => {
                                 return (
-                                    <div className='card_inners border-b  last:border-0  flex gap-1 items-center flex-wrap justify-between p-2'>
+                                    <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2'>
                                         <div className='text-[14px]'>
-                                            <p className='flex items-center gap-1 text-[#75757A]'><LuUser2 />{element?.attendeesDetails?.fullName}</p>
-                                            <p className='flex items-center gap-1 text-[#75757A]'><MdOutlineEmail />{element?.attendeesDetails?.email}</p>
+                                            <p className='flex items-center gap-1 text-[#75757A]'><LuUser2 className='text-black' />{element?.attendeesDetails?.fullName}</p>
+                                            <p className='flex items-center gap-1 text-[#75757A]'><MdOutlineEmail className='text-black' />{element?.attendeesDetails?.email}</p>
                                         </div>
 
-                                       <div className=''>
-                                            <select className="rounded-full bg-orange-400 focus:outline-none cursor-pointer text-[14px] p-2 text-white" onChange={(e :any)=>handleSelectValue(e , element )}>
+                                       <div className='flex justify-end'>
+                                            <select className="rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer text-[12px] p-1 text-white" onChange={(e :any)=>handleSelectValue(e , element )}>
                                                 <option value="" disabled selected>Move to</option>
                                                 {groupList?.map((data: any) => (
                                                     <option key={data.groupNo} value={data.groupNo}>Group {data.groupNo}</option>
