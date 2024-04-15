@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams, Link } from "react-router-dom";
 import ApiClient from "../methods/api/apiClient";
 import loader from '../methods/loader';
+import { MdOutlineEmail } from 'react-icons/md';
+import { LuUser2 } from 'react-icons/lu';
 const Groups = ({ eventDetail = '' }: any) => {
     const { id } = useParams()
     const [groupList, setGroupList]: any = useState()
-    const handleSelectValue = (e : any ,element: any ) => {
+    const handleSelectValue = (e: any, element: any) => {
         loader(true)
-        console.log(element,"newwwwww")
         let payload = {
             data: [{
                 id: element?.id,
@@ -17,9 +18,10 @@ const Groups = ({ eventDetail = '' }: any) => {
                 groupId: element?.attendeesDetails?.groupId
             }]
         };
-        ApiClient.put('api/event/group/edit',payload).then(res => {
+        ApiClient.put('api/event/group/edit', payload).then(res => {
             if (res.success) {
                 loader(false)
+                e.target.value = ""; 
                 getGroupPair()
             }
         })
@@ -35,45 +37,49 @@ const Groups = ({ eventDetail = '' }: any) => {
     }
     useEffect(() => {
         getGroupPair()
+
     }, [])
 
     console.log(groupList, "groupList")
     return (
         <>
-            {groupList?.map((ele: any) => {
-                return (
-                    <>
+        <div  className='max-h-96 overflow-y-auto'>
+            <div className='grid grid-cols-2 gap-2'>
+                {groupList?.map((ele: any) => {
+                    return (
+                        <>
 
-                        <div style={{
-                            display: "flex",
-                            justifyContent: "space-evenly"
-                        }}>
-                            <h2> Group{ele?.groupNo}</h2>
-                            <p>{ele?.attendees?.map((element: any) => {
-                                return (
-                                    <div style={{
-                                        display: "flex",
-                                        justifyContent: "space-evenly"
-                                    }}>
-                                        <p>{element?.attendeesDetails?.fullName}</p>
-                                        <p>{element?.attendeesDetails?.email}</p>
-                                        <select className="form-select" onChange={(e :any)=>handleSelectValue(e , element )}>
-                                <option value="" disabled selected>Move to</option>
-                                {groupList?.map((data: any) => (
-                                    <option key={data.groupNo} value={data.groupNo}>Group {data.groupNo}</option>
-                                ))}
-                                
-                            </select>
-                                    </div>
+                            <div className='brouplists border border-1 p-3'>
 
-                                )
-                            })}</p>
-                        </div>
-                    </>
-                )
+                                <h2 className='font-bold text-[#2b2b2b] text-lg border-b border-1 pb-2'> Group{ele?.groupNo}</h2>
+                                <p className=''>{ele?.attendees?.map((element: any) => {
+                                    return (
+                                        <div className='card_inners border-b  last:border-0  flex gap-1 items-center flex-wrap justify-between p-2'>
+                                            <div className='text-[14px]'>
+                                                <p className='flex items-center gap-1 text-[#75757A]'><LuUser2 />{element?.attendeesDetails?.fullName}</p>
+                                                <p className='flex items-center gap-1 text-[#75757A]'><MdOutlineEmail />{element?.attendeesDetails?.email}</p>
+                                            </div>
 
-            })}
+                                            <div className=''>
+                                                <select className="rounded-full bg-orange-400 focus:outline-none cursor-pointer text-[14px] p-2 text-white" onChange={(e: any) => handleSelectValue(e, element)}>
+                                                    <option value="" disabled selected>Move to</option>
+                                                    {groupList?.filter((data: any) => data.groupNo !== ele.groupNo)?.map((data: any) => (
+                                                        <option key={data?.groupNo} value={data?.groupNo}>Group {data?.groupNo}</option>
+                                                    ))}
+                                                </select>
 
+                                            </div>
+                                        </div>
+
+                                    )
+                                })}</p>
+                            </div>
+                        </>
+                    )
+
+                })}
+            </div>
+        </div>
             {/* {Object.entries(eventDetail).map(([group, items] :any) => (
                 <div key={group}>
                     <p>{group}</p>

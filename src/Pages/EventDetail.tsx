@@ -16,6 +16,7 @@ import rolesModel from "../models/roles.model";
 import { FiPrinter } from "react-icons/fi";
 import { MdOutlineShare } from "react-icons/md";
 import Groups from "./Groups";
+import { AiOutlineUsergroupAdd } from "react-icons/ai";
 
 const EventDetail = () => {
   const [host, setHost]: any = useState()
@@ -178,6 +179,7 @@ console.log(attendeesGroup,"attendeesGroup")
       loader(false)
       if (res.success) {
         toast.success(res.message)
+        getDetail()
       }
     })
   }
@@ -253,7 +255,10 @@ console.log(attendeesGroup,"attendeesGroup")
   return (
     <>
       <PageLayout>
-        <Link to="/event" >
+      
+        <div className="bg-white border-gray-200 px-4 pt-8 lg:px-6 py-2.5 dark:bg-gray-800">
+          <div className="container mx-auto">
+          <Link to="/event" >
           <div
             className="mb-4 cp pt-1 ms-2 pointer"
           // onClick={() => history.go(-1)}
@@ -266,8 +271,7 @@ console.log(attendeesGroup,"attendeesGroup")
             Back
           </div>
         </Link>
-        <div className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-          <div className="container mx-auto">
+
             <div className="banner-sectin">
               <img src="/assets/img/event-banner.png" className="w-full h-75 md:h-[450px] lg:[500px] object-cover rounded-3xl	 " />
             </div>
@@ -455,9 +459,9 @@ console.log(attendeesGroup,"attendeesGroup")
 
                       </>}
 
-<div>
-  <button  onClick={() => setGroup(true)} className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" >Groups</button>
-</div>
+                      <div className="flex justify-end">
+                        <button  onClick={() => setGroup(true)} className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
+                      </div>
 
                     </div>
 
@@ -474,7 +478,7 @@ console.log(attendeesGroup,"attendeesGroup")
                         
                       <div className="flex flex-col items-center justify-center gap-y-4">
                           <button className="bg-[#EF7A2B] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" onClick={handlePrint}><FiPrinter /> Print</button>
-                          <button className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl"  onClick={() => window.open(data?.qrCode, '_blank')}><MdOutlineShare />Share</button>
+                          {/* <button className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl"  onClick={() => window.open(data?.qrCode, '_blank')}><MdOutlineShare />Share</button> */}
                         </div>
                       </div>
                     
@@ -539,6 +543,7 @@ console.log(attendeesGroup,"attendeesGroup")
 
       {group ? <>
         <Modal
+          
           title="Group List"
           body={<>
          <Groups
