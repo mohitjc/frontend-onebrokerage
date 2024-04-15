@@ -188,7 +188,7 @@ console.log(attendeesGroup,"attendeesGroup")
     getDetail()
     getAttendee()
     getInvites()
-    getAttendeesGroupPair()
+    // getAttendeesGroupPair()
   }, [])
 
   const requestCheck = () => {
@@ -458,10 +458,12 @@ console.log(attendeesGroup,"attendeesGroup")
                         </> : <></>}
 
                       </>}
-
-                      <div className="flex justify-end">
+{data?.isGroupGenerated === true ? <div className="flex justify-end">
                         <button  onClick={() => setGroup(true)} className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
-                      </div>
+                      </div>:<div className="flex justify-end">
+                        <button  onClick={() => setGroup(true)} className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />Generate Connect meets</button>
+                      </div>}
+                     
 
                     </div>
 

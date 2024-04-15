@@ -81,14 +81,14 @@ console.log(data,"allGroupDetails")
                     </div>
                   
 
-                    <div className=''>
+                    {/* <div className=''>
                       <div className='text_head'>
                         <label className='text-typo text-base font-normal max-w-sm w-full block mb-1'>Role</label>
                       </div>
                       <div className='sub_fatch'>
                         <p className='text-sm text-gray-500' >{user.customerRole?.name}</p>
                       </div>
-                    </div>
+                    </div> */}
                   
 
 
@@ -101,7 +101,7 @@ console.log(data,"allGroupDetails")
                       </div>
                     </div>
 
-{data?.groupId?<>
+{/* {data?.groupId?<>
   <div className=''>
                       <div className='text_head'>
                         <label className='text-typo text-base font-normal max-w-sm w-full block mb-1'>Group</label>
@@ -110,7 +110,7 @@ console.log(data,"allGroupDetails")
                         <p className='text-sm text-gray-500' >{data?.groupId?.name||'--'}</p>
                       </div>
                     </div>   
-</>:<></>}
+</>:<></>} */}
 
 
 
@@ -131,16 +131,22 @@ console.log(data,"allGroupDetails")
                   
                   </thead>
                 <tbody>
-
+                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'>{data?.groupId?.name||'--'}</td>
+                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'>{user.customerRole?.name}</td>
+                     
                 {
                   data?.allGroupDetails?.map((e :any)=>{
                     return(
+                      <>
+                     
                       <tr>
+                      
                         <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'>{e?.groupId?.name}</td>
                         <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'>{e?.role}</td>
 
                       </tr>
-                    
+                    </>
+                     
                     )
 
                   })
