@@ -21,7 +21,7 @@ export default function Modal({result=(e:any)=>{},body=<>test</>,title='Modal ti
                     <span className="sr-only">Close modal</span>
                 </button>
             </div>
-            <div className="p-4 md:p-5 space-y-4 h-[450px] overflow-y-scroll">
+            <div className="p-4 md:p-5 space-y-4 ">
                 {body}
             </div>
             {footer}
