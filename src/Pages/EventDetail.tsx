@@ -15,6 +15,7 @@ import Members from "../components/Events/Member";
 import rolesModel from "../models/roles.model";
 import { FiPrinter } from "react-icons/fi";
 import { MdOutlineShare } from "react-icons/md";
+import Groups from "./Groups";
 
 const EventDetail = () => {
   const [host, setHost]: any = useState()
@@ -23,8 +24,9 @@ const EventDetail = () => {
   const [aloading, setALoader] = useState(false)
   const [isModal, setModal] = useState('')
   const [isRModal, setRModal] = useState(false)
+  const [group, setGroup] = useState(false)
   const [invites, setInvites] = useState([])
-  const [attendeesGroup , setattendeesGroup] = useState([])
+  const [attendeesGroup , setattendeesGroup] = useState()
   const user: any = crendentialModel.getUser()
   const history = useNavigate()
   const [role, setRole] = useState()
@@ -453,7 +455,9 @@ console.log(attendeesGroup,"attendeesGroup")
 
                       </>}
 
-
+<div>
+  <button  onClick={() => setGroup(true)} className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" >Groups</button>
+</div>
 
                     </div>
 
@@ -532,6 +536,20 @@ console.log(attendeesGroup,"attendeesGroup")
         />
       </> : <></>}
 
+
+      {group ? <>
+        <Modal
+          title="Group List"
+          body={<>
+         <Groups
+         eventDetail={attendeesGroup}
+         />
+          </>}
+          result={e => {
+            setGroup(false)
+          }}
+        />
+      </> : <></>}
     </>
   );
 };

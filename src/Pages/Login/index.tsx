@@ -131,19 +131,7 @@ const Login = () => {
     }
   )
   };
-    // if (eventId) {
 
-    //     // try {
-    //     //     const res =  ApiClient.get(`api/attandance?email=${data?.email}&eventId=${eventId}`);
-    //     //     if (res?.success  === true) {
-    //     //     let url = `/thanku`
-    //     //     }
-    //     // } catch (error) {
-    //     //     console.error("Error fetching attendance:", error);
-    //     // }
-
-
-    // }
   
   return (
     <>
