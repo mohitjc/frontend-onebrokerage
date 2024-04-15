@@ -178,6 +178,7 @@ console.log(attendeesGroup,"attendeesGroup")
       loader(false)
       if (res.success) {
         toast.success(res.message)
+        getDetail()
       }
     })
   }
@@ -474,7 +475,7 @@ console.log(attendeesGroup,"attendeesGroup")
                         
                       <div className="flex flex-col items-center justify-center gap-y-4">
                           <button className="bg-[#EF7A2B] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" onClick={handlePrint}><FiPrinter /> Print</button>
-                          <button className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl"  onClick={() => window.open(data?.qrCode, '_blank')}><MdOutlineShare />Share</button>
+                          {/* <button className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl"  onClick={() => window.open(data?.qrCode, '_blank')}><MdOutlineShare />Share</button> */}
                         </div>
                       </div>
                     

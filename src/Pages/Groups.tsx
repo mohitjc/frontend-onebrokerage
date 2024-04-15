@@ -7,7 +7,6 @@ const Groups = ({ eventDetail = '' }: any) => {
     const [groupList, setGroupList]: any = useState()
     const handleSelectValue = (e : any ,element: any ) => {
         loader(true)
-        console.log(element,"newwwwww")
         let payload = {
             data: [{
                 id: element?.id,
@@ -34,7 +33,8 @@ const Groups = ({ eventDetail = '' }: any) => {
         })
     }
     useEffect(() => {
-        getGroupPair()
+            getGroupPair()
+     
     }, [])
 
     console.log(groupList, "groupList")
