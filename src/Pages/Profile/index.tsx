@@ -12,7 +12,7 @@ const Profile = () => {
 
   const user:any = crendentialModel.getUser()
   const [data, setData]:any = useState('');
-
+console.log(data,"allGroupDetails")
   const gallaryData = () => {
     loader(true)
     ApiClient.get(`api/user/detail`, { id: user._id }).then(res => {
