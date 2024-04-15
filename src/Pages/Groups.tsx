@@ -42,12 +42,15 @@ const Groups = ({ eventDetail = '' }: any) => {
     console.log(groupList, "groupList")
     return (
         <>
-        <div className='grid grid-cols-2 gap-2'>
+        <div className='max-h-96 overflow-y-auto'>
+
+       
+        <div className='grid grid-cols-2 gap-2 '>
             {groupList?.map((ele: any) => {
                 return (
                     <>
 
-                        <div className='brouplists border border-1 p-3'>
+                        <div className='brouplists border border-1 p-3 '>
 
                             <h2 className='font-bold text-[#2b2b2b] text-lg border-b border-1 pb-2'> Group{ele?.groupNo}</h2>
                             <p className=''>{ele?.attendees?.map((element: any) => {
@@ -77,7 +80,7 @@ const Groups = ({ eventDetail = '' }: any) => {
 
             })}
             </div>
-
+        </div>
             {/* {Object.entries(eventDetail).map(([group, items] :any) => (
                 <div key={group}>
                     <p>{group}</p>
