@@ -238,10 +238,11 @@ console.log(attendeesGroup,"attendeesGroup")
     if (data && new Date(datepipeModel.datetodatepicker(data.date)).getTime() <= new Date().getTime()) value = true
     return value
   }
-  console.log(data?.qrCode, "qrCode")
+  
   function handlePrint() {
     const imgElement = document.createElement("img");
     imgElement.src = data?.qrCode;
+    console.log(data?.qrCode, "qrCode")
     const printWindow = window.open("", "_blank") as Window;
     if (printWindow) {
         printWindow.document.write(`<html><head><title>Print Image</title></head><body style='margin: 0; text-align: center;'><img src='${data?.qrCode}' style='max-width: 100%; max-height: 100%;'></body></html>`);

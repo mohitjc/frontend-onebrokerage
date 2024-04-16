@@ -187,7 +187,7 @@ const Html = ({
                           Object.keys(features).map((oitm) => {
                             return (
                               <>
-                                <h6 className="text-sm font-medium text-typo !my-5">
+                                <h6 className="text-sm font-medium text-typo !my-5 capitalize">
                                   {oitm}
                                 </h6>
                                 <ul className="!mt-3.5 !mb-3 space-y-3.5">
@@ -201,7 +201,7 @@ const Html = ({
                                             <IoCloseCircle className="text-xl text-red-600" />
                                           )}
                                           {/* <i class={`material-icons ${isChecked(item, fitm) ? 'text-success' : 'text-danger'} planIcon`}>{isChecked(item, fitm) ? 'check' : 'close'}</i> */}
-                                          {fitm.name}
+                                      <p className="capitalize">{fitm.name}</p>    
                                           {fitm.description ? (
                                             <>
                                               <a
