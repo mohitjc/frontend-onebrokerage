@@ -7,10 +7,10 @@ import Html from './html';
 import { useNavigate } from 'react-router-dom';
 import environment from '../../environment';
 import axios from 'axios';
-import crendentialModel from '../../models/credential.model';
+import { useSelector } from 'react-redux';
 
 const Roles = (p) => {
-    const user = crendentialModel.getUser()
+    const user = useSelector((state) => state.user);
     const searchState = {data:''};
     const [filters, setFilter] = useState({ page: 1, count: 50, search: '', catType: '' })
     const [data, setData] = useState([])

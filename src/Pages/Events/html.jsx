@@ -11,7 +11,7 @@ import statusModel from '../../models/status.model';
 import datepipeModel from '../../models/datepipemodel';
 import shared from "./shared";
 import ApiClient from '../../methods/api/apiClient';
-import crendentialModel from '../../models/credential.model';
+import { useSelector } from 'react-redux';
 const Html = ({
     sorting,
     filter,
@@ -29,7 +29,7 @@ const Html = ({
     isAllow,
     total = { total }
 }) => {
-    const user = crendentialModel.getUser()
+    const user = useSelector((state) => state.user);
     const columns = [
         {
             key: 'title', name: 'Title', sort: true,

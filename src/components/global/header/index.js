@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.scss';
 import Html from './Html';
-import crendentialModel from '../../../models/credential.model';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../Pages/actions/user';
 
@@ -18,7 +17,6 @@ const Header = ({ setIsOpen, isOpen }) => {
   const searchState={data:''};
 
   const Logout = () => {
-    crendentialModel.setUser('')
     dispatch(logout())
     localStorage.removeItem("persist:admin-app")
     localStorage.removeItem("token")

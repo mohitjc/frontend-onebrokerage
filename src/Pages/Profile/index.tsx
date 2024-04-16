@@ -5,12 +5,12 @@ import ApiClient from '../../methods/api/apiClient';
 import loader from '../../methods/loader';
 import './profile.scss'
 import methodModel from '../../methods/methods';
-import crendentialModel from '../../models/credential.model';
+import { useSelector } from 'react-redux';
 
 
 const Profile = () => {
 
-  const user:any = crendentialModel.getUser()
+  const user = useSelector((state:any) => state.user);
   const [data, setData]:any = useState('');
 console.log(data,"allGroupDetails")
   const gallaryData = () => {
@@ -26,7 +26,7 @@ console.log(data,"allGroupDetails")
 
   useEffect(
     () => {
-      if (user) {
+      if (user.loggedIn) {
         gallaryData();
       }
     },

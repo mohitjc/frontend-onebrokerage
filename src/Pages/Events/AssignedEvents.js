@@ -2,7 +2,6 @@ import  { useEffect, useState } from 'react';
 import ApiClient from '../../methods/api/apiClient';
 import './style.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import crendentialModel from '../../models/credential.model';
 import shared from './shared';
 import Table from '../../components/Table';
 import Layout from '../../components/global/layout';
@@ -10,9 +9,10 @@ import SelectDropdown from '../../components/common/SelectDropdown';
 import statusModel from '../../models/status.model';
 import { Tooltip } from "antd";
 import datepipeModel from '../../models/datepipemodel';
+import { useSelector } from 'react-redux';
 
 const AssignedEvents = () => {
-    const user = crendentialModel.getUser()
+    const user = useSelector((state) => state.user);
     const searchState = {data:''}
     const [filters, setFilter] = useState({ page: 1, count: 50, search: '', catType: '',type:'ongoing' })
     const [data, setData] = useState([])

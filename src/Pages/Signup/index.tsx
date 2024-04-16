@@ -7,14 +7,15 @@ import './style.scss';
 import AuthLayout from '../../components/AuthLayout';
 import environment from '../../environment';
 import { toast } from 'react-toastify';
-import crendentialModel from '../../models/credential.model';
 import methodModel from '../../methods/methods';
 import FormControl from '../../components/common/FormControl';
+import { useDispatch, useSelector } from 'react-redux';
+import { login_success } from '../actions/user';
 
 const Signup = () => {
   const history = useNavigate();
-  const user:any = crendentialModel.getUser()
- 
+  const user = useSelector((state:any) => state.user);
+ const dispatch=useDispatch()
 
   const [form, setForm]:any = useState({ email: '', password: '', fullName: '',customerRole:environment.customerRoleId });
   const [remember, setRemember] = useState(false);
@@ -25,7 +26,8 @@ const Signup = () => {
 
   const setLogin=(data:any)=>{
     localStorage.setItem('token', data.access_token)
-    crendentialModel.setUser(data)
+  
+    dispatch(login_success(data));
     let url = '/profile'
     let eventId=methodModel.getPrams('eventId')
     if(eventId) url=`/dashboard?eventId=${eventId}`

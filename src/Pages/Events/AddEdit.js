@@ -8,9 +8,9 @@ import statusModel from "../../models/status.model";
 import { Tooltip } from "antd";
 import FormControl from "../../components/common/FormControl";
 import timezoneModel from "../../models/timezone.model";
-import crendentialModel from "../../models/credential.model";
 import shared from "./shared";
 import datepipeModel from "../../models/datepipemodel";
+import { useSelector } from "react-redux";
 
 const AddEdit = () => {
     const { id } = useParams()
@@ -18,7 +18,7 @@ const AddEdit = () => {
     const [form, setform] = useState({ id: '', title: '',type:'', date: "",timezone:'',capacity:'',description:'',deadline:'',externalLink:'',address:'',status: 'active' })
     const history = useNavigate()
     const [submitted, setSubmitted] = useState(false)
-    const user = crendentialModel.getUser()
+    const user = useSelector((state) => state.user);
     const formValidation = [
         { key: 'status', required: true },
         { key: 'type', required: true ,message:'Type is required'},

@@ -7,14 +7,15 @@ import loader from "../../methods/loader";
 import pipeModel from "../../models/pipeModel";
 import { FiCheck } from "react-icons/fi";
 import datepipeModel from "../../models/datepipemodel";
-import environment from "../../environment";
-import crendentialModel from "../../models/credential.model";
+import { useDispatch, useSelector } from "react-redux";
+import { login_success } from "../actions/user";
 
 const ActivePlan = () => {
-  const user = crendentialModel.getUser();
+  const user = useSelector((state) => state.user);
   const [activeplan, setActivePlan] = useState();
   const [card, setCard] = useState();
   const history = useNavigate();
+  const dispatch=useDispatch()
 
   useEffect(() => {
     loader(true);
@@ -31,7 +32,8 @@ const ActivePlan = () => {
         } else {
           userDetail = { ...user, subscriptionId: "" };
         }
-        crendentialModel.setUser(userDetail)
+     
+        dispatch(login_success(userDetail));
       }
       loader(false);
     }

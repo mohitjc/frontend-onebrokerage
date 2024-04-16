@@ -5,11 +5,9 @@ import { FiEdit3, FiPlus } from "react-icons/fi";
 import { BsTrash3 } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import ApiClient from "../../methods/api/apiClient";
-import crendentialModel from "../../models/credential.model";
 import AddAttendee from "./AddAttendee";
 import loader from "../../methods/loader";
-import environment from "../../environment";
-import SelectDropdown from "../../components/common/SelectDropdown";
+import { useSelector } from "react-redux";
 
 export default function AttendeeList({ eventId, eventDetail }) {
     const [data, setData] = useState([])
@@ -17,7 +15,7 @@ export default function AttendeeList({ eventId, eventDetail }) {
     const [total, setTotal] = useState(0)
     const [tab, setTab] = useState('list')
     const [role, setRole] = useState()
-    const user = crendentialModel.getUser()
+    const user = useSelector((state) => state.user);
     const [filters, setFilter] = useState({ page: 1, count: 50, search: '', eventId: eventId })
 
     const attendPremit=(row)=>{

@@ -6,13 +6,13 @@ import loader from '../../methods/loader';
 import methodModel from '../../methods/methods';
 import './style.scss';
 import AuthLayout from '../../components/AuthLayout';
-import crendentialModel from '../../models/credential.model';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 const Resetpassword = () => {
     const history = useNavigate();
 
-    const user = crendentialModel.getUser()
+    const user = useSelector((state:any) => state.user);
     useEffect(() => {
         if (localStorage.getItem('token')) {
             history('/dashboard')

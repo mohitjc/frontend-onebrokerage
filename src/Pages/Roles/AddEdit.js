@@ -6,7 +6,7 @@ import { rolePermission, rolePermissions, roleType } from '../../models/type.mod
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Layout from '../../components/global/layout';
 import { Tooltip } from "antd";
-import crendentialModel from '../../models/credential.model';
+import { useSelector } from 'react-redux';
 
 const AddEditRole = () => {
 
@@ -28,7 +28,7 @@ const AddEditRole = () => {
   const [form, setform] = useState({...roleType});
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
-  const user = crendentialModel.getUser()
+  const user = useSelector((state) => state.user);
   const formValidation = [
     { key: 'status', required: true },
   ];

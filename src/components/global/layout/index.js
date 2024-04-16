@@ -7,7 +7,6 @@ import { ToastContainer } from 'react-toastify';
 import permissionModel from '../../../models/permisstion.model';
 import ApiClient from '../../../methods/api/apiClient';
 import methodModel from '../../../methods/methods';
-import crendentialModel from '../../../models/credential.model';
 import environment from '../../../environment';
 import { FcOvertime } from "react-icons/fc";
 import { BsExclamationTriangle } from "react-icons/bs";
@@ -23,7 +22,7 @@ const Layout = ({ children }) => {
 
 
   useEffect(() => {
-    if (!user) {
+    if (!user.loggedIn) {
       history('/login');
     } else {
       let permissions = user.roleDetail?.permissions?.[0]
@@ -35,7 +34,6 @@ const Layout = ({ children }) => {
         ApiClient.get('api/user/detail', { id: user._id }).then(async res => {
           if (res.success) {
             let data = { ...user, ...res.data }
-            crendentialModel.setUser(data)
             dispatch(login_success(data))
           }
         })
