@@ -48,7 +48,7 @@ const Html = ({
         {
             key: 'groupId', name: 'Group',
             render: (row) => {
-                return <>{row?.groupDetails?.name}</>
+                return <> <p className='capitalize'>{row?.groupDetails?.name}</p></>
             }
         },
         {
