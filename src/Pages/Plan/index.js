@@ -7,10 +7,10 @@ import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import environment from '../../environment';
 import { toast } from 'react-toastify';
-import crendentialModel from '../../models/credential.model';
+import { useSelector } from 'react-redux';
 
 const Plans = (p) => {
-  const user = crendentialModel.getUser()
+  const user = useSelector((state) => state.user);
   const searchState = {data:''};
   const [filters, setFilter] = useState({ page: 1, count: 50, search: '' })
   const [data, setData] = useState([])
@@ -215,10 +215,7 @@ const Plans = (p) => {
       ApiClient.post(`api/payOnStripe`, payload).then(res => {
         loader(false)
         if (res.success) {
-          // let UserDetail = { ...user, on_trial: true }
-          // crendentialModel.setUser(UserDetail)
           window.location.assign(res.data.url)
-          // history('/activeplan')
         }else{
           toast.error(res.message)
         }

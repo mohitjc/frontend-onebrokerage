@@ -5,7 +5,6 @@ import './style.scss';
 import Html from './Html';
 import { useNavigate } from 'react-router-dom';
 import formModel from '../../../models/form.model';
-import crendentialModel from '../../../models/credential.model';
 import { useDispatch, useSelector } from 'react-redux';
 import { login_success } from '../../../Pages/actions/user';
 
@@ -91,7 +90,6 @@ const EditProfile = () => {
     ApiClient.put('api/user', value).then(res => {
       if (res.success) {
         let uUser = { ...user, ...value }
-        crendentialModel.setUser(uUser)
         dispatch(login_success(uUser))
         history("/profile")
         // ToastsStore.success(res.message)
@@ -118,7 +116,7 @@ const EditProfile = () => {
 
   useEffect(
     () => {
-      if (user) {
+      if (user.loggedIn) {
         gallaryData();
       }
     },[]);

@@ -5,7 +5,6 @@ import loader from '../../methods/loader';
 import { Link } from 'react-router-dom';
 import './style.scss';
 import AuthLayout from '../../components/AuthLayout';
-import crendentialModel from '../../models/credential.model';
 import methodModel from '../../methods/methods';
 import { useDispatch, useSelector } from 'react-redux';
 import { login_success } from '../actions/user';
@@ -58,7 +57,6 @@ const Login = () => {
   const setLogin = async (data: any) => {
 
     localStorage.setItem('token', data.access_token)
-    crendentialModel.setUser(data)
     dispatch(login_success(data));
     let url = '/profile'
     let eventId = methodModel.getPrams('eventId')

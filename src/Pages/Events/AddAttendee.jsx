@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import crendentialModel from "../../models/credential.model";
 import FormControl from "../../components/common/FormControl";
 import loader from "../../methods/loader";
 import ApiClient from "../../methods/api/apiClient";
 import environment from "../../environment";
+import { useSelector } from "react-redux";
 
 export default function AddAttendee({ id = '', eventId, guest=false,result = (e) => { },eventDetail }) {
-    const user = crendentialModel.getUser()
+    const user = useSelector((state) => state.user);
     const [submitted, setSubmitted] = useState(false)
     const [users, setUsers] = useState([])
     const [members, setMember] = useState([{fullName: '', email: '' }])

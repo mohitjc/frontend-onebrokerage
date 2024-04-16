@@ -205,12 +205,12 @@ const Html = ({
                                           {fitm.description ? (
                                             <>
                                               <a
-                                                id={`app-title_${fitm.id}`}
+                                                id={`app-title_${fitm.id}_${item.id}`}
                                                 className="border !border-[#808080] w-4 h-4 flex items-center justify-center rounded-full relative ml-2.5 text-[10px]">
                                                 <AiOutlineInfo className="text-[8px]" />
                                               </a>
                                               <ReactTooltip
-                                                anchorId={`app-title_${fitm.id}`}
+                                                anchorId={`app-title_${fitm.id}_${item.id}`}
                                                 place="top"
                                                 content={fitm.description}
                                               />

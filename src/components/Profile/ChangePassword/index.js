@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import ApiClient from '../../../methods/api/apiClient';
 import loader from '../../../methods/loader';
 import methodModel from '../../../methods/methods';
-import crendentialModel from '../../../models/credential.model';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../Pages/actions/user';
 
@@ -37,8 +36,6 @@ const ChangePassword = p => {
     }
     ApiClient.put('api/user/change/password', payload).then(res => {
       if (res.success) {
-        // ToastsStore.success(res.message)
-        crendentialModel.setUser('')
         dispatch(logout())
         localStorage.removeItem('token')
         localStorage.removeItem('persist:admin-app')

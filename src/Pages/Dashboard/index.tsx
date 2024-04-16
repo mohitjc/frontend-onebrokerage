@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import Layout from "../../components/global/layout"
 import ApiClient from "../../methods/api/apiClient"
-import crendentialModel from "../../models/credential.model"
 import datepipeModel from "../../models/datepipemodel"
 import Modal from "../../components/common/Modal"
 import Members from "../../components/Events/Member"
@@ -13,6 +12,7 @@ import environment from "../../environment"
 import { BsPersonGear } from "react-icons/bs"
 import { MdOutlineSystemUpdateAlt } from "react-icons/md"
 import { FaRegCalendarCheck } from "react-icons/fa"
+import { useSelector } from "react-redux"
 
 const Dashboard = () => {
     const [events, setEvents] = useState([])
@@ -20,7 +20,7 @@ const Dashboard = () => {
     const [loading, setLoader] = useState(false)
     const [total, setTotal] = useState(0)
     const [modalData, setModalData]: any = useState()
-    const user: any = crendentialModel.getUser()
+    const user = useSelector((state:any) => state.user);
     const history=useNavigate()
 
     const getEvents = (p = {}) => {

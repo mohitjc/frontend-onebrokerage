@@ -5,25 +5,27 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import permissionModel from '../../../models/permisstion.model';
 import ApiClient from '../../../methods/api/apiClient';
-import crendentialModel from '../../../models/credential.model';
 import { Menu, Transition } from '@headlessui/react'
 import methodModel from '../../../methods/methods';
 import { FaFacebookF } from "react-icons/fa";
 import { SlSocialTwitter } from "react-icons/sl";
 import { FaGithub } from "react-icons/fa6";
 import { FaDribbble } from "react-icons/fa6";
+import { useDispatch, useSelector } from 'react-redux';
+import { login_success, logout } from '../../../Pages/actions/user';
 
 
 
 const PageLayout = ({ children }) => {
-  const user = crendentialModel.getUser()
+  const user = useSelector((state) => state.user);
+  const dispatch=useDispatch()
   const history = useNavigate()
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 
   useEffect(() => {
-    if (!user) {
+    if (!user.loggedIn) {
       
     } else {
       let permissions = user.roleDetail?.permissions?.[0]
@@ -35,7 +37,7 @@ const PageLayout = ({ children }) => {
         ApiClient.get('api/user/detail', { id: user._id }).then(async res => {
           if (res.success) {
             let data = { ...user, ...res.data }
-            crendentialModel.setUser(data)
+            dispatch(login_success(data));
           }
         })
       }
@@ -50,8 +52,7 @@ const PageLayout = ({ children }) => {
   ]
 
   const Logout = () => {
-    crendentialModel.setUser('')
-    localStorage.removeItem("persist:admin-app")
+    dispatch(logout());
     localStorage.removeItem("token")
     history('/login');
   };
