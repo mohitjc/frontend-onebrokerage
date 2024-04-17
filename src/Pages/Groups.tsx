@@ -5,6 +5,7 @@ import loader from '../methods/loader';
 import { MdOutlineEmail } from 'react-icons/md';
 import { LuUser2 } from 'react-icons/lu';
 import axios from 'axios';
+import { TbFileExport } from "react-icons/tb";
 import environment from '../environment';
 const Groups = ({ eventDetail = '' }: any) => {
     const { id } = useParams()
@@ -103,56 +104,65 @@ const getGroupExport = async () => {
     return (
         <>
         
-        <div  className='max-h-96 overflow-y-auto'>
-        <button onClick={getGroupExport}>Export Data</button>
-         {/* import button */}
-         <div>
-                      <button>
-        Import
-        <input
-          type="file"
-          id="fileInput"
-          onChange={(e :any)=>handleInputField(e)}
-        />
-      </button>
-                       
-                      </div>
-                      {/*  */}
-            <div className='grid grid-cols-2 gap-2'>
-                {groupList?.sort((a : any, b : any) => a.groupNo - b.groupNo)?.map((ele: any) => {
-                    return (
-                        <>
-
-                            <div className='brouplists border border-1 rounded-lg shadow-lg p-3'>
-
-                                <h2 className='font-bold text-[#2b2b2b] text-lg border-b border-1 pb-2'> Group{ele?.groupNo}</h2>
-                                <p className=''>{ele?.attendees?.map((element: any) => {
-                                    return (
-                                        <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2                                        '>
-                                            <div className='text-[14px]'>
-                                                <p className='flex items-center gap-1 text-[#75757A] capitalize '><LuUser2 className='text-black'/>{element?.attendeesDetails?.fullName}</p>
-                                                <p className='flex items-center gap-1 text-[#75757A] '><MdOutlineEmail className='text-black'/>{element?.attendeesDetails?.email}</p>
-                                            </div>
-
-                                            <div className=''>
-                                                <select className="rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer text-[12px] p-1 text-white" onChange={(e: any) => handleSelectValue(e, element)}>
-                                                    <option value="" disabled selected>Move to</option>
-                                                    {groupList?.filter((data: any) => data.groupNo !== ele.groupNo)?.map((data: any) => (
-                                                        <option key={data?.groupNo} value={data?.groupNo}>Group {data?.groupNo}</option>
-                                                    ))}
-                                                </select>
-
-                                            </div>
-                                        </div>
-
-                                    )
-                                })}</p>
+                    <div className='max-h-96 overflow-y-auto'>
+                    <div className='flex items-center justify-end'>
+                            <button className='bg-orange-500 px-2 py-2 rounded-md text-sm flex items-center gap-2 text-white' onClick={getGroupExport}><TbFileExport className='text-md' /> Export Data</button>
                             </div>
-                        </>
-                    )
+                        <div className=''>
+                            
+                            {/* import button */}
+                            <div>
 
-                })}
-            </div>
+                            <div className="flex w-full mt-2 items-center justify-center bg-grey-lighter">
+                                    <label className="w-full flex flex-col border-dashed border-gray-200 items-center px-2 py-3 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:shadow-lg ">
+                                        <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                                        </svg>
+                                        <span className="mt-2 text-xs leading-normal">Select a file</span>
+                                        <input type='file' onChange={(e :any)=>handleInputField(e)} className="hidden" />
+                                    </label>
+                                </div>
+
+
+                            
+                            </div>
+                      {/*  */}
+                        </div>
+                    <div className='grid grid-cols-2 gap-2'>
+                        {groupList?.sort((a : any, b : any) => a.groupNo - b.groupNo)?.map((ele: any) => {
+                            return (
+                                <>
+
+                                    <div className='brouplists border border-1 rounded-lg shadow-lg p-3'>
+
+                                        <h2 className='font-bold text-[#2b2b2b] text-lg border-b border-1 pb-2'> Group{ele?.groupNo}</h2>
+                                        <p className=''>{ele?.attendees?.map((element: any) => {
+                                            return (
+                                                <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2                                        '>
+                                                    <div className='text-[14px]'>
+                                                        <p className='flex items-center gap-1 text-[#75757A] capitalize '><LuUser2 className='text-black'/>{element?.attendeesDetails?.fullName}</p>
+                                                        <p className='flex items-center gap-1 text-[#75757A] '><MdOutlineEmail className='text-black'/>{element?.attendeesDetails?.email}</p>
+                                                    </div>
+
+                                                    <div className=''>
+                                                        <select className="rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer text-[12px] p-1 text-white" onChange={(e: any) => handleSelectValue(e, element)}>
+                                                            <option value="" disabled selected>Move to</option>
+                                                            {groupList?.filter((data: any) => data.groupNo !== ele.groupNo)?.map((data: any) => (
+                                                                <option key={data?.groupNo} value={data?.groupNo}>Group {data?.groupNo}</option>
+                                                            ))}
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+
+                                            )
+                                        })}</p>
+                                    </div>
+                                </>
+                            )
+
+                        })}
+                    </div>
         </div>
             {/* {Object.entries(eventDetail).map(([group, items] :any) => (
                 <div key={group}>
