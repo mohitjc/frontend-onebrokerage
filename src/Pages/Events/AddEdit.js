@@ -26,7 +26,8 @@ const AddEdit = () => {
         { key:'description' , required:true ,message:'Description is required'},
         { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
     ]
-
+console.log(form?.date,"vvvvvvvvvvvvvvvvvvvvvvvvvvvv")
+console.log(form?.deadline,"vvvvvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvvvvvvv")
     const timezones=timezoneModel.list
 
     const handleSubmit = (e) => {
@@ -241,7 +242,7 @@ const AddEdit = () => {
                                 label="RSVP Deadline"
                                 value={datepipeModel.datetodatepicker(form.deadline||'')}
                                 maxlength="8"
-                                maxDate={form.date}
+                                // maxDate={form.date}
                                 onChange={e => setform({ ...form, deadline: e })}
                                 error={getDateErrr(form.date,form.deadline) && submitted ? 'Entered date is greater than Event Date':''}
                                 required
