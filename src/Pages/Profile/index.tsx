@@ -117,13 +117,13 @@ console.log(data,"allGroupDetails")
                                      
                 </div>
 
-                <div className='mt-8'>
+                <div className='mt-8 '>
                   <div className='overflow-auto'>
                   <table className='w-full'>
                   <thead className='border-y border-[#EAECF0]'>
                     <tr className='border-y border-[#EAECF0]'>
-                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block '>Group</label></th>
-                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block '>Role</label></th>
+                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block capitalize'>Group</label></th>
+                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block capitalize'>Role</label></th>
 
                     </tr>
                    
@@ -131,8 +131,8 @@ console.log(data,"allGroupDetails")
                   
                   </thead>
                 <tbody>
-                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'>{data?.groupId?.name||'--'}</td>
-                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'>{user.customerRole?.name}</td>
+                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{data?.groupId?.name||'--'}</td>
+                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{user.customerRole?.name}</td>
                      
                 {
                   data?.allGroupDetails?.map((e :any)=>{
@@ -141,8 +141,8 @@ console.log(data,"allGroupDetails")
                      
                       <tr>
                       
-                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'>{e?.groupId?.name}</td>
-                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'>{e?.role}</td>
+                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{e?.groupId?.name}</td>
+                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{e?.role}</td>
 
                       </tr>
                     </>
