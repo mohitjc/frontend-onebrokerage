@@ -337,7 +337,7 @@ useEffect(()=>{
 
             <div className="col-span-full">
               <label>Admin Comment</label>
-              <textarea
+              <textarea disabled
                 className="relative shadow-box bg-white w-full rounded-lg flex items-center gap-2 overflow-hidden px-2"
                 value={form.adminComment}
                 onChange={e => setForm({ ...form, adminComment: e.target.value })}

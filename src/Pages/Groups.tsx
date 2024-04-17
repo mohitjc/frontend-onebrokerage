@@ -4,10 +4,13 @@ import ApiClient from "../methods/api/apiClient";
 import loader from '../methods/loader';
 import { MdOutlineEmail } from 'react-icons/md';
 import { LuUser2 } from 'react-icons/lu';
+import axios from 'axios';
+import environment from '../environment';
 const Groups = ({ eventDetail = '' }: any) => {
     const { id } = useParams()
     const [groupList, setGroupList]: any = useState()
     const [attendeesGroup , setattendeesGroup] = useState()
+    const [data,setData]=useState()
     const getAttendeesGroupPair  = () => {
         loader(true)
         ApiClient.get(`api/event/groups?eventId=${id}`).then(res => {
@@ -47,15 +50,74 @@ const Groups = ({ eventDetail = '' }: any) => {
             }
         })
     }
+ 
+
+const getGroupExport = async () => {
+    try {
+   
+  const res=await axios({
+      method:"get",
+      url: `${environment.api}api/export/event-group?eventId=${id}`,
+      responseType:'blob',
+   
+  });
+  var blob=new Blob([res.data],{
+      type:res.headers["content-type"],
+  });
+  let downloadAnchor :any= document.createElement("a")
+  downloadAnchor.href = window.URL.createObjectURL(blob);
+  downloadAnchor.download = `GroupsDetail.xlsx`;
+  downloadAnchor.click()
+      
+  
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  
     useEffect(() => {
-        // getGroupPair()
         getAttendeesGroupPair()
     }, [])
-
+    const handleInputField = (e: any) => {
+        const file = e.target.files?.[0]; // Get the selected file
+       
+          const formData = new FormData();
+          formData.append('file', file);
+         let body={
+          file:e.target.files?.[0]
+         }
+          ApiClient.postFormData('api/importGroupEvent', body)
+            .then(res => {
+              if (res.success) {
+                console.log(res.data); // Log the response data if needed
+              } else {
+                console.error('Failed to import file:', res.error); // Handle error response
+              }
+            })
+            .catch(error => {
+              console.error('Network error:', error); // Handle network errors
+            });
+        
+      };
     console.log(groupList, "groupList")
     return (
         <>
+        
         <div  className='max-h-96 overflow-y-auto'>
+        <button onClick={getGroupExport}>Export Data</button>
+         {/* import button */}
+         <div>
+                      <button>
+        Import
+        <input
+          type="file"
+          id="fileInput"
+          onChange={(e :any)=>handleInputField(e)}
+        />
+      </button>
+                       
+                      </div>
+                      {/*  */}
             <div className='grid grid-cols-2 gap-2'>
                 {groupList?.sort((a : any, b : any) => a.groupNo - b.groupNo)?.map((ele: any) => {
                     return (
