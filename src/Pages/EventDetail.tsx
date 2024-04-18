@@ -491,7 +491,7 @@ const handleMemberHistoryPage=()=>{
                         </> : <></>}
 
                       </>}
-
+<div><button>Request Generate Grop</button></div>
                      
 {data?.isGroupGenerated === true ? <div className="flex justify-end">
                         <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3 px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
