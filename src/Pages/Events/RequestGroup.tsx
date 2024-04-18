@@ -43,8 +43,8 @@ console.log(selectedIds,"selectedIdsselectedIdsselectedIdsselectedIds")
         options={options}
         onChange={handleSelectChange}
       />
-     <div>
-      <button onClick={()=>handleSubmit()}>Save</button>
+     <div className='mt-4 flex items-center justify-end'>
+       <button className='bg-[#EF7A2B] inline-flex py-2 px-6 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl' onClick={()=>handleSubmit()}>Save</button>
      </div>
     </div>
     

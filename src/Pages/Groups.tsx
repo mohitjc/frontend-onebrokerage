@@ -116,9 +116,13 @@ const getGroupExport = async () => {
     return (
         <>
         
-                    <div className='max-h-96 overflow-y-auto'>
-                        <button onClick={() => setRequestGroup(true)} >Add New Group</button>
-                    <div className='flex items-center gap-4 justify-end'>
+                    <div className='max-h-96 overflow-y-auto pr-4'>
+                    <div className='flex items-center gap-4 justify-between mb-3'>
+                        <div className=''>
+                        <button className='bg-orange-500 rounded-lg px-4 py-2 text-white' onClick={() => setRequestGroup(true)} >Add New Group</button>
+
+                        </div>
+                        <div className='flex items-center gap-2'>
                         <div className=''>
                             <div className="flex  items-center justify-center bg-grey-lighter">
                                 <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer ">
@@ -131,6 +135,8 @@ const getGroupExport = async () => {
                             </div>
                         </div>
                             <button className='bg-orange-500 px-2 py-2 rounded-md text-sm flex items-center gap-2 text-white' onClick={getGroupExport}><TbFileExport className='text-md' /> Export Data</button>
+                   
+                        </div>
                     </div>
                         <div className='mt-2'>
                                 {/* import button */}
@@ -150,16 +156,16 @@ const getGroupExport = async () => {
                                         <p className=''>{ele?.attendees?.map((element: any) => {
                                             return (
                                                 <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2                                        '>
-                                                    <div className='text-[14px]'>
-                                                        <p className='flex items-center gap-1 text-[#75757A] capitalize '><LuUser2 className='text-black'/>{element?.attendeesDetails?.fullName}</p>
-                                                        <p className='flex items-center gap-1 text-[#75757A] '><MdOutlineEmail className='text-black'/>{element?.attendeesDetails?.email}</p>
+                                                    <div className=''>
+                                                        <p className='flex items-center gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]'/>{element?.attendeesDetails?.fullName}</p>
+                                                        <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]'/>{element?.attendeesDetails?.email}</p>
                                                     </div>
 
-                                                    <div className=''>
-                                                        <select className="rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer text-[12px] p-1 text-white" onChange={(e: any) => handleSelectValue(e, element)}>
+                                                    <div className='rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer  px-2 pb-1 '>
+                                                        <select className=" bg-transparent focus:outline-none cursor-pointer text-[12px] text-[12px] text-white" onChange={(e: any) => handleSelectValue(e, element)}>
                                                             <option value="" disabled selected>Move to</option>
                                                             {groupList?.filter((data: any) => data.groupNo !== ele.groupNo)?.map((data: any) => (
-                                                                <option key={data?.groupNo} value={data?.groupNo}>Group {data?.groupNo}</option>
+                                                                <option className='text-md text-black' key={data?.groupNo} value={data?.groupNo}>Group {data?.groupNo}</option>
                                                             ))}
                                                         </select>
 
