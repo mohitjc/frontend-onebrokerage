@@ -104,7 +104,7 @@ const getGroupExport = async () => {
     return (
         <>
         
-                    <div className='max-h-96 overflow-y-auto'>
+                    <div className='max-h-96 overflow-y-auto pr-4'>
                     <div className='flex items-center gap-4 justify-end'>
                         <div className=''>
                             <div className="flex  items-center justify-center bg-grey-lighter">
@@ -142,11 +142,11 @@ const getGroupExport = async () => {
                                                         <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]'/>{element?.attendeesDetails?.email}</p>
                                                     </div>
 
-                                                    <div className='rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer text-[12px] p-1 text-white'>
-                                                        <select className=" bg-transparent focus:outline-none cursor-pointer text-[12px] text-white" onChange={(e: any) => handleSelectValue(e, element)}>
+                                                    <div className='rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer  px-2 pb-1 '>
+                                                        <select className=" bg-transparent focus:outline-none cursor-pointer text-[12px] text-[12px] text-white" onChange={(e: any) => handleSelectValue(e, element)}>
                                                             <option value="" disabled selected>Move to</option>
                                                             {groupList?.filter((data: any) => data.groupNo !== ele.groupNo)?.map((data: any) => (
-                                                                <option key={data?.groupNo} value={data?.groupNo}>Group {data?.groupNo}</option>
+                                                                <option className='text-md text-black' key={data?.groupNo} value={data?.groupNo}>Group {data?.groupNo}</option>
                                                             ))}
                                                         </select>
 
