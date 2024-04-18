@@ -79,26 +79,34 @@ const getGroupExport = async () => {
     useEffect(() => {
         getAttendeesGroupPair()
     }, [])
-    const handleInputField = (e: any) => {
-        const file = e.target.files?.[0]; // Get the selected file
-       
-          const formData = new FormData();
-          formData.append('file', file);
-         let body={
-          file:e.target.files?.[0]
-         }
-          ApiClient.postFormData('api/importGroupEvent', body)
-            .then(res => {
-              if (res.success) {
-                console.log(res.data); // Log the response data if needed
-              } else {
-                console.error('Failed to import file:', res.error); // Handle error response
-              }
-            })
-            .catch(error => {
-              console.error('Network error:', error); // Handle network errors
-            });
+    const handleInputField = async () => {
         
+        
+        
+
+
+            try {
+   
+                const res=await axios({
+                    method:"get",
+                    url: `${environment.api}api/sample/group-import`,
+                    responseType:'blob',
+                 
+                });
+                var blob=new Blob([res.data],{
+                    type:res.headers["content-type"],
+                });
+                let downloadAnchor :any= document.createElement("a")
+                downloadAnchor.href = window.URL.createObjectURL(blob);
+                downloadAnchor.download = `SampleFile.xlsx`;
+                downloadAnchor.click()
+                    
+                
+                  } catch (error) {
+                    console.error('Error fetching data:', error);
+                  }
+
+
       };
     console.log(groupList, "groupList")
     return (
@@ -112,8 +120,8 @@ const getGroupExport = async () => {
                                     <svg className="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                                     </svg>
-                                    <span className="text-sm leading-normal">Select a file</span>
-                                    <input type='file' onChange={(e :any)=>handleInputField(e)} className="hidden" />
+                                    <span className="text-sm leading-normal"onClick={()=>handleInputField()}>Download file</span>
+                               
                                 </label>
                             </div>
                         </div>

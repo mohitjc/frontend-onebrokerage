@@ -277,7 +277,7 @@ console.log(form?.deadline,"vvvvvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvvvvvvv")
                             <FormControl
                                 type="text"
                                 name="groupMemberLimit"
-                                label="Group Member Limit"
+                                label=" Members per group"
                                 className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
                                 value={form?.groupMemberLimit}
                                 onChange={e => setform({ ...form, groupMemberLimit: e })}
