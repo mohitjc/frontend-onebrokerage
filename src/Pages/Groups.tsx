@@ -7,10 +7,13 @@ import { LuUser2 } from 'react-icons/lu';
 import axios from 'axios';
 import { TbFileExport } from "react-icons/tb";
 import environment from '../environment';
+import Modal from "../components/common/Modal";
+import AddNewGroup from './Events/AddNewGroup';
 const Groups = ({ eventDetail = '' }: any) => {
     const { id } = useParams()
     const [groupList, setGroupList]: any = useState()
     const [attendeesGroup , setattendeesGroup] = useState()
+    const [requestGroup,setRequestGroup] = useState(false)
     const [data,setData]=useState()
     const getAttendeesGroupPair  = () => {
         loader(true)
@@ -113,6 +116,7 @@ const getGroupExport = async () => {
         <>
         
                     <div className='max-h-96 overflow-y-auto'>
+                        <button onClick={() => setRequestGroup(true)} >Add New Group</button>
                     <div className='flex items-center gap-4 justify-end'>
                         <div className=''>
                             <div className="flex  items-center justify-center bg-grey-lighter">
@@ -188,7 +192,18 @@ const getGroupExport = async () => {
                     ))}
                 </div>
             ))} */}
-
+      {requestGroup ? <>
+        <Modal
+          
+          title="Request Group"
+          body={<>
+        <AddNewGroup></AddNewGroup>
+          </>}
+          result={e => {
+            setRequestGroup(false)
+          }}
+        />
+      </> : <></>}
         </>
 
 
