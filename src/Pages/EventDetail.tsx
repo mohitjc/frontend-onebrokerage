@@ -19,6 +19,8 @@ import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import MemberHistory from "./Events/MemberHistory";
 import RequestGroup from "./Events/RequestGroup";
+import { LiaUserClockSolid } from "react-icons/lia";
+
 const EventDetail = () => {
   const [host, setHost]: any = useState()
   const [data, setData]: any = useState()
@@ -492,13 +494,15 @@ const handleMemberHistoryPage=()=>{
                         </> : <></>}
 
                       </>}
-<div><button onClick={() => setRequestGroup(true)}>Request Generate Group</button></div>
+                     <div className="flex items-center justify-between">
+                     <div className=""><button className="flex items-center gap-2 border border-gray-300 py-3 px-3 rounded-xl hover:bg-orange-500 hover:text-white" onClick={() => setRequestGroup(true)}><LiaUserClockSolid /> Request Generate Group</button></div>
                      
-{data?.isGroupGenerated === true ? <div className="flex justify-end">
-                        <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3 px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
-                      </div>:<div className="flex justify-end">
-                        <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3  px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />Generate Connect meets</button>
-                      </div>}
+                     {data?.isGroupGenerated === true ? <div className="flex justify-end">
+                                   <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3 px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
+                                 </div>:<div className="flex justify-end">
+                                   <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3  px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />Generate Connect meets</button>
+                                 </div>}
+                     </div>
                      
 
                     </div>
