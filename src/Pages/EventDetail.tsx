@@ -18,7 +18,7 @@ import Groups from "./Groups";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import MemberHistory from "./Events/MemberHistory";
-
+import RequestGroup from "./Events/RequestGroup";
 const EventDetail = () => {
   const [host, setHost]: any = useState()
   const [data, setData]: any = useState()
@@ -29,6 +29,7 @@ const EventDetail = () => {
   const [group, setGroup] = useState(false)
   const [memberHistory, setmemberHistory] = useState(false)
   const [invites, setInvites] = useState([])
+  const [requestGroup,setRequestGroup] = useState(false)
   const [memberHistoryData , setmemberHistoryData] = useState()
   const [attendeesGroup , setattendeesGroup] = useState()
   const user = useSelector((state:any) => state.user);
@@ -491,7 +492,7 @@ const handleMemberHistoryPage=()=>{
                         </> : <></>}
 
                       </>}
-<div><button>Request Generate Grop</button></div>
+<div><button onClick={() => setRequestGroup(true)}>Request Generate Group</button></div>
                      
 {data?.isGroupGenerated === true ? <div className="flex justify-end">
                         <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3 px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
@@ -601,6 +602,19 @@ const handleMemberHistoryPage=()=>{
           </>}
           result={e => {
             setmemberHistory(false)
+          }}
+        />
+      </> : <></>}
+
+      {requestGroup ? <>
+        <Modal
+          
+          title="Request Group"
+          body={<>
+         <RequestGroup eventDetail = {attendeeFilter} data={data}/>
+          </>}
+          result={e => {
+            setRequestGroup(false)
           }}
         />
       </> : <></>}
