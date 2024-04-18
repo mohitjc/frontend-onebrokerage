@@ -137,13 +137,13 @@ const getGroupExport = async () => {
                                         <p className=''>{ele?.attendees?.map((element: any) => {
                                             return (
                                                 <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2                                        '>
-                                                    <div className='text-[14px]'>
-                                                        <p className='flex items-center gap-1 text-[#75757A] capitalize '><LuUser2 className='text-black'/>{element?.attendeesDetails?.fullName}</p>
-                                                        <p className='flex items-center gap-1 text-[#75757A] '><MdOutlineEmail className='text-black'/>{element?.attendeesDetails?.email}</p>
+                                                    <div className=''>
+                                                        <p className='flex items-center gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]'/>{element?.attendeesDetails?.fullName}</p>
+                                                        <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]'/>{element?.attendeesDetails?.email}</p>
                                                     </div>
 
-                                                    <div className=''>
-                                                        <select className="rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer text-[12px] p-1 text-white" onChange={(e: any) => handleSelectValue(e, element)}>
+                                                    <div className='rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer text-[12px] p-1 text-white'>
+                                                        <select className=" bg-transparent focus:outline-none cursor-pointer text-[12px] text-white" onChange={(e: any) => handleSelectValue(e, element)}>
                                                             <option value="" disabled selected>Move to</option>
                                                             {groupList?.filter((data: any) => data.groupNo !== ele.groupNo)?.map((data: any) => (
                                                                 <option key={data?.groupNo} value={data?.groupNo}>Group {data?.groupNo}</option>
