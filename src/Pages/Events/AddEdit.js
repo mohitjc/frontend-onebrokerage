@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 const AddEdit = () => {
     const { id } = useParams()
     const [images, setImages] = useState({ image: ''});
-    const [form, setform] = useState({ id: '', title: '',type:'', date: "",timezone:'',capacity:'',description:'',deadline:'',externalLink:'',address:'',status: 'active' })
+    const [form, setform] = useState({ id: '', title: '',type:'', date: "",timezone:'',capacity:'',groupMemberLimit:'',description:'',deadline:'',externalLink:'',address:'',status: 'active' })
     const history = useNavigate()
     const [submitted, setSubmitted] = useState(false)
     const user = useSelector((state) => state.user);
@@ -23,9 +23,11 @@ const AddEdit = () => {
         { key: 'status', required: true },
         { key: 'type', required: true ,message:'Type is required'},
         { key: 'timezone', required: true },
-        { key:'description' , required:true ,message:'Description is required'}
+        { key:'description' , required:true ,message:'Description is required'},
+        { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
     ]
-
+console.log(form?.date,"vvvvvvvvvvvvvvvvvvvvvvvvvvvv")
+console.log(form?.deadline,"vvvvvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvvvvvvv")
     const timezones=timezoneModel.list
 
     const handleSubmit = (e) => {
@@ -240,7 +242,7 @@ const AddEdit = () => {
                                 label="RSVP Deadline"
                                 value={datepipeModel.datetodatepicker(form.deadline||'')}
                                 maxlength="8"
-                                maxDate={form.date}
+                                // maxDate={form.date}
                                 onChange={e => setform({ ...form, deadline: e })}
                                 error={getDateErrr(form.date,form.deadline) && submitted ? 'Entered date is greater than Event Date':''}
                                 required
@@ -269,7 +271,19 @@ const AddEdit = () => {
                                 onChange={e => setform({ ...form, externalLink: e })}
                             />
                         </div>
-
+                        <div className=" mb-3">
+                           
+                            <FormControl
+                                type="text"
+                                name="groupMemberLimit"
+                                label="Group Member Limit"
+                                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
+                                value={form?.groupMemberLimit}
+                                onChange={e => setform({ ...form, groupMemberLimit: e })}
+                                required
+                                error={getError('groupMemberLimit')}
+                            />
+                        </div>
                       
 
                         

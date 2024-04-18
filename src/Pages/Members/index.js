@@ -66,7 +66,14 @@ const Members = () => {
         })
     }
 
-
+    const filter = (p={}) => {
+        let f={
+            page:1,
+            ...p
+        }
+        setFilter({ ...filters, ...f})
+        getData({ ...f})
+    }
     const clear = () => {
         setFilter({ ...filters, search: '',status:'', page: 1 })
         getData({ search: '', status:'',page: 1 })
@@ -173,6 +180,8 @@ const Members = () => {
         pageChange={pageChange}
         deleteItem={deleteItem}
         filters={filters}
+        filter={filter}
+        setFilter={setFilter}
         loaging={loaging}
         data={data}
         total={total}
