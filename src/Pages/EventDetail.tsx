@@ -586,6 +586,7 @@ const handleMemberHistoryPage=()=>{
           body={<>
          <Groups
          eventDetail={attendeesGroup}
+         dataa={data}
          />
           </>}
           result={e => {

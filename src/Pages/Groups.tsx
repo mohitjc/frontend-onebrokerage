@@ -9,7 +9,8 @@ import { TbFileExport } from "react-icons/tb";
 import environment from '../environment';
 import Modal from "../components/common/Modal";
 import AddNewGroup from './Events/AddNewGroup';
-const Groups = ({ eventDetail = '' }: any) => {
+const Groups = ({ eventDetail = '' , dataa =''} : any) => {
+    console.log(eventDetail,"eventDetaileventDetaileventDetaileventDetaileventDetail")
     const { id } = useParams()
     const [groupList, setGroupList]: any = useState()
     const [attendeesGroup , setattendeesGroup] = useState()
@@ -197,7 +198,7 @@ const getGroupExport = async () => {
           
           title="Request Group"
           body={<>
-        <AddNewGroup></AddNewGroup>
+        <AddNewGroup dataaa={dataa} />
           </>}
           result={e => {
             setRequestGroup(false)
