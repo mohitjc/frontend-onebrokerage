@@ -17,6 +17,7 @@ import { MdOutlineShare } from "react-icons/md";
 import Groups from "./Groups";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import MemberHistory from "./Events/MemberHistory";
 
 const EventDetail = () => {
   const [host, setHost]: any = useState()
@@ -26,7 +27,9 @@ const EventDetail = () => {
   const [isModal, setModal] = useState('')
   const [isRModal, setRModal] = useState(false)
   const [group, setGroup] = useState(false)
+  const [memberHistory, setmemberHistory] = useState(false)
   const [invites, setInvites] = useState([])
+  const [memberHistoryData , setmemberHistoryData] = useState()
   const [attendeesGroup , setattendeesGroup] = useState()
   const user = useSelector((state:any) => state.user);
   const history = useNavigate()
@@ -35,6 +38,7 @@ const EventDetail = () => {
   const [member, setMember]: any = useState()
   const { id } = useParams()
 console.log(attendeesGroup,"attendeesGroup")
+console.log(user,"nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
   const getDetail = () => {
     loader(true)
     ApiClient.get('api/event/details', { id: id, email: user?.email }).then(res => {
@@ -104,7 +108,13 @@ console.log(attendeesGroup,"attendeesGroup")
       }
     })
   }
-
+const getMemberHistory=()=>{
+  ApiClient.get(`api/member/event/groups?email=${user?.email}`).then(res=>{
+    if(res.success){
+      setmemberHistoryData(res?.data)
+    }
+  })
+}
 
 
   const attendeeFilter = (meetConfirm: any) => {
@@ -188,6 +198,7 @@ console.log(attendeesGroup,"attendeesGroup")
     getDetail()
     getAttendee()
     getInvites()
+    getMemberHistory()
     // getAttendeesGroupPair()
   }, [])
 
@@ -270,7 +281,9 @@ console.log(attendeesGroup,"attendeesGroup")
 // }}
 
 
+const handleMemberHistoryPage=()=>{
 
+}
   return (
     <>
       <PageLayout>
@@ -337,6 +350,7 @@ console.log(attendeesGroup,"attendeesGroup")
                         {/* <p className="font-[400]">You Have RSVP’d . Yes to this event</p> */}
                         <p className="text-[#2B91EF] font-[600] cursor-pointer" onClick={() => setRModal(true)}>RSVP List</p>
                       </div>
+                      <div><button onClick={() => setmemberHistory(true)}> Member history</button></div>
                     </div>
                   </div>
                   <div className="md:mt-8 lg:mt-10">
@@ -575,6 +589,18 @@ console.log(attendeesGroup,"attendeesGroup")
           </>}
           result={e => {
             setGroup(false)
+          }}
+        />
+      </> : <></>}
+      {memberHistory ? <>
+        <Modal
+          
+          title="Member History"
+          body={<>
+         <MemberHistory eventDetail = {memberHistoryData}/>
+          </>}
+          result={e => {
+            setmemberHistory(false)
           }}
         />
       </> : <></>}
