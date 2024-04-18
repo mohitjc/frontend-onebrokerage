@@ -351,7 +351,7 @@ const handleMemberHistoryPage=()=>{
                         {/* <p className="font-[400]">You Have RSVP’d . Yes to this event</p> */}
                         <p className="text-[#2B91EF] font-[600] cursor-pointer" onClick={() => setRModal(true)}>RSVP List</p>
                       </div>
-                      <div><button onClick={() => setmemberHistory(true)}> Member history</button></div>
+                      <div><button className="text-sm hover:text-blue-500 underline text-blue-500 underline-offset-4" onClick={() => setmemberHistory(true)}> Member history</button></div>
                     </div>
                   </div>
                   <div className="md:mt-8 lg:mt-10">
