@@ -253,6 +253,24 @@ console.log(attendeesGroup,"attendeesGroup")
         console.error("Failed to open print window.");
     }
 }
+// const handleInputField=(e :any)=>{
+// console.log(e?.target?.files[0] ,"vvvvvvvvvvvvvvv")
+// const file = e.target?.files[0]; // Get the selected file
+
+// // Create FormData object to send file
+// const formData = new FormData();
+// formData.append('file', file);
+// if (file){
+//   ApiClient.post('api/importGroupEvent',formData).then(res => {
+
+//     if (res.success) {
+//    console.log(res,"bbbbbbbbbbbbb")
+//     }
+//   })
+// }}
+
+
+
   return (
     <>
       <PageLayout>
@@ -459,10 +477,12 @@ console.log(attendeesGroup,"attendeesGroup")
                         </> : <></>}
 
                       </>}
+
+                     
 {data?.isGroupGenerated === true ? <div className="flex justify-end">
-                        <button  onClick={() => setGroup(true)} className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
+                        <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3 px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
                       </div>:<div className="flex justify-end">
-                        <button  onClick={() => setGroup(true)} className="bg-[#46454E] w-44 py-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />Generate Connect meets</button>
+                        <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3  px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />Generate Connect meets</button>
                       </div>}
                      
 
