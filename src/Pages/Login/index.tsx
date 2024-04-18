@@ -124,6 +124,7 @@ const Login = () => {
   const handleAttendence =(e: any)=>{
     e.preventDefault()
     let eventId = methodModel.getPrams('eventId')
+    loader(true)
     ApiClient.post('api/find/user',{email:username},'',true).then(res2=>{
       if(res2.success){
         let url = `/login?eventId=${eventId}&email=${username}&attended=true`
@@ -132,6 +133,7 @@ const Login = () => {
         let url = `/signup?eventId=${eventId}&email=${username}&attended=true`
       history(url); 
       }
+      loader(false)
     })
   };
 
