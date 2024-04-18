@@ -34,7 +34,8 @@ console.log(form?.deadline,"vvvvvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvvvvvvv")
         e.preventDefault()
         setSubmitted(true)
         let invalid = methodModel.getFormError(formValidation, form)
-        if (invalid||getDateErrr(form.date)||getDateErrr(form.deadline)) return
+        
+        if (invalid||getDateErrr(form.date)||getDateErrr(form.date,form.deadline)) return
         let method = 'post'
         let url = shared.addApi
         let value = {
