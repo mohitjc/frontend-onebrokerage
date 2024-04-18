@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import './style.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import permissionModel from '../../../models/permisstion.model';
 import ApiClient from '../../../methods/api/apiClient';
@@ -68,7 +67,7 @@ const PageLayout = ({ children }) => {
                 {/* <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span> */}
               </Link>
               <div className="flex items-center lg:order-2">
-                {user ? <>
+                {user?.loggedIn ? <>
                   <Menu as="div" className="relative  ml-auto">
                     <div>
                       <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-1 text-sm font-semibold text-gray-900 ">
@@ -280,7 +279,7 @@ const PageLayout = ({ children }) => {
             </footer>
 
       </div>
-      <ToastContainer position="top-right" />
+
     </>
   );
 };

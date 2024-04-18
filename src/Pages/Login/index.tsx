@@ -53,27 +53,30 @@ const Login = () => {
       if(email) setUsername(email)
   }, [])
   let attendance = methodModel.getPrams('attendance')
-  console.log(attendance,"attendance")
   const setLogin = async (data: any) => {
 
-    localStorage.setItem('token', data.access_token)
-    dispatch(login_success(data));
+    
     let url = '/profile'
     let eventId = methodModel.getPrams('eventId')
    
     if (eventId) {
-
+      if(methodModel.getPrams('attended')){
         try {
-            const res = await ApiClient.get(`api/attandance?email=${data?.email}&eventId=${eventId}`);
-            console.log(res.success, "res.success");
-            if (res.success === true) {
-                url = `/thanku`
-            }
-        } catch (error) {
-            console.error("Error fetching attendance:", error);
-        }
-
+          const res = await ApiClient.get(`api/attandance?email=${data?.email}&eventId=${eventId}`);
+          console.log(res.success, "res.success");
+          if (res.success === true) {
+              url = `/thanku`
+          }
+      } catch (error) {
+          console.error("Error fetching attendance:", error);
+      }
+      }else{
+        url = `/event/detail/${eventId}`
+      }
     }
+
+    localStorage.setItem('token', data.access_token)
+    dispatch(login_success(data));
     history(url);
 }
 
@@ -121,17 +124,15 @@ const Login = () => {
   const handleAttendence =(e: any)=>{
     e.preventDefault()
     let eventId = methodModel.getPrams('eventId')
-    ApiClient.get(`api/attandance?email=${username}&eventId=${eventId}`).then(async res => {
-     
-      if (res.success == true) {
-        let url = `/thanku`
+    ApiClient.post('api/find/user',{email:username},'',true).then(res2=>{
+      if(res2.success){
+        let url = `/login?eventId=${eventId}&email=${username}&attended=true`
         history(url);
-        }
-       
-       
-    
-    }
-  )
+      }else{
+        let url = `/signup?eventId=${eventId}&email=${username}&attended=true`
+      history(url); 
+      }
+    })
   };
 
   
@@ -169,6 +170,7 @@ const Login = () => {
                     placeholder="Email address"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    disabled={methodModel.getPrams('attended')?true:false}
                     required
                   />
                   <div className="relative mb-6">

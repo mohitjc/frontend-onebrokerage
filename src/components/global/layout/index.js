@@ -3,7 +3,6 @@ import './style.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from '../sidebar';
 import Header from '../header';
-import { ToastContainer } from 'react-toastify';
 import permissionModel from '../../../models/permisstion.model';
 import ApiClient from '../../../methods/api/apiClient';
 import methodModel from '../../../methods/methods';
@@ -128,7 +127,6 @@ const Layout = ({ children }) => {
           </main>
         </div>
       </div>
-      <ToastContainer position="top-right" />
     </>
   );
 };

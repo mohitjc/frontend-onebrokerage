@@ -31,6 +31,7 @@ import Thanku from './Pages/Thanku';
 import configureStoreProd from './Pages/config/configureStore.prod';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { ToastContainer } from 'react-toastify';
 const { persistor, store } = configureStoreProd();
 
 function App() {
@@ -83,6 +84,7 @@ function App() {
                 <img src="/assets/img/loader.gif" alt="logo" className="loaderlogo" />
             </div>
         </div>
+        <ToastContainer position="top-right" />
     </>
     
   );
