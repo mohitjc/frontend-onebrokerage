@@ -498,11 +498,9 @@ const handleMemberHistoryPage=()=>{
                      <div className="">
                 
                      {data?.addedBy?._id != user._id ? data?.meetingStatus !== "completed" ? (
-                          meetingStart() ? (
+                         
                             <button className="flex items-center gap-2 border border-gray-300 py-3 px-3 rounded-xl hover:bg-orange-500 hover:text-white" onClick={() => setRequestGroup(true)}><LiaUserClockSolid />Request For Group</button>
-                          ) : (
-                            ""
-                          )
+                          
                         ) : null :<></>}
                      
                      </div>
@@ -626,7 +624,7 @@ const handleMemberHistoryPage=()=>{
           
           title="Request For Group"
           body={<>
-         <RequestGroup eventDetail = {attendeeFilter} data={data}/>
+         <RequestGroup eventDetail = {attendeeFilter} data={data} setRequestGroup={setRequestGroup}/>
           </>}
           result={e => {
             setRequestGroup(false)

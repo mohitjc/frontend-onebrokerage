@@ -156,21 +156,21 @@ const Dashboard = () => {
                     <li className="me-2">
                         <span
                             onClick={() => typeFilter('ongoing')}
-                            className={`cursor-pointer flex items-center gap-2 ${filters.type == 'ongoing' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+                            className={`cursor-pointer flex items-center gap-2 ${filters.type == 'ongoing' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-orange-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
                         ><BsPersonGear />
                         Ongoing</span>
                     </li>
                     <li className="me-2">
                         <span
                             onClick={() => typeFilter('upcoming')}
-                            className={`cursor-pointer flex items-center gap-2 ${filters.type == 'upcoming' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+                            className={`cursor-pointer flex items-center gap-2 ${filters.type == 'upcoming' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-orange-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
                         > <MdOutlineSystemUpdateAlt />
                         Upcoming</span>
                     </li>
                     <li className="me-2">
                         <span
                             onClick={() => typeFilter('completed')}
-                            className={`cursor-pointer flex items-center gap-2 ${filters.type == 'completed' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+                            className={`cursor-pointer flex items-center gap-2 ${filters.type == 'completed' ? 'inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg active dark:text-blue-500 dark:border-orange-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
                         ><FaRegCalendarCheck />
                         Completed</span>
                     </li>

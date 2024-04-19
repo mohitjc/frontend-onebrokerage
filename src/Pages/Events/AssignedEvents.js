@@ -188,19 +188,19 @@ const AssignedEvents = () => {
         <li className="me-2">
             <span 
             onClick={()=>typeFilter('ongoing')}
-            className={`cursor-pointer ${filters.type=='ongoing'?'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500':'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+            className={`cursor-pointer ${filters.type=='ongoing'?'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-orange-500':'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
             >Ongoing</span>
         </li>
         <li className="me-2">
             <span 
             onClick={()=>typeFilter('upcoming')}
-            className={`cursor-pointer ${filters.type=='upcoming'?'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500':'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+            className={`cursor-pointer ${filters.type=='upcoming'?'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-orange-500':'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
             >Upcoming</span>
         </li>
         <li className="me-2">
             <span 
             onClick={()=>typeFilter('completed')}
-            className={`cursor-pointer ${filters.type=='completed'?'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500':'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
+            className={`cursor-pointer ${filters.type=='completed'?'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-orange-500':'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`}
             >Completed</span>
         </li>
     </ul>
