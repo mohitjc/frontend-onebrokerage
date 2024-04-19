@@ -24,13 +24,27 @@ const Signup = () => {
   const [eyes, setEyes] = useState({ password: false, confirmPassword: false, currentPassword: false });
 
 
-  const setLogin=(data:any)=>{
-    localStorage.setItem('token', data.access_token)
+  const setLogin=async(data:any)=>{
   
-    dispatch(login_success(data));
     let url = '/profile'
     let eventId=methodModel.getPrams('eventId')
-    if(eventId) url=`/dashboard?eventId=${eventId}`
+    if (eventId) {
+      if(methodModel.getPrams('attended')){
+        try {
+          const res = await ApiClient.get(`api/attandance?email=${data?.email}&eventId=${eventId}`);
+          console.log(res.success, "res.success");
+          if (res.success === true) {
+              url = `/thanku`
+          }
+      } catch (error) {
+          console.error("Error fetching attendance:", error);
+      }
+      }else{
+        url = `/event/detail/${eventId}`
+      }
+    }
+    localStorage.setItem('token', data.access_token)
+    dispatch(login_success(data));
     history(url);
   }
 
@@ -116,6 +130,7 @@ const Signup = () => {
             className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
             placeholder="Email address"
             autoComplete='off'
+            disabled={methodModel.getPrams('attended')?true:false}
             required />
              <input type="text"
             onChange={e => setForm({ ...form, fullName: e.target.value })}

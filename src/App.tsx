@@ -31,6 +31,8 @@ import Thanku from './Pages/Thanku';
 import configureStoreProd from './Pages/config/configureStore.prod';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { ToastContainer } from 'react-toastify';
+import Setting from './Pages/Setting';
 const { persistor, store } = configureStoreProd();
 
 function App() {
@@ -49,7 +51,8 @@ function App() {
     {url:'/roles/add',element:<AddEditRole />},
     {url:'/roles/edit/:id',element:<AddEditRole />},
     {url:'/members/add',element:<AddEdiMember />},
-    {url:'/members',element:<Members />},
+    {url:'/members',element:<Members />}, 
+    {url:'/setting',element:<Setting />}, 
     {url:'/members/edit/:id',element:<AddEdiMember />},
     {url:'/assign-member/add',element:<AddEditAssignMembers />},
     {url:'/assign-member',element:<AssignMembers />},
@@ -83,6 +86,7 @@ function App() {
                 <img src="/assets/img/loader.gif" alt="logo" className="loaderlogo" />
             </div>
         </div>
+        <ToastContainer position="top-right" />
     </>
     
   );

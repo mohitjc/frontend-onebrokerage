@@ -495,13 +495,23 @@ const handleMemberHistoryPage=()=>{
 
                       </>}
                      <div className="flex items-center justify-between">
-                     <div className=""><button className="flex items-center gap-2 border border-gray-300 py-3 px-3 rounded-xl hover:bg-orange-500 hover:text-white" onClick={() => setRequestGroup(true)}><LiaUserClockSolid /> Request Generate Group</button></div>
+                     <div className="">
+                
+                     {data?.addedBy?._id != user._id ? data?.meetingStatus !== "completed" ? (
+                          meetingStart() ? (
+                            <button className="flex items-center gap-2 border border-gray-300 py-3 px-3 rounded-xl hover:bg-orange-500 hover:text-white" onClick={() => setRequestGroup(true)}><LiaUserClockSolid />Request For Group</button>
+                          ) : (
+                            ""
+                          )
+                        ) : null :<></>}
                      
-                     {data?.isGroupGenerated === true ? <div className="flex justify-end">
+                     </div>
+                     {data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager"? <>{data?.isGroupGenerated === true ? <div className="flex justify-end">
                                    <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3 px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
                                  </div>:<div className="flex justify-end">
                                    <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3  px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />Generate Connect meets</button>
-                                 </div>}
+                                 </div>}</>:""}
+                     
                      </div>
                      
 
@@ -614,7 +624,7 @@ const handleMemberHistoryPage=()=>{
       {requestGroup ? <>
         <Modal
           
-          title="Request Group"
+          title="Request For Group"
           body={<>
          <RequestGroup eventDetail = {attendeeFilter} data={data}/>
           </>}

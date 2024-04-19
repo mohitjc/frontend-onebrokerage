@@ -37,7 +37,7 @@ const handleError = (err, hideError) => {
 }
 
 class ApiClient {
-    static post(url1, params, base = '') {
+    static post(url1, params, base = '',hideError=false) {
         let url = baseUrl + url1
         if (base) url = base + url1
 
@@ -52,7 +52,7 @@ class ApiClient {
                     loader(false)
                     if (error && error.response) {
                         let eres = error.response;
-                        handleError(eres.data)
+                        handleError(eres.data,hideError)
                         fulfill({ ...eres.data, success: false });
                     } else {
                         toast.error('Network Error')

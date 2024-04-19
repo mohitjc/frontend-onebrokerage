@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import { ToastContainer } from "react-toastify"
 
 const AuthLayout=({children}:any)=>{
     return <>
@@ -26,7 +25,6 @@ const AuthLayout=({children}:any)=>{
           </div>
         </div>
       </div>
-      <ToastContainer position="top-right" />
     </>
 }
 
