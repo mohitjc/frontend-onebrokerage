@@ -6,11 +6,10 @@ import { Tooltip } from "antd";
 import { RiHome6Line } from "react-icons/ri";
 import { TiArrowSortedDown } from "react-icons/ti";
 import environment from "../../../environment";
-import { LuTimerReset } from "react-icons/lu";
-import { FiAlertTriangle } from "react-icons/fi";
 import { SiPlanet, SiSuperuser } from "react-icons/si";
 import { MdEventAvailable, MdOutlineEmojiEvents, MdOutlineEventAvailable } from "react-icons/md";
 import { LuUser2 } from "react-icons/lu";
+import { CiSettings } from "react-icons/ci";
 
 
 const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
@@ -53,7 +52,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
     },
     {
       name:'Setting',
-      icon:<SiPlanet className="text-[#00f884] shrink-0 text-lg" />      ,
+      icon:<CiSettings className="text-[#00f884] shrink-0 text-lg" />      ,
       url:'/setting',
       key:'readMembers',
     },
