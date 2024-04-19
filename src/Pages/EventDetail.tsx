@@ -624,7 +624,7 @@ const handleMemberHistoryPage=()=>{
           
           title="Request For Group"
           body={<>
-         <RequestGroup eventDetail = {attendeeFilter} data={data}/>
+         <RequestGroup eventDetail = {attendeeFilter} data={data} setRequestGroup={setRequestGroup}/>
           </>}
           result={e => {
             setRequestGroup(false)

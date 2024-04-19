@@ -3,7 +3,9 @@ import Select from 'react-select';
 import ApiClient from '../../methods/api/apiClient';
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-const RequestGroup = ({ eventDetail = '' ,data="" }: any) => {
+import { toast } from 'react-toastify';
+import loader from '../../methods/loader';
+const RequestGroup = ({ eventDetail = '' ,data="" ,setRequestGroup=""}: any) => {
   const { id } = useParams()
   const user = useSelector((state:any) => state.user);
   console.log(data,"datatatatattatattaattataatt")
@@ -19,6 +21,7 @@ const RequestGroup = ({ eventDetail = '' ,data="" }: any) => {
     setSelectedIds(selectedIdsArray);
   };
   const handleSubmit=()=>{
+    loader(true)
     let payload={
       
         eventId: id,
@@ -29,8 +32,11 @@ const RequestGroup = ({ eventDetail = '' ,data="" }: any) => {
     
     }
     ApiClient.post("api/group/request",payload).then(res=>{
-      if(res.success){
-      console.log(res)
+     
+      if(res){
+   toast(res.message)
+   loader(false)
+   setRequestGroup(false)
       }
     })
   }
