@@ -887,6 +887,12 @@ input.searchbar.mr-2 {
 
   }
 
+  .min-sidebar~div>.main-sidebar {
+    margin-top: 0px !important;
+
+  }
+
+
   .d-flex.justify-content-between.align-items-center {
     /* flex-wrap: wrap; */
     display: block !important;
@@ -899,7 +905,7 @@ input.searchbar.mr-2 {
 
   .main-sidebar {
     position: absolute;
-    top: 143px;
+    top: 60px;
     z-index: 998;
   }
 
@@ -1567,7 +1573,12 @@ p.profile_data {
 }
 
 
+@media (max-width:1000px){
+  .w-\[calc\(100\%-280px\)\] {
+    width:100% !important;
+}
 
+}
 
 @media screen and (min-width:320px) and (max-width:767px) {
   .min-sidebar~div>.main-sidebar a.col_side:hover {
@@ -1581,9 +1592,14 @@ p.profile_data {
     min-width: 250px;
     width: 100%;
     min-height: 100vh;
-    margin-top: -72px;
+    // margin-top: -72px;
     border-right: 1px solid #E8E8E8;
+    top: 0px;
   }
+
+.active-sidebar img.hide-logo {
+   padding-left: 0px !important; 
+}
 
   .sidees {
     display: flex;
