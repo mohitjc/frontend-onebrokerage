@@ -7,10 +7,14 @@ import { LuUser2 } from 'react-icons/lu';
 import axios from 'axios';
 import { TbFileExport } from "react-icons/tb";
 import environment from '../environment';
-const Groups = ({ eventDetail = '' }: any) => {
+import Modal from "../components/common/Modal";
+import AddNewGroup from './Events/AddNewGroup';
+const Groups = ({ eventDetail = '' , dataa =''} : any) => {
+    console.log(eventDetail,"eventDetaileventDetaileventDetaileventDetaileventDetail")
     const { id } = useParams()
     const [groupList, setGroupList]: any = useState()
     const [attendeesGroup , setattendeesGroup] = useState()
+    const [requestGroup,setRequestGroup] = useState(false)
     const [data,setData]=useState()
     const getAttendeesGroupPair  = () => {
         loader(true)
@@ -113,7 +117,12 @@ const getGroupExport = async () => {
         <>
         
                     <div className='max-h-96 overflow-y-auto pr-4'>
-                    <div className='flex items-center gap-4 justify-end'>
+                    <div className='flex items-center gap-4 justify-between mb-3'>
+                        <div className=''>
+                        <button className='bg-orange-500 rounded-lg px-4 py-2 text-white' onClick={() => setRequestGroup(true)} >Add New Group</button>
+
+                        </div>
+                        <div className='flex items-center gap-2'>
                         <div className=''>
                             <div className="flex  items-center justify-center bg-grey-lighter">
                                 <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer ">
@@ -126,6 +135,8 @@ const getGroupExport = async () => {
                             </div>
                         </div>
                             <button className='bg-orange-500 px-2 py-2 rounded-md text-sm flex items-center gap-2 text-white' onClick={getGroupExport}><TbFileExport className='text-md' /> Export Data</button>
+                   
+                        </div>
                     </div>
                         <div className='mt-2'>
                                 {/* import button */}
@@ -188,7 +199,18 @@ const getGroupExport = async () => {
                     ))}
                 </div>
             ))} */}
-
+      {requestGroup ? <>
+        <Modal
+          
+          title="Request Group"
+          body={<>
+        <AddNewGroup dataaa={dataa} />
+          </>}
+          result={e => {
+            setRequestGroup(false)
+          }}
+        />
+      </> : <></>}
         </>
 
 

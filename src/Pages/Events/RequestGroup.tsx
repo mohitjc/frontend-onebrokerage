@@ -23,7 +23,7 @@ const RequestGroup = ({ eventDetail = '' ,data="" }: any) => {
       
         eventId: id,
         groupId:data?.groupId?._id,
-        requestedBy: user?._id,
+        requestedBy: user?.email,
         attendeeIds:selectedIds
       
     
