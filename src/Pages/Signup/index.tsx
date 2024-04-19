@@ -113,21 +113,21 @@ const Signup = () => {
           <input type="email"
             onChange={e => setForm({ ...form, email: e.target.value })}
             value={form.email}
-            className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-blue-500 focus:border-blue-500"
+            className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
             placeholder="Email address"
             autoComplete='off'
             required />
              <input type="text"
             onChange={e => setForm({ ...form, fullName: e.target.value })}
             value={form.fullName}
-            className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-blue-500 focus:border-blue-500"
+            className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
             placeholder="Enter Name"
             autoComplete='off'
             required />
           <div className="relative mb-6">
             <input 
             type={eyes.password ? 'text' : 'password'} 
-            className="shadow-box border-1 border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-blue-500 focus:border-blue-500" placeholder="Password"
+            className="shadow-box border-1 border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500" placeholder="Password"
              onChange={e => setForm({ ...form, password: e.target.value })}
              value={form.password}
              minLength={8}
