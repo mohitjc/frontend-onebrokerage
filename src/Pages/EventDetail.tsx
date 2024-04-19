@@ -495,7 +495,13 @@ const handleMemberHistoryPage=()=>{
 
                       </>}
                      <div className="flex items-center justify-between">
-                     <div className=""><button className="flex items-center gap-2 border border-gray-300 py-3 px-3 rounded-xl hover:bg-orange-500 hover:text-white" onClick={() => setRequestGroup(true)}><LiaUserClockSolid /> Request Generate Group</button></div>
+                     <div className="">
+                     {data?.addedBy?._id != user._id?<>
+                    
+                     <button className="flex items-center gap-2 border border-gray-300 py-3 px-3 rounded-xl hover:bg-orange-500 hover:text-white" onClick={() => setRequestGroup(true)}><LiaUserClockSolid /> Request Generate Group</button>
+                     </>:<></>}
+                     
+                     </div>
                      
                      {data?.isGroupGenerated === true ? <div className="flex justify-end">
                                    <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3 px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
