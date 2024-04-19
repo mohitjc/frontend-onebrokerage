@@ -318,14 +318,14 @@ const handleMemberHistoryPage=()=>{
             <div className="events_details">
               <div className="grid grid-cols-12 gap-x-10">
                 <div className="col-span-12 md:col-span-7 lg:col-span-8">
-                  <div className="flex flex-col lg:gap-y-3 py-2 lg:py-4">
+                  <div className="flex flex-col gap-y-2 lg:gap-y-3 py-2 lg:py-4">
                     <div className="date_text">
-                      <h6 className="text-[#EF7A2B] text-[24px] font-[400]"> <span className="mr-1">{datepipeModel.datetime(data?.date)}</span>
+                      <h6 className="text-[#EF7A2B] text-[16px] xl:text-[24px] font-[400]"> <span className="mr-1">{datepipeModel.datetime(data?.date)}</span>
                         {/* |<span className="ml-1">Time 8:30 AM - 11:00 AM</span> */}
                       </h6>
                     </div>
                     <div>
-                      <p className="text-[#393C3D] text-[33px] font-[600]">{data?.title}</p>
+                      <p className="text-[#393C3D] text-[20px] lg:text-[33px] font-[600]">{data?.title}</p>
                     </div>
                     <div className="flex justify-between items-center">
                       <p className="flex gap-x-2 items-center capitalize"><IoLocationSharp className="text-orange-500 text-2xl lg:text-3xl" />{data?.address}</p>
@@ -338,8 +338,8 @@ const handleMemberHistoryPage=()=>{
                   </div>
                 </div>
 
-                <div className="col-span-12 md:col-span-5 lg:col-span-4">
-                  <div className="flex items-center gap-x-6">
+                <div className="col-span-12 md:col-span-5 lg:col-span-4 ">
+                  <div className="flex items-center gap-x-6 gap-y-6">
                     <div className=" border-4 border-orange-500 rounded-full drop-shadow-lg">
                       <img className="h-28 w-28 rounded-full object-cover " src="/assets/img/event-banner.png" alt="" />
                     </div>
@@ -356,7 +356,7 @@ const handleMemberHistoryPage=()=>{
                       <div><button className="text-sm hover:text-blue-500 underline text-blue-500 underline-offset-4" onClick={() => setmemberHistory(true)}> Member history</button></div>
                     </div>
                   </div>
-                  <div className="md:mt-8 lg:mt-10">
+                  <div className="mt-6 md:mt-8 lg:mt-10">
                     <div className="borders_data p-6">
                       <div className="flex flex-col gap-y-4">
 
@@ -506,12 +506,12 @@ const handleMemberHistoryPage=()=>{
                         ) : null :<></>}
                      
                      </div>
-                     
-                     {data?.isGroupGenerated === true ? <div className="flex justify-end">
+                     {data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager"? <>{data?.isGroupGenerated === true ? <div className="flex justify-end">
                                    <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3 px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
                                  </div>:<div className="flex justify-end">
                                    <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3  px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />Generate Connect meets</button>
-                                 </div>}
+                                 </div>}</>:""}
+                     
                      </div>
                      
 
@@ -624,7 +624,7 @@ const handleMemberHistoryPage=()=>{
       {requestGroup ? <>
         <Modal
           
-          title="Request Group"
+          title="Request For Group"
           body={<>
          <RequestGroup eventDetail = {attendeeFilter} data={data}/>
           </>}

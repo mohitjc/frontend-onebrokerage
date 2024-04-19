@@ -16,6 +16,7 @@ const Groups = ({ eventDetail = '' , dataa =''} : any) => {
     const [attendeesGroup , setattendeesGroup] = useState()
     const [requestGroup,setRequestGroup] = useState(false)
     const [data,setData]=useState()
+    const[showDiv ,setShowDiv] =useState(false)
     const getAttendeesGroupPair  = () => {
         loader(true)
         ApiClient.get(`api/event/groups?eventId=${id}`).then(res => {
@@ -129,6 +130,21 @@ const getGroupExport = async () => {
                                     <svg className="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                                     </svg>
+                                    <span className="text-sm leading-normal">Import file</span>
+                               
+                                </label>
+                            </div>
+                        </div>
+                           
+                   
+                        </div>
+                        <div className='flex items-center gap-2'>
+                        <div className=''>
+                            <div className="flex  items-center justify-center bg-grey-lighter">
+                                <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer ">
+                                    <svg className="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                                    </svg>
                                     <span className="text-sm leading-normal"onClick={()=>handleInputField()}>Download file</span>
                                
                                 </label>
@@ -141,10 +157,11 @@ const getGroupExport = async () => {
                         <div className='mt-2'>
                                 {/* import button */}
                                 <div>
-                                
+                                <button onClick={()=>setShowDiv(true)}>Request Group from Member</button>
                                 </div>
                              {/*  */}
                         </div>
+                        {showDiv ? <div><p>jhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p> </div>:""}
                     <div className='grid grid-cols-2 gap-2'>
                         {groupList?.sort((a : any, b : any) => a.groupNo - b.groupNo)?.map((ele: any) => {
                             return (
@@ -204,7 +221,7 @@ const getGroupExport = async () => {
           
           title="Request Group"
           body={<>
-        <AddNewGroup dataaa={dataa} />
+        <AddNewGroup dataaa={dataa} setRequestGroup={setRequestGroup} getGroupPair={getGroupPair} />
           </>}
           result={e => {
             setRequestGroup(false)
