@@ -3,12 +3,14 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import ApiClient from "../methods/api/apiClient";
 import loader from '../methods/loader';
 import { MdOutlineEmail } from 'react-icons/md';
-import { LuUser2 } from 'react-icons/lu';
+import { LuUser2, LuUserPlus } from 'react-icons/lu';
 import axios from 'axios';
 import { TbFileExport } from "react-icons/tb";
 import environment from '../environment';
 import Modal from "../components/common/Modal";
 import AddNewGroup from './Events/AddNewGroup';
+import { IoMdCloudDownload, IoMdCloudUpload } from 'react-icons/io';
+import { FiPlus } from 'react-icons/fi';
 const Groups = ({ eventDetail = '' , dataa =''} : any) => {
     console.log(eventDetail,"eventDetaileventDetaileventDetaileventDetaileventDetail")
     const { id } = useParams()
@@ -118,50 +120,49 @@ const getGroupExport = async () => {
         <>
         
                     <div className='max-h-96 overflow-y-auto pr-4'>
-                    <div className='flex items-center gap-4 justify-between mb-3'>
+                    <div className='flex items-center gap-4 justify-end mb-3'>
+                      
                         <div className=''>
-                        <button className='bg-orange-500 rounded-lg px-4 py-2 text-white' onClick={() => setRequestGroup(true)} >Add New Group</button>
+                            <div className='flex items-center gap-2'>
+                                <div className="flex  items-center justify-center bg-grey-lighter">
+                                    <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer ">
+                                    <IoMdCloudUpload className='text-md' />
+                                        <span className="text-sm leading-normal">Import file</span>
+                                    </label>
+                                </div>
+                                <div className=''>
+                                    <div className="flex  items-center justify-center bg-grey-lighter">
+                                        <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer ">
+                                        <IoMdCloudDownload className='text-md'/>
 
-                        </div>
-                        <div className='flex items-center gap-2'>
-                        <div className=''>
-                            <div className="flex  items-center justify-center bg-grey-lighter">
-                                <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer ">
-                                    <svg className="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                                    </svg>
-                                    <span className="text-sm leading-normal">Import file</span>
-                               
-                                </label>
+                                            <span className="text-sm leading-normal"onClick={()=>handleInputField()}>Download file</span>
+                                    
+                                        </label>
+                                    </div>
+                                </div>
+                                <button className='bg-orange-500 px-2 py-2 rounded-md text-sm flex items-center gap-2 text-white' onClick={getGroupExport}><TbFileExport className='text-md' /> Export Data</button>
+                   
                             </div>
-                        </div>
                            
                    
                         </div>
-                        <div className='flex items-center gap-2'>
-                        <div className=''>
-                            <div className="flex  items-center justify-center bg-grey-lighter">
-                                <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer ">
-                                    <svg className="w-4 h-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                                    </svg>
-                                    <span className="text-sm leading-normal"onClick={()=>handleInputField()}>Download file</span>
-                               
-                                </label>
-                            </div>
+                     
+                    </div>
+                    <div className='mt-2 flex items-center gap-2'>
+                        <div className='flex-grow'>
+                            <button className='w-full bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setRequestGroup(true)}><FiPlus  /> Add New Group</button>
                         </div>
-                            <button className='bg-orange-500 px-2 py-2 rounded-md text-sm flex items-center gap-2 text-white' onClick={getGroupExport}><TbFileExport className='text-md' /> Export Data</button>
-                   
+                        <div className='flex-grow'>
+                            <button className='w-full bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setShowDiv(true)}><LuUserPlus  /> Request Group</button>
                         </div>
                     </div>
-                        <div className='mt-2'>
-                                {/* import button */}
-                                <div>
-                                <button onClick={()=>setShowDiv(true)}>Request Group from Member</button>
+
+                        {showDiv ? <div className='w-full border border-1 mt-4 rounded-lg p-3'>
+                                <div className=''>
+                                        <p>data</p>
                                 </div>
-                             {/*  */}
-                        </div>
-                        {showDiv ? <div><p>jhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p> </div>:""}
+
+                         </div>:""}
                     <div className='grid grid-cols-2 gap-2'>
                         {groupList?.sort((a : any, b : any) => a.groupNo - b.groupNo)?.map((ele: any) => {
                             return (
