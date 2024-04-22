@@ -11,18 +11,24 @@ import Modal from "../components/common/Modal";
 import AddNewGroup from './Events/AddNewGroup';
 import { IoMdCloudDownload, IoMdCloudUpload } from 'react-icons/io';
 import { FiPlus } from 'react-icons/fi';
+import { useLocation } from 'react-router-dom';
 const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     console.log(eventDetail, "eventDetaileventDetaileventDetaileventDetaileventDetail")
     const { id } = useParams()
+    const location = useLocation();
+    const receivedStateData = location.state;
+  console.log(receivedStateData,"receivedStateDatareceivedStateDatareceivedStateDatareceivedStateDatareceivedStateData")
     const [groupList, setGroupList]: any = useState()
     const [attendeesGroup, setattendeesGroup] = useState()
     const [requestGroup, setRequestGroup] = useState(false)
     const [requestGroupList, setRequestGroupList]: any = useState("")
     const [data, setData] = useState()
     const [showDiv, setShowDiv] = useState(false)
+    const eventIdd = receivedStateData?.eventId?.id
+    console.log(eventIdd,"eventIddeventIdd")
     const getAttendeesGroupPair = () => {
         loader(true)
-        ApiClient.get(`api/event/groups?eventId=${id}`).then(res => {
+        ApiClient.get(`api/event/groups?eventId=${eventIdd}`).then(res => {
             if (res.success) {
 
                 setattendeesGroup(res?.data)
@@ -52,7 +58,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     }
     const getGroupPair = () => {
         loader(true)
-        ApiClient.get(`api/event/group/list?eventId=${id}`).then(res => {
+        ApiClient.get(`api/event/group/list?eventId=${eventIdd}`).then(res => {
             if (res.success) {
                 loader(false)
                 setGroupList(res?.data)
@@ -61,7 +67,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     }
     const getGroupRequest = () => {
         let payload = {
-            eventId: id
+            eventId: eventIdd
         }
         ApiClient.get(`api/group-request/list`, payload).then(res => {
             if (res.success) {
@@ -75,7 +81,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
 
             const res = await axios({
                 method: "get",
-                url: `${environment.api}api/export/event-group?eventId=${id}`,
+                url: `${environment.api}api/export/event-group?eventId=${eventIdd}`,
                 responseType: 'blob',
 
             });
@@ -261,7 +267,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
 
                     title="Request Group"
                     body={<>
-                        <AddNewGroup dataaa={dataa} setRequestGroup={setRequestGroup} getGroupPair={getGroupPair} />
+                        <AddNewGroup dataaa={receivedStateData?.dataa} setRequestGroup={setRequestGroup} getGroupPair={getGroupPair} receivedStateData={receivedStateData}/>
                     </>}
                     result={e => {
                         setRequestGroup(false)

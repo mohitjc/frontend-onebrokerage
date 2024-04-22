@@ -241,9 +241,12 @@ console.log(form?.deadline,"vvvvvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvvvvvvv")
                                type="datetime-local"
                                 name="deadline"
                                 label="RSVP Deadline"
+                                
                                 value={datepipeModel.datetodatepicker(form.deadline||'')}
                                 maxlength="8"
                                 // maxDate={form.date}
+                                min={new Date().toISOString().slice(0, 16)}
+                                minDate={new Date()} 
                                 onChange={e => setform({ ...form, deadline: e })}
                                 error={getDateErrr(form.date,form.deadline) && submitted ? 'Entered date is greater than Event Date':''}
                                 required
