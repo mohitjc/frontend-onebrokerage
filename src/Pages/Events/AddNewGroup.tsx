@@ -12,7 +12,7 @@ const AddNewGroup = ({dataaa ='' , setRequestGroup="" ,getGroupPair="" ,received
     const getInvites = () => {
         let f = {
             eventId:receivedStateData?.eventId?.id,
-            groupId: dataaa?.groupId?._id,
+            groupId: dataaa?.data?.groupId?._id,
             groupNo:value ,
             attendeeIds: [
                
