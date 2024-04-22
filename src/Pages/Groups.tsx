@@ -12,6 +12,7 @@ import AddNewGroup from './Events/AddNewGroup';
 import { IoMdCloudDownload, IoMdCloudUpload } from 'react-icons/io';
 import { FiPlus } from 'react-icons/fi';
 import { useLocation } from 'react-router-dom';
+import PageLayout from '../components/global/PageLayout';
 const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     console.log(eventDetail, "eventDetaileventDetaileventDetaileventDetaileventDetail")
     const { id } = useParams()
@@ -136,10 +137,23 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     return (
         <>
 
-            <div className='max-h-96 overflow-y-auto pr-4'>
-                <div className='flex items-center gap-4 justify-end mb-3'>
+        <PageLayout>
 
-                    <div className=''>
+        <div className="bg-white border-gray-200 px-4 pt-8 lg:px-6 py-2.5 dark:bg-gray-800">
+          <div className="container mx-auto">
+
+            <div className=''>
+                <div className='flex items-center gap-4  mb-3'>
+
+                    <div className='flex items-center justify-between w-full'>
+                    <div className='mt-2 flex items-center gap-2'>
+                            <div className=''>
+                                <button className='w-full text-sm bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setRequestGroup(true)}><FiPlus /> Add New Group</button>
+                            </div>
+                            <div className=''>
+                                <button className='w-full text-sm bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setShowDiv(true)}><LuUserPlus /> Request Group</button>
+                            </div>
+                        </div>
                         <div className='flex items-center gap-2'>
                             <div className="flex  items-center justify-center bg-grey-lighter">
                                 <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide  border border-blue cursor-pointer ">
@@ -165,14 +179,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
                     </div>
 
                 </div>
-                <div className='mt-2 flex items-center gap-2'>
-                    <div className='flex-grow'>
-                        <button className='w-full bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setRequestGroup(true)}><FiPlus /> Add New Group</button>
-                    </div>
-                    <div className='flex-grow'>
-                        <button className='w-full bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setShowDiv(true)}><LuUserPlus /> Request Group</button>
-                    </div>
-                </div>
+               
 
                 {showDiv ? <div className='w-full border border-1 mt-4 rounded-lg p-3 mb-4'>
                     <div className=''>
@@ -274,6 +281,10 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
                     }}
                 />
             </> : <></>}
+            </div>
+            </div>
+
+            </PageLayout>
         </>
 
 
