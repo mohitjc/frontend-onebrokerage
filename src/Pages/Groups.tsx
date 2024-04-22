@@ -222,7 +222,10 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
 
                                 <div className='brouplists border border-1 rounded-lg shadow-lg p-3 mb-3'>
 
-                                    <h2 className='font-bold text-[#2b2b2b] text-lg border-b border-1 pb-2'> Group{ele?.groupNo}</h2>
+                                    <div className='flex items-center justify-between border-b border-1 pb-2 mb-2'>
+                                    <h2 className='font-bold text-[#2b2b2b] text-lg     '> Group{ele?.groupNo}</h2>
+                                    {ele?.isUnique === true ? <p className='bg-orange-500 p-2 text-xs  mb-0 text-white rounded-md'>New Pair</p> :""}
+                                    </div>
                                     <p className=''>{ele?.attendees?.map((element: any) => {
                                         return (
                                             <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2                                        '>
