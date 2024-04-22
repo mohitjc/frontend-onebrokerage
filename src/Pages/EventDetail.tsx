@@ -36,6 +36,8 @@ const EventDetail = () => {
   const [attendeesGroup , setattendeesGroup] = useState()
   const user = useSelector((state:any) => state.user);
   const history = useNavigate()
+  const navigate = useNavigate();
+
   const [role, setRole] = useState()
   const [me, setMe] = useState()
   const [member, setMember]: any = useState()
@@ -246,7 +248,7 @@ const getMemberHistory=()=>{
     }
 
   }
-
+console.log(new Date().getTime(),"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
   const meetingStart = () => {
     let value = false
     if (data && new Date(datepipeModel.datetodatepicker(data.date)).getTime() <= new Date().getTime()) value = true
@@ -284,8 +286,13 @@ const getMemberHistory=()=>{
 // }}
 
 
-const handleMemberHistoryPage=()=>{
-
+const handleOpenModal=()=>{
+  const stateData ={
+    eventDetail:{attendeesGroup},
+    dataa:{data},
+    eventId:{id}
+  }
+  history('/groupsDetail',  { state: stateData });
 }
   return (
     <>
@@ -506,11 +513,12 @@ const handleMemberHistoryPage=()=>{
                      </div>
                      {data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager"? <>{data?.isGroupGenerated === true ? <div className="flex justify-end">
                                    <button  
-                                   onClick={() => setGroup(true)} 
+                                  //  onClick={() => setGroup(true)} 
+                                  onClick={handleOpenModal}
                                    className="bg-[#46454E] inline-flex py-3 px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
                                  </div>:
                            ( meetingStart() ?     <div className="flex justify-end">
-                                   <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3  px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />Generate Connect meets</button>
+                                   <button  onClick={handleOpenModal} className="bg-[#46454E] inline-flex py-3  px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />Generate Connect meets</button>
                                  </div>:"")}</>:""}
                      
                      </div>
@@ -594,7 +602,7 @@ const handleMemberHistoryPage=()=>{
       </> : <></>}
 
 
-      {group ? <>
+      {/* {group ? <>
         <Modal
           
           title="Group List"
@@ -608,7 +616,7 @@ const handleMemberHistoryPage=()=>{
             setGroup(false)
           }}
         />
-      </> : <></>}
+      </> : <></>} */}
       {memberHistory ? <>
         <Modal
           

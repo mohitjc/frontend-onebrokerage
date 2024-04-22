@@ -33,6 +33,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ToastContainer } from 'react-toastify';
 import Setting from './Pages/Setting';
+import Groups from './Pages/Groups';
 const { persistor, store } = configureStoreProd();
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
     {url:'/assinged-event',element:<AssignedEvents />},
     {url:'/event/detail/:id',element:<EventDetail />},
     {url:'/thanku',element:<Thanku />},
+    {url:'/groupsDetail',element:<Groups/>}
   ]
 
   return (

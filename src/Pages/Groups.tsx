@@ -11,18 +11,25 @@ import Modal from "../components/common/Modal";
 import AddNewGroup from './Events/AddNewGroup';
 import { IoMdCloudDownload, IoMdCloudUpload } from 'react-icons/io';
 import { FiPlus } from 'react-icons/fi';
+import { useLocation } from 'react-router-dom';
+import PageLayout from '../components/global/PageLayout';
 const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     console.log(eventDetail, "eventDetaileventDetaileventDetaileventDetaileventDetail")
     const { id } = useParams()
+    const location = useLocation();
+    const receivedStateData = location.state;
+  console.log(receivedStateData,"receivedStateDatareceivedStateDatareceivedStateDatareceivedStateDatareceivedStateData")
     const [groupList, setGroupList]: any = useState()
     const [attendeesGroup, setattendeesGroup] = useState()
     const [requestGroup, setRequestGroup] = useState(false)
     const [requestGroupList, setRequestGroupList]: any = useState("")
     const [data, setData] = useState()
     const [showDiv, setShowDiv] = useState(false)
+    const eventIdd = receivedStateData?.eventId?.id
+    console.log(eventIdd,"eventIddeventIdd")
     const getAttendeesGroupPair = () => {
         loader(true)
-        ApiClient.get(`api/event/groups?eventId=${id}`).then(res => {
+        ApiClient.get(`api/event/groups?eventId=${eventIdd}`).then(res => {
             if (res.success) {
 
                 setattendeesGroup(res?.data)
@@ -52,7 +59,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     }
     const getGroupPair = () => {
         loader(true)
-        ApiClient.get(`api/event/group/list?eventId=${id}`).then(res => {
+        ApiClient.get(`api/event/group/list?eventId=${eventIdd}`).then(res => {
             if (res.success) {
                 loader(false)
                 setGroupList(res?.data)
@@ -61,7 +68,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     }
     const getGroupRequest = () => {
         let payload = {
-            eventId: id
+            eventId: eventIdd
         }
         ApiClient.get(`api/group-request/list`, payload).then(res => {
             if (res.success) {
@@ -75,7 +82,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
 
             const res = await axios({
                 method: "get",
-                url: `${environment.api}api/export/event-group?eventId=${id}`,
+                url: `${environment.api}api/export/event-group?eventId=${eventIdd}`,
                 responseType: 'blob',
 
             });
@@ -130,10 +137,23 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     return (
         <>
 
-            <div className='max-h-96 overflow-y-auto pr-4'>
-                <div className='flex items-center gap-4 justify-end mb-3'>
+        <PageLayout>
 
-                    <div className=''>
+        <div className="bg-white border-gray-200 px-4 pt-8 lg:px-6 py-2.5 dark:bg-gray-800">
+          <div className="container mx-auto">
+
+            <div className=''>
+                <div className='flex items-center gap-4  mb-3'>
+
+                    <div className='flex items-center justify-between w-full'>
+                    <div className='mt-2 flex items-center gap-2'>
+                            <div className=''>
+                                <button className='w-full text-sm bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setRequestGroup(true)}><FiPlus /> Add New Group</button>
+                            </div>
+                            <div className=''>
+                                <button className='w-full text-sm bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setShowDiv(true)}><LuUserPlus /> Request Group</button>
+                            </div>
+                        </div>
                         <div className='flex items-center gap-2'>
                             <div className="flex  items-center justify-center bg-grey-lighter">
                                 <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide  border border-blue cursor-pointer ">
@@ -159,14 +179,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
                     </div>
 
                 </div>
-                <div className='mt-2 flex items-center gap-2'>
-                    <div className='flex-grow'>
-                        <button className='w-full bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setRequestGroup(true)}><FiPlus /> Add New Group</button>
-                    </div>
-                    <div className='flex-grow'>
-                        <button className='w-full bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setShowDiv(true)}><LuUserPlus /> Request Group</button>
-                    </div>
-                </div>
+               
 
                 {showDiv ? <div className='w-full border border-1 mt-4 rounded-lg p-3 mb-4'>
                     <div className=''>
@@ -207,18 +220,18 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
                         return (
                             <>
 
-                                <div className='brouplists border border-1 rounded-lg shadow-lg p-3'>
+                                <div className='brouplists border border-1 rounded-lg shadow-lg p-3 mb-3'>
 
                                     <h2 className='font-bold text-[#2b2b2b] text-lg border-b border-1 pb-2'> Group{ele?.groupNo}</h2>
                                     <p className=''>{ele?.attendees?.map((element: any) => {
                                         return (
                                             <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2                                        '>
                                                 <div className=''>
-                                                {element?.attendeesDetails?.fullName ?  <p className='flex items-center gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />{element?.attendeesDetails?.fullName}</p>:""}   
+                                                {element?.attendeesDetails?.fullName ?  <p className='flex items-center mb-2 gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />{element?.attendeesDetails?.fullName}</p>:""}   
                                                 {element?.attendeesDetails?.email  ?  <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]' />{element?.attendeesDetails?.email}</p>:"" } 
                                                 </div>
 {element?.attendeesDetails?.fullName || element?.attendeesDetails?.email  ?    <div className='rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer  px-2 pb-1 '>
-                                                    <select className=" bg-transparent focus:outline-none cursor-pointer text-[12px] text-[12px] text-white" onChange={(e: any) => handleSelectValue(e, element)}>
+                                                    <select className=" bg-transparent focus:outline-none cursor-pointer text-[14px]  text-white" onChange={(e: any) => handleSelectValue(e, element)}>
                                                         <option value="" disabled selected>Move to</option>
                                                         {groupList?.filter((data: any) => data.groupNo !== ele.groupNo)?.map((data: any) => (
                                                             <option className='text-md text-black' key={data?.groupNo} value={data?.groupNo}>Group {data?.groupNo}</option>
@@ -261,13 +274,17 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
 
                     title="Request Group"
                     body={<>
-                        <AddNewGroup dataaa={dataa} setRequestGroup={setRequestGroup} getGroupPair={getGroupPair} />
+                        <AddNewGroup dataaa={receivedStateData?.dataa} setRequestGroup={setRequestGroup} getGroupPair={getGroupPair} receivedStateData={receivedStateData}/>
                     </>}
                     result={e => {
                         setRequestGroup(false)
                     }}
                 />
             </> : <></>}
+            </div>
+            </div>
+
+            </PageLayout>
         </>
 
 

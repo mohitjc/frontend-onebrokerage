@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ApiClient from "../../methods/api/apiClient";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import {  toast } from 'react-toastify';
-const AddNewGroup = ({dataaa ='' , setRequestGroup="" ,getGroupPair=""} :any) => {
+const AddNewGroup = ({dataaa ='' , setRequestGroup="" ,getGroupPair="" ,receivedStateData} :any) => {
     const [value ,setValue]= useState()
     const { id } = useParams()
     console.log(dataaa,"dataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaadataaa")
@@ -11,8 +11,8 @@ const AddNewGroup = ({dataaa ='' , setRequestGroup="" ,getGroupPair=""} :any) =>
    }
     const getInvites = () => {
         let f = {
-            eventId:id,
-            groupId: dataaa?.groupId?._id,
+            eventId:receivedStateData?.eventId?.id,
+            groupId: dataaa?.data?.groupId?._id,
             groupNo:value ,
             attendeeIds: [
                
