@@ -11,25 +11,26 @@ import Modal from "../components/common/Modal";
 import AddNewGroup from './Events/AddNewGroup';
 import { IoMdCloudDownload, IoMdCloudUpload } from 'react-icons/io';
 import { FiPlus } from 'react-icons/fi';
-const Groups = ({ eventDetail = '' , dataa =''} : any) => {
-    console.log(eventDetail,"eventDetaileventDetaileventDetaileventDetaileventDetail")
+const Groups = ({ eventDetail = '', dataa = '' }: any) => {
+    console.log(eventDetail, "eventDetaileventDetaileventDetaileventDetaileventDetail")
     const { id } = useParams()
     const [groupList, setGroupList]: any = useState()
-    const [attendeesGroup , setattendeesGroup] = useState()
-    const [requestGroup,setRequestGroup] = useState(false)
-    const [data,setData]=useState()
-    const[showDiv ,setShowDiv] =useState(false)
-    const getAttendeesGroupPair  = () => {
+    const [attendeesGroup, setattendeesGroup] = useState()
+    const [requestGroup, setRequestGroup] = useState(false)
+    const [requestGroupList, setRequestGroupList]: any = useState("")
+    const [data, setData] = useState()
+    const [showDiv, setShowDiv] = useState(false)
+    const getAttendeesGroupPair = () => {
         loader(true)
         ApiClient.get(`api/event/groups?eventId=${id}`).then(res => {
-          if (res.success) {
-         
-            setattendeesGroup(res?.data)
-            loader(false)
-            getGroupPair()
-          }
+            if (res.success) {
+
+                setattendeesGroup(res?.data)
+                loader(false)
+                getGroupPair()
+            }
         })
-      }
+    }
     const handleSelectValue = (e: any, element: any) => {
         loader(true)
         let payload = {
@@ -44,7 +45,7 @@ const Groups = ({ eventDetail = '' , dataa =''} : any) => {
         ApiClient.put('api/event/group/edit', payload).then(res => {
             if (res.success) {
                 loader(false)
-                e.target.value = ""; 
+                e.target.value = "";
                 getGroupPair()
             }
         })
@@ -58,157 +59,185 @@ const Groups = ({ eventDetail = '' , dataa =''} : any) => {
             }
         })
     }
- const getGroupRequest=()=>{
-    let payload={
-        eventId:id
-    }
-    ApiClient.get(`api/group-request/list`,payload).then(res => {
-        if (res.success) {
-           console.log(res,"ressssssss")
+    const getGroupRequest = () => {
+        let payload = {
+            eventId: id
         }
-    })
- }
-
-const getGroupExport = async () => {
-    try {
-   
-  const res=await axios({
-      method:"get",
-      url: `${environment.api}api/export/event-group?eventId=${id}`,
-      responseType:'blob',
-   
-  });
-  var blob=new Blob([res.data],{
-      type:res.headers["content-type"],
-  });
-  let downloadAnchor :any= document.createElement("a")
-  downloadAnchor.href = window.URL.createObjectURL(blob);
-  downloadAnchor.download = `GroupsDetail.xlsx`;
-  downloadAnchor.click()
-      
-  
-    } catch (error) {
-      console.error('Error fetching data:', error);
+        ApiClient.get(`api/group-request/list`, payload).then(res => {
+            if (res.success) {
+                setRequestGroupList(res?.data)
+            }
+        })
     }
-  };
-  
+
+    const getGroupExport = async () => {
+        try {
+
+            const res = await axios({
+                method: "get",
+                url: `${environment.api}api/export/event-group?eventId=${id}`,
+                responseType: 'blob',
+
+            });
+            var blob = new Blob([res.data], {
+                type: res.headers["content-type"],
+            });
+            let downloadAnchor: any = document.createElement("a")
+            downloadAnchor.href = window.URL.createObjectURL(blob);
+            downloadAnchor.download = `GroupsDetail.xlsx`;
+            downloadAnchor.click()
+
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
     useEffect(() => {
         getAttendeesGroupPair()
         getGroupRequest()
     }, [])
     const handleInputField = async () => {
-        
-        
-        
 
 
-            try {
-   
-                const res=await axios({
-                    method:"get",
-                    url: `${environment.api}api/sample/group-import`,
-                    responseType:'blob',
-                 
-                });
-                var blob=new Blob([res.data],{
-                    type:res.headers["content-type"],
-                });
-                let downloadAnchor :any= document.createElement("a")
-                downloadAnchor.href = window.URL.createObjectURL(blob);
-                downloadAnchor.download = `SampleFile.xlsx`;
-                downloadAnchor.click()
-                    
-                
-                  } catch (error) {
-                    console.error('Error fetching data:', error);
-                  }
 
 
-      };
+
+        try {
+
+            const res = await axios({
+                method: "get",
+                url: `${environment.api}api/sample/group-import`,
+                responseType: 'blob',
+
+            });
+            var blob = new Blob([res.data], {
+                type: res.headers["content-type"],
+            });
+            let downloadAnchor: any = document.createElement("a")
+            downloadAnchor.href = window.URL.createObjectURL(blob);
+            downloadAnchor.download = `SampleFile.xlsx`;
+            downloadAnchor.click()
+
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+
+
+    };
     console.log(groupList, "groupList")
     return (
         <>
-        
-                    <div className='max-h-96 overflow-y-auto pr-4'>
-                    <div className='flex items-center gap-4 justify-end mb-3'>
-                      
-                        <div className=''>
-                            <div className='flex items-center gap-2'>
-                                <div className="flex  items-center justify-center bg-grey-lighter">
-                                    <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer ">
+
+            <div className='max-h-96 overflow-y-auto pr-4'>
+                <div className='flex items-center gap-4 justify-end mb-3'>
+
+                    <div className=''>
+                        <div className='flex items-center gap-2'>
+                            <div className="flex  items-center justify-center bg-grey-lighter">
+                                <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide  border border-blue cursor-pointer ">
                                     <IoMdCloudUpload className='text-md' />
-                                        <span className="text-sm leading-normal">Import file</span>
+                                    <span className="text-sm leading-normal">Import file</span>
+                                </label>
+                            </div>
+                            <div className=''>
+                                <div className="flex  items-center justify-center bg-grey-lighter">
+                                    <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide  border border-blue cursor-pointer ">
+                                        <IoMdCloudDownload className='text-md' />
+
+                                        <span className="text-sm leading-normal" onClick={() => handleInputField()}>Download file</span>
+
                                     </label>
                                 </div>
-                                <div className=''>
-                                    <div className="flex  items-center justify-center bg-grey-lighter">
-                                        <label className=" flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer ">
-                                        <IoMdCloudDownload className='text-md'/>
-
-                                            <span className="text-sm leading-normal"onClick={()=>handleInputField()}>Download file</span>
-                                    
-                                        </label>
-                                    </div>
-                                </div>
-                                <button className='bg-orange-500 px-2 py-2 rounded-md text-sm flex items-center gap-2 text-white' onClick={getGroupExport}><TbFileExport className='text-md' /> Export Data</button>
-                   
                             </div>
-                           
-                   
+                            <button className='bg-orange-500 px-2 py-2 rounded-md text-sm flex items-center gap-2 text-white' onClick={getGroupExport}><TbFileExport className='text-md' /> Export Data</button>
+
                         </div>
-                     
-                    </div>
-                    <div className='mt-2 flex items-center gap-2'>
-                        <div className='flex-grow'>
-                            <button className='w-full bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setRequestGroup(true)}><FiPlus  /> Add New Group</button>
-                        </div>
-                        <div className='flex-grow'>
-                            <button className='w-full bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setShowDiv(true)}><LuUserPlus  /> Request Group</button>
-                        </div>
+
+
                     </div>
 
-                        {showDiv ? <div className='w-full border border-1 mt-4 rounded-lg p-3'>
-                                <div className=''>
-                                        <p>dataaaaaaa</p>
-                                </div>
+                </div>
+                <div className='mt-2 flex items-center gap-2'>
+                    <div className='flex-grow'>
+                        <button className='w-full bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setRequestGroup(true)}><FiPlus /> Add New Group</button>
+                    </div>
+                    <div className='flex-grow'>
+                        <button className='w-full bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setShowDiv(true)}><LuUserPlus /> Request Group</button>
+                    </div>
+                </div>
 
-                         </div>:""}
-                    <div className='grid grid-cols-2 gap-2'>
-                        {groupList?.sort((a : any, b : any) => a.groupNo - b.groupNo)?.map((ele: any) => {
-                            return (
-                                <>
+                {showDiv ? <div className='w-full border border-1 mt-4 rounded-lg p-3 mb-4'>
+                    <div className=''>
+                        {requestGroupList?.map((ele: any) => {
+                            return (<>
+                                <h4 className='mb-4 mt-4'>Requested By : <span className='bg-orange-500 px-2 py-1 pb-1 text-sm rounded-md ml-2 text-white'>{ele?.requestedBy}</span></h4>
 
-                                    <div className='brouplists border border-1 rounded-lg shadow-lg p-3'>
+                                <table className='w-full'>
+                                    <thead className='border border-gray-200'>
+                                        <tr className='border border-gray-200'>
+                                            <th className='border border-gray-200 text-left p-2'>Name</th>
+                                            <th className='border border-gray-200 text-left p-2'>Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {ele?.attendeesDetails?.map((element: any) => {
+                                        return( <tr>
+                                            <td className='border border-gray-200 p-2'>{element?.fullName}</td>
+                                            <td className='border border-gray-200 p-2'>{element?.email}</td>
+                                        </tr>)
+                                       
+                                         })}
+                                    </tbody>
+                                </table>
+                               
+                                  
 
-                                        <h2 className='font-bold text-[#2b2b2b] text-lg border-b border-1 pb-2'> Group{ele?.groupNo}</h2>
-                                        <p className=''>{ele?.attendees?.map((element: any) => {
-                                            return (
-                                                <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2                                        '>
-                                                    <div className=''>
-                                                        <p className='flex items-center gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]'/>{element?.attendeesDetails?.fullName}</p>
-                                                        <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]'/>{element?.attendeesDetails?.email}</p>
-                                                    </div>
+                               
+                            </>)
 
-                                                    <div className='rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer  px-2 pb-1 '>
-                                                        <select className=" bg-transparent focus:outline-none cursor-pointer text-[12px] text-[12px] text-white" onChange={(e: any) => handleSelectValue(e, element)}>
-                                                            <option value="" disabled selected>Move to</option>
-                                                            {groupList?.filter((data: any) => data.groupNo !== ele.groupNo)?.map((data: any) => (
-                                                                <option className='text-md text-black' key={data?.groupNo} value={data?.groupNo}>Group {data?.groupNo}</option>
-                                                            ))}
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-
-                                            )
-                                        })}</p>
-                                    </div>
-                                </>
-                            )
 
                         })}
                     </div>
-        </div>
+
+                </div> : ""}
+                <div className='grid grid-cols-2 gap-2'>
+                    {groupList?.sort((a: any, b: any) => a.groupNo - b.groupNo)?.map((ele: any) => {
+                        return (
+                            <>
+
+                                <div className='brouplists border border-1 rounded-lg shadow-lg p-3'>
+
+                                    <h2 className='font-bold text-[#2b2b2b] text-lg border-b border-1 pb-2'> Group{ele?.groupNo}</h2>
+                                    <p className=''>{ele?.attendees?.map((element: any) => {
+                                        return (
+                                            <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2                                        '>
+                                                <div className=''>
+                                                {element?.attendeesDetails?.fullName ?  <p className='flex items-center gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />{element?.attendeesDetails?.fullName}</p>:""}   
+                                                {element?.attendeesDetails?.email  ?  <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]' />{element?.attendeesDetails?.email}</p>:"" } 
+                                                </div>
+{element?.attendeesDetails?.fullName || element?.attendeesDetails?.email  ?    <div className='rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer  px-2 pb-1 '>
+                                                    <select className=" bg-transparent focus:outline-none cursor-pointer text-[12px] text-[12px] text-white" onChange={(e: any) => handleSelectValue(e, element)}>
+                                                        <option value="" disabled selected>Move to</option>
+                                                        {groupList?.filter((data: any) => data.groupNo !== ele.groupNo)?.map((data: any) => (
+                                                            <option className='text-md text-black' key={data?.groupNo} value={data?.groupNo}>Group {data?.groupNo}</option>
+                                                        ))}
+                                                    </select>
+
+                                                </div> :""}
+                                             
+                                            </div>
+
+                                        )
+                                    })}</p>
+                                </div>
+                            </>
+                        )
+
+                    })}
+                </div>
+            </div>
             {/* {Object.entries(eventDetail).map(([group, items] :any) => (
                 <div key={group}>
                     <p>{group}</p>
@@ -227,18 +256,18 @@ const getGroupExport = async () => {
                     ))}
                 </div>
             ))} */}
-      {requestGroup ? <>
-        <Modal
-          
-          title="Request Group"
-          body={<>
-        <AddNewGroup dataaa={dataa} setRequestGroup={setRequestGroup} getGroupPair={getGroupPair} />
-          </>}
-          result={e => {
-            setRequestGroup(false)
-          }}
-        />
-      </> : <></>}
+            {requestGroup ? <>
+                <Modal
+
+                    title="Request Group"
+                    body={<>
+                        <AddNewGroup dataaa={dataa} setRequestGroup={setRequestGroup} getGroupPair={getGroupPair} />
+                    </>}
+                    result={e => {
+                        setRequestGroup(false)
+                    }}
+                />
+            </> : <></>}
         </>
 
 

@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 const AddEdit = () => {
     const { id } = useParams()
     const [images, setImages] = useState({ image: ''});
-    const [form, setform] = useState({ id: '', title: '',type:'', date: "",timezone:'',capacity:'',groupMemberLimit:'',description:'',deadline:'',externalLink:'',address:'',status: 'active' })
+    const [form, setform] = useState({ id: '', title: '',type:'', date: "",timezone:'',capacity:'',description:'',deadline:'',externalLink:'',address:'',status: 'active' })
     const history = useNavigate()
     const [submitted, setSubmitted] = useState(false)
     const user = useSelector((state) => state.user);
@@ -24,7 +24,7 @@ const AddEdit = () => {
         { key: 'type', required: true ,message:'Type is required'},
         { key: 'timezone', required: true },
         { key:'description' , required:true ,message:'Description is required'},
-        { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
+        // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
     ]
 console.log(form?.date,"vvvvvvvvvvvvvvvvvvvvvvvvvvvv")
 console.log(form?.deadline,"vvvvvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvvvvvvv")
@@ -272,7 +272,7 @@ console.log(form?.deadline,"vvvvvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvvvvvvv")
                                 onChange={e => setform({ ...form, externalLink: e })}
                             />
                         </div>
-                        <div className=" mb-3">
+                        {/* <div className=" mb-3">
                            
                             <FormControl
                                 type="text"
@@ -284,7 +284,7 @@ console.log(form?.deadline,"vvvvvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvvvvvvv")
                                 required
                                 error={getError('groupMemberLimit')}
                             />
-                        </div>
+                        </div> */}
                       
 
                         

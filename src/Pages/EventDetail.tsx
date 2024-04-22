@@ -505,10 +505,13 @@ const handleMemberHistoryPage=()=>{
                      
                      </div>
                      {data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager"? <>{data?.isGroupGenerated === true ? <div className="flex justify-end">
-                                   <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3 px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
-                                 </div>:<div className="flex justify-end">
+                                   <button  
+                                   onClick={() => setGroup(true)} 
+                                   className="bg-[#46454E] inline-flex py-3 px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
+                                 </div>:
+                           ( meetingStart() ?     <div className="flex justify-end">
                                    <button  onClick={() => setGroup(true)} className="bg-[#46454E] inline-flex py-3  px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />Generate Connect meets</button>
-                                 </div>}</>:""}
+                                 </div>:"")}</>:""}
                      
                      </div>
                      
