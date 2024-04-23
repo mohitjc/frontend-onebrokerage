@@ -195,11 +195,43 @@ function getHoursAndMinutes(s, e) {
 
     return value;
 }
+function getHoursAndMinutesSeconds(s, e) {
+    let startDate = new Date(s);
+    let endDate = new Date(e);
+    // Convert dates to timestamps
+    var startTimestamp = startDate.getTime();
+    var endTimestamp = endDate.getTime();
+
+    // Calculate the difference in milliseconds
+    var difference = Math.abs(endTimestamp - startTimestamp);
+
+    // Convert milliseconds to hours, minutes, and seconds
+    var hours = Math.floor(difference / (1000 * 60 * 60));
+    var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    let value = '';
+    if (hours > 24) {
+        let days = hours / 24;
+        days = Math.round(days);
+        value = `${days} days`;
+    } else if (hours) {
+        value = `${hours} hours ${minutes ? `and ${minutes} minutes` : ''}`;
+    } else if (minutes) {
+        value = `${minutes} minutes ${seconds ? `and ${seconds} seconds` : ''}`;
+    } else {
+        value = `${seconds} seconds`;
+    }
+
+    return value;
+}
+
 
 const datepipeModel = {
     DaysNo,
     date,
     getHoursAndMinutes,
+    getHoursAndMinutesSeconds,
     stringToDate,
     day,
     datetostring,

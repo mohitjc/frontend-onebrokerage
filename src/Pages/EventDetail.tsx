@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 import MemberHistory from "./Events/MemberHistory";
 import RequestGroup from "./Events/RequestGroup";
 import { LiaUserClockSolid } from "react-icons/lia";
-
+import Swal from 'sweetalert2';
 const EventDetail = () => {
   const [host, setHost]: any = useState()
   const [data, setData]: any = useState()
@@ -134,16 +134,39 @@ const getMemberHistory=()=>{
   }
 
   const endEvent = () => {
-    if (window.confirm("Do you want to End this Event")) {
-      loader(true)
-      ApiClient.put('api/event/edit', { id: id, meetingStatus: "completed" }).then(res => {
-        if (res.success) {
-          getDetail()
-        } else {
-          loader(false)
-        }
-      })
-    }
+    // if (window.confirm("Do you want to End this Event")) {
+    //   loader(true)
+    //   ApiClient.put('api/event/edit', { id: id, meetingStatus: "completed" }).then(res => {
+    //     if (res.success) {
+    //       getDetail()
+    //     } else {
+    //       loader(false)
+    //     }
+    //   })
+    // }
+    Swal.fire({
+      title: "Are you sure?",
+      text:`Do you want to End this Event`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes"
+    }).then((result) => {
+      if (result.isConfirmed) {
+          loader(true)
+          ApiClient.put('api/event/edit', { id: id, meetingStatus: "completed" }).then(res => {
+                if (res.success) {
+                  getDetail()
+                } else {
+                  loader(false)
+                }
+              })
+      //   Swal.fire({
+      //     icon: "success"
+      //   });
+      }
+    });
   }
 
   const deletePremit = (row: any) => {
@@ -380,7 +403,7 @@ const handleOpenModal=()=>{
                           meetingStart() ? (
                             <div className="text-green-500">Meeting Started</div>
                           ) : (
-                            <div className="text-red-500">Meeting will start in {datepipeModel.getHoursAndMinutes(new Date().toISOString(), datepipeModel.datetodatepicker(data?.date))}</div>
+                            <div className="text-red-500">Meeting will start in {datepipeModel.getHoursAndMinutesSeconds(new Date().toISOString(), datepipeModel.datetodatepicker(data?.date))}</div>
                           )
                         ) : null}
 
