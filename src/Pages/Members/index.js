@@ -8,7 +8,7 @@ import environment from '../../environment';
 import axios from 'axios';
 import shared from './shared';
 import { useSelector } from 'react-redux';
-
+import Swal from 'sweetalert2';
 const Members = () => {
     const user = useSelector((state) => state.user);
     const searchState = {data:''}
@@ -80,16 +80,39 @@ const Members = () => {
     }
 
     const deleteItem = (id) => {
-        if (window.confirm("Do you want to delete this")) {
-            loader(true)
-            ApiClient.delete(shared.deleteApi, { id: id }).then(res => {
-                if (res.success) {
-                    // ToastsStore.success(res.message)
-                    clear()
-                }
-                loader(false)
-            })
-        }
+        // if (window.confirm("Do you want to delete this")) {
+        //     loader(true)
+        //     ApiClient.delete(shared.deleteApi, { id: id }).then(res => {
+        //         if (res.success) {
+        //             // ToastsStore.success(res.message)
+        //             clear()
+        //         }
+        //         loader(false)
+        //     })
+        // }
+        Swal.fire({
+            title: "Are you sure?",
+            text:`Do you want to delete this`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                loader(true)
+                ApiClient.delete(shared.deleteApi, { id: id }).then(res => {
+                            if (res.success) {
+                                // ToastsStore.success(res.message)
+                                clear()
+                            }
+                            loader(false)
+                        })
+            //   Swal.fire({
+            //     icon: "success"
+            //   });
+            }
+          });
     }
 
     const pageChange = (e) => {
