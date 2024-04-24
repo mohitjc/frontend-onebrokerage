@@ -8,11 +8,11 @@ const MemberHistory = ({ eventDetail = '' }) => {
       <table className='w-full'>
         <thead className='text-xs text-gray-700 capitalize bg-gray-50  border-b border-[#EAECF0]'>
           <tr className='!border border-[#EAECF0]'>
-            <th className='cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] !px-5 text-left bg-[#F7FAFF] !py-3'>Event</th>
-            <th className='cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] !px-5 text-left bg-[#F7FAFF] !py-3'>Description</th>
-            <th className='cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] !px-5 text-left bg-[#F7FAFF] !py-3'>Type</th>
-            <th className='cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] !px-5 text-left bg-[#F7FAFF] !py-3'>Added By</th>
-            <th className='cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] !px-5 text-left bg-[#F7FAFF] !py-3'>Address</th>
+            <th className='cursor-pointer  !border-l-0  !border border-[#EAECF0] !px-2 text-left bg-[#F7FAFF] !py-3'>Event</th>
+            <th className='cursor-pointer  !border-l-0  !border border-[#EAECF0] !px-2 text-left bg-[#F7FAFF] !py-3'>Description</th>
+            <th className='cursor-pointer  !border-l-0  !border border-[#EAECF0] !px-2 text-left bg-[#F7FAFF] !py-3'>Type</th>
+            <th className='cursor-pointer  !border-l-0  !border border-[#EAECF0] !px-2 text-left bg-[#F7FAFF] !py-3'>Participants</th>
+            <th className='cursor-pointer  !border-l-0  !border border-[#EAECF0] !px-2 text-left bg-[#F7FAFF] !py-3'>Address</th>
           </tr>
         </thead>
         <tbody>

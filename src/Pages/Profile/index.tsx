@@ -132,7 +132,7 @@ console.log(data,"allGroupDetails")
                   </thead>
                 <tbody>
                 <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{data?.groupId?.name||'--'}</td>
-                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{user.customerRole?.name}</td>
+                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{data?.groupId?.name ? user.customerRole?.name : "--"}</td>
                      
                 {
                   data?.allGroupDetails?.map((e :any)=>{
@@ -141,8 +141,15 @@ console.log(data,"allGroupDetails")
                      
                       <tr>
                       
-                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{e?.groupId?.name}</td>
-                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{e?.role}</td>
+                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{e?.groupId?.name || "--"}</td>
+                      
+                       
+                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>
+  {e?.groupId?.name ? (e?.role === "meetManager" ? "Connect Meet Manager" : e?.role) : "--"}
+</td>
+
+
+
 
                       </tr>
                     </>
