@@ -274,7 +274,7 @@ const getMemberHistory=()=>{
 console.log(new Date().getTime(),"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
   const meetingStart = () => {
     let value = false
-    if (data && new Date(datepipeModel.datetodatepicker(data.date)).getTime() <= new Date().getTime()) value = true
+    if (data && new Date(datepipeModel.datetime(data.date)).getTime() <= new Date().getTime()) value = true
     return value
   }
   
@@ -403,7 +403,7 @@ const handleOpenModal=()=>{
                           meetingStart() ? (
                             <div className="text-green-500">Meeting Started</div>
                           ) : (
-                            <div className="text-red-500">Meeting will start in {datepipeModel.getHoursAndMinutesSeconds(new Date().toISOString(), datepipeModel.datetodatepicker(data?.date))}</div>
+                            <div className="text-red-500">Meeting will start in {datepipeModel.getHoursAndMinutesSeconds(new Date().toISOString(), datepipeModel.datetime(data?.date))}</div>
                           )
                         ) : null}
 

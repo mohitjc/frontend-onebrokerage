@@ -40,6 +40,7 @@ const getWeekDate = (date = new Date(), week = 1) => {
 
 const date = (p) => {
     if(!p) return '--'
+    if(p.includes('T')) p=p.split('T')[0]
     let d = new Date(p)
     return `${d.getDate()} ${monthfind(d.getMonth())} ${d.getFullYear()}`
 }
