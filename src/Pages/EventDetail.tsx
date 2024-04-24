@@ -346,7 +346,7 @@ const handleOpenModal=()=>{
         <div className="bg-white border-gray-200 px-4 lg:px-6 py-8 dark:bg-gray-800">
           <div className="container mx-auto">
             <div className="events_details">
-              <div className="grid grid-cols-12 gap-x-10">
+              <div className="grid grid-cols-12 gap-x-2 xl:gap-x-10">
                 <div className="col-span-12 md:col-span-7 lg:col-span-8">
                   <div className="flex flex-col gap-y-2 lg:gap-y-3 py-2 lg:py-4">
                     <div className="date_text">
@@ -485,7 +485,7 @@ const handleOpenModal=()=>{
                           <ul className="mt-3">
                             {attendeeFilter('Pending').map((itm: any) => {
                               return <>
-                                <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
+                                <li className="text-[#3F3F3F] text-[14px] capitalize  border-b flex py-3">
                                   <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span>
 
                                   {deletePremit(itm) ? <>
