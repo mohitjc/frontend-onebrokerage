@@ -485,8 +485,8 @@ const handleOpenModal=()=>{
                           <ul className="mt-3 grid grid-cols-1 md:grid-cols-2">
                             {attendeeFilter('Pending').map((itm: any) => {
                               return <>
-                                <li className="text-[#3F3F3F]   capitalize  border-b py-3">
-                                  <span className="flex items-center gap-1 text-[13px] font-semibold"><FiUser />{itm.memberDetails?.fullName || itm?.fullName} <span className="font-normal text-[11px]">{itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span></span>
+                                <li className="text-[#3F3F3F] text-[14px] capitalize  border-b flex py-3">
+                                  <span className="flex items-center gap-1 text-[13px] font-semibold"><FiUser />{itm.memberDetails?.fullName || itm?.fullName} <span className=" text-[11px] font-normal">{itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span></span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >

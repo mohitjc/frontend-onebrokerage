@@ -40,37 +40,41 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
             }
         })
     }
-    const importFile= (e :any) => {
-        // console.log(e?.target?.value,"pppppppppppppppppppppppppppppp")
-        const data = e?.target?.files[0]
-        console.log(data,"datadatadatadatadatadatadata")
-        const file =e?.target?.value
-        loader(true)
-        ApiClient.get(`api/import/event-group?groupId=${groupId}&filePath=${data}`).then(res => {
-            if (res.success) {
-console.log(res,"resssssssssssssssssssssssssssss")
-toast.success(res.message)
-            }
-        })
+    const importFile = (e: any) => {
+        const file = e?.target?.files[0];
+    
+        if (file) {
+            loader(true)
+            const formData = new FormData();
+            formData.append('file', file);
+            fetch('http://66.179.251.9:6040/multiple/documents?modelName="users"', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                loader(false)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                loader(true)
+                const filepath = data?.data?.imagePath
+                ApiClient.get(`api/import/event-group?groupId=${groupId}&filePath=${filepath}`).then(res => {
+                    if (res.success) {
+                        loader(false)
+        toast.success(res.message)
+                    }
+                })
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
     }
-// const importFile = (e: any) => {
-//     const file = e?.target?.files[0];
-   
+    
 
-//     loader(true);
-//     ApiClient.getFormData(`api/import/event-group?groupId=${groupId}&filePath=${file}`)
-//         .then(res => {
-//             if (res.success) {
-//                 console.log(res, "Response from server");
-//                 toast.success(res.message);
-//                 loader(false);
-//             }
-//         })
-//         .catch(error => {
-//             console.error("Error while uploading file:", error);
-//             toast.error("Failed to upload file");
-//         });
-// }
 
     const handleSelectValue = (e: any, element: any) => {
         loader(true)
