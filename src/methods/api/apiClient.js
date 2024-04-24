@@ -181,7 +181,11 @@ class ApiClient {
                 });
         });
     }
-    static getFormData(url, params) {
+
+    static postFormFileData(url, params) {
+        let configupdate = {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        };
         url = baseUrl + url
         setAuthorizationToken(axios);
         return new Promise(function (fulfill, reject) {
@@ -190,10 +194,10 @@ class ApiClient {
             oArr.map(itm => {
                 body.append(itm, params[itm]);
             })
-
+    
             axios
-                .get(url, body, config)
-
+                .post(url, body, configupdate)
+    
                 .then(function (response) {
                     fulfill(response && response.data);
                 })
@@ -204,12 +208,14 @@ class ApiClient {
                         handleError(eres.data)
                         fulfill(eres.data);
                     } else {
-                        toast.error('Network Error')
+                        toast.error('Network Error');
                         reject(error);
                     }
                 });
         });
     }
+
+   
      static async multiImageUpload (url, params) {
         url = baseUrl + url
         setAuthorizationToken(axios);
