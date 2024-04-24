@@ -51,7 +51,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
       key:'',
     },
     {
-      name:'Setting',
+      name:'Settings',
       icon:<CiSettings className="text-[#00f884] shrink-0 text-lg" />      ,
       url:'/setting',
       key:'readMembers',
