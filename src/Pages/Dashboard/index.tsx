@@ -194,7 +194,7 @@ const Dashboard = () => {
                     total={total}
                     theme="list"
                     ListHtml={ListHtml}
-                    rowClass="grid grid-cols-4 gap-4"
+                    rowClass="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3"
                     result={(e) => {
                         if (e.event == 'page') pageChange(e.value)
                         if (e.event == 'sort') sorting(e.value)

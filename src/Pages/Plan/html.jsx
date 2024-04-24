@@ -28,7 +28,7 @@ const Html = ({
   return (
     <Layout>
       <div className="">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap justify-between items-center gap-y-4">
         <div className="flex flex-col">
           <h4 className="text-typo text-2xl font-semibold">Plan</h4>
           {!user?.on_trial && !user?.trial_ended ? (
@@ -48,17 +48,16 @@ const Html = ({
                 appliedcurrency.map((item) => {
                   return (
                     <span
-                      className="span_section flex gap-x-1 text-uppercase text-primary h6 currency-format pointer bg-white shadow-btn text-center !px-2 !py-2 ml-3"
+                      className="span_section flex items-center gap-x-1 text-uppercase text-primary h6 currency-format pointer bg-white shadow-btn text-center !px-2 !py-2 ml-3"
                       onClick={(e) =>
                         setcurrencyiso(item?.isoCode.toLowerCase())
                       }>
                       <img
                         src={methodModel.userImg(item?.countryFlagImage)}
-                        width="25px"
-                        height="13px"
-                        className="mr-1"
+                        
+                        className="mr-1 h-14 w-14 rounded-full object-cover"
                       />
-                      <span className="text_bg text-xs text-center bg-[#F7F7FE] "> {item?.isoCode} </span>
+                      <span className="text_bg text-md text-center bg-[#F7F7FE] "> {item?.isoCode} </span>
                     </span>
                   );
                 })}
@@ -76,12 +75,12 @@ const Html = ({
         </p>
         </div>
       </div>
-      <div className="border !border-[#EBEBEB] bg-white rounded-[10px] !p-5 mt-6">
-        <div className="flex items-center justify-between border-b border-[#EBEBEB] pb-6 mb-6">
+      <div className="border !border-[#EBEBEB] bg-white rounded-[10px] p-0 lg:!p-5 mt-6">
+        <div className="flex md:items-center flex-col md:flex-row md:flex-wrap justify-between border-b border-[#EBEBEB] pb-6 mb-6">
           <div>
             <h4 className="text-typo text-base font-semibold">Choose Plan</h4>
           </div>
-          <ul className="flex items-center justify-center ml-auto !gap-2 !p-1 w-fit bg-[#FAFBFC] border border-[#EAECF0] rounded-lg">
+          <ul className="flex flex-wrap items-center justify-center md:ml-auto mt-2 !gap-2 !p-1 w-fit bg-[#FAFBFC] border border-[#EAECF0] rounded-lg">
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 1
@@ -124,7 +123,7 @@ const Html = ({
             </li>
           </ul>
         </div>
-        <div className=" mx-auto grid grid-cols-3 gap-6">
+        <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data &&
             data.map((item, index) => {
               return (

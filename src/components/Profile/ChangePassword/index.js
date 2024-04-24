@@ -8,7 +8,7 @@ import { logout } from '../../../Pages/actions/user';
 
 const ChangePassword = p => {
   const user = useSelector((state) => state.user);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
   const history = useNavigate()
   const [form, setForm] = useState({ confirmPassword: '', currentPassword: '', newPassword: '' })
   const [submitted, setSubmitted] = useState(false)
@@ -29,10 +29,10 @@ const ChangePassword = p => {
     if (invalid) return
 
     loader(true)
-    let payload={
-      currentPassword:form.currentPassword,
-      newPassword:form.newPassword,
-      userId:user._id
+    let payload = {
+      currentPassword: form.currentPassword,
+      newPassword: form.newPassword,
+      userId: user._id
     }
     ApiClient.put('api/user/change/password', payload).then(res => {
       if (res.success) {
@@ -49,8 +49,8 @@ const ChangePassword = p => {
     <>
 
       <div className='wrapper_section'>
-        <div className='main-title mb-8'>
-          <h3 className='text-2xl font-semibold text-[#111827] mb-6'>Change Password</h3>
+        <div className='main-title mb-4 lg:mb-8'>
+          <h3 className='text-lg lg:text-2xl font-semibold text-[#111827] mb-6'>Change Password</h3>
         </div>
 
         <div className='input_form p-6 shadow-box overflow-hidden rounded-lg bg-white'>
@@ -59,60 +59,58 @@ const ChangePassword = p => {
             <div className='items-center '>
               <div className=''>
 
+                <div className="flex flex-col md:flex-row  items-center gap-4 mb-6">
 
-
-                <div className="flex items-center gap-4 mb-6">
-
-                  <label className='text-typo text-base font-medium max-w-xs w-full block'>Current Password<span className="start">*</span></label>
+                  <label className='text-typo text-base font-medium w-full block'>Current Password<span className="start">*</span></label>
                   <div className='w-full'>
-                  <div className="relative max-w-lg">
-                    <input
-                      type={eyes.currentPassword ? 'text' : 'password'}
-                      className="shadow-box bg-white w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
-                      value={form.currentPassword}
-                      maxLength="20"
-                      placeholder='Enter current password'
-                      onChange={e => setForm({ ...form, currentPassword: e.target.value })}
-                      required
-                    />
-                    <div className='absolute right-2 top-3 cursor-pointer text-grey-500 text-sm'>
-                      <i className={eyes.currentPassword ? 'fa fa-eye text-gray-400' : 'fa fa-eye-slash text-gray-400'} onClick={() => setEyes({ ...eyes, currentPassword: !eyes.currentPassword })}></i>
+                    <div className="relative ">
+                      <input
+                        type={eyes.currentPassword ? 'text' : 'password'}
+                        className="shadow-box bg-white w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
+                        value={form.currentPassword}
+                        maxLength="20"
+                        placeholder='Enter current password'
+                        onChange={e => setForm({ ...form, currentPassword: e.target.value })}
+                        required
+                      />
+                      <div className='absolute right-2 top-3 cursor-pointer text-grey-500 text-sm'>
+                        <i className={eyes.currentPassword ? 'fa fa-eye text-gray-400' : 'fa fa-eye-slash text-gray-400'} onClick={() => setEyes({ ...eyes, currentPassword: !eyes.currentPassword })}></i>
 
+                      </div>
                     </div>
+                    {submitted && getError('currentPassword').invalid ? <div className="invalid-feedback d-block">Min Length must be 8 characters long</div> : <></>}
                   </div>
-                  {submitted && getError('currentPassword').invalid ? <div className="invalid-feedback d-block">Min Length must be 8 characters long</div> : <></>}
-                  </div>
-                  
+
                 </div>
 
-                <div className="flex items-center gap-4 mb-6 ">
-                  <label className='text-typo text-base font-medium max-w-xs w-full block'>New Password<span className="start">*</span></label>
+                <div className="flex flex-col md:flex-row  items-center gap-4 mb-6 ">
+                  <label className='text-typo text-base font-medium w-full block'>New Password<span className="start">*</span></label>
 
-<div className=' w-full'>
-<div className="relative max-w-lg">
-                    <input
-                      type={eyes.password ? 'text' : 'password'}
-                      className="shadow-box bg-white w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
-                      value={form.newPassword}
-                      placeholder='Enter new password'
-                      maxLength="20"
-                      onChange={e => setForm({ ...form, newPassword: e.target.value })}
-                      required
-                    />
-                    <div className='absolute right-2 top-3 cursor-pointer text-grey-500 text-sm'>
-                      <i className={eyes.password ? 'fa fa-eye text-gray-400' : 'fa fa-eye-slash text-gray-400'} onClick={() => setEyes({ ...eyes, password: !eyes.password })}></i>
+                  <div className=' w-full'>
+                    <div className="relative ">
+                      <input
+                        type={eyes.password ? 'text' : 'password'}
+                        className="shadow-box bg-white w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
+                        value={form.newPassword}
+                        placeholder='Enter new password'
+                        maxLength="20"
+                        onChange={e => setForm({ ...form, newPassword: e.target.value })}
+                        required
+                      />
+                      <div className='absolute right-2 top-3 cursor-pointer text-grey-500 text-sm'>
+                        <i className={eyes.password ? 'fa fa-eye text-gray-400' : 'fa fa-eye-slash text-gray-400'} onClick={() => setEyes({ ...eyes, password: !eyes.password })}></i>
 
+                      </div>
                     </div>
+                    {submitted && getError('newPassword').invalid ? <div className="invalid-feedback d-block">Min Length must be 8 characters long</div> : <></>}
                   </div>
-                  {submitted && getError('newPassword').invalid ? <div className="invalid-feedback d-block">Min Length must be 8 characters long</div> : <></>}
-</div>
-                 
+
                 </div>
 
-                <div className="flex items-center gap-4 mb-6">
-                  <label className='text-typo text-base font-medium max-w-xs w-full block'>Confirm Password<span className="start">*</span></label>
+                <div className="flex flex-col md:flex-row  items-center gap-4 mb-6">
+                  <label className='text-typo text-base font-medium w-full block'>Confirm Password<span className="start">*</span></label>
 
-                  <div className="relative w-full max-w-lg">
+                  <div className="relative w-full ">
                     <input
                       type={eyes.confirmPassword ? 'text' : 'password'}
                       className="shadow-box bg-white w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
