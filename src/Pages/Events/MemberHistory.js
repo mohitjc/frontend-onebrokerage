@@ -19,11 +19,11 @@ const MemberHistory = ({ eventDetail = '' }) => {
         {eventDetail?.map((ele)=>{
             return (
               <tr>
-                <td className=' text-typo !px-2 text-sm font-normal !py-3 !border text-center border-[#EAECF0]'>{ele?.eventsDetails?.title}</td>
-                <td className=' text-typo !px-2 text-sm font-normal !py-3 !border text-center border-[#EAECF0]'> <div dangerouslySetInnerHTML={{ __html: ele?.eventsDetails?.description }} /></td>
-                <td className=' text-typo !px-2 text-sm font-normal !py-3 !border text-center border-[#EAECF0]'>{ele?.eventsDetails?.type}</td>
-                <td className=' text-typo !px-2 text-sm font-normal !py-3 !border text-center border-[#EAECF0]'>{ele?.emailFrom}</td>
-                <td className=' text-typo !px-2 text-sm font-normal !py-3 !border text-center border-[#EAECF0]'>{ele?.eventsDetails?.address}</td>
+                <td className=' text-typo !px-2 text-sm font-normal !py-3 !border text-left border-[#EAECF0]'>{ele?.eventsDetails?.title}</td>
+                <td className=' text-typo !px-2 text-sm font-normal !py-3 !border text-left border-[#EAECF0]'> <div dangerouslySetInnerHTML={{ __html: ele?.eventsDetails?.description }} /></td>
+                <td className=' text-typo !px-2 text-sm font-normal !py-3 !border text-left border-[#EAECF0]'>{ele?.eventsDetails?.type}</td>
+                <td className=' text-typo !px-2 text-sm font-normal !py-3 !border text-left border-[#EAECF0]'>{ele?.emailFrom}</td>
+                <td className=' text-typo !px-2 text-sm font-normal !py-3 !border text-left border-[#EAECF0]'>{ele?.eventsDetails?.address}</td>
               </tr>
             )
   

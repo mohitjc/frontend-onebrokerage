@@ -12,7 +12,7 @@ import AddAttendee from "./Events/AddAttendee";
 import { toast } from "react-toastify";
 import Members from "../components/Events/Member";
 import rolesModel from "../models/roles.model";
-import { FiPrinter } from "react-icons/fi";
+import { FiPrinter, FiUser } from "react-icons/fi";
 import { MdOutlineShare } from "react-icons/md";
 import Groups from "./Groups";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
@@ -346,7 +346,7 @@ const handleOpenModal=()=>{
         <div className="bg-white border-gray-200 px-4 lg:px-6 py-8 dark:bg-gray-800">
           <div className="container mx-auto">
             <div className="events_details">
-              <div className="grid grid-cols-12 gap-x-10">
+              <div className="grid grid-cols-12 gap-x-2 xl:gap-x-10">
                 <div className="col-span-12 md:col-span-7 lg:col-span-8">
                   <div className="flex flex-col gap-y-2 lg:gap-y-3 py-2 lg:py-4">
                     <div className="date_text">
@@ -463,7 +463,7 @@ const handleOpenModal=()=>{
 
                         <div className="mt-6 mb-6">
                           <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">No ({attendeeFilter('No').length})</h6>
-                          <ul className="mt-3">
+                          <ul className=" mt-3 ">
                             {attendeeFilter('No').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
@@ -482,11 +482,11 @@ const handleOpenModal=()=>{
 
                         <div className="mt-6 mb-6">
                           <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">VIEWED/NO RESPONSE YET ({attendeeFilter('Pending').length})</h6>
-                          <ul className="mt-3">
+                          <ul className="mt-3 grid grid-cols-1 md:grid-cols-2">
                             {attendeeFilter('Pending').map((itm: any) => {
                               return <>
-                                <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span>
+                                <li className="text-[#3F3F3F] text-[14px] capitalize  border-b flex py-3">
+                                  <span className="flex items-center gap-1 text-[13px] font-semibold"><FiUser />{itm.memberDetails?.fullName || itm?.fullName} <span className=" text-[11px] font-normal">{itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span></span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -502,7 +502,7 @@ const handleOpenModal=()=>{
                         {addPremit() && invites.length ? <>
                           <div className="mt-6 mb-6">
                             <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">Invitations ({invites.length})</h6>
-                            <ul className="mt-3">
+                            <ul className="mt-3 ">
                               {invites.map((itm: any) => {
                                 return <>
                                   <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3 gap-3">

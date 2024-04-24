@@ -90,7 +90,7 @@ const Html = ({
 
     return (
         <Layout>
-            <div className="flex justify-between items-center">
+            <div className="flex flex-wrap justify-between items-center gap-y-4">
                 <div>
                     <h3 className="text-2xl font-semibold text-[#111827]"> {shared.title}s</h3>
                     <p class="text-sm font-normal text-[#75757A]">Here you can see all about your {shared.title}s</p>

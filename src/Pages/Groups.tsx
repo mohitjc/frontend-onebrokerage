@@ -59,20 +59,16 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
                 return response.json();
             })
             .then(data => {
-                // Handle the response data as needed
-                console.log('Response:', data);
                 loader(true)
                 const filepath = data?.data?.imagePath
                 ApiClient.get(`api/import/event-group?groupId=${groupId}&filePath=${filepath}`).then(res => {
                     if (res.success) {
                         loader(false)
-        console.log(res ,"responaseeeeeeeeeeeeeeeeeeeeee")
         toast.success(res.message)
                     }
                 })
             })
             .catch(error => {
-                // Handle errors
                 console.error('Error:', error);
             });
         }
