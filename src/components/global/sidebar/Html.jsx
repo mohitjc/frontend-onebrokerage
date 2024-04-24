@@ -45,7 +45,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
       key:'readEvents',
     },
     {
-      name:'Plan',
+      name:'Plans',
       icon:<SiPlanet className="text-[#00f884] shrink-0 text-lg" />      ,
       url:'/plan',
       key:'',

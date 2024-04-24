@@ -181,7 +181,35 @@ class ApiClient {
                 });
         });
     }
+    static getFormData(url, params) {
+        url = baseUrl + url
+        setAuthorizationToken(axios);
+        return new Promise(function (fulfill, reject) {
+            var body = new FormData();
+            let oArr = Object.keys(params)
+            oArr.map(itm => {
+                body.append(itm, params[itm]);
+            })
 
+            axios
+                .get(url, body, config)
+
+                .then(function (response) {
+                    fulfill(response && response.data);
+                })
+                .catch(function (error) {
+                    loader(false)
+                    if (error && error.response) {
+                        let eres = error.response;
+                        handleError(eres.data)
+                        fulfill(eres.data);
+                    } else {
+                        toast.error('Network Error')
+                        reject(error);
+                    }
+                });
+        });
+    }
      static async multiImageUpload (url, params) {
         url = baseUrl + url
         setAuthorizationToken(axios);

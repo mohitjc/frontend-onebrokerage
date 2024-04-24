@@ -500,14 +500,15 @@ useEffect(()=>{
                       <div className="">
                         <label>Phone Number</label>
                         <PhoneInput
-                          country={'us'}
-                          value={itm.mobileNo}
-                          enableSearch={true}
-                          limitMaxLength
-                          required
-                          onChange={e =>editAddress(i, e, 'mobileNo')}
-                          countryCodeEditable={true}
-                        />
+    defaultCountry={'us'} // Set the default country to United States
+    value={form.mobileNo}
+    enableSearch={true}
+    limitMaxLength
+    required
+    onChange={e => setForm({ ...form, mobileNo: e })}
+    countryCodeEditable={true}
+    minLength={10} // Corrected typo in minLength
+  />
                       </div>
                       <div className="">
                       <label>Address</label>
