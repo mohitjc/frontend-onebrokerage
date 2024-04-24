@@ -46,13 +46,32 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
         console.log(data,"datadatadatadatadatadatadata")
         const file =e?.target?.value
         loader(true)
-        ApiClient.get(`api/import/event-group?groupId=${groupId}&filePath=${file}`).then(res => {
+        ApiClient.get(`api/import/event-group?groupId=${groupId}&filePath=${data}`).then(res => {
             if (res.success) {
 console.log(res,"resssssssssssssssssssssssssssss")
 toast.success(res.message)
             }
         })
     }
+// const importFile = (e: any) => {
+//     const file = e?.target?.files[0];
+   
+
+//     loader(true);
+//     ApiClient.getFormData(`api/import/event-group?groupId=${groupId}&filePath=${file}`)
+//         .then(res => {
+//             if (res.success) {
+//                 console.log(res, "Response from server");
+//                 toast.success(res.message);
+//                 loader(false);
+//             }
+//         })
+//         .catch(error => {
+//             console.error("Error while uploading file:", error);
+//             toast.error("Failed to upload file");
+//         });
+// }
+
     const handleSelectValue = (e: any, element: any) => {
         loader(true)
         let payload = {
