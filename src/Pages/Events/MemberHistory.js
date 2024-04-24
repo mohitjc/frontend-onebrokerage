@@ -11,7 +11,7 @@ const MemberHistory = ({ eventDetail = '' }) => {
             <th className='cursor-pointer  !border-l-0  !border border-[#EAECF0] !px-2 text-left bg-[#F7FAFF] !py-3'>Event</th>
             <th className='cursor-pointer  !border-l-0  !border border-[#EAECF0] !px-2 text-left bg-[#F7FAFF] !py-3'>Description</th>
             <th className='cursor-pointer  !border-l-0  !border border-[#EAECF0] !px-2 text-left bg-[#F7FAFF] !py-3'>Type</th>
-            <th className='cursor-pointer  !border-l-0  !border border-[#EAECF0] !px-2 text-left bg-[#F7FAFF] !py-3'>Added By</th>
+            <th className='cursor-pointer  !border-l-0  !border border-[#EAECF0] !px-2 text-left bg-[#F7FAFF] !py-3'>Participants</th>
             <th className='cursor-pointer  !border-l-0  !border border-[#EAECF0] !px-2 text-left bg-[#F7FAFF] !py-3'>Address</th>
           </tr>
         </thead>
