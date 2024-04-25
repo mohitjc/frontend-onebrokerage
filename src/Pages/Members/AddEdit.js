@@ -125,10 +125,10 @@ const AddEdit = () => {
                     <div className='flex items-center mb-8'>
                         <Tooltip placement="top" title="Back">
 
-                            <Link to={`/${shared.url}`} className="!px-4  py-2 flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3"><i className='fa fa-angle-left text-lg'></i></Link>
+                            <Link to={`/${shared.url}`} className="!px-4  py-2 flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all gap-1 mr-2"><i className='fa fa-angle-left text-lg'></i></Link>
                         </Tooltip>
                         <div>
-                            <h3 className="text-2xl font-semibold text-[#111827]">
+                            <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
                                 {/* {id ? 'Edit' : 'Add'}  */}
                                  {shared.title}
                             </h3>
@@ -140,8 +140,8 @@ const AddEdit = () => {
                     <div className="">
                 {members.map((itm,i) => {
                     return <>
-                        <div className="grid grid-cols-2 gap-3">
-                        <div className="col-md-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                        <div className="">
                                 <FormControl
                                     type="select"
                                     displayValue="email"
@@ -197,7 +197,7 @@ const AddEdit = () => {
                             
                             <div className="col-span-full text-right">
                                 {members.length>1?<>
-                                    <button type="button" onClick={()=>removeMember(i)} className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                    <button type="button" onClick={()=>removeMember(i)} className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-2 py-1 md:px-5 md:py-2.5 text-center">
                             <span className="material-symbols-outlined">delete</span>
                                 </button> 
                                 </>:<></>}

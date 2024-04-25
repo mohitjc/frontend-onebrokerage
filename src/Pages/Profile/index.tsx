@@ -144,7 +144,8 @@ console.log(data,"allGroupDetails")
                       
                        
                         <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>
-  {e?.groupId?.name ? (e?.role === "meetManager" ? "Connect Meet Manager" : e?.role) : "--"}
+                       { e?.groupId?.name ? (e?.role === "meetManager" ? "Connect Meet Manager" : (e?.role === "assistant" ? "Assistant Group Leader" : e?.role)) : "--"}
+
 </td>
 
 

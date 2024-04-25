@@ -178,7 +178,7 @@ const Dashboard = () => {
             </div>
 
             {loading ? <>
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                     <div className="shine shineCard"></div>
                     <div className="shine shineCard"></div>
                     <div className="shine shineCard"></div>
@@ -194,7 +194,7 @@ const Dashboard = () => {
                     total={total}
                     theme="list"
                     ListHtml={ListHtml}
-                    rowClass="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3"
+                    rowClass="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3"
                     result={(e) => {
                         if (e.event == 'page') pageChange(e.value)
                         if (e.event == 'sort') sorting(e.value)

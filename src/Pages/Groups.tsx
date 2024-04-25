@@ -41,43 +41,79 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
             }
         })
     }
-    const importFile = (e: any) => {
-        const file = e?.target?.files[0];
+    // const importFile = (e: any) => {
+    //     const file = e?.target?.files[0];
     
-        if (file) {
-            loader(true)
-            const formData = new FormData();
-            formData.append('file', file);
-            fetch('http://66.179.251.9:6040/multiple/documents?modelName="users"', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                loader(false)
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                loader(true)
-                // const filepath = data?.data?.imagePath
-                const filepath = "/home/jc-vishal/Downloads/ATL Techies History for JC SW.xlsx"
+    //     if (file) {
+    //         loader(true)
+    //         const formData = new FormData();
+    //         formData.append('file', file);
+    //         fetch('http://66.179.251.9:6040/multiple/documents?modelName="users"', {
+    //             method: 'POST',
+    //             body: formData
+    //         })
+    //         .then(response => {
+    //             loader(false)
+    //             if (!response.ok) {
+    //                 throw new Error('Network response was not ok');
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             loader(true)
+    //             // const filepath = data?.data?.imagePath
+    //             const filepath = "/home/jc-vishal/Downloads/ATL Techies History for JC SW.xlsx"
                 
-                ApiClient.get(`api/import/event-group?groupId=${groupId}&eventId=${eventIdd}&filePath=${filepath}`).then(res => {
-                    if (res.success) {
-                        loader(false)
-        toast.success(res.message)
-                    }
-                })
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-    }
+    //             ApiClient.get(`api/import/event-group?groupId=${groupId}&eventId=${eventIdd}&filePath=${filepath}`).then(res => {
+    //                 if (res.success) {
+    //                     loader(false)
+    //     toast.success(res.message)
+    //                 }
+    //             })
+    //         })
+    //         .catch(error => {
+    //             console.error('Error:', error);
+    //         });
+    //     }
+    // }
     
+// const importFile =(e : any)=>{
+//     let payload = {
+//         groupId:groupId,
+//         eventId:eventIdd,
+//         base64String:e.target.files[0]
+//     }
+//     ApiClient.postFormFileData(`api/import/event-group`,payload).then(res => {
+//         if (res.success) {
+//             toast.success(res.message)
+//         }
+//     })
+// }
+const importFile = (e : any) => {
+    const file = e.target.files[0];
 
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = (event :any) => {
+            const base64String = event.target.result;
+
+            let payload = {
+                groupId: groupId,
+                eventId: eventIdd,
+                base64String: base64String
+            };
+
+            ApiClient.post(`api/import/event-group`, payload).then(res => {
+                if (res.success) {
+                    toast.success(res.message);
+                }
+            });
+        };
+
+        reader.readAsDataURL(file);
+    }
+};
 
     const handleSelectValue = (e: any, element: any) => {
         loader(true)
@@ -198,16 +234,16 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
                         <div className=''>
                             <div className='flex items-center gap-4  mb-3'>
 
-                                <div className='flex items-center justify-between w-full'>
-                                    <div className='mt-2 flex items-center gap-2'>
+                                <div className='flex items-center justify-between flex-wrap w-full'>
+                                    <div className='mt-2 flex  items-center gap-2'>
                                         <div className=''>
-                                            <button className='w-full text-sm bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setRequestGroup(true)}><FiPlus /> Add New Group</button>
+                                            <button className='w-full text-sm bg-orange-500 rounded-lg px-1 lg:px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setRequestGroup(true)}><FiPlus /> Add New Group</button>
                                         </div>
                                         <div className=''>
                                             <button className='w-full text-sm bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setShowDiv(true)}><LuUserPlus /> Request Group</button>
                                         </div>
                                     </div>
-                                    <div className='flex items-center gap-2'>
+                                    <div className='flex items-center gap-2 flex-wrap'>
                                         {/* import File */}
                                         <div className="flex items-center justify-center bg-grey-lighter">
                                             <label htmlFor="fileInput" className="flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide border border-blue cursor-pointer">
@@ -271,7 +307,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
                                 </div>
 
                             </div> : ""}
-                            <div className='grid grid-cols-2 gap-2'>
+                            <div className='grid grid-cols-1 lg:grid-cols-2 gap-2'>
                                 {groupList?.sort((a: any, b: any) => a.groupNo - b.groupNo)?.map((ele: any) => {
                                     return (
                                         <>
@@ -280,7 +316,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
 
                                                 <div className='flex items-center justify-between border-b border-1 pb-2 mb-2'>
                                                     <h2 className='font-bold text-[#2b2b2b] text-lg     '> Group{ele?.groupNo}</h2>
-                                                    {ele?.isUnique === true ? <p className='bg-orange-500 p-2 text-xs  mb-0 text-white rounded-md'>New Pair</p> : ""}
+                                                    {ele?.isUnique === true ? <span className='bg-orange-500 p-2 text-xs  mb-0 text-white rounded-md inline-flex'>New Pair</span> : ""}
                                                 </div>
                                                 <p className=''>{ele?.attendees?.map((element: any) => {
                                                     return (

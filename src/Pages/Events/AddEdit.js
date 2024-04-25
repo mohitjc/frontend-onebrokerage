@@ -126,17 +126,17 @@ console.log(form?.deadline,"vvvvvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvvvvvvv")
                             <Link to="/event" className="!px-4  py-2 flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3"><i className='fa fa-angle-left text-lg'></i></Link>
                         </Tooltip>
                         <div>
-                            <h3 className="text-2xl font-semibold text-[#111827]">
+                            <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
                                 {form && form.id ? 'Edit' : 'Add'} {shared.title}
                             </h3>
-                            <p class="text-sm font-normal text-[#75757A]">Here you can see all about your {shared.title}</p>
+                            <p class="text-xs lg:text-sm font-normal text-[#75757A]">Here you can see all about your {shared.title}</p>
                         </div>
                     </div>
 
 
 
                     <h3 className="ViewUser mb-3"></h3>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <div className=" mb-3">
                             <FormControl
                                 type="text"
