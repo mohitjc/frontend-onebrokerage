@@ -22,7 +22,7 @@ const ImageUpload = ({ model, result, value, multiple ,required,err,label=''}) =
             let file = files.item(i)
             console.log("i", i)
             console.log("file", file)
-            const res = await ApiClient.multiImageUpload('api/upload/image?modelName=' + model, { file: file })
+            const res = await ApiClient.azureUpload({ file: file })
             if (res.fileName) {
                 let image = res.fileName
                 if (!multiple) {

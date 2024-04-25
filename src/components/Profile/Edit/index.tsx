@@ -39,6 +39,7 @@ const EditProfile = () => {
      aboutUs:'',
      country:'usa'
     });
+    const [images, setImages]:any = useState({ image: '' });
   const history=useNavigate()
   const [submitted, setSubmitted] = useState(false)
 
@@ -63,6 +64,13 @@ const EditProfile = () => {
         let multiAddress=value.multiAddress||[]
         payload.multiAddress=multiAddress.length?multiAddress:[]
         setForm({ ...payload })
+
+        let img=images
+        Object.keys(images).map(itm=>{
+          img[itm]=value[itm]
+        })
+
+        setImages({...img})
         setData(value)
       }
       loader(false)
@@ -79,8 +87,11 @@ const EditProfile = () => {
     let invalid = formModel.getFormError('profileForm')
     if (invalid) return
 
-    let value = { ...form, id: user._id,addedBy: user._id
-      // verifiedGroupLeader:'approved'
+    let value = { ...form, 
+      id: user._id,
+      addedBy: user._id,
+      // verifiedGroupLeader:'approved',
+      ...images
      }
    Object.keys(value).map(itm=>{
     if(!value[itm]) value[itm]=null
@@ -114,6 +125,14 @@ const EditProfile = () => {
     })
   }
 
+ 
+  const imageResult = (e:any, key:any) => {
+    images[key] = e.value
+    setImages(images)
+    console.log("imageResult", e)
+}
+
+
   useEffect(
     () => {
       if (user.loggedIn) {
@@ -126,6 +145,8 @@ const EditProfile = () => {
      <Html
      handleSubmit={handleSubmit}
      setForm={setForm}
+     imageResult={imageResult}
+     images={images}
      form={form}
      uploadImage={uploadImage}
      getError={getError}

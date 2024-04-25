@@ -10,6 +10,9 @@ let apiUrl ='https://skillprobackend.azurewebsites.net/';
 
 const environment = {
     api: apiUrl,
+    sasKey:'sp=racwdli&st=2024-04-25T09:28:38Z&se=2024-04-30T17:28:38Z&sv=2022-11-02&sr=c&sig=qfRZ%2B%2Bb7z9aBHmlcE2XM0XQDIKa2WLcieACpb%2B4S9PU%3D',
+    sasurl:'https://skillprobackendstore.blob.core.windows.net',
+    container:'exel',
     map_api_key:'AIzaSyCbRhC6h9Pp43-5t_Knyrd_ewAdLMIJtCg',
     planTypeId:'65ead4e65cfbfd7a03ed102f',
     apiUrl :'https://skillprobackend.azurewebsites.net/',

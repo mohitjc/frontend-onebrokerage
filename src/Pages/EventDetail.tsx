@@ -34,6 +34,7 @@ const EventDetail = () => {
   const [requestGroup,setRequestGroup] = useState(false)
   const [memberHistoryData , setmemberHistoryData] = useState()
   const [attendeesGroup , setattendeesGroup] = useState()
+  const [newData,setNewData]= useState()
   const user = useSelector((state:any) => state.user);
   const history = useNavigate()
   const navigate = useNavigate();
@@ -321,6 +322,8 @@ const handleOpenModal=(e :any)=>{
   }
   history('/groupsDetail',  { state: stateData });
 }
+const showRole = invites?.map((ele)=> setNewData(ele) )
+console.log(invites,"setNewDatasetNewDatasetNewDatasetNewDatasetNewData")
   return (
     <>
       <PageLayout>

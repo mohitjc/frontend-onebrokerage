@@ -14,7 +14,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import FormControl from '../../common/FormControl';
 
 
-const Html = ({ handleSubmit, setForm, form, getError, uploadImage, submitted }) => {
+const Html = ({ handleSubmit, setForm, form, getError,imageResult,images, uploadImage, submitted }) => {
 
 
 
@@ -47,13 +47,6 @@ const Html = ({ handleSubmit, setForm, form, getError, uploadImage, submitted })
   const countries=countryStateModel.list
   const timezones=timezoneModel.list
   const [roles, setRoles] = useState([])
-  const [images, setImages] = useState({ image: '' });
-  const imageResult = (e, key) => {
-    images[key] = e.value
-    setImages(images)
-    console.log("imageResult", e)
-}
-
 
 
 const getCertificates = () => {
