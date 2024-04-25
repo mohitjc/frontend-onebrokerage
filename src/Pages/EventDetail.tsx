@@ -34,7 +34,8 @@ const EventDetail = () => {
   const [requestGroup,setRequestGroup] = useState(false)
   const [memberHistoryData , setmemberHistoryData] = useState()
   const [attendeesGroup , setattendeesGroup] = useState()
-  const [newData,setNewData]= useState()
+  const [newData,setNewData]= useState([])
+  const [Roledata, setRoleData]: any = useState()
   const user = useSelector((state:any) => state.user);
   const history = useNavigate()
   const navigate = useNavigate();
@@ -43,8 +44,8 @@ const EventDetail = () => {
   const [me, setMe] = useState()
   const [member, setMember]: any = useState()
   const { id } = useParams()
-console.log(attendeesGroup,"attendeesGroup")
-console.log(user,"nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
+
+console.log(newData,"nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
   const getDetail = () => {
     loader(true)
     ApiClient.get('api/event/details', { id: id, email: user?.email }).then(res => {
@@ -75,6 +76,7 @@ console.log(user,"nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
     ApiClient.get('api/attendees/list', f).then(res => {
       setALoader(false)
       if (res.success) {
+        setNewData(res?.data)
         let data: any = res.data.map((itm: any) => {
           return {
             ...itm,
@@ -322,8 +324,11 @@ const handleOpenModal=(e :any)=>{
   }
   history('/groupsDetail',  { state: stateData });
 }
-const showRole = invites?.map((ele)=> setNewData(ele) )
-console.log(invites,"setNewDatasetNewDatasetNewDatasetNewDatasetNewData")
+
+  const roleData =newData?.map((ele)=>{
+    setRoleData()
+  })
+
   return (
     <>
       <PageLayout>
@@ -454,8 +459,8 @@ console.log(invites,"setNewDatasetNewDatasetNewDatasetNewDatasetNewData")
                             {attendeeFilter('Yes').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span>
-
+                                  <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}  { localStorage.setItem(itm.memberDetails.role, "Role")}</span>
+                                
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
                                       <BsTrash3 />
@@ -541,7 +546,7 @@ console.log(invites,"setNewDatasetNewDatasetNewDatasetNewDatasetNewData")
                         ) : null :<></>}
                      
                      </div>
-                     {data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager"? <>{data?.isGroupGenerated === true ? <div className="flex justify-end">
+                     {data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager" || localStorage.getItem("Role") === "meetManager" || localStorage.getItem("Role") === "assistant"? <>{data?.isGroupGenerated === true ? <div className="flex justify-end">
                                    <button  
                                   //  onClick={() => setGroup(true)} 
                                   onClick={() => handleOpenModal("SeeAllGroups")}
