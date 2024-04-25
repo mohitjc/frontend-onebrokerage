@@ -183,16 +183,16 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
                         <div className=''>
                             <div className='flex items-center gap-4  mb-3'>
 
-                                <div className='flex items-center justify-between w-full'>
-                                    <div className='mt-2 flex items-center gap-2'>
+                                <div className='flex items-center justify-between flex-wrap w-full'>
+                                    <div className='mt-2 flex  items-center gap-2'>
                                         <div className=''>
-                                            <button className='w-full text-sm bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setRequestGroup(true)}><FiPlus /> Add New Group</button>
+                                            <button className='w-full text-sm bg-orange-500 rounded-lg px-1 lg:px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setRequestGroup(true)}><FiPlus /> Add New Group</button>
                                         </div>
                                         <div className=''>
                                             <button className='w-full text-sm bg-orange-500 rounded-lg px-4 py-2 text-white flex items-center gap-4 justify-center font-bold' onClick={() => setShowDiv(true)}><LuUserPlus /> Request Group</button>
                                         </div>
                                     </div>
-                                    <div className='flex items-center gap-2'>
+                                    <div className='flex items-center gap-2 flex-wrap'>
                                         {/* import File */}
                                         <div className="flex items-center justify-center bg-grey-lighter">
                                             <label htmlFor="fileInput" className="flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide border border-blue cursor-pointer">
@@ -256,7 +256,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
                                 </div>
 
                             </div> : ""}
-                            <div className='grid grid-cols-2 gap-2'>
+                            <div className='grid grid-cols-1 lg:grid-cols-2 gap-2'>
                                 {groupList?.sort((a: any, b: any) => a.groupNo - b.groupNo)?.map((ele: any) => {
                                     return (
                                         <>
@@ -265,7 +265,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
 
                                                 <div className='flex items-center justify-between border-b border-1 pb-2 mb-2'>
                                                     <h2 className='font-bold text-[#2b2b2b] text-lg     '> Group{ele?.groupNo}</h2>
-                                                    {ele?.isUnique === true ? <p className='bg-orange-500 p-2 text-xs  mb-0 text-white rounded-md'>New Pair</p> : ""}
+                                                    {ele?.isUnique === true ? <span className='bg-orange-500 p-2 text-xs  mb-0 text-white rounded-md inline-flex'>New Pair</span> : ""}
                                                 </div>
                                                 <p className=''>{ele?.attendees?.map((element: any) => {
                                                     return (
