@@ -256,8 +256,6 @@ class ApiClient {
             blockBlobClient.uploadBrowserData(file).then(res => {
                 console.log("res", res)
                 fulfill({ success: true, fileName: blobName })
-                blockBlobClient.deleteIfExists()
-
             }).catch(err => {
                 console.log("err", err)
                 fulfill({ success: false, message: err })
