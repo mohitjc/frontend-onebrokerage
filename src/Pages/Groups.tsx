@@ -218,8 +218,11 @@ const importFile = (e : any) => {
 
      
             <PageLayout>
-            <div
-            className="mb-4 cp pt-1 ms-2 pointer"
+       
+                <div className="bg-white border-gray-200 px-4 pt-8 lg:px-6 py-2.5 dark:bg-gray-800">
+                    <div className="container mx-auto">
+                    <div
+            className="mb-4 pt-1  pointer"
           onClick={() => history(-1)}
           >
             <span>
@@ -229,9 +232,6 @@ const importFile = (e : any) => {
             </span>
             Back
           </div>
-                <div className="bg-white border-gray-200 px-4 pt-8 lg:px-6 py-2.5 dark:bg-gray-800">
-                    <div className="container mx-auto">
-
                         <div className=''>
                             <div className='flex items-center gap-4  mb-3'>
 
