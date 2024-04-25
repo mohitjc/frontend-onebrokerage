@@ -7,11 +7,11 @@
 import axios from 'axios';
 import querystring from 'querystring';
 import { setAuthorizationToken } from '../auth';
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import loader from '../loader';
 import environment from '../../environment';
 import methodModel from '../methods';
-
+import { BlockBlobClient, AnonymousCredential } from '@azure/storage-blob';
 
 var config = {
     headers: { 'Content-Type': 'application/json' },
@@ -26,7 +26,7 @@ const handleError = (err, hideError) => {
         if (err && err.error && err.error.code == 401) {
             localStorage.removeItem("persist:admin-app")
             localStorage.removeItem("token")
-            hideError=true
+            hideError = true
             methodModel.route('/')
         }
         message = err && err.error && err.error.message
@@ -36,8 +36,20 @@ const handleError = (err, hideError) => {
     if (!hideError) toast.error(message);
 }
 
+
+const sasKey = environment.sasKey
+const sasurl = environment.sasurl
+const container = environment.container
+
+
+function buildBlobName(file) {
+    var filename = file.name.substring(0, file.name.lastIndexOf('.'));
+    var ext = file.name.substring(file.name.lastIndexOf('.'));
+    return filename + '_' + Math.random().toString(16).slice(2) + ext;
+}
+
 class ApiClient {
-    static post(url1, params, base = '',hideError=false) {
+    static post(url1, params, base = '', hideError = false) {
         let url = baseUrl + url1
         if (base) url = base + url1
 
@@ -52,7 +64,7 @@ class ApiClient {
                     loader(false)
                     if (error && error.response) {
                         let eres = error.response;
-                        handleError(eres.data,hideError)
+                        handleError(eres.data, hideError)
                         fulfill({ ...eres.data, success: false });
                     } else {
                         toast.error('Network Error')
@@ -194,10 +206,10 @@ class ApiClient {
             oArr.map(itm => {
                 body.append(itm, params[itm]);
             })
-    
+
             axios
                 .post(url, body, configupdate)
-    
+
                 .then(function (response) {
                     fulfill(response && response.data);
                 })
@@ -215,25 +227,41 @@ class ApiClient {
         });
     }
 
-   
-     static async multiImageUpload (url, params) {
+
+    static async multiImageUpload(url, params) {
         url = baseUrl + url
         setAuthorizationToken(axios);
         var body = new FormData();
-            let oArr = Object.keys(params)
-            oArr.map(itm => {
-                body.append(itm, params[itm]);
+        let oArr = Object.keys(params)
+        oArr.map(itm => {
+            body.append(itm, params[itm]);
+        })
+
+        return await axios
+            .post(url, body, config)
+
+            .then(function (response) {
+                return response && response.data
             })
+            .catch(function (error) {
+                return error && error.response
+            });
+    }
 
-          return await axios
-                .post(url, body, config)
+    static async azureUpload({ file }) {
+        return new Promise(function (fulfill, reject) {
+            var blobName = buildBlobName(file);
+            var login = `${sasurl}/${container}/${blobName}?${sasKey}`;
+            var blockBlobClient = new BlockBlobClient(login, new AnonymousCredential());
+            blockBlobClient.uploadBrowserData(file).then(res => {
+                console.log("res", res)
+                fulfill({ success: true, fileName: blobName })
 
-                .then(function (response) {
-                    return response && response.data
-                })
-                .catch(function (error) {
-                    return error && error.response 
-                });
+            }).catch(err => {
+                console.log("err", err)
+                fulfill({ success: false, message: err })
+            });
+        });
     }
 
 }
