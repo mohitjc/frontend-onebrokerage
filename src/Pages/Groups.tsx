@@ -60,8 +60,10 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
             })
             .then(data => {
                 loader(true)
-                const filepath = data?.data?.imagePath
-                ApiClient.get(`api/import/event-group?groupId=${groupId}&filePath=${filepath}`).then(res => {
+                // const filepath = data?.data?.imagePath
+                const filepath = "/home/jc-vishal/Downloads/ATL Techies History for JC SW.xlsx"
+                
+                ApiClient.get(`api/import/event-group?groupId=${groupId}&eventId=${eventIdd}&filePath=${filepath}`).then(res => {
                     if (res.success) {
                         loader(false)
         toast.success(res.message)
