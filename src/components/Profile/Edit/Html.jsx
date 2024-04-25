@@ -372,7 +372,7 @@ useEffect(()=>{
 
 
 
-          <div className='shadow grid grid-cols-12 gap-4 mb-4 md:p-4 p-0'>
+          <div className='shadow grid grid-cols-12 gap-4 mb-4  p-4'>
              <div className="col-span-12 md:col-span-6">
                  <label>Skills</label>
                  <MultiSelectDropdown
@@ -453,7 +453,7 @@ useEffect(()=>{
              </div>
              </div>
 
-             <div className='shadow grid grid-cols-12 gap-4 mb-4 md:p-4 p-0'>
+             <div className='shadow grid grid-cols-12 gap-4 mb-4  p-4'>
             <div className="col-span-full ">
             <div className=" ">
               <h4 className="text-1xl font-semibold text-[#111827]">Addresses</h4>

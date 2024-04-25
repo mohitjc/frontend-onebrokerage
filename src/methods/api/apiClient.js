@@ -256,11 +256,28 @@ class ApiClient {
             blockBlobClient.uploadBrowserData(file).then(res => {
                 console.log("res", res)
                 fulfill({ success: true, fileName: blobName })
-
             }).catch(err => {
                 console.log("err", err)
                 fulfill({ success: false, message: err })
             });
+        });
+    }
+
+    static async azureBlobDelete({ fileName }) {
+        const options = {
+            deleteSnapshots: 'include' // or 'only'
+          }
+        return new Promise(function (fulfill, reject) {
+            var blobName = fileName;
+            var login = `${sasurl}/${container}/${blobName}?${sasKey}`;
+            var blockBlobClient = new BlockBlobClient(login, new AnonymousCredential());
+            blockBlobClient.deleteIfExists(options).then(res=>{
+                fulfill({success:true})
+                console.log("delete res", res)
+            }).catch(err=>{
+                console.log("delete err", err)
+                fulfill({success:false,message: err})
+            })
         });
     }
 
