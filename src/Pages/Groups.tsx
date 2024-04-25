@@ -18,6 +18,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     console.log(eventDetail, "eventDetaileventDetaileventDetaileventDetaileventDetail")
     const { id } = useParams()
     const location = useLocation();
+    const history = useNavigate();
     const receivedStateData = location.state;
     console.log(receivedStateData, "receivedStateDatareceivedStateDatareceivedStateDatareceivedStateDatareceivedStateData")
     const [groupList, setGroupList]: any = useState()
@@ -177,8 +178,20 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     return (
         <>
 
-            <PageLayout>
 
+     
+            <PageLayout>
+            <div
+            className="mb-4 cp pt-1 ms-2 pointer"
+          onClick={() => history(-1)}
+          >
+            <span>
+
+
+              <i className="fa fa-arrow-left mr-2"></i>
+            </span>
+            Back
+          </div>
                 <div className="bg-white border-gray-200 px-4 pt-8 lg:px-6 py-2.5 dark:bg-gray-800">
                     <div className="container mx-auto">
 
