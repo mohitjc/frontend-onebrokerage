@@ -30,17 +30,17 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     const eventIdd = receivedStateData?.eventId?.id
     const groupId = receivedStateData?.dataa?.data?.groupId?._id
     console.log(eventIdd, "eventIddeventIdd")
-    const getAttendeesGroupPair = () => {
-        loader(true)
-        ApiClient.get(`api/event/groups?eventId=${eventIdd}`).then(res => {
-            if (res.success) {
+    // const getAttendeesGroupPair = () => {
+    //     loader(true)
+    //     ApiClient.get(`api/event/groups?eventId=${eventIdd}`).then(res => {
+    //         if (res.success) {
 
-                setattendeesGroup(res?.data)
-                loader(false)
-                getGroupPair()
-            }
-        })
-    }
+    //             setattendeesGroup(res?.data)
+    //             loader(false)
+    //             getGroupPair()
+    //         }
+    //     })
+    // }
     // const importFile = (e: any) => {
     //     const file = e?.target?.files[0];
     
@@ -178,7 +178,8 @@ const importFile = (e : any) => {
     };
 
     useEffect(() => {
-        getAttendeesGroupPair()
+        // getAttendeesGroupPair()
+        getGroupPair()
         getGroupRequest()
     }, [])
     const handleInputField = async () => {
