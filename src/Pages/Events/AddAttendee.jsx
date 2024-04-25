@@ -129,7 +129,7 @@ export default function AddAttendee({ id = '', eventId, guest=false,result = (e)
                 </h3> */}
                 {members.map((itm,i) => {
                     return <>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                            
                             
                             {guest?<>
