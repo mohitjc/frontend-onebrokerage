@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import ApiClient from "../../../methods/api/apiClient";
 import Html from "./html";
 import './style.scss';
+import loader from "../../../methods/loader";
 
 const ImageUpload = ({ model, result, value, multiple ,required,err,label=''}) => {
     const inputElement = useRef();
     const [img, setImg] = useState('')
-    const [loader, setLoader] = useState(false)
+    const [loading, setLoader] = useState(false)
     const uploadImage = async (e) => {
         let files = e.target.files
         let i = 0
@@ -42,9 +43,13 @@ const ImageUpload = ({ model, result, value, multiple ,required,err,label=''}) =
     }
 
     const remove = (index) => {
-        setImg('')
-        inputElement.current.value = ''
-        result({ event: 'remove', value: '' })
+        loader(true)
+        ApiClient.azureBlobDelete({fileName:value}).then(res=>{
+            loader(false)
+            inputElement.current.value = ''
+            result({ event: 'remove', value: '' })
+            setImg('')
+        })
     }
 
     useEffect(() => {
@@ -59,7 +64,7 @@ const ImageUpload = ({ model, result, value, multiple ,required,err,label=''}) =
         img={img}
         model={model}
         required={required}
-        loader={loader}
+        loader={loading}
         err={err}
         remove={remove}
     /></>
