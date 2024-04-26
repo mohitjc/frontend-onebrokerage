@@ -30,6 +30,7 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     const eventIdd = receivedStateData?.eventId?.id
     const groupId = receivedStateData?.dataa?.data?.groupId?._id
     console.log(eventIdd, "eventIddeventIdd")
+    console.log(groupList,"groupListgroupListgroupListgroupListgroupList")
     // const getAttendeesGroupPair = () => {
     //     loader(true)
     //     ApiClient.get(`api/event/groups?eventId=${eventIdd}`).then(res => {
@@ -120,7 +121,7 @@ const importFile = (e : any) => {
         let payload = {
             data: [{
                 id: element?.id,
-                groupNo: e?.target?.value,
+                ConnectMeetId: e?.target?.value,
                 attendeeId: element?.attendeesDetails?._id,
                 eventId: element?.attendeesDetails?.eventId,
                 groupId: element?.attendeesDetails?.groupId
@@ -330,7 +331,7 @@ const importFile = (e : any) => {
                                                                 <select className=" bg-transparent focus:outline-none cursor-pointer text-[14px]  text-white" onChange={(e: any) => handleSelectValue(e, element)}>
                                                                     <option value="" disabled selected>Move to</option>
                                                                     {groupList?.filter((data: any) => data.groupNo !== ele.groupNo)?.map((data: any) => (
-                                                                        <option className='text-md text-black' key={data?.groupNo} value={data?.groupNo}>Group {data?.groupNo}</option>
+                                                                        <option className='text-md text-black' key={data?.groupNo} value={data?._id?.ConnectMeetId}>Group {data?.groupNo}</option>
                                                                     ))}
                                                                 </select>
 
