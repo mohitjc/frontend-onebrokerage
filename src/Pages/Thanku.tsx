@@ -7,8 +7,6 @@ const Thanku = () => {
 const [loading,setLoader]=useState(false)
 const [img,setImg]=useState('')
 
-
-
 const uploadFile=(e:any)=>{
   let files=e.target.files;
   let file=files.item(0)
