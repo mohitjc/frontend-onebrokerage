@@ -112,6 +112,13 @@ const EventDetail = () => {
     ApiClient.get(`api/event/groups?eventId=${id}`).then(res => {
       if (res.success) {
         setattendeesGroup(res?.data)
+        const stateData ={
+          eventDetail:{attendeesGroup},
+          dataa:{data},
+          eventId:{id},
+          attendeesGroup:attendeesGroup
+        }
+        history('/groupsDetail',  { state: stateData });
       }
     })
   }
@@ -316,12 +323,16 @@ const handleOpenModal=(e :any)=>{
   if(e === "GenerateConnectmeets"){
     getAttendeesGroupPair()
   }
-  const stateData ={
-    eventDetail:{attendeesGroup},
-    dataa:{data},
-    eventId:{id}
+  else if(e === "SeeAllGroups"){
+    const stateData ={
+      eventDetail:{attendeesGroup},
+      dataa:{data},
+      eventId:{id},
+      attendeesGroup:attendeesGroup
+    }
+    history('/groupsDetail',  { state: stateData });
   }
-  history('/groupsDetail',  { state: stateData });
+
 }
 
   
@@ -490,7 +501,7 @@ const handleOpenModal=(e :any)=>{
 
                         <div className="mt-6 mb-6">
                           <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">VIEWED/NO RESPONSE YET ({attendeeFilter('Pending').length})</h6>
-                          <ul className="mt-3 grid grid-cols-1">
+                          <ul className="mt-3 grid grid-cols-1 md:grid-cols-2">
                             {attendeeFilter('Pending').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize  border-b flex py-3">
