@@ -490,7 +490,7 @@ const handleOpenModal=(e :any)=>{
 
                         <div className="mt-6 mb-6">
                           <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">VIEWED/NO RESPONSE YET ({attendeeFilter('Pending').length})</h6>
-                          <ul className="mt-3 grid grid-cols-1 md:grid-cols-2">
+                          <ul className="mt-3 grid grid-cols-1">
                             {attendeeFilter('Pending').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize  border-b flex py-3">

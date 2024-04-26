@@ -22,37 +22,37 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
     },
     {
       name:'Dashboard',
-      icon:<RiHome6Line className="text-[#00b884] shrink-0 text-lg" />,
+      icon:<RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
       url:'/dashboard',
       key:'readDashboard',
     },
     // {
     //   name:'Assign Members',
-    //   icon:<SiSuperuser className="text-[#00f884] shrink-0 text-lg" />      ,
+    //   icon:<SiSuperuser className="text-[#fff] shrink-0 text-lg" />      ,
     //   url:'/assign-member',
     //   key:'readMembers',
     // },
     {
       name:'Members',
-      icon:<LuUser2 className="text-[#00f884] shrink-0 text-lg" />      ,
+      icon:<LuUser2 className="text-[#fff] shrink-0 text-lg" />      ,
       url:'/members',
       key:'readMembers',
     },
       {
       name:'Events',
-      icon:<MdOutlineEmojiEvents className="text-[#00b184] shrink-0 text-lg" />      ,
+      icon:<MdOutlineEmojiEvents className="text-[#fff] shrink-0 text-lg" />      ,
       url:'/event',
       key:'readEvents',
     },
     {
       name:'Plans',
-      icon:<SiPlanet className="text-[#00f884] shrink-0 text-lg" />      ,
+      icon:<SiPlanet className="text-[#fff] shrink-0 text-lg" />      ,
       url:'/plan',
       key:'',
     },
     {
       name:'Settings',
-      icon:<CiSettings className="text-[#00f884] shrink-0 text-lg" />      ,
+      icon:<CiSettings className="text-[#fff] shrink-0 text-lg" />      ,
       url:'/setting',
       key:'readMembers',
     },
@@ -126,15 +126,15 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
             </Disclosure>
             </>:<>
             {isAllow(itm.key) ? <>
-              <Tooltip placement="right" title={itm.name}>
+              <Tooltip placement="top" color="#ef7a2b" title={itm.name}>
                 <NavLink
                   to={itm.url}
                   className={(isActive) =>
-                    "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#00b884] hover:bg-[#00b884]/10 !no-underline transition-all " +
-                    (location?.pathname == itm.url && " !text-[#00b884] !bg-[#EDECF9] !font-medium")
+                    "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#fff] hover:!text-[#fff] hover:bg-[#00b884]/10 !no-underline transition-all " +
+                    (location?.pathname == itm.url && " !text-[#fff] !bg-[#ef7a2b] !font-medium")
                   }>
 
-                  {itm.icon}
+                    {itm.icon}
                   <span className="text-inherit leading-none sidebar_text">{itm.name}</span>
 
                 </NavLink>
