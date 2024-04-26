@@ -112,6 +112,13 @@ const EventDetail = () => {
     ApiClient.get(`api/event/groups?eventId=${id}`).then(res => {
       if (res.success) {
         setattendeesGroup(res?.data)
+        const stateData ={
+          eventDetail:{attendeesGroup},
+          dataa:{data},
+          eventId:{id},
+          attendeesGroup:attendeesGroup
+        }
+        history('/groupsDetail',  { state: stateData });
       }
     })
   }
@@ -316,12 +323,16 @@ const handleOpenModal=(e :any)=>{
   if(e === "GenerateConnectmeets"){
     getAttendeesGroupPair()
   }
-  const stateData ={
-    eventDetail:{attendeesGroup},
-    dataa:{data},
-    eventId:{id}
+  else if(e === "SeeAllGroups"){
+    const stateData ={
+      eventDetail:{attendeesGroup},
+      dataa:{data},
+      eventId:{id},
+      attendeesGroup:attendeesGroup
+    }
+    history('/groupsDetail',  { state: stateData });
   }
-  history('/groupsDetail',  { state: stateData });
+
 }
 
   

@@ -116,7 +116,17 @@ console.log(data,"allGroupDetails")
                                      
                 </div>
 
-                <div className='mt-8 '>
+               
+            </div>
+
+
+           
+          
+
+
+          </div>
+
+          <div className='mt-8 '>
                   <div className='overflow-auto'>
                   <table className='w-full'>
                   <thead className='border-y border-[#EAECF0]'>
@@ -163,14 +173,8 @@ console.log(data,"allGroupDetails")
                 </div>
 
                 </div>
-            </div>
 
-
-           
-          
-
-
-          </div>
+                
         </div>
       </div>
 

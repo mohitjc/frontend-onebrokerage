@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 
 const Setting = () => {
-  const [memberGroup, setMemberGroup] = useState('');
+  const [memberGroup, setMemberGroup] = useState(3);
   const [getdata,setGetData] :any= useState()
   const user = useSelector((state: any) => state.user);
 console.log(getdata ,"getdatagetdatagetdatagetdatagetdatagetdata")
@@ -65,7 +65,7 @@ console.log(getdata ,"getdatagetdatagetdatagetdatagetdatagetdata")
             type="text" 
             placeholder="Member Group" 
             className='relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 border border-gray-100' 
-            value={memberGroup} 
+            value={memberGroup}
             onChange={handleChange} 
           />
         </div>
