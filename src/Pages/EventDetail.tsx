@@ -34,6 +34,8 @@ const EventDetail = () => {
   const [requestGroup,setRequestGroup] = useState(false)
   const [memberHistoryData , setmemberHistoryData] = useState()
   const [attendeesGroup , setattendeesGroup] = useState()
+  const [newData,setNewData]= useState([])
+  const [Roledata, setRoleData]: any = useState()
   const user = useSelector((state:any) => state.user);
   const history = useNavigate()
   const navigate = useNavigate();
@@ -42,8 +44,7 @@ const EventDetail = () => {
   const [me, setMe] = useState()
   const [member, setMember]: any = useState()
   const { id } = useParams()
-console.log(attendeesGroup,"attendeesGroup")
-console.log(user,"nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
+
   const getDetail = () => {
     loader(true)
     ApiClient.get('api/event/details', { id: id, email: user?.email }).then(res => {
@@ -74,6 +75,7 @@ console.log(user,"nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
     ApiClient.get('api/attendees/list', f).then(res => {
       setALoader(false)
       if (res.success) {
+        setNewData(res?.data)
         let data: any = res.data.map((itm: any) => {
           return {
             ...itm,
@@ -321,6 +323,8 @@ const handleOpenModal=(e :any)=>{
   }
   history('/groupsDetail',  { state: stateData });
 }
+
+  
   return (
     <>
       <PageLayout>
@@ -451,8 +455,8 @@ const handleOpenModal=(e :any)=>{
                             {attendeeFilter('Yes').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span>
-
+                                  <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm?.memberDetails?.role)})` : '(Guest)'}  { localStorage.setItem(itm?.memberDetails?.role, "Role")}</span>
+                                
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
                                       <BsTrash3 />
@@ -471,7 +475,7 @@ const handleOpenModal=(e :any)=>{
                             {attendeeFilter('No').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3">
-                                  <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span>
+                                  <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm?.memberDetails?.role)})` : '(Guest)'}</span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -490,7 +494,7 @@ const handleOpenModal=(e :any)=>{
                             {attendeeFilter('Pending').map((itm: any) => {
                               return <>
                                 <li className="text-[#3F3F3F] text-[14px] capitalize  border-b flex py-3">
-                                  <span className="flex items-center gap-1 text-[13px] font-semibold"><FiUser />{itm.memberDetails?.fullName || itm?.fullName} <span className=" text-[11px] font-normal">{itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span></span>
+                                  <span className="flex items-center gap-1 text-[13px] font-semibold"><FiUser />{itm.memberDetails?.fullName || itm?.fullName} <span className=" text-[11px] font-normal">{itm.memberDetails?.fullName ? `(${rolesModel.name(itm?.memberDetails?.role)})` : '(Guest)'}</span></span>
 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
@@ -510,7 +514,7 @@ const handleOpenModal=(e :any)=>{
                               {invites.map((itm: any) => {
                                 return <>
                                   <li className="text-[#3F3F3F] text-[14px] capitalize flex border-b py-3 gap-3">
-                                    <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm.memberDetails.role)})` : '(Guest)'}</span>
+                                    <span>{itm.memberDetails?.fullName || itm?.fullName} {itm.memberDetails?.fullName ? `(${rolesModel.name(itm?.memberDetails?.role)})` : '(Guest)'}</span>
 
                                     {deletePremit(itm) ? <>
                                       <Tooltip placement="top" title="Accept" className='cursor-pointer ml-auto text-green-500 text-lg'> <span onClick={() => acceptReject(itm.id, 'accepted')} >
@@ -538,7 +542,7 @@ const handleOpenModal=(e :any)=>{
                         ) : null :<></>}
                      
                      </div>
-                     {data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager"? <>{data?.isGroupGenerated === true ? <div className="flex justify-end">
+                     {data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager" || role === "meetManager" || role === "assistant"? <>{data?.isGroupGenerated === true ? <div className="flex justify-end">
                                    <button  
                                   //  onClick={() => setGroup(true)} 
                                   onClick={() => handleOpenModal("SeeAllGroups")}

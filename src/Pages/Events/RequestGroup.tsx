@@ -11,7 +11,15 @@ const RequestGroup = ({ eventDetail = '' ,data="" ,setRequestGroup=""}: any) => 
   console.log(data,"datatatatattatattaattataatt")
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
-  const options = eventDetail('Yes').map((itm: any) => ({
+  // const options = eventDetail('Yes').map((itm: any) => ({
+  //   value: itm.id,
+  //   label: itm.memberDetails?.fullName
+  // }));
+// Assuming loggedInUserId contains the ID of the logged-in user
+console.log(user,"user")
+const options = eventDetail('Yes')
+  .filter((itm: any) => itm.memberDetails?.fullName !== user?.fullName)
+  .map((itm: any) => ({
     value: itm.id,
     label: itm.memberDetails?.fullName
   }));

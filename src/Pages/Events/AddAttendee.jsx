@@ -146,7 +146,7 @@ export default function AddAttendee({ id = '', eventId, guest=false,result = (e)
                             <div className="col-md-6">
                                 <FormControl
                                     type="select"
-                                    // className="lowercase"
+                                    className="lowercase"
                                     displayValue="email"
                                     valueType="object"
                                     placeholder="Select Member"

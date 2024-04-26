@@ -58,7 +58,7 @@ console.log(getdata ,"getdatagetdatagetdatagetdatagetdatagetdata")
 
   return (
     <Layout>
-      <div className='shadow-box bg-white rounded-lg mt-6 p-6 w-96'>
+      <div className='shadow-box bg-white rounded-lg mt-6 p-2 lg:p-6 w-full lg:w-96'>
         <div className='inputs_date'>
           <label className='mb-1 block'>My group settings</label>
           <input 
