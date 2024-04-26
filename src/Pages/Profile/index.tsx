@@ -158,9 +158,6 @@ console.log(data,"allGroupDetails")
 
 </td>
 
-
-
-
                       </tr>
                     </>
                      
@@ -174,7 +171,7 @@ console.log(data,"allGroupDetails")
 
                 </div>
 
-                
+
         </div>
       </div>
 
