@@ -1,28 +1,7 @@
-import { useState } from "react";
 import PageLayout from "../components/global/PageLayout";
-import ApiClient from "../methods/api/apiClient";
 
 const Thanku = () => {
-
-const [loading,setLoader]=useState(false)
-const [img,setImg]=useState('')
-
-const uploadFile=(e:any)=>{
-  let files=e.target.files;
-  let file=files.item(0)
-  console.log("file",file)
-  if(file){
-    setLoader(true)
-    ApiClient.azureUpload({file:file}).then(res=>{
-      setLoader(false)
-      if(res.success){
-        setImg(res.fileName)
-      }
-    })
-  }
-}
-
-
+  
   return (
     <>
       <PageLayout>
@@ -35,13 +14,6 @@ const uploadFile=(e:any)=>{
                         <p>Login with your email to view events</p>
                       </div>
                      </div>
-                     
-                     {/* <input type="file" onChange={uploadFile} />
-                     {loading?<>
-                     <div className="text-center">Uploading...</div>
-                     </>:<></>}
-
-                     <img className="ext-image-section block w-50" width={100} src={methodModel.noImg(img)}/> */}
                 </div>
           </div>
       </PageLayout>
