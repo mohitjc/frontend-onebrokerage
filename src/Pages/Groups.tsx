@@ -31,65 +31,10 @@ const Groups = ({ eventDetail = '', dataa = '' }: any) => {
     const groupId = receivedStateData?.dataa?.data?.groupId?._id
     console.log(eventIdd, "eventIddeventIdd")
     console.log(groupList,"groupListgroupListgroupListgroupListgroupList")
-    // const getAttendeesGroupPair = () => {
-    //     loader(true)
-    //     ApiClient.get(`api/event/groups?eventId=${eventIdd}`).then(res => {
-    //         if (res.success) {
-
-    //             setattendeesGroup(res?.data)
-    //             loader(false)
-    //             getGroupPair()
-    //         }
-    //     })
-    // }
-    // const importFile = (e: any) => {
-    //     const file = e?.target?.files[0];
-    
-    //     if (file) {
-    //         loader(true)
-    //         const formData = new FormData();
-    //         formData.append('file', file);
-    //         fetch('http://66.179.251.9:6040/multiple/documents?modelName="users"', {
-    //             method: 'POST',
-    //             body: formData
-    //         })
-    //         .then(response => {
-    //             loader(false)
-    //             if (!response.ok) {
-    //                 throw new Error('Network response was not ok');
-    //             }
-    //             return response.json();
-    //         })
-    //         .then(data => {
-    //             loader(true)
-    //             // const filepath = data?.data?.imagePath
-    //             const filepath = "/home/jc-vishal/Downloads/ATL Techies History for JC SW.xlsx"
-                
-    //             ApiClient.get(`api/import/event-group?groupId=${groupId}&eventId=${eventIdd}&filePath=${filepath}`).then(res => {
-    //                 if (res.success) {
-    //                     loader(false)
-    //     toast.success(res.message)
-    //                 }
-    //             })
-    //         })
-    //         .catch(error => {
-    //             console.error('Error:', error);
-    //         });
-    //     }
-    // }
-    
-// const importFile =(e : any)=>{
-//     let payload = {
-//         groupId:groupId,
-//         eventId:eventIdd,
-//         base64String:e.target.files[0]
-//     }
-//     ApiClient.postFormFileData(`api/import/event-group`,payload).then(res => {
-//         if (res.success) {
-//             toast.success(res.message)
-//         }
-//     })
-// }
+console.log(requestGroupList,"requestGroupListrequestGroupListrequestGroupListrequestGroupListrequestGroupListrequestGroupList")
+const handleCloseModal =()=>{
+    setShowDiv(false)
+}
 const importFile = (e : any) => {
     const file = e.target.files[0];
 
@@ -276,8 +221,9 @@ const importFile = (e : any) => {
 
 
                             {showDiv ? <div className='w-full border border-1 mt-4 rounded-lg p-3 mb-4'>
+                                <button onClick={handleCloseModal}>Close</button>
                                 <div className=''>
-                                    {requestGroupList?.map((ele: any) => {
+                                    {requestGroupList?.length ? requestGroupList?.map((ele: any) => {
                                         return (<>
                                             <h4 className='mb-4 mt-4'>Requested By : <span className='bg-orange-500 px-2 py-1 pb-1 text-sm rounded-md ml-2 text-white'>{ele?.requestedBy}</span></h4>
 
@@ -305,7 +251,7 @@ const importFile = (e : any) => {
                                         </>)
 
 
-                                    })}
+                                    }) :"No Data Available"}
                                 </div>
 
                             </div> : ""}

@@ -33,7 +33,7 @@ const Html = ({
           <h4 className="text-typo text-2xl font-semibold">Plan</h4>
           {!user?.on_trial && !user?.trial_ended ? (
                               <p className="text--sm font-normal text-[#75757A]">
-                              Please choose your plan to start free trial
+                              Please choose your plan 
                               </p>
                           ) : <></>}
 
