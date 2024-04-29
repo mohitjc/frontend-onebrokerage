@@ -10,6 +10,7 @@ import { SiPlanet, SiSuperuser } from "react-icons/si";
 import { MdEventAvailable, MdOutlineEmojiEvents, MdOutlineEventAvailable } from "react-icons/md";
 import { LuUser2 } from "react-icons/lu";
 import { CiSettings } from "react-icons/ci";
+import { LiaHistorySolid } from "react-icons/lia";
 
 
 const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
@@ -58,7 +59,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
     },
     {
       name:'History',
-      icon:<CiSettings className="text-[#fff] shrink-0 text-lg" />      ,
+      icon:<LiaHistorySolid className="text-[#fff] shrink-0 text-lg" />      ,
       url:'/history',
       key:'readMembers',
     },
