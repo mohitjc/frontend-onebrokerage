@@ -5,7 +5,6 @@ import loader from '../methods/loader';
 import { MdOutlineEmail } from 'react-icons/md';
 import { LuUser2, LuUserPlus } from 'react-icons/lu';
 import { MdClear } from "react-icons/md";
-
 import axios from 'axios';
 import { TbFileExport } from "react-icons/tb";
 import environment from '../environment';
@@ -267,16 +266,16 @@ const importFile = (e : any) => {
                                             <div className='brouplists border border-1 rounded-lg shadow-lg p-3 mb-3'>
 
                                                 <div className='flex items-center justify-between border-b border-1 pb-2 mb-2'>
-                                                    <h2 className='font-bold text-[#2b2b2b] text-lg     '> Group{ele?.groupNo}</h2>
+                                                    <h2 className='font-bold text-[#2b2b2b] text-lg'> Group{ele?.groupNo}</h2>
                                                     {ele?.isUnique === true ? <span className='bg-orange-500 p-2 text-xs  mb-0 text-white rounded-md inline-flex'>New Pair</span> : ""}
                                                 </div>
                                                 <p className=''>{ele?.attendees?.map((element: any) => {
                                                     return (
                                                         <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2'>
                                                             <div className='flex items-start gap-1'>
-                                                            <input type="checkbox" className='mt-1'/>     
+                                                                <input type="checkbox" className='mt-1' />     
                                                               <div>
-                                                              {element?.attendeesDetails?.fullName ? <p className='flex items-center mb-2 gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />{element?.attendeesDetails?.fullName}</p> : ""}
+                                                                {element?.attendeesDetails?.fullName ? <p className='flex items-center mb-2 gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />{element?.attendeesDetails?.fullName}</p> : ""}
                                                                 {element?.attendeesDetails?.email ? <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]' />{element?.attendeesDetails?.email}</p> : ""}
                                                           
                                                               </div>
