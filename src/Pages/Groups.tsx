@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams, Link } from "react-router-dom";
 import ApiClient from "../methods/api/apiClient";
 import loader from '../methods/loader';
-import { MdClear, MdOutlineEmail } from 'react-icons/md';
+import { MdOutlineEmail } from 'react-icons/md';
 import { LuUser2, LuUserPlus } from 'react-icons/lu';
+import { MdClear } from "react-icons/md";
+
 import axios from 'axios';
 import { TbFileExport } from "react-icons/tb";
 import environment from '../environment';
@@ -179,7 +181,8 @@ const importFile = (e : any) => {
             Back
           </div>
                         <div className=''>
-                            <div className='flex items-center gap-4 mb-3'>
+                            <div className='flex items-center gap-4  mb-3'>
+
                                 <div className='flex items-center justify-between flex-wrap w-full'>
                                     <div className='mt-2 flex  items-center gap-2'>
                                         <div className=''>
@@ -190,14 +193,14 @@ const importFile = (e : any) => {
                                         </div>
                                     </div>
                                     <div className='flex items-center gap-2 flex-wrap'>
-                                        {/* import File */}
-                                        <div className="flex items-center justify-center bg-grey-lighter">
+                                        {/* {/ import File /} */}
+                                        {/* <div className="flex items-center justify-center bg-grey-lighter">
                                             <label htmlFor="fileInput" className="flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide border border-blue cursor-pointer">
                                                 <IoMdCloudUpload className='text-md' />
                                                 <span className="text-sm leading-normal">Import file</span>
                                             </label>
                                             <input id="fileInput" type="file" style={{ display: 'none' }} onChange={importFile} />
-                                        </div>
+                                        </div> */}
 
                                         <div className=''>
                                             <div className="flex  items-center justify-center bg-grey-lighter">
@@ -212,17 +215,21 @@ const importFile = (e : any) => {
                                         <button className='bg-orange-500 px-2 py-2 rounded-md text-sm flex items-center gap-2 text-white' onClick={getGroupExport}><TbFileExport className='text-md' /> Export Data</button>
 
                                     </div>
+
+
                                 </div>
 
                             </div>
 
 
                             {showDiv ? <div className='w-full border border-1 mt-4 rounded-lg p-3 mb-4'>
-                                <button className='text-white flex items-center justify-end ml-auto rounded-lg text-sm cursor-pointer text-end bg-red-500 px-2 gap-1 py-1' onClick={handleCloseModal}> <MdClear/> Close </button>
-                                <div className=''>
+                                <div className="flex items-center justify-end">
+                                <button className='bg-orange-500 text-sm px-2 py-1 flex items-center gap-1 rounded-md text-white' onClick={handleCloseModal}><MdClear />  Close</button>
+                                </div>
+                                <div className='grid grid-cols-1 lg:grid-cols-2'>
                                     {requestGroupList?.length ? requestGroupList?.map((ele: any) => {
-                                        return (<>
-                                            <h4 className='mb-4 mt-4'>Requested By : <span className='bg-orange-500 px-2 py-1 pb-1 text-sm rounded-md ml-2 text-white'>{ele?.requestedBy}</span></h4>
+                                        return (<><div className="shwoing-requeted">
+                                            <h4 className='mb-4 mt-4 text-xs'>Requested By : <span className='bg-orange-500 px-2 py-1 pb-1 text-sm rounded-md ml-2 text-white'>{ele?.requestedBy}</span></h4>
 
                                             <table className='w-full'>
                                                 <thead className='border border-gray-200'>
@@ -245,10 +252,10 @@ const importFile = (e : any) => {
 
 
 
-                                        </>)
+                                        </div></>)
 
 
-                                    }) :<p className='w-full text-center'>No Data Available</p>}
+                                    }) :"No Data Available"}
                                 </div>
 
                             </div> : ""}
@@ -265,7 +272,7 @@ const importFile = (e : any) => {
                                                 </div>
                                                 <p className=''>{ele?.attendees?.map((element: any) => {
                                                     return (
-                                                        <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2                                        '>
+                                                        <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2'>
                                                             <div className='flex items-start gap-1'>
                                                             <input type="checkbox" className='mt-1'/>     
                                                               <div>
