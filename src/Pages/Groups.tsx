@@ -238,7 +238,7 @@ const importFile = (e : any) => {
                                                     {ele?.attendeesDetails?.map((element: any) => {
                                                         return (<tr>
                                                             <td className='border border-gray-200 p-2'>{element?.fullName}</td>
-                                                            <td className='border border-gray-200 p-2'>{element?.email}</td>
+                                                       <td className='border border-gray-200 p-2'>{element?.email}</td>
                                                         </tr>)
 
                                                     })}
@@ -269,9 +269,13 @@ const importFile = (e : any) => {
                                                 <p className=''>{ele?.attendees?.map((element: any) => {
                                                     return (
                                                         <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2                                        '>
-                                                            <div className=''>
-                                                                {element?.attendeesDetails?.fullName ? <p className='flex items-center mb-2 gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />{element?.attendeesDetails?.fullName}</p> : ""}
+                                                            <div className='flex items-start gap-1'>
+                                                            <input type="checkbox" className='mt-1'/>     
+                                                              <div>
+                                                              {element?.attendeesDetails?.fullName ? <p className='flex items-center mb-2 gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />{element?.attendeesDetails?.fullName}</p> : ""}
                                                                 {element?.attendeesDetails?.email ? <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]' />{element?.attendeesDetails?.email}</p> : ""}
+                                                          
+                                                              </div>
                                                             </div>
                                                             {element?.attendeesDetails?.fullName || element?.attendeesDetails?.email ? <div className='rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer  px-2 pb-1 '>
                                                                 <select className=" bg-transparent focus:outline-none cursor-pointer text-[14px]  text-white" onChange={(e: any) => handleSelectValue(e, element)}>
