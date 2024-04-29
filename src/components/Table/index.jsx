@@ -86,8 +86,8 @@ const Table = ({ className = '', data = [], theme = 'table', ListHtml = (e) => {
 
 
             {count < total ? <>
-                <div className='paginationWrapper flex items-center justify-between mt-15'>
-                    <span>Show {count} from {total} data</span>
+                <div className='paginationWrapper flex items-center justify-between mt-15 px-4'>
+                    <p className="w-96 text-sm text-gray-500">Show {count} from {total} data</p>
                     <Pagination
                         currentPage={page}
                         totalSize={total}
