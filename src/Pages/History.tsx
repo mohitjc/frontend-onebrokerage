@@ -55,37 +55,46 @@ const History = () => {
 
     return (
         <>
-            <Layout><div>
+            <Layout>
+                <div className='mb-8'>
                 {/* /* import File  */}
-                <div className="flex items-center justify-center bg-grey-lighter">
-                    <label htmlFor="fileInput" className="flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide border border-blue cursor-pointer">
-                        <IoMdCloudUpload className='text-md' />
-                        <span className="text-sm leading-normal">Import file</span>
-                    </label>
-                    <input id="fileInput" type="file" style={{ display: 'none' }} onChange={importFile} />
-                </div></div>
+                
+                    <div className="flex items-center justify-between bg-grey-lighter">
+                        <div className="flex flex-col">
+                        <h4 className="text-typo text-2xl font-semibold">History</h4>
+                        </div>
+                        
+                          <div className=''>
+                            <label htmlFor="fileInput" className="flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide border border-blue cursor-pointer">
+                                    <IoMdCloudUpload className='text-md' />
+                                    <span className="text-sm leading-normal">Import file</span>
+                                </label>
+                                <input id="fileInput" type="file" style={{ display: 'none' }} onChange={importFile} />
+                          </div>
+                    </div>
+                </div>
 
                 <div>
-                    <h4>History</h4>
-                    <div>
-                        <table>
-                            <thead>
-                                <th> Name</th>
-                                <th>E-mail</th>
-                                <th>ConnectMeet Date</th>
-                                <th>
+                   
+                    <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
+                        <table className='w-full text-sm text-left  text-gray-500 '>
+                            <thead className='text-xs text-gray-700 capitalize bg-gray-50'>
+                                <th className='px-6 py-3 cursor-pointer'> Name</th>
+                                <th className='px-6 py-3 cursor-pointer'>E-mail</th>
+                                <th className='px-6 py-3 cursor-pointer'>ConnectMeet Date</th>
+                                <th className='px-6 py-3 cursor-pointer'>
                                     Event Name
                                 </th>
-                                <th>Event Date</th>
+                                <th className='px-6 py-3 cursor-pointer'>Event Date</th>
                             </thead>
                             <tbody>
                                 {list?.map((ele :any) => {
                                     return (<tr>
-                                        <td>{ele?.fullName}</td>
-                                        <td>{ele?.email}</td>
-                                        <td>{ele?.connectMeetDate ? datepipeModel.datetime(ele?.connectMeetDate) : "N/A"}</td>
-                                        <td>{ele?.eventName}</td>
-                                        <td>{ele?.eventDate ? datepipeModel.datetime(ele?.eventDate) : "N/A"}</td>
+                                        <td className='bg-white px-6 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>{ele?.fullName}</td>
+                                        <td className='bg-white px-6 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>{ele?.email}</td>
+                                        <td className='bg-white px-6 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>{ele?.connectMeetDate ? datepipeModel.datetime(ele?.connectMeetDate) : "N/A"}</td>
+                                        <td className='bg-white px-6 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>{ele?.eventName}</td>
+                                        <td className='bg-white px-6 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>{ele?.eventDate ? datepipeModel.datetime(ele?.eventDate) : "N/A"}</td>
                                     </tr>)
                                 })}
 

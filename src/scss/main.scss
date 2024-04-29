@@ -1850,7 +1850,7 @@ img.hide-logo {
 
 
 .react-pagination-js-default ul>li:first-child {
-  margin-right: auto !important;
+  margin-left: auto !important;
   border-radius: 8px;
   background: white;
   border: 1px solid #d0d5dd !important;
@@ -1910,7 +1910,7 @@ li.page.disabled {
 }
 
 .react-pagination-js-default ul>li:last-child {
-  margin-left: auto !important;
+ 
   border-radius: 8px;
   background: white;
   border: 1px solid #d0d5dd !important;
@@ -2069,3 +2069,5 @@ border: 0.3px solid rgba(0, 0, 0, 0.63);
 background: #FFF;
 box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
 }
+
+
