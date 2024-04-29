@@ -501,12 +501,15 @@ const handleOpenModal=(e :any)=>{
 
                         <div className="mt-6 mb-6">
                           <h6 className="text-[#C22020] text-[19px] leading-2  lg:leading-6	 font-[600]">VIEWED/NO RESPONSE YET ({attendeeFilter('Pending').length})</h6>
-                          <ul className="mt-3 grid grid-cols-1 md:grid-cols-2">
+                          <ul className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-x-4">
                             {attendeeFilter('Pending').map((itm: any) => {
                               return <>
-                                <li className="text-[#3F3F3F] text-[14px] capitalize  border-b flex py-3">
-                                  <span className="flex items-center gap-1 text-[13px] font-semibold"><FiUser />{itm.memberDetails?.fullName || itm?.fullName} <span className=" text-[11px] font-normal">{itm.memberDetails?.fullName ? `(${rolesModel.name(itm?.memberDetails?.role)})` : '(Guest)'}</span></span>
-
+                                <li className="text-[#3F3F3F] gap-2 text-[14px] capitalize  border-b flex items-center py-3">
+                                  <FiUser className="text-xl" />
+                                  <div>
+                                    <p className="flex items-center gap-1 text-[13px] font-semibold">{itm.memberDetails?.fullName || itm?.fullName}</p>
+                                    <span className=" text-[11px] font-normal block">{itm.memberDetails?.fullName ? `(${rolesModel.name(itm?.memberDetails?.role)})` : '(Guest)'}</span>
+                                  </div> 
                                   {deletePremit(itm) ? <>
                                     <Tooltip placement="top" title="Delete" className='cursor-pointer ml-auto text-red-500'> <span onClick={() => deleteItem(itm.id)} >
                                       <BsTrash3 />
