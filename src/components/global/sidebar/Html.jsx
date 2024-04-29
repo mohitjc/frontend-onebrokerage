@@ -56,6 +56,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen,user }) => {
       url:'/setting',
       key:'readMembers',
     },
+    {
+      name:'History',
+      icon:<CiSettings className="text-[#fff] shrink-0 text-lg" />      ,
+      url:'/history',
+      key:'readMembers',
+    },
     // {
     //   name:'My Event',
     //   icon:<span class="material-symbols-outlined text-[#ffc800] shrink-0 text-lg">star</span>,
