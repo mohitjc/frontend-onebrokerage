@@ -59,9 +59,9 @@ console.log(data,"allGroupDetails")
                   <img src={methodModel.userImg(data && data.image)} className="h-32 w-32 rounded-md mx-auto" />
                </div>
                <div className='flex flex-col gap-y-2'>
-                  <p className='text-sm text-gray-500 flex items-center gap-2'> <LiaUserSolid />{data && data.fullName}</p>
-                  <p className='text-sm text-gray-500 flex items-center gap-2' ><MdOutlineEmail />{data && data.email}</p>
-                  <p className='text-sm text-gray-500 flex items-center gap-2'><MdOutlinePhone />{String(data.mobileNo?'+'+data.mobileNo:'N/A')}</p>
+                  <p className='text-sm text-gray-700 flex items-center gap-2'> <LiaUserSolid className='text-xl' />{data && data.fullName}</p>
+                  <p className='text-sm text-gray-700 flex items-center gap-2' ><MdOutlineEmail className='text-xl' />{data && data.email}</p>
+                  <p className='text-sm text-gray-700 flex items-center gap-2'><MdOutlinePhone className='text-xl' />{String(data.mobileNo?'+'+data.mobileNo:'N/A')}</p>
                </div>
                </div>
             </div>
@@ -72,15 +72,15 @@ console.log(data,"allGroupDetails")
                   <table className='w-full'>
                   <thead className='border-y border-[#EAECF0]'>
                     <tr className='border-y border-[#EAECF0]'>
-                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block capitalize'>Group</label></th>
-                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block capitalize'>Role</label></th>
+                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block capitalize'>Group</label></th>
+                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block capitalize'>Role</label></th>
 
                     </tr>
                   
                   </thead>
                 <tbody>
-                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{data?.groupId?.name||'--'}</td>
-                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{data?.groupId?.name ? user.customerRole?.name : "--"}</td>
+                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3 text-left bg-[#F7FAFF] !py-2 capitalize'>{data?.groupId?.name||'--'}</td>
+                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3 text-left bg-[#F7FAFF] !py-2 capitalize'>{data?.groupId?.name ? user.customerRole?.name : "--"}</td>
                      
                 {
                   data?.allGroupDetails?.map((e :any)=>{
@@ -89,10 +89,10 @@ console.log(data,"allGroupDetails")
                      
                       <tr>
                       
-                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{e?.groupId?.name || "--"}</td>
+                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3 text-left bg-[#F7FAFF] !py-2 capitalize'>{e?.groupId?.name || "--"}</td>
                       
                        
-                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>
+                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3 text-left bg-[#F7FAFF] !py-2 capitalize'>
                        { e?.groupId?.name ? (e?.role === "meetManager" ? "Connect Meet Manager" : (e?.role === "assistant" ? "Assistant Group Leader" : e?.role)) : "--"}
 
 </td>
