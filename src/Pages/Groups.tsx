@@ -179,8 +179,7 @@ const importFile = (e : any) => {
             Back
           </div>
                         <div className=''>
-                            <div className='flex items-center gap-4  mb-3'>
-
+                            <div className='flex items-center gap-4 mb-3'>
                                 <div className='flex items-center justify-between flex-wrap w-full'>
                                     <div className='mt-2 flex  items-center gap-2'>
                                         <div className=''>
@@ -213,8 +212,6 @@ const importFile = (e : any) => {
                                         <button className='bg-orange-500 px-2 py-2 rounded-md text-sm flex items-center gap-2 text-white' onClick={getGroupExport}><TbFileExport className='text-md' /> Export Data</button>
 
                                     </div>
-
-
                                 </div>
 
                             </div>
