@@ -3,7 +3,11 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import ApiClient from "../methods/api/apiClient";
 import loader from '../methods/loader';
 import { MdOutlineEmail } from 'react-icons/md';
+import { GoHistory } from "react-icons/go";
+import { Disclosure } from '@headlessui/react'
+import { ChevronUpIcon } from '@heroicons/react/20/solid'
 import { LuUser2, LuUserPlus } from 'react-icons/lu';
+import { MdClear } from "react-icons/md";
 import axios from 'axios';
 import { TbFileExport } from "react-icons/tb";
 import environment from '../environment';
@@ -191,7 +195,7 @@ const importFile = (e : any) => {
                                         </div>
                                     </div>
                                     <div className='flex items-center gap-2 flex-wrap'>
-                                        {/* import File */}
+                                        {/* {/ import File /} */}
                                         {/* <div className="flex items-center justify-center bg-grey-lighter">
                                             <label htmlFor="fileInput" className="flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide border border-blue cursor-pointer">
                                                 <IoMdCloudUpload className='text-md' />
@@ -221,11 +225,13 @@ const importFile = (e : any) => {
 
 
                             {showDiv ? <div className='w-full border border-1 mt-4 rounded-lg p-3 mb-4'>
-                                <button onClick={handleCloseModal}>Close</button>
-                                <div className=''>
+                                <div className="flex items-center justify-end">
+                                <button className='bg-orange-500 text-sm px-2 py-1 flex items-center gap-1 rounded-md text-white' onClick={handleCloseModal}><MdClear />  Close</button>
+                                </div>
+                                <div className='grid grid-cols-1 lg:grid-cols-2'>
                                     {requestGroupList?.length ? requestGroupList?.map((ele: any) => {
-                                        return (<>
-                                            <h4 className='mb-4 mt-4'>Requested By : <span className='bg-orange-500 px-2 py-1 pb-1 text-sm rounded-md ml-2 text-white'>{ele?.requestedBy}</span></h4>
+                                        return (<><div className="shwoing-requeted">
+                                            <h4 className='mb-4 mt-4 text-xs'>Requested By : <span className='bg-orange-500 px-2 py-1 pb-1 text-sm rounded-md ml-2 text-white'>{ele?.requestedBy}</span></h4>
 
                                             <table className='w-full'>
                                                 <thead className='border border-gray-200'>
@@ -248,55 +254,114 @@ const importFile = (e : any) => {
 
 
 
-                                        </>)
+                                        </div></>)
 
 
                                     }) :"No Data Available"}
                                 </div>
 
                             </div> : ""}
-                            <div className='grid grid-cols-1 lg:grid-cols-2 gap-2'>
-                                {groupList?.sort((a: any, b: any) => a.groupNo - b.groupNo)?.map((ele: any) => {
-                                    return (
-                                        <>
+                            
+                            <div className='grid grid-cols-12 gap-x-4'>
+                                    <div className='col-span-12 md:col-span-8'>
 
-                                            <div className='brouplists border border-1 rounded-lg shadow-lg p-3 mb-3'>
+                                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-2'>
+                                            {groupList?.sort((a: any, b: any) => a.groupNo - b.groupNo)?.map((ele: any) => {
+                                                return (
+                                                    <>
 
-                                                <div className='flex items-center justify-between border-b border-1 pb-2 mb-2'>
-                                                    <h2 className='font-bold text-[#2b2b2b] text-lg     '> Group{ele?.groupNo}</h2>
-                                                    {ele?.isUnique === true ? <span className='bg-orange-500 p-2 text-xs  mb-0 text-white rounded-md inline-flex'>New Pair</span> : ""}
-                                                </div>
-                                                <p className=''>{ele?.attendees?.map((element: any) => {
-                                                    return (
-                                                        <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2                                        '>
-                                                            <div className='flex items-start gap-1'>
-                                                            <input type="checkbox" className='mt-1'/>     
-                                                              <div>
-                                                              {element?.attendeesDetails?.fullName ? <p className='flex items-center mb-2 gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />{element?.attendeesDetails?.fullName}</p> : ""}
-                                                                {element?.attendeesDetails?.email ? <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]' />{element?.attendeesDetails?.email}</p> : ""}
-                                                          
-                                                              </div>
+                                                        <div className='brouplists border border-1 rounded-lg shadow-lg p-3 mb-3'>
+
+                                                            <div className='flex items-center justify-between border-b border-1 pb-2 mb-2'>
+                                                                <h2 className='font-bold text-[#2b2b2b] text-lg'> Group{ele?.groupNo}</h2>
+                                                                {ele?.isUnique === true ? <span className='bg-orange-500 p-2 text-xs  mb-0 text-white rounded-md inline-flex'>New Pair</span> : ""}
                                                             </div>
-                                                            {element?.attendeesDetails?.fullName || element?.attendeesDetails?.email ? <div className='rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer  px-2 pb-1 '>
-                                                                <select className=" bg-transparent focus:outline-none cursor-pointer text-[14px]  text-white" onChange={(e: any) => handleSelectValue(e, element)}>
-                                                                    <option value="" disabled selected>Move to</option>
-                                                                    {groupList?.filter((data: any) => data.groupNo !== ele.groupNo)?.map((data: any) => (
-                                                                        <option className='text-md text-black' key={data?.groupNo} value={data?._id?.ConnectMeetId}>Group {data?.groupNo}</option>
-                                                                    ))}
-                                                                </select>
+                                                            <p className=''>{ele?.attendees?.map((element: any) => {
+                                                                return (
+                                                                    <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2'>
+                                                                        <div className='flex items-start gap-1'>
+                                                                            <input type="checkbox" className='mt-1' />     
+                                                                        <div>
+                                                                            {element?.attendeesDetails?.fullName ? <p className='flex items-center mb-2 gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />{element?.attendeesDetails?.fullName}</p> : ""}
+                                                                            {element?.attendeesDetails?.email ? <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]' />{element?.attendeesDetails?.email}</p> : ""}
+                                                                    
+                                                                        </div>
+                                                                        </div>
+                                                                        {element?.attendeesDetails?.fullName || element?.attendeesDetails?.email ? <div className='rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer  px-2 pb-1 '>
+                                                                            <select className=" bg-transparent focus:outline-none cursor-pointer text-[14px]  text-white" onChange={(e: any) => handleSelectValue(e, element)}>
+                                                                                <option value="" disabled selected>Move to</option>
+                                                                                {groupList?.filter((data: any) => data.groupNo !== ele.groupNo)?.map((data: any) => (
+                                                                                    <option className='text-md text-black' key={data?.groupNo} value={data?._id?.ConnectMeetId}>Group {data?.groupNo}</option>
+                                                                                ))}
+                                                                            </select>
 
-                                                            </div> : ""}
+                                                                        </div> : ""}
 
+                                                                    </div>
+
+                                                                )
+                                                            })}</p>
                                                         </div>
+                                                    </>
+                                                )
 
-                                                    )
-                                                })}</p>
+                                            })}
+                                        </div>
+
+                                    </div>
+                                    <div className='col-span-12 md:col-span-4'>
+                                        <div className='histroy_showinf p-4 rounded-md border border-gray-300'>
+                                            <h6 className='text-black text-xl flex items-center gap-2  mb-4'><GoHistory /> History</h6>
+                                            
+
+                                           
+
+
+                                            <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+                                               
+
+                                                <div className="w-full ">
+                                                        <div className="mb-4 border border-gray-200 rounded-lg">
+                                                            <Disclosure >
+                                                            {({ open }) => (
+                                                                <>
+                                                                <Disclosure.Button className="flex w-full items-center cursor-pointer justify-between rounded-lg bg-orange-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-orange-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+                                                                    <div className=' '>
+                                                                        <div className='flex flex-col gap-y-1'>
+                                                                            <h4 className='text-lg font-bold text-[#2b2b2b]'>Event Name</h4>
+                                                                            <p className='text-sm text-gray-500'>11:30pm - <span>1/02/2022</span></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <ChevronUpIcon
+                                                                    className={`${
+                                                                        open ? 'rotate-180 transform' : ''
+                                                                    } h-5 w-5 text-black`}
+                                                                    />
+                                                                </Disclosure.Button>
+                                                                <Disclosure.Panel className="px-4 pb-2 pt-4 text-sm text-gray-500">
+                                                                <div className=''>
+                                                                    <p className='flex items-center mb-2 gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />wdwd</p>
+                                                                    <p className='flex items-center mb-2 gap-1 text-[#75757A] capitalize text-[14px] '><MdOutlineEmail className='text-black !text-[16px]' />wdwd</p>
+                                                                </div>
+                                                                </Disclosure.Panel>
+                                                                </>
+                                                            )}
+                                                            </Disclosure>
+                                                            
+                                                        </div>
+                                                </div>
+
+
+
                                             </div>
-                                        </>
-                                    )
 
-                                })}
+
+                                        </div>
+
+                                    </div>
                             </div>
+
+
                         </div>
                         {/* {Object.entries(eventDetail).map(([group, items] :any) => (
                 <div key={group}>
