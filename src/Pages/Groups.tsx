@@ -192,13 +192,13 @@ const importFile = (e : any) => {
                                     </div>
                                     <div className='flex items-center gap-2 flex-wrap'>
                                         {/* import File */}
-                                        <div className="flex items-center justify-center bg-grey-lighter">
+                                        {/* <div className="flex items-center justify-center bg-grey-lighter">
                                             <label htmlFor="fileInput" className="flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide border border-blue cursor-pointer">
                                                 <IoMdCloudUpload className='text-md' />
                                                 <span className="text-sm leading-normal">Import file</span>
                                             </label>
                                             <input id="fileInput" type="file" style={{ display: 'none' }} onChange={importFile} />
-                                        </div>
+                                        </div> */}
 
                                         <div className=''>
                                             <div className="flex  items-center justify-center bg-grey-lighter">
