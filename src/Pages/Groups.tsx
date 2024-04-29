@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams, Link } from "react-router-dom";
 import ApiClient from "../methods/api/apiClient";
 import loader from '../methods/loader';
-import { MdOutlineEmail } from 'react-icons/md';
+import { MdClear, MdOutlineEmail } from 'react-icons/md';
 import { LuUser2, LuUserPlus } from 'react-icons/lu';
 import axios from 'axios';
 import { TbFileExport } from "react-icons/tb";
@@ -221,7 +221,7 @@ const importFile = (e : any) => {
 
 
                             {showDiv ? <div className='w-full border border-1 mt-4 rounded-lg p-3 mb-4'>
-                                <button onClick={handleCloseModal}>Close</button>
+                                <button className='text-white flex items-center justify-end ml-auto rounded-lg text-sm cursor-pointer text-end bg-red-500 px-2 gap-1 py-1' onClick={handleCloseModal}> <MdClear/> Close </button>
                                 <div className=''>
                                     {requestGroupList?.length ? requestGroupList?.map((ele: any) => {
                                         return (<>
@@ -251,7 +251,7 @@ const importFile = (e : any) => {
                                         </>)
 
 
-                                    }) :"No Data Available"}
+                                    }) :<p className='w-full text-center'>No Data Available</p>}
                                 </div>
 
                             </div> : ""}

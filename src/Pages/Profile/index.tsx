@@ -135,8 +135,6 @@ console.log(data,"allGroupDetails")
                         <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block capitalize'>Role</label></th>
 
                     </tr>
-                   
-                 
                   
                   </thead>
                 <tbody>
