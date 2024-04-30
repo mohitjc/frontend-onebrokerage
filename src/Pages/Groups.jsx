@@ -173,8 +173,8 @@ const importFile = (e ) => {
         }
     };
     const handleSelectAllClick = (e, attendees) => {
-        const emails = attendees.map(attendee => attendee.attendeesDetails.email);
-        if (e.target.checked) {
+        const emails = attendees?.map(attendee => attendee?.attendeesDetails?.email);
+        if (e?.target?.checked) {
             setSelectedEmails(prevSelectedEmails => [...prevSelectedEmails, ...emails]);
         } else {
             setSelectedEmails(prevSelectedEmails => prevSelectedEmails.filter(selectedEmail => !emails.includes(selectedEmail)));
@@ -302,7 +302,8 @@ const importFile = (e ) => {
                                                         <div className='brouplists border border-1 rounded-lg shadow-lg p-3 mb-3'>
 
                                                             <div className='flex items-center justify-between border-b border-1 pb-2 mb-2'>
-                                                                <h2 className='font-bold text-[#2b2b2b] text-lg'> Group{ele?.groupNo}</h2>  <input type="checkbox" onChange={(e) => handleSelectAllClick(e, ele.attendees)} />
+                                                                <h2 className='font-bold text-[#2b2b2b] text-lg'> Group{ele?.groupNo}</h2>
+                                                                { ele?.attendees ?  <input type="checkbox" onChange={(e) => handleSelectAllClick(e, ele?.attendees)} /> :""} 
                                                                 {ele?.isUnique === true ? <span className='bg-orange-500 p-2 text-xs  mb-0 text-white rounded-md inline-flex'>New Pair</span> : ""}
                                                             </div>
                                                             <p className=''>{ele?.attendees?.map((element) => {

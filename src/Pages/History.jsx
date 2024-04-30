@@ -6,17 +6,57 @@ import { toast } from 'react-toastify';
 import { useSelector } from "react-redux";
 import datepipeModel from '../models/datepipemodel';
 import loader from '../methods/loader';
+import Table from "../components/Table";
+
 const History = () => {
-    const user = useSelector((state: any) => state.user);
+    const user = useSelector((state) => state.user);
     console.log(user, "userdata")
+    const [loaging, setLoader] = useState(true)
     const [list, setList] = useState([])
-    const importFile = (e: any) => {
+    
+    const [currentPage, setCurrentPage] = useState(1);
+    const [total, setTotal] = useState(0)
+    const [totalPages, setTotalPages] = useState(1);
+     const [filters, setFilter] = useState({ page: 1, count: 10, search: '' })
+     const columns = [
+        {
+            key: 'fullName', name: 'Name',
+            render: (row) => {
+                return <>{row?.fullName}</>
+            }
+        },
+        {
+            key: 'email', name: 'Email',
+            render: (row) => {
+                return <>{row?.email}</>
+            }
+        },
+        {
+            key: 'connectMeetDate', name: 'ConnectMeet Date',
+            render: (row) => {
+                return <>{  datepipeModel.datetime(row?.connectMeetDate)}</>
+            }
+        },
+        {
+            key: 'eventName', name: 'Event Name	',
+            render: (row) => {
+                return <>{row?.eventName}</>
+            }
+        },
+        {
+            key: 'eventDate', name: 'Event Date	',
+            render: (row) => {
+                return <>{ datepipeModel.datetime(row?.eventDate)}</>
+            }
+        },
+    ]
+    const importFile = (e) => {
         const file = e.target.files[0];
 
         if (file) {
             const reader = new FileReader();
 
-            reader.onload = (event: any) => {
+            reader.onload = (event) => {
                 const base64String = event.target.result;
 
                 let payload = {
@@ -38,14 +78,42 @@ const History = () => {
             reader.readAsDataURL(file);
         }
     };
+    
+    const pageChange = (e) => {
+        console.log(e,"pagechange")
+    
+        setFilter({ ...filters, page:e })
+        getdata({ page: e })
+    }
+    const sorting = (key) => {
+        let sorder = 'asc'
+        if (filters.key == key) {
+            if (filters.sorder == 'asc') {
+                sorder = 'desc'
+            } else {
+                sorder = 'asc'
+            }
+        }
+
+        let sortBy = `${key} ${sorder}`;
+        setFilter({ ...filters, sortBy, key, sorder })
+        getdata({ sortBy, key, sorder })
+    }
+
     const getdata = () => {
         loader(true)
-        ApiClient.get(`api/import/event-group/list`).then(res => {
+        setLoader(true)
+        let payload ={
+            ...filters
+        }
+        ApiClient.get(`api/import/event-group/list`,payload).then(res => {
             if (res.success) {
                 loader(false)
                 setList(res?.data);
                 toast.success(res.message);
+                setTotal(res?.total)
             }
+            setLoader(false)
         });
     }
     console.log(list, "listlistlistlistlistlistlist")
@@ -77,30 +145,24 @@ const History = () => {
                 <div>
                    
                     <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
-                        <table className='w-full text-sm text-left  text-gray-500 '>
-                            <thead className='text-xs text-gray-700 capitalize bg-gray-50'>
-                                <th className='px-6 py-3 cursor-pointer'> Name</th>
-                                <th className='px-6 py-3 cursor-pointer'>E-mail</th>
-                                <th className='px-6 py-3 cursor-pointer'>ConnectMeet Date</th>
-                                <th className='px-6 py-3 cursor-pointer'>
-                                    Event Name
-                                </th>
-                                <th className='px-6 py-3 cursor-pointer'>Event Date</th>
-                            </thead>
-                            <tbody>
-                                {list?.map((ele :any) => {
-                                    return (<tr>
-                                        <td className='bg-white px-6 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>{ele?.fullName}</td>
-                                        <td className='bg-white px-6 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>{ele?.email}</td>
-                                        <td className='bg-white px-6 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>{ele?.connectMeetDate ? datepipeModel.datetime(ele?.connectMeetDate) : "N/A"}</td>
-                                        <td className='bg-white px-6 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>{ele?.eventName}</td>
-                                        <td className='bg-white px-6 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>{ele?.eventDate ? datepipeModel.datetime(ele?.eventDate) : "N/A"}</td>
-                                    </tr>)
-                                })}
+                       
+                        {!loaging ? <>
+                    <Table
+                        className='mb-3'
+                        data={list}
+                        columns={columns}
+                        page={filters.page}
+                        count={filters.count}
+                        total={total}
+                        result={(e) => {
+                            if (e.event == 'page') pageChange(e.value)
+                            if (e.event == 'sort') sorting(e.value)
+                        }}
+                    />
 
-                            </tbody>
-                        </table>
+                </> : <></>}
                     </div>
+                   
                 </div>
             </Layout>
         </>
