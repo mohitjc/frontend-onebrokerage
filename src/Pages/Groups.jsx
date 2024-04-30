@@ -19,6 +19,7 @@ import { useLocation } from 'react-router-dom';
 import PageLayout from '../components/global/PageLayout';
 import { toast } from 'react-toastify';
 import datepipeModel from '../models/datepipemodel';
+import GroupHistory from "./GroupHistory"
 const Groups = ({ eventDetail = '', dataa = '' }) => {
     console.log(eventDetail, "eventDetaileventDetaileventDetaileventDetaileventDetail")
     const { id } = useParams()
@@ -32,6 +33,7 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
     const [requestGroup, setRequestGroup] = useState(false)
     const [requestGroupList, setRequestGroupList] = useState("")
     const [historyData, setHistoryData] = useState()
+    const [historyModal, setHistoryModal] = useState(false)
     const [data, setData] = useState()
     const [showDiv, setShowDiv] = useState(false)
     const eventIdd = receivedStateData?.eventId?.id
@@ -176,6 +178,7 @@ const importFile = (e ) => {
         const emails = attendees?.map(attendee => attendee?.attendeesDetails?.email);
         if (e?.target?.checked) {
             setSelectedEmails(prevSelectedEmails => [...prevSelectedEmails, ...emails]);
+            setHistoryModal(true)
         } else {
             setSelectedEmails(prevSelectedEmails => prevSelectedEmails.filter(selectedEmail => !emails.includes(selectedEmail)));
         }
@@ -443,6 +446,18 @@ return(<div><h4>Name{ele?.fullName}</h4>
                                 }}
                             />
                         </> : <></>}
+                        {historyModal ? <>
+        <Modal
+          
+          title=" History"
+          body={<>
+         <GroupHistory />
+          </>}
+          result={e => {
+            setHistoryModal(false)
+          }}
+        />
+      </> : <></>}
                     </div>
                 </div>
 
