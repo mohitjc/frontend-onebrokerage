@@ -6,6 +6,8 @@ import loader from '../../methods/loader';
 import './profile.scss'
 import methodModel from '../../methods/methods';
 import { useSelector } from 'react-redux';
+import { LiaUserSolid } from 'react-icons/lia';
+import { MdOutlineEmail, MdOutlinePhone } from 'react-icons/md';
 
 
 const Profile = () => {
@@ -51,97 +53,34 @@ console.log(data,"allGroupDetails")
         <div className='inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white'>
           <div className='grid items-start grid-cols-12 gap-4'>
 
-            <div className='col-span-12 md:col-span-3 lg:col-span-2'>
-              <img src={methodModel.userImg(data && data.image)} className="h-32 w-32 mx-auto" />
+            <div className='col-span-12 md:col-span-5 lg:col-span-4'>
+               <div className='flex items-center gap-4'>
+               <div className=''>
+                  <img src={methodModel.userImg(data && data.image)} className="h-32 w-32 rounded-md mx-auto" />
+               </div>
+               <div className='flex flex-col gap-y-2'>
+                  <p className='text-sm text-gray-700 flex items-center gap-2'> <LiaUserSolid className='text-xl' />{data && data.fullName}</p>
+                  <p className='text-sm text-gray-700 flex items-center gap-2' ><MdOutlineEmail className='text-xl' />{data && data.email}</p>
+                  <p className='text-sm text-gray-700 flex items-center gap-2'><MdOutlinePhone className='text-xl' />{String(data.mobileNo?'+'+data.mobileNo:'N/A')}</p>
+               </div>
+               </div>
             </div>
 
-            <div className='col-span-12 md:col-span-9 lg:col-span-10 pl-0 ml-0 lg:pl-5 lg:ml-6 border-none lg:border-l  lg:border-gray-300'>
-                <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 '>
-
-
-                    <div className=''>
-                      <div className='text_head'>
-                        <label className='text-typo text-base font-normal max-w-sm w-full block mb-1'>Name</label>
-                      </div>
-                      <div className='sub_fatch'>
-                        <p className='text-sm text-gray-500'>{data && data.fullName}</p>
-                      </div>
-                    </div>
-                   
-
-
-                    <div className=''>
-                      <div className='text_head'>
-                        <label className='text-typo text-base font-normal max-w-sm w-full block mb-1'>Email</label>
-                      </div>
-                      <div className='sub_fatch'>
-                        <p className='text-sm text-gray-500' >{data && data.email}</p>
-                      </div>
-                    </div>
-                  
-
-                    {/* <div className=''>
-                      <div className='text_head'>
-                        <label className='text-typo text-base font-normal max-w-sm w-full block mb-1'>Role</label>
-                      </div>
-                      <div className='sub_fatch'>
-                        <p className='text-sm text-gray-500' >{user.customerRole?.name}</p>
-                      </div>
-                    </div> */}
-                  
-
-
-                    <div className=''>
-                      <div className='text_head'>
-                        <label className='text-typo text-base font-normal max-w-sm w-full block mb-1'>Mobile No</label>
-                      </div>
-                      <div className='sub_fatch'>
-                        <p className='text-sm text-gray-500'>{String(data.mobileNo?'+'+data.mobileNo:'N/A')}</p>
-                      </div>
-                    </div>
-
-{/* {data?.groupId?<>
-  <div className=''>
-                      <div className='text_head'>
-                        <label className='text-typo text-base font-normal max-w-sm w-full block mb-1'>Group</label>
-                      </div>
-                      <div className='sub_fatch'>
-                        <p className='text-sm text-gray-500' >{data?.groupId?.name||'--'}</p>
-                      </div>
-                    </div>   
-</>:<></>} */}
-
-
-
-                                     
-                </div>
-
-               
-            </div>
-
-
-           
-          
-
-
-          </div>
-
-          <div className='mt-8 '>
+            <div className='col-span-12 md:col-span-7 lg:col-span-8 '>
+            <div className='mt-2 '>
                   <div className='overflow-auto'>
                   <table className='w-full'>
                   <thead className='border-y border-[#EAECF0]'>
                     <tr className='border-y border-[#EAECF0]'>
-                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block capitalize'>Group</label></th>
-                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block capitalize'>Role</label></th>
+                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block capitalize'>Group</label></th>
+                        <th className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3 text-left bg-[#F7FAFF] !py-2'><label className='text-typo text-base font-normal max-w-sm w-full block capitalize'>Role</label></th>
 
                     </tr>
-                   
-                 
                   
                   </thead>
                 <tbody>
-                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{data?.groupId?.name||'--'}</td>
-                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{data?.groupId?.name ? user.customerRole?.name : "--"}</td>
+                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3 text-left bg-[#F7FAFF] !py-2 capitalize'>{data?.groupId?.name||'--'}</td>
+                <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3 text-left bg-[#F7FAFF] !py-2 capitalize'>{data?.groupId?.name ? user.customerRole?.name : "--"}</td>
                      
                 {
                   data?.allGroupDetails?.map((e :any)=>{
@@ -150,10 +89,10 @@ console.log(data,"allGroupDetails")
                      
                       <tr>
                       
-                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>{e?.groupId?.name || "--"}</td>
+                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3 text-left bg-[#F7FAFF] !py-2 capitalize'>{e?.groupId?.name || "--"}</td>
                       
                        
-                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-2 capitalize'>
+                        <td className='text-[#82838B] !border-l font-normal text-sm !border border-[#EAECF0] px-3 text-left bg-[#F7FAFF] !py-2 capitalize'>
                        { e?.groupId?.name ? (e?.role === "meetManager" ? "Connect Meet Manager" : (e?.role === "assistant" ? "Assistant Group Leader" : e?.role)) : "--"}
 
 </td>
@@ -170,6 +109,17 @@ console.log(data,"allGroupDetails")
                 </div>
 
                 </div>
+               
+            </div>
+
+
+           
+          
+
+
+          </div>
+
+        
 
 
         </div>

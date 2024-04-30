@@ -14,7 +14,7 @@ import Resetpassword from './Pages/Resetpassword';
 import Roles from './Pages/Roles';
 import AddEditRole from './Pages/Roles/AddEdit';
 import Dashboard from './Pages/Dashboard';
-
+import History from './Pages/History';
 import Signup from './Pages/Signup';
 import Events from './Pages/Events';
 import AddEditEvent from "./Pages/Events/AddEdit";
@@ -54,6 +54,7 @@ function App() {
     {url:'/members/add',element:<AddEdiMember />},
     {url:'/members',element:<Members />}, 
     {url:'/setting',element:<Setting />}, 
+    {url:'/history',element:<History />}, 
     {url:'/members/edit/:id',element:<AddEdiMember />},
     {url:'/assign-member/add',element:<AddEditAssignMembers />},
     {url:'/assign-member',element:<AssignMembers />},

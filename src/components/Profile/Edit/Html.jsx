@@ -456,7 +456,7 @@ useEffect(()=>{
              <div className='shadow grid grid-cols-12 gap-4 mb-4  p-4'>
             <div className="col-span-full ">
             <div className=" ">
-              <h4 className="text-1xl font-semibold text-[#111827]">Addresses</h4>
+              {/* <h4 className="text-1xl font-semibold text-[#111827]">Addresses</h4> */}
               <div className=''>
 
              

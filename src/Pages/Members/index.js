@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 const Members = () => {
     const user = useSelector((state) => state.user);
     const searchState = {data:''}
-    const [filters, setFilter] = useState({ page: 1, count: 50, search: '', catType: '' })
+    const [filters, setFilter] = useState({ page: 1, count: 10, search: '', catType: '' })
     const [data, setData] = useState([])
     const [total, setTotal] = useState(0)
     const [loaging, setLoader] = useState(true)
