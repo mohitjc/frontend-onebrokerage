@@ -302,8 +302,11 @@ const importFile = (e ) => {
                                                         <div className='brouplists border border-1 rounded-lg shadow-lg p-3 mb-3'>
 
                                                             <div className='flex items-center justify-between border-b border-1 pb-2 mb-2'>
-                                                                <h2 className='font-bold text-[#2b2b2b] text-lg'> Group{ele?.groupNo}</h2>
+                                                                <div className='flex items-center gap-1'>
                                                                 { ele?.attendees ?  <input type="checkbox" onChange={(e) => handleSelectAllClick(e, ele?.attendees)} /> :""} 
+                                                                <h2 className='font-bold text-[#2b2b2b] text-lg'> Group{ele?.groupNo}</h2>
+                                                                </div>
+                                                               
                                                                 {ele?.isUnique === true ? <span className='bg-orange-500 p-2 text-xs  mb-0 text-white rounded-md inline-flex'>New Pair</span> : ""}
                                                             </div>
                                                             <p className=''>{ele?.attendees?.map((element) => {
@@ -317,7 +320,7 @@ const importFile = (e ) => {
                                                                     
                                                                         </div>
                                                                         </div>
-                                                                        {element?.attendeesDetails?.fullName || element?.attendeesDetails?.email ? <div className='rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer  px-2 pb-1 '>
+                                                                        {element?.attendeesDetails?.fullName || element?.attendeesDetails?.email ? <div className='rounded-md shdaow-md bg-orange-400 focus:outline-none cursor-pointer  px-2 pb-1 '>
                                                                             <select className=" bg-transparent focus:outline-none cursor-pointer text-[14px]  text-white" onChange={(e) => handleSelectValue(e, element)}>
                                                                                 <option value="" disabled selected>Move to</option>
                                                                                 {groupList?.filter((data) => data.groupNo !== ele.groupNo)?.map((data) => (
