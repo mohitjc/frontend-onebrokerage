@@ -393,8 +393,8 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
                                                                         <div className=' '>
 
                                                                             <div className='flex flex-col gap-y-1'>
-                                                                                <h4 className='text-lg font-bold text-[#2b2b2b]'>{ele?.eventsDetails?.[0]?.title}</h4>
-                                                                                <p className='text-sm text-gray-500'>{ele?.ConnectMeetId}</p>
+                                                                                <h4 className='text-md font-bold text-[#2b2b2b]'>{ele?.eventsDetails?.[0]?.title}</h4>
+                                                                                <p className='text-xs text-gray-500'>{ele?.ConnectMeetId}</p>
                                                                             </div>
                                                                         </div>
                                                                         <ChevronUpIcon
