@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 const AssignedEvents = () => {
     const user = useSelector((state) => state.user);
     const searchState = {data:''}
-    const [filters, setFilter] = useState({ page: 1, count: 50, search: '', catType: '',type:'ongoing' })
+    const [filters, setFilter] = useState({ page: 1, count: 10, search: '', catType: '',type:'ongoing' })
     const [data, setData] = useState([])
     const [total, setTotal] = useState(0)
     const [loaging, setLoader] = useState(true)

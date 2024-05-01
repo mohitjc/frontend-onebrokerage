@@ -98,11 +98,11 @@ const History = () => {
         getdata({ sortBy, key, sorder })
     }
 
-    const getdata = () => {
+    const getdata = (p) => {
         loader(true)
         setLoader(true)
         let payload ={
-            ...filters
+            ...filters , ...p
         }
         ApiClient.get(`api/import/event-group/list`,payload).then(res => {
             if (res.success) {
