@@ -130,7 +130,7 @@ const Html = ({
                 <>
                   <div>
                     <div className={`shadow-xl !rounded-xl hover:shadow-2xl !p-5 ${item.id == activeplan?.planId?'border border-orange-400 shadow-2xl':''}`}>
-                      <div className="flex !gap-3 items-center mb-6">
+                      <div className="flex !gap-3 flex-wrap items-center mb-6">
                         <div className="w-12 h-12 shrink-0 flex items-center justify-center border-4 !border-[#ECEAFC] !rounded-xl bg-[#F7F7FE] shadow-[0_0.5px_1px_0_rgba(0,0,0,0.05)]">
                           {item.name === "Advance" ? (
                             <img
@@ -150,7 +150,7 @@ const Html = ({
                           {item.name}
                         </h5>
                       </div>
-                      <div className="flex !gap-1 items-center">
+                      <div className="flex !gap-1 items-center flex-wrap">
                         <h2 className="text-typo text-3xl font-semibold">
                           {getPrice(item)} {currencyiso?.toUpperCase()}
                         </h2>

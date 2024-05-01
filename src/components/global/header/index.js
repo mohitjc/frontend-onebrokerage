@@ -20,6 +20,7 @@ const Header = ({ setIsOpen, isOpen }) => {
     dispatch(logout())
     localStorage.removeItem("persist:admin-app")
     localStorage.removeItem("token")
+    // localStorage.removeItem("loginTime")
     history('/login');
   };
 

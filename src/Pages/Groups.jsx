@@ -167,25 +167,35 @@ const importFile = (e ) => {
 
 
     };
+   
+    // const handleCheckboxClick = (e, email) => {
+    //     if (e.target.checked) {
+    //         setSelectedEmails(prevSelectedEmails => [...prevSelectedEmails, email]);
+    //     } else {
+    //         setSelectedEmails(prevSelectedEmails => prevSelectedEmails.filter(selectedEmail => selectedEmail !== email));
+    //     }
+    // };
     const handleCheckboxClick = (e, email) => {
         if (e.target.checked) {
-            setSelectedEmails(prevSelectedEmails => [...prevSelectedEmails, email]);
+            setSelectedEmails([email]);
         } else {
-            setSelectedEmails(prevSelectedEmails => prevSelectedEmails.filter(selectedEmail => selectedEmail !== email));
+            // If a radio button is unchecked, don't do anything for now
         }
     };
+    
     const handleSelectAllClick = (e, attendees) => {
         const emails = attendees?.map(attendee => attendee?.attendeesDetails?.email);
         if (e?.target?.checked) {
             setSelectedEmails(prevSelectedEmails => [...prevSelectedEmails, ...emails]);
-            setHistoryModal(true)
+            // setHistoryModal(true)
         } else {
             setSelectedEmails(prevSelectedEmails => prevSelectedEmails.filter(selectedEmail => !emails.includes(selectedEmail)));
         }
     };
     const getselectedEmailsData=()=>{
+        setHistoryModal(true)
         const emails = selectedEmails.join(',');
-        ApiClient.get(`api/import/event-group/list?email=${emails}`).then(res => {
+        ApiClient.get(`api/user/historic/data?email=${emails}`).then(res => {
             if (res.success) {
                 setHistoryData(res?.data)
             }
@@ -305,22 +315,25 @@ const importFile = (e ) => {
                                                         <div className='brouplists border border-1 rounded-lg shadow-lg p-3 mb-3'>
 
                                                             <div className='flex items-center justify-between border-b border-1 pb-2 mb-2'>
+                                                                <div className='flex items-center gap-1'>
+                                                                {/* { ele?.attendees ?  <input type="checkbox" onChange={(e) => handleSelectAllClick(e, ele?.attendees)} /> :""}  */}
                                                                 <h2 className='font-bold text-[#2b2b2b] text-lg'> Group{ele?.groupNo}</h2>
-                                                                { ele?.attendees ?  <input type="checkbox" onChange={(e) => handleSelectAllClick(e, ele?.attendees)} /> :""} 
+                                                                </div>
+                                                               
                                                                 {ele?.isUnique === true ? <span className='bg-orange-500 p-2 text-xs  mb-0 text-white rounded-md inline-flex'>New Pair</span> : ""}
                                                             </div>
                                                             <p className=''>{ele?.attendees?.map((element) => {
                                                                 return (
                                                                     <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2'>
                                                                         <div className='flex items-start gap-1'>
-                                                                            {/* <input type="checkbox" className='mt-1'onChange={(e) => handleCheckboxClick(e, element?.attendeesDetails?.email)} />      */}
+                                                                            <input type="radio" className='mt-1'onChange={(e) => handleCheckboxClick(e, element?.attendeesDetails?.email)} />     
                                                                         <div>
                                                                             {element?.attendeesDetails?.fullName ? <p className='flex items-center mb-2 gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />{element?.attendeesDetails?.fullName}</p> : ""}
                                                                             {element?.attendeesDetails?.email ? <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]' />{element?.attendeesDetails?.email}</p> : ""}
                                                                     
                                                                         </div>
                                                                         </div>
-                                                                        {element?.attendeesDetails?.fullName || element?.attendeesDetails?.email ? <div className='rounded-full shdaow-md bg-orange-400 focus:outline-none cursor-pointer  px-2 pb-1 '>
+                                                                        {element?.attendeesDetails?.fullName || element?.attendeesDetails?.email ? <div className='rounded-md shdaow-md bg-orange-400 focus:outline-none cursor-pointer  px-2 pb-1 '>
                                                                             <select className=" bg-transparent focus:outline-none cursor-pointer text-[14px]  text-white" onChange={(e) => handleSelectValue(e, element)}>
                                                                                 <option value="" disabled selected>Move to</option>
                                                                                 {groupList?.filter((data) => data.groupNo !== ele.groupNo)?.map((data) => (
@@ -451,7 +464,7 @@ return(<div><h4>Name{ele?.fullName}</h4>
           
           title=" History"
           body={<>
-         <GroupHistory />
+         <GroupHistory data ={historyData}/>
           </>}
           result={e => {
             setHistoryModal(false)
