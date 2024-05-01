@@ -22,7 +22,7 @@ const PageLayout = ({ children }) => {
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
-
+console.log(user,"useruseruseruseruseruseruseruseruseruseruser")
   useEffect(() => {
     if (!user.loggedIn) {
       

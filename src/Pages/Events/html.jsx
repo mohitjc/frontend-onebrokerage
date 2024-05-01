@@ -102,7 +102,7 @@ const Html = ({
     const getGroups = () => {
         let f = {
             page: 1,
-            count: 50
+            count: 10
         }
         ApiClient.get('api/group/list', f).then(res => {
             if (res.success) {

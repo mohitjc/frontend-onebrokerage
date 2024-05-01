@@ -80,10 +80,8 @@ const History = () => {
     };
     
     const pageChange = (e) => {
-        console.log(e,"pagechange")
-    
-        setFilter({ ...filters, page:e })
-        getdata({ page: e })
+    setFilter({ ...filters, page:e })
+          getdata({ ...filters ,page: e })
     }
     const sorting = (key) => {
         let sorder = 'asc'
@@ -100,11 +98,11 @@ const History = () => {
         getdata({ sortBy, key, sorder })
     }
 
-    const getdata = () => {
+    const getdata = (p) => {
         loader(true)
         setLoader(true)
         let payload ={
-            ...filters
+            ...filters , ...p
         }
         ApiClient.get(`api/import/event-group/list`,payload).then(res => {
             if (res.success) {
@@ -116,7 +114,7 @@ const History = () => {
             setLoader(false)
         });
     }
-    console.log(list, "listlistlistlistlistlistlist")
+
     useEffect(() => {
         getdata()
     }, [])

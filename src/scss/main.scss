@@ -770,6 +770,20 @@ input.searchbar.mr-2 {
   }
 }
 
+
+@media only screen and (min-width:768px) and (max-width:1000px){
+  .w-\[calc\(100\%-80px\)\] {
+    width: 100% !important;
+}
+.main-sidebar {
+  position: absolute;
+  top: 120px !important;
+  z-index: 998;
+}
+}
+
+
+
 @media only screen and (min-width:991px) and (max-width:1000px) {
   .dropdown.addDropdown.chnagesg {
     margin-top: 0px;
@@ -785,11 +799,11 @@ input.searchbar.mr-2 {
     display: flex;
   }
 
-  .main-sidebar {
-    position: absolute;
-    top: 143px;
-    z-index: 998;
-  }
+  // .main-sidebar {
+  //   position: absolute;
+  //   top: 143px;
+  //   z-index: 998;
+  // }
 
   .main-navbar {
     padding-left: 25px;

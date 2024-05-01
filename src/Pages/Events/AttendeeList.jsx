@@ -16,7 +16,7 @@ export default function AttendeeList({ eventId, eventDetail }) {
     const [tab, setTab] = useState('list')
     const [role, setRole] = useState()
     const user = useSelector((state) => state.user);
-    const [filters, setFilter] = useState({ page: 1, count: 50, search: '', eventId: eventId })
+    const [filters, setFilter] = useState({ page: 1, count: 10, search: '', eventId: eventId })
 
     const attendPremit=(row)=>{
         let value=false

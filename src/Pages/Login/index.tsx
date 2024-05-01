@@ -115,8 +115,10 @@ const Login = () => {
           // setLogin(res.data)
         } else {
           setLogin(res.data)
+         
         }
-       
+        const loginTime = new Date();
+localStorage.setItem('loginTime', loginTime.toISOString());
       }
       loader(false)
     })
