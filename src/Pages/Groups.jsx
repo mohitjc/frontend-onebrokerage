@@ -317,7 +317,7 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
 
                             <div className='grid grid-cols-12 gap-x-4'>
 
-                                <div className={`${historyData?.length ? "col-span-12 md:col-span-8":"col-span-12 md:col-span-12"}`} >
+                                <div className={`${historyData?.length ? "col-span-12 md:col-span-8" : "col-span-12 md:col-span-12"}`} >
 
                                     <div className='grid grid-cols-1 lg:grid-cols-2  gap-2'>
 
@@ -340,12 +340,12 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
                                                                 <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2'>
                                                                     <div className='flex items-start gap-1'>
                                                                         {/* <input type="radio" className='mt-1' onChange={(e) => handleCheckboxClick(e, element?.attendeesDetails?.email)} /> */}
-                                                                        <input 
-                            type="radio" 
-                            className='mt-1' 
-                            onChange={(e) => handleCheckboxClick(e, element?.attendeesDetails?.email)}
-                            checked={selectedAttendee === element?.attendeesDetails?.email}
-                        />
+                                                                        <input
+                                                                            type="radio"
+                                                                            className='mt-1'
+                                                                            onChange={(e) => handleCheckboxClick(e, element?.attendeesDetails?.email)}
+                                                                            checked={selectedAttendee === element?.attendeesDetails?.email}
+                                                                        />
                                                                         <div>
                                                                             {element?.attendeesDetails?.fullName ? <p className='flex items-center mb-2 gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />{element?.attendeesDetails?.fullName}</p> : ""}
                                                                             {element?.attendeesDetails?.email ? <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]' />{element?.attendeesDetails?.email}</p> : ""}
@@ -374,7 +374,7 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
                                     </div>
 
                                 </div>
-{historyData?.length ?   <div className='col-span-12 md:col-span-4'>
+                                {historyData?.length ? <div className='col-span-12 md:col-span-4'>
                                     <div className='histroy_showinf p-4 rounded-md border border-gray-300'>
                                         <h6 className='text-black text-xl flex items-center gap-2  mb-4'><GoHistory /> History</h6>
 
@@ -434,8 +434,8 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
 
                                     </div>
 
-                                </div> :""}
-                              
+                                </div> : ""}
+
 
                             </div>
 
