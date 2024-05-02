@@ -435,7 +435,7 @@ const handleOpenModal=(e :any)=>{
                           {attendeeFilter('Yes').length ? <>
                             {addPremit() ? <>
                               {meetingStart() ? <>
-                                <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg" onClick={markAttendance}>Use the QR code to record attendance</button>
+                                <button className="bg-[#EF7A2B] py-3 px-2  text-center text-white rounded-lg" onClick={markAttendance}>Mark Attendance</button>
                               </> : <></>}
 
                               {meetingStart() ? <>

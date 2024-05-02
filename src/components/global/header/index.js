@@ -5,7 +5,6 @@ import Html from './Html';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../Pages/actions/user';
 
-
 const Header = ({ setIsOpen, isOpen }) => {
   const user = useSelector((state) => state.user);
   const toggle = () => { setIsOpen(!isOpen); localStorage.setItem('sidebar', !isOpen) };
@@ -13,7 +12,7 @@ const Header = ({ setIsOpen, isOpen }) => {
   const toggle1 = () => setIsOpen1(!isOpen1);
   const history = useNavigate();
   const dispatch=useDispatch()
-
+ 
   const searchState={data:''};
 
   const Logout = () => {
@@ -43,8 +42,10 @@ const Header = ({ setIsOpen, isOpen }) => {
         console.log("Logging in user for the first time...");
     }
   }
+
 useEffect(() => {
   autoLogout()
+  
 }, [])
 
 
