@@ -68,7 +68,7 @@ function App() {
     {url:'/assinged-event',element:<AssignedEvents />},
     {url:'/event/detail/:id',element:<EventDetail />},
     {url:'/thanku',element:<Thanku />},
-    {url:'/groupsDetail',element:<Groups/>}
+    {url:'/groupsDetail/:id',element:<Groups/>}
   ]
 
   return (

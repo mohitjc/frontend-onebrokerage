@@ -23,7 +23,29 @@ const Header = ({ setIsOpen, isOpen }) => {
     // localStorage.removeItem("loginTime")
     history('/login');
   };
+  console.log(user?.lastLogin,"lastLogin")
 
+  // logout after 1 day 
+  function autoLogout() {
+    const oneDayInMillis = 24 * 60 * 60 * 1000; // One day in milliseconds
+    const currentTime = new Date().getTime();
+    
+    if (user?.lastLogin) {
+        const lastLoginTime = new Date(user?.lastLogin).getTime();
+        const timeDifference = currentTime - lastLoginTime;
+        
+        if (timeDifference >= oneDayInMillis) {
+            console.log("Logging out user...");
+            Logout()
+        } 
+    } else {
+        // No last login time found, assuming user is logging in for the first time
+        console.log("Logging in user for the first time...");
+    }
+  }
+useEffect(() => {
+  autoLogout()
+}, [])
 
 
   useEffect(
