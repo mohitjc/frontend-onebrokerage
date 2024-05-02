@@ -141,7 +141,7 @@ const getMemberHistory=()=>{
     }
     return arr
   }
-
+console.log(data?.isMarkAttendance,"ppppppppppppppppppppppppppp")
   const endEvent = () => {
     // if (window.confirm("Do you want to End this Event")) {
     //   loader(true)
@@ -556,13 +556,13 @@ const handleOpenModal=(e :any)=>{
                         ) : null :<></>}
                      
                      </div>
-                     {data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager" || role === "meetManager" || role === "assistant"? <>{data?.isGroupGenerated === true ? <div className="flex justify-end">
+                     {data?.addedBy?._id === user?._id  ||  data?.memberId?.role === "assistant" || data?.memberId?.role === "meetManager" || role === "meetManager" || role === "assistant"? <>{data?.isGroupGenerated === true || data?.isMarkAttendance === "true" ? <div className="flex justify-end">
                                    <button  
                                   //  onClick={() => setGroup(true)} 
                                   onClick={() => handleOpenModal("SeeAllGroups")}
                                    className="bg-[#46454E] inline-flex py-3 px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />See All Groups</button>
                                  </div>:
-                           ( meetingStart() ?     <div className="flex justify-end">
+                           ( meetingStart() || data?.isMarkAttendance === "true"  ?     <div className="flex justify-end">
                                    <button onClick={() => handleOpenModal("GenerateConnectmeets")} className="bg-[#46454E] inline-flex py-3  px-3 flex items-center justify-center gap-x-2 text-white shadow hover:shadow-lg rounded-xl" > <AiOutlineUsergroupAdd />Generate Connect meets</button>
                                  </div>:"")}</>:""}
                      

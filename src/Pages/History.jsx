@@ -22,7 +22,7 @@ const History = () => {
         {
             key: 'fullName', name: 'Name',
             render: (row) => {
-                return <>{row?.fullName}</>
+                return <p className='capitalize'>{row?.fullName}</p>
             }
         },
         {
@@ -102,7 +102,7 @@ const History = () => {
         loader(true)
         setLoader(true)
         let payload ={
-            ...filters , ...p
+            ...filters , ...p , groupId:user?.groupId?._id
         }
         ApiClient.get(`api/import/event-group/list`,payload).then(res => {
             if (res.success) {
