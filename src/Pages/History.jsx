@@ -97,6 +97,11 @@ const History = () => {
         setFilter({ ...filters, sortBy, key, sorder })
         getdata({ sortBy, key, sorder })
     }
+    const handlePageSizeChange = (e) => {
+        const newSize = parseInt(e.target.value);
+        setFilter({count:newSize});
+        getdata({ count:newSize})
+    }
 
     const getdata = (p) => {
         loader(true)
@@ -157,7 +162,18 @@ const History = () => {
                             if (e.event == 'sort') sorting(e.value)
                         }}
                     />
-
+ <div>
+                            Show{' '}
+                            
+                            <select value={filters?.count} onChange={handlePageSizeChange} className="border rounded-md px-2 py-1">
+                                {[10, 20, 30, 40, 50,60,70,80,90,100].map(option => (
+                                    <option key={option} value={option}>
+                                        {option}
+                                    </option>
+                                ))}
+                            </select>{' '}
+                           
+                        </div>
                 </> : <></>}
                     </div>
                    
