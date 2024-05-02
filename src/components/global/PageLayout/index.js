@@ -63,23 +63,23 @@ console.log(user,"useruseruseruseruseruseruseruseruseruseruser")
           <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xxl">
               <Link to="/" className="flex items-center">
-                <img src="/assets/img/logo.png" className="mr-3 h-6 lg:h-16 sm:h-9" alt="Flowbite Logo" />
+                <img src="/assets/img/logo.png" className="mr-3 h-10 lg:h-16 sm:h-10" alt="Flowbite Logo" />
                 {/* <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span> */}
               </Link>
               <div className="flex items-center lg:order-2">
                 {user?.loggedIn ? <>
                   <Menu as="div" className="relative  ml-auto">
                     <div>
-                      <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-1 text-sm font-semibold text-gray-900 ">
+                      <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-1 mb-0 text-sm font-semibold text-gray-900 ">
                         <div className="flex items-center">
                           <div className="flex items-center">
-                            <img alt="image" src={methodModel.userImg(user.image)} className="h-12 w-12 rounded-full object-cover" />
-                            <div className="ml-2 text-left">
+                            <img alt="image" src={methodModel.userImg(user.image)} className="h-10 w-10 rounded-full object-cover" />
+                            <div className="ml-2 text-left hidden md:block">
                               <b>{user.fullName}</b>
                               <p className="grayCls mb-0 text-capitalize">{user.customerRole?.name}</p>
                             </div>
                           </div>
-                          <i className="fa fa-angle-down top-1 relative h-5 w-5 text-gray-400" aria-hidden="true" />
+                          <i className="fa fa-angle-down top-1 relative h-5 w-5 text-gray-400 hidden md:block" aria-hidden="true" />
                         </div>
 
                       </Menu.Button>
