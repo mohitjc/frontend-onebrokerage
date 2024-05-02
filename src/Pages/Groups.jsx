@@ -183,7 +183,7 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
             setSelectedName(name)
             setSelectedAttendee(email)
             loader(true)
-            ApiClient.get(`api/user/historic/data?email=${email}&groupId=${user?.groupId?._id}`).then(res => {
+            ApiClient.get(`api/user/historic/data?email=${email}&groupId=${user?.groupId?._id}&eventId=${id}`).then(res => {
                 if (res.success) {
                     setHistoryData(res?.data)
                     loader(false)
@@ -304,7 +304,7 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
                                         </div></>)
 
 
-                                    }) : "No Data Available"}
+                                    }) : "No Request Available"}
                                 </div>
 
                             </div> : ""}
