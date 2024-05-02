@@ -20,11 +20,13 @@ import PageLayout from '../components/global/PageLayout';
 import { toast } from 'react-toastify';
 import datepipeModel from '../models/datepipemodel';
 import GroupHistory from "./GroupHistory"
+import { useSelector } from "react-redux";
 const Groups = ({ eventDetail = '', dataa = '' }) => {
     console.log(eventDetail, "eventDetaileventDetaileventDetaileventDetaileventDetail")
     const { id } = useParams()
     const location = useLocation();
     const history = useNavigate();
+    const user = useSelector((state) => state.user);
     const receivedStateData = location.state;
     console.log(receivedStateData, "receivedStateDatareceivedStateDatareceivedStateDatareceivedStateDatareceivedStateData")
     const [groupList, setGroupList] = useState()
@@ -39,9 +41,7 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
     const eventIdd = receivedStateData?.eventId?.id
     const groupId = receivedStateData?.dataa?.data?.groupId?._id
 
-    console.log(eventIdd, "eventIddeventIdd")
-    console.log(groupList, "groupListgroupListgroupListgroupListgroupList")
-    console.log(requestGroupList, "requestGroupListrequestGroupListrequestGroupListrequestGroupListrequestGroupListrequestGroupList")
+   
     const handleCloseModal = () => {
         setShowDiv(false)
     }
@@ -176,12 +176,14 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
     //     }
     // };
     const [selectedAttendee, setSelectedAttendee] = useState(null);
-    const handleCheckboxClick = (e, email) => {
+    const [selectedName, setSelectedName] = useState(null);
+    const handleCheckboxClick = (e, email , name) => {
         if (e.target.checked) {
             // setSelectedEmails([email]);
+            setSelectedName(name)
             setSelectedAttendee(email)
             loader(true)
-            ApiClient.get(`api/user/historic/data?email=${email}`).then(res => {
+            ApiClient.get(`api/user/historic/data?email=${email}&groupId=${user?.groupId?._id}`).then(res => {
                 if (res.success) {
                     setHistoryData(res?.data)
                     loader(false)
@@ -212,8 +214,7 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
     //         }
     //     })
     // }
-    console.log(historyData, "historyData")
-    console.log(historyData?.eventsDetails, "oooooooooooooooooooooo")
+
     return (
         <>
 
@@ -248,14 +249,7 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
                                         </div>
                                     </div>
                                     <div className='flex items-center gap-2 flex-wrap'>
-                                        {/* {/ import File /} */}
-                                        {/* <div className="flex items-center justify-center bg-grey-lighter">
-                                            <label htmlFor="fileInput" className="flex gap-2 items-center border-dashed border-gray-200 items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide border border-blue cursor-pointer">
-                                                <IoMdCloudUpload className='text-md' />
-                                                <span className="text-sm leading-normal">Import file</span>
-                                            </label>
-                                            <input id="fileInput" type="file" style={{ display: 'none' }} onChange={importFile} />
-                                        </div> */}
+                                 
 
                                         <div className=''>
                                             <div className="flex  items-center justify-center bg-grey-lighter">
@@ -340,12 +334,12 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
                                                                 <div className='card_inners border-b  last:border-0  items-center flex  flex-wrap gap-y-2 items-center justify-between  p-2'>
                                                                     <div className='flex items-start gap-1'>
                                                                         {/* <input type="radio" className='mt-1' onChange={(e) => handleCheckboxClick(e, element?.attendeesDetails?.email)} /> */}
-                                                                        <input
+                                                                    {element?.attendeesDetails?.email ?  <input
                                                                             type="radio"
                                                                             className='mt-1'
-                                                                            onChange={(e) => handleCheckboxClick(e, element?.attendeesDetails?.email)}
+                                                                            onChange={(e) => handleCheckboxClick(e, element?.attendeesDetails?.email ,element?.attendeesDetails?.fullName )}
                                                                             checked={selectedAttendee === element?.attendeesDetails?.email}
-                                                                        />
+                                                                        /> :""}   
                                                                         <div>
                                                                             {element?.attendeesDetails?.fullName ? <p className='flex items-center mb-2 gap-1 text-[#75757A] capitalize text-[14px] '><LuUser2 className='text-black !text-[16px]' />{element?.attendeesDetails?.fullName}</p> : ""}
                                                                             {element?.attendeesDetails?.email ? <p className='flex items-center gap-1 text-[#75757A]  text-[14px]'><MdOutlineEmail className='text-black !text-[16px]' />{element?.attendeesDetails?.email}</p> : ""}
@@ -375,14 +369,15 @@ const Groups = ({ eventDetail = '', dataa = '' }) => {
 
                                 </div>
                                 {historyData?.length ? <div className='col-span-12 md:col-span-4'>
-                                    <div className='histroy_showinf p-4 rounded-md border border-gray-300'>
-                                        <h6 className='text-black text-xl flex items-center gap-2  mb-4'><GoHistory /> History</h6>
+                                    <div className='histroy_showinf p-4 rounded-md border border-gray-300 '>
+                                        <h6 className='text-black text-xl flex items-center gap-2  mb-4'> <GoHistory /> <span  className='capitalize'>{selectedName}</span> History </h6>
 
 
 
 
 
                                         <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+                                           
                                             {historyData?.map((ele) => {
                                                 return (<div className="w-full ">
                                                     <div className="mb-4 border border-gray-200 rounded-lg">
