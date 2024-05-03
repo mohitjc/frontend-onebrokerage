@@ -27,6 +27,7 @@ const EditProfile = () => {
      postal_code:'',
      city:'',
      timezone:'America/Los_Angeles',
+     secondaryEmail:"",
     //  customerRole:'',
      adminComment:'',
      linkedInUrl:'',

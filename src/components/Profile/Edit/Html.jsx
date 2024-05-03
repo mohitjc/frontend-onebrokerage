@@ -200,7 +200,19 @@ useEffect(()=>{
               />
 
             </div>
+            <div className="col-span-12 md:col-span-6">
+              <label>Secondary Email</label>
+              <input
+                type=" Secondary email"
+                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
+                value={form.secondaryEmail}
+                autoComplete="false"
+                onChange={e => { setForm({ ...form, secondaryEmail: e.target.value }); }}
+                required
+                // disabled
+              />
 
+            </div>
 
             <div className="col-span-12 md:col-span-6">
               <label className='lablefontcls'>Image</label><br></br>
