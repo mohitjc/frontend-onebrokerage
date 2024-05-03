@@ -84,7 +84,7 @@ const Login = () => {
   const hendleSubmit = (e:any) => {
     e.preventDefault()
     let data:any = {
-      email: username,
+      loginId: username,
       password,
       ip_address:ip
     };
@@ -127,12 +127,12 @@ localStorage.setItem('loginTime', loginTime.toISOString());
     e.preventDefault()
     let eventId = methodModel.getPrams('eventId')
     loader(true)
-    ApiClient.post('api/find/user',{email:username},'',true).then(res2=>{
+    ApiClient.post('api/find/user',{loginId:username},'',true).then(res2=>{
       if(res2.success){
-        let url = `/login?eventId=${eventId}&email=${username}&attended=true`
+        let url = `/login?eventId=${eventId}&loginId=${username}&attended=true`
         history(url);
       }else{
-        let url = `/signup?eventId=${eventId}&email=${username}&attended=true`
+        let url = `/signup?eventId=${eventId}&loginId=${username}&attended=true`
       history(url); 
       }
       loader(false)
@@ -146,9 +146,9 @@ localStorage.setItem('loginTime', loginTime.toISOString());
         {attendance === "true" ?   <form onSubmit={handleAttendence}>
                   <div>
                   <input
-                    type="email"
+                    type="text"
                     className="shadow-box bg-white mb-6 w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
-                    placeholder="Email address"
+                    placeholder="Login Id"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
@@ -169,9 +169,9 @@ localStorage.setItem('loginTime', loginTime.toISOString());
                   </h4>
                   {step==1?<>
                     <input
-                    type="email"
+                    type="text"
                     className="shadow-box bg-white mb-6 w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
-                    placeholder="Email address"
+                    placeholder="Login Id"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     disabled={methodModel.getPrams('attended')?true:false}

@@ -17,7 +17,7 @@ const Signup = () => {
   const user = useSelector((state:any) => state.user);
  const dispatch=useDispatch()
 
-  const [form, setForm]:any = useState({ email: '', password: '', fullName: '',customerRole:environment.customerRoleId });
+  const [form, setForm]:any = useState({ email: '', password: '', fullName: '',customerRole:environment.customerRoleId ,loginId:""});
   const [remember, setRemember] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [groups, setGroups] = useState([]);
@@ -55,7 +55,7 @@ const Signup = () => {
       }
     })
   }
-
+ 
   const hendleSubmit = (e: any) => {
     e.preventDefault()
     setSubmitted(true)
@@ -119,11 +119,53 @@ const Signup = () => {
 
     getGroups()
   }, [])
+  const [loginIdExists, setLoginIdExists] = useState(true); 
+  const getLoginId = (loginId :any) => {
+    ApiClient.get(`api/check/login-id?loginId=${loginId ? loginId : null}`)
+      .then((res) => {
+        if (res.success) {
+          setLoginIdExists(true);
+        } else {
+          setLoginIdExists(false);
+        }
+      })
+      .catch((error) => {
+        console.error('Error checking login ID:', error);
+        setLoginIdExists(true); 
+      });
+  };
+  
+  const handleLoginIdChange = (e :any) => {
+    const { value } = e.target;
+    setForm({ ...form, loginId: value });
+    getLoginId(value);
+  };
   return (
     <>
       <AuthLayout>
         <form className="" onSubmit={hendleSubmit} autoComplete='off'>
           <h4 className="text-typo mb-6 text-2xl font-bold">Sign Up</h4>
+          {/* <input type="text"
+            onChange={e => setForm({ ...form, loginId: e.target.value })}
+            value={form.loginId}
+            className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
+            placeholder="Login Id"
+            autoComplete='off'
+            disabled={methodModel.getPrams('attended')?true:false}
+            required /> */}
+              <input
+      type="text"
+      onChange={handleLoginIdChange}
+      value={form.loginId}
+      className={`shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500 ${loginIdExists ? '' : 'border-red-500'}`}
+      placeholder="Login Id"
+      autoComplete="off"
+      maxLength={8}
+      disabled={methodModel.getPrams('attended') ? true : false}
+      required
+    />
+      {loginIdExists ? null : <p className="text-red-500">Login ID already exists.</p>}
+
           <input type="email"
             onChange={e => setForm({ ...form, email: e.target.value })}
             value={form.email}

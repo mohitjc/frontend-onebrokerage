@@ -67,12 +67,17 @@ const History = () => {
                     base64String: base64String
                 };
 
-                ApiClient.post(`api/import/event-group`, payload).then(res => {
-                    if (res.success) {
-                        toast.success(res.message);
-                        getdata()
-                    }
-                });
+ApiClient.post(`api/import/event-group`, payload).then(res => {
+    if (res.success) {
+        toast.success(res.message);
+       loader(true)
+        
+        setTimeout(() => {
+            loader(false)
+            getdata();
+        }, 60000); 
+    }
+});
             };
 
             reader.readAsDataURL(file);
@@ -112,6 +117,7 @@ const History = () => {
         ApiClient.get(`api/import/event-group/list`,payload).then(res => {
             if (res.success) {
                 loader(false)
+                
                 setList(res?.data);
                 toast.success(res.message);
                 setTotal(res?.total)

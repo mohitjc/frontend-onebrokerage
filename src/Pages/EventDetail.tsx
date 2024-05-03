@@ -109,6 +109,7 @@ const EventDetail = () => {
 
 
   const getAttendeesGroupPair  = () => {
+    loader(true)
     ApiClient.get(`api/event/groups?eventId=${id}`).then(res => {
       if (res.success) {
         setattendeesGroup(res?.data)
@@ -117,8 +118,10 @@ const EventDetail = () => {
           dataa:{data},
           eventId:{id},
           attendeesGroup:attendeesGroup
+
         }
         history(`/groupsDetail/${id}`,  { state: stateData });
+        loader(false)
       }
     })
   }
