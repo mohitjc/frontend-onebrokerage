@@ -22,6 +22,7 @@ const Login = () => {
 
   const [ip, setIp] = useState('');
   const [username, setUsername] = useState('');
+  const [attandanceEmail, setAttendanceEmail] = useState('');
   const [remember, setRemember] = useState(false);
   const [password, setPassword] = useState('');
   const [eyes, setEyes] = useState({ password: false, confirmPassword: false, currentPassword: false });
@@ -127,12 +128,12 @@ localStorage.setItem('loginTime', loginTime.toISOString());
     e.preventDefault()
     let eventId = methodModel.getPrams('eventId')
     loader(true)
-    ApiClient.post('api/find/user',{loginId:username},'',true).then(res2=>{
+    ApiClient.post('api/find/user',{email:attandanceEmail},'',true).then(res2=>{
       if(res2.success){
-        let url = `/login?eventId=${eventId}&loginId=${username}&attended=true`
+        let url = `/login?eventId=${eventId}&email=${attandanceEmail}&attended=true`
         history(url);
       }else{
-        let url = `/signup?eventId=${eventId}&loginId=${username}&attended=true`
+        let url = `/signup?eventId=${eventId}&email=${attandanceEmail}&attended=true`
       history(url); 
       }
       loader(false)
@@ -146,11 +147,11 @@ localStorage.setItem('loginTime', loginTime.toISOString());
         {attendance === "true" ?   <form onSubmit={handleAttendence}>
                   <div>
                   <input
-                    type="text"
+                    type="email"
                     className="shadow-box bg-white mb-6 w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
-                    placeholder="Login Id"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Email address"
+                    value={attandanceEmail}
+                    onChange={(e) => setAttendanceEmail(e.target.value)}
                     required
                   />
                   </div>
@@ -174,7 +175,7 @@ localStorage.setItem('loginTime', loginTime.toISOString());
                     placeholder="Login Id"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    disabled={methodModel.getPrams('attended')?true:false}
+                    // disabled={methodModel.getPrams('attended')?true:false}
                     required
                   />
                   <div className="relative mb-6">
