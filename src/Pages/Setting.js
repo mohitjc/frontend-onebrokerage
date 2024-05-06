@@ -16,7 +16,7 @@ const Setting = () => {
 
   const [form, setForm] = useState({ memberGroup: "3", connectMeetHistory: "" });
   const [getdata, setGetData] = useState()
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state?.user);
   useEffect(() => {
     getSettingData();
   }, []);
