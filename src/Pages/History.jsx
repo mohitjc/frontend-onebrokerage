@@ -88,6 +88,10 @@ ApiClient.post(`api/import/event-group`, payload).then(res => {
     setFilter({ ...filters, page:e })
           getdata({ ...filters ,page: e })
     }
+    const count = (e) => {
+        setFilter({ ...filters, count:e })
+              getdata({ ...filters ,count: e })
+        }
     const sorting = (key) => {
         let sorder = 'asc'
         if (filters.key == key) {
@@ -166,18 +170,10 @@ ApiClient.post(`api/import/event-group`, payload).then(res => {
                         result={(e) => {
                             if (e.event == 'page') pageChange(e.value)
                             if (e.event == 'sort') sorting(e.value)
+                            if(e.event == 'count') count(e.value)
                         }}
                     />
  <div>
-                            Show{' '}
-                            
-                            <select value={filters?.count} onChange={handlePageSizeChange} className="border rounded-md px-2 py-1">
-                                {[10, 20, 30, 40, 50,60,70,80,90,100].map(option => (
-                                    <option key={option} value={option}>
-                                        {option}
-                                    </option>
-                                ))}
-                            </select>{' '}
                            
                         </div>
                 </> : <></>}

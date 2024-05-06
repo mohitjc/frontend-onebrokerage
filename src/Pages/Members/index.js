@@ -119,7 +119,10 @@ const Members = () => {
         setFilter({ ...filters, page: e })
         getData({ page: e })
     }
-
+    const count = (e) => {
+        setFilter({ ...filters, count:e })
+        getData({ ...filters ,count: e })
+        }
     const changestatus = (e) => {
         setFilter({ ...filters, status: e, page: 1 })
         getData({ status: e, page: 1 })
@@ -201,6 +204,7 @@ const Members = () => {
         sorting={sorting}
         isAllow={isAllow}
         pageChange={pageChange}
+        count={count}
         deleteItem={deleteItem}
         filters={filters}
         filter={filter}
