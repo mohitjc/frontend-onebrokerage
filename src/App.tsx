@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import NotFoundPage from './Pages/NotFoundPage';
@@ -26,7 +26,7 @@ const { persistor, store } = configureStoreProd();
 function App() {
 
   const routes=[
-    {url:'',element:<Home />},
+    // {url:'',element:<Home />},
     {url:'/login',element:<Login />},
     {url:'/signup',element:<Signup />},
     {url:'/dashboard',element:<Dashboard />},
@@ -41,6 +41,7 @@ function App() {
     {url:'/user',element:<Users />},
     {url:'/user/edit/:id',element:<AddEditUsers />},
     {url:'/user/add',element:<AddEditUsers />},
+    {url:'/',element:<Navigate to="/login" />},
   ]
 
   return (
