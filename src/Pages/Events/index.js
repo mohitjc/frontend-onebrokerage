@@ -129,7 +129,10 @@ const Events = () => {
         setFilter({ ...filters, page: e })
         getData({ page: e })
     }
-
+    const count = (e) => {
+        setFilter({ ...filters, count:e })
+        getData({ ...filters ,count: e })
+        }
     const changestatus = (e) => {
         setFilter({ ...filters, status: e, page: 1 })
         getData({ status: e, page: 1 })
@@ -218,6 +221,7 @@ const Events = () => {
         sortClass={sortClass}
         sorting={sorting}
         isAllow={isAllow}
+        count={count}
         pageChange={pageChange}
         deleteItem={deleteItem}
         filters={filters}

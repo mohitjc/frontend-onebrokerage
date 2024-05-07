@@ -19,6 +19,7 @@ const Html = ({
     statusChange,
     roleUpdate,
     pageChange,
+    count,
     deleteItem,
     clear,
     filters,
@@ -191,6 +192,7 @@ const Html = ({
                         result={(e) => {
                             if (e.event == 'page') pageChange(e.value)
                             if (e.event == 'sort') sorting(e.value)
+                            if(e.event == 'count') count(e.value)
                         }}
                     />
 
