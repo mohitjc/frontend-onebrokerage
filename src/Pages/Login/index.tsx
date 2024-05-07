@@ -85,7 +85,7 @@ const Login = () => {
   const hendleSubmit = (e:any) => {
     e.preventDefault()
     let data:any = {
-      loginId: username,
+      email: username,
       password,
       ip_address:ip
     };
@@ -113,9 +113,9 @@ const Login = () => {
         if (res.data.two_factor_email_sent || step==1) {
           setStep(2)
           setRes(res.data)
-          // setLogin(res.data)
-        } else {
           setLogin(res.data)
+        } else {
+          // setLogin(res.data)
          
         }
         const loginTime = new Date();

@@ -14,26 +14,13 @@ import Resetpassword from './Pages/Resetpassword';
 import Roles from './Pages/Roles';
 import AddEditRole from './Pages/Roles/AddEdit';
 import Dashboard from './Pages/Dashboard';
-import History from './Pages/History';
 import Signup from './Pages/Signup';
-import Events from './Pages/Events';
-import AddEditEvent from "./Pages/Events/AddEdit";
-import ViewEvent from "./Pages/Events/View";
-import Plan from "./Pages/Plan";
-import ActivePlan from "./Pages/Plan/ActivePlan";
-import AssignedEvents from './Pages/Events/AssignedEvents';
-import AssignMembers from './Pages/AssignMembers';
-import AddEditAssignMembers from './Pages/AssignMembers/AddEdit';
-import Members from './Pages/Members';
-import AddEdiMember from './Pages/Members/AddEdit';
-import EventDetail from './Pages/EventDetail';
-import Thanku from './Pages/Thanku';
 import configureStoreProd from './Pages/config/configureStore.prod';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ToastContainer } from 'react-toastify';
-import Setting from './Pages/Setting';
-import Groups from './Pages/Groups';
+import Users from './Pages/Users';
+import AddEditUsers from './Pages/Users/AddEdit';
 const { persistor, store } = configureStoreProd();
 
 function App() {
@@ -51,24 +38,9 @@ function App() {
     {url:'/roles',element:<Roles />},
     {url:'/roles/add',element:<AddEditRole />},
     {url:'/roles/edit/:id',element:<AddEditRole />},
-    {url:'/members/add',element:<AddEdiMember />},
-    {url:'/members',element:<Members />}, 
-    {url:'/setting',element:<Setting />}, 
-    {url:'/history',element:<History />}, 
-    {url:'/members/edit/:id',element:<AddEdiMember />},
-    {url:'/assign-member/add',element:<AddEditAssignMembers />},
-    {url:'/assign-member',element:<AssignMembers />},
-    {url:'/assign-member/edit/:id',element:<AddEditAssignMembers />},
-    {url:'/event',element:<Events />},
-    {url:'/event/edit/:id',element:<AddEditEvent />},
-    {url:'/event/add',element:<AddEditEvent />},
-    // {url:'/event/detail/:id',element:<ViewEvent />},
-    {url:'/plan',element:<Plan />},
-    {url:'/activeplan',element:<ActivePlan />},
-    {url:'/assinged-event',element:<AssignedEvents />},
-    {url:'/event/detail/:id',element:<EventDetail />},
-    {url:'/thanku',element:<Thanku />},
-    {url:'/groupsDetail/:id',element:<Groups/>}
+    {url:'/user',element:<Users />},
+    {url:'/user/edit/:id',element:<AddEditUsers />},
+    {url:'/user/add',element:<AddEditUsers />},
   ]
 
   return (

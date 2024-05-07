@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
       }
       let browseload = localStorage.getItem('browseload')
       if (!browseload) {
-        ApiClient.get('api/user/detail', { id: user._id }).then(async res => {
+        ApiClient.get('api/user/profile', { id: user._id }).then(async res => {
           if (res.success) {
             let data = { ...user, ...res.data }
             dispatch(login_success(data))
@@ -46,7 +46,7 @@ const Layout = ({ children }) => {
   }
 
   const logowhite = () => {
-    let value = '/assets/img/fd.png'
+    let value = '/assets/img/logo.png'
     return value
   }
 

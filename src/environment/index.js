@@ -1,5 +1,5 @@
 let host = document.location.host;
-let apiUrl ='https://skillprobackend.azurewebsites.net/';
+let apiUrl ='https://stageapi.ecometrixs.com/';
 
 const environment = {
     api: apiUrl,
@@ -8,7 +8,7 @@ const environment = {
     container:'exel',
     map_api_key:'AIzaSyCbRhC6h9Pp43-5t_Knyrd_ewAdLMIJtCg',
     planTypeId:'65ead4e65cfbfd7a03ed102f',
-    apiUrl :'https://skillprobackend.azurewebsites.net/',
+    apiUrl :apiUrl,
     userRoleId:'65eac23ceac028f4dbfb1fbc',
     customerRoleId:'66026ea2f105ac23ab31e48e',
     glRoleId:'65fc4a1e2e22cff912335e12',
