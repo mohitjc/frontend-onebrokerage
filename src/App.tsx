@@ -26,6 +26,19 @@ import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
 import Users from "./Pages/Users";
 import AddEditUsers from "./Pages/Users/AddEdit";
+import Category from "./Pages/Categories";
+import AddEditCategory from "./Pages/Categories/AddEdit";
+import ViewCategory from "./Pages/Categories/View";
+import Products from "./Pages/Products";
+import AddEditProducts from "./Pages/Products/AddEdit";
+import ViewProducts from "./Pages/Products/View";
+import FAQ from "./Pages/FAQ";
+import AddEditFAQ from "./Pages/FAQ/AddEdit";
+import ViewFAQ from "./Pages/FAQ/View";
+import Content from "./Pages/Content";
+import AddEditContent from "./Pages/Content/AddEdit";
+import ViewContent from "./Pages/Content/View";
+
 const { persistor, store } = configureStoreProd();
 
 function App() {
@@ -46,6 +59,22 @@ function App() {
     { url: "/user/edit/:id", element: <AddEditUsers /> },
     { url: "/user/add", element: <AddEditUsers /> },
     { url: "/", element: <Navigate to="/login" /> },
+
+    { url: "/category", element: <Category /> },
+    { url: "/category/add", element: <AddEditCategory /> },
+    { url: "/category/detail/:id", element: <ViewCategory /> },
+    { url: "/category/edit/:id", element: <AddEditCategory /> },
+    { url: "/product", element: <Products /> },
+    { url: "/product/add", element: <AddEditProducts /> },
+    { url: "/product/detail/:id", element: <ViewProducts /> },
+    { url: "/product/edit/:id", element: <AddEditProducts /> },
+    { url: "/faq", element: <FAQ /> },
+    { url: "/faq/add", element: <AddEditFAQ /> },
+    { url: "/faq/detail/:id", element: <ViewFAQ /> },
+    { url: "/faq/edit/:id", element: <AddEditFAQ /> },
+    { url: "/content", element: <Content /> },
+    { url: "/content/detail/:slug", element: <ViewContent /> },
+    { url: "/content/edit/:slug", element: <AddEditContent /> },
   ];
 
   return (

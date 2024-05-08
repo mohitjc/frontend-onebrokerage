@@ -91,7 +91,7 @@ const Login = () => {
       ip_address: ip,
     };
 
-    let url = "api/user/login";
+    let url = "user/admin/login";
     if (step == 2) {
       url = "api/two-factor/auth";
       data = {

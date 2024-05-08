@@ -12,14 +12,16 @@ import shared from "./shared";
 import datepipeModel from "../../models/datepipemodel";
 import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
+import ImageUpload from "../../components/common/ImageUpload";
 
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
   const [form, setform] = useState({
     id: "",
-    fullName: "",
-    email: "",
+    name: "",
+    image: "",
+    type: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -32,7 +34,10 @@ const AddEdit = () => {
     // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
   ];
 
-  const timezones = timezoneModel.list;
+  const options = [
+    { id: "product", name: "Product" },
+    { id: "faq", name: "FAQ" },
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -144,68 +149,51 @@ const AddEdit = () => {
               <div className=" mb-3">
                 <FormControl
                   type="text"
-                  name="full_name"
-                  label="Full Name"
-                  value={form.fullName}
-                  onChange={(e) => setform({ ...form, fullName: e })}
+                  name="name"
+                  label="Name"
+                  value={form.name}
+                  onChange={(e) => setform({ ...form, name: e })}
                   required
                 />
               </div>
               <div className=" mb-3">
                 <FormControl
-                  type="text"
-                  name="email"
-                  label="Email"
-                  value={form.email}
-                  onChange={(e) => setform({ ...form, email: e })}
+                  type="select"
+                  name="type"
+                  label="Type"
+                  value={form.type}
+                  onChange={(e) => setform({ ...form, type: e })}
+                  options={options}
+                  theme="search"
                   required
                 />
               </div>
-              {/* <div className="mb-3">
-                <label>
-                  Mobile No<span className="star">*</span>
-                </label>
-                <PhoneInput
-                  country={"us"}
-                  value={form.phone}
-                  enableSearch={true}
-                  limitMaxLength
-                  required
-                  onChange={(e) => setform({ ...form, phone: e })}
-                  countryCodeEditable={true}
-                  minlegth="10"
+              <div className="mb-3">
+                <label className="lablefontcls">Image</label>
+                <br></br>
+                <ImageUpload
+                  model="users"
+                  result={(e) => imageResult(e, "image")}
+                  value={images.image || form.image}
+                  multiple={false}
+                  label="Choose file"
                 />
-                {submitted && getError("phone").invalid ? (
-                  <div className="invalid-feedback d-block">
-                    Min Length is 10
+                {submitted && !images.image && (
+                  <div className="text-danger small mt-1">
+                    image is required.
                   </div>
-                ) : (
-                  <></>
                 )}
-              </div> */}
-
-              {/* < div className="mb-3">
-                <FormControl
-                  type="date"
-                  name="date"
-                  label="DOB"
-                  value={datepipeModel.datetodatepicker(form.date_of_birth)}
-                  onChange={(e) => {
-                    setform({ ...form, date_of_birth: e });
-                  }}
-                  // required
-                  error={
-                    getDateErrr(form.date_of_birth) && submitted
-                      ? "Entered date is less than Current Date"
-                      : ""
-                  }
-                />
-              </div> */}
+              </div>
 
               {/* <div className="col-span-12 md:col-span-6">
-                                <label className='lablefontcls'>Image</label><br></br>
-                                <ImageUpload model="users" result={e => imageResult(e, 'image')} value={images.image || form.image} />
-                            </div> */}
+                <label className="lablefontcls">Image</label>
+                <br></br>
+                <ImageUpload
+                  model="users"
+                  result={(e) => imageResult(e, "image")}
+                  value={images.image || form.image}
+                />
+              </div> */}
             </div>
 
             <div className="text-right">

@@ -22,7 +22,7 @@ const Html = ({
       <div className="wrapper_section">
         <div className="flex items-center  justify-between">
           <h3 className="text-2xl font-semibold text-[#111827]">
-            Edit Profile{" "}
+            Edit Profile
           </h3>
         </div>
 
@@ -32,8 +32,8 @@ const Html = ({
               <FormControl
                 type="text"
                 label="First Name"
-                value={form.fullName}
-                onChange={(e) => setForm({ ...form, fullName: e })}
+                value={form.firstName}
+                onChange={(e) => setForm({ ...form, firstName: e })}
                 required
               />
             </div>
@@ -42,8 +42,8 @@ const Html = ({
               <FormControl
                 type="text"
                 label="Last Name"
-                value={form.profession}
-                onChange={(e) => setForm({ ...form, profession: e })}
+                value={form.lastName}
+                onChange={(e) => setForm({ ...form, lastName: e })}
                 required
               />
             </div>
