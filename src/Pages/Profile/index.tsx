@@ -12,7 +12,6 @@ import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
 const Profile = () => {
   const user = useSelector((state: any) => state.user);
   const [data, setData]: any = useState("");
-  console.log(data, "allGroupDetails");
   const gallaryData = () => {
     loader(true);
     ApiClient.get(`user/profile`, { id: user._id }).then((res) => {

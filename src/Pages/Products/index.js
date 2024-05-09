@@ -214,8 +214,6 @@ const Products = () => {
     }
   }, []);
 
-  console.log("data", data);
-
   return (
     <>
       <Html

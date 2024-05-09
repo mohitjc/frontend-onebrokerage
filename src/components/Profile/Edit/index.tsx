@@ -102,7 +102,6 @@ const EditProfile = () => {
   const imageResult = (e: any, key: any) => {
     images[key] = e.value;
     setImages(images);
-    console.log("imageResult", e);
   };
 
   useEffect(() => {

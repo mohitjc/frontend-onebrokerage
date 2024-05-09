@@ -90,6 +90,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/content",
       key: "",
     },
+    {
+      name: "Newsletter",
+      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      url: "/newsletter",
+      key: "",
+    },
   ];
 
   return (

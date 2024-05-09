@@ -12,7 +12,6 @@ import datepipeModel from "../../models/datepipemodel";
 import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
-import methodModel from "../../methods/methods";
 const Html = ({
   sorting,
   filter,
@@ -34,11 +33,18 @@ const Html = ({
   const user = useSelector((state) => state.user);
   const columns = [
     {
-      key: "question",
-      name: "Question",
+      key: "subject",
+      name: "Subject",
       sort: false,
       render: (row) => {
-        return <span className="capitalize">{row?.question}</span>;
+        return <span className="capitalize">{row?.subject}</span>;
+      },
+    },
+    {
+      key: "to",
+      name: "Email",
+      render: (row) => {
+        return <span className="capitalize">{row?.to}</span>;
       },
     },
     {
@@ -104,7 +110,6 @@ const Html = ({
       },
     },
   ];
-
   return (
     <Layout>
       <div className="flex flex-wrap justify-between items-center gap-y-4">
@@ -120,10 +125,7 @@ const Html = ({
 
         <a id="downloadFile"></a>
 
-        <div className="flex">
-          {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
-                        <PiFileCsv className="text-typo text-xl" />  Export CSV
-                    </button> */}
+        {/* <div className="flex">    
 
           {isAllow(`add${shared.check}`) ? (
             <Link
@@ -135,7 +137,7 @@ const Html = ({
           ) : (
             <></>
           )}
-        </div>
+        </div> */}
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
@@ -209,15 +211,6 @@ const Html = ({
               }}
               options={statusModel.list}
             />
-            {/* <SelectDropdown
-                            id="statusDropdown"
-                            displayValue="name"
-                            placeholder='All Groups'
-                            intialValue={filters.groupId}
-                            theme="search"
-                            result={e => filter({ groupId: e.value })}
-                            options={groups}
-                        /> */}
             {filters.status || filters.groupId || filters.search ? (
               <>
                 <button

@@ -50,7 +50,7 @@ const AddEdit = () => {
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || getDateErrr(form.date)) return;
+    if (invalid) return;
     let method = "post";
     let url = shared.addApi;
     let value = {
@@ -107,28 +107,6 @@ const AddEdit = () => {
       });
     }
   }, [id]);
-
-  const imageResult = (e, key) => {
-    images[key] = e.value;
-    setImages(images);
-  };
-
-  const getError = (key) => {
-    return submitted
-      ? methodModel.getError(key, form, formValidation)?.message
-      : "";
-  };
-
-  const getDateErrr = (start, end = new Date()) => {
-    let value = false;
-    if (start && end) {
-      if (new Date(start).getTime() < new Date(end).getTime()) {
-        value = true;
-      }
-    }
-
-    return value;
-  };
 
   useEffect(() => {
     getCategories();
@@ -193,32 +171,6 @@ const AddEdit = () => {
                   required
                 />
               </div>
-              {/*<div className="mb-3">
-                <label className="lablefontcls">Image</label>
-                <br></br>
-                <ImageUpload
-                  model="users"
-                  result={(e) => imageResult(e, "images")}
-                  value={images.images || form.images}
-                  multiple={true}
-                  label="Choose files"
-                />
-                  {submitted && !images.image && (
-                  <div className="text-danger small mt-1">
-                    image is required.
-                  </div>
-                )} 
-              </div>*/}
-
-              {/* <div className="col-span-12 md:col-span-6">
-                <label className="lablefontcls">Image</label>
-                <br></br>
-                <ImageUpload
-                  model="users"
-                  result={(e) => imageResult(e, "image")}
-                  value={images.image || form.image}
-                />
-              </div> */}
             </div>
 
             <div className="text-right">

@@ -14,15 +14,16 @@ import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
 
-let options = [];
 const AddEdit = () => {
-  const { id } = useParams();
-  const [images, setImages] = useState({ images: "" });
+  const { slug } = useParams();
   const [form, setform] = useState({
     id: "",
-    question: "",
-    answer: "",
-    category: "",
+    slug: "",
+    title: "",
+    description: "",
+    keywords: [],
+    meta_title: "",
+    meta_description: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -35,27 +36,16 @@ const AddEdit = () => {
     // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
   ];
 
-  const getCategories = () => {
-    ApiClient.get("category/listing").then((res) => {
-      if (res.success) {
-        options = res?.data.map(({ id, name }) => {
-          return { id: id, name: name };
-        });
-      }
-    });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || getDateErrr(form.date)) return;
+    if (invalid) return;
     let method = "post";
     let url = shared.addApi;
     let value = {
       ...form,
-      ...images,
     };
     if (value.id) {
       method = "put";
@@ -77,9 +67,9 @@ const AddEdit = () => {
   };
 
   useEffect(() => {
-    if (id) {
+    if (slug) {
       loader(true);
-      ApiClient.get(shared.detailApi, { id }).then((res) => {
+      ApiClient.get(shared.detailApi, { slug }).then((res) => {
         if (res.success) {
           let value = res.data;
           let payload = form;
@@ -88,51 +78,15 @@ const AddEdit = () => {
             payload[itm] = value[itm];
           });
 
-          if (value.category) {
-            payload.category = value.category._id;
-          }
-
-          payload.id = id;
+          payload.id = value.id;
           setform({
             ...payload,
           });
-
-          let img = images;
-          Object.keys(img).map((itm) => {
-            img[itm] = value[itm];
-          });
-          setImages({ ...img });
         }
         loader(false);
       });
     }
-  }, [id]);
-
-  const imageResult = (e, key) => {
-    images[key] = e.value;
-    setImages(images);
-  };
-
-  const getError = (key) => {
-    return submitted
-      ? methodModel.getError(key, form, formValidation)?.message
-      : "";
-  };
-
-  const getDateErrr = (start, end = new Date()) => {
-    let value = false;
-    if (start && end) {
-      if (new Date(start).getTime() < new Date(end).getTime()) {
-        value = true;
-      }
-    }
-
-    return value;
-  };
-
-  useEffect(() => {
-    getCategories();
-  }, []);
+  }, [slug]);
 
   return (
     <>
@@ -150,7 +104,6 @@ const AddEdit = () => {
               </Tooltip>
               <div>
                 <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
-                  {/* {form && form.id ? "Edit" : "Add"}  */}
                   Edit {shared.addTitle}
                 </h3>
                 <p class="text-xs lg:text-sm font-normal text-[#75757A]">
@@ -164,62 +117,59 @@ const AddEdit = () => {
               <div className=" mb-3">
                 <FormControl
                   type="text"
-                  name="question"
-                  label="Question"
-                  value={form.question}
-                  onChange={(e) => setform({ ...form, question: e })}
+                  name="title"
+                  label="Title"
+                  value={form.title}
+                  onChange={(e) => setform({ ...form, title: e })}
                   required
                 />
               </div>
 
+              <div className="col-span-2 mb-3">
+                <FormControl
+                  type="editor"
+                  name="description"
+                  label="Description"
+                  value={form.answer}
+                  onChange={(e) => setform({ ...form, description: e })}
+                  required
+                />
+              </div>
               <div className=" mb-3">
                 <FormControl
-                  type="select"
-                  name="category"
-                  label="Category"
-                  value={form.category}
-                  onChange={(e) => setform({ ...form, category: e })}
-                  options={options}
-                  theme="search"
+                  type="text"
+                  name="meta_title"
+                  label="Meta Title"
+                  value={form.title}
+                  onChange={(e) => setform({ ...form, meta_title: e })}
                   required
                 />
               </div>
               <div className="col-span-2 mb-3">
                 <FormControl
                   type="editor"
-                  name="answer"
-                  label="Answer"
-                  value={form.answer}
-                  onChange={(e) => setform({ ...form, answer: e })}
+                  name="meta_description"
+                  label="Meta Description"
+                  value={form.meta_description}
+                  onChange={(e) => setform({ ...form, meta_description: e })}
                   required
                 />
               </div>
-              {/*<div className="mb-3">
-                <label className="lablefontcls">Image</label>
-                <br></br>
-                <ImageUpload
-                  model="users"
-                  result={(e) => imageResult(e, "images")}
-                  value={images.images || form.images}
-                  multiple={true}
-                  label="Choose files"
+              <div className="col-span-2 mb-3">
+                <FormControl
+                  type="text"
+                  name="keywords"
+                  label="Keywords"
+                  value={form.keywords}
+                  onChange={(e) =>
+                    setform({
+                      ...form,
+                      keywords: e,
+                    })
+                  }
+                  required
                 />
-                  {submitted && !images.image && (
-                  <div className="text-danger small mt-1">
-                    image is required.
-                  </div>
-                )} 
-              </div>*/}
-
-              {/* <div className="col-span-12 md:col-span-6">
-                <label className="lablefontcls">Image</label>
-                <br></br>
-                <ImageUpload
-                  model="users"
-                  result={(e) => imageResult(e, "image")}
-                  value={images.image || form.image}
-                />
-              </div> */}
+              </div>
             </div>
 
             <div className="text-right">

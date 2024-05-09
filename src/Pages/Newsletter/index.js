@@ -10,7 +10,7 @@ import shared from "./shared";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
-const FAQ = () => {
+const Newsletter = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
@@ -45,6 +45,9 @@ const FAQ = () => {
   const getData = (p = {}) => {
     setLoader(true);
     let filter = { ...filters, ...p, email: user.email };
+
+    // if (user.customerRole?._id == environment.glRoleId)
+    //   filter.groupId = user.groupId?._id || "";
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
@@ -123,7 +126,6 @@ const FAQ = () => {
     if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
     let status = "active";
     if (itm.status == "active") status = "deactive";
-
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to ${
@@ -143,6 +145,11 @@ const FAQ = () => {
           }
           loader(false);
         });
+        //   Swal.fire({
+
+        //     // text: `Sucessfully ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
+        //     icon: "success"
+        //   });
       }
     });
   };
@@ -213,4 +220,4 @@ const FAQ = () => {
   );
 };
 
-export default FAQ;
+export default Newsletter;

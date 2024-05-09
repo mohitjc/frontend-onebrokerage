@@ -38,6 +38,8 @@ import ViewFAQ from "./Pages/FAQ/View";
 import Content from "./Pages/Content";
 import AddEditContent from "./Pages/Content/AddEdit";
 import ViewContent from "./Pages/Content/View";
+import Newsletter from "./Pages/Newsletter";
+import ViewNewsletter from "./Pages/Newsletter/View";
 
 const { persistor, store } = configureStoreProd();
 
@@ -75,6 +77,8 @@ function App() {
     { url: "/content", element: <Content /> },
     { url: "/content/detail/:slug", element: <ViewContent /> },
     { url: "/content/edit/:slug", element: <AddEditContent /> },
+    { url: "/newsletter", element: <Newsletter /> },
+    { url: "/newsletter/detail/:id", element: <ViewNewsletter /> },
   ];
 
   return (

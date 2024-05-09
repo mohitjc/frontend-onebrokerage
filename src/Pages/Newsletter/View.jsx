@@ -49,22 +49,18 @@ const View = () => {
               </h3>
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Question</label>
+                  <label className="profileheddingcls">Title</label>
                   <div className="profiledetailscls">
-                    {data?.question || "--"}
+                    {data?.subject || "--"}
                   </div>
                 </div>
                 <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Category</label>
-                  <div className="profiledetailscls capitalize">
-                    {data?.category.name || "--"}
-                  </div>
+                  <label className="profileheddingcls">Emails</label>
+                  <div className="profiledetailscls">{data?.to || "--"}</div>
                 </div>
-                <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Answer</label>
-                  <div className="profiledetailscls capitalize">
-                    {data?.answer || "--"}
-                  </div>
+                <div className="col-span-12 md:col-span-12">
+                  <label className="profileheddingcls">Content</label>
+                  <div className="profiledetailscls">{data?.body || "--"}</div>
                 </div>
               </div>
             </div>

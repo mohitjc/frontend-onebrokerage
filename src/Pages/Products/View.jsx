@@ -35,7 +35,6 @@ const View = () => {
   useEffect(() => {
     getDetail();
   }, []);
-  console.log("DATA", data);
 
   return (
     <>
