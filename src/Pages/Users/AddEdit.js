@@ -158,6 +158,7 @@ const AddEdit = () => {
                   value={form.email}
                   onChange={(e) => setform({ ...form, email: e })}
                   required
+                  disabled={id?true:false}
                 />
               </div>
               {/* <div className="mb-3">

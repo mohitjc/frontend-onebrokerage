@@ -67,7 +67,7 @@ const View = () => {
                 </div>
                 <div className="col-span-12 md:col-span-12">
                   <label className="profileheddingcls">Content</label>
-                  <div className="profiledetailscls">{data?.body || "--"}</div>
+                  <div className="profiledetailscls" dangerouslySetInnerHTML={{__html:data?.body|| "--"}}></div>
                 </div>
               </div>
             </div>
