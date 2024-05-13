@@ -84,7 +84,7 @@ const View = () => {
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Image</label>
                   <div className="profiledetailscls">
-                    <img src={methodModel.noImg(data?.image)} width="250" />
+                    <img src={methodModel.noImg(data?.image)} className="h-32"/>
                   </div>
                 </div>
               </div>
