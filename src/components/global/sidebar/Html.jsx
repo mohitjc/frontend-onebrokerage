@@ -191,7 +191,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                             <>
                               <Tooltip
                                 placement="top"
-                                color="#ef7a2b"
+                                color="#EB6A59"
                                 title={itm.name}
                               >
                                 <NavLink
@@ -199,7 +199,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                   className={(isActive) =>
                                     "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#fff] hover:!text-[#fff] hover:bg-[#00b884]/10 !no-underline transition-all " +
                                     (location?.pathname == itm.url &&
-                                      " !text-[#fff] !bg-[#ef7a2b] !font-medium")
+                                      " !text-[#fff] !bg-[#EB6A59] !font-medium")
                                   }
                                 >
                                   {itm.icon}
