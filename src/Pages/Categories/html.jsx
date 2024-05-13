@@ -217,6 +217,16 @@ const Html = ({
           </form>
 
           <div className="flex gap-2 ml-auto">
+          <SelectDropdown
+              id="statusDropdown"
+              displayValue="name"
+              placeholder="All Type"
+              intialValue={filters.type}
+              result={(e) => {
+                filter({type:e.value});
+              }}
+              options={shared.types}
+            />
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"
@@ -227,16 +237,7 @@ const Html = ({
               }}
               options={statusModel.list}
             />
-            {/* <SelectDropdown
-                            id="statusDropdown"
-                            displayValue="name"
-                            placeholder='All Groups'
-                            intialValue={filters.groupId}
-                            theme="search"
-                            result={e => filter({ groupId: e.value })}
-                            options={groups}
-                        /> */}
-            {filters.status || filters.groupId || filters.search ? (
+            {filters.status || filters.type || filters.search ? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
