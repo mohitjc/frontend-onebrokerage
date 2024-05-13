@@ -5,12 +5,13 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import Sidebar from '../sidebar';
 import { FiMenu, FiX, } from "react-icons/fi";
-
+import { CiSettings } from "react-icons/ci";
+import { LuLogOut, LuUser } from "react-icons/lu";
+import { RxDashboard } from "react-icons/rx";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-
 
 
 const Html = ({ isOpen, toggle, searchHandle, search, user, isOpen1, searchChange, clear, Logout }) => {
@@ -79,10 +80,10 @@ const Html = ({ isOpen, toggle, searchHandle, search, user, isOpen1, searchChang
                     to="/profile"
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm'
+                      'block px-4 py-2 text-sm flex items-center gap-2'
                     )}
                   >
-                    <i className="far fa-user mr-2" /> Profile
+                   <LuUser /> Profile
                   </Link>
                 )}
               </Menu.Item>
@@ -92,10 +93,10 @@ const Html = ({ isOpen, toggle, searchHandle, search, user, isOpen1, searchChang
                                 to="/dashboard"
                                 className={classNames(
                                   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                  'block px-4 py-2 text-sm flex align-center'
+                                  'block px-4 py-2 text-sm flex align-center flex items-center gap-2'
                                 )}
                               >
-                               <span class="material-symbols-outlined text-base middle mr-2">dashboard</span> Dashboard
+                              <RxDashboard /> Dashboard
                               </Link>
                             )}
                           </Menu.Item>
@@ -105,10 +106,11 @@ const Html = ({ isOpen, toggle, searchHandle, search, user, isOpen1, searchChang
                     to="/profile/change-password"
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm'
+                      'block px-4 py-2 text-sm flex items-center gap-2'
                     )}
                   >
-                    <i className="fa fa-cog mr-2" aria-hidden="true"></i> Change Password
+                    <CiSettings />
+                    Change Password
                   </Link>
                 )}
               </Menu.Item>
@@ -125,10 +127,10 @@ const Html = ({ isOpen, toggle, searchHandle, search, user, isOpen1, searchChang
                     onClick={() => Logout()}
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block w-full px-4 py-2 text-left text-sm ancortag'
+                      'block w-full px-4 py-2 text-left text-sm ancortag flex items-center gap-2'
                     )}
                   >
-                    <i className="fas fa-sign-out-alt mr-2" />  Logout
+                   <LuLogOut /> Logout
                   </a>
                 )}
               </Menu.Item>
