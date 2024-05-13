@@ -157,7 +157,7 @@ const Signup = () => {
       type="text"
       onChange={handleLoginIdChange}
       value={form.loginId}
-      className={`shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500 ${loginIdExists ? '' : 'border-red-500'}`}
+      className={`shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-[#EB6A59]${loginIdExists ? '' : 'border-red-500'}`}
       placeholder="Login Id"
       autoComplete="off"
       maxLength={8}

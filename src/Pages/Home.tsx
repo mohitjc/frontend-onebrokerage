@@ -341,7 +341,7 @@ const Home = () => {
                                       </div>
                                       </div>
                                       <div className="text-center">
-                                      <img src="assets/img/skill/team3.png" alt="" className="h-24 w-24 border-4 mx-auto p-1 border-orange-500 object-contain rounded-full" />
+                                      <img src="assets/img/skill/team3.png" alt="" className="h-24 w-24 border-4 mx-auto p-1 border-[#EB6A59]object-contain rounded-full" />
                                       <div className="names mt-2">
                                             <h6 className="mb-1 text-lg font-bold">Ricky Aprilia</h6>
                                             <p className="text-sm">Founder of Varibo</p>

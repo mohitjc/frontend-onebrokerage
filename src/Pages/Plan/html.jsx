@@ -260,7 +260,7 @@ const Html = ({
                             </p>
                           ) : null}
                           <button
-                            className="!px-4 bg-[#fff] text-black hover:text-black  text-typo text-sm font-normal py-2.5 flex items-center justify-center gap-2 border-orange-500  rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed w-full mt-8"
+                            className="!px-4 bg-[#fff] text-black hover:text-black  text-typo text-sm font-normal py-2.5 flex items-center justify-center gap-2 border-[#EB6A59] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed w-full mt-8"
                             disabled={getPrice(item)||item.planType=='free' ? false : true}
                             onClick={(e) => getplandetails(item)}>
                             {activeplan?.isActive ? "Upgrade" : "Get Started"}

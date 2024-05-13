@@ -17,7 +17,7 @@ const AuthLayout=({children}:any)=>{
         <div className="col-span-12 md:col-span-6 lg:col-span-6 hidden md:block">
           <div className="relative w-full h-screen">
             <img src="/assets/img/login_Img.png" alt="bg-logon" width="auto" height="auto" className=" object-center object-cover absolute inset-0 w-full h-full z-10" />
-            <div className="bg-black/30 flex flex-col justify-between h-full   py-6 px-3 xs:px-4 md:px-4  xl:px-12 xl:py-16 relative z-20">
+            <div className="flex flex-col justify-between h-full   py-6 px-3 xs:px-4 md:px-4  xl:px-12 xl:py-16 relative z-20">
               {/* <h6 className="text-lg xl:text-2xl  font-medium text-white mt-auto">Multipurpose
                 tool you need to succeed
                 in business</h6> */}
