@@ -157,7 +157,7 @@ const Signup = () => {
       type="text"
       onChange={handleLoginIdChange}
       value={form.loginId}
-      className={`shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500 ${loginIdExists ? '' : 'border-red-500'}`}
+      className={`shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-[#EB6A59]${loginIdExists ? '' : 'border-red-500'}`}
       placeholder="Login Id"
       autoComplete="off"
       maxLength={8}
@@ -233,7 +233,7 @@ const Signup = () => {
            }}
            />
            {submitted&&!form.groupId?<>
-           <div className='text-red-600 text-sm'>Group is required</div>
+           <div className='text-[#EB6A59] text-sm'>Group is required</div>
            </>:<></>}
          </div>
 </>:<></>}
@@ -244,15 +244,15 @@ const Signup = () => {
           </div>
 
           {submitted&&!remember?<>
-           <div className='text-red-600 text-sm capitalize mt-3'>Please agree our Terms Of Use And Privacy Policy</div>
+           <div className='text-[#EB6A59] text-sm capitalize mt-3'>Please agree our Terms Of Use And Privacy Policy</div>
            </>:<></>}
 
 
           <div className="mt-8">
-            <button type="submit" className="px-4 w-full text-sm font-normal text-white h-12 flex items-center justify-center gap-2 !bg-orange-500 rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed">Sign Up</button>
+            <button type="submit" className="px-4 w-full text-sm font-normal text-white h-12 flex items-center justify-center gap-2 !bg-[#EB6A59] rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed">Sign Up</button>
           </div>
 
-          <p className='text-sm mt-3 text-center'>Already have an account? <Link to="/login" className='text-orange-500 text-sm'>Sign In</Link></p>
+          <p className='text-sm mt-3 text-center'>Already have an account? <Link to="/login" className='text-[#EB6A59] text-sm'>Sign In</Link></p>
 
         </form>
       </AuthLayout>

@@ -3,10 +3,16 @@ import { Disclosure, Transition } from "@headlessui/react";
 import styles from "./index.module.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { Tooltip } from "antd";
-import { RiHome6Line } from "react-icons/ri";
+import { RiHome6Line, RiUserSettingsLine } from "react-icons/ri";
 import { TiArrowSortedDown } from "react-icons/ti";
+import { TbCategoryPlus } from "react-icons/tb";
+import { BiCartAdd } from "react-icons/bi";
+import { PiNewspaper } from "react-icons/pi";
+
+
 import { SiPlanet, SiSuperuser } from "react-icons/si";
 import {
+  MdContentPaste,
   MdEventAvailable,
   MdOutlineEmojiEvents,
   MdOutlineEventAvailable,
@@ -17,6 +23,8 @@ import { LiaHistorySolid } from "react-icons/lia";
 import environment from "../../../environment";
 import ApiClient from "../../../methods/api/apiClient";
 import { UserCircleIcon } from "@heroicons/react/20/solid";
+import { FiUsers } from "react-icons/fi";
+import { FaQuestion } from "react-icons/fa";
 
 const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
   const [activeplan, setActiveplan] = useState();
@@ -56,43 +64,43 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     },
     // {
     //   name: "Roles",
-    //   icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+    //   icon: <RiUserSettingsLine className="text-[#fff] shrink-0 text-lg" />,
     //   url: "/roles",
     //   key: "",
     // },
     {
       name: "Users",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <FiUsers className="text-[#fff] shrink-0 text-lg" />,
       url: "/user",
       key: "",
     },
     {
       name: "Categories",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <TbCategoryPlus className="text-[#fff] shrink-0 text-lg" />,
       url: "/category",
       key: "",
     },
     {
       name: "Products",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <BiCartAdd className="text-[#fff] shrink-0 text-lg" />,
       url: "/product",
       key: "",
     },
     {
       name: "FAQ",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
       url: "/faq",
       key: "",
     },
     {
       name: "Content",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
       url: "/content",
       key: "",
     },
     {
       name: "Newsletter",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
       url: "/newsletter",
       key: "",
     },

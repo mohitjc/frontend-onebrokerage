@@ -44,7 +44,7 @@ const Layout = ({ children }) => {
   };
 
   const logowhite = () => {
-    let value = "/assets/img/logo.png";
+    let value = "/assets/img/logo-white.png";
     return value;
   };
 
@@ -126,7 +126,7 @@ const Layout = ({ children }) => {
               {user?.verifiedGroupLeader != "approved" &&
               user.customerRole?._id == environment.glRoleId ? (
                 <>
-                  <div className="py-3 shadow-md mb-4 bg-gray-100 rounded-md text-red-600 mb-3 text-center">
+                  <div className="py-3 shadow-md mb-4 bg-gray-100 rounded-md text-[#EB6A59] mb-3 text-center">
                     {" "}
                     {user?.verifiedGroupLeader == "decline" ? (
                       <p className="flex items-center gap-x-2 text-lg  justify-center">
