@@ -36,7 +36,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       }
     });
   };
-  console.log(activeplan, "activeplan");
+
   const location = useLocation();
   useEffect(() => {
     if (user?.customerRole?.name === "Group Leader") {
@@ -54,12 +54,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/dashboard",
       key: "",
     },
-    {
-      name: "Roles",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
-      url: "/roles",
-      key: "",
-    },
+    // {
+    //   name: "Roles",
+    //   icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+    //   url: "/roles",
+    //   key: "",
+    // },
     {
       name: "Users",
       icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
