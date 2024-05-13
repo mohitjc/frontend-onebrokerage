@@ -8,6 +8,7 @@ import { FiMenu, FiX, } from "react-icons/fi";
 import { CiSettings } from "react-icons/ci";
 import { LuLogOut, LuUser } from "react-icons/lu";
 import { RxDashboard } from "react-icons/rx";
+import { IoSettingsOutline } from "react-icons/io5";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -109,7 +110,8 @@ const Html = ({ isOpen, toggle, searchHandle, search, user, isOpen1, searchChang
                       'block px-4 py-2 text-sm flex items-center gap-2'
                     )}
                   >
-                    <CiSettings />
+                   <IoSettingsOutline />
+
                     Change Password
                   </Link>
                 )}
