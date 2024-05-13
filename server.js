@@ -1,14 +1,14 @@
 // Get dependencies
-const express    = require('express');
-const path       = require('path');
-const http       = require('http');
-
+const express = require('express');
+const path = require('path');
+const http = require('http');
 
 const app = express();
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'build')));
-
+let url=path.join(__dirname, 'build/index.html')
+console.log("url",url)
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build/index.html'));

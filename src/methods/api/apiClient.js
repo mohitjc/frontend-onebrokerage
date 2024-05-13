@@ -5,7 +5,6 @@
  */
 
 import axios from 'axios';
-import querystring from 'querystring';
 import { setAuthorizationToken } from '../auth';
 import { toast } from 'react-toastify';
 import loader from '../loader';
@@ -49,14 +48,14 @@ function buildBlobName(file) {
 }
 
 class ApiClient {
-    static post(url1, params, base = '', hideError = false) {
+    static post(url1, payload, base = '', hideError = false) {
         let url = baseUrl + url1
         if (base) url = base + url1
 
         setAuthorizationToken(axios);
         return new Promise(function (fulfill, reject) {
             axios
-                .post(url, JSON.stringify(params), config)
+                .post(url, JSON.stringify(payload), config)
                 .then(function (response) {
                     fulfill(response && response.data);
                 })
@@ -74,13 +73,13 @@ class ApiClient {
         });
     }
 
-    static put(url1, params, base = '') {
+    static put(url1, payload, base = '') {
         let url = baseUrl + url1
         if (base) url = base + url1
         setAuthorizationToken(axios);
         return new Promise(function (fulfill, reject) {
             axios
-                .put(url, JSON.stringify(params), config)
+                .put(url, JSON.stringify(payload), config)
                 .then(function (response) {
                     fulfill(response && response.data);
                 })
@@ -102,13 +101,10 @@ class ApiClient {
 
         let url = baseUrl + url1
         if (base) url = base + url1
-
-        let query = querystring.stringify(params);
-        url = query ? `${url}?${query}` : url;
         setAuthorizationToken(axios);
         return new Promise(function (fulfill, reject) {
             axios
-                .get(url, config)
+                .get(url, {...config,params:params})
                 .then(function (response) {
                     fulfill(response && response.data);
                 })
@@ -130,12 +126,10 @@ class ApiClient {
         let url = baseUrl + url1
         if (base) url = base + url1
 
-        let query = querystring.stringify(params);
-        url = query ? `${url}?${query}` : url;
         setAuthorizationToken(axios);
         return new Promise(function (fulfill, reject) {
             axios
-                .delete(url, config)
+                .delete(url, {...config,params:params})
                 .then(function (response) {
                     fulfill(response && response.data);
                 })
