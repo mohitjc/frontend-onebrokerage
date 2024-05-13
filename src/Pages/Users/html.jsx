@@ -48,13 +48,12 @@ const Html = ({
       },
     },
     {
-      key: "phone",
-      name: "phone",
+      key: "mobileNo",
+      name: "Mobile No",
       render: (row) => {
         return (
           <>
-            {" "}
-            <p className="capitalize">{row?.phone}</p>
+            <p className="capitalize">{row?.mobileNo?'+':''}{row?.mobileNo}</p>
           </>
         );
       },

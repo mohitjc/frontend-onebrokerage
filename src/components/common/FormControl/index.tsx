@@ -4,6 +4,7 @@ import SelectDropdown from '../SelectDropdown'
 import './style.scss'
 import { Editor } from "@tinymce/tinymce-react";
 import tinymcModel from '../../../models/tinymc.model';
+import PhoneInput from 'react-phone-input-2';
 export default function FormControl({
     name,
     id = "",
@@ -78,7 +79,16 @@ export default function FormControl({
                 result={(e:any) => { onChange(e.value) }}
                 options={options}
                 disabled={disabled}
-            /> : type == 'number' ? <input
+            /> :type=='phone'?<>
+            
+            <PhoneInput
+                country={"us"}
+                value={value}
+                enableSearch={true}
+                onChange={(e) => onChange(e)}
+                countryCodeEditable={true}
+              />
+            </>: type == 'number' ? <input
                 type="text"
                 name={name}
                 className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 z-9 overflow-hidden px-2"
