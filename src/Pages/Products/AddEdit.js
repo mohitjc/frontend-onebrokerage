@@ -187,7 +187,7 @@ const AddEdit = () => {
                   result={(e) => imageResult(e, "images")}
                   value={images.images || form.images}
                   multiple={true}
-                  label="Choose files"
+                  label="Choose Images"
                 />
                 {submitted && !images.images && (
                   <div className="text-danger small mt-1">

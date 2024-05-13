@@ -59,6 +59,10 @@ const View = () => {
                                 <div className='profiledetailscls'>{data?.fullName || '--'}</div>
                             </div>
                             <div className="col-span-12 md:col-span-6">
+                                <label className="profileheddingcls">Mobile No</label>
+                                <div className='profiledetailscls'>{data?.mobileNo || '--'}</div>
+                            </div>
+                            <div className="col-span-12 md:col-span-6">
                                 <label className="profileheddingcls">Email</label>
                                 <div className='profiledetailscls'>{data?.email || '--'}</div>
                             </div>

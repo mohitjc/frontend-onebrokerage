@@ -20,6 +20,7 @@ const AddEdit = () => {
     id: "",
     fullName: "",
     email: "",
+    mobileNo:'',
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -147,6 +148,16 @@ const AddEdit = () => {
                   label="Full Name"
                   value={form.fullName}
                   onChange={(e) => setform({ ...form, fullName: e })}
+                  required
+                />
+              </div>
+              <div className=" mb-3">
+                <FormControl
+                  type="phone"
+                  name="mobileNo"
+                  label="Mobile No"
+                  value={form.mobileNo}
+                  onChange={(e) => setform({ ...form, mobileNo: e })}
                   required
                 />
               </div>
