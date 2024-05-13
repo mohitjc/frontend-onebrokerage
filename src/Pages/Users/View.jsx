@@ -66,10 +66,8 @@ const View = () => {
                                 <label className="profileheddingcls">Email</label>
                                 <div className='profiledetailscls'>{data?.email || '--'}</div>
                             </div>
-                           
                           
                         </div>
-
 
                     </div>
                 </div>

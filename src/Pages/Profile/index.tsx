@@ -55,7 +55,7 @@ const Profile = () => {
           </Link>
         </div>
 
-        <div className="inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white">
+        <div className="inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white   ">
           <div className="grid items-start grid-cols-12 gap-4">
             <div className="col-span-12 md:col-span-7 lg:col-span-7">
               <div className="flex items-start gap-4">
