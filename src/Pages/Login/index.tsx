@@ -159,7 +159,7 @@ const Login = () => {
               {/* <label><input type="checkbox" checked={remember} onChange={(e)=>setRemember(e.target.checked)} className="mr-2" /> Remember Me</label> */}
               <button
                 type="submit"
-                className="!px-4 w-full text-sm font-normal text-white h-11 flex items-center justify-center gap-2 !bg-orange-500 rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"
+                className="!px-4 w-full text-sm font-normal text-white h-11 flex items-center justify-center gap-2 !bg-[#EB6A59] rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"
               >
                 Mark Attendence
               </button>
@@ -232,7 +232,7 @@ const Login = () => {
                 <span className="text-md text-gray-600">Remember Me</span>
               </label>
               <Link
-                className="sign_up ml-auto text-orange-500"
+                className="sign_up ml-auto text-[#EB6A59]"
                 to="/forgotpassword"
               >
                 {" "}
@@ -243,12 +243,12 @@ const Login = () => {
               {/* <label><input type="checkbox" checked={remember} onChange={(e)=>setRemember(e.target.checked)} className="mr-2" /> Remember Me</label> */}
               <button
                 type="submit"
-                className="!px-4 w-full text-sm font-normal text-white h-11 flex items-center justify-center gap-2 !bg-orange-500 rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"
+                className="!px-4 w-full text-sm font-normal text-white h-11 flex items-center justify-center gap-2 !bg-[#EB6A59] rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"
               >
                 Sign in
               </button>
             </div>
-            {/* <p className='text-sm mt-3 text-center'>Don't have an account? <Link to="/signup" className='text-orange-500 text-sm'>Sign Up</Link></p> */}
+            {/* <p className='text-sm mt-3 text-center'>Don't have an account? <Link to="/signup" className='text-[#EB6A59] text-sm'>Sign Up</Link></p> */}
           </form>
         )}
       </AuthLayout>

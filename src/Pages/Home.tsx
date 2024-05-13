@@ -389,7 +389,7 @@ const Home = () => {
                     <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
                       <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-1xl md:text-2xl lg:text-3xl xl:text-5xl">
                         <span className="block xl:text-lg">Benefits</span>
-                        <span className="block text-orange-500 xl:inline">
+                        <span className="block text-[#EB6A59] xl:inline">
                           Take Professional Business Networking to New Heights
                         </span>
                       </h1>
@@ -405,7 +405,7 @@ const Home = () => {
                       <div className="relative flex flex-col sm:flex-row sm:space-x-4">
                         <a
                           href="#_"
-                          className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-orange-500 rounded-md sm:mb-0 hover:bg-orange-700 sm:w-auto"
+                          className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-[#EB6A59] rounded-md sm:mb-0 hover:bg-orange-700 sm:w-auto"
                         >
                           Try It Free
                           <svg
@@ -455,7 +455,7 @@ const Home = () => {
                       printing and typesetting industry ply dummy text of the
                       printing and typesetting industry.
                     </p>
-                    <button className="bg-orange-500 text-white	md:py-3 sm:py-2 py-2  px-12 text-base	 rounded-3xl font-bold	mt-8">
+                    <button className="bg-[#EB6A59] text-white	md:py-3 sm:py-2 py-2  px-12 text-base	 rounded-3xl font-bold	mt-8">
                       All Projects
                     </button>
                   </div>

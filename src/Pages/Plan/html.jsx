@@ -84,7 +84,7 @@ const Html = ({
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 1
-                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-orange-500 text-white"
+                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-[#EB6A59] text-white"
                   : "!text-[#667085] hover:!text-[#667085]"
                   }`}
                 onClick={(e) => changeInterval(1)}>
@@ -94,7 +94,7 @@ const Html = ({
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 3
-                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-orange-500 text-white"
+                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-[#EB6A59] text-white"
                   : "!text-[#667085] hover:!text-[#667085]"
                   }`}
                 onClick={(e) => changeInterval(3)}>
@@ -104,7 +104,7 @@ const Html = ({
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 6
-                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-orange-500 text-white"
+                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-[#EB6A59] text-white"
                   : "!text-[#667085] hover:!text-[#667085]"
                   }`}
                 onClick={(e) => changeInterval(6)}>
@@ -114,7 +114,7 @@ const Html = ({
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 12
-                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-orange-500 text-white"
+                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-[#EB6A59] text-white"
                   : "!text-[#667085] hover:!text-[#667085]"
                   }`}
                 onClick={(e) => changeInterval(12)}>
@@ -154,7 +154,7 @@ const Html = ({
                         <h2 className="text-typo text-3xl font-semibold">
                           {getPrice(item)} {currencyiso?.toUpperCase()}
                         </h2>
-                        <div className="border !border-[#E9E7FB]  !rounded-md bg-orange-500 !px-2 py-0.5 text-xs font-medium !text-[#fff]">
+                        <div className="border !border-[#E9E7FB]  !rounded-md bg-[#EB6A59] !px-2 py-0.5 text-xs font-medium !text-[#fff]">
                           0% off
                         </div>
                         <p>
@@ -197,7 +197,7 @@ const Html = ({
                                           {isChecked(item, fitm) ? (
                                             <IoCheckmarkCircle className="text-xl text-green-700" />
                                           ) : (
-                                            <IoCloseCircle className="text-xl text-red-600" />
+                                            <IoCloseCircle className="text-xl text-[#EB6A59]" />
                                           )}
                                           {/* <i class={`material-icons ${isChecked(item, fitm) ? 'text-success' : 'text-danger'} planIcon`}>{isChecked(item, fitm) ? 'check' : 'close'}</i> */}
                                       <p className="capitalize">{fitm.name}</p>    

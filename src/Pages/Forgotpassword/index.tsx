@@ -38,7 +38,7 @@ const Forgotpassword = () => {
   return (
     <>
       <AuthLayout>
-        <form className="centerLogin" onSubmit={hendleSubmit}>
+        <form className="" onSubmit={hendleSubmit}>
           <div className="text-center mb-4">
             <h3 className="text-left lgtext">Forgot Password</h3>
           </div>

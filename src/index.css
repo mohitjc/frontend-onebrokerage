@@ -25,7 +25,7 @@ background: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4); /* W3C, IE 10+
 
 button[type=submit] {
   -webkit-appearance: button;
-  background-color: #fd7838 !important;
+  background-color: #EB6A59 !important;
   background-image: none;
 }
 
