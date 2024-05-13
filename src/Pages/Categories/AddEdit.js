@@ -34,10 +34,7 @@ const AddEdit = () => {
     // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
   ];
 
-  const options = [
-    { id: "product", name: "Product" },
-    { id: "faq", name: "FAQ" },
-  ];
+  const options = shared.types
 
   const handleSubmit = (e) => {
     e.preventDefault();
