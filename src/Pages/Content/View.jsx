@@ -74,9 +74,7 @@ const View = () => {
                 </div>
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Description</label>
-                  <div className="profiledetailscls capitalize">
-                    {data?.description || "--"}
-                  </div>
+                  <div className="profiledetailscls capitalize" dangerouslySetInnerHTML={{__html:data?.description || "--"}}></div>
                 </div>
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Keywords</label>
