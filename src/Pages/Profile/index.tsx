@@ -57,28 +57,40 @@ const Profile = () => {
 
         <div className="inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white">
           <div className="grid items-start grid-cols-12 gap-4">
-            <div className="col-span-12 md:col-span-5 lg:col-span-4 lg:border--r border-dashed border-gray-400">
-              <div className="flex items-center gap-4">
+            <div className="col-span-12 md:col-span-7 lg:col-span-7">
+              <div className="flex items-start gap-4">
                 <div className="">
                   <img
                     src={methodModel.userImg(data && data.image)}
                     className="h-32 w-32 rounded-md mx-auto"
                   />
                 </div>
-                <div className="flex flex-col gap-y-4">
-                  <p className="text-sm text-gray-700 flex items-center gap-2">
-                    {" "}
-                    <LiaUserSolid className="text-xl" />
-                    {data && data.fullName}
-                  </p>
-                  <p className="text-sm text-gray-700 flex items-center gap-2">
-                    <MdOutlineEmail className="text-xl" />
+                <div className="flex flex-col gap-y-4 ml-4 lg:border-l border-dashed border-gray-400 pl-5">
+                  <div className="">
+                      <label className="text-gray-600">Name</label>
+                      <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
+                        {" "}
+                        {/* <LiaUserSolid className="text-xl" /> */}
+                        {data && data.fullName}
+                      </p>
+                  </div>
+                  <div className="">
+                  <label className="text-gray-600">Email</label>
+                  <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
+                    {/* <MdOutlineEmail className="text-xl" /> */}
                     {data && data.email}
                   </p>
-                  <p className="text-sm text-gray-700 flex items-center gap-2">
-                    <MdOutlinePhone className="text-xl" />
+                  </div>
+
+                  <div className="">
+                  <label className="text-gray-600">Phone Number</label>
+                  <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
+                    {/* <MdOutlinePhone className="text-xl" /> */}
                     {String(data.mobileNo ? "+" + data.mobileNo : "N/A")}
                   </p>
+                  </div>
+                 
+                 
                 </div>
               </div>
             </div>
