@@ -54,7 +54,7 @@ function App() {
     { url: "/profile", element: <Profile /> },
     { url: "/profile/:tab", element: <Settings /> },
     { url: "/forgotpassword", element: <Forgotpassword /> },
-    { url: "/resetpassword", element: <Resetpassword /> },
+    { url: "/reset", element: <Resetpassword /> },
     { url: "/roles", element: <Roles /> },
     { url: "/roles/add", element: <AddEditRole /> },
     { url: "/roles/edit/:id", element: <AddEditRole /> },
