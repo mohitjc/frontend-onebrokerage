@@ -130,7 +130,7 @@ const AddEdit = () => {
                   type="editor"
                   name="description"
                   label="Description"
-                  value={form.answer}
+                  value={form.description}
                   onChange={(e) => setform({ ...form, description: e })}
                   required
                 />
