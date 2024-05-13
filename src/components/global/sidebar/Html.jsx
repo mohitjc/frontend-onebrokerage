@@ -124,7 +124,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                           <Disclosure as="div" defaultOpen={tabclass(itm.tab)}>
                             {({ open }) => (
                               <>
-                                <Tooltip placement="right" title={itm.name}>
+                                <tooltip placement="right" title={itm.name}>
                                   <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#4A545E]  hover:!text-[#5577FF] gap-[12px] hover:bg-[#5577FF]/10 transition-all duration-300">
                                     <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                                       {itm.icon}
@@ -139,7 +139,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                       } h-4 w-4 transition-all duration-500  text-[#7E8B99]`}
                                     />
                                   </Disclosure.Button>
-                                </Tooltip>
+                                </tooltip>
                                 <Transition
                                   enter="transition duration-300 ease-in-out"
                                   enterFrom="transform scale-95 opacity-0"
@@ -189,7 +189,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                         <>
                           {isAllow(itm.key) ? (
                             <>
-                              <Tooltip
+                              <tooltip
                                 placement="top"
                                 color="#EB6A59"
                                 title={itm.name}
@@ -207,7 +207,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                     {itm.name}
                                   </span>
                                 </NavLink>
-                              </Tooltip>
+                              </tooltip>
                             </>
                           ) : (
                             <></>
