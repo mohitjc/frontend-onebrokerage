@@ -12,6 +12,7 @@ import datepipeModel from "../../models/datepipemodel";
 import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
+import methodModel from "../../methods/methods";
 const Html = ({
   sorting,
   filter,
@@ -33,39 +34,31 @@ const Html = ({
   const user = useSelector((state) => state.user);
   const columns = [
     {
-      key: "fullName",
-      name: "Full Name",
-      sort: true,
+      key: "name",
+      name: "Name",
+      sort: false,
       render: (row) => {
-        return <span className="capitalize">{row?.fullName}</span>;
+        return <span className="capitalize">{row?.name}</span>;
       },
     },
     {
-      key: "email",
-      name: "Email",
+      key: "typr",
+      name: "Type",
       render: (row) => {
-        return <span className="capitalize">{row?.email}</span>;
+        return <span className="capitalize">{row?.type}</span>;
       },
     },
     {
-      key: "phone",
-      name: "phone",
+      key: "image",
+      name: "Image",
       render: (row) => {
         return (
           <>
-            {" "}
-            <p className="capitalize">{row?.phone}</p>
+            <img src={methodModel.noImg(row?.image)} height={30} width={30} />
           </>
         );
       },
     },
-    /* {
-      key: "timezone",
-      name: "Timezone",
-      render: (row) => {
-        return <>{row?.timezone}</>;
-      },
-    }, */
     {
       key: "status",
       name: "Status",
@@ -129,22 +122,6 @@ const Html = ({
       },
     },
   ];
-
-  /*  const getGroups = () => {
-    let f = {
-      page: 1,
-      count: 10,
-    };
-    ApiClient.get("api/group/list", f).then((res) => {
-      if (res.success) {
-        setGroup(res.data);
-      }
-    });
-  };
- */
-  //   useEffect(() => {
-  //       getGroups()
-  //   }, [])
 
   return (
     <Layout>

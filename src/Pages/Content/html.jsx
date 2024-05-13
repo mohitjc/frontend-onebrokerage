@@ -12,6 +12,7 @@ import datepipeModel from "../../models/datepipemodel";
 import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
+import methodModel from "../../methods/methods";
 const Html = ({
   sorting,
   filter,
@@ -33,37 +34,18 @@ const Html = ({
   const user = useSelector((state) => state.user);
   const columns = [
     {
-      key: "fullName",
-      name: "Full Name",
-      sort: true,
+      key: "title",
+      name: "Title",
+      sort: false,
       render: (row) => {
-        return <span className="capitalize">{row?.fullName}</span>;
+        return <span className="capitalize">{row?.title}</span>;
       },
     },
-    {
-      key: "email",
-      name: "Email",
+    /*  {
+      key: "category",
+      name: "Type",
       render: (row) => {
-        return <span className="capitalize">{row?.email}</span>;
-      },
-    },
-    {
-      key: "phone",
-      name: "phone",
-      render: (row) => {
-        return (
-          <>
-            {" "}
-            <p className="capitalize">{row?.phone}</p>
-          </>
-        );
-      },
-    },
-    /* {
-      key: "timezone",
-      name: "Timezone",
-      render: (row) => {
-        return <>{row?.timezone}</>;
+        return <span className="capitalize">{row?.type}</span>;
       },
     }, */
     {
@@ -93,16 +75,18 @@ const Html = ({
               <Tooltip placement="top" title="View">
                 <a
                   className="border cursor-pointer border-[#ff7641] hover:opacity-70 rounded-lg bg-[#ff764114] w-10 h-10 !text-primary flex items-center justify-center text-xl"
-                  onClick={(e) => view(itm.id)}
+                  onClick={(e) => view(itm.slug)}
                 >
                   <span class="material-symbols-outlined">visibility</span>
                 </a>
               </Tooltip>
-              {isAllow(`edit${shared.check}`) && itm.addedBy == user._id ? (
+              {isAllow(
+                `edit${shared.check}`
+              ) /* && itm.addedBy == user._id  */ ? (
                 <Tooltip placement="top" title="Edit">
                   <a
                     className="border cursor-pointer border-[#ff7641] hover:opacity-70 rounded-lg bg-[#ff764114] w-10 h-10 !text-primary flex items-center justify-center text-xl"
-                    onClick={(e) => edit(itm.id)}
+                    onClick={(e) => edit(itm.slug)}
                   >
                     <FiEdit3 />
                   </a>
@@ -161,11 +145,7 @@ const Html = ({
 
         <a id="downloadFile"></a>
 
-        <div className="flex">
-          {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
-                        <PiFileCsv className="text-typo text-xl" />  Export CSV
-                    </button> */}
-
+        {/*    <div className="flex">
           {isAllow(`add${shared.check}`) ? (
             <Link
               className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
@@ -176,7 +156,7 @@ const Html = ({
           ) : (
             <></>
           )}
-        </div>
+        </div> */}
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">

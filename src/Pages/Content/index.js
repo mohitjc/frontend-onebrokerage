@@ -9,7 +9,8 @@ import axios from "axios";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
-const Users = () => {
+
+const Content = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
@@ -177,8 +178,8 @@ const Users = () => {
     history(`/${shared.url}/edit/${id}`);
   };
 
-  const view = (id) => {
-    let url = `/${shared.url}/detail/${id}`;
+  const view = (slug) => {
+    let url = `/${shared.url}/detail/${slug}`;
     history(url);
   };
 
@@ -213,6 +214,7 @@ const Users = () => {
     }
   }, []);
 
+
   return (
     <>
       <Html
@@ -239,4 +241,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Content;

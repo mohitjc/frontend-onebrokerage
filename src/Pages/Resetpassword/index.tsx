@@ -1,86 +1,91 @@
-
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ApiClient from '../../methods/api/apiClient';
-import loader from '../../methods/loader';
-import methodModel from '../../methods/methods';
-import './style.scss';
-import AuthLayout from '../../components/AuthLayout';
-import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ApiClient from "../../methods/api/apiClient";
+import loader from "../../methods/loader";
+import methodModel from "../../methods/methods";
+import "./style.scss";
+import AuthLayout from "../../components/AuthLayout";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const Resetpassword = () => {
-    const history = useNavigate();
+  const history = useNavigate();
 
-    const user = useSelector((state:any) => state.user);
-    useEffect(() => {
-        if (localStorage.getItem('token')) {
-            history('/dashboard')
-        }
-    }, [])
-
-    const formValidation = [
-        { key: 'confirmPassword', minLength: 8, confirmMatch: ['confirmPassword', 'newPassword'] },
-        { key: 'newPassword', minLength: 8 },
-    ]
-
-    const [form, setForm]:any = useState({ confirmPassword: '', newPassword: '', code: '',id:'' });
-    const [submitted, setSubmitted] = useState(false)
-    const [eyes, setEyes] = useState({ password: false, confirmPassword: false });
-
-    const getError = (key:any) => {
-        return methodModel.getError(key, form, formValidation)
+  const user = useSelector((state: any) => state.user);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      history("/dashboard");
     }
+  }, []);
 
-    useEffect(() => {
-        let prm = {
-            // email: methodModel.getPrams('email'),
-            id: methodModel.getPrams('id'),
-            code: methodModel.getPrams('code'),
-        }
+  const formValidation = [
+    {
+      key: "confirmPassword",
+      minLength: 8,
+      confirmMatch: ["confirmPassword", "newPassword"],
+    },
+    { key: "newPassword", minLength: 8 },
+  ];
 
-        setForm({ ...form, ...prm })
-    }, [])
+  const [form, setForm]: any = useState({
+    confirmPassword: "",
+    newPassword: "",
+    code: "",
+    id: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [eyes, setEyes] = useState({ password: false, confirmPassword: false });
 
-    const hendleSubmit = (e:any) => {
-        e.preventDefault();
-        setSubmitted(true)
-        let invalid = methodModel.getFormError(formValidation, form)
-        if (invalid) return
-        loader(true)
-        let payload = {
-            password: form.newPassword,
-            verificationCode: form.code,
-            id: form.id
-        }
-        ApiClient.put('api/user/reset/password', payload).then(res => {
-            if (res.success) {
-                history('/login');
-                setTimeout(() => {
-                    toast.success(res.message)
-                  }, 100);
-            }
-            loader(false)
-        })
+  const getError = (key: any) => {
+    return methodModel.getError(key, form, formValidation);
+  };
+
+  useEffect(() => {
+    let prm = {
+      // email: methodModel.getPrams('email'),
+      id: methodModel.getPrams("id"),
+      code: methodModel.getPrams("code"),
     };
 
+    setForm({ ...form, ...prm });
+  }, []);
 
-    return (
-        <>
+  const hendleSubmit = (e: any) => {
+    e.preventDefault();
+    setSubmitted(true);
+    let invalid = methodModel.getFormError(formValidation, form);
+    if (invalid) return;
+    loader(true);
+    let payload = {
+      password: form.newPassword,
+      verificationCode: form.code,
+      id: form.id,
+    };
+    ApiClient.put("user/reset/password", payload).then((res) => {
+      if (res.success) {
+        history("/login");
+        setTimeout(() => {
+          toast.success(res.message);
+        }, 100);
+      }
+      loader(false);
+    });
+  };
 
-        <AuthLayout>
-                            <form
-                                className=""
-                                onSubmit={hendleSubmit}
-                            >
-                                <div className="text-center mb-4">
-                                    <h3 className="text-left lgtext">New Password</h3>
+  return (
+    <>
+      <AuthLayout>
+        <form className="" onSubmit={hendleSubmit}>
+          <div className="text-center mb-4">
+            <h3 className="text-left lgtext">New Password</h3>
 
-                                    <p className='para_forget_new'>Please create a new password that you don’t use on any other site.</p>
-                                </div>
+            <p className="para_forget_new">
+              Please create a new password that you don’t use on any other site.
+            </p>
+          </div>
 
-                                <div className="mb-3">
-                                    {/* <div className="inputWrapper mb-3">
+          <div className="mb-3">
+            {/* <div className="inputWrapper mb-3">
                                         <label>Code</label>
                                
                                     <input
@@ -92,59 +97,83 @@ const Resetpassword = () => {
                                         required
                                     />
                                             </div> */}
-                                    {/* <label>New Password<span className="start">*</span></label> */}
+            {/* <label>New Password<span className="start">*</span></label> */}
 
-                                    <div className="mb-3">
-                                        <div className="inputWrapper">
-                                            <input
-                                                type={eyes.password ? 'text' : 'password'}
-                                                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 mb-0 bginput w-full"
-                                                value={form.newPassword}
-                                                min="12"
-                                                onChange={e => setForm({ ...form, newPassword: e.target.value })}
-                                                placeholder="New Password"
-                                                required
-                                            />
-                                            <i className={eyes.password ? 'fa fa-eye' : 'fa fa-eye-slash'} onClick={() => setEyes({ ...eyes, password: !eyes.password })}></i>
-                                        </div>
+            <div className="mb-3">
+              <div className="inputWrapper">
+                <input
+                  type={eyes.password ? "text" : "password"}
+                  className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 mb-0 bginput w-full"
+                  value={form.newPassword}
+                  min="12"
+                  onChange={(e) =>
+                    setForm({ ...form, newPassword: e.target.value })
+                  }
+                  placeholder="New Password"
+                  required
+                />
+                <i
+                  className={eyes.password ? "fa fa-eye" : "fa fa-eye-slash"}
+                  onClick={() => setEyes({ ...eyes, password: !eyes.password })}
+                ></i>
+              </div>
 
-                                        {submitted && getError('newPassword').invalid ? <div className="invalid-feedback d-block">Min Length must be 8 characters long</div> : <></>}
-                                    </div>
-                                    <div className="inputWrapper">
-                                        {/* <label>Confirm Password<span className="start">*</span></label> */}
+              {submitted && getError("newPassword").invalid ? (
+                <div className="invalid-feedback d-block">
+                  Min Length must be 8 characters long
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+            <div className="inputWrapper">
+              {/* <label>Confirm Password<span className="start">*</span></label> */}
 
-                                        <div className="inputWrapper">
-                                            <input
-                                                type={eyes.confirmPassword ? 'text' : 'password'}
-                                                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 mb-0 bginput w-full"
-                                                value={form.confirmPassword}
-                                                maxLength={50}
-                                                onChange={e => setForm({ ...form, confirmPassword: e.target.value })}
-                                                placeholder="Confirm Password"
-                                                required
-                                            />
-                                            <i className={eyes.confirmPassword ? 'fa fa-eye' : 'fa fa-eye-slash'} onClick={() => setEyes({ ...eyes, confirmPassword: !eyes.confirmPassword })}></i>
-                                        </div>
-                                        {submitted && getError('confirmPassword').err.confirmMatch ? <div className="invalid-feedback d-block">Confirm Password is not matched with New Password</div> : <></>}
-                                    </div>
-                                </div>
+              <div className="inputWrapper">
+                <input
+                  type={eyes.confirmPassword ? "text" : "password"}
+                  className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 mb-0 bginput w-full"
+                  value={form.confirmPassword}
+                  maxLength={50}
+                  onChange={(e) =>
+                    setForm({ ...form, confirmPassword: e.target.value })
+                  }
+                  placeholder="Confirm Password"
+                  required
+                />
+                <i
+                  className={
+                    eyes.confirmPassword ? "fa fa-eye" : "fa fa-eye-slash"
+                  }
+                  onClick={() =>
+                    setEyes({ ...eyes, confirmPassword: !eyes.confirmPassword })
+                  }
+                ></i>
+              </div>
+              {submitted && getError("confirmPassword").err.confirmMatch ? (
+                <div className="invalid-feedback d-block">
+                  Confirm Password is not matched with New Password
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
 
+          <div className=" mt-6">
+            <button
+              type="submit"
+              className="w-full text-white bg-orange-500   focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center  mb-4"
+            >
+              Save
+            </button>
+          </div>
 
-                                <div className=" mt-6">
-
-                                    <button type="submit" className="w-full text-white bg-orange-500   focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center  mb-4">
-                                       
-                                       Save
-                                    </button>
-                                </div>
-
-                                {/* <p className='accopuntt'> Just Remember?<a class="sign_up" href="/login"> Sign Up</a></p> */}
-                            </form>
-        </AuthLayout>
-        
-
-        </>
-    );
+          {/* <p className='accopuntt'> Just Remember?<a class="sign_up" href="/login"> Sign Up</a></p> */}
+        </form>
+      </AuthLayout>
+    </>
+  );
 };
 
 export default Resetpassword;

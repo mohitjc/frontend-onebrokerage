@@ -12,14 +12,18 @@ import shared from "./shared";
 import datepipeModel from "../../models/datepipemodel";
 import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
+import ImageUpload from "../../components/common/ImageUpload";
 
 const AddEdit = () => {
-  const { id } = useParams();
-  const [images, setImages] = useState({ image: "" });
+  const { slug } = useParams();
   const [form, setform] = useState({
     id: "",
-    fullName: "",
-    email: "",
+    slug: "",
+    title: "",
+    description: "",
+    keywords: [],
+    meta_title: "",
+    meta_description: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -32,19 +36,16 @@ const AddEdit = () => {
     // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
   ];
 
-  const timezones = timezoneModel.list;
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || getDateErrr(form.date)) return;
+    if (invalid) return;
     let method = "post";
     let url = shared.addApi;
     let value = {
       ...form,
-      ...images,
     };
     if (value.id) {
       method = "put";
@@ -66,9 +67,9 @@ const AddEdit = () => {
   };
 
   useEffect(() => {
-    if (id) {
+    if (slug) {
       loader(true);
-      ApiClient.get(shared.detailApi, { id }).then((res) => {
+      ApiClient.get(shared.detailApi, { slug }).then((res) => {
         if (res.success) {
           let value = res.data;
           let payload = form;
@@ -77,43 +78,15 @@ const AddEdit = () => {
             payload[itm] = value[itm];
           });
 
-          payload.id = id;
+          payload.id = value.id;
           setform({
             ...payload,
           });
-
-          let img = images;
-          Object.keys(img).map((itm) => {
-            img[itm] = value[itm];
-          });
-          setImages({ ...img });
         }
         loader(false);
       });
     }
-  }, [id]);
-
-  const imageResult = (e, key) => {
-    images[key] = e.value;
-    setImages(images);
-  };
-
-  const getError = (key) => {
-    return submitted
-      ? methodModel.getError(key, form, formValidation)?.message
-      : "";
-  };
-
-  const getDateErrr = (start, end = new Date()) => {
-    let value = false;
-    if (start && end) {
-      if (new Date(start).getTime() < new Date(end).getTime()) {
-        value = true;
-      }
-    }
-
-    return value;
-  };
+  }, [slug]);
 
   return (
     <>
@@ -131,7 +104,7 @@ const AddEdit = () => {
               </Tooltip>
               <div>
                 <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
-                  {form && form.id ? "Edit" : "Add"} {shared.addTitle}
+                  Edit {shared.addTitle}
                 </h3>
                 <p class="text-xs lg:text-sm font-normal text-[#75757A]">
                   Here you can see all about your {shared.addTitle}
@@ -144,68 +117,59 @@ const AddEdit = () => {
               <div className=" mb-3">
                 <FormControl
                   type="text"
-                  name="full_name"
-                  label="Full Name"
-                  value={form.fullName}
-                  onChange={(e) => setform({ ...form, fullName: e })}
+                  name="title"
+                  label="Title"
+                  value={form.title}
+                  onChange={(e) => setform({ ...form, title: e })}
+                  required
+                />
+              </div>
+
+              <div className="col-span-2 mb-3">
+                <FormControl
+                  type="editor"
+                  name="description"
+                  label="Description"
+                  value={form.answer}
+                  onChange={(e) => setform({ ...form, description: e })}
                   required
                 />
               </div>
               <div className=" mb-3">
                 <FormControl
                   type="text"
-                  name="email"
-                  label="Email"
-                  value={form.email}
-                  onChange={(e) => setform({ ...form, email: e })}
+                  name="meta_title"
+                  label="Meta Title"
+                  value={form.title}
+                  onChange={(e) => setform({ ...form, meta_title: e })}
                   required
                 />
               </div>
-              {/* <div className="mb-3">
-                <label>
-                  Mobile No<span className="star">*</span>
-                </label>
-                <PhoneInput
-                  country={"us"}
-                  value={form.phone}
-                  enableSearch={true}
-                  limitMaxLength
-                  required
-                  onChange={(e) => setform({ ...form, phone: e })}
-                  countryCodeEditable={true}
-                  minlegth="10"
-                />
-                {submitted && getError("phone").invalid ? (
-                  <div className="invalid-feedback d-block">
-                    Min Length is 10
-                  </div>
-                ) : (
-                  <></>
-                )}
-              </div> */}
-
-              {/* < div className="mb-3">
+              <div className="col-span-2 mb-3">
                 <FormControl
-                  type="date"
-                  name="date"
-                  label="DOB"
-                  value={datepipeModel.datetodatepicker(form.date_of_birth)}
-                  onChange={(e) => {
-                    setform({ ...form, date_of_birth: e });
-                  }}
-                  // required
-                  error={
-                    getDateErrr(form.date_of_birth) && submitted
-                      ? "Entered date is less than Current Date"
-                      : ""
-                  }
+                  type="editor"
+                  name="meta_description"
+                  label="Meta Description"
+                  value={form.meta_description}
+                  onChange={(e) => setform({ ...form, meta_description: e })}
+                  required
                 />
-              </div> */}
-
-              {/* <div className="col-span-12 md:col-span-6">
-                                <label className='lablefontcls'>Image</label><br></br>
-                                <ImageUpload model="users" result={e => imageResult(e, 'image')} value={images.image || form.image} />
-                            </div> */}
+              </div>
+              <div className="col-span-2 mb-3">
+                <FormControl
+                  type="text"
+                  name="keywords"
+                  label="Keywords"
+                  value={form.keywords}
+                  onChange={(e) =>
+                    setform({
+                      ...form,
+                      keywords: e,
+                    })
+                  }
+                  required
+                />
+              </div>
             </div>
 
             <div className="text-right">

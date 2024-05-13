@@ -1,14 +1,14 @@
-const shared={
-    check:'Users',
-    title:'Users',
-    addTitle:'User',
-    url:'user',
-    addApi:'api/event/create',
-    editApi:'api/event/edit',
-    detailApi:'api/event/details',
-    listApi:'api/user/group-events',
-    statusApi:'api/event/edit',
-    deleteApi:'api/event/delete'
-}
+const shared = {
+  check: "Users",
+  title: "Users",
+  addTitle: "User",
+  url: "user",
+  addApi: "user/add",
+  editApi: "user",
+  detailApi: "user",
+  listApi: "user/listing",
+  statusApi: "user/status/change",
+  deleteApi: "user/delete",
+};
 
-export default shared
+export default shared;

@@ -33,39 +33,20 @@ const Html = ({
   const user = useSelector((state) => state.user);
   const columns = [
     {
-      key: "fullName",
-      name: "Full Name",
-      sort: true,
+      key: "subject",
+      name: "Subject",
+      sort: false,
       render: (row) => {
-        return <span className="capitalize">{row?.fullName}</span>;
+        return <span className="capitalize">{row?.subject}</span>;
       },
     },
     {
-      key: "email",
+      key: "to",
       name: "Email",
       render: (row) => {
-        return <span className="capitalize">{row?.email}</span>;
+        return <span className="capitalize">{row?.to}</span>;
       },
     },
-    {
-      key: "phone",
-      name: "phone",
-      render: (row) => {
-        return (
-          <>
-            {" "}
-            <p className="capitalize">{row?.phone}</p>
-          </>
-        );
-      },
-    },
-    /* {
-      key: "timezone",
-      name: "Timezone",
-      render: (row) => {
-        return <>{row?.timezone}</>;
-      },
-    }, */
     {
       key: "status",
       name: "Status",
@@ -129,23 +110,6 @@ const Html = ({
       },
     },
   ];
-
-  /*  const getGroups = () => {
-    let f = {
-      page: 1,
-      count: 10,
-    };
-    ApiClient.get("api/group/list", f).then((res) => {
-      if (res.success) {
-        setGroup(res.data);
-      }
-    });
-  };
- */
-  //   useEffect(() => {
-  //       getGroups()
-  //   }, [])
-
   return (
     <Layout>
       <div className="flex flex-wrap justify-between items-center gap-y-4">
@@ -161,10 +125,7 @@ const Html = ({
 
         <a id="downloadFile"></a>
 
-        <div className="flex">
-          {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
-                        <PiFileCsv className="text-typo text-xl" />  Export CSV
-                    </button> */}
+        {/* <div className="flex">    
 
           {isAllow(`add${shared.check}`) ? (
             <Link
@@ -176,7 +137,7 @@ const Html = ({
           ) : (
             <></>
           )}
-        </div>
+        </div> */}
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
@@ -250,15 +211,6 @@ const Html = ({
               }}
               options={statusModel.list}
             />
-            {/* <SelectDropdown
-                            id="statusDropdown"
-                            displayValue="name"
-                            placeholder='All Groups'
-                            intialValue={filters.groupId}
-                            theme="search"
-                            result={e => filter({ groupId: e.value })}
-                            options={groups}
-                        /> */}
             {filters.status || filters.groupId || filters.search ? (
               <>
                 <button
