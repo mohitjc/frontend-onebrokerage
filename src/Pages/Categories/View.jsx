@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import shared from "./shared";
 import loader from "../../methods/loader";
 import { Tooltip } from "antd";
+import methodModel from "../../methods/methods";
 
 const View = () => {
   const [host, setHost] = useState();
@@ -78,6 +79,12 @@ const View = () => {
                   <label className="profileheddingcls">Type</label>
                   <div className="profiledetailscls capitalize">
                     {data?.type || "--"}
+                  </div>
+                </div>
+                <div className="col-span-12 md:col-span-6">
+                  <label className="profileheddingcls">Image</label>
+                  <div className="profiledetailscls">
+                    <img src={methodModel.noImg(data?.image)} width="250" />
                   </div>
                 </div>
               </div>

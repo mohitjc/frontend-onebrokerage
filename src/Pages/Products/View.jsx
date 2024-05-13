@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import shared from "./shared";
 import loader from "../../methods/loader";
 import { Tooltip } from "antd";
+import methodModel from "../../methods/methods";
 
 const View = () => {
   const [host, setHost] = useState();
@@ -75,8 +76,18 @@ const View = () => {
                 </div>
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Description</label>
-                  <div className="profiledetailscls capitalize">
-                    {data?.description || "--"}
+                  <div className="profiledetailscls capitalize" dangerouslySetInnerHTML={{__html:data?.description || "--"}}>
+                  </div>
+                </div>
+                <div className="col-span-full">
+                  <label className="profileheddingcls">Images</label>
+                  <div className="flex gap-2 flex-wrap items-center">
+                    {data.images.map(itm=>{
+                      return <>
+                       <img src={methodModel.noImg(itm)} width="140" />
+                      </>
+                    })}
+                   
                   </div>
                 </div>
               </div>

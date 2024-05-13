@@ -69,7 +69,7 @@ const View = () => {
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Answer</label>
                   <div className="profiledetailscls capitalize">
-                    {data?.answer || "--"}
+                    <div className="profiledetailscls capitalize" dangerouslySetInnerHTML={{__html:data?.answer || "--"}}></div>
                   </div>
                 </div>
               </div>
