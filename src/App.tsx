@@ -25,6 +25,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
 import Users from "./Pages/Users";
+import UserDetail from "./Pages/Users/View";
 import AddEditUsers from "./Pages/Users/AddEdit";
 import Category from "./Pages/Categories";
 import AddEditCategory from "./Pages/Categories/AddEdit";
@@ -53,13 +54,14 @@ function App() {
     { url: "/profile", element: <Profile /> },
     { url: "/profile/:tab", element: <Settings /> },
     { url: "/forgotpassword", element: <Forgotpassword /> },
-    { url: "/resetpassword", element: <Resetpassword /> },
+    { url: "/reset", element: <Resetpassword /> },
     { url: "/roles", element: <Roles /> },
     { url: "/roles/add", element: <AddEditRole /> },
     { url: "/roles/edit/:id", element: <AddEditRole /> },
     { url: "/user", element: <Users /> },
     { url: "/user/edit/:id", element: <AddEditUsers /> },
     { url: "/user/add", element: <AddEditUsers /> },
+    { url: "/user/detail/:id", element: <UserDetail /> },
     { url: "/", element: <Navigate to="/login" /> },
 
     { url: "/category", element: <Category /> },

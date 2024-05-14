@@ -56,7 +56,7 @@ const Html = ({
           <>
             <div className="w-32" onClick={() => statusChange(row)}>
               <Tooltip placement="top" title="Active / Inactive">
-                <span className="bg-[#EEE] text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize">
+                <span className="bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize">
                   {row.status == "deactive" ? "inactive" : "active"}
                 </span>
               </Tooltip>
@@ -74,7 +74,7 @@ const Html = ({
             <div className="flex items-center justify-start gap-1.5">
               <Tooltip placement="top" title="View">
                 <a
-                  className="border cursor-pointer border-[#ff7641] hover:opacity-70 rounded-lg bg-[#ff764114] w-10 h-10 !text-primary flex items-center justify-center text-xl"
+                  className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
                   onClick={(e) => view(itm.slug)}
                 >
                   <span class="material-symbols-outlined">visibility</span>
@@ -85,7 +85,7 @@ const Html = ({
               ) /* && itm.addedBy == user._id  */ ? (
                 <Tooltip placement="top" title="Edit">
                   <a
-                    className="border cursor-pointer border-[#ff7641] hover:opacity-70 rounded-lg bg-[#ff764114] w-10 h-10 !text-primary flex items-center justify-center text-xl"
+                    className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
                     onClick={(e) => edit(itm.slug)}
                   >
                     <FiEdit3 />
@@ -184,7 +184,7 @@ const Html = ({
                 onChange={(e) => {
                   setFilter({ ...filters, search: e.target.value });
                 }}
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
                 placeholder="Search"
                 required
               />
@@ -198,7 +198,7 @@ const Html = ({
             </div>
             <button
               type="submit"
-              class="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-orange-500  focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              class="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               <svg
                 class="w-4 h-4"

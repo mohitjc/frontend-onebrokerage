@@ -144,7 +144,7 @@ const AddEdit = () => {
               </div>
             </div>
 
-            <h3 className="ViewUser mb-3"></h3>
+            
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className=" mb-3">
                 <FormControl
@@ -187,7 +187,7 @@ const AddEdit = () => {
                   result={(e) => imageResult(e, "images")}
                   value={images.images || form.images}
                   multiple={true}
-                  label="Choose files"
+                  label="Choose Images"
                 />
                 {submitted && !images.images && (
                   <div className="text-danger small mt-1">
@@ -200,7 +200,7 @@ const AddEdit = () => {
             <div className="text-right">
               <button
                 type="submit"
-                className="text-white bg-orange-400 bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                className="text-white bg-[#EB6A59] bg-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
               >
                 Save
               </button>

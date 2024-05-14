@@ -3,10 +3,16 @@ import { Disclosure, Transition } from "@headlessui/react";
 import styles from "./index.module.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { Tooltip } from "antd";
-import { RiHome6Line } from "react-icons/ri";
+import { RiHome6Line, RiUserSettingsLine } from "react-icons/ri";
 import { TiArrowSortedDown } from "react-icons/ti";
+import { TbCategoryPlus } from "react-icons/tb";
+import { BiCartAdd } from "react-icons/bi";
+import { PiNewspaper } from "react-icons/pi";
+
+
 import { SiPlanet, SiSuperuser } from "react-icons/si";
 import {
+  MdContentPaste,
   MdEventAvailable,
   MdOutlineEmojiEvents,
   MdOutlineEventAvailable,
@@ -17,6 +23,8 @@ import { LiaHistorySolid } from "react-icons/lia";
 import environment from "../../../environment";
 import ApiClient from "../../../methods/api/apiClient";
 import { UserCircleIcon } from "@heroicons/react/20/solid";
+import { FiUsers } from "react-icons/fi";
+import { FaQuestion } from "react-icons/fa";
 
 const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
   const [activeplan, setActiveplan] = useState();
@@ -36,7 +44,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       }
     });
   };
-  console.log(activeplan, "activeplan");
+
   const location = useLocation();
   useEffect(() => {
     if (user?.customerRole?.name === "Group Leader") {
@@ -54,45 +62,45 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/dashboard",
       key: "",
     },
-    {
-      name: "Roles",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
-      url: "/roles",
-      key: "",
-    },
+    // {
+    //   name: "Roles",
+    //   icon: <RiUserSettingsLine className="text-[#fff] shrink-0 text-lg" />,
+    //   url: "/roles",
+    //   key: "",
+    // },
     {
       name: "Users",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <FiUsers className="text-[#fff] shrink-0 text-lg" />,
       url: "/user",
       key: "",
     },
     {
       name: "Categories",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <TbCategoryPlus className="text-[#fff] shrink-0 text-lg" />,
       url: "/category",
       key: "",
     },
     {
       name: "Products",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <BiCartAdd className="text-[#fff] shrink-0 text-lg" />,
       url: "/product",
       key: "",
     },
     {
       name: "FAQ",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
       url: "/faq",
       key: "",
     },
     {
       name: "Content",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
       url: "/content",
       key: "",
     },
     {
       name: "Newsletter",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
       url: "/newsletter",
       key: "",
     },
@@ -116,7 +124,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                           <Disclosure as="div" defaultOpen={tabclass(itm.tab)}>
                             {({ open }) => (
                               <>
-                                <Tooltip placement="right" title={itm.name}>
+                                <tooltip placement="right" title={itm.name}>
                                   <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#4A545E]  hover:!text-[#5577FF] gap-[12px] hover:bg-[#5577FF]/10 transition-all duration-300">
                                     <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                                       {itm.icon}
@@ -131,7 +139,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                       } h-4 w-4 transition-all duration-500  text-[#7E8B99]`}
                                     />
                                   </Disclosure.Button>
-                                </Tooltip>
+                                </tooltip>
                                 <Transition
                                   enter="transition duration-300 ease-in-out"
                                   enterFrom="transform scale-95 opacity-0"
@@ -181,9 +189,9 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                         <>
                           {isAllow(itm.key) ? (
                             <>
-                              <Tooltip
+                              <tooltip
                                 placement="top"
-                                color="#ef7a2b"
+                                color="#EB6A59"
                                 title={itm.name}
                               >
                                 <NavLink
@@ -191,7 +199,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                   className={(isActive) =>
                                     "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#fff] hover:!text-[#fff] hover:bg-[#00b884]/10 !no-underline transition-all " +
                                     (location?.pathname == itm.url &&
-                                      " !text-[#fff] !bg-[#ef7a2b] !font-medium")
+                                      " !text-[#fff] !bg-[#EB6A59] !font-medium")
                                   }
                                 >
                                   {itm.icon}
@@ -199,7 +207,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                     {itm.name}
                                   </span>
                                 </NavLink>
-                              </Tooltip>
+                              </tooltip>
                             </>
                           ) : (
                             <></>

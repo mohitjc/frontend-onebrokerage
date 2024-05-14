@@ -265,7 +265,7 @@ console.log(user,"useruseruseruseruseruseruseruseruseruseruser")
                             <input type="email" placeholder="Enter Your Mail" className="bg-white opacity-100 placeholder:text-white py-3 px-2 mt-4 rounded pl-12 text-white w-full"/>
                         </div>
                        <div className=" w-full ">
-                       <button className="bg-orange-500 text-white	py-3 px-8 text-base	 w-full text-sm rounded flex items-center	mt-8">Subscribe Now  <img
+                       <button className="bg-[#EB6A59] text-white	py-3 px-8 text-base	 w-full text-sm rounded flex items-center	mt-8">Subscribe Now  <img
                             className="ms-4	"
                             src="assets/img/skill/plane.svg "
                             alt=""

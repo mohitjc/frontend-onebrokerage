@@ -4,6 +4,7 @@ import SelectDropdown from '../SelectDropdown'
 import './style.scss'
 import { Editor } from "@tinymce/tinymce-react";
 import tinymcModel from '../../../models/tinymc.model';
+import PhoneInput from 'react-phone-input-2';
 export default function FormControl({
     name,
     id = "",
@@ -23,6 +24,7 @@ export default function FormControl({
     min='',
     className='',
     value,
+    disabled=false,
     theme=''
 }:any) {
 
@@ -76,7 +78,17 @@ export default function FormControl({
                 theme={theme}
                 result={(e:any) => { onChange(e.value) }}
                 options={options}
-            /> : type == 'number' ? <input
+                disabled={disabled}
+            /> :type=='phone'?<>
+            
+            <PhoneInput
+                country={"us"}
+                value={value}
+                enableSearch={true}
+                onChange={(e) => onChange(e)}
+                countryCodeEditable={true}
+              />
+            </>: type == 'number' ? <input
                 type="text"
                 name={name}
                 className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 z-9 overflow-hidden px-2"
@@ -86,6 +98,7 @@ export default function FormControl({
                 maxLength={maxlength}
                 minLength={minlength}
                 min={min}
+                disabled={disabled}
                 onChange={e => onChange(methodModel.isNumber(e))}
             /> : type=='badge'?<>
             <div className='flex'>
@@ -94,9 +107,10 @@ export default function FormControl({
                 className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
                 placeholder={placeholder}
                 value={text}
+                disabled={disabled}
                 onChange={e => setText(e.target.value)}
             />
-            <button type='button' className='btn btn-primary ml-2' onClick={add}>Add</button>
+            <button type='button' className='btn btn-primary ml-2' disabled={disabled} onClick={add}>Add</button>
             </div>
             <div className=''>
                 {value?.map((itm:any,i:any)=>{
@@ -114,7 +128,7 @@ export default function FormControl({
                                     <input type="radio"
                                         checked={value == itm.id ? true : false}
                                         onChange={e => onChange(itm.id)}
-                                        className="mr-2" name={name} />
+                                        className="mr-2" name={name} disabled={disabled} />
                                     {itm.name}</label></div>
                             })}
                             </div>
@@ -125,6 +139,7 @@ export default function FormControl({
                             onEditorChange={(newValue, editor) => {
                               onChange(newValue)
                             }}
+                            disabled={disabled}
                             apiKey={tinymcModel.apiKey}
                             init={{
                             //   selector: "textarea#autocompleter-cardmenuitem",
@@ -152,6 +167,7 @@ export default function FormControl({
                 maxLength={maxlength}
                 minLength={minlength}
                 min={min}
+                disabled={disabled}
                 onChange={e => {
                     console.log("e",e.target)
                     onChange(e.target.value)
