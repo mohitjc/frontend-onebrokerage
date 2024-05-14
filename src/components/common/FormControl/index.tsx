@@ -60,9 +60,9 @@ export default function FormControl({
     }
 
     return <>
-        <div className="formWrapper mb-6 relative">
+        <div className="formWrapper   mb-6 relative">
             {label ? <>
-                <label className='text-sm'>{label} {required ? <><span className="star">*</span></> : <></>}</label>
+                <label className='text-sm '>{label} {required ? <><span className="star">*</span></> : <></>}</label>
             </> : <></>}
 
             {type == 'select' ? <SelectDropdown

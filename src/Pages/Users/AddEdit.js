@@ -151,7 +151,7 @@ const AddEdit = () => {
                   required
                 />
               </div>
-              <div className=" mb-3">
+              <div className="mobile_number mb-3">
                 <FormControl
                   type="phone"
                   name="mobileNo"
