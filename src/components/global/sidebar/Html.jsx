@@ -9,7 +9,6 @@ import { TbCategoryPlus } from "react-icons/tb";
 import { BiCartAdd } from "react-icons/bi";
 import { PiNewspaper } from "react-icons/pi";
 
-
 import { SiPlanet, SiSuperuser } from "react-icons/si";
 import {
   MdContentPaste,
@@ -62,12 +61,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/dashboard",
       key: "",
     },
-    // {
-    //   name: "Roles",
-    //   icon: <RiUserSettingsLine className="text-[#fff] shrink-0 text-lg" />,
-    //   url: "/roles",
-    //   key: "",
-    // },
+    {
+      name: "Questions",
+      icon: <RiUserSettingsLine className="text-[#fff] shrink-0 text-lg" />,
+      url: "/question",
+      key: "",
+    },
     {
       name: "Users",
       icon: <FiUsers className="text-[#fff] shrink-0 text-lg" />,
