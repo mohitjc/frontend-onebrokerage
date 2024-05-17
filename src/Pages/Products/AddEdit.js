@@ -56,7 +56,7 @@ const AddEdit = () => {
     }
     ApiClient.get("category/listing",f).then((res) => {
       if (res.success) {
-        options = res?.data.map(({ id, name }) => {
+        let options = res?.data.map(({ id, name }) => {
           return { id: id, name: name };
         });
         setSubcategory(options)
@@ -146,7 +146,7 @@ const AddEdit = () => {
 
   useEffect(()=>{
     if(form.category){
-      getSubCategories({category:form.category})
+      getSubCategories({parent_category:form.category})
     }
   },[form.category])
 
