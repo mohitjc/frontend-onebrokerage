@@ -44,6 +44,9 @@ import ViewNewsletter from "./Pages/Newsletter/View";
 import Questions from "./Pages/Questions";
 import AddEditQuestion from "./Pages/Questions/AddEdit";
 import ViewQuestion from "./Pages/Questions/View";
+import Tags from "./Pages/Tags";
+import AddEditTag from "./Pages/Tags/AddEdit";
+import ViewTag from "./Pages/Tags/View";
 
 const { persistor, store } = configureStoreProd();
 
@@ -88,6 +91,10 @@ function App() {
     { url: "/question/add", element: <AddEditQuestion /> },
     { url: "/question/detail/:id", element: <ViewQuestion /> },
     { url: "/question/edit/:id", element: <AddEditQuestion /> },
+    { url: "/tag", element: <Tags /> },
+    { url: "/tag/add", element: <AddEditTag /> },
+    { url: "/tag/detail/:id", element: <ViewTag /> },
+    { url: "/tag/edit/:id", element: <AddEditTag /> },
   ];
 
   return (

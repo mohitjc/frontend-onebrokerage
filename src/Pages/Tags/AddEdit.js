@@ -14,23 +14,17 @@ import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
 
-let options = [];
-let productTypeoptions=[{ id: "therapeutic", name: "Therapeutic Benefits" },
-{ id: "health", name: "Health Benefits" },]
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ images: "" });
   const [form, setform] = useState({
     id: "",
     name: "",
-    description: "",
-    category: "",
-    sub_category:'',
-    product_type:''
+    type: "",
+    images: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
-  const [subcategory, setSubcategory] = useState([]);
   const user = useSelector((state) => state.user);
   const formValidation = [
     /*  { key: "status", required: true },
@@ -39,30 +33,6 @@ const AddEdit = () => {
     { key: "description", required: true, message: "Description is required" }, */
     // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
   ];
-
-  const getCategories = () => {
-    ApiClient.get("category/listing").then((res) => {
-      if (res.success) {
-        options = res?.data.map(({ id, name }) => {
-          return { id: id, name: name };
-        });
-      }
-    });
-  };
-
-  const getSubCategories = (p={}) => {
-    let f={
-      ...p,
-    }
-    ApiClient.get("category/listing",f).then((res) => {
-      if (res.success) {
-        options = res?.data.map(({ id, name }) => {
-          return { id: id, name: name };
-        });
-        setSubcategory(options)
-      }
-    });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,12 +45,7 @@ const AddEdit = () => {
     let value = {
       ...form,
       ...images,
-      category:form.category||null,
-      sub_category:form.sub_category||null,
     };
-
-    
-
     if (value.id) {
       method = "put";
       url = shared.editApi;
@@ -112,9 +77,9 @@ const AddEdit = () => {
             payload[itm] = value[itm];
           });
 
-          if (payload.category?._id) payload.category = payload.category._id;
-          if (payload.sub_category?._id) payload.sub_category = payload.sub_category._id;
-          
+          if (value.category) {
+            payload.category = value.category._id;
+          }
 
           payload.id = id;
           setform({
@@ -140,15 +105,10 @@ const AddEdit = () => {
     }
   };
 
-  useEffect(() => {
-    getCategories();
-  }, []);
-
-  useEffect(()=>{
-    if(form.category){
-      getSubCategories({category:form.category})
-    }
-  },[form.category])
+  const options = [
+    { id: "therapeutic", name: "Therapeutic Benefits" },
+    { id: "health", name: "Health Benefits" },
+  ];
 
   return (
     <>
@@ -189,57 +149,16 @@ const AddEdit = () => {
               <div className=" mb-3">
                 <FormControl
                   type="select"
-                  name="category"
-                  label="Category"
-                  value={form.category}
-                  onChange={(e) => {
-                    setform({ ...form, category: e })
-                  }}
+                  name="type"
+                  label="Type"
+                  value={form.type}
+                  onChange={(e) => setform({ ...form, type: e })}
                   options={options}
                   theme="search"
                   required
                 />
               </div>
-              {form.category?<>
-                <div className=" mb-3">
-                <FormControl
-                  type="select"
-                  name="Sub category"
-                  label="Sub category"
-                  value={form.sub_category}
-                  onChange={(e) => setform({ ...form, sub_category: e })}
-                  options={subcategory}
-                  theme="search"
-                  
-                />
-              </div>
-              </>:<></>}
 
-              <div className=" mb-3">
-                <FormControl
-                  type="select"
-                  name="product_type"
-                  label="Product Type"
-                  value={form.product_type}
-                  onChange={(e) =>
-                    setform({ ...form, product_type: e.toString() })
-                  }
-                  options={productTypeoptions}
-                  theme="search"
-                  required
-                />
-              </div>
-              
-              <div className="col-span-2 mb-3">
-                <FormControl
-                  type="editor"
-                  name="description"
-                  label="Description"
-                  value={form.description}
-                  onChange={(e) => setform({ ...form, description: e })}
-                  required
-                />
-              </div>
               <div className="mb-3">
                 <label className="lablefontcls">Image</label>
                 <br></br>
