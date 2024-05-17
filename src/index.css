@@ -37,3 +37,19 @@ button[type=submit] {
    
   z-index: 1;
 }
+
+
+
+.profiledetailscls {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e1d1d;
+}
+
+
+label.profileheddingcls {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: #767676;
+}

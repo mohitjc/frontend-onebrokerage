@@ -59,7 +59,7 @@ export default function FormControl({
 
   return (
     <>
-      <div className="formWrapper mb-6 relative">
+      <div className="formWrapper  relative">
         {label ? (
           <>
             <label className="text-sm">

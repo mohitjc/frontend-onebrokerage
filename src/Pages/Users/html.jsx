@@ -12,6 +12,8 @@ import datepipeModel from "../../models/datepipemodel";
 import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
+import { PiEyeLight } from "react-icons/pi";
+import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 const Html = ({
   sorting,
   filter,
@@ -72,11 +74,11 @@ const Html = ({
         return (
           <>
             <div className="w-32" onClick={() => statusChange(row)}>
-              <Tooltip placement="top" title="Active / Inactive">
-                <span className="bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize">
-                  {row.status == "deactive" ? "inactive" : "active"}
-                </span>
-              </Tooltip>
+            <span 
+              className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                          ${row.status == "deactive" ? " bg-red-500 text-white" : "bg-green-500 text-white"}`}>
+              {row.status == "deactive" ? "inactive" : "active"}
+            </span>
             </div>
           </>
         );
@@ -91,19 +93,19 @@ const Html = ({
             <div className="flex items-center justify-start gap-1.5">
               <Tooltip placement="top" title="View">
                 <a
-                  className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
+                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                   onClick={(e) => view(itm.id)}
                 >
-                  <span class="material-symbols-outlined">visibility</span>
+                 <PiEyeLight />
                 </a>
               </Tooltip>
               {isAllow(`edit${shared.check}`) && itm.addedBy == user._id ? (
                 <Tooltip placement="top" title="Edit">
                   <a
-                    className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) => edit(itm.id)}
                   >
-                    <FiEdit3 />
+                   <LiaEdit />
                   </a>
                 </Tooltip>
               ) : (
@@ -113,10 +115,10 @@ const Html = ({
                 <Tooltip placement="top" title="Delete">
                   {" "}
                   <span
-                    className="border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl "
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={() => deleteItem(itm.id)}
                   >
-                    <BsTrash3 />
+                    <LiaTrashAlt />
                   </span>{" "}
                 </Tooltip>
               ) : (
