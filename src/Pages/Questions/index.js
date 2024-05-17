@@ -9,9 +9,8 @@ import axios from "axios";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import SweetAlert from "../../components/SweetAlert/SweetAlert";
 
-const Category = () => {
+const Questions = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
@@ -45,7 +44,10 @@ const Category = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p, email: user.email };
+    let filter = { ...filters, ...p };
+
+    // if (user.customerRole?._id == environment.glRoleId)
+    //   filter.groupId = user.groupId?._id || "";
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
@@ -63,7 +65,7 @@ const Category = () => {
 
   const clear = () => {
     let f = {
-      type: "",
+      groupId: "",
       search: "",
       status: "",
       page: 1,
@@ -238,4 +240,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default Questions;

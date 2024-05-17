@@ -12,8 +12,7 @@ import datepipeModel from "../../models/datepipemodel";
 import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
-import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
-import { PiEyeLight } from "react-icons/pi";
+import methodModel from "../../methods/methods";
 const Html = ({
   sorting,
   filter,
@@ -35,20 +34,31 @@ const Html = ({
   const user = useSelector((state) => state.user);
   const columns = [
     {
-      key: "subject",
-      name: "Subject",
+      key: "title",
+      name: "Title",
       sort: false,
       render: (row) => {
-        return <span className="capitalize">{row?.subject}</span>;
+        return <span className="capitalize">{row?.title}</span>;
       },
     },
     {
-      key: "to",
-      name: "Email",
+      key: "question",
+      name: "Question",
       render: (row) => {
-        return <span className="capitalize">{row?.to}</span>;
+        return <span className="capitalize">{row?.question}</span>;
       },
     },
+    /*    {
+      key: "image",
+      name: "Image",
+      render: (row) => {
+        return (
+          <>
+            <img src={methodModel.noImg(row?.image)} height={30} width={30} />
+          </>
+        );
+      },
+    }, 
     {
       key: "status",
       name: "Status",
@@ -56,16 +66,16 @@ const Html = ({
         return (
           <>
             <div className="w-32" onClick={() => statusChange(row)}>
-            <span 
-              className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-                          ${row.status == "deactive" ? " bg-red-500 text-white" : "bg-green-500 text-white"}`}>
-              {row.status == "deactive" ? "inactive" : "active"}
-            </span>
+              <Tooltip placement="top" title="Active / Inactive">
+                <span className="bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize">
+                  {row.status == "deactive" ? "inactive" : "active"}
+                </span>
+              </Tooltip>
             </div>
           </>
         );
       },
-    },
+    },*/
     {
       key: "action",
       name: "Action",
@@ -75,43 +85,60 @@ const Html = ({
             <div className="flex items-center justify-start gap-1.5">
               <Tooltip placement="top" title="View">
                 <a
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                  className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
                   onClick={(e) => view(itm.id)}
                 >
-                   <PiEyeLight />
+                  <span class="material-symbols-outlined">visibility</span>
                 </a>
               </Tooltip>
-              {isAllow(`edit${shared.check}`) && itm.addedBy == user._id ? (
+              {/* {isAllow(`edit${shared.check}`) && itm.addedBy == user._id ? (
                 <Tooltip placement="top" title="Edit">
                   <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
                     onClick={(e) => edit(itm.id)}
                   >
-                    <LiaEdit />
+                    <FiEdit3 />
                   </a>
                 </Tooltip>
               ) : (
                 <></>
-              )}
+              )} 
               {isAllow(`delete${shared.check}`) && itm.addedBy == user._id ? (
                 <Tooltip placement="top" title="Delete">
                   {" "}
                   <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg "
+                    className="border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl "
                     onClick={() => deleteItem(itm.id)}
                   >
-                    <LiaTrashAlt />
+                    <BsTrash3 />
                   </span>{" "}
                 </Tooltip>
               ) : (
                 <></>
-              )}
+              )}*/}
             </div>
           </>
         );
       },
     },
   ];
+
+  /*  const getGroups = () => {
+    let f = {
+      page: 1,
+      count: 10,
+    };
+    ApiClient.get("api/group/list", f).then((res) => {
+      if (res.success) {
+        setGroup(res.data);
+      }
+    });
+  };
+ */
+  //   useEffect(() => {
+  //       getGroups()
+  //   }, [])
+
   return (
     <Layout>
       <div className="flex flex-wrap justify-between items-center gap-y-4">
@@ -127,9 +154,12 @@ const Html = ({
 
         <a id="downloadFile"></a>
 
-        {/* <div className="flex">    
+        <div className="flex">
+          {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
+                        <PiFileCsv className="text-typo text-xl" />  Export CSV
+                    </button> */}
 
-          {isAllow(`add${shared.check}`) ? (
+          {/*    {isAllow(`add${shared.check}`) ? (
             <Link
               className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
               to={`/${shared.url}/add`}
@@ -138,8 +168,8 @@ const Html = ({
             </Link>
           ) : (
             <></>
-          )}
-        </div> */}
+          )} */}
+        </div>
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
@@ -203,7 +233,7 @@ const Html = ({
           </form>
 
           <div className="flex gap-2 ml-auto">
-            <SelectDropdown
+            {/* <SelectDropdown
               id="statusDropdown"
               displayValue="name"
               placeholder="All Status"
@@ -212,7 +242,16 @@ const Html = ({
                 changestatus(e.value);
               }}
               options={statusModel.list}
-            />
+            /> */}
+            {/* <SelectDropdown
+                            id="statusDropdown"
+                            displayValue="name"
+                            placeholder='All Groups'
+                            intialValue={filters.groupId}
+                            theme="search"
+                            result={e => filter({ groupId: e.value })}
+                            options={groups}
+                        /> */}
             {filters.status || filters.groupId || filters.search ? (
               <>
                 <button

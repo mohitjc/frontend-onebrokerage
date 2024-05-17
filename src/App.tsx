@@ -41,6 +41,9 @@ import AddEditContent from "./Pages/Content/AddEdit";
 import ViewContent from "./Pages/Content/View";
 import Newsletter from "./Pages/Newsletter";
 import ViewNewsletter from "./Pages/Newsletter/View";
+import Questions from "./Pages/Questions";
+import AddEditQuestion from "./Pages/Questions/AddEdit";
+import ViewQuestion from "./Pages/Questions/View";
 
 const { persistor, store } = configureStoreProd();
 
@@ -81,6 +84,10 @@ function App() {
     { url: "/content/edit/:slug", element: <AddEditContent /> },
     { url: "/newsletter", element: <Newsletter /> },
     { url: "/newsletter/detail/:id", element: <ViewNewsletter /> },
+    { url: "/question", element: <Questions /> },
+    { url: "/question/add", element: <AddEditQuestion /> },
+    { url: "/question/detail/:id", element: <ViewQuestion /> },
+    { url: "/question/edit/:id", element: <AddEditQuestion /> },
   ];
 
   return (
