@@ -39,7 +39,7 @@ const AddEdit = () => {
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || !images.images) return;
+    if (invalid) return;
     let method = "post";
     let url = shared.addApi;
     let value = {
@@ -159,7 +159,7 @@ const AddEdit = () => {
                 />
               </div>
 
-              <div className="mb-3">
+              {/*   <div className="mb-3">
                 <label className="lablefontcls">Image</label>
                 <br></br>
                 <ImageUpload
@@ -174,7 +174,7 @@ const AddEdit = () => {
                     image is required.
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
 
             <div className="text-right">

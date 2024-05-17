@@ -54,7 +54,18 @@ const Html = ({
       key: "sub_category_detail",
       name: "Sub Category",
       render: (row) => {
-        return <span className="capitalize">{row?.sub_category_detail?.name||'--'}</span>;
+        return (
+          <span className="capitalize">
+            {row?.sub_category_detail?.name || "--"}
+          </span>
+        );
+      },
+    },
+    {
+      key: "product_type",
+      name: "Product Type",
+      render: (row) => {
+        return <span className="capitalize">{row?.product_type || "--"}</span>;
       },
     },
     /*    {
@@ -75,11 +86,16 @@ const Html = ({
         return (
           <>
             <div className="w-32" onClick={() => statusChange(row)}>
-            <span 
-              className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-                          ${row.status == "deactive" ? " bg-red-500 text-white" : "bg-green-500 text-white"}`}>
-              {row.status == "deactive" ? "inactive" : "active"}
-            </span>
+              <span
+                className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                          ${
+                            row.status == "deactive"
+                              ? " bg-red-500 text-white"
+                              : "bg-green-500 text-white"
+                          }`}
+              >
+                {row.status == "deactive" ? "inactive" : "active"}
+              </span>
             </div>
           </>
         );
