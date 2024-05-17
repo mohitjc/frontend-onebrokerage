@@ -15,8 +15,10 @@ import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
 
 let options = [];
-let productTypeoptions=[{ id: "therapeutic", name: "Therapeutic Benefits" },
-{ id: "health", name: "Health Benefits" },]
+let productTypeoptions = [
+  { id: "therapeutic", name: "Therapeutic Benefits" },
+  { id: "health", name: "Health Benefits" },
+];
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ images: "" });
@@ -25,9 +27,10 @@ const AddEdit = () => {
     name: "",
     description: "",
     category: "",
-    sub_category:'',
-    product_type:''
+    sub_category: "",
+    product_type: "",
   });
+
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [subcategory, setSubcategory] = useState([]);
@@ -50,16 +53,16 @@ const AddEdit = () => {
     });
   };
 
-  const getSubCategories = (p={}) => {
-    let f={
+  const getSubCategories = (p = {}) => {
+    let f = {
       ...p,
-    }
-    ApiClient.get("category/listing",f).then((res) => {
+    };
+    ApiClient.get("category/listing", f).then((res) => {
       if (res.success) {
         let options = res?.data.map(({ id, name }) => {
           return { id: id, name: name };
         });
-        setSubcategory(options)
+        setSubcategory(options);
       }
     });
   };
@@ -75,11 +78,9 @@ const AddEdit = () => {
     let value = {
       ...form,
       ...images,
-      category:form.category||null,
-      sub_category:form.sub_category||null,
+      category: form.category || null,
+      sub_category: form.sub_category || null,
     };
-
-    
 
     if (value.id) {
       method = "put";
@@ -113,8 +114,8 @@ const AddEdit = () => {
           });
 
           if (payload.category?._id) payload.category = payload.category._id;
-          if (payload.sub_category?._id) payload.sub_category = payload.sub_category._id;
-          
+          if (payload.sub_category?._id)
+            payload.sub_category = payload.sub_category._id;
 
           payload.id = id;
           setform({
@@ -140,6 +141,7 @@ const AddEdit = () => {
     }
   };
 
+
   useEffect(() => {
     getCategories();
   }, []);
@@ -148,7 +150,7 @@ const AddEdit = () => {
     if(form.category){
       getSubCategories({parent_category:form.category})
     }
-  },[form.category])
+  }, [form.category]);
 
   return (
     <>
@@ -193,27 +195,30 @@ const AddEdit = () => {
                   label="Category"
                   value={form.category}
                   onChange={(e) => {
-                    setform({ ...form, category: e })
+                    setform({ ...form, category: e });
                   }}
                   options={options}
                   theme="search"
                   required
                 />
               </div>
-              {form.category?<>
-                <div className=" mb-3">
-                <FormControl
-                  type="select"
-                  name="Sub category"
-                  label="Sub category"
-                  value={form.sub_category}
-                  onChange={(e) => setform({ ...form, sub_category: e })}
-                  options={subcategory}
-                  theme="search"
-                  
-                />
-              </div>
-              </>:<></>}
+              {form.category ? (
+                <>
+                  <div className=" mb-3">
+                    <FormControl
+                      type="select"
+                      name="Sub category"
+                      label="Sub category"
+                      value={form.sub_category}
+                      onChange={(e) => setform({ ...form, sub_category: e })}
+                      options={subcategory}
+                      theme="search"
+                    />
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
 
               <div className=" mb-3">
                 <FormControl
@@ -229,7 +234,7 @@ const AddEdit = () => {
                   required
                 />
               </div>
-              
+
               <div className="col-span-2 mb-3">
                 <FormControl
                   type="editor"

@@ -51,13 +51,14 @@ const ImageUpload = ({
   };
 
   const remove = (index) => {
-    loader(true);
-    ApiClient.azureBlobDelete({ fileName: value }).then((res) => {
-      loader(false);
-      inputElement.current.value = "";
+    if (multiple) {
+      let images = img.filter((itm, idx) => idx !== index);
+      result({ event: "remove", value: images });
+      setImg(images);
+    } else {
       result({ event: "remove", value: "" });
       setImg("");
-    });
+    }
   };
 
   useEffect(() => {
