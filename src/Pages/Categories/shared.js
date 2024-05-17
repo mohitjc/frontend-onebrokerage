@@ -1,14 +1,14 @@
-const types=[
+const types = [
   { id: "product", name: "Product" },
   { id: "faq", name: "FAQ" },
-]
+];
 
 const shared = {
-  check: "Catgories",
-  title: "Catgories",
+  check: "Categories",
+  title: "Categories",
   addTitle: "Category",
   url: "category",
-  types:[...types],
+  types: [...types],
   addApi: "category/add",
   editApi: "category/update",
   detailApi: "category/detail",

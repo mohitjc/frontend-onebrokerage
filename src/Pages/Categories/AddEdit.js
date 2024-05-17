@@ -14,6 +14,8 @@ import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
 
+let categoryOptions;
+
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
@@ -21,6 +23,14 @@ const AddEdit = () => {
     id: "",
     name: "",
     image: "",
+    type: "",
+    parent_category: null,
+  });
+
+  const [filters, setFilters] = useState({
+    page: 1,
+    count: 10,
+    search: "",
     type: "",
   });
   const history = useNavigate();
@@ -34,7 +44,17 @@ const AddEdit = () => {
     // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
   ];
 
-  const options = shared.types
+  const options = shared.types;
+
+  const getCategoriesList = () => {
+    ApiClient.get(shared.listApi, filters).then((res) => {
+      if (res.success) {
+        categoryOptions = res.data.map(({ id, name }) => {
+          return { id: id, name: name };
+        });
+      }
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -103,6 +123,10 @@ const AddEdit = () => {
     }
   };
 
+  useEffect(() => {
+    getCategoriesList();
+  }, []);
+
   return (
     <>
       <Layout>
@@ -145,10 +169,24 @@ const AddEdit = () => {
                   name="type"
                   label="Type"
                   value={form.type}
-                  onChange={(e) => setform({ ...form, type: e })}
+                  onChange={(e) => {
+                    setform({ ...form, type: e });
+                    setFilters({ ...filters, type: e });
+                  }}
                   options={options}
                   theme="search"
                   required
+                />
+              </div>
+              <div className=" mb-3">
+                <FormControl
+                  type="select"
+                  name="type"
+                  label="Category"
+                  value={form.parent_category}
+                  onChange={(e) => setform({ ...form, parent_category: e })}
+                  options={categoryOptions}
+                  theme="search"
                 />
               </div>
               <div className="mb-3">
