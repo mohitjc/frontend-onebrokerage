@@ -42,26 +42,10 @@ const Html = ({
       },
     },
     {
-      key: "category_detail",
-      name: "Category",
+      key: "type",
+      name: "Type",
       render: (row) => {
-        return <span className="capitalize">{row?.category_detail.name}</span>;
-      },
-    },
-    {
-      key: "product_type",
-      name: "Product Type",
-      sort: false,
-      render: (row) => {
-        return <span className="capitalize">{row?.product_type}</span>;
-      },
-    },
-    {
-      key: "sub_category",
-      name: "Sub Category",
-      sort: false,
-      render: (row) => {
-        return <span className="capitalize">{row?.sub_category}</span>;
+        return <span className="capitalize">{row?.type}</span>;
       },
     },
     /*    {
@@ -107,31 +91,25 @@ const Html = ({
                   <span class="material-symbols-outlined">visibility</span>
                 </a>
               </Tooltip>
-              {isAllow(`edit${shared.check}`) && itm.addedBy == user._id ? (
-                <Tooltip placement="top" title="Edit">
-                  <a
-                    className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
-                    onClick={(e) => edit(itm.id)}
-                  >
-                    <FiEdit3 />
-                  </a>
-                </Tooltip>
-              ) : (
-                <></>
-              )}
-              {isAllow(`delete${shared.check}`) && itm.addedBy == user._id ? (
-                <Tooltip placement="top" title="Delete">
-                  {" "}
-                  <span
-                    className="border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl "
-                    onClick={() => deleteItem(itm.id)}
-                  >
-                    <BsTrash3 />
-                  </span>{" "}
-                </Tooltip>
-              ) : (
-                <></>
-              )}
+
+              <Tooltip placement="top" title="Edit">
+                <a
+                  className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
+                  onClick={(e) => edit(itm.id)}
+                >
+                  <FiEdit3 />
+                </a>
+              </Tooltip>
+
+              <Tooltip placement="top" title="Delete">
+                {" "}
+                <span
+                  className="border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl "
+                  onClick={() => deleteItem(itm.id)}
+                >
+                  <BsTrash3 />
+                </span>
+              </Tooltip>
             </div>
           </>
         );

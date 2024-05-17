@@ -103,6 +103,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/newsletter",
       key: "",
     },
+    {
+      name: "Tags",
+      icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
+      url: "/tag",
+      key: "",
+    },
   ];
 
   return (
