@@ -14,11 +14,11 @@ import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
 
-let categoryOptions;
 
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
+  const [categoryOptions, setCategories] = useState([]);
   const [form, setform] = useState({
     id: "",
     name: "",
@@ -46,12 +46,16 @@ const AddEdit = () => {
 
   const options = shared.types;
 
-  const getCategoriesList = () => {
-    ApiClient.get(shared.listApi, filters).then((res) => {
+  const getCategoriesList = (p={}) => {
+    let f={
+      ...p,
+    }
+    ApiClient.get(shared.listApi, f).then((res) => {
       if (res.success) {
-        categoryOptions = res.data.map(({ id, name }) => {
+        let categoryOptions = res.data.map(({ id, name }) => {
           return { id: id, name: name };
         });
+        setCategories(categoryOptions)
       }
     });
   };
@@ -72,8 +76,6 @@ const AddEdit = () => {
       method = "put";
       url = shared.editApi;
     } else {
-      value.addedBy = user._id;
-      value.groupId = user?.groupId?._id;
       delete value.id;
     }
 
@@ -100,6 +102,7 @@ const AddEdit = () => {
           });
 
           payload.id = id;
+          if(payload.parent_category?._id) payload.parent_category=payload.parent_category?._id
           setform({
             ...payload,
           });
@@ -124,8 +127,8 @@ const AddEdit = () => {
   };
 
   useEffect(() => {
-    getCategoriesList();
-  }, []);
+    getCategoriesList({type:form.type});
+  }, [form.type]);
 
   return (
     <>
@@ -170,8 +173,7 @@ const AddEdit = () => {
                   label="Type"
                   value={form.type}
                   onChange={(e) => {
-                    setform({ ...form, type: e });
-                    setFilters({ ...filters, type: e });
+                    setform({ ...form, type: e, parent_category:''});
                   }}
                   options={options}
                   theme="search"
@@ -182,10 +184,13 @@ const AddEdit = () => {
                 <FormControl
                   type="select"
                   name="type"
-                  label="Category"
+                  label="Parent Category"
                   value={form.parent_category}
                   onChange={(e) => setform({ ...form, parent_category: e })}
-                  options={categoryOptions}
+                  options={[
+                    {name:'Set as Parent',id:''},
+                    ...categoryOptions
+                  ]}
                   theme="search"
                 />
               </div>

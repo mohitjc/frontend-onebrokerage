@@ -44,10 +44,17 @@ const Html = ({
       },
     },
     {
-      key: "typr",
+      key: "type",
       name: "Type",
       render: (row) => {
         return <span className="capitalize">{row?.type}</span>;
+      },
+    },
+    {
+      key: "parent_category_detail",
+      name: "Parent Category",
+      render: (row) => {
+        return <span className="capitalize">{row?.parent_category_detail?.name||'--'}</span>;
       },
     },
     {

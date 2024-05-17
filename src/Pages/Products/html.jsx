@@ -50,6 +50,13 @@ const Html = ({
         return <span className="capitalize">{row?.category_detail.name}</span>;
       },
     },
+    {
+      key: "sub_category_detail",
+      name: "Sub Category",
+      render: (row) => {
+        return <span className="capitalize">{row?.sub_category_detail?.name||'--'}</span>;
+      },
+    },
     /*    {
       key: "image",
       name: "Image",
