@@ -102,8 +102,6 @@ const AddEdit = () => {
     }
   }, [id]);
 
-  console.log("HERE", form.options);
-
   return (
     <>
       <Layout>
