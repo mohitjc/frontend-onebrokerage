@@ -48,6 +48,7 @@ const AddEdit = () => {
   const getCategoriesList = (p = {}) => {
     let f = {
       ...p,
+      category_type: "master",
     };
     ApiClient.get(shared.listApi, f).then((res) => {
       if (res.success) {
