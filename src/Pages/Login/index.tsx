@@ -166,10 +166,16 @@ const Login = () => {
             </div>
           </form>
         ) : (
-          <form onSubmit={hendleSubmit}>
-            <h4 className="text-typo mb-6 text-2xl font-medium">Sign in</h4>
+          <form className="w-7/12	mx-auto" onSubmit={hendleSubmit}>
+           <div className="">
+              <h1 className="text-[40px] font-semibold text-white ">Sign In</h1>
+              <span className="flex w-10 h-1 bg-[#EB6A59] mt-1"></span>
+            </div>
+            <p className="text-[20px] font-normal text-white mt-4">
+              Please enter your valid details
+            </p>
             {step == 1 ? (
-              <>
+              <div className="mt-5">
                 <input
                   type="text"
                   className="shadow-box bg-white mb-6 w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
@@ -204,7 +210,7 @@ const Login = () => {
                     />
                   )}
                 </div>
-              </>
+              </div>
             ) : (
               <>
                 <p className="mb-2">OTP sent on email</p>
@@ -221,7 +227,7 @@ const Login = () => {
               </>
             )}
 
-            <div className="flex">
+<div className="flex">
               <label className="flex items-center pointer">
                 <input
                   type="checkbox"
@@ -229,21 +235,22 @@ const Login = () => {
                   onChange={(e) => setRemember(e.target.checked)}
                   className="mr-2 h-4 w-4"
                 />{" "}
-                <span className="text-md text-gray-600">Remember Me</span>
+                <span className="text-[14px] font-normal text-white">
+                  Remember Me
+                </span>
               </label>
               <Link
-                className="sign_up ml-auto text-[#EB6A59]"
+                className="font-semibold  text-[14px] ml-auto text-[#EB6A59]"
                 to="/forgotpassword"
               >
                 {" "}
                 Forgot Password
               </Link>
             </div>
-            <div className="mt-8">
-              {/* <label><input type="checkbox" checked={remember} onChange={(e)=>setRemember(e.target.checked)} className="mr-2" /> Remember Me</label> */}
+            <div className="mt-8 flex items-center justify-center">
               <button
                 type="submit"
-                className="!px-4 w-full text-sm font-normal text-white h-11 flex items-center justify-center gap-2 !bg-[#EB6A59] rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"
+                className="h-11 rounded-full w-52 font-semibold text-center text-white   hover:opacity-80 transition-all "
               >
                 Sign in
               </button>

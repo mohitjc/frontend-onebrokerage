@@ -18,7 +18,7 @@ import {
 } from "react-icons/md";
 import { LuUser2 } from "react-icons/lu";
 import { CiSettings } from "react-icons/ci";
-import { LiaHistorySolid } from "react-icons/lia";
+import { LiaHistorySolid, LiaUserTagSolid } from "react-icons/lia";
 import environment from "../../../environment";
 import ApiClient from "../../../methods/api/apiClient";
 import { UserCircleIcon } from "@heroicons/react/20/solid";
@@ -105,7 +105,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     },
     {
       name: "Tags",
-      icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
+      icon: <LiaUserTagSolid className="text-[#fff] shrink-0 text-lg" />,
       url: "/tag",
       key: "",
     },
