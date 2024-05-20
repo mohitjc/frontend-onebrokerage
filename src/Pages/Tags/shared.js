@@ -7,7 +7,7 @@ const shared = {
   editApi: "tag/update",
   detailApi: "tag/detail",
   listApi: "tag/list",
-  statusApi: "tag/status/change",
+  statusApi: "tag/status",
   deleteApi: "tag/delete",
 };
 
