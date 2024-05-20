@@ -38,19 +38,23 @@ const Forgotpassword = () => {
   return (
     <>
       <AuthLayout>
-        <form className="" onSubmit={hendleSubmit}>
-          <div className="text-center mb-4">
-            <h3 className="text-left lgtext">Forgot Password</h3>
+      <form className="w-7/12	mx-auto" onSubmit={hendleSubmit}>
+          <div className="">
+            <h1 className="text-[40px] font-semibold text-white">
+              Forgot Passowrd
+            </h1>
+            <span className="flex w-10 h-1 bg-[#EB6A59] mt-1"></span>
           </div>
-          <p className="para_forget">
+          <p className="text-[20px] font-normal text-white mt-4">
+            {" "}
             No worries! Just enter your email and we’ll send you a reset
             password link.
           </p>
-          <div className="mb-3">
+          <div className=" mt-5">
             <div className="inputWrapper">
               <input
                 type="email"
-                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2  mb-0 bginput w-full"
+                className="mb-4 w-full text-sm text-white  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
                 placeholder="Email*"
                 value={form.email}
                 required
@@ -59,19 +63,22 @@ const Forgotpassword = () => {
             </div>
           </div>
 
-          <div className="buttons">
+          <div className="flex items-center justify-center mt-6">
             <button
               type="submit"
-              className="w-full text-white bg-[#EB6A59] bg-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center loginclass mb-4"
+              className="h-11 rounded-full w-52 text-center text-white bg-[#EB6A59]  font-semibold hover:opacity-80 transition-all"
             >
               Send Recovery Email
             </button>
           </div>
 
-          <p className="accopuntt mt-0">
+          <p className="text-white text-center font-normal text-[14px] mt-4">
             {" "}
             Just Remember?
-            <Link className="sign_up" to="/login">
+            <Link
+              className="text-[#EB6A59] text-[14px] !font-semibold"
+              to="/login"
+            >
               {" "}
               Sign In
             </Link>
