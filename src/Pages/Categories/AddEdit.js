@@ -14,7 +14,6 @@ import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
 
-
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
@@ -46,16 +45,17 @@ const AddEdit = () => {
 
   const options = shared.types;
 
-  const getCategoriesList = (p={}) => {
-    let f={
+  const getCategoriesList = (p = {}) => {
+    let f = {
       ...p,
-    }
+      category_type: "master",
+    };
     ApiClient.get(shared.listApi, f).then((res) => {
       if (res.success) {
         let categoryOptions = res.data.map(({ id, name }) => {
           return { id: id, name: name };
         });
-        setCategories(categoryOptions)
+        setCategories(categoryOptions);
       }
     });
   };
@@ -102,7 +102,8 @@ const AddEdit = () => {
           });
 
           payload.id = id;
-          if(payload.parent_category?._id) payload.parent_category=payload.parent_category?._id
+          if (payload.parent_category?._id)
+            payload.parent_category = payload.parent_category?._id;
           setform({
             ...payload,
           });
@@ -127,7 +128,7 @@ const AddEdit = () => {
   };
 
   useEffect(() => {
-    getCategoriesList({type:form.type});
+    getCategoriesList({ type: form.type });
   }, [form.type]);
 
   return (
@@ -173,27 +174,29 @@ const AddEdit = () => {
                   label="Type"
                   value={form.type}
                   onChange={(e) => {
-                    setform({ ...form, type: e, parent_category:''});
+                    setform({ ...form, type: e, parent_category: "" });
                   }}
                   options={options}
                   theme="search"
                   required
                 />
               </div>
-              <div className=" mb-3">
-                <FormControl
-                  type="select"
-                  name="type"
-                  label="Parent Category"
-                  value={form.parent_category}
-                  onChange={(e) => setform({ ...form, parent_category: e })}
-                  options={[
-                    {name:'Set as Parent',id:''},
-                    ...categoryOptions
-                  ]}
-                  theme="search"
-                />
-              </div>
+              {form.type && (
+                <div className=" mb-3">
+                  <FormControl
+                    type="select"
+                    name="type"
+                    label="Parent Category"
+                    value={form.parent_category}
+                    onChange={(e) => setform({ ...form, parent_category: e })}
+                    options={[
+                      { name: "Set as Parent", id: "" },
+                      ...categoryOptions,
+                    ]}
+                    theme="search"
+                  />
+                </div>
+              )}
               <div className="mb-3">
                 <label className="lablefontcls">Image</label>
                 <br></br>

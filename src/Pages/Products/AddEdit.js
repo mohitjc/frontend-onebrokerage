@@ -43,8 +43,12 @@ const AddEdit = () => {
     // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
   ];
 
-  const getCategories = () => {
-    ApiClient.get("category/listing").then((res) => {
+  const getCategories = (p = {}) => {
+    let f = {
+      ...p,
+      type: "product",
+    };
+    ApiClient.get("category/listing", f).then((res) => {
       if (res.success) {
         options = res?.data.map(({ id, name }) => {
           return { id: id, name: name };
@@ -56,6 +60,7 @@ const AddEdit = () => {
   const getSubCategories = (p = {}) => {
     let f = {
       ...p,
+      type: "product",
     };
     ApiClient.get("category/listing", f).then((res) => {
       if (res.success) {
@@ -141,14 +146,13 @@ const AddEdit = () => {
     }
   };
 
-
   useEffect(() => {
     getCategories();
   }, []);
 
-  useEffect(()=>{
-    if(form.category){
-      getSubCategories({parent_category:form.category})
+  useEffect(() => {
+    if (form.category) {
+      getSubCategories({ parent_category: form.category });
     }
   }, [form.category]);
 
