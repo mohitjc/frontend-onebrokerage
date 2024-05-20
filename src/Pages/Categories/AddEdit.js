@@ -26,8 +26,6 @@ const AddEdit = () => {
     parent_category: "null",
   });
 
-  console.log("FORM", form);
-
   const [filters, setFilters] = useState({
     page: 1,
     count: 10,
