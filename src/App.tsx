@@ -60,7 +60,7 @@ function App() {
     { url: "/profile", element: <Profile /> },
     { url: "/profile/:tab", element: <Settings /> },
     { url: "/forgotpassword", element: <Forgotpassword /> },
-    { url: "/reset", element: <Resetpassword /> },
+    { url: "/resetpassword", element: <Resetpassword /> },
     { url: "/roles", element: <Roles /> },
     { url: "/roles/add", element: <AddEditRole /> },
     { url: "/roles/edit/:id", element: <AddEditRole /> },

@@ -23,8 +23,10 @@ const AddEdit = () => {
     name: "",
     image: "",
     type: "",
-    parent_category: null,
+    parent_category: "null",
   });
+
+  console.log("FORM", form);
 
   const [filters, setFilters] = useState({
     page: 1,
@@ -48,7 +50,6 @@ const AddEdit = () => {
   const getCategoriesList = (p = {}) => {
     let f = {
       ...p,
-      category_type: "master",
     };
     ApiClient.get(shared.listApi, f).then((res) => {
       if (res.success) {
@@ -71,7 +72,7 @@ const AddEdit = () => {
     let value = {
       ...form,
       ...images,
-      parent_category: null,
+      parent_category: !form.parent_category ? null : form.parent_category,
     };
     if (value.id) {
       method = "put";

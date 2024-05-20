@@ -47,6 +47,7 @@ const AddEdit = () => {
     let f = {
       ...p,
       type: "product",
+      category_type: "master",
     };
     ApiClient.get("category/listing", f).then((res) => {
       if (res.success) {
@@ -196,7 +197,7 @@ const AddEdit = () => {
                 <FormControl
                   type="select"
                   name="category"
-                  label="Category"
+                  label="Parent Category"
                   value={form.category}
                   onChange={(e) => {
                     setform({ ...form, category: e });

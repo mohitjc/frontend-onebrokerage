@@ -62,7 +62,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       key: "",
     },
     {
-      name: "Questions",
+      name: "Onboarding Questions",
       icon: <RiUserSettingsLine className="text-[#fff] shrink-0 text-lg" />,
       url: "/question",
       key: "",
