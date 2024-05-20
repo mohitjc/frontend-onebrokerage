@@ -71,6 +71,7 @@ const AddEdit = () => {
     let value = {
       ...form,
       ...images,
+      parent_category: null,
     };
     if (value.id) {
       method = "put";

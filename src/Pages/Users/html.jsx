@@ -55,7 +55,10 @@ const Html = ({
       render: (row) => {
         return (
           <>
-            <p className="capitalize">{row?.mobileNo?'+':''}{row?.mobileNo}</p>
+            <p className="capitalize">
+              {row?.mobileNo ? "+" : ""}
+              {row?.mobileNo}
+            </p>
           </>
         );
       },
@@ -74,11 +77,16 @@ const Html = ({
         return (
           <>
             <div className="w-32" onClick={() => statusChange(row)}>
-            <span 
-              className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-                          ${row.status == "deactive" ? " bg-red-500 text-white" : "bg-green-500 text-white"}`}>
-              {row.status == "deactive" ? "inactive" : "active"}
-            </span>
+              <span
+                className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                          ${
+                            row.status == "deactive"
+                              ? " bg-red-500 text-white"
+                              : "bg-green-500 text-white"
+                          }`}
+              >
+                {row.status == "deactive" ? "inactive" : "active"}
+              </span>
             </div>
           </>
         );
@@ -96,34 +104,27 @@ const Html = ({
                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                   onClick={(e) => view(itm.id)}
                 >
-                 <PiEyeLight />
+                  <PiEyeLight />
                 </a>
               </Tooltip>
-              {isAllow(`edit${shared.check}`) && itm.addedBy == user._id ? (
-                <Tooltip placement="top" title="Edit">
-                  <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => edit(itm.id)}
-                  >
-                   <LiaEdit />
-                  </a>
-                </Tooltip>
-              ) : (
-                <></>
-              )}
-              {isAllow(`delete${shared.check}`) && itm.addedBy == user._id ? (
-                <Tooltip placement="top" title="Delete">
-                  {" "}
-                  <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={() => deleteItem(itm.id)}
-                  >
-                    <LiaTrashAlt />
-                  </span>{" "}
-                </Tooltip>
-              ) : (
-                <></>
-              )}
+              <Tooltip placement="top" title="Edit">
+                <a
+                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                  onClick={(e) => edit(itm.id)}
+                >
+                  <LiaEdit />
+                </a>
+              </Tooltip>
+
+              <Tooltip placement="top" title="Delete">
+                {" "}
+                <span
+                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                  onClick={() => deleteItem(itm.id)}
+                >
+                  <LiaTrashAlt />
+                </span>{" "}
+              </Tooltip>
             </div>
           </>
         );
