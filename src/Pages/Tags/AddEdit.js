@@ -16,12 +16,12 @@ import ImageUpload from "../../components/common/ImageUpload";
 
 const AddEdit = () => {
   const { id } = useParams();
-  const [images, setImages] = useState({ images: "" });
+  const [images, setImages] = useState({ image: "" });
   const [form, setform] = useState({
     id: "",
     name: "",
     type: "",
-    images: "",
+    image: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -159,22 +159,22 @@ const AddEdit = () => {
                 />
               </div>
 
-              {/*   <div className="mb-3">
+              <div className="mb-3">
                 <label className="lablefontcls">Image</label>
                 <br></br>
                 <ImageUpload
                   model="users"
-                  result={(e) => imageResult(e, "images")}
-                  value={images.images || form.images}
-                  multiple={true}
+                  result={(e) => imageResult(e, "image")}
+                  value={images.image || form.image}
+                  multiple={false}
                   label="Choose Images"
                 />
-                {submitted && !images.images && (
+                {/* {submitted && !images.images && (
                   <div className="text-danger small mt-1">
                     image is required.
                   </div>
-                )}
-              </div> */}
+                )} */}
+              </div>
             </div>
 
             <div className="text-right">
