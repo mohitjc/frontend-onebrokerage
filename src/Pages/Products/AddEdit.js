@@ -37,7 +37,7 @@ const AddEdit = () => {
   const user = useSelector((state) => state.user);
   const formValidation = [
     {
-      key: "type",
+      key: "product_type",
       required: true,
       message: "Type is required",
     },
