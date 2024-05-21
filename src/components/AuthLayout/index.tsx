@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const AuthLayout=({children}:any)=>{
     return <>
-      <div className='grid items-center grid-cols-12'>
+      <div className='grid items-center grid-cols-12 bg_images'>
        
        <div className="col-span-12 md:col-span-6 lg:col-span-6">
          <div className="relative flex flex-col items-center justify-center h-screen py-8 overflow-auto">

@@ -53,3 +53,11 @@ label.profileheddingcls {
   text-transform: capitalize;
   color: #767676;
 }
+
+
+.bg_images{
+  background-image: url('../public/assets/img/main_image.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 100%;
+}
