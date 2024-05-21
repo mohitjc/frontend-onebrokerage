@@ -48,7 +48,7 @@ const Html = ({
         return <span className="capitalize">{row?.type}</span>;
       },
     },
-    /*    {
+    {
       key: "image",
       name: "Image",
       render: (row) => {
@@ -58,7 +58,7 @@ const Html = ({
           </>
         );
       },
-    }, */
+    },
     {
       key: "status",
       name: "Status",
@@ -66,11 +66,16 @@ const Html = ({
         return (
           <>
             <div className="w-32" onClick={() => statusChange(row)}>
-            <span 
-              className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-                          ${row.status == "deactive" ? " bg-gray-200 text-black" : "bg-[#ee695e] text-white"}`}>
-              {row.status == "deactive" ? "inactive" : "active"}
-            </span>
+              <span
+                className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                          ${
+                            row.status == "deactive"
+                              ? " bg-gray-200 text-black"
+                              : "bg-[#ee695e] text-white"
+                          }`}
+              >
+                {row.status == "deactive" ? "inactive" : "active"}
+              </span>
             </div>
           </>
         );
