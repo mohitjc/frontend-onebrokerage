@@ -10,7 +10,14 @@ const Chart = () => {
       tooltip: {},
       xAxis: {
         type: "category",
-        data: ["Candies", "Gummies", "Capsules", "Drinks"],
+        data: [
+          "Candies",
+          "Gummies",
+          "Capsules",
+          "Drinks",
+          "Functional",
+          "Therapeutic",
+        ],
       },
       yAxis: {
         type: "value",
@@ -19,7 +26,7 @@ const Chart = () => {
         {
           name: "Sales",
           type: "bar",
-          data: [120, 200, 150, 80],
+          data: [120, 200, 150, 80, 30, 60],
         },
       ],
     };

@@ -36,11 +36,12 @@ const AddEdit = () => {
   const [subcategory, setSubcategory] = useState([]);
   const user = useSelector((state) => state.user);
   const formValidation = [
-    /*  { key: "status", required: true },
-    { key: "type", required: true, message: "Type is required" },
-    { key: "timezone", required: true },
-    { key: "description", required: true, message: "Description is required" }, */
-    // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
+    {
+      key: "type",
+      required: true,
+      message: "Type is required",
+    },
+    { key: "category", required: true },
   ];
 
   const getCategories = (p = {}) => {
@@ -206,6 +207,11 @@ const AddEdit = () => {
                   theme="search"
                   required
                 />
+                {submitted && !form.category && (
+                  <div className="text-danger small mt-1">
+                    parent category is required.
+                  </div>
+                )}
               </div>
               {form.category ? (
                 <>
@@ -238,6 +244,11 @@ const AddEdit = () => {
                   theme="search"
                   required
                 />
+                {submitted && !form.product_type && (
+                  <div className="text-danger small mt-1">
+                    type is required.
+                  </div>
+                )}
               </div>
 
               <div className="col-span-2 mb-3">
@@ -249,6 +260,11 @@ const AddEdit = () => {
                   onChange={(e) => setform({ ...form, description: e })}
                   required
                 />
+                {submitted && !form.description && (
+                  <div className="text-danger small mt-1">
+                    description is required.
+                  </div>
+                )}
               </div>
               <div className="mb-3">
                 <label className="lablefontcls">Image</label>
