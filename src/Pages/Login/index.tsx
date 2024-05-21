@@ -178,7 +178,7 @@ const Login = () => {
               <div className="mt-5">
                 <input
                   type="text"
-                  className="shadow-box bg-white mb-6 w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
+                  className="mb-4 w-full text-sm text-white  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
                   placeholder="Email"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -188,7 +188,7 @@ const Login = () => {
                 <div className="relative mb-6">
                   <input
                     type={eyes.password ? "text" : "password"}
-                    className="shadow-box bg-white w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
+                    className="mb-4 w-full text-sm text-white  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
@@ -218,7 +218,7 @@ const Login = () => {
                   type="text"
                   maxLength={6}
                   minLength={6}
-                  className="shadow-box bg-white mb-6 w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
+                  className="mb-4 w-full text-sm text-white  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
                   placeholder="Enter OTP"
                   value={otp}
                   onChange={(e) => setOTP(e.target.value)}
