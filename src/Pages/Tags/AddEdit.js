@@ -106,8 +106,8 @@ const AddEdit = () => {
   };
 
   const options = [
-    { id: "therapeutic", name: "Therapeutic Benefits" },
-    { id: "health", name: "Health Benefits" },
+    { id: "Therapeutic Use", name: "Therapeutic Benefits" },
+    { id: "Health & Wellness", name: "Health Benefits" },
   ];
 
   return (
