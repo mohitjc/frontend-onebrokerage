@@ -20,7 +20,7 @@ const AddEdit = () => {
     id: "",
     fullName: "",
     email: "",
-    mobileNo:'',
+    mobileNo: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -46,6 +46,7 @@ const AddEdit = () => {
     let value = {
       ...form,
       ...images,
+      role: "user",
     };
     if (value.id) {
       method = "put";
@@ -169,7 +170,7 @@ const AddEdit = () => {
                   value={form.email}
                   onChange={(e) => setform({ ...form, email: e })}
                   required
-                  disabled={id?true:false}
+                  disabled={id ? true : false}
                 />
               </div>
               {/* <div className="mb-3">

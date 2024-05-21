@@ -91,7 +91,7 @@ const Html = ({
                   <span class="material-symbols-outlined">visibility</span>
                 </a>
               </Tooltip>
-              {/* {isAllow(`edit${shared.check}`) && itm.addedBy == user._id ? (
+              {isAllow(`edit${shared.check}`) && itm.addedBy == user._id ? (
                 <Tooltip placement="top" title="Edit">
                   <a
                     className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
@@ -102,8 +102,8 @@ const Html = ({
                 </Tooltip>
               ) : (
                 <></>
-              )} 
-              {isAllow(`delete${shared.check}`) && itm.addedBy == user._id ? (
+              )}
+              {/* {isAllow(`delete${shared.check}`) && itm.addedBy == user._id ? (
                 <Tooltip placement="top" title="Delete">
                   {" "}
                   <span
@@ -115,7 +115,7 @@ const Html = ({
                 </Tooltip>
               ) : (
                 <></>
-              )}*/}
+              )} */}
             </div>
           </>
         );
@@ -157,9 +157,8 @@ const Html = ({
         <div className="flex">
           {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
-                    </button> */}
-
-          {/*    {isAllow(`add${shared.check}`) ? (
+                    </button>  */}
+          {/*  {isAllow(`add${shared.check}`) ? (
             <Link
               className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
               to={`/${shared.url}/add`}
@@ -168,7 +167,7 @@ const Html = ({
             </Link>
           ) : (
             <></>
-          )} */}
+          )}{" "} */}
         </div>
       </div>
 

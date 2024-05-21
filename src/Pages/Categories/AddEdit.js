@@ -26,8 +26,6 @@ const AddEdit = () => {
     parent_category: "null",
   });
 
-  console.log("FORM", form);
-
   const [filters, setFilters] = useState({
     page: 1,
     count: 10,
@@ -50,6 +48,7 @@ const AddEdit = () => {
   const getCategoriesList = (p = {}) => {
     let f = {
       ...p,
+      category_type: "master",
     };
     ApiClient.get(shared.listApi, f).then((res) => {
       if (res.success) {

@@ -63,10 +63,11 @@ const Resetpassword = () => {
     };
     ApiClient.put("user/reset/password", payload).then((res) => {
       if (res.success) {
-        history("/login");
         setTimeout(() => {
           toast.success(res.message);
         }, 100);
+
+        history("/login");
       }
       loader(false);
     });
