@@ -26,9 +26,9 @@ const AddEdit = () => {
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);
   const formValidation = [
-    /*  { key: "status", required: true },
-    { key: "type", required: true, message: "Type is required" },
-    { key: "timezone", required: true },
+    { key: "mobileNo", required: true },
+    { key: "email", required: true, message: "Email is required", email: true },
+    /* { key: "timezone", required: true },
     { key: "description", required: true, message: "Description is required" }, */
     // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
   ];
@@ -40,7 +40,7 @@ const AddEdit = () => {
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || getDateErrr(form.date)) return;
+    if (invalid) return;
     let method = "post";
     let url = shared.addApi;
     let value = {
@@ -161,6 +161,11 @@ const AddEdit = () => {
                   onChange={(e) => setform({ ...form, mobileNo: e })}
                   required
                 />
+                {submitted && !form.mobileNo && (
+                  <div className="invalid-feedback d-block">
+                    mobile is required
+                  </div>
+                )}
               </div>
               <div className=" mb-3">
                 <FormControl

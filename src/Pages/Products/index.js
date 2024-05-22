@@ -133,20 +133,10 @@ const Products = () => {
   };
 
   const statusChange = (itm) => {
-    /* if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
+    /*  if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return; */
     let status = "active";
     if (itm.status == "active") status = "deactive";
- */
-    // if (window.confirm(`Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`)) {
-    //     loader(true)
-    //     ApiClient.put(shared.statusApi, { id: itm.id, status }).then(res => {
-    //         if (res.success) {
-    //             getData()
-    //         }
-    //         loader(false)
-    //     })
-    // }
-    /*   Swal.fire({
+    Swal.fire({
       title: "Are you sure?",
       text: `Do you want to ${
         status == "active" ? "Activate" : "Deactivate"
@@ -158,19 +148,14 @@ const Products = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        // loader(true);
-         ApiClient.put(shared.statusApi, { id: itm.id, status }).then((res) => {
+        ApiClient.put(shared.statusApi, { id: itm.id, status }).then((res) => {
           if (res.success) {
             getData();
           }
           loader(false);
-        }); 
-        //   Swal.fire({
-        //     // text: `Sucessfully ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
-        //     icon: "success"
-        //   });
+        });
       }
-    }); */
+    });
   };
 
   const edit = (id) => {
