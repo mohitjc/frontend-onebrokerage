@@ -36,7 +36,7 @@ const Html = ({
     {
       key: "title",
       name: "Title",
-      sort: false,
+      sort: true,
       render: (row) => {
         return <span className="capitalize">{row?.title}</span>;
       },
@@ -44,41 +44,16 @@ const Html = ({
     {
       key: "question",
       name: "Question",
+      sort: false,
       render: (row) => {
         return <span className="capitalize">{row?.question}</span>;
       },
     },
-    /*    {
-      key: "image",
-      name: "Image",
-      render: (row) => {
-        return (
-          <>
-            <img src={methodModel.noImg(row?.image)} height={30} width={30} />
-          </>
-        );
-      },
-    }, 
-    {
-      key: "status",
-      name: "Status",
-      render: (row) => {
-        return (
-          <>
-            <div className="w-32" onClick={() => statusChange(row)}>
-              <Tooltip placement="top" title="Active / Inactive">
-                <span className="bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize">
-                  {row.status == "deactive" ? "inactive" : "active"}
-                </span>
-              </Tooltip>
-            </div>
-          </>
-        );
-      },
-    },*/
+
     {
       key: "action",
       name: "Action",
+      sort: false,
       render: (itm) => {
         return (
           <>
@@ -91,7 +66,7 @@ const Html = ({
                   <span class="material-symbols-outlined">visibility</span>
                 </a>
               </Tooltip>
-              {isAllow(`edit${shared.check}`) && itm.addedBy == user._id ? (
+              {/* {isAllow(`edit${shared.check}`) && itm.addedBy == user._id ? (
                 <Tooltip placement="top" title="Edit">
                   <a
                     className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
@@ -103,7 +78,7 @@ const Html = ({
               ) : (
                 <></>
               )}
-              {/* {isAllow(`delete${shared.check}`) && itm.addedBy == user._id ? (
+              {isAllow(`delete${shared.check}`) && itm.addedBy == user._id ? (
                 <Tooltip placement="top" title="Delete">
                   {" "}
                   <span

@@ -38,7 +38,7 @@ const Html = ({
     {
       key: "name",
       name: "Name",
-      sort: false,
+      sort: true,
       render: (row) => {
         return <span className="capitalize">{row?.name}</span>;
       },
@@ -54,7 +54,11 @@ const Html = ({
       key: "parent_category_detail",
       name: "Parent Category",
       render: (row) => {
-        return <span className="capitalize">{row?.parent_category_detail?.name||'--'}</span>;
+        return (
+          <span className="capitalize">
+            {row?.parent_category_detail?.name || "--"}
+          </span>
+        );
       },
     },
     {
@@ -75,14 +79,16 @@ const Html = ({
         return (
           <>
             <div className="w-32" onClick={() => statusChange(row)}>
-              
-            <span 
-              className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-                          ${row.status == "deactive" ? " bg-gray-200 text-black" : "bg-[#ee695e] text-white"}`}>
-              {row.status == "deactive" ? "inactive" : "active"}
-            </span>
-
-             
+              <span
+                className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                          ${
+                            row.status == "deactive"
+                              ? " bg-gray-200 text-black"
+                              : "bg-[#ee695e] text-white"
+                          }`}
+              >
+                {row.status == "deactive" ? "inactive" : "active"}
+              </span>
             </div>
           </>
         );
@@ -229,13 +235,13 @@ const Html = ({
           </form>
 
           <div className="flex gap-2 ml-auto">
-          <SelectDropdown
+            <SelectDropdown
               id="statusDropdown"
               displayValue="name"
               placeholder="All Type"
               intialValue={filters.type}
               result={(e) => {
-                filter({type:e.value});
+                filter({ type: e.value });
               }}
               options={shared.types}
             />
