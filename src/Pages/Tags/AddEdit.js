@@ -39,7 +39,7 @@ const AddEdit = () => {
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid) return;
+    if (invalid || !images.image) return;
     let method = "post";
     let url = shared.addApi;
     let value = {
@@ -128,9 +128,9 @@ const AddEdit = () => {
                 <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
                   {form && form.id ? "Edit" : "Add"} {shared.addTitle}
                 </h3>
-                <p class="text-xs lg:text-sm font-normal text-[#75757A]">
+                {/* <p class="text-xs lg:text-sm font-normal text-[#75757A]">
                   Here you can see all about your {shared.addTitle}
-                </p>
+                </p> */}
               </div>
             </div>
 
@@ -172,11 +172,11 @@ const AddEdit = () => {
                   multiple={false}
                   label="Choose Images"
                 />
-                {/* {submitted && !images.images && (
+                {submitted && !images.images && (
                   <div className="text-danger small mt-1">
                     image is required.
                   </div>
-                )} */}
+                )}
               </div>
             </div>
 

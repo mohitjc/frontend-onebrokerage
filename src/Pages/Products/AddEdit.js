@@ -178,9 +178,9 @@ const AddEdit = () => {
                 <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
                   {form && form.id ? "Edit" : "Add"} {shared.addTitle}
                 </h3>
-                <p class="text-xs lg:text-sm font-normal text-[#75757A]">
+                {/* <p class="text-xs lg:text-sm font-normal text-[#75757A]">
                   Here you can see all about your {shared.addTitle}
-                </p>
+                </p> */}
               </div>
             </div>
 
