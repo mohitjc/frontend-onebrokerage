@@ -52,7 +52,8 @@ const AddEdit = () => {
     };
     ApiClient.get("category/listing", f).then((res) => {
       if (res.success) {
-        options = res?.data.map(({ id, name }) => {
+        const filtered = res?.data.filter((itm) => itm.status == "active");
+        options = filtered.map(({ id, name }) => {
           return { id: id, name: name };
         });
       }
@@ -66,7 +67,8 @@ const AddEdit = () => {
     };
     ApiClient.get("category/listing", f).then((res) => {
       if (res.success) {
-        let options = res?.data.map(({ id, name }) => {
+        const filtered = res?.data.filter((itm) => itm.status == "active");
+        let options = filtered.map(({ id, name }) => {
           return { id: id, name: name };
         });
         setSubcategory(options);
