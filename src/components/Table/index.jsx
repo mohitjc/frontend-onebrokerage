@@ -88,9 +88,17 @@ const Table = ({
                         >
                           {itm.name}{" "}
                           {itm.sort ? (
-                            <span className="ml-2">
-                              <HiOutlineArrowDown className="shrink-0 inline text-sm" />
-                            </span>
+                            <>
+                              {true ? (
+                                <span className="ml-2">
+                                  <HiOutlineArrowDown className="shrink-0 inline text-sm" />
+                                </span>
+                              ) : (
+                                <span className="ml-2">
+                                  <HiOutlineArrowUp className="shrink-0 inline text-sm" />
+                                </span>
+                              )}
+                            </>
                           ) : null}
                         </th>
                       ))}

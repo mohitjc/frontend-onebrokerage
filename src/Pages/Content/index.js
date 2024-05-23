@@ -133,7 +133,7 @@ const Content = () => {
   };
 
   const statusChange = (itm) => {
-    if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
+    // if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
     let status = "active";
     if (itm.status == "active") status = "deactive";
 
@@ -213,7 +213,6 @@ const Content = () => {
       getData({ search: searchState.data, page: 1 });
     }
   }, []);
-
 
   return (
     <>

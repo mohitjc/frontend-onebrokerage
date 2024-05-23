@@ -49,7 +49,7 @@ const Html = ({
         return <span className="capitalize">{row?.to}</span>;
       },
     },
-    {
+    /* {
       key: "status",
       name: "Status",
       render: (row) => {
@@ -70,7 +70,7 @@ const Html = ({
           </>
         );
       },
-    },
+    }, */
     {
       key: "action",
       name: "Action",
