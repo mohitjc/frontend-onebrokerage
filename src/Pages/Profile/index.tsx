@@ -58,11 +58,11 @@ const Profile = () => {
         <div className="inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white   ">
           <div className="grid items-start grid-cols-12 gap-4">
             <div className="col-span-12 md:col-span-7 lg:col-span-7">
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-4 shrink-0">
                 <div className="">
                   <img
                     src={methodModel.userImg(data && data.image)}
-                    className="h-32 w-32 rounded-md mx-auto"
+                    className="h-32 w-32 rounded-md object-contain mx-auto"
                   />
                 </div>
                 <div className="flex flex-col gap-y-4 ml-4 lg:border-l border-dashed border-gray-400 pl-5">

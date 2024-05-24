@@ -8,6 +8,7 @@ import AuthLayout from "../../components/AuthLayout";
 import methodModel from "../../methods/methods";
 import { useDispatch, useSelector } from "react-redux";
 import { login_success } from "../actions/user";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const Login = () => {
   const history = useNavigate();
@@ -194,16 +195,16 @@ const Login = () => {
                     placeholder="Password"
                     required
                   />
-                  {eyes.password ? (
-                    <i
-                      className="fa fa-eye top-3 right-3 absolute text-gray-600"
+                     {eyes.password ? (
+                    <FiEye
+                      className="top-3 right-3 absolute text-white cursor-pointer"
                       onClick={() =>
                         setEyes({ ...eyes, password: !eyes.password })
                       }
                     />
                   ) : (
-                    <i
-                      className="fa fa-eye-slash top-3 right-3 absolute text-gray-600"
+                    <FiEyeOff
+                      className="top-3 right-3 absolute text-white cursor-pointer"
                       onClick={() =>
                         setEyes({ ...eyes, password: !eyes.password })
                       }
@@ -233,7 +234,8 @@ const Login = () => {
                   type="checkbox"
                   checked={remember}
                   onChange={(e) => setRemember(e.target.checked)}
-                  className="mr-2 h-4 w-4"
+                  className="mr-2 h-4 w-4 cursor-pointer"
+                  style={{ accentColor: '#EB6A59' }}
                 />{" "}
                 <span className="text-[14px] font-normal text-white">
                   Remember Me
@@ -244,7 +246,7 @@ const Login = () => {
                 to="/forgotpassword"
               >
                 {" "}
-                Forgot Password
+                Forgot Password?
               </Link>
             </div>
             <div className="mt-8 flex items-center justify-center">
