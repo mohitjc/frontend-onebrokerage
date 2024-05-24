@@ -1,38 +1,45 @@
+import React from "react";
+import ReactEcharts from "echarts-for-react";
 
-// import React from 'react';
-// import ReactEcharts from "echarts-for-react";
+const PieChart = () => {
+  // Data for the pie chart
+  const data = [
+    { value: 20, name: "A" },
+    { value: 15, name: "B" },
+    { value: 25, name: "C" },
+    { value: 10, name: "D" },
+    { value: 30, name: "E" },
+  ];
 
+  // Options for the pie chart
+  const options = {
+    title: {
+      text: "Total Products",
+      left: "center",
+    },
+    tooltip: {
+      trigger: "item",
+      formatter: "{a} <br/>{b} : {c} ({d}%)",
+    },
+    series: [
+      {
+        name: "Products",
+        type: "pie",
+        radius: "55%",
+        center: ["50%", "60%"],
+        data: data,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
+      },
+    ],
+  };
 
+  return <ReactEcharts option={options} style={{ height: "500px" }} />;
+};
 
-// const PieChart = () => {
-//     const data = {
-//         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-//         datasets: [
-//             {
-//                 label: '# of Votes',
-//                 data: [12, 19, 3, 5, 2, 3],
-//                 backgroundColor: [
-//                     'rgba(255, 99, 132, 0.2)',
-//                     'rgba(54, 162, 235, 0.2)',
-//                     'rgba(255, 206, 86, 0.2)',
-//                     'rgba(75, 192, 192, 0.2)',
-//                     'rgba(153, 102, 255, 0.2)',
-//                     'rgba(255, 159, 64, 0.2)',
-//                 ],
-//                 borderColor: [
-//                     'rgba(255, 99, 132, 1)',
-//                     'rgba(54, 162, 235, 1)',
-//                     'rgba(255, 206, 86, 1)',
-//                     'rgba(75, 192, 192, 1)',
-//                     'rgba(153, 102, 255, 1)',
-//                     'rgba(255, 159, 64, 1)',
-//                 ],
-//                 borderWidth: 1,
-//             },
-//         ],
-//     };
-
-//     return <Pie data={data} />;
-// };
-
-// export default PieChart;
+export default PieChart;

@@ -24,7 +24,7 @@ const Chart = () => {
       },
       series: [
         {
-          name: "Sales",
+          name: "Category",
           type: "bar",
           data: [120, 200, 150, 80, 30, 60],
         },
