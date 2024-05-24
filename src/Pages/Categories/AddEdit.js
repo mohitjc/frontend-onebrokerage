@@ -65,7 +65,7 @@ const AddEdit = () => {
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || !images.image) return;
+    if (invalid) return;
     let method = "post";
     let url = shared.addApi;
     let value = {
@@ -208,11 +208,11 @@ const AddEdit = () => {
                   multiple={false}
                   label="Choose file"
                 />
-                {submitted && !images.image && (
+                {/* {submitted && !images.image && (
                   <div className="text-danger small mt-1">
                     image is required.
                   </div>
-                )}
+                )} */}
               </div>
             </div>
 
