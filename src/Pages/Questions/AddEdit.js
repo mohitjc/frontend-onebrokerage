@@ -228,13 +228,16 @@ const AddEdit = () => {
                 />
                   </div>
                   <div>
-                  <label>Image</label>
+                  <label >Image</label>
+                  <div>
                   <ImageUpload
-                  model="users"
-                  result={(e) => updateOption(i,e.value,'image')}
-                  value={itm.image}
-                  label="Choose file"
-                />
+                        model="users"
+                        result={(e) => updateOption(i,e.value,'image')}
+                        value={itm.image}
+                        label="Choose file"
+                      />
+                    </div>
+                       
                   </div>
                   {/* <div className="col-span-full text-right">
                   <i className="fa fa-times cusrsor-pointer" onClick={()=>deleteOption(i)}></i>
