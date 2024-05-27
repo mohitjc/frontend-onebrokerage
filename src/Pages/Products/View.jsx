@@ -71,12 +71,14 @@ const View = () => {
                     {data?.category.name || "--"}
                   </div>
                 </div>
-                {/*  <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Sub-category</label>
-                  <div className="profiledetailscls capitalize">
-                    {data?.category.name || "--"}
+                {data?.sub_category && (
+                  <div className="col-span-12 md:col-span-6">
+                    <label className="profileheddingcls">Sub-category</label>
+                    <div className="profiledetailscls capitalize">
+                      {data?.sub_category?.name || "--"}
+                    </div>
                   </div>
-                </div> */}
+                )}
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Product Type</label>
                   <div className="profiledetailscls capitalize">
