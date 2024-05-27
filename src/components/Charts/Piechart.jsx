@@ -13,10 +13,10 @@ const PieChart = () => {
 
   // Options for the pie chart
   const options = {
-    title: {
-      text: "Total Products",
-      left: "center",
-    },
+    // title: {
+    //   text: "",
+    //   left: "center",
+    // },
     tooltip: {
       trigger: "item",
       formatter: "{a} <br/>{b} : {c} ({d}%)",
@@ -39,7 +39,7 @@ const PieChart = () => {
     ],
   };
 
-  return <ReactEcharts option={options} style={{ height: "500px" }} />;
+  return <ReactEcharts option={options} style={{ height: "400px" }} />;
 };
 
 export default PieChart;
