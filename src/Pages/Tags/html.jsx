@@ -253,7 +253,7 @@ const Html = ({
                             result={e => filter({ groupId: e.value })}
                             options={groups}
                         /> */}
-            {filters.status || filters.groupId || filters.search ? (
+            {filters.status || filters.groupId ? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"

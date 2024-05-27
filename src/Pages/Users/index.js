@@ -149,7 +149,7 @@ const Users = () => {
       title: "Are you sure?",
       text: `Do you want to ${
         status == "active" ? "Activate" : "Deactivate"
-      } this`,
+      } this user?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",

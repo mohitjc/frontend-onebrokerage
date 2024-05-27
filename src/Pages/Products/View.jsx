@@ -41,25 +41,22 @@ const View = () => {
   return (
     <>
       <Layout>
-    
         <div className="bg-white shadow-box rounded-lg w-full p-4 mt-6">
-        <div className="flex items-center mb-8">
-                <Tooltip placement="top" title="Back">
-                  <span
-                    onClick={() => history(-1)}
-                    className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3"
-                  >
-                    <i className="fa fa-angle-left text-lg"></i>
-                  </span>
-                </Tooltip>
-                <div>
-                  <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
-                  {shared.addTitle} Details
-                  </h3>
-                
-                </div>
+          <div className="flex items-center mb-8">
+            <Tooltip placement="top" title="Back">
+              <span
+                onClick={() => history(-1)}
+                className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3"
+              >
+                <i className="fa fa-angle-left text-lg"></i>
+              </span>
+            </Tooltip>
+            <div>
+              <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
+                {shared.addTitle} Details
+              </h3>
             </div>
-
+          </div>
 
           <div className="grid grid-cols-12 gap-4">
             <div className="sideclass col-span-12 md:col-span-12">
@@ -74,24 +71,45 @@ const View = () => {
                     {data?.category.name || "--"}
                   </div>
                 </div>
+                {/*  <div className="col-span-12 md:col-span-6">
+                  <label className="profileheddingcls">Sub-category</label>
+                  <div className="profiledetailscls capitalize">
+                    {data?.category.name || "--"}
+                  </div>
+                </div> */}
                 <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Description</label>
-                  <div className="profiledetailscls capitalize" dangerouslySetInnerHTML={{__html:data?.description || "--"}}></div>
-                </div>
-                {data?.images?.length?<>
-                  <div className="col-span-full">
-                  <label className="profileheddingcls">Images</label>
-                  <div className="flex gap-2 flex-wrap items-center">
-                    {data.images.map(itm=>{
-                      return <>
-                       <img src={methodModel.noImg(itm)} width="140" />
-                      </>
-                    })}
-                   
+                  <label className="profileheddingcls">Product Type</label>
+                  <div className="profiledetailscls capitalize">
+                    {data?.product_type || "--"}
                   </div>
                 </div>
-                </>:<></>}
-               
+                <div className="col-span-12 md:col-span-6">
+                  <label className="profileheddingcls">Description</label>
+                  <div
+                    className="profiledetailscls capitalize"
+                    dangerouslySetInnerHTML={{
+                      __html: data?.description || "--",
+                    }}
+                  ></div>
+                </div>
+                {data?.images?.length ? (
+                  <>
+                    <div className="col-span-full">
+                      <label className="profileheddingcls">Images</label>
+                      <div className="flex gap-2 flex-wrap items-center">
+                        {data.images.map((itm) => {
+                          return (
+                            <>
+                              <img src={methodModel.noImg(itm)} width="140" />
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>
