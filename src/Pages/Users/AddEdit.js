@@ -25,6 +25,7 @@ const AddEdit = () => {
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);
+  const inValidEmail = methodModel.emailvalidation(form?.email);
   const formValidation = [
     { key: "mobileNo", required: true },
     { key: "email", required: true, message: "Email is required", email: true },
@@ -177,6 +178,11 @@ const AddEdit = () => {
                   required
                   disabled={id ? true : false}
                 />
+                {form.email && submitted && !inValidEmail && (
+                  <div className="invalid-feedback d-block">
+                    please enter valid email
+                  </div>
+                )}
               </div>
               {/* <div className="mb-3">
                 <label>

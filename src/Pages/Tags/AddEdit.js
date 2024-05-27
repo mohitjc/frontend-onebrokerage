@@ -172,7 +172,7 @@ const AddEdit = () => {
                   multiple={false}
                   label="Choose Images"
                 />
-                {submitted && !images.images && (
+                {submitted && !images.image && (
                   <div className="text-danger small mt-1">
                     image is required.
                   </div>

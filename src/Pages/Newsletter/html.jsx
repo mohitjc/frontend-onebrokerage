@@ -172,7 +172,7 @@ const Html = ({
                 onChange={(e) => {
                   setFilter({ ...filters, search: e.target.value });
                 }}
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                 placeholder="Search"
                 required
               />
@@ -207,7 +207,7 @@ const Html = ({
             </button>
           </form>
 
-          <div className="flex gap-2 ml-auto">
+          {/* <div className="flex gap-2 ml-auto">
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"
@@ -230,7 +230,7 @@ const Html = ({
             ) : (
               <></>
             )}
-          </div>
+          </div> */}
         </div>
 
         {!loaging ? (

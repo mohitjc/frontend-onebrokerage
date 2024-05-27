@@ -13,6 +13,8 @@ import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
 import methodModel from "../../methods/methods";
+import { PiEyeLight } from "react-icons/pi";
+import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 const Html = ({
   sorting,
   filter,
@@ -90,29 +92,29 @@ const Html = ({
             <div className="flex items-center justify-start gap-1.5">
               <Tooltip placement="top" title="View">
                 <a
-                  className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
+                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                   onClick={(e) => view(itm.id)}
                 >
-                  <span class="material-symbols-outlined">visibility</span>
+                  <PiEyeLight />
                 </a>
               </Tooltip>
 
               <Tooltip placement="top" title="Edit">
                 <a
-                  className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
+                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                   onClick={(e) => edit(itm.id)}
                 >
-                  <FiEdit3 />
+                  <LiaEdit />
                 </a>
               </Tooltip>
 
               <Tooltip placement="top" title="Delete">
                 {" "}
                 <span
-                  className="border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-lg bg-[#FDE9EA] w-10 h-10 text-[#E92531] flex items-center justify-center text-xl "
+                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg "
                   onClick={() => deleteItem(itm.id)}
                 >
-                  <BsTrash3 />
+                  <LiaTrashAlt />
                 </span>
               </Tooltip>
             </div>
@@ -196,7 +198,7 @@ const Html = ({
                 onChange={(e) => {
                   setFilter({ ...filters, search: e.target.value });
                 }}
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                 placeholder="Search"
                 required
               />
@@ -251,7 +253,7 @@ const Html = ({
                             result={e => filter({ groupId: e.value })}
                             options={groups}
                         /> */}
-            {filters.status || filters.groupId || filters.search ? (
+            {filters.status || filters.groupId ? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"

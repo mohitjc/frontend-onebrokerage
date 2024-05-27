@@ -118,8 +118,7 @@ i.fa.fa-trash.text-danger.icon-css {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 15px;
-
+  padding: 15px !important;
   >span {
     font-size: 13px;
     color: #84818A;
@@ -2091,4 +2090,13 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
 
 .imagesRow {
   margin-top: 15px;
+}
+
+@keyframes slowShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+   100% { transform: translateX(5px); }
+}
+.slow-shake {
+  animation: slowShake 2s infinite;
 }

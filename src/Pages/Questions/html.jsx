@@ -171,7 +171,7 @@ const Html = ({
                 onChange={(e) => {
                   setFilter({ ...filters, search: e.target.value });
                 }}
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                 placeholder="Search"
                 required
               />
@@ -206,8 +206,8 @@ const Html = ({
             </button>
           </form>
 
-          <div className="flex gap-2 ml-auto">
-            {/* <SelectDropdown
+          {/*   <div className="flex gap-2 ml-auto">
+            <SelectDropdown
               id="statusDropdown"
               displayValue="name"
               placeholder="All Status"
@@ -216,16 +216,16 @@ const Html = ({
                 changestatus(e.value);
               }}
               options={statusModel.list}
-            /> */}
-            {/* <SelectDropdown
-                            id="statusDropdown"
-                            displayValue="name"
-                            placeholder='All Groups'
-                            intialValue={filters.groupId}
-                            theme="search"
-                            result={e => filter({ groupId: e.value })}
-                            options={groups}
-                        /> */}
+            />
+            <SelectDropdown
+              id="statusDropdown"
+              displayValue="name"
+              placeholder="All Groups"
+              intialValue={filters.groupId}
+              theme="search"
+              result={(e) => filter({ groupId: e.value })}
+              options={groups}
+            />{" "}
             {filters.status || filters.groupId || filters.search ? (
               <>
                 <button
@@ -238,7 +238,7 @@ const Html = ({
             ) : (
               <></>
             )}
-          </div>
+          </div> */}
         </div>
 
         {!loaging ? (

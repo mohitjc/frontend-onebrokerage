@@ -164,6 +164,10 @@ const AddEdit = () => {
     <>
       <Layout>
         <form onSubmit={handleSubmit}>
+
+
+        
+
           <div className="pprofile1">
             <div className="flex items-center mb-8">
               <Tooltip placement="top" title="Back">
@@ -184,8 +188,11 @@ const AddEdit = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <div className=" mb-3">
+          
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12 md:col-span-6">
+              <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12 md:col-span-6 mb-3">
                 <FormControl
                   type="text"
                   name="name"
@@ -196,7 +203,7 @@ const AddEdit = () => {
                 />
               </div>
 
-              <div className=" mb-3">
+              <div className="col-span-12 md:col-span-6 mb-3">
                 <FormControl
                   type="select"
                   name="category"
@@ -217,7 +224,7 @@ const AddEdit = () => {
               </div>
               {form.category ? (
                 <>
-                  <div className=" mb-3">
+                  <div className="col-span-12 md:col-span-6 mb-3">
                     <FormControl
                       type="select"
                       name="Sub category"
@@ -233,7 +240,7 @@ const AddEdit = () => {
                 <></>
               )}
 
-              <div className=" mb-3">
+              <div className={`col-span-12 md:col-span-${form.category?'6':'12'} mb-3`}>
                 <FormControl
                   type="select"
                   name="product_type"
@@ -253,7 +260,8 @@ const AddEdit = () => {
                 )}
               </div>
 
-              <div className="col-span-2 mb-3">
+
+              <div className="col-span-12 md:col-span-12 mb-3">
                 <FormControl
                   type="editor"
                   name="description"
@@ -268,9 +276,18 @@ const AddEdit = () => {
                   </div>
                 )}
               </div>
-              <div className="mb-3">
-                <label className="lablefontcls">Image</label>
-                <br></br>
+
+            
+            
+            </div>
+              </div>
+
+              <div className="col-span-12 md:col-span-6">
+                    <div className="grid grid-cols-1">
+
+                    <div className="col-span-12 mb-3">
+                <label className="lablefontcls mb-2 inline-flex">Image</label>
+              
                 <ImageUpload
                   model="users"
                   result={(e) => imageResult(e, "images")}
@@ -284,7 +301,12 @@ const AddEdit = () => {
                   </div>
                 )}
               </div>
-            </div>
+                    </div>
+              </div>
+          </div>
+
+         
+
 
             <div className="text-right">
               <button
