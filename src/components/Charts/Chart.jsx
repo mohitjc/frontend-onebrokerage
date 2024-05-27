@@ -4,9 +4,9 @@ import ReactEcharts from "echarts-for-react";
 const Chart = () => {
   const getOption = () => {
     return {
-      title: {
-        text: "Categories",
-      },
+      // title: {
+      //   text: "Categories",
+      // },
       tooltip: {},
       xAxis: {
         type: "category",
@@ -34,7 +34,7 @@ const Chart = () => {
 
   return (
     <div>
-      <ReactEcharts option={getOption()} />
+      <ReactEcharts option={getOption()} style={{ height: "400px" }} />
     </div>
   );
 };

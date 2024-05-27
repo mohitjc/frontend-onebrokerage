@@ -12,10 +12,10 @@ const DoughnutChart = () => {
 
   // Options for the doughnut chart
   const options = {
-    title: {
-      text: "Total Questions",
-      left: "center",
-    },
+    // title: {
+    //   text: "",
+    //   left: "center",
+    // },
     tooltip: {
       trigger: "item",
       formatter: "{a} <br/>{b} : {c} ({d}%)",
