@@ -68,154 +68,157 @@ const ChangePassword = (p) => {
 
         <div className="input_form p-6 shadow-box overflow-hidden rounded-lg bg-white grid grid-cols-12">
           <div className="col-span-12 md:col-span-7">
+            <form onSubmit={handleSubmit}>
+              <div className="items-center ">
+                <div className="">
+                  <div className="flex flex-col md:flex-row  items-center gap-4 mb-6">
+                    <label className="text-typo text-base font-medium w-96">
+                      Current Password<span className="start">*</span>
+                    </label>
+                    <div className="w-full">
+                      <div className="relative ">
+                        <input
+                          type={eyes.currentPassword ? "text" : "password"}
+                          className="shadow-box bg-white w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
+                          value={form.currentPassword}
+                          maxLength="20"
+                          placeholder="Enter current password"
+                          onChange={(e) =>
+                            setForm({
+                              ...form,
+                              currentPassword: e.target.value,
+                            })
+                          }
+                          required
+                        />
+                        <div className="absolute right-2 top-3 cursor-pointer text-grey-500 text-sm">
+                          <i
+                            className={
+                              eyes.currentPassword
+                                ? "fa fa-eye text-gray-400"
+                                : "fa fa-eye-slash text-gray-400"
+                            }
+                            onClick={() =>
+                              setEyes({
+                                ...eyes,
+                                currentPassword: !eyes.currentPassword,
+                              })
+                            }
+                          ></i>
+                        </div>
+                      </div>
+                      {submitted && getError("currentPassword").invalid ? (
+                        <div className="invalid-feedback d-block">
+                          Min Length must be 8 characters long
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  </div>
 
-          
-          <form onSubmit={handleSubmit}>
-            <div className="items-center ">
-              <div className="">
-                <div className="flex flex-col md:flex-row  items-center gap-4 mb-6">
-                  <label className="text-typo text-base font-medium w-96">
-                    Current Password<span className="start">*</span>
-                  </label>
-                  <div className="w-full">
-                    <div className="relative ">
+                  <div className="flex flex-col md:flex-row  items-center gap-4 mb-6 ">
+                    <label className="text-typo text-base font-medium w-96">
+                      New Password<span className="start">*</span>
+                    </label>
+
+                    <div className=" w-full">
+                      <div className="relative ">
+                        <input
+                          type={eyes.password ? "text" : "password"}
+                          className="shadow-box bg-white w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
+                          value={form.newPassword}
+                          placeholder="Enter new password"
+                          minLength={9}
+                          maxLength={16}
+                          onChange={(e) =>
+                            setForm({ ...form, newPassword: e.target.value })
+                          }
+                          required
+                        />
+                        <div className="absolute right-2 top-3 cursor-pointer text-grey-500 text-sm">
+                          <i
+                            className={
+                              eyes.password
+                                ? "fa fa-eye text-gray-400"
+                                : "fa fa-eye-slash text-gray-400"
+                            }
+                            onClick={() =>
+                              setEyes({ ...eyes, password: !eyes.password })
+                            }
+                          ></i>
+                        </div>
+                      </div>
+                      {submitted && getError("newPassword").invalid ? (
+                        <div className="invalid-feedback d-block">
+                          Min Length must be 8 characters long
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col md:flex-row  items-center gap-4 mb-6">
+                    <label className="text-typo text-base font-medium w-96">
+                      Confirm Password<span className="start">*</span>
+                    </label>
+
+                    <div className="relative w-full ">
                       <input
-                        type={eyes.currentPassword ? "text" : "password"}
+                        type={eyes.confirmPassword ? "text" : "password"}
                         className="shadow-box bg-white w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
-                        value={form.currentPassword}
-                        maxLength="20"
-                        placeholder="Enter current password"
+                        placeholder="Enter Confirm Password"
+                        value={form.confirmPassword}
+                        minLength={9}
+                        maxLength={16}
                         onChange={(e) =>
-                          setForm({ ...form, currentPassword: e.target.value })
+                          setForm({ ...form, confirmPassword: e.target.value })
                         }
                         required
                       />
                       <div className="absolute right-2 top-3 cursor-pointer text-grey-500 text-sm">
                         <i
                           className={
-                            eyes.currentPassword
+                            eyes.confirmPassword
                               ? "fa fa-eye text-gray-400"
                               : "fa fa-eye-slash text-gray-400"
                           }
                           onClick={() =>
                             setEyes({
                               ...eyes,
-                              currentPassword: !eyes.currentPassword,
+                              confirmPassword: !eyes.confirmPassword,
                             })
                           }
                         ></i>
                       </div>
+                      {submitted && getError("confirmPassword").invalid ? (
+                        <>
+                          {getError("confirmPassword").err.confirmMatch ? (
+                            <div className="invalid-feedback d-block">
+                              Confirm Password is not matched with New Password
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+                      ) : (
+                        <></>
+                      )}
                     </div>
-                    {submitted && getError("currentPassword").invalid ? (
-                      <div className="invalid-feedback d-block">
-                        Min Length must be 8 characters long
-                      </div>
-                    ) : (
-                      <></>
-                    )}
                   </div>
-                </div>
 
-                <div className="flex flex-col md:flex-row  items-center gap-4 mb-6 ">
-                  <label className="text-typo text-base font-medium w-96">
-                    New Password<span className="start">*</span>
-                  </label>
-
-                  <div className=" w-full">
-                    <div className="relative ">
-                      <input
-                        type={eyes.password ? "text" : "password"}
-                        className="shadow-box bg-white w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
-                        value={form.newPassword}
-                        placeholder="Enter new password"
-                        maxLength="20"
-                        onChange={(e) =>
-                          setForm({ ...form, newPassword: e.target.value })
-                        }
-                        required
-                      />
-                      <div className="absolute right-2 top-3 cursor-pointer text-grey-500 text-sm">
-                        <i
-                          className={
-                            eyes.password
-                              ? "fa fa-eye text-gray-400"
-                              : "fa fa-eye-slash text-gray-400"
-                          }
-                          onClick={() =>
-                            setEyes({ ...eyes, password: !eyes.password })
-                          }
-                        ></i>
-                      </div>
-                    </div>
-                    {submitted && getError("newPassword").invalid ? (
-                      <div className="invalid-feedback d-block">
-                        Min Length must be 8 characters long
-                      </div>
-                    ) : (
-                      <></>
-                    )}
+                  <div className="flex items-end justify-end">
+                    <button
+                      type="submit"
+                      className="text-white bg-[#EB6A59]  focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center  mb-2 cursor-pointer"
+                    >
+                      Update
+                    </button>
                   </div>
-                </div>
-
-                <div className="flex flex-col md:flex-row  items-center gap-4 mb-6">
-                  <label className="text-typo text-base font-medium w-96">
-                    Confirm Password<span className="start">*</span>
-                  </label>
-
-                  <div className="relative w-full ">
-                    <input
-                      type={eyes.confirmPassword ? "text" : "password"}
-                      className="shadow-box bg-white w-full text-sm placeholder:text-gray-500 rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 !ring-primary !outline-primary"
-                      placeholder="Enter Confirm Password"
-                      value={form.confirmPassword}
-                      maxLength="20"
-                      onChange={(e) =>
-                        setForm({ ...form, confirmPassword: e.target.value })
-                      }
-                      required
-                    />
-                    <div className="absolute right-2 top-3 cursor-pointer text-grey-500 text-sm">
-                      <i
-                        className={
-                          eyes.confirmPassword
-                            ? "fa fa-eye text-gray-400"
-                            : "fa fa-eye-slash text-gray-400"
-                        }
-                        onClick={() =>
-                          setEyes({
-                            ...eyes,
-                            confirmPassword: !eyes.confirmPassword,
-                          })
-                        }
-                      ></i>
-                    </div>
-                    {submitted && getError("confirmPassword").invalid ? (
-                      <>
-                        {getError("confirmPassword").err.confirmMatch ? (
-                          <div className="invalid-feedback d-block">
-                            Confirm Password is not matched with New Password
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex items-end justify-end">
-                  <button
-                    type="submit"
-                    className="text-white bg-[#EB6A59]  focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center  mb-2 cursor-pointer"
-                  >
-                    Update
-                  </button>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
           </div>
         </div>
       </div>

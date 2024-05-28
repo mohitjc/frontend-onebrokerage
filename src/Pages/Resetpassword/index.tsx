@@ -106,7 +106,7 @@ const Resetpassword = () => {
                   type={eyes.password ? "text" : "password"}
                   className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 mb-0 bginput w-full"
                   value={form.newPassword}
-                  minLength={12}
+                  minLength={9}
                   maxLength={16}
                   onChange={(e) =>
                     setForm({ ...form, newPassword: e.target.value })
@@ -136,7 +136,7 @@ const Resetpassword = () => {
                   type={eyes.confirmPassword ? "text" : "password"}
                   className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 mb-0 bginput w-full"
                   value={form.confirmPassword}
-                  minLength={12}
+                  minLength={9}
                   maxLength={16}
                   onChange={(e) =>
                     setForm({ ...form, confirmPassword: e.target.value })

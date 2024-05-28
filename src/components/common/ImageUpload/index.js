@@ -31,7 +31,7 @@ const ImageUpload = ({
       let file = files.item(i);
       console.log("i", i);
       console.log("file", file);
-      const res = await ApiClient.azureUpload({ file: file });
+      const res = await ApiClient.multiImageUpload('upload/image',files);
       if (res.fileName) {
         let image = res.fileName;
         if (!multiple) {
