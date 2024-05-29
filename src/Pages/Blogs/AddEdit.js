@@ -15,10 +15,7 @@ import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
 
 let options = [];
-let productTypeoptions = [
-  { id: "Therapeutic Use", name: "Therapeutic Benefits" },
-  { id: "Health & Wellness", name: "Health Benefits" },
-];
+
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
@@ -181,7 +178,6 @@ const AddEdit = () => {
                       }}
                       options={options}
                       theme="search"
-                      required
                     />
                   </div>
                   <div className="col-span-12 md:col-span-12 mb-3">

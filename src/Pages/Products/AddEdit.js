@@ -13,6 +13,7 @@ import datepipeModel from "../../models/datepipemodel";
 import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
+import MultiSelectDropdown from "../../components/common/MultiSelectDropdown";
 
 let options = [];
 let productTypeoptions = [
@@ -29,11 +30,13 @@ const AddEdit = () => {
     category: "",
     sub_category: "",
     product_type: "",
+    tags: [],
   });
 
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [subcategory, setSubcategory] = useState([]);
+  const [productTags, setProductTags] = useState([]);
   const user = useSelector((state) => state.user);
   const formValidation = [
     {
@@ -43,6 +46,7 @@ const AddEdit = () => {
     },
     { key: "category", required: true },
     { key: "description", required: true },
+    { key: "tags", required: true },
   ];
 
   const getCategories = (p = {}) => {
@@ -77,12 +81,24 @@ const AddEdit = () => {
     });
   };
 
+  const getProductTags = () => {
+    ApiClient.get("tag/list", { type: form.product_type }).then((res) => {
+      if (res.success) {
+        const filtered = res?.data.filter((itm) => itm.status == "active");
+        let tags = filtered.map(({ id, name }) => {
+          return { id: id, name: name };
+        });
+        setProductTags(tags);
+      }
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || !images.images) return;
+    if (invalid || !images.images || form.tags?.length == 0) return;
     let method = "post";
     let url = shared.addApi;
     let value = {
@@ -161,6 +177,12 @@ const AddEdit = () => {
     }
   }, [form.category]);
 
+  useEffect(() => {
+    if (form.product_type) {
+      getProductTags();
+    }
+  }, [form.product_type]);
+
   return (
     <>
       <Layout>
@@ -198,8 +220,34 @@ const AddEdit = () => {
                       required
                     />
                   </div>
-
-                  <div className="col-span-12 md:col-span-6 mb-3">
+                  <div className={`col-span-12 md:col-span-6 mb-3`}>
+                    <FormControl
+                      type="select"
+                      name="product_type"
+                      label="Product Type"
+                      value={form.product_type}
+                      onChange={(e) =>
+                        setform({
+                          ...form,
+                          product_type: e.toString(),
+                          tags: [],
+                        })
+                      }
+                      options={productTypeoptions}
+                      theme="search"
+                      required
+                    />
+                    {submitted && !form.product_type && (
+                      <div className="text-danger small mt-1">
+                        type is required.
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    className={`col-span-12 md:col-span-${
+                      form.category ? "6" : "12"
+                    } mb-3`}
+                  >
                     <FormControl
                       type="select"
                       name="category"
@@ -238,29 +286,24 @@ const AddEdit = () => {
                     <></>
                   )}
 
-                  <div
-                    className={`col-span-12 md:col-span-${
-                      form.category ? "6" : "12"
-                    } mb-3`}
-                  >
-                    <FormControl
-                      type="select"
-                      name="product_type"
-                      label="Product Type"
-                      value={form.product_type}
-                      onChange={(e) =>
-                        setform({ ...form, product_type: e.toString() })
-                      }
-                      options={productTypeoptions}
-                      theme="search"
-                      required
-                    />
-                    {submitted && !form.product_type && (
-                      <div className="text-danger small mt-1">
-                        type is required.
-                      </div>
-                    )}
-                  </div>
+                  {form.product_type ? (
+                    <div className="col-span-12 md:col-span-12 mb-3">
+                      <MultiSelectDropdown
+                        options={productTags}
+                        result={({ value }) =>
+                          setform({ ...form, tags: value })
+                        }
+                        intialValue={form.tags}
+                      />
+                      {submitted && form.tags.length == 0 && (
+                        <div className="text-danger small mt-1">
+                          tags are required.
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <></>
+                  )}
 
                   <div className="col-span-12 md:col-span-12 mb-3">
                     <FormControl
