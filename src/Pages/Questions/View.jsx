@@ -80,7 +80,7 @@ const View = () => {
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Options</label>
                   <div className="profiledetailscls capitalize">
-                    {data?.options.join(",") || "--"}
+                    {/* {data?.options.join(",") || "--"} */}
                   </div>
                 </div>
               </div>

@@ -221,19 +221,19 @@ class ApiClient {
         });
     }
 
-
-    static async multiImageUpload(url, params) {
+    static async multiImageUpload(url, files,params={},key = 'file') {
         url = baseUrl + url
         setAuthorizationToken(axios);
-        var body = new FormData();
-        let oArr = Object.keys(params)
-        oArr.map(itm => {
-            body.append(itm, params[itm]);
-        })
+        let body = new FormData();
 
-        return await axios
-            .post(url, body, config)
+        let i = 0
+        for (let item of files) {
+            let file = files.item(i)
+            body.append(key, file);
+            i++
+        }
 
+        return await axios.post(url, body, { ...config, headers: { "Content-Type": "multipart/form-data;" },params:params})
             .then(function (response) {
                 return response && response.data
             })

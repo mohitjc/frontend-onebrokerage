@@ -25,6 +25,7 @@ const AddEdit = () => {
     options: [],
     order: "",
   });
+  const [options, setOptions] = useState([]);
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);
@@ -36,8 +37,6 @@ const AddEdit = () => {
       message: "Question Type is required",
     },
     { key: "question", required: true, message: "Question is required" },
-    { key: "options", required: true },
-    { key: "order", required: true },
   ];
 
   const typeOptions = [
@@ -56,6 +55,7 @@ const AddEdit = () => {
     let url = shared.addApi;
     let value = {
       ...form,
+      options:options
     };
     if (value.id) {
       method = "put";
@@ -92,15 +92,37 @@ const AddEdit = () => {
             payload.category = value.category._id;
           }
 
+      
           payload.id = id;
           setform({
             ...payload,
           });
+
+          let options=value?.options||[]
+          options=options.map(itm=>{
+            let item=itm
+            if(!itm?.name) item={name:itm,image:''}
+            return item
+          })
+          setOptions(options)
         }
         loader(false);
       });
     }
   }, [id]);
+
+  const updateOption=(i,v,key='')=>{
+    let arr=options||[]
+    arr[i][key]=v
+    setOptions([...arr])
+  }
+
+  const deleteOption=(i)=>{
+    let arr=options||[]
+    arr=arr.filter((itm,ind)=>ind!=i)
+    setOptions([...arr])
+  }
+
 
   return (
     <>
@@ -134,6 +156,7 @@ const AddEdit = () => {
                   label="Title"
                   value={form.title}
                   onChange={(e) => setform({ ...form, title: e })}
+                  disabled
                   required
                 />
               </div>
@@ -147,6 +170,7 @@ const AddEdit = () => {
                   onChange={(e) => setform({ ...form, question_type: e })}
                   options={typeOptions}
                   theme="search"
+                  disabled
                   required
                 />
                 {submitted && !form.question_type && (
@@ -159,6 +183,7 @@ const AddEdit = () => {
                   type="text"
                   name="description"
                   label="Question"
+                  disabled
                   value={form.question}
                   onChange={(e) => {
                     setform({ ...form, question: e });
@@ -185,17 +210,44 @@ const AddEdit = () => {
                 )}
               </div>
               <div className="col-span-2 mb-3">
-                <FormControl
+                <label>Options</label>
+               
+                {options.map((itm,i)=>{
+                  return <>
+                <div className="grid grid-cols-2 gap-2 shadow p-2 mb-4">
+                  <div>
+                  <FormControl
                   type="text"
-                  name="options"
-                  label="Options"
-                  value={form.options}
-                  onChange={(e) => setform({ ...form, options: e.split(",") })}
+                  label="Name"
+                  value={itm.name}
+                  onChange={(e) => {
+                    updateOption(i,e,'name')
+                  }}
+                  disabled
                   required
                 />
-                {submitted && !form.options && (
+                  </div>
+                  <div>
+                  <label >Image</label>
+                  <div>
+                  <ImageUpload
+                        model="users"
+                        result={(e) => updateOption(i,e.value,'image')}
+                        value={itm.image}
+                        label="Choose file"
+                      />
+                    </div>
+                       
+                  </div>
+                  {/* <div className="col-span-full text-right">
+                  <i className="fa fa-times cusrsor-pointer" onClick={()=>deleteOption(i)}></i>
+                  </div> */}
+                </div>
+                  </>
+                })}
+                {/* {submitted && !form.options && (
                   <div className="text-danger">options are required.</div>
-                )}
+                )} */}
               </div>
             </div>
 
