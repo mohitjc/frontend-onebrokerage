@@ -109,6 +109,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/tag",
       key: "",
     },
+    {
+      name: "Blogs",
+      icon: <LiaUserTagSolid className="text-[#fff] shrink-0 text-lg" />,
+      url: "/blog",
+      key: "",
+    },
   ];
 
   return (
