@@ -183,6 +183,8 @@ const AddEdit = () => {
     }
   }, [form.product_type]);
 
+  console.log("FORM", form);
+
   return (
     <>
       <Layout>
@@ -231,6 +233,8 @@ const AddEdit = () => {
                           ...form,
                           product_type: e.toString(),
                           tags: [],
+                          category: "",
+                          sub_category: "",
                         })
                       }
                       options={productTypeoptions}
@@ -243,29 +247,31 @@ const AddEdit = () => {
                       </div>
                     )}
                   </div>
-                  <div
-                    className={`col-span-12 md:col-span-${
-                      form.category ? "6" : "12"
-                    } mb-3`}
-                  >
-                    <FormControl
-                      type="select"
-                      name="category"
-                      label="Parent Category"
-                      value={form.category}
-                      onChange={(e) => {
-                        setform({ ...form, category: e });
-                      }}
-                      options={options}
-                      theme="search"
-                      required
-                    />
-                    {submitted && !form.category && (
-                      <div className="text-danger small mt-1">
-                        parent category is required.
-                      </div>
-                    )}
-                  </div>
+                  {form.product_type && (
+                    <div
+                      className={`col-span-12 md:col-span-${
+                        form.category ? "6" : "12"
+                      } mb-3`}
+                    >
+                      <FormControl
+                        type="select"
+                        name="category"
+                        label="Parent Category"
+                        value={form.category}
+                        onChange={(e) => {
+                          setform({ ...form, category: e });
+                        }}
+                        options={options}
+                        theme="search"
+                        required
+                      />
+                      {submitted && !form.category && (
+                        <div className="text-danger small mt-1">
+                          parent category is required.
+                        </div>
+                      )}
+                    </div>
+                  )}
                   {form.category ? (
                     <>
                       <div className="col-span-12 md:col-span-6 mb-3">
