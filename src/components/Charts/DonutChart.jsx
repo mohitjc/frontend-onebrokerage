@@ -3,11 +3,11 @@ import ReactEcharts from "echarts-for-react";
 
 const DoughnutChart = () => {
   const data = [
-    { value: 20, name: "A" },
-    { value: 15, name: "B" },
-    { value: 25, name: "C" },
-    { value: 10, name: "D" },
-    { value: 30, name: "E" },
+    { value: 20, name: "Multiple" },
+    { value: 15, name: "Single" },
+    { value: 25, name: "Yes/No" },
+    { value: 10, name: "Comment" },
+    { value: 30, name: "Radio" },
   ];
 
   // Options for the doughnut chart
