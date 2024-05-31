@@ -59,50 +59,49 @@ const View = () => {
           </div>
 
           <div className="grid grid-cols-1  gap-4">
-                    <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Title</label>
-                  <div className="profiledetailscls">{data?.title || "--"}</div>
-                </div>
-                {/* <div className="col-span-12 md:col-span-6">
+            <div className="col-span-12 md:col-span-6">
+              <label className="profileheddingcls">Title</label>
+              <div className="profiledetailscls">{data?.title || "--"}</div>
+            </div>
+            {/* <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Category</label>
                   <div className="profiledetailscls capitalize">
                     {data?.category.name || "--"}
                   </div>
                 </div>  */}
 
-             
-                {data?.images?.length ? (
-                  <>
-                    <div className="col-span-12 md:col-span-6">
-                      <label className="profileheddingcls">Images</label>
-                      <div className="flex gap-2 flex-wrap items-center">
-                        {data.images.map((itm) => {
-                          return (
-                            <>
-                              <img src={methodModel.noImg(itm)} width="" className="h-32" />
-                            </>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-
-
-<div className="col-span-12 md:col-span-12">
-                  <label className="profileheddingcls">Description</label>
-                  <div
-                    className="profiledetailscls capitalize"
-                    dangerouslySetInnerHTML={{
-                      __html: data?.description || "--",
-                    }}
-                  ></div>
+            <div className="col-span-12 md:col-span-12">
+              <label className="profileheddingcls">Description</label>
+              <div
+                className="profiledetailscls capitalize"
+                dangerouslySetInnerHTML={{
+                  __html: data?.description || "--",
+                }}
+              ></div>
+            </div>
+            {data?.image ? (
+              <>
+                <div className="col-span-12 md:col-span-6">
+                  <label className="profileheddingcls">Images</label>
+                  <div className="flex gap-2 flex-wrap items-center">
+                    <img src={methodModel.noImg(data?.image)} width="140" />
+                  </div>
                 </div>
+              </>
+            ) : (
+              <></>
+            )}
 
-
-              </div>
+            <div className="col-span-12 md:col-span-12">
+              <label className="profileheddingcls">Description</label>
+              <div
+                className="profiledetailscls capitalize"
+                dangerouslySetInnerHTML={{
+                  __html: data?.description || "--",
+                }}
+              ></div>
+            </div>
+          </div>
         </div>
       </Layout>
     </>

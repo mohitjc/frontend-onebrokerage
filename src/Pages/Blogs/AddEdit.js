@@ -99,7 +99,7 @@ const AddEdit = () => {
             payload[itm] = value[itm];
           });
 
-          if (payload.category?._id) payload.category = payload.category._id;
+          if (payload.category) payload.category = payload.category.id;
 
           payload.id = id;
           setform({
