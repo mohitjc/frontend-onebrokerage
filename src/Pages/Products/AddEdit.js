@@ -294,6 +294,9 @@ const AddEdit = () => {
 
                   {form.product_type ? (
                     <div className="col-span-12 md:col-span-12 mb-3">
+                      <label className="mb-1">
+                        Tags<span class="star">*</span>
+                      </label>
                       <MultiSelectDropdown
                         options={productTags}
                         result={({ value }) =>

@@ -81,16 +81,6 @@ const Blogs = () => {
   };
 
   const deleteItem = (id) => {
-    // if (window.confirm("Do you want to delete this")) {
-    //     loader(true)
-    //     ApiClient.delete(shared.deleteApi, { id: id }).then(res => {
-    //         if (res.success) {
-    //             // ToastsStore.success(res.message)
-    //             clear()
-    //         }
-    //         loader(false)
-    //     })
-    // }
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to delete this`,
@@ -104,14 +94,10 @@ const Blogs = () => {
         loader(true);
         ApiClient.delete(shared.deleteApi, { id: id }).then((res) => {
           if (res.success) {
-            // ToastsStore.success(res.message)
             clear();
           }
           loader(false);
         });
-        //   Swal.fire({
-        //     icon: "success"
-        //   });
       }
     });
   };
@@ -145,7 +131,7 @@ const Blogs = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        ApiClient.put(shared.statusApi, { id: itm.id, status }).then((res) => {
+        ApiClient.put(shared.statusApi, { id: itm?._id }).then((res) => {
           if (res.success) {
             getData();
           }

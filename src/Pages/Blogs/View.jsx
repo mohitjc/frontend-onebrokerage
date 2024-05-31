@@ -38,6 +38,8 @@ const View = () => {
     getDetail();
   }, []);
 
+  console.log("data", data);
+
   return (
     <>
       <Layout>
@@ -81,18 +83,12 @@ const View = () => {
                     }}
                   ></div>
                 </div>
-                {data?.images?.length ? (
+                {data?.image ? (
                   <>
                     <div className="col-span-full">
                       <label className="profileheddingcls">Images</label>
                       <div className="flex gap-2 flex-wrap items-center">
-                        {data.images.map((itm) => {
-                          return (
-                            <>
-                              <img src={methodModel.noImg(itm)} width="140" />
-                            </>
-                          );
-                        })}
+                        <img src={methodModel.noImg(data?.image)} width="140" />
                       </div>
                     </div>
                   </>

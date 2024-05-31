@@ -7,9 +7,15 @@ import { useParams } from "react-router-dom";
 import shared from "./shared";
 import loader from "../../methods/loader";
 import { Tooltip } from "antd";
+import questionsKeys from "../Profile/questions";
+import { useSelector } from "react-redux";
 
 const View = () => {
+  const user = useSelector((state) => state.user);
+
   const [data, setData] = useState();
+  const [questions, setQuestions] = useState([]);
+
   const history = useNavigate();
   const { id } = useParams();
 
@@ -23,9 +29,22 @@ const View = () => {
     });
   };
 
+  const getQuestionsList = () => {
+    ApiClient.get(`onboarding-questions/list`, { id: user._id }).then((res) => {
+      if (res.success) {
+        setQuestions(res.data);
+      }
+    });
+  };
+  const sortedQuestions = questions?.sort((a, b) => a.order - b.order);
+
   useEffect(() => {
     getDetail();
   }, []);
+
+  useEffect(() => {
+    if (data) getQuestionsList();
+  }, [data]);
 
   return (
     <>
@@ -66,6 +85,48 @@ const View = () => {
                   <label className="profileheddingcls">Email</label>
                   <div className="profiledetailscls">{data?.email || "--"}</div>
                 </div>
+              </div>
+
+              <div className="mt-5">
+                <label className="profileheddingcls">
+                  Onboarding Answers :-
+                </label>
+                {sortedQuestions?.map((item, index) => {
+                  let key = questionsKeys[item.title];
+                  let answer = data[key];
+                  if (data[key] == true || data[key] == false) {
+                    answer = data[key] == true ? "Yes" : "No";
+                  }
+                  if (Array.isArray(answer)) {
+                    answer = answer.join(", ");
+                  }
+                  return (
+                    <div
+                      key={index}
+                      className={`${
+                        index > 0
+                          ? "mt-3  last:border-0 border-b border-gray-200 pb-4"
+                          : "mt-0 last:border-0 border-b border-gray-200 pb-4"
+                      }`}
+                    >
+                      <div className="text-xl mb-3 font-bold mb-2 ">
+                        {item.title}
+                      </div>
+                      <div className="flex items-start font-semibold gap-2 mb-2 ">
+                        <span className="h-8 w-8 justify-center flex items-center bg-gray-200 shrink-0">
+                          Q
+                        </span>{" "}
+                        {item.question}
+                      </div>
+                      <div className="flex items-start font-regular gap-2">
+                        <span className="h-8 w-8 justify-center text-white flex items-center bg-[#EB6A59] shrink-0">
+                          A
+                        </span>
+                        <span> {answer}</span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
