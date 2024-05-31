@@ -48,7 +48,7 @@ const Profile = () => {
   return (
     <Layout>
       <div className="wrapper_section">
-        <div className="flex items-center  justify-between">
+        <div className="flex items-center  justify-between mb-8">
           <h3 className=" text-lg lg:text-2xl font-semibold text-[#111827]">
             Profile Information
           </h3>
@@ -72,45 +72,49 @@ const Profile = () => {
           </Link>
         </div>
 
-        <div className="inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white   ">
-          <div className="grid items-start grid-cols-12 gap-4 mb-5">
-            <div className="col-span-12 md:col-span-7 lg:col-span-7">
-              <div className="flex items-start gap-4 shrink-0">
+
+        <div className="grid grid-cols-12 gap-6">
+            <div className="col-span-12 md:col-span-4 lg:col-span-3">
+              <div className="flex items-center justify-center py-8 shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 sticky top-6">
+                
+                <div className="flex flex-col items-center gap-4">
                 <div className="">
                   <img
                     src={methodModel.userImg(data && data.image)}
-                    className="h-32 w-32 rounded-md object-contain mx-auto"
+                    className="h-36 w-36 rounded-full object-cover mx-auto"
                   />
                 </div>
-                <div className="flex flex-col gap-y-4 ml-4 lg:border-l border-dashed border-gray-400 pl-5">
-                  <div className="">
-                    <label className="text-gray-600">Name</label>
-                    <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
+                  <div className="text-center">
+                   
+                    <p className="text-md text-gray-700 flex items-center  flex flex-col ">
                       {" "}
-                      {/* <LiaUserSolid className="text-xl" /> */}
+                      <LiaUserSolid className="text-xl text-[#EB6A59]" />
                       {data && data.fullName}
                     </p>
                   </div>
-                  <div className="">
-                    <label className="text-gray-600">Email</label>
-                    <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
-                      {/* <MdOutlineEmail className="text-xl" /> */}
+                  <div className="text-center">
+                   
+                    <p className="text-md text-gray-700 flex items-center  flex flex-col ">
+                      <MdOutlineEmail className="text-xl text-[#EB6A59]" />
                       {data && data.email}
                     </p>
                   </div>
 
-                  <div className="">
-                    <label className="text-gray-600">Phone Number</label>
-                    <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
-                      {/* <MdOutlinePhone className="text-xl" /> */}
+                  <div className="text-center">
+                  
+                    <p className="text-md text-gray-700 flex items-center  flex flex-col ">
+                      <MdOutlinePhone className="text-xl text-[#EB6A59]" />
                       {String(data.mobileNo ? "+" + data.mobileNo : "N/A")}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="">
+      
+
+        <div className="col-span-12 md:col-span-8 lg:col-span-9    ">
+          
+          <div className="p-6 shadow-box overflow-hidden rounded-lg bg-white ">
             <div className="text-xl mb-5">Onboarding Answers :-</div>
             {sortedQuestions?.map((item: any, index: any) => {
               let key: any = questionsKeys[item.title];
@@ -149,6 +153,7 @@ const Profile = () => {
               );
             })}
           </div>
+        </div>
         </div>
       </div>
     </Layout>
