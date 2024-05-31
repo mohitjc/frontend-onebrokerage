@@ -13,40 +13,31 @@ import datepipeModel from "../../models/datepipemodel";
 import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
-import MultiSelectDropdown from "../../components/common/MultiSelectDropdown";
 
 let options = [];
-let productTypeoptions = [
-  { id: "Therapeutic Use", name: "Therapeutic Benefits" },
-  { id: "Health & Wellness", name: "Health Benefits" },
-];
+
 const AddEdit = () => {
   const { id } = useParams();
-  const [images, setImages] = useState({ images: "" });
+  const [images, setImages] = useState({ image: "" });
   const [form, setform] = useState({
     id: "",
-    name: "",
+    title: "",
     description: "",
+    image: "",
     category: "",
-    sub_category: "",
-    product_type: "",
-    tags: [],
   });
 
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [subcategory, setSubcategory] = useState([]);
-  const [productTags, setProductTags] = useState([]);
   const user = useSelector((state) => state.user);
   const formValidation = [
     {
-      key: "product_type",
+      key: "title",
       required: true,
-      message: "Type is required",
+      message: "title is required",
     },
-    { key: "category", required: true },
     { key: "description", required: true },
-    { key: "tags", required: true },
   ];
 
   const getCategories = (p = {}) => {
@@ -65,55 +56,24 @@ const AddEdit = () => {
     });
   };
 
-  const getSubCategories = (p = {}) => {
-    let f = {
-      ...p,
-      type: "product",
-    };
-    ApiClient.get("category/listing", f).then((res) => {
-      if (res.success) {
-        const filtered = res?.data.filter((itm) => itm.status == "active");
-        let options = filtered.map(({ id, name }) => {
-          return { id: id, name: name };
-        });
-        setSubcategory(options);
-      }
-    });
-  };
-
-  const getProductTags = () => {
-    ApiClient.get("tag/list", { type: form.product_type }).then((res) => {
-      if (res.success) {
-        const filtered = res?.data.filter((itm) => itm.status == "active");
-        let tags = filtered.map(({ id, name }) => {
-          return { id: id, name: name };
-        });
-        setProductTags(tags);
-      }
-    });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || !images.images || form.tags?.length == 0) return;
+    if (invalid || !images.image) return;
     let method = "post";
     let url = shared.addApi;
     let value = {
       ...form,
       ...images,
       category: form.category || null,
-      sub_category: form.sub_category || null,
     };
 
     if (value.id) {
       method = "put";
       url = shared.editApi;
     } else {
-      value.addedBy = user._id;
-      value.groupId = user?.groupId?._id;
       delete value.id;
     }
 
@@ -140,8 +100,6 @@ const AddEdit = () => {
           });
 
           if (payload.category?._id) payload.category = payload.category._id;
-          if (payload.sub_category?._id)
-            payload.sub_category = payload.sub_category._id;
 
           payload.id = id;
           setform({
@@ -170,20 +128,6 @@ const AddEdit = () => {
   useEffect(() => {
     getCategories();
   }, []);
-
-  useEffect(() => {
-    if (form.category) {
-      getSubCategories({ parent_category: form.category });
-    }
-  }, [form.category]);
-
-  useEffect(() => {
-    if (form.product_type) {
-      getProductTags();
-    }
-  }, [form.product_type]);
-
-  console.log("FORM", form);
 
   return (
     <>
@@ -215,102 +159,27 @@ const AddEdit = () => {
                   <div className="col-span-12 md:col-span-6 mb-3">
                     <FormControl
                       type="text"
-                      name="name"
-                      label="Name"
-                      value={form.name}
-                      onChange={(e) => setform({ ...form, name: e })}
+                      name="title"
+                      label="Title"
+                      value={form.title}
+                      onChange={(e) => setform({ ...form, title: e })}
                       required
                     />
                   </div>
-                  <div className={`col-span-12 md:col-span-6 mb-3`}>
+
+                  <div className="col-span-12 md:col-span-6 mb-3">
                     <FormControl
                       type="select"
-                      name="product_type"
-                      label="Product Type"
-                      value={form.product_type}
-                      onChange={(e) =>
-                        setform({
-                          ...form,
-                          product_type: e.toString(),
-                          tags: [],
-                          category: "",
-                          sub_category: "",
-                        })
-                      }
-                      options={productTypeoptions}
+                      name="category"
+                      label="Category"
+                      value={form.category}
+                      onChange={(e) => {
+                        setform({ ...form, category: e });
+                      }}
+                      options={options}
                       theme="search"
-                      required
                     />
-                    {submitted && !form.product_type && (
-                      <div className="text-danger small mt-1">
-                        type is required.
-                      </div>
-                    )}
                   </div>
-                  {form.product_type && (
-                    <div
-                      className={`col-span-12 md:col-span-${
-                        form.category ? "6" : "12"
-                      } mb-3`}
-                    >
-                      <FormControl
-                        type="select"
-                        name="category"
-                        label="Parent Category"
-                        value={form.category}
-                        onChange={(e) => {
-                          setform({ ...form, category: e });
-                        }}
-                        options={options}
-                        theme="search"
-                        required
-                      />
-                      {submitted && !form.category && (
-                        <div className="text-danger small mt-1">
-                          parent category is required.
-                        </div>
-                      )}
-                    </div>
-                  )}
-                  {form.category ? (
-                    <>
-                      <div className="col-span-12 md:col-span-6 mb-3">
-                        <FormControl
-                          type="select"
-                          name="Sub category"
-                          label="Sub category"
-                          value={form.sub_category}
-                          onChange={(e) =>
-                            setform({ ...form, sub_category: e })
-                          }
-                          options={subcategory}
-                          theme="search"
-                        />
-                      </div>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-
-                  {form.product_type ? (
-                    <div className="col-span-12 md:col-span-12 mb-3">
-                      <MultiSelectDropdown
-                        options={productTags}
-                        result={({ value }) =>
-                          setform({ ...form, tags: value })
-                        }
-                        intialValue={form.tags}
-                      />
-                      {submitted && form.tags.length == 0 && (
-                        <div className="text-danger small mt-1">
-                          tags are required.
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-
                   <div className="col-span-12 md:col-span-12 mb-3">
                     <FormControl
                       type="editor"
@@ -338,12 +207,11 @@ const AddEdit = () => {
 
                     <ImageUpload
                       model="users"
-                      result={(e) => imageResult(e, "images")}
-                      value={images.images || form.images}
-                      multiple={true}
+                      result={(e) => imageResult(e, "image")}
+                      value={images.image || form.images}
                       label="Choose Images"
                     />
-                    {submitted && !images.images && (
+                    {submitted && !images.image && (
                       <div className="text-danger small mt-1">
                         image is required.
                       </div>

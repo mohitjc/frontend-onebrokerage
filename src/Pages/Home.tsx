@@ -301,86 +301,124 @@ const Home = () => {
             </section>
 
             <section className="py-16 md:py-18 lg:py-28 bg-[#706FE505] relative">
-           
               <div className="container items-center  px-8 mx-auto xl:px-5">
-                <img src="assets/img/skill/circle-dot.png" alt="" className="h-24 " />
-                  <div className="text-center">
-                    <h6 className="text-md md:text-3xl lg:text-5xl font-bold text-[#03014C] mx-auto lineheightcustom	w-96">Let’s hear 
-                        What they says</h6>
-                  </div>
+                <img
+                  src="assets/img/skill/circle-dot.png"
+                  alt=""
+                  className="h-24 "
+                />
+                <div className="text-center">
+                  <h6 className="text-md md:text-3xl lg:text-5xl font-bold text-[#03014C] mx-auto lineheightcustom	w-96">
+                    Let’s hear What they says
+                  </h6>
+                </div>
 
-                  <div className="slider-main mt-10">
-                      <div className="grid grid-cols-12">
-                          <div className="col-span-12 mx-auto">
-                            <div className="mx-auto w-3/4 ">
+                <div className="slider-main mt-10">
+                  <div className="grid grid-cols-12">
+                    <div className="col-span-12 mx-auto">
+                      <div className="mx-auto w-3/4 ">
+                        <div className="flex justify-center gap-x-4 text-center ">
+                          <img
+                            src="assets/img/skill/te1.png"
+                            alt=""
+                            className="h-8 "
+                          />
+                          <p className="leading-[4rem] text-[1.2rem]">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Risus vel lobortis tincidunt fames quisque
+                            mauris at diam. Nullam morbi ipsum turpis amet id
+                            posuere torto quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate
+                            velit esse cillum dolore.
+                          </p>
+                          <img
+                            src="assets/img/skill/te2.png"
+                            className="h-8 "
+                            alt=""
+                          />
+                        </div>
 
-                           
-                                <div className="flex justify-center gap-x-4 text-center ">
-                                    <img src="assets/img/skill/te1.png" alt="" className="h-8 " />
-                                    <p className="leading-[4rem] text-[1.2rem]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus vel lobortis tincidunt
-                                        fames quisque mauris at diam. Nullam morbi ipsum turpis amet id posuere torto
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
-                                  <img src="assets/img/skill/te2.png" className="h-8 " alt="" />
-                                </div>
-
-                                <div className="images_for users mt-12">
-                                    <div className="images_testmonial flex  justify-around">
-                                      <div className="">
-                                      <img src="assets/img/skill/team1.png" alt="" className="h-14 w-14 object-contain mx-auto rounded-full" />
-                                      <div className="names mt-2 hidden">
-                                            <h6 className="mb-1 text-lg font-bold">Ricky Aprilia</h6>
-                                            <p className="text-sm">Founder of Varibo</p>
-                                      </div>
-                                      </div>
-                                      <div className="">
-                                      <img src="assets/img/skill/team2.png" alt="" className="h-14 w-14 object-contain mx-auto rounded-full" />
-                                      <div className="names mt-2 hidden">
-                                            <h6 className="mb-1 text-lg font-bold">Ricky Aprilia</h6>
-                                            <p className="text-sm">Founder of Varibo</p>
-                                      </div>
-                                      </div>
-                                      <div className="text-center">
-                                      <img src="assets/img/skill/team3.png" alt="" className="h-24 w-24 border-4 mx-auto p-1 border-[#EB6A59]object-contain rounded-full" />
-                                      <div className="names mt-2">
-                                            <h6 className="mb-1 text-lg font-bold">Ricky Aprilia</h6>
-                                            <p className="text-sm">Founder of Varibo</p>
-                                      </div>
-                                      </div>
-                                      <div className="">
-                                      <img src="assets/img/skill/team4.png" alt="" className="h-14 w-14 object-contain mx-auto rounded-full" />
-                                      <div className="names mt-2 hidden">
-                                            <h6 className="mb-1 text-lg font-bold">Ricky Aprilia</h6>
-                                            <p className="text-sm">Founder of Varibo</p>
-                                      </div>
-                                      </div>
-                                      <div className="">
-                                      <img src="assets/img/skill/team5.png" alt="" className="h-14 w-14 object-contain mx-auto rounded-full" />
-                                      <div className="names mt-2 hidden">
-                                            <h6 className="mb-1 text-lg font-bold">Ricky Aprilia</h6>
-                                            <p className="text-sm">Founder of Varibo</p>
-                                      </div>
-                                      </div>
-
-                                    
-                                     
-                                      
-                                     
-                                    </div>
-                                </div>
-                                </div>
-
-
+                        <div className="images_for users mt-12">
+                          <div className="images_testmonial flex  justify-around">
+                            <div className="">
+                              <img
+                                src="assets/img/skill/team1.png"
+                                alt=""
+                                className="h-14 w-14 object-contain mx-auto rounded-full"
+                              />
+                              <div className="names mt-2 hidden">
+                                <h6 className="mb-1 text-lg font-bold">
+                                  Ricky Aprilia
+                                </h6>
+                                <p className="text-sm">Founder of Varibo</p>
+                              </div>
+                            </div>
+                            <div className="">
+                              <img
+                                src="assets/img/skill/team2.png"
+                                alt=""
+                                className="h-14 w-14 object-contain mx-auto rounded-full"
+                              />
+                              <div className="names mt-2 hidden">
+                                <h6 className="mb-1 text-lg font-bold">
+                                  Ricky Aprilia
+                                </h6>
+                                <p className="text-sm">Founder of Varibo</p>
+                              </div>
+                            </div>
+                            <div className="text-center">
+                              <img
+                                src="assets/img/skill/team3.png"
+                                alt=""
+                                className="h-24 w-24 border-4 mx-auto p-1 border-[#EB6A59]object-contain rounded-full"
+                              />
+                              <div className="names mt-2">
+                                <h6 className="mb-1 text-lg font-bold">
+                                  Ricky Aprilia
+                                </h6>
+                                <p className="text-sm">Founder of Varibo</p>
+                              </div>
+                            </div>
+                            <div className="">
+                              <img
+                                src="assets/img/skill/team4.png"
+                                alt=""
+                                className="h-14 w-14 object-contain mx-auto rounded-full"
+                              />
+                              <div className="names mt-2 hidden">
+                                <h6 className="mb-1 text-lg font-bold">
+                                  Ricky Aprilia
+                                </h6>
+                                <p className="text-sm">Founder of Varibo</p>
+                              </div>
+                            </div>
+                            <div className="">
+                              <img
+                                src="assets/img/skill/team5.png"
+                                alt=""
+                                className="h-14 w-14 object-contain mx-auto rounded-full"
+                              />
+                              <div className="names mt-2 hidden">
+                                <h6 className="mb-1 text-lg font-bold">
+                                  Ricky Aprilia
+                                </h6>
+                                <p className="text-sm">Founder of Varibo</p>
+                              </div>
+                            </div>
                           </div>
+                        </div>
                       </div>
-
-                  
+                    </div>
                   </div>
-                  <img src="assets/img/skill/circle-dot.png" alt="" className="h-24 ml-auto " />
+                </div>
+                <img
+                  src="assets/img/skill/circle-dot.png"
+                  alt=""
+                  className="h-24 ml-auto "
+                />
               </div>
-             
             </section>
-
 
             <section className="py-16 md:py-18 lg:py-28  bg-white ">
               <div className="container items-center  px-8 mx-auto xl:px-5">

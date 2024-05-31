@@ -8,10 +8,12 @@ import methodModel from "../../methods/methods";
 import { useSelector } from "react-redux";
 import { LiaUserSolid } from "react-icons/lia";
 import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
+import questionsKeys from "./questions";
 
 const Profile = () => {
   const user = useSelector((state: any) => state.user);
   const [data, setData]: any = useState("");
+  const [questions, setQuestions]: any = useState([]);
   const gallaryData = () => {
     loader(true);
     ApiClient.get(`user/profile`, { id: user._id }).then((res) => {
@@ -22,11 +24,26 @@ const Profile = () => {
     });
   };
 
+  const getQuestionsList = () => {
+    ApiClient.get(`onboarding-questions/list`, { id: user._id }).then((res) => {
+      if (res.success) {
+        setQuestions(res.data);
+      }
+    });
+  };
+
   useEffect(() => {
     if (user.loggedIn) {
       gallaryData();
+      getQuestionsList();
     }
   }, []);
+
+  const sortedQuestions = questions?.sort(
+    (a: any, b: any) => a.order - b.order
+  );
+
+  console.log("questions", questions);
 
   return (
     <Layout>
@@ -56,7 +73,7 @@ const Profile = () => {
         </div>
 
         <div className="inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white   ">
-          <div className="grid items-start grid-cols-12 gap-4">
+          <div className="grid items-start grid-cols-12 gap-4 mb-5">
             <div className="col-span-12 md:col-span-7 lg:col-span-7">
               <div className="flex items-start gap-4 shrink-0">
                 <div className="">
@@ -92,6 +109,45 @@ const Profile = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="">
+            <div className="text-xl mb-5">Onboarding Answers :-</div>
+            {sortedQuestions?.map((item: any, index: any) => {
+              let key: any = questionsKeys[item.title];
+              let answer = data[key];
+              if (data[key] == true || data[key] == false) {
+                answer = data[key] == true ? "Yes" : "No";
+              }
+              if (Array.isArray(answer)) {
+                answer = answer.join(", ");
+              }
+              return (
+                <div
+                  key={index}
+                  className={`${
+                    index > 0
+                      ? "mt-3  last:border-0 border-b border-gray-200 pb-4"
+                      : "mt-0 last:border-0 border-b border-gray-200 pb-4"
+                  }`}
+                >
+                  <div className="text-xl mb-3 font-bold mb-2 ">
+                    {item.title}
+                  </div>
+                  <div className="flex items-start font-semibold gap-2 mb-2 ">
+                    <span className="h-8 w-8 justify-center flex items-center bg-gray-200 shrink-0">
+                      Q
+                    </span>{" "}
+                    {item.question}
+                  </div>
+                  <div className="flex items-start font-regular gap-2">
+                    <span className="h-8 w-8 justify-center text-white flex items-center bg-[#EB6A59] shrink-0">
+                      A
+                    </span>
+                    <span> {answer}</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

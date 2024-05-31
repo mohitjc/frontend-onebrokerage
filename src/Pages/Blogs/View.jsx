@@ -8,7 +8,6 @@ import shared from "./shared";
 import loader from "../../methods/loader";
 import { Tooltip } from "antd";
 import methodModel from "../../methods/methods";
-import environment from "../../environment";
 
 const View = () => {
   const [host, setHost] = useState();
@@ -28,7 +27,7 @@ const View = () => {
   };
 
   const getHostDetail = (id) => {
-    ApiClient.get("product/detail", { id: id }).then((res) => {
+    ApiClient.get("blog/detail", { id: id }).then((res) => {
       if (res.success) {
         setHost(res.data);
       }
@@ -63,30 +62,17 @@ const View = () => {
             <div className="sideclass col-span-12 md:col-span-12">
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Name</label>
-                  <div className="profiledetailscls">{data?.name || "--"}</div>
+                  <label className="profileheddingcls">Title</label>
+                  <div className="profiledetailscls">{data?.title || "--"}</div>
                 </div>
-                <div className="col-span-12 md:col-span-6">
+                {/* <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Category</label>
                   <div className="profiledetailscls capitalize">
                     {data?.category.name || "--"}
                   </div>
-                </div>
-                {data?.sub_category && (
-                  <div className="col-span-12 md:col-span-6">
-                    <label className="profileheddingcls">Sub-category</label>
-                    <div className="profiledetailscls capitalize">
-                      {data?.sub_category?.name || "--"}
-                    </div>
-                  </div>
-                )}
-                <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Product Type</label>
-                  <div className="profiledetailscls capitalize">
-                    {data?.product_type || "--"}
-                  </div>
-                </div>
-                <div className="col-span-12 md:col-span-6">
+                </div>  */}
+
+                <div className="col-span-12 md:col-span-12">
                   <label className="profileheddingcls">Description</label>
                   <div
                     className="profiledetailscls capitalize"
@@ -107,42 +93,6 @@ const View = () => {
                             </>
                           );
                         })}
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-                {data?.qr_image ? (
-                  <>
-                    <div className="col-span-6">
-                      <label className="profileheddingcls">QR Code</label>
-                      <div className="flex gap-2 flex-wrap items-center">
-                        <img
-                          src={methodModel.noImg(data?.qr_image)}
-                          width="140"
-                        />
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-                {data?.qr_pdf ? (
-                  <>
-                    <div className="col-span-6">
-                      <label className="profileheddingcls">Download PDF</label>
-                      <div className="flex gap-2 flex-wrap items-center">
-                        <a
-                          href={`${environment.apiUrl}/document/${data?.qr_pdf}`}
-                          download={data?.qr_pdf}
-                          target="blank"
-                        >
-                          <img
-                            src="/assets/img/PDF_file.png"
-                            className="h-20"
-                          />
-                        </a>
                       </div>
                     </div>
                   </>
