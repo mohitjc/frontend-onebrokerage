@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../../components/global/layout";
 import { useEffect, useState } from "react";
 import datepipeModel from "../../models/datepipemodel";
@@ -9,6 +9,9 @@ import loader from "../../methods/loader";
 import { Tooltip } from "antd";
 import questionsKeys from "../Profile/questions";
 import { useSelector } from "react-redux";
+import { LiaUserSolid } from "react-icons/lia";
+import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
+import methodModel from "../../methods/methods";
 
 const View = () => {
   const user = useSelector((state) => state.user);
@@ -49,8 +52,11 @@ const View = () => {
   return (
     <>
       <Layout>
-        <div className="bg-white shadow-box rounded-lg w-full p-4 mt-6">
-          <div className="flex items-center mb-8">
+
+
+
+      <div className="wrapper_section">
+      <div className="flex items-center mb-8">
             <Tooltip placement="top" title="Back">
               <span
                 onClick={() => history(-1)}
@@ -66,29 +72,46 @@ const View = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-12 gap-4">
-            <div className="sideclass col-span-12 md:col-span-12">
-              <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Name</label>
-                  <div className="profiledetailscls">
-                    {data?.fullName || "--"}
+
+        <div className="grid grid-cols-12 gap-6">
+            <div className="col-span-12 md:col-span-4 lg:col-span-3">
+              <div className="flex items-center justify-center py-8 shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 sticky top-2">
+                
+                <div className="flex flex-col items-center gap-4">
+               
+                  <div className="text-center">
+                   
+                    <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
+                      {" "}
+                      <LiaUserSolid className="text-xl text-[#EB6A59]" />
+                      {data && data.fullName}
+                    </p>
                   </div>
-                </div>
-                <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Mobile No</label>
-                  <div className="profiledetailscls">
-                    +{data?.mobileNo || "--"}
+                  <div className="text-center">
+                   
+                    <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
+                      <MdOutlineEmail className="text-xl text-[#EB6A59]" />
+                      {data && data.email}
+                    </p>
                   </div>
-                </div>
-                <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Email</label>
-                  <div className="profiledetailscls">{data?.email || "--"}</div>
+
+                  <div className="text-center">
+                  
+                    <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
+                      <MdOutlinePhone className="text-xl text-[#EB6A59]" />
+                      +{data?.mobileNo || "--"}
+                    </p>
+                  </div>
                 </div>
               </div>
+            </div>
+      
 
-              <div className="mt-5">
-                <label className="profileheddingcls">
+        <div className="col-span-12 md:col-span-8 lg:col-span-9    ">
+          
+          <div className="p-6 shadow-box overflow-hidden rounded-lg bg-white ">
+          <div className="mt-5">
+                <label className="text-2xl font-semibold mb-8 inline-flex">
                   Onboarding Answers :-
                 </label>
                 {sortedQuestions?.map((item, index) => {
@@ -128,9 +151,13 @@ const View = () => {
                   );
                 })}
               </div>
-            </div>
           </div>
         </div>
+        </div>
+      </div>
+
+
+        
       </Layout>
     </>
   );
