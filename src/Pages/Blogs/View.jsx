@@ -58,10 +58,8 @@ const View = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-12 gap-4">
-            <div className="sideclass col-span-12 md:col-span-12">
-              <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-12 md:col-span-6">
+          <div className="grid grid-cols-1  gap-4">
+                    <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Title</label>
                   <div className="profiledetailscls">{data?.title || "--"}</div>
                 </div>
@@ -72,24 +70,16 @@ const View = () => {
                   </div>
                 </div>  */}
 
-                <div className="col-span-12 md:col-span-12">
-                  <label className="profileheddingcls">Description</label>
-                  <div
-                    className="profiledetailscls capitalize"
-                    dangerouslySetInnerHTML={{
-                      __html: data?.description || "--",
-                    }}
-                  ></div>
-                </div>
+             
                 {data?.images?.length ? (
                   <>
-                    <div className="col-span-full">
+                    <div className="col-span-12 md:col-span-6">
                       <label className="profileheddingcls">Images</label>
                       <div className="flex gap-2 flex-wrap items-center">
                         {data.images.map((itm) => {
                           return (
                             <>
-                              <img src={methodModel.noImg(itm)} width="140" />
+                              <img src={methodModel.noImg(itm)} width="" className="h-32" />
                             </>
                           );
                         })}
@@ -99,9 +89,20 @@ const View = () => {
                 ) : (
                   <></>
                 )}
+
+
+<div className="col-span-12 md:col-span-12">
+                  <label className="profileheddingcls">Description</label>
+                  <div
+                    className="profiledetailscls capitalize"
+                    dangerouslySetInnerHTML={{
+                      __html: data?.description || "--",
+                    }}
+                  ></div>
+                </div>
+
+
               </div>
-            </div>
-          </div>
         </div>
       </Layout>
     </>

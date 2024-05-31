@@ -153,8 +153,8 @@ const AddEdit = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 md:col-span-6">
+            <div className="grid grid-cols-12 gap-4 lg:gap-8">
+              <div className="col-span-12 md:col-span-6 lg:col-span-8">
                 <div className="grid grid-cols-12 gap-4">
                   <div className="col-span-12 md:col-span-6 mb-3">
                     <FormControl
@@ -198,12 +198,14 @@ const AddEdit = () => {
                 </div>
               </div>
 
-              <div className="col-span-12 md:col-span-6">
+              <div className="col-span-12 md:col-span-6 lg:col-span-4">
                 <div className="grid grid-cols-1">
                   <div className="col-span-12 mb-3">
+                    <div>
                     <label className="lablefontcls mb-2 inline-flex">
                       Image
                     </label>
+                    </div>
 
                     <ImageUpload
                       model="users"
