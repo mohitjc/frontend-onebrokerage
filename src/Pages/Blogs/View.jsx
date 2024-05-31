@@ -38,8 +38,6 @@ const View = () => {
     getDetail();
   }, []);
 
-  console.log("data", data);
-
   return (
     <>
       <Layout>
@@ -60,42 +58,48 @@ const View = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-12 gap-4">
-            <div className="sideclass col-span-12 md:col-span-12">
-              <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Title</label>
-                  <div className="profiledetailscls">{data?.title || "--"}</div>
-                </div>
-                {/* <div className="col-span-12 md:col-span-6">
+          <div className="grid grid-cols-1  gap-4">
+            <div className="col-span-12 md:col-span-6">
+              <label className="profileheddingcls">Title</label>
+              <div className="profiledetailscls">{data?.title || "--"}</div>
+            </div>
+            {/* <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Category</label>
                   <div className="profiledetailscls capitalize">
                     {data?.category.name || "--"}
                   </div>
                 </div>  */}
 
-                <div className="col-span-12 md:col-span-12">
-                  <label className="profileheddingcls">Description</label>
-                  <div
-                    className="profiledetailscls capitalize"
-                    dangerouslySetInnerHTML={{
-                      __html: data?.description || "--",
-                    }}
-                  ></div>
+            <div className="col-span-12 md:col-span-12">
+              <label className="profileheddingcls">Description</label>
+              <div
+                className="profiledetailscls capitalize"
+                dangerouslySetInnerHTML={{
+                  __html: data?.description || "--",
+                }}
+              ></div>
+            </div>
+            {data?.image ? (
+              <>
+                <div className="col-span-12 md:col-span-6">
+                  <label className="profileheddingcls">Images</label>
+                  <div className="flex gap-2 flex-wrap items-center">
+                    <img src={methodModel.noImg(data?.image)} width="140" />
+                  </div>
                 </div>
-                {data?.image ? (
-                  <>
-                    <div className="col-span-full">
-                      <label className="profileheddingcls">Images</label>
-                      <div className="flex gap-2 flex-wrap items-center">
-                        <img src={methodModel.noImg(data?.image)} width="140" />
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
+              </>
+            ) : (
+              <></>
+            )}
+
+            <div className="col-span-12 md:col-span-12">
+              <label className="profileheddingcls">Description</label>
+              <div
+                className="profiledetailscls capitalize"
+                dangerouslySetInnerHTML={{
+                  __html: data?.description || "--",
+                }}
+              ></div>
             </div>
           </div>
         </div>
