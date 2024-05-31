@@ -131,12 +131,14 @@ const Blogs = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        ApiClient.put(shared.statusApi, { id: itm?._id }).then((res) => {
-          if (res.success) {
-            getData();
+        ApiClient.put(shared.statusApi, { id: itm?._id, status }).then(
+          (res) => {
+            if (res.success) {
+              getData();
+            }
+            loader(false);
           }
-          loader(false);
-        });
+        );
       }
     });
   };
