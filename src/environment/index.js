@@ -1,5 +1,5 @@
 let host = document.location.host;
-let apiUrl = "http://195.35.8.196:6057/"; //"https://stageapi.ecometrixs.com/";
+let apiUrl = "https://shroomapi.jcsoftwaresolution.in/"; //"https://stageapi.ecometrixs.com/";
 
 const environment = {
   api: apiUrl,
