@@ -1,9 +1,10 @@
 let host = document.location.host;
-let apiUrl = "http://74.208.206.18:4025/"; //"https://stageapi.ecometrixs.com/";
+let apiUrl = "http://195.35.8.196:6057/"; //"https://stageapi.ecometrixs.com/";
 
 const environment = {
   api: apiUrl,
-  sasKey:"sp=racwdli&st=2024-05-01T12:17:30Z&se=2070-05-01T20:17:30Z&sv=2022-11-02&sr=c&sig=AQ7v4HhuDj%2BeA0pZHQEy2zATZKSwBMpjie%2BhvcaLc6Y%3D",
+  sasKey:
+    "sp=racwdli&st=2024-05-01T12:17:30Z&se=2070-05-01T20:17:30Z&sv=2022-11-02&sr=c&sig=AQ7v4HhuDj%2BeA0pZHQEy2zATZKSwBMpjie%2BhvcaLc6Y%3D",
   // sasurl: "https://skillprobackendstore.blob.core.windows.net",
   sasurl: apiUrl,
   container: "img",
