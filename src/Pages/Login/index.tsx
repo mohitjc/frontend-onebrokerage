@@ -167,7 +167,7 @@ const Login = () => {
             </div>
           </form>
         ) : (
-          <form className="w-7/12	mx-auto" onSubmit={hendleSubmit}>
+          <form className="w-11/12 md:w-7/12	mx-auto" onSubmit={hendleSubmit}>
            <div className="">
               <h1 className="text-[40px] font-semibold text-white ">Sign In</h1>
               <span className="flex w-10 h-1 bg-[#EB6A59] mt-1"></span>

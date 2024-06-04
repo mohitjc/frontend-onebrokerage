@@ -150,7 +150,7 @@ const Signup = () => {
   return (
     <>
       <AuthLayout>
-        <form className="" onSubmit={hendleSubmit} autoComplete="off">
+        <form className="w-11/12 md:w-7/12	mx-auto" onSubmit={hendleSubmit} autoComplete="off">
           <h4 className="text-typo mb-6 text-2xl font-bold">Sign Up</h4>
           {/* <input type="text"
             onChange={e => setForm({ ...form, loginId: e.target.value })}
