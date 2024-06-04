@@ -47,6 +47,9 @@ import ViewQuestion from "./Pages/Questions/View";
 import Tags from "./Pages/Tags";
 import AddEditTag from "./Pages/Tags/AddEdit";
 import ViewTag from "./Pages/Tags/View";
+import Blogs from "./Pages/Blogs";
+import AddEditBlog from "./Pages/Blogs/AddEdit";
+import ViewBlog from "./Pages/Blogs/View";
 
 const { persistor, store } = configureStoreProd();
 
@@ -95,6 +98,10 @@ function App() {
     { url: "/tag/add", element: <AddEditTag /> },
     { url: "/tag/detail/:id", element: <ViewTag /> },
     { url: "/tag/edit/:id", element: <AddEditTag /> },
+    { url: "/blog", element: <Blogs /> },
+    { url: "/blog/add", element: <AddEditBlog /> },
+    { url: "/blog/detail/:id", element: <ViewBlog /> },
+    { url: "/blog/edit/:id", element: <AddEditBlog /> },
   ];
 
   return (

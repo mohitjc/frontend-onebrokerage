@@ -8,10 +8,12 @@ import methodModel from "../../methods/methods";
 import { useSelector } from "react-redux";
 import { LiaUserSolid } from "react-icons/lia";
 import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
+import questionsKeys from "./questions";
 
 const Profile = () => {
   const user = useSelector((state: any) => state.user);
   const [data, setData]: any = useState("");
+  const [questions, setQuestions]: any = useState([]);
   const gallaryData = () => {
     loader(true);
     ApiClient.get(`user/profile`, { id: user._id }).then((res) => {
@@ -22,11 +24,26 @@ const Profile = () => {
     });
   };
 
+  const getQuestionsList = () => {
+    ApiClient.get(`onboarding-questions/list`, { id: user._id }).then((res) => {
+      if (res.success) {
+        setQuestions(res.data);
+      }
+    });
+  };
+
   useEffect(() => {
     if (user.loggedIn) {
       gallaryData();
+      getQuestionsList();
     }
   }, []);
+
+  const sortedQuestions = questions?.sort(
+    (a: any, b: any) => a.order - b.order
+  );
+
+  console.log("questions", questions);
 
   return (
     <Layout>
@@ -56,13 +73,13 @@ const Profile = () => {
         </div>
 
         <div className="inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white   ">
-          <div className="grid items-start grid-cols-12 gap-4">
+          <div className="grid items-center grid-cols-12 gap-4 mb-5">
             <div className="col-span-12 md:col-span-7 lg:col-span-7">
-              <div className="flex items-start gap-4 shrink-0">
+              <div className="flex items-center gap-4 shrink-0">
                 <div className="">
                   <img
                     src={methodModel.userImg(data && data.image)}
-                    className="h-32 w-32 rounded-md object-contain mx-auto"
+                    className="h-36 w-36 rounded-full object-cover mx-auto"
                   />
                 </div>
                 <div className="flex flex-col gap-y-4 ml-4 lg:border-l border-dashed border-gray-400 pl-5">
@@ -93,6 +110,7 @@ const Profile = () => {
               </div>
             </div>
           </div>
+       
         </div>
       </div>
     </Layout>

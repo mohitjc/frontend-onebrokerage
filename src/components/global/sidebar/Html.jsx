@@ -23,7 +23,7 @@ import environment from "../../../environment";
 import ApiClient from "../../../methods/api/apiClient";
 import { UserCircleIcon } from "@heroicons/react/20/solid";
 import { FiUsers } from "react-icons/fi";
-import { FaQuestion } from "react-icons/fa";
+import { FaBlog, FaQuestion } from "react-icons/fa";
 
 const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
   const [activeplan, setActiveplan] = useState();
@@ -107,6 +107,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       name: "Tags",
       icon: <LiaUserTagSolid className="text-[#fff] shrink-0 text-lg" />,
       url: "/tag",
+      key: "",
+    },
+    {
+      name: "Blogs",
+      icon: <FaBlog className="text-[#fff] shrink-0 text-lg" />,
+      url: "/blog",
       key: "",
     },
   ];

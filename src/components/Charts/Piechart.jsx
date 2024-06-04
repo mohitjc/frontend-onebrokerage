@@ -4,11 +4,11 @@ import ReactEcharts from "echarts-for-react";
 const PieChart = () => {
   // Data for the pie chart
   const data = [
-    { value: 20, name: "A" },
-    { value: 15, name: "B" },
-    { value: 25, name: "C" },
-    { value: 10, name: "D" },
-    { value: 30, name: "E" },
+    { value: 20, name: "Candies" },
+    { value: 15, name: "Gummies" },
+    { value: 25, name: "Chocolate" },
+    { value: 10, name: "Dried" },
+    { value: 30, name: "capsules" },
   ];
 
   // Options for the pie chart

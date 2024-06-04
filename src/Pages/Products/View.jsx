@@ -8,6 +8,7 @@ import shared from "./shared";
 import loader from "../../methods/loader";
 import { Tooltip } from "antd";
 import methodModel from "../../methods/methods";
+import environment from "../../environment";
 
 const View = () => {
   const [host, setHost] = useState();
@@ -106,6 +107,42 @@ const View = () => {
                             </>
                           );
                         })}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {data?.qr_image ? (
+                  <>
+                    <div className="col-span-6">
+                      <label className="profileheddingcls">QR Code</label>
+                      <div className="flex gap-2 flex-wrap items-center">
+                        <img
+                          src={methodModel.noImg(data?.qr_image)}
+                          width="140"
+                        />
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {data?.qr_pdf ? (
+                  <>
+                    <div className="col-span-6">
+                      <label className="profileheddingcls">Download PDF</label>
+                      <div className="flex gap-2 flex-wrap items-center">
+                        <a
+                          href={`${environment.apiUrl}/document/${data?.qr_pdf}`}
+                          download={data?.qr_pdf}
+                          target="blank"
+                        >
+                          <img
+                            src="/assets/img/PDF_file.png"
+                            className="h-20"
+                          />
+                        </a>
                       </div>
                     </div>
                   </>
