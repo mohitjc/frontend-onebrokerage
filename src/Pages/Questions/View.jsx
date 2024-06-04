@@ -81,6 +81,9 @@ const View = () => {
                   <label className="profileheddingcls">Options</label>
                   <div className="profiledetailscls capitalize">
                     {/* {data?.options.join(",") || "--"} */}
+                    {data?.options
+                      .map((option) => option?.name || "--")
+                      .join(", ")}
                   </div>
                 </div>
               </div>
