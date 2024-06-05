@@ -19,7 +19,6 @@ const Users = () => {
   const history = useNavigate();
 
   const sortClass = (key) => {
-    console.log("CHECK", filters.key, key);
     let cls = "fa-sort";
     if (filters.key == key && filters.sorder == "asc") cls = "fa-sort-up";
     else if (filters.key == key && filters.sorder == "desc")
