@@ -286,6 +286,7 @@ const Html = ({
               columns={columns}
               page={filters.page}
               count={filters.count}
+              filters={filters}
               total={total}
               result={(e) => {
                 if (e.event == "page") pageChange(e.value);
