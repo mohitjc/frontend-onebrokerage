@@ -28,7 +28,7 @@ const AddEdit = () => {
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);
   const formValidation = [
-    /*     { key: "status", required: true }, */
+    { key: "color", required: true },
     { key: "type", required: true, message: "Type is required" },
     /* { key: "timezone", required: true },
     { key: "description", required: true, message: "Description is required" }, */
