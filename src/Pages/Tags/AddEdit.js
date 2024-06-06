@@ -163,11 +163,13 @@ const AddEdit = () => {
                 )}
               </div>
               <div className=" mb-3">
+                <div className="grid grid-cols-2 gap-4 items-end">
                 <FormControl
                   type="color"
                   name="color"
                   label="Color"
                   value={form.color}
+                 
                   onChange={(e) => setform({ ...form, color: e })}
                   required
                 />
@@ -178,6 +180,7 @@ const AddEdit = () => {
                   onChange={(e) => setform({ ...form, color: e })}
                   required
                 />
+                </div>
               </div>
 
               <div className="mb-3">

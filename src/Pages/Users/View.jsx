@@ -136,13 +136,13 @@ const View = () => {
                         {item.title}
                       </div>
                       <div className="flex items-start font-semibold gap-2 mb-2 ">
-                        <span className="h-8 w-8 justify-center flex items-center bg-gray-200 shrink-0">
+                        <span className="h-6 w-6 justify-center flex items-center bg-gray-200 shrink-0">
                           Q
                         </span>{" "}
                         {item.question}
                       </div>
                       <div className="flex items-start font-regular gap-2">
-                        <span className="h-8 w-8 justify-center text-white flex items-center bg-[#EB6A59] shrink-0">
+                        <span className="h-6 w-6 justify-center text-white flex items-center bg-[#EB6A59] shrink-0">
                           A
                         </span>
                         <span> {answer}</span>

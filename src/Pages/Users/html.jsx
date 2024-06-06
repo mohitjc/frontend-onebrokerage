@@ -48,7 +48,7 @@ const Html = ({
       name: "Email",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.email}</span>;
+        return <span className="">{row?.email}</span>;
       },
     },
     {
