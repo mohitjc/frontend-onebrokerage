@@ -22,6 +22,7 @@ const AddEdit = () => {
     name: "",
     type: "",
     image: "",
+    color: "#f5655a",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -160,6 +161,23 @@ const AddEdit = () => {
                 {submitted && !form.type && (
                   <span className="text-danger">type is required.</span>
                 )}
+              </div>
+              <div className=" mb-3">
+                <FormControl
+                  type="color"
+                  name="color"
+                  label="Color"
+                  value={form.color}
+                  onChange={(e) => setform({ ...form, color: e })}
+                  required
+                />
+                <FormControl
+                  type="text"
+                  name="color"
+                  value={form.color}
+                  onChange={(e) => setform({ ...form, color: e })}
+                  required
+                />
               </div>
 
               <div className="mb-3">
