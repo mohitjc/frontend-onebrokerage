@@ -50,6 +50,7 @@ import ViewTag from "./Pages/Tags/View";
 import Blogs from "./Pages/Blogs";
 import AddEditBlog from "./Pages/Blogs/AddEdit";
 import ViewBlog from "./Pages/Blogs/View";
+import Emails from "./Pages/Emails";
 
 const { persistor, store } = configureStoreProd();
 
@@ -102,6 +103,7 @@ function App() {
     { url: "/blog/add", element: <AddEditBlog /> },
     { url: "/blog/detail/:id", element: <ViewBlog /> },
     { url: "/blog/edit/:id", element: <AddEditBlog /> },
+    { url: "/emails", element: <Emails /> },
   ];
 
   return (

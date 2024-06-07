@@ -115,6 +115,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/blog",
       key: "",
     },
+    {
+      name: "Emails",
+      icon: <FaBlog className="text-[#fff] shrink-0 text-lg" />,
+      url: "/emails",
+      key: "",
+    },
   ];
 
   return (
