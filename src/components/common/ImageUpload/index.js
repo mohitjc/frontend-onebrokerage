@@ -31,7 +31,6 @@ const ImageUpload = ({
       console.log("res", res);
       if (res.files) {
         let image = res.files.map((itm) => itm.fileName);
-        console.log("image", image);
         if (!multiple) {
           setImg(image[0]);
           result({ event: "value", value: image[0] });
