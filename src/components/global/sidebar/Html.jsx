@@ -15,6 +15,7 @@ import {
   MdEventAvailable,
   MdOutlineEmojiEvents,
   MdOutlineEventAvailable,
+  MdOutlineMarkEmailRead,
 } from "react-icons/md";
 import { LuUser2 } from "react-icons/lu";
 import { CiSettings } from "react-icons/ci";
@@ -117,11 +118,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     },
     {
       name: "Emails",
-      icon: <FaBlog className="text-[#fff] shrink-0 text-lg" />,
+      icon: <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />,
       url: "/emails",
       key: "",
     },
   ];
+
 
   return (
     <>

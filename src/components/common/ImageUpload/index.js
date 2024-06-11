@@ -34,7 +34,7 @@ const ImageUpload = ({
         console.log("image", image);
         if (!multiple) {
           setImg(image[0]);
-          result({ event: "value", value: image });
+          result({ event: "value", value: image[0] });
         } else {
           images = [...images, ...image];
           setImg(images);
