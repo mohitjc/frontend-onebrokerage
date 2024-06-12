@@ -8,6 +8,7 @@ import { TiArrowSortedDown } from "react-icons/ti";
 import { TbCategoryPlus } from "react-icons/tb";
 import { BiCartAdd } from "react-icons/bi";
 import { PiNewspaper } from "react-icons/pi";
+import { GrUserSettings } from "react-icons/gr";
 
 import { SiPlanet, SiSuperuser } from "react-icons/si";
 import {
@@ -15,6 +16,7 @@ import {
   MdEventAvailable,
   MdOutlineEmojiEvents,
   MdOutlineEventAvailable,
+  MdOutlineGroups,
   MdOutlineMarkEmailRead,
 } from "react-icons/md";
 import { LuUser2 } from "react-icons/lu";
@@ -76,13 +78,13 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     },
     {
       name: "Groove Group",
-      icon: <FiUsers className="text-[#fff] shrink-0 text-lg" />,
+      icon: <MdOutlineGroups className="text-[#fff] shrink-0 text-lg" />,
       url: "/customers",
       key: "",
     },
     {
       name: "Roles",
-      icon: <FiUsers className="text-[#fff] shrink-0 text-lg" />,
+      icon: <GrUserSettings className="text-[#fff] shrink-0 text-lg" />,
       url: "/roles",
       key: "",
     },
