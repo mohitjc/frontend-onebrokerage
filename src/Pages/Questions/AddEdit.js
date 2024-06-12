@@ -55,7 +55,7 @@ const AddEdit = () => {
     let url = shared.addApi;
     let value = {
       ...form,
-      options:options
+      options: options,
     };
     if (value.id) {
       method = "put";
@@ -92,37 +92,35 @@ const AddEdit = () => {
             payload.category = value.category._id;
           }
 
-      
           payload.id = id;
           setform({
             ...payload,
           });
 
-          let options=value?.options||[]
-          options=options.map(itm=>{
-            let item=itm
-            if(!itm?.name) item={name:itm,image:''}
-            return item
-          })
-          setOptions(options)
+          let options = value?.options || [];
+          options = options.map((itm) => {
+            let item = itm;
+            if (!itm?.name) item = { name: itm, image: "" };
+            return item;
+          });
+          setOptions(options);
         }
         loader(false);
       });
     }
   }, [id]);
 
-  const updateOption=(i,v,key='')=>{
-    let arr=options||[]
-    arr[i][key]=v
-    setOptions([...arr])
-  }
+  const updateOption = (i, v, key = "") => {
+    let arr = options || [];
+    arr[i][key] = v;
+    setOptions([...arr]);
+  };
 
-  const deleteOption=(i)=>{
-    let arr=options||[]
-    arr=arr.filter((itm,ind)=>ind!=i)
-    setOptions([...arr])
-  }
-
+  const deleteOption = (i) => {
+    let arr = options || [];
+    arr = arr.filter((itm, ind) => ind != i);
+    setOptions([...arr]);
+  };
 
   return (
     <>
@@ -211,39 +209,40 @@ const AddEdit = () => {
               </div>
               <div className="col-span-2 mb-3">
                 <label>Options</label>
-               
-                {options.map((itm,i)=>{
-                  return <>
-                <div className="grid grid-cols-2 gap-2 shadow p-2 mb-4">
-                  <div>
-                  <FormControl
-                  type="text"
-                  label="Name"
-                  value={itm.name}
-                  onChange={(e) => {
-                    updateOption(i,e,'name')
-                  }}
-                  disabled
-                  required
-                />
-                  </div>
-                  <div>
-                  <label >Image</label>
-                  <div>
-                  <ImageUpload
-                        model="users"
-                        result={(e) => updateOption(i,e.value,'image')}
-                        value={itm.image}
-                        label="Choose file"
-                      />
-                    </div>
-                       
-                  </div>
-                  {/* <div className="col-span-full text-right">
+
+                {options.map((itm, i) => {
+                  return (
+                    <>
+                      <div className="grid grid-cols-2 gap-2 shadow p-2 mb-4">
+                        <div>
+                          <FormControl
+                            type="text"
+                            label="Name"
+                            value={itm.name}
+                            onChange={(e) => {
+                              updateOption(i, e, "name");
+                            }}
+                            disabled
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label>Image</label>
+                          <div>
+                            <ImageUpload
+                              model="users"
+                              result={(e) => updateOption(i, e.value, "image")}
+                              value={itm.image}
+                              label="Choose file"
+                            />
+                          </div>
+                        </div>
+                        {/* <div className="col-span-full text-right">
                   <i className="fa fa-times cusrsor-pointer" onClick={()=>deleteOption(i)}></i>
                   </div> */}
-                </div>
-                  </>
+                      </div>
+                    </>
+                  );
                 })}
                 {/* {submitted && !form.options && (
                   <div className="text-danger">options are required.</div>
