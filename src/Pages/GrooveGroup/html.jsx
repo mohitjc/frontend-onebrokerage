@@ -12,9 +12,8 @@ import datepipeModel from "../../models/datepipemodel";
 import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
-import methodModel from "../../methods/methods";
-import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { PiEyeLight } from "react-icons/pi";
+import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 const Html = ({
   sorting,
   filter,
@@ -32,35 +31,47 @@ const Html = ({
   changestatus,
   isAllow,
   total = { total },
+  sortClass,
 }) => {
   const user = useSelector((state) => state.user);
   const columns = [
     {
-      key: "title",
-      name: "Title",
+      key: "fullName",
+      name: "Full Name",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.title}</span>;
+        return <span className="capitalize">{row?.fullName}</span>;
       },
     },
-    // {
-    //   key: "category",
-    //   name: "Category",
-    //   render: (row) => {
-    //     return <span className="capitalize">{row?.category}</span>;
-    //   },
-    // },
     {
-      key: "image",
-      name: "Image",
+      key: "email",
+      name: "Email",
+      sort: true,
+      render: (row) => {
+        return <span className="">{row?.email}</span>;
+      },
+    },
+    {
+      key: "mobileNo",
+      name: "Mobile No",
       render: (row) => {
         return (
           <>
-            <img src={methodModel.noImg(row?.image)} height={30} width={30} />
+            <p className="capitalize">
+              {row?.mobileNo ? "+" : ""}
+              {row?.mobileNo}
+            </p>
           </>
         );
       },
     },
+    /* {
+      key: "timezone",
+      name: "Timezone",
+      render: (row) => {
+        return <>{row?.timezone}</>;
+      },
+    }, */
     {
       key: "status",
       name: "Status",
@@ -98,7 +109,6 @@ const Html = ({
                   <PiEyeLight />
                 </a>
               </Tooltip>
-
               <Tooltip placement="top" title="Edit">
                 <a
                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -109,12 +119,13 @@ const Html = ({
               </Tooltip>
 
               <Tooltip placement="top" title="Delete">
+                {" "}
                 <span
                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                   onClick={() => deleteItem(itm.id)}
                 >
                   <LiaTrashAlt />
-                </span>
+                </span>{" "}
               </Tooltip>
             </div>
           </>
@@ -275,10 +286,14 @@ const Html = ({
               columns={columns}
               page={filters.page}
               count={filters.count}
+              filters={filters}
               total={total}
               result={(e) => {
                 if (e.event == "page") pageChange(e.value);
-                if (e.event == "sort") sorting(e.value);
+                if (e.event == "sort") {
+                  sorting(e.value);
+                  sortClass(e.value);
+                }
                 if (e.event == "count") count(e.value);
               }}
             />

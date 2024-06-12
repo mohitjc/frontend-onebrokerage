@@ -75,6 +75,18 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       key: "",
     },
     {
+      name: "Groove Group",
+      icon: <FiUsers className="text-[#fff] shrink-0 text-lg" />,
+      url: "/customers",
+      key: "",
+    },
+    {
+      name: "Roles",
+      icon: <FiUsers className="text-[#fff] shrink-0 text-lg" />,
+      url: "/roles",
+      key: "",
+    },
+    {
       name: "Categories",
       icon: <TbCategoryPlus className="text-[#fff] shrink-0 text-lg" />,
       url: "/category",
@@ -123,7 +135,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       key: "",
     },
   ];
-
 
   return (
     <>

@@ -51,6 +51,9 @@ import Blogs from "./Pages/Blogs";
 import AddEditBlog from "./Pages/Blogs/AddEdit";
 import ViewBlog from "./Pages/Blogs/View";
 import Emails from "./Pages/Emails";
+import GrooveGroup from "./Pages/GrooveGroup";
+import GrooveGroupDetail from "./Pages/GrooveGroup/View";
+import AddEditGrooveGroup from "./Pages/GrooveGroup/AddEdit";
 
 const { persistor, store } = configureStoreProd();
 
@@ -104,6 +107,10 @@ function App() {
     { url: "/blog/detail/:id", element: <ViewBlog /> },
     { url: "/blog/edit/:id", element: <AddEditBlog /> },
     { url: "/emails", element: <Emails /> },
+    { url: "/customers", element: <GrooveGroup /> },
+    { url: "/customers/edit/:id", element: <AddEditGrooveGroup /> },
+    { url: "/customers/add", element: <AddEditGrooveGroup /> },
+    { url: "/customers/detail/:id", element: <GrooveGroupDetail /> },
   ];
 
   return (

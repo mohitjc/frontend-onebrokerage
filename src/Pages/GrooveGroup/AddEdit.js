@@ -153,23 +153,7 @@ const AddEdit = () => {
                   required
                 />
               </div>
-              <div className="mobile_number mb-3">
-                <FormControl
-                  type="select"
-                  name="role"
-                  label="Role"
-                  value={form.mobileNo}
-                  options={[]}
-                  onChange={(e) => setform({ ...form, mobileNo: e })}
-                  required
-                  theme="search"
-                />
-                {/* {submitted && !form.mobileNo && (
-                  <div className="invalid-feedback d-block">
-                    role is required
-                  </div>
-                )} */}
-              </div>
+
               <div className="mobile_number mb-3">
                 <FormControl
                   type="phone"
