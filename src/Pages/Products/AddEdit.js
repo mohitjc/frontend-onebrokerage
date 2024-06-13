@@ -37,7 +37,10 @@ const AddEdit = () => {
   const [submitted, setSubmitted] = useState(false);
   const [subcategory, setSubcategory] = useState([]);
   const [productTags, setProductTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
   const user = useSelector((state) => state.user);
+  const deletedTags = findDeletedItems(selectedTags, form.tags);
+
   const formValidation = [
     {
       key: "product_type",
@@ -111,6 +114,7 @@ const AddEdit = () => {
     if (value.id) {
       method = "put";
       url = shared.editApi;
+      value.deleted_tags = deletedTags;
     } else {
       value.addedBy = user._id;
       value.groupId = user?.groupId?._id;
@@ -127,11 +131,29 @@ const AddEdit = () => {
     });
   };
 
+  function findDeletedItems(initialArray, updatedArray) {
+    // Create a copy of the initial array
+    let initialCopy = [...initialArray];
+    // Loop through the updated array
+    updatedArray.forEach((item) => {
+      // Check if the item exists in the initial copy
+      let index = initialCopy.indexOf(item);
+      if (index !== -1) {
+        // If found, remove it from the initial copy
+        initialCopy.splice(index, 1);
+      }
+    });
+
+    // At this point, the initial copy contains the deleted items
+    return initialCopy;
+  }
+
   useEffect(() => {
     if (id) {
       loader(true);
       ApiClient.get(shared.detailApi, { id }).then((res) => {
         if (res.success) {
+          setSelectedTags(res.data.tags);
           let value = res.data;
           let payload = form;
 
@@ -182,8 +204,6 @@ const AddEdit = () => {
       getProductTags();
     }
   }, [form.product_type]);
-
-  console.log("FORM", form);
 
   return (
     <>
@@ -299,9 +319,9 @@ const AddEdit = () => {
                       </label>
                       <MultiSelectDropdown
                         options={productTags}
-                        result={({ value }) =>
-                          setform({ ...form, tags: value })
-                        }
+                        result={({ value }) => {
+                          setform({ ...form, tags: value });
+                        }}
                         intialValue={form.tags}
                       />
                       {submitted && form.tags.length == 0 && (
