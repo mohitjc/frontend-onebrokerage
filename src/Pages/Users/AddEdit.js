@@ -16,11 +16,13 @@ import PhoneInput from "react-phone-input-2";
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
+  const [roleOptions, setRoleOptions] = useState([]);
   const [form, setform] = useState({
     id: "",
     fullName: "",
     email: "",
     mobileNo: "",
+    role: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -29,9 +31,7 @@ const AddEdit = () => {
   const formValidation = [
     { key: "mobileNo", required: true },
     { key: "email", required: true, message: "Email is required", email: true },
-    /* { key: "timezone", required: true },
-    { key: "description", required: true, message: "Description is required" }, */
-    // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
+    { key: "role", required: true },
   ];
 
   const timezones = timezoneModel.list;
@@ -47,7 +47,6 @@ const AddEdit = () => {
     let value = {
       ...form,
       ...images,
-      role: "user",
     };
     if (value.id) {
       method = "put";
@@ -118,6 +117,23 @@ const AddEdit = () => {
     return value;
   };
 
+  const getRolesList = () => {
+    ApiClient.get("role/listing").then((res) => {
+      if (res.success) {
+        const filtered = res?.data.filter((itm) => itm.status == "active");
+        setRoleOptions(
+          filtered.map(({ _id, name }) => {
+            return { id: _id, name: name };
+          })
+        );
+      }
+    });
+  };
+
+  useEffect(() => {
+    getRolesList();
+  }, []);
+
   return (
     <>
       <Layout>
@@ -158,17 +174,17 @@ const AddEdit = () => {
                   type="select"
                   name="role"
                   label="Role"
-                  value={form.mobileNo}
-                  options={[]}
-                  onChange={(e) => setform({ ...form, mobileNo: e })}
+                  value={form.role}
+                  options={roleOptions}
+                  onChange={(e) => setform({ ...form, role: e })}
                   required
                   theme="search"
                 />
-                {/* {submitted && !form.mobileNo && (
+                {submitted && !form.role && (
                   <div className="invalid-feedback d-block">
                     role is required
                   </div>
-                )} */}
+                )}
               </div>
               <div className="mobile_number mb-3">
                 <FormControl

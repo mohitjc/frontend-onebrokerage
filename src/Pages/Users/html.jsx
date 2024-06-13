@@ -51,6 +51,14 @@ const Html = ({
         return <span className="">{row?.email}</span>;
       },
     },
+    // {
+    //   key: "role",
+    //   name: "role",
+    //   sort: true,
+    //   render: (row) => {
+    //     return <span className="">{row?.role}</span>;
+    //   },
+    // },
     {
       key: "mobileNo",
       name: "Mobile No",

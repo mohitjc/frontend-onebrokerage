@@ -29,9 +29,6 @@ const AddEdit = () => {
   const formValidation = [
     { key: "mobileNo", required: true },
     { key: "email", required: true, message: "Email is required", email: true },
-    /* { key: "timezone", required: true },
-    { key: "description", required: true, message: "Description is required" }, */
-    // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
   ];
 
   const timezones = timezoneModel.list;
