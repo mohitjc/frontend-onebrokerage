@@ -173,12 +173,12 @@ const Roles = (p) => {
 
     let status = "active";
 
-    if (
-      itm.id == "64b15102b14de6c28838f7d2" ||
-      itm.id == "64b152a909d268f038611929"
-    ) {
-      return;
-    }
+    // if (
+    //   itm.id == "64b15102b14de6c28838f7d2" ||
+    //   itm.id == "64b152a909d268f038611929"
+    // ) {
+    //   return;
+    // }
     if (itm.status == "active") status = "deactive";
     Swal.fire({
       title: "Are you sure?",
@@ -235,9 +235,9 @@ const Roles = (p) => {
   };
 
   const isAllow = (key = "") => {
-    let permissions = user.roleDetail?.permissions?.[0];
+    let permissions = user.role?.permissions?.[0];
     let value = permissions?.[key];
-    if (user?.roleDetail?._id == environment.adminRoleId) value = true;
+    // if (user?.role?._id === environment.adminRoleId) value = true;
     // return true;
     return value;
   };

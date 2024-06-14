@@ -134,6 +134,7 @@ const Products = () => {
 
   const statusChange = (itm) => {
     /*  if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return; */
+    if (!isAllow(`edit${shared.check}`)) return;
     let status = "active";
     if (itm.status == "active") status = "deactive";
     Swal.fire({
