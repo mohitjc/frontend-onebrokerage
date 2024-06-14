@@ -55,7 +55,7 @@ const Html = ({
           </p>
         </div>
         <div className="flex items-center gap-2">
-          {isAllow("addRoles") ? (
+          {/* {isAllow("addRoles") ? (
             <Link
               className="bg-primary leading-10 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
               to="/roles/add"
@@ -64,7 +64,7 @@ const Html = ({
             </Link>
           ) : (
             <></>
-          )}
+          )} */}
 
           <SelectDropdown
             id="statusDropdown"

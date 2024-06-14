@@ -44,6 +44,7 @@ const AddEditRole = () => {
     let url = "role/add";
     let value = {
       ...form,
+      loginPanel: "admin",
     };
     if (value.id) {
       method = "put";
@@ -52,7 +53,6 @@ const AddEditRole = () => {
       value.addedBy = user._id;
       delete value.id;
     }
-
     loader(true);
     ApiClient.allApi(url, value, method).then((res) => {
       if (res.success) {
