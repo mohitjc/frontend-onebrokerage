@@ -184,11 +184,11 @@ const Products = () => {
     link.click();
   };
 
-  const isAllow = (key = "") => {
-    let permissions = user.role?.permissions;
+  const isAllow = (key = "read") => {
+    let permissions = user.role?.permissions?.[0];
     let value = permissions?.[key];
-    return true;
-    // return value
+    // return true;
+    return value;
   };
 
   useEffect(() => {

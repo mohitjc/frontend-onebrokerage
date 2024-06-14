@@ -201,10 +201,10 @@ const Content = () => {
   };
 
   const isAllow = (key = "") => {
-    let permissions = user.role?.permissions;
+    let permissions = user.role?.permissions?.[0];
     let value = permissions?.[key];
-    return true;
-    // return value
+    // return true;
+    return value;
   };
 
   useEffect(() => {

@@ -11,6 +11,7 @@ import { FiEdit3, FiPlus } from "react-icons/fi";
 import SelectDropdown from "../../components/common/SelectDropdown";
 import statusModel from "../../models/status.model";
 import { PiEyeLight } from "react-icons/pi";
+import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 const Html = ({
   clear,
   sortClass,
@@ -155,17 +156,15 @@ const Html = ({
                             {/* dropdown */}
                             <td className="!text-typo !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
                               <div className="flex items-center justify-start gap-1.5">
-                                {isAllow("editRoles") ? (
-                                  <>
-                                    <Tooltip placement="top" title="Edit">
-                                      <a
-                                        className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
-                                        onClick={(e) => edit(itm.id)}
-                                      >
-                                        <FiEdit3 />
-                                      </a>
-                                    </Tooltip>
-                                  </>
+                                {isAllow(`editRoles`) ? (
+                                  <Tooltip placement="top" title="Edit">
+                                    <a
+                                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                                      onClick={(e) => edit(itm.id)}
+                                    >
+                                      <LiaEdit />
+                                    </a>
+                                  </Tooltip>
                                 ) : (
                                   <></>
                                 )}
@@ -174,14 +173,12 @@ const Html = ({
                                 itm.id != environment.userRoleId &&
                                 isAllow("deleteRoles") ? (
                                   <>
-                                    {" "}
                                     <Tooltip placement="top" title="Delete">
-                                      {" "}
                                       <span
-                                        className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
+                                        className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg "
                                         onClick={() => deleteItem(itm.id)}
                                       >
-                                        <BsTrash3 />
+                                        <LiaTrashAlt />
                                       </span>
                                     </Tooltip>
                                   </>

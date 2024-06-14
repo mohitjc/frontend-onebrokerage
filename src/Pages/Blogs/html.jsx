@@ -90,54 +90,49 @@ const Html = ({
         return (
           <>
             <div className="flex items-center justify-start gap-1.5">
-              <Tooltip placement="top" title="View">
-                <a
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={(e) => view(itm.id)}
-                >
-                  <PiEyeLight />
-                </a>
-              </Tooltip>
-
-              <Tooltip placement="top" title="Edit">
-                <a
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={(e) => edit(itm.id)}
-                >
-                  <LiaEdit />
-                </a>
-              </Tooltip>
-
-              <Tooltip placement="top" title="Delete">
-                <span
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={() => deleteItem(itm.id)}
-                >
-                  <LiaTrashAlt />
-                </span>
-              </Tooltip>
+              {isAllow(`read${shared.check}`) ? (
+                <Tooltip placement="top" title="View">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => view(itm.id)}
+                  >
+                    <PiEyeLight />
+                  </a>
+                </Tooltip>
+              ) : (
+                <></>
+              )}
+              {isAllow(`edit${shared.check}`) ? (
+                <Tooltip placement="top" title="Edit">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => edit(itm.id)}
+                  >
+                    <LiaEdit />
+                  </a>
+                </Tooltip>
+              ) : (
+                <></>
+              )}
+              {isAllow(`delete${shared.check}`) ? (
+                <Tooltip placement="top" title="Delete">
+                  {" "}
+                  <span
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={() => deleteItem(itm.id)}
+                  >
+                    <LiaTrashAlt />
+                  </span>{" "}
+                </Tooltip>
+              ) : (
+                <></>
+              )}
             </div>
           </>
         );
       },
     },
   ];
-
-  /*  const getGroups = () => {
-    let f = {
-      page: 1,
-      count: 10,
-    };
-    ApiClient.get("api/group/list", f).then((res) => {
-      if (res.success) {
-        setGroup(res.data);
-      }
-    });
-  };
- */
-  //   useEffect(() => {
-  //       getGroups()
-  //   }, [])
 
   return (
     <Layout>

@@ -44,7 +44,7 @@ const AddEditRole = () => {
     let url = "role/add";
     let value = {
       ...form,
-      loginPanel: "admin",
+      loginPannel: "admin",
     };
     if (value.id) {
       method = "put";

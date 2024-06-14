@@ -13,6 +13,8 @@ import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
 import methodModel from "../../methods/methods";
+import { PiEyeLight } from "react-icons/pi";
+import { LiaEdit } from "react-icons/lia";
 const Html = ({
   sorting,
   filter,
@@ -66,21 +68,25 @@ const Html = ({
         return (
           <>
             <div className="flex items-center justify-start gap-1.5">
-              <Tooltip placement="top" title="View">
-                <a
-                  className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
-                  onClick={(e) => view(itm.id)}
-                >
-                  <span class="material-symbols-outlined">visibility</span>
-                </a>
-              </Tooltip>
-              {isAllow(`edit${shared.check}`) && itm.addedBy == user._id ? (
+              {isAllow(`read${shared.check}`) ? (
+                <Tooltip placement="top" title="View">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => view(itm.id)}
+                  >
+                    <PiEyeLight />
+                  </a>
+                </Tooltip>
+              ) : (
+                <></>
+              )}
+              {isAllow(`edit${shared.check}`) ? (
                 <Tooltip placement="top" title="Edit">
                   <a
-                    className="border cursor-pointer border-[#EB6A59] hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-xl"
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) => edit(itm.id)}
                   >
-                    <FiEdit3 />
+                    <LiaEdit />
                   </a>
                 </Tooltip>
               ) : (

@@ -49,15 +49,19 @@ const Html = ({
         return (
           <>
             <div className="flex items-center justify-start gap-1.5">
-              <Tooltip placement="top" title="Delete">
-                {" "}
-                <span
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg "
-                  onClick={() => deleteItem(itm.id)}
-                >
-                  <LiaTrashAlt />
-                </span>{" "}
-              </Tooltip>
+              {isAllow(`delete${shared.check}`) ? (
+                <Tooltip placement="top" title="Delete">
+                  {" "}
+                  <span
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg "
+                    onClick={() => deleteItem(itm.id)}
+                  >
+                    <LiaTrashAlt />
+                  </span>{" "}
+                </Tooltip>
+              ) : (
+                <></>
+              )}
             </div>
           </>
         );
