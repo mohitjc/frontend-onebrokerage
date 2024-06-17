@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { LiaUserSolid } from "react-icons/lia";
 import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
 import methodModel from "../../methods/methods";
+import { GrUserSettings } from "react-icons/gr";
 
 const View = () => {
   const user = useSelector((state) => state.user);
@@ -70,7 +71,7 @@ const View = () => {
           </div>
 
           <div className="grid grid-cols-12 gap-6">
-            <div className="col-span-12 md:col-span-4 lg:col-span-3">
+            <div className="col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-3">
               <div className="flex items-center justify-center py-8 shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 sticky top-2">
                 <div className="flex flex-col items-center gap-4">
                   <div className="text-center">
@@ -94,8 +95,8 @@ const View = () => {
                     </p>
                   </div>
                   <div className="text-center">
-                    <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
-                      Role
+                  <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
+                     <GrUserSettings  className="text-xl text-[#EB6A59]"/>
                     </p>
                     {data?.role?.name || "--"}
                   </div>
@@ -103,7 +104,7 @@ const View = () => {
               </div>
             </div>
 
-            <div className="col-span-12 md:col-span-8 lg:col-span-9    ">
+            <div className="col-span-12 md:col-span-8 lg:col-span-8  xl:col-span-9  ">
               <div className="p-6 shadow-box overflow-hidden rounded-lg bg-white ">
                 <div className="mt-5">
                   <label className="text-2xl font-semibold mb-8 inline-flex">
