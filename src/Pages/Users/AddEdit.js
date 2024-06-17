@@ -192,7 +192,7 @@ const AddEdit = () => {
                 />
                 {submitted && !form.role && (
                   <div className="invalid-feedback d-block">
-                    role is required
+                    Role is required
                   </div>
                 )}
               </div>
@@ -207,7 +207,7 @@ const AddEdit = () => {
                 />
                 {submitted && !form.mobileNo && (
                   <div className="invalid-feedback d-block">
-                    mobile is required
+                    Mobile is required
                   </div>
                 )}
               </div>
@@ -223,7 +223,7 @@ const AddEdit = () => {
                 />
                 {form.email && submitted && !inValidEmail && (
                   <div className="invalid-feedback d-block">
-                    please enter valid email
+                    Please enter valid email
                   </div>
                 )}
               </div>
