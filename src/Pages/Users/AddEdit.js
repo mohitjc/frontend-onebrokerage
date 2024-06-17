@@ -36,8 +36,7 @@ const AddEdit = () => {
     { key: "role", required: true },
   ];
 
-  console.log("user", user);
-  const isSubAdmin = user?.role?.name == "Sub Admin";
+  const isSubAdmin = user?.role?.name !== "Admin";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -140,7 +139,7 @@ const AddEdit = () => {
 
   useEffect(() => {
     getRolesList();
-  }, []);
+  }, [user?.role?.name]);
 
   return (
     <>
