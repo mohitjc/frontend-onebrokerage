@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/global/layout";
 import "./style.scss";
 import { Link } from "react-router-dom";
-import { Tooltip } from "antd";
+import { Button, Tooltip } from "antd";
 import { FiEdit3, FiPlus } from "react-icons/fi";
 import { BsTrash3 } from "react-icons/bs";
 import Table from "../../components/Table";
@@ -280,7 +280,7 @@ const Html = ({
               result={(e) => {
                 getRolesData(e.value);
               }}
-              options={roles.filter((item) => item.name != "Customers")}
+              options={roles.filter((item) => item.name != "Customer")}
             />
             <SelectDropdown
               id="statusDropdown"
@@ -292,6 +292,12 @@ const Html = ({
               }}
               options={statusModel.list}
             />
+            <button
+              onClick={() => {}}
+              className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+            >
+              <FiPlus className="text-xl text-white" /> Import Users
+            </button>
             {/* <SelectDropdown
                             id="statusDropdown"
                             displayValue="name"

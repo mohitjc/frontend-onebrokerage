@@ -126,7 +126,7 @@ const AddEdit = () => {
         let filtered = res?.data.filter((itm) => itm.status == "active");
         if (isAdmin) {
           filtered = res?.data.filter(
-            (itm) => itm.status == "active" && itm.name != "Customers"
+            (itm) => itm.status == "active" && itm.name != "Customer"
           );
         }
 

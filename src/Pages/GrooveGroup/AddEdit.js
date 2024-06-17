@@ -23,7 +23,6 @@ const AddEdit = () => {
     fullName: "",
     email: "",
     mobileNo: "",
-    role: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -32,7 +31,6 @@ const AddEdit = () => {
   const formValidation = [
     { key: "mobileNo", required: true },
     { key: "email", required: true, message: "Email is required", email: true },
-    { key: "role", required: true },
   ];
 
   const timezones = timezoneModel.list;
@@ -47,6 +45,7 @@ const AddEdit = () => {
     let url = shared.addApi;
     let value = {
       ...form,
+      role: environment.userRoleId,
     };
     if (value.id) {
       method = "put";
@@ -71,7 +70,7 @@ const AddEdit = () => {
     ApiClient.get("role/listing").then((res) => {
       if (res.success) {
         const filtered = res?.data.filter(
-          (itm) => itm.status == "active" && itm.name == "Customers"
+          (itm) => itm.status == "active" && itm.name == "Customer"
         );
         setRoleOptions(
           filtered.map(({ _id, name }) => {
@@ -172,7 +171,7 @@ const AddEdit = () => {
                   required
                 />
               </div>
-              <div className="mobile_number mb-3">
+              {/* <div className="mobile_number mb-3">
                 <FormControl
                   type="select"
                   name="role"
@@ -188,7 +187,7 @@ const AddEdit = () => {
                     Role is required
                   </div>
                 )}
-              </div>
+              </div> */}
 
               <div className="mobile_number mb-3">
                 <FormControl

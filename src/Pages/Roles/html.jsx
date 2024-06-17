@@ -111,16 +111,10 @@ const Html = ({
                         <HiOutlineArrowDown className="shrink-0 inline text-sm" />
                       </span>
                     </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-4"
-                    >
+                    <th scope="col" className="px-6 py-4">
                       Status
                     </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-4"
-                    >
+                    <th scope="col" className="px-6 py-4">
                       Action
                     </th>
                   </tr>
@@ -136,9 +130,7 @@ const Html = ({
                         console.log("itm", itm);
                       return (
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                          <td className="px-6 py-4">
-                            {itm.name}
-                          </td>
+                          <td className="px-6 py-4">{itm.name}</td>
                           <td className="px-6 py-4">
                             <div
                               className="w-32"
@@ -163,7 +155,7 @@ const Html = ({
                           <td className="px-6 py-4">
                             <div className="flex items-center justify-start gap-1.5">
                               {isAllow(`editRoles`) &&
-                              itm.name !== "Customers" ? (
+                              itm.name !== "Customer" ? (
                                 <Tooltip placement="top" title="Edit">
                                   <a
                                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
