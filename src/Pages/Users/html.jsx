@@ -32,8 +32,18 @@ const Html = ({
   isAllow,
   total = { total },
   sortClass,
+  getRolesData,
 }) => {
   const user = useSelector((state) => state.user);
+  const [roles, setRoles] = useState([]);
+
+  const getRolesList = () => {
+    ApiClient.get("role/listing").then((res) => {
+      if (res.success) {
+        setRoles(res.data);
+      }
+    });
+  };
   const columns = [
     {
       key: "fullName",
@@ -164,9 +174,9 @@ const Html = ({
     });
   };
  */
-  //   useEffect(() => {
-  //       getGroups()
-  //   }, [])
+  useEffect(() => {
+    getRolesList();
+  }, []);
 
   return (
     <Layout>
@@ -265,6 +275,16 @@ const Html = ({
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"
+              placeholder="All Roles"
+              intialValue={filters.role}
+              result={(e) => {
+                getRolesData(e.value);
+              }}
+              options={roles.filter((item) => item.name != "Customers")}
+            />
+            <SelectDropdown
+              id="statusDropdown"
+              displayValue="name"
               placeholder="All Status"
               intialValue={filters.status}
               result={(e) => {
@@ -281,7 +301,7 @@ const Html = ({
                             result={e => filter({ groupId: e.value })}
                             options={groups}
                         /> */}
-            {filters.status || filters.groupId ? (
+            {filters.status || filters.groupId || filters.role ? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"

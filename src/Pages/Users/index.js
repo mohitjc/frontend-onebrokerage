@@ -68,6 +68,7 @@ const Users = () => {
       search: "",
       status: "",
       page: 1,
+      role: "",
     };
     setFilter({ ...filters, ...f });
     getData({ ...f });
@@ -129,6 +130,11 @@ const Users = () => {
   const changestatus = (e) => {
     setFilter({ ...filters, status: e, page: 1 });
     getData({ status: e, page: 1 });
+  };
+
+  const getRolesData = (id) => {
+    setFilter({ ...filters, role: id, page: 1 });
+    getData({ role: id, page: 1 });
   };
 
   const statusChange = (itm) => {
@@ -235,6 +241,7 @@ const Users = () => {
         statusChange={statusChange}
         changestatus={changestatus}
         exportfun={exportfun}
+        getRolesData={getRolesData}
       />
     </>
   );
