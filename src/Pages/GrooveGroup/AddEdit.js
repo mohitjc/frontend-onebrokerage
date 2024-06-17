@@ -135,12 +135,7 @@ const AddEdit = () => {
 
   useEffect(() => {
     getRolesList();
-    if (roleOptions) {
-      setform({ ...form, role: roleOptions[0]?.id });
-    }
   }, []);
-
-  console.log("roleOptions", roleOptions, form.role);
 
   return (
     <>
@@ -182,7 +177,7 @@ const AddEdit = () => {
                   type="select"
                   name="role"
                   label="Role"
-                  value={form.role}
+                  value={roleOptions[0]?.id}
                   options={roleOptions}
                   onChange={(e) => setform({ ...form, role: e })}
                   required

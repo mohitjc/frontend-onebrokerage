@@ -148,8 +148,6 @@ const AddEdit = () => {
     getRolesList();
   }, [user?.role?.name]);
 
-  console.log("id", id);
-
   return (
     <>
       <Layout>

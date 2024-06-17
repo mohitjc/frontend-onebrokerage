@@ -155,7 +155,7 @@ const Users = () => {
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to ${
-        status == "active" ? "Activate" : "Deactivate"
+        status == "active" ? "Activate" : "Inactivate"
       } this user?`,
       icon: "warning",
       showCancelButton: true,
