@@ -189,12 +189,17 @@ const Users = () => {
     history(url);
   };
 
-  const uploadFile = (file) => {
+  const uploadFile = (e) => {
+    let files = e.target.files;
+    let file = files?.item(0);
     let url = "user/import-users";
-    ApiClient.post(url, file).then((res) => {
+    if (!file) return;
+    loader(true);
+    ApiClient.postFormFileData(url, { file }).then((res) => {
       if (res.success) {
         console.log("res", res);
       }
+      loader(false);
     });
   };
 

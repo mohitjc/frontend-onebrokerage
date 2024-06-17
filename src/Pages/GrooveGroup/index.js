@@ -200,6 +200,20 @@ const Users = () => {
     link.click();
   };
 
+  const uploadFile = (e) => {
+    let files = e.target.files;
+    let file = files?.item(0);
+    let url = "user/import-users";
+    if (!file) return;
+    loader(true);
+    ApiClient.postFormFileData(url, { file }).then((res) => {
+      if (res.success) {
+        console.log("res", res);
+      }
+      loader(false);
+    });
+  };
+
   const isAllow = (key = "") => {
     let permissions = user.role?.permissions?.[0];
     let value = permissions?.[key];
@@ -235,6 +249,7 @@ const Users = () => {
         statusChange={statusChange}
         changestatus={changestatus}
         exportfun={exportfun}
+        uploadFile={uploadFile}
       />
     </>
   );
