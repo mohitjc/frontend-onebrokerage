@@ -98,12 +98,12 @@ const Html = ({
         <>
           <div className="shadow-box w-full bg-white rounded-lg">
             <div className="scrollbar w-full overflow-auto">
-              <table className="w-full">
-                <thead className="border-b border-[#EAECF0]">
-                  <tr className="border-b border-[#EAECF0]">
+              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 capitalize bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <tr className="">
                     <th
                       scope="col"
-                      className="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-3 "
+                      className="px-6 py-4"
                       onClick={(e) => sorting("name")}
                     >
                       Role Name{" "}
@@ -113,13 +113,13 @@ const Html = ({
                     </th>
                     <th
                       scope="col"
-                      className="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-3 "
+                      className="px-6 py-4"
                     >
                       Status
                     </th>
                     <th
                       scope="col"
-                      className="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-3"
+                      className="px-6 py-4"
                     >
                       Action
                     </th>
@@ -135,11 +135,11 @@ const Html = ({
                       )
                         console.log("itm", itm);
                       return (
-                        <tr className="">
-                          <td className="!text-typo capitalize !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                          <td className="px-6 py-4">
                             {itm.name}
                           </td>
-                          <td className="!text-typo capitalize !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                          <td className="px-6 py-4">
                             <div
                               className="w-32"
                               onClick={() => statusChange(itm)}
@@ -160,7 +160,7 @@ const Html = ({
                           </td>
 
                           {/* dropdown */}
-                          <td className="!text-typo !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                          <td className="px-6 py-4">
                             <div className="flex items-center justify-start gap-1.5">
                               {isAllow(`editRoles`) &&
                               itm.name !== "Customers" ? (
