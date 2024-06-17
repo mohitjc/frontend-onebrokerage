@@ -33,6 +33,7 @@ const Html = ({
   total = { total },
   sortClass,
   getRolesData,
+  uploadFile,
 }) => {
   const user = useSelector((state) => state.user);
   const [roles, setRoles] = useState([]);
@@ -292,12 +293,22 @@ const Html = ({
               }}
               options={statusModel.list}
             />
-            <button
-              onClick={() => {}}
-              className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+            <label
+              className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-8 py-4 text-center `}
             >
-              <FiPlus className="text-xl text-white" /> Import Users
-            </button>
+              <input
+                type="file"
+                className="hidden"
+                // accept="file/*"
+                onChange={(e) => {
+                  uploadFile(e);
+                }}
+              />
+              <div className="flex flex-col items-center justify-center">
+                <FiPlus className="text-2xl text-[#EB6A59]" />
+                <span>Import Users</span>
+              </div>
+            </label>
             {/* <SelectDropdown
                             id="statusDropdown"
                             displayValue="name"

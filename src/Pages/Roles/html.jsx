@@ -167,7 +167,6 @@ const Html = ({
                               ) : (
                                 <></>
                               )}
-
                               {/* {itm.id != environment.adminRoleId &&
                                 itm.id != environment.userRoleId &&
                                 isAllow("deleteRoles") ? (

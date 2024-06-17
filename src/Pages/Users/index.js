@@ -189,6 +189,15 @@ const Users = () => {
     history(url);
   };
 
+  const uploadFile = (file) => {
+    let url = "user/import-users";
+    ApiClient.post(url, file).then((res) => {
+      if (res.success) {
+        console.log("res", res);
+      }
+    });
+  };
+
   const exportfun = async () => {
     const token = await localStorage.getItem("token");
     const req = await axios({
@@ -242,6 +251,7 @@ const Users = () => {
         changestatus={changestatus}
         exportfun={exportfun}
         getRolesData={getRolesData}
+        uploadFile={uploadFile}
       />
     </>
   );
