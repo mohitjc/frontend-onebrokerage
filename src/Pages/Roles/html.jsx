@@ -111,7 +111,7 @@ const Html = ({
                         <HiOutlineArrowDown className="shrink-0 inline text-sm" />
                       </span>
                     </th>
-                    <th scope="col" className="table_data text-left">
+                    <th scope="col" className="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-3 ">
                       Status
                     </th>
                     <th
@@ -135,7 +135,7 @@ const Html = ({
                             <td className="!text-typo capitalize !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
                               {itm.name}
                             </td>
-                            <td className="table_dats">
+                            <td className="!text-typo capitalize !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
                               <div
                                 className="w-32"
                                 onClick={() => statusChange(itm)}
