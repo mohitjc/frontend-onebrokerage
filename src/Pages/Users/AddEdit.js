@@ -188,6 +188,7 @@ const AddEdit = () => {
                   }}
                   required
                   theme="search"
+                  disabled={form.role}
                 />
                 {submitted && !form.role && (
                   <div className="invalid-feedback d-block">

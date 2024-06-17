@@ -12,6 +12,7 @@ import shared from "./shared";
 import datepipeModel from "../../models/datepipemodel";
 import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
+import environment from "../../environment";
 
 const AddEdit = () => {
   const { id } = useParams();
@@ -92,6 +93,7 @@ const AddEdit = () => {
             payload[itm] = value[itm];
           });
 
+          if (payload.role?._id) payload.role = payload.role?._id;
           payload.id = id;
           setform({
             ...payload,
