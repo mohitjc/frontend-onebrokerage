@@ -36,7 +36,8 @@ const AddEdit = () => {
     { key: "role", required: true },
   ];
 
-  const timezones = timezoneModel.list;
+  console.log("user", user);
+  const isSubAdmin = user?.role?.name == "Sub Admin";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -122,7 +123,12 @@ const AddEdit = () => {
   const getRolesList = () => {
     ApiClient.get("role/listing").then((res) => {
       if (res.success) {
-        const filtered = res?.data.filter((itm) => itm.status == "active");
+        let filtered = res?.data.filter((itm) => itm.status == "active");
+        if (isSubAdmin) {
+          filtered = res?.data.filter(
+            (itm) => itm.status == "active" && itm.name != "Admin"
+          );
+        }
         setRoleOptions(
           filtered.map(({ _id, name }) => {
             return { id: _id, name: name };
