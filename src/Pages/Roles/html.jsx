@@ -133,48 +133,50 @@ const Html = ({
                         itm.id != environment.adminRoleId &&
                         itm.id != environment.userRoleId
                       )
-                        return (
-                          <tr className="">
-                            <td className="!text-typo capitalize !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
-                              {itm.name}
-                            </td>
-                            <td className="!text-typo capitalize !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
-                              <div
-                                className="w-32"
-                                onClick={() => statusChange(itm)}
-                              >
-                                <span
-                                  className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                        console.log("itm", itm);
+                      return (
+                        <tr className="">
+                          <td className="!text-typo capitalize !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                            {itm.name}
+                          </td>
+                          <td className="!text-typo capitalize !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                            <div
+                              className="w-32"
+                              onClick={() => statusChange(itm)}
+                            >
+                              <span
+                                className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
                           ${
                             itm.status == "deactive"
                               ? " bg-gray-200 text-black"
                               : "bg-[#ee695e] text-white"
                           }`}
-                                >
-                                  {itm.status == "deactive"
-                                    ? "inactive"
-                                    : "active"}
-                                </span>
-                              </div>
-                            </td>
+                              >
+                                {itm.status == "deactive"
+                                  ? "inactive"
+                                  : "active"}
+                              </span>
+                            </div>
+                          </td>
 
-                            {/* dropdown */}
-                            <td className="!text-typo !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
-                              <div className="flex items-center justify-start gap-1.5">
-                                {isAllow(`editRoles`) ? (
-                                  <Tooltip placement="top" title="Edit">
-                                    <a
-                                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                                      onClick={(e) => edit(itm.id)}
-                                    >
-                                      <LiaEdit />
-                                    </a>
-                                  </Tooltip>
-                                ) : (
-                                  <></>
-                                )}
+                          {/* dropdown */}
+                          <td className="!text-typo !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                            <div className="flex items-center justify-start gap-1.5">
+                              {isAllow(`editRoles`) &&
+                              itm.name !== "Customers" ? (
+                                <Tooltip placement="top" title="Edit">
+                                  <a
+                                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                                    onClick={(e) => edit(itm.id)}
+                                  >
+                                    <LiaEdit />
+                                  </a>
+                                </Tooltip>
+                              ) : (
+                                <></>
+                              )}
 
-                                {/* {itm.id != environment.adminRoleId &&
+                              {/* {itm.id != environment.adminRoleId &&
                                 itm.id != environment.userRoleId &&
                                 isAllow("deleteRoles") ? (
                                   <>
@@ -190,12 +192,12 @@ const Html = ({
                                 ) : (
                                   <></>
                                 )} */}
-                              </div>
-                            </td>
+                            </div>
+                          </td>
 
-                            {/* end */}
-                          </tr>
-                        );
+                          {/* end */}
+                        </tr>
+                      );
                     })}
                 </tbody>
               </table>
