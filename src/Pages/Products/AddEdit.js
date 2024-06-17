@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
 import MultiSelectDropdown from "../../components/common/MultiSelectDropdown";
+import Swal from "sweetalert2";
 
 let options = [];
 let productTypeoptions = [
@@ -97,13 +98,15 @@ const AddEdit = () => {
   };
 
   const handleSubmit = (e) => {
+    let url = shared.addApi;
     e.preventDefault();
     setSubmitted(true);
+
     let invalid = methodModel.getFormError(formValidation, form);
 
     if (invalid || !images.images || form.tags?.length == 0) return;
     let method = "post";
-    let url = shared.addApi;
+
     let value = {
       ...form,
       ...images,
@@ -120,15 +123,36 @@ const AddEdit = () => {
       value.groupId = user?.groupId?._id;
       delete value.id;
     }
-
-    loader(true);
-    ApiClient.allApi(url, value, method).then((res) => {
-      if (res.success) {
-        // ToastsStore.success(res.message)
-        history(`/${shared.url}`);
-      }
-      loader(false);
-    });
+    if (deletedTags.length > 0) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: `The tag you are deleting is associated with review on product. Still you want to delete ?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          loader(true);
+          ApiClient.allApi(url, value, method).then((res) => {
+            if (res.success) {
+              history(`/${shared.url}`);
+            }
+            loader(false);
+          });
+        }
+      });
+    } else {
+      loader(true);
+      ApiClient.allApi(url, value, method).then((res) => {
+        if (res.success) {
+          // ToastsStore.success(res.message)
+          history(`/${shared.url}`);
+        }
+        loader(false);
+      });
+    }
   };
 
   function findDeletedItems(initialArray, updatedArray) {

@@ -135,7 +135,12 @@ const AddEdit = () => {
 
   useEffect(() => {
     getRolesList();
+    if (roleOptions) {
+      setform({ ...form, role: roleOptions[0]?.id });
+    }
   }, []);
+
+  console.log("roleOptions", roleOptions, form.role);
 
   return (
     <>

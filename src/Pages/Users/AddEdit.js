@@ -37,6 +37,7 @@ const AddEdit = () => {
   ];
 
   const isSubAdmin = user?.role?.name !== "Admin";
+  const isAdmin = user?.role?.name == "Admin";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -123,6 +124,12 @@ const AddEdit = () => {
     ApiClient.get("role/listing").then((res) => {
       if (res.success) {
         let filtered = res?.data.filter((itm) => itm.status == "active");
+        if (isAdmin) {
+          filtered = res?.data.filter(
+            (itm) => itm.status == "active" && itm.name != "Customers"
+          );
+        }
+
         if (isSubAdmin) {
           filtered = res?.data.filter(
             (itm) => itm.status == "active" && itm.name != "Admin"
@@ -140,6 +147,8 @@ const AddEdit = () => {
   useEffect(() => {
     getRolesList();
   }, [user?.role?.name]);
+
+  console.log("id", id);
 
   return (
     <>
@@ -188,7 +197,7 @@ const AddEdit = () => {
                   }}
                   required
                   theme="search"
-                  disabled={form.role}
+                  disabled={id ? true : false}
                 />
                 {submitted && !form.role && (
                   <div className="invalid-feedback d-block">
