@@ -81,7 +81,7 @@ const Table = ({
                       {columns.map((itm) => (
                         <th
                           scope="col"
-                          className={`px-6 py-3 ${
+                          className={`px-6 py-3   ${
                             itm.sort ? "cursor-pointer" : ""
                           }`}
                           onClick={() => headclick(itm)}
@@ -90,8 +90,8 @@ const Table = ({
                           {itm.name}{" "}
                           {itm.sort ? (
                             <>
-                              <span className="ml-2">
-                                <HiOutlineArrowDown className="shrink-0 inline text-sm" />
+                              <span className="ml-1">
+                                <HiOutlineArrowDown className=" inline text-sm" />
                               </span>
                             </>
                           ) : null}
