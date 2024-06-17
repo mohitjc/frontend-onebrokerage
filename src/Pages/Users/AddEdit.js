@@ -17,12 +17,14 @@ const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
   const [roleOptions, setRoleOptions] = useState([]);
+  const [login, setLoginPannel] = useState("");
   const [form, setform] = useState({
     id: "",
     fullName: "",
     email: "",
     mobileNo: "",
     role: "",
+    loginPannel: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -46,7 +48,6 @@ const AddEdit = () => {
     let url = shared.addApi;
     let value = {
       ...form,
-      ...images,
     };
     if (value.id) {
       method = "put";
@@ -79,6 +80,7 @@ const AddEdit = () => {
             payload[itm] = value[itm];
           });
 
+          if (payload.role?._id) payload.role = payload.role._id;
           payload.id = id;
           setform({
             ...payload,
@@ -176,7 +178,9 @@ const AddEdit = () => {
                   label="Role"
                   value={form.role}
                   options={roleOptions}
-                  onChange={(e) => setform({ ...form, role: e })}
+                  onChange={(e) => {
+                    setform({ ...form, role: e });
+                  }}
                   required
                   theme="search"
                 />

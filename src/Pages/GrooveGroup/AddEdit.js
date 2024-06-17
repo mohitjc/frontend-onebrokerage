@@ -16,11 +16,13 @@ import PhoneInput from "react-phone-input-2";
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
+  const [roleOptions, setRoleOptions] = useState([]);
   const [form, setform] = useState({
     id: "",
     fullName: "",
     email: "",
     mobileNo: "",
+    role: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -43,8 +45,6 @@ const AddEdit = () => {
     let url = shared.addApi;
     let value = {
       ...form,
-      ...images,
-      role: "user",
     };
     if (value.id) {
       method = "put";
@@ -62,6 +62,21 @@ const AddEdit = () => {
         history(`/${shared.url}`);
       }
       loader(false);
+    });
+  };
+
+  const getRolesList = () => {
+    ApiClient.get("role/listing").then((res) => {
+      if (res.success) {
+        const filtered = res?.data.filter(
+          (itm) => itm.status == "active" && itm.name == "Customers"
+        );
+        setRoleOptions(
+          filtered.map(({ _id, name }) => {
+            return { id: _id, name: name };
+          })
+        );
+      }
     });
   };
 
@@ -115,6 +130,10 @@ const AddEdit = () => {
     return value;
   };
 
+  useEffect(() => {
+    getRolesList();
+  }, []);
+
   return (
     <>
       <Layout>
@@ -149,6 +168,23 @@ const AddEdit = () => {
                   onChange={(e) => setform({ ...form, fullName: e })}
                   required
                 />
+              </div>
+              <div className="mobile_number mb-3">
+                <FormControl
+                  type="select"
+                  name="role"
+                  label="Role"
+                  value={form.role}
+                  options={roleOptions}
+                  onChange={(e) => setform({ ...form, role: e })}
+                  required
+                  theme="search"
+                />
+                {submitted && !form.role && (
+                  <div className="invalid-feedback d-block">
+                    role is required
+                  </div>
+                )}
               </div>
 
               <div className="mobile_number mb-3">

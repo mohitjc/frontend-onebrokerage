@@ -11,6 +11,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Layout from "../../components/global/layout";
 import { Tooltip } from "antd";
 import { useSelector } from "react-redux";
+import environment from "../../environment";
 
 const AddEditRole = () => {
   const permissions = rolePermissions;
@@ -44,7 +45,7 @@ const AddEditRole = () => {
     let url = "role/add";
     let value = {
       ...form,
-      loginPannel: "admin",
+      loginPannel: form.id == environment.userRoleId ? "front" : "admin",
     };
     if (value.id) {
       method = "put";
@@ -79,8 +80,7 @@ const AddEditRole = () => {
           Object.keys(roleType.permissions).map((itm) => {
             payload.permissions[itm] = permissions[itm] || false;
           });
-          console.log("payload", payload);
-          console.log("permissions", permissions);
+
           payload.id = id;
           setform({
             ...payload,
@@ -208,6 +208,7 @@ const AddEditRole = () => {
                   value={form.name}
                   onChange={(e) => setform({ ...form, name: e.target.value })}
                   required
+                  disabled={form?.name}
                 />
               </div>
             </div>
@@ -246,7 +247,7 @@ const AddEditRole = () => {
                               >
                                 <input
                                   type="checkbox"
-                                   className="h-4 w-4"
+                                  className="h-4 w-4"
                                   onChange={(e) =>
                                     HandleAllRead(e.target.checked, itm.key)
                                   }

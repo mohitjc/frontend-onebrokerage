@@ -43,7 +43,7 @@ const Users = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p, email: user.email };
+    let filter = { ...filters, ...p };
 
     // if (user.customerRole?._id == environment.glRoleId)
     //   filter.groupId = user.groupId?._id || "";

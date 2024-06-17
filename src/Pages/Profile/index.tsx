@@ -43,8 +43,6 @@ const Profile = () => {
     (a: any, b: any) => a.order - b.order
   );
 
-  console.log("questions", questions);
-
   return (
     <Layout>
       <div className="wrapper_section">
@@ -110,7 +108,6 @@ const Profile = () => {
               </div>
             </div>
           </div>
-       
         </div>
       </div>
     </Layout>

@@ -93,6 +93,12 @@ const View = () => {
                       {data?.mobileNo || "--"}
                     </p>
                   </div>
+                  <div className="text-center">
+                    <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
+                      Role
+                    </p>
+                    {data?.role?.name || "--"}
+                  </div>
                 </div>
               </div>
             </div>

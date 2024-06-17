@@ -111,7 +111,10 @@ const Html = ({
                         <HiOutlineArrowDown className="shrink-0 inline text-sm" />
                       </span>
                     </th>
-                    <th scope="col" className="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-3 ">
+                    <th
+                      scope="col"
+                      className="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-3 "
+                    >
                       Status
                     </th>
                     <th
@@ -140,16 +143,18 @@ const Html = ({
                                 className="w-32"
                                 onClick={() => statusChange(itm)}
                               >
-                                <Tooltip
-                                  placement="top"
-                                  title="Active / Inactive"
+                                <span
+                                  className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                          ${
+                            itm.status == "deactive"
+                              ? " bg-gray-200 text-black"
+                              : "bg-[#ee695e] text-white"
+                          }`}
                                 >
-                                  <span className="bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize">
-                                    {itm.status == "deactive"
-                                      ? "inactive"
-                                      : "active"}
-                                  </span>
-                                </Tooltip>
+                                  {itm.status == "deactive"
+                                    ? "inactive"
+                                    : "active"}
+                                </span>
                               </div>
                             </td>
 
@@ -169,7 +174,7 @@ const Html = ({
                                   <></>
                                 )}
 
-                                {itm.id != environment.adminRoleId &&
+                                {/* {itm.id != environment.adminRoleId &&
                                 itm.id != environment.userRoleId &&
                                 isAllow("deleteRoles") ? (
                                   <>
@@ -184,7 +189,7 @@ const Html = ({
                                   </>
                                 ) : (
                                   <></>
-                                )}
+                                )} */}
                               </div>
                             </td>
 
