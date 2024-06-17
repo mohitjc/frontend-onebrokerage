@@ -69,7 +69,7 @@ function App() {
     { url: "/forgotpassword", element: <Forgotpassword /> },
     { url: "/resetpassword", element: <Resetpassword /> },
     { url: "/roles", element: <Roles /> },
-    { url: "/roles/add", element: <AddEditRole /> },
+    // { url: "/roles/add", element: <AddEditRole /> },
     { url: "/roles/edit/:id", element: <AddEditRole /> },
     { url: "/user", element: <Users /> },
     { url: "/user/edit/:id", element: <AddEditUsers /> },
