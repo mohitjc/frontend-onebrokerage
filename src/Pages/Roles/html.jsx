@@ -127,47 +127,46 @@ const Html = ({
                         itm.id != environment.adminRoleId &&
                         itm.id != environment.userRoleId
                       )
-                        console.log("itm", itm);
-                      return (
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                          <td className="px-6 py-4">{itm.name}</td>
-                          <td className="px-6 py-4">
-                            <div
-                              className="w-32"
-                              onClick={() => statusChange(itm)}
-                            >
-                              <span
-                                className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                        return (
+                          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td className="px-6 py-4">{itm.name}</td>
+                            <td className="px-6 py-4">
+                              <div
+                                className="w-32"
+                                onClick={() => statusChange(itm)}
+                              >
+                                <span
+                                  className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
                           ${
                             itm.status == "deactive"
                               ? " bg-gray-200 text-black"
                               : "bg-[#ee695e] text-white"
                           }`}
-                              >
-                                {itm.status == "deactive"
-                                  ? "inactive"
-                                  : "active"}
-                              </span>
-                            </div>
-                          </td>
+                                >
+                                  {itm.status == "deactive"
+                                    ? "inactive"
+                                    : "active"}
+                                </span>
+                              </div>
+                            </td>
 
-                          {/* dropdown */}
-                          <td className="px-6 py-4">
-                            <div className="flex items-center justify-start gap-1.5">
-                              {isAllow(`editRoles`) &&
-                              itm.name !== "Customer" ? (
-                                <Tooltip placement="top" title="Edit">
-                                  <a
-                                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                                    onClick={(e) => edit(itm.id)}
-                                  >
-                                    <LiaEdit />
-                                  </a>
-                                </Tooltip>
-                              ) : (
-                                <></>
-                              )}
-                              {/* {itm.id != environment.adminRoleId &&
+                            {/* dropdown */}
+                            <td className="px-6 py-4">
+                              <div className="flex items-center justify-start gap-1.5">
+                                {isAllow(`editRoles`) &&
+                                itm.name == "Sub Admin" ? (
+                                  <Tooltip placement="top" title="Edit">
+                                    <a
+                                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                                      onClick={(e) => edit(itm.id)}
+                                    >
+                                      <LiaEdit />
+                                    </a>
+                                  </Tooltip>
+                                ) : (
+                                  <></>
+                                )}
+                                {/* {itm.id != environment.adminRoleId &&
                                 itm.id != environment.userRoleId &&
                                 isAllow("deleteRoles") ? (
                                   <>
@@ -183,12 +182,12 @@ const Html = ({
                                 ) : (
                                   <></>
                                 )} */}
-                            </div>
-                          </td>
+                              </div>
+                            </td>
 
-                          {/* end */}
-                        </tr>
-                      );
+                            {/* end */}
+                          </tr>
+                        );
                     })}
                 </tbody>
               </table>

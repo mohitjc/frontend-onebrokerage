@@ -179,6 +179,8 @@ const Html = ({
     getRolesList();
   }, []);
 
+  console.log("user", user);
+
   return (
     <Layout>
       <div className="flex flex-wrap justify-between items-center gap-y-4">
@@ -273,16 +275,18 @@ const Html = ({
           </form>
 
           <div className="flex gap-2 ml-auto">
-            <SelectDropdown
-              id="statusDropdown"
-              displayValue="name"
-              placeholder="All Roles"
-              intialValue={filters.role}
-              result={(e) => {
-                getRolesData(e.value);
-              }}
-              options={roles.filter((item) => item.name != "Customer")}
-            />
+            {user?.role?.name == "Admin" && (
+              <SelectDropdown
+                id="statusDropdown"
+                displayValue="name"
+                placeholder="All Roles"
+                intialValue={filters.role}
+                result={(e) => {
+                  getRolesData(e.value);
+                }}
+                options={roles.filter((item) => item.name != "Customer")}
+              />
+            )}
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"

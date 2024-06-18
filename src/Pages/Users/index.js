@@ -17,6 +17,7 @@ const Users = () => {
   const [total, setTotal] = useState(0);
   const [loaging, setLoader] = useState(true);
   const history = useNavigate();
+  const isAdmin = user?.role?.name == "Admin";
 
   const sortClass = (key) => {
     let cls = "fa-sort";
@@ -50,12 +51,24 @@ const Users = () => {
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
-        setData(
-          res.data.map((itm) => {
-            itm.id = itm._id;
-            return itm;
-          })
-        );
+        if (isAdmin) {
+          setData(
+            res.data.map((itm) => {
+              itm.id = itm._id;
+              return itm;
+            })
+          );
+        } else {
+          setData(
+            res.data
+              .map((itm) => {
+                itm.id = itm._id;
+                return itm;
+              })
+              .filter((itm) => itm.roleDetails.name !== "Admin")
+          );
+        }
+
         setTotal(res.total);
       }
       setLoader(false);
