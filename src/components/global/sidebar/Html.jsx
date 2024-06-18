@@ -18,7 +18,10 @@ import {
   MdOutlineEventAvailable,
   MdOutlineGroups,
   MdOutlineMarkEmailRead,
+  MdOutlineOndemandVideo,
+  MdOutlineAudioFile,
 } from "react-icons/md";
+
 import { LuUser2 } from "react-icons/lu";
 import { CiSettings } from "react-icons/ci";
 import { LiaHistorySolid, LiaUserTagSolid } from "react-icons/lia";
@@ -134,6 +137,18 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       name: "Emails",
       icon: <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />,
       url: "/emails",
+      key: "",
+    },
+    {
+      name: "Videos",
+      icon: <MdOutlineOndemandVideo className="text-[#fff] shrink-0 text-lg" />,
+      url: "/videos",
+      key: "",
+    },
+    {
+      name: "Audio",
+      icon: <MdOutlineAudioFile className="text-[#fff] shrink-0 text-lg" />,
+      url: "/audio",
       key: "",
     },
   ];

@@ -13,8 +13,8 @@ import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
 import methodModel from "../../methods/methods";
-import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { PiEyeLight } from "react-icons/pi";
+import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 const Html = ({
   sorting,
   filter,
@@ -32,62 +32,25 @@ const Html = ({
   changestatus,
   isAllow,
   total = { total },
-  handleMarkPopular,
 }) => {
   const user = useSelector((state) => state.user);
   const columns = [
     {
-      key: "popular",
-      name: "Popular",
-      sort: false,
-      render: (row) => {
-        return (
-          <input
-            type="checkbox"
-            className="h-4 w-4 green_check cursor-pointer shrink-0 rounded-[4px] !border !border-[#3C3E49A3] !text-white"
-            name={`popular${row._id}`}
-            id={row._id}
-            onChange={(e) => {
-              handleMarkPopular(e, row._id);
-            }}
-          />
-        );
-      },
-    },
-    {
-      key: "name",
-      name: "Name",
+      key: "title",
+      name: "Title",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.name}</span>;
+        return <span className="capitalize">{row?.title}</span>;
       },
     },
     {
-      key: "category_detail",
+      key: "category",
       name: "Category",
       render: (row) => {
-        return <span className="capitalize">{row?.category_detail.name}</span>;
+        return <span className="capitalize">{row?.category?.name}</span>;
       },
     },
     {
-      key: "sub_category_detail",
-      name: "Sub Category",
-      render: (row) => {
-        return (
-          <span className="capitalize">
-            {row?.sub_category_detail?.name || "--"}
-          </span>
-        );
-      },
-    },
-    {
-      key: "product_type",
-      name: "Product Type",
-      render: (row) => {
-        return <span className="capitalize">{row?.product_type || "--"}</span>;
-      },
-    },
-    /*    {
       key: "image",
       name: "Image",
       render: (row) => {
@@ -97,7 +60,7 @@ const Html = ({
           </>
         );
       },
-    }, */
+    },
     {
       key: "status",
       name: "Status",
@@ -155,7 +118,7 @@ const Html = ({
                 <Tooltip placement="top" title="Delete">
                   {" "}
                   <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg "
                     onClick={() => deleteItem(itm.id)}
                   >
                     <LiaTrashAlt />
@@ -170,22 +133,6 @@ const Html = ({
       },
     },
   ];
-
-  /*  const getGroups = () => {
-    let f = {
-      page: 1,
-      count: 10,
-    };
-    ApiClient.get("api/group/list", f).then((res) => {
-      if (res.success) {
-        setGroup(res.data);
-      }
-    });
-  };
- */
-  //   useEffect(() => {
-  //       getGroups()
-  //   }, [])
 
   return (
     <Layout>
@@ -284,6 +231,16 @@ const Html = ({
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"
+              placeholder="All Type"
+              intialValue={filters.type}
+              result={(e) => {
+                filter({ type: e.value });
+              }}
+              options={shared.types}
+            />
+            <SelectDropdown
+              id="statusDropdown"
+              displayValue="name"
               placeholder="All Status"
               intialValue={filters.status}
               result={(e) => {
@@ -291,16 +248,7 @@ const Html = ({
               }}
               options={statusModel.list}
             />
-            {/* <SelectDropdown
-                            id="statusDropdown"
-                            displayValue="name"
-                            placeholder='All Groups'
-                            intialValue={filters.groupId}
-                            theme="search"
-                            result={e => filter({ groupId: e.value })}
-                            options={groups}
-                        /> */}
-            {filters.status || filters.groupId ? (
+            {filters.status || filters.type ? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"

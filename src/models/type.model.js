@@ -51,6 +51,14 @@ export const rolePermissions = [
     name: "Emails",
     key: "Emails",
   },
+  {
+    name: "Videos",
+    key: "Videos",
+  },
+  {
+    name: "Audio",
+    key: "Audio",
+  },
 ];
 
 export const rolePermission = [

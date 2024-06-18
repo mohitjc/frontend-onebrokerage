@@ -9,8 +9,9 @@ import axios from "axios";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import SweetAlert from "../../components/SweetAlert/SweetAlert";
 
-const Products = () => {
+const Category = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
@@ -46,9 +47,6 @@ const Products = () => {
     setLoader(true);
     let filter = { ...filters, ...p, email: user.email };
 
-    // if (user.customerRole?._id == environment.glRoleId)
-    //   filter.groupId = user.groupId?._id || "";
-
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
         setData(
@@ -65,7 +63,7 @@ const Products = () => {
 
   const clear = () => {
     let f = {
-      groupId: "",
+      type: "",
       search: "",
       status: "",
       page: 1,
@@ -132,22 +130,20 @@ const Products = () => {
     getData({ status: e, page: 1 });
   };
 
-  const handleMarkPopular = (e, id) => {
-    let checked = e.target.checked;
-    let f = { product_id: id, isPopular: checked };
-    ApiClient.put(shared.editApi, f).then((res) => {
-      if (res.success) {
-        alert("Updated successfully");
-        getData();
-      }
-    });
-  };
-
   const statusChange = (itm) => {
-    /*  if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return; */
-    if (!isAllow(`edit${shared.check}`)) return;
+    if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
     let status = "active";
     if (itm.status == "active") status = "deactive";
+
+    // if (window.confirm(`Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`)) {
+    //     loader(true)
+    //     ApiClient.put(shared.statusApi, { id: itm.id, status }).then(res => {
+    //         if (res.success) {
+    //             getData()
+    //         }
+    //         loader(false)
+    //     })
+    // }
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to ${
@@ -160,12 +156,18 @@ const Products = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
+        loader(true);
         ApiClient.put(shared.statusApi, { id: itm.id, status }).then((res) => {
           if (res.success) {
             getData();
           }
           loader(false);
         });
+        //   Swal.fire({
+
+        //     // text: `Sucessfully ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
+        //     icon: "success"
+        //   });
       }
     });
   };
@@ -196,7 +198,7 @@ const Products = () => {
     link.click();
   };
 
-  const isAllow = (key = "read") => {
+  const isAllow = (key = "") => {
     let permissions = user.role?.permissions?.[0];
     let value = permissions?.[key];
     // return true;
@@ -231,10 +233,9 @@ const Products = () => {
         statusChange={statusChange}
         changestatus={changestatus}
         exportfun={exportfun}
-        handleMarkPopular={handleMarkPopular}
       />
     </>
   );
 };
 
-export default Products;
+export default Category;

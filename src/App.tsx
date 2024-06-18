@@ -54,6 +54,12 @@ import Emails from "./Pages/Emails";
 import GrooveGroup from "./Pages/GrooveGroup";
 import GrooveGroupDetail from "./Pages/GrooveGroup/View";
 import AddEditGrooveGroup from "./Pages/GrooveGroup/AddEdit";
+import Videos from "./Pages/Videos";
+import AddVideos from "./Pages/Videos/AddEdit";
+import ViewVideos from "./Pages/Videos/View";
+import Audio from "./Pages/Audio";
+import AddAudio from "./Pages/Audio/AddEdit";
+import ViewAudio from "./Pages/Audio/View";
 
 const { persistor, store } = configureStoreProd();
 
@@ -111,6 +117,13 @@ function App() {
     { url: "/customers/edit/:id", element: <AddEditGrooveGroup /> },
     { url: "/customers/add", element: <AddEditGrooveGroup /> },
     { url: "/customers/detail/:id", element: <GrooveGroupDetail /> },
+    { url: "/videos", element: <Videos /> },
+    { url: "/videos/add", element: <AddVideos /> },
+    { url: "/videos/detail/:id", element: <ViewVideos /> },
+
+    { url: "/audio", element: <Audio /> },
+    { url: "/audio/add", element: <AddAudio /> },
+    { url: "/audio/detail/:id", element: <ViewAudio /> },
   ];
 
   return (
