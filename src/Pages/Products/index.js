@@ -137,7 +137,6 @@ const Products = () => {
     let f = { product_id: id, isPopular: checked };
     ApiClient.put(shared.editApi, f).then((res) => {
       if (res.success) {
-        alert("Updated successfully");
         getData();
       }
     });

@@ -41,6 +41,7 @@ const Html = ({
       name: "Popular",
       sort: false,
       render: (row) => {
+        console.log("row", row);
         return (
           <input
             type="checkbox"
@@ -50,6 +51,7 @@ const Html = ({
             onChange={(e) => {
               handleMarkPopular(e, row._id);
             }}
+            // checked={}
           />
         );
       },
