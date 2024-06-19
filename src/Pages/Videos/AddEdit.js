@@ -13,7 +13,7 @@ import datepipeModel from "../../models/datepipemodel";
 import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiTrash } from "react-icons/fi";
 import environment from "../../environment";
 
 const AddEdit = () => {
@@ -198,7 +198,9 @@ const AddEdit = () => {
               </div>
 
               <div className="mb-3">
-                <label className="lablefontcls">Video</label>
+               <div>
+               <label className="lablefontcls ">Video</label>
+               </div>
                 {/* <br></br>
                 <ImageUpload
                   model="users"
@@ -214,7 +216,7 @@ const AddEdit = () => {
                 )} */}
                 {!form.video && (
                   <label
-                    className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-4 text-center `}
+                    className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center `}
                   >
                     <input
                       type="file"
@@ -224,25 +226,26 @@ const AddEdit = () => {
                         uploadVideo(e);
                       }}
                     />
-                    <div className="flex flex-col items-center justify-center">
+                    <div className="flex flex-row gap-2 items-center justify-center">
                       <FiPlus className="text-2xl text-[#EB6A59]" />
-                      <span>Choose File..</span>
+                      <span>Choose Video File</span>
                     </div>
                   </label>
                 )}
                 {form.video && (
-                  <div>
+                  <div className="relative inline-flex">
                     <video
                       src={`${environment.sasurl}/${form?.video}`}
                       width={300}
                       controls
                     />
                     <a
+                     className="bg-white rounded-full bg-primary inline-flex p-2 absolute top-2 right-2 text-white"
                       onClick={() => {
                         setform({ ...form, video: "" });
                       }}
                     >
-                      remove
+                     <FiTrash />
                     </a>
                   </div>
                 )}
