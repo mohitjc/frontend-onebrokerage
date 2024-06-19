@@ -87,14 +87,17 @@ const Table = ({
                           onClick={() => headclick(itm)}
                           key={itm.key}
                         >
-                          {itm.name}{" "}
+                        <span className="inline-flex items-center gap-1">
+
+                        <span>  {itm.name}{" "}</span>
                           {itm.sort ? (
                             <>
-                              <span className="ml-1">
+                              <span className="">
                                 <HiOutlineArrowDown className=" inline text-sm" />
                               </span>
                             </>
                           ) : null}
+                        </span>
                         </th>
                       ))}
                     </tr>
