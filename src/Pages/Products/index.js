@@ -134,7 +134,7 @@ const Products = () => {
 
   const handleMarkPopular = (e, id) => {
     let checked = e.target.checked;
-    let f = { product_id: id, isPopular: checked };
+    let f = { id: id, isPopular: checked };
     ApiClient.put(shared.editApi, f).then((res) => {
       if (res.success) {
         getData();
