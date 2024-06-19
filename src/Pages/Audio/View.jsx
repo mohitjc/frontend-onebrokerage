@@ -8,6 +8,7 @@ import shared from "./shared";
 import loader from "../../methods/loader";
 import { Tooltip } from "antd";
 import methodModel from "../../methods/methods";
+import environment from "../../environment";
 
 const View = () => {
   const [host, setHost] = useState();
@@ -68,15 +69,16 @@ const View = () => {
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Category</label>
                   <div className="profiledetailscls capitalize">
-                    {data?.category || "--"}
+                    {data?.category?.name || "--"}
                   </div>
                 </div>
                 <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Video</label>
+                  <label className="profileheddingcls">Audio</label>
                   <div className="profiledetailscls">
-                    <img
-                      src={methodModel.noImg(data?.image)}
-                      className="h-32"
+                    <audio
+                      src={`${environment.sasurl}/${data?.audio}`}
+                      width={100}
+                      controls
                     />
                   </div>
                 </div>

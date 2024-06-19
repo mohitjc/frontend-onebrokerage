@@ -67,6 +67,7 @@ const Video = () => {
       type: "",
       search: "",
       status: "",
+      category: "",
       page: 1,
     };
     setFilter({ ...filters, ...f });

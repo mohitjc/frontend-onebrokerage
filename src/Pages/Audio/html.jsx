@@ -74,14 +74,14 @@ const Html = ({
       },
     },
     {
-      key: "video",
-      name: "Video",
+      key: "audio",
+      name: "Audio",
       render: (row) => {
         return (
           <>
-            <video
-              src={`${environment.sasurl}/${row?.video}`}
-              width={130}
+            <audio
+              src={`${environment.sasurl}/${row?.audio}`}
+              width={100}
               controls
             />
           </>
@@ -259,9 +259,9 @@ const Html = ({
               id="statusDropdown"
               displayValue="name"
               placeholder="All Type"
-              intialValue={filters.type}
+              intialValue={filters.category}
               result={(e) => {
-                filter({ type: e.value });
+                filter({ category: e.value });
               }}
               options={categoryOptions}
             />
@@ -275,7 +275,7 @@ const Html = ({
               }}
               options={statusModel.list}
             />
-            {filters.status || filters.type ? (
+            {filters.status || filters.type || filters.category ? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
