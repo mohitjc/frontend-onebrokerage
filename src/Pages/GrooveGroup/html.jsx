@@ -14,6 +14,7 @@ import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
 import { PiEyeLight } from "react-icons/pi";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
+import { LuImport } from "react-icons/lu";
 const Html = ({
   sorting,
   filter,
@@ -288,7 +289,7 @@ const Html = ({
             )}
 
             <label
-              className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center `}
+              className={`block cursor-pointer text-gray-500 bg-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center `}
             >
               <input
                 type="file"
@@ -299,7 +300,7 @@ const Html = ({
                 }}
               />
               <div className="flex gap-2 items-center justify-center">
-                <FiPlus className="text-2xl text-[#EB6A59]" />
+                <LuImport className="text-xl " />
                 <span>Import Users</span>
               </div>
             </label>
