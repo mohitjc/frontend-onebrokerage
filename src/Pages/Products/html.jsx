@@ -51,7 +51,7 @@ const Html = ({
             onChange={(e) => {
               handleMarkPopular(e, row._id);
             }}
-            checked={row.isPopular}
+            checked={row?.isPopular}
           />
         );
       },
