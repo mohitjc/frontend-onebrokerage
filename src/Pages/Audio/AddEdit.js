@@ -37,11 +37,9 @@ const AddEdit = () => {
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);
   const formValidation = [
-    /*  { key: "status", required: true },
-    { key: "type", required: true, message: "Type is required" },
-    { key: "timezone", required: true },
-    { key: "description", required: true, message: "Description is required" }, */
-    // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
+    { key: "title", required: true },
+    { key: "category", required: true },
+    { key: "audio", required: true },
   ];
 
   const options = shared.types;
@@ -102,7 +100,7 @@ const AddEdit = () => {
           });
 
           payload.id = id;
-          if (payload?.category?.id) payload.category = payload.category?.id;
+          if (payload?.category?._id) payload.category = payload.category?._id;
           setform({
             ...payload,
           });
@@ -179,6 +177,11 @@ const AddEdit = () => {
                   onChange={(e) => setform({ ...form, title: e })}
                   required
                 />
+                {submitted && !form.title && (
+                  <div className="text-danger small mt-1">
+                    Title is required.
+                  </div>
+                )}
               </div>
               <div className=" mb-3">
                 <FormControl
@@ -193,11 +196,16 @@ const AddEdit = () => {
                   theme="search"
                   required
                 />
+                {submitted && !form.category && (
+                  <div className="text-danger small mt-1">
+                    Category is required.
+                  </div>
+                )}
               </div>
 
               <div className="mb-3">
                 <div>
-                <label className="lablefontcls">Audio</label>
+                  <label className="lablefontcls">Audio</label>
                 </div>
                 {/* <br></br>
                 <ImageUpload
@@ -237,14 +245,19 @@ const AddEdit = () => {
                       width={300}
                       controls
                     />
-                     <a
-                     className="bg-white rounded-full bg-primary inline-flex p-2 absolute top-3 right-2 text-white"
+                    <a
+                      className="bg-white rounded-full bg-primary inline-flex p-2 absolute top-3 right-2 text-white"
                       onClick={() => {
                         setform({ ...form, audio: "" });
                       }}
                     >
-                     <FiTrash />
+                      <FiTrash />
                     </a>
+                  </div>
+                )}
+                {submitted && !form.audio && (
+                  <div className="text-danger small mt-1">
+                    Audio is required.
                   </div>
                 )}
               </div>

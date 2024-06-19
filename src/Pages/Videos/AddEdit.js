@@ -38,11 +38,10 @@ const AddEdit = () => {
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);
   const formValidation = [
-    /*  { key: "status", required: true },
-    { key: "type", required: true, message: "Type is required" },
-    { key: "timezone", required: true },
-    { key: "description", required: true, message: "Description is required" }, */
-    // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
+    { key: "title", required: true },
+    { key: "category", required: true },
+    { key: "video", required: true },
+    ,
   ];
 
   const options = shared.types;
@@ -181,6 +180,11 @@ const AddEdit = () => {
                   onChange={(e) => setform({ ...form, title: e })}
                   required
                 />
+                {submitted && !form.title && (
+                  <div className="text-danger small mt-1">
+                    Title is required.
+                  </div>
+                )}
               </div>
               <div className=" mb-3">
                 <FormControl
@@ -195,12 +199,17 @@ const AddEdit = () => {
                   theme="search"
                   required
                 />
+                {submitted && !form.category && (
+                  <div className="text-danger small mt-1">
+                    Category is required.
+                  </div>
+                )}
               </div>
 
               <div className="mb-3">
-               <div>
-               <label className="lablefontcls ">Video</label>
-               </div>
+                <div>
+                  <label className="lablefontcls ">Video</label>
+                </div>
                 {/* <br></br>
                 <ImageUpload
                   model="users"
@@ -240,13 +249,18 @@ const AddEdit = () => {
                       controls
                     />
                     <a
-                     className="bg-white rounded-full bg-primary inline-flex p-2 absolute top-2 right-2 text-white"
+                      className="bg-white rounded-full bg-primary inline-flex p-2 absolute top-2 right-2 text-white"
                       onClick={() => {
                         setform({ ...form, video: "" });
                       }}
                     >
-                     <FiTrash />
+                      <FiTrash />
                     </a>
+                  </div>
+                )}
+                {submitted && !form.video && (
+                  <div className="text-danger small mt-1">
+                    Video is required.
                   </div>
                 )}
               </div>
