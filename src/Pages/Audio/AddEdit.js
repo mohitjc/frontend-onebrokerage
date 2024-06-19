@@ -13,7 +13,7 @@ import datepipeModel from "../../models/datepipemodel";
 import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiTrash } from "react-icons/fi";
 import environment from "../../environment";
 
 const AddEdit = () => {
@@ -196,7 +196,9 @@ const AddEdit = () => {
               </div>
 
               <div className="mb-3">
+                <div>
                 <label className="lablefontcls">Audio</label>
+                </div>
                 {/* <br></br>
                 <ImageUpload
                   model="users"
@@ -224,23 +226,24 @@ const AddEdit = () => {
                     />
                     <div className="flex flex-col items-center justify-center">
                       <FiPlus className="text-2xl text-[#EB6A59]" />
-                      <span>Choose File..</span>
+                      <span>Choose Audio File</span>
                     </div>
                   </label>
                 )}
                 {form.audio && (
-                  <div>
+                  <div className="relative inline-flex">
                     <audio
                       src={`${environment.sasurl}/${form?.audio}`}
                       width={300}
                       controls
                     />
-                    <a
+                     <a
+                     className="bg-white rounded-full bg-primary inline-flex p-2 absolute top-3 right-2 text-white"
                       onClick={() => {
                         setform({ ...form, audio: "" });
                       }}
                     >
-                      remove
+                     <FiTrash />
                     </a>
                   </div>
                 )}
