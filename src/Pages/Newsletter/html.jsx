@@ -90,7 +90,7 @@ const Html = ({
               ) : (
                 <></>
               )}
-              {isAllow(`edit${shared.check}`) ? (
+              {/* {isAllow(`edit${shared.check}`) ? (
                 <Tooltip placement="top" title="Edit">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -101,7 +101,7 @@ const Html = ({
                 </Tooltip>
               ) : (
                 <></>
-              )}
+              )}*/}
               {isAllow(`delete${shared.check}`) ? (
                 <Tooltip placement="top" title="Delete">
                   {" "}

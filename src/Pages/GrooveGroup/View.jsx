@@ -95,8 +95,8 @@ const View = () => {
                     </p>
                   </div>
                   <div className="text-center">
-                  <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
-                     <GrUserSettings  className="text-xl text-[#EB6A59]"/>
+                    <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
+                      <GrUserSettings className="text-xl text-[#EB6A59]" />
                     </p>
                     {data?.role?.name || "--"}
                   </div>
