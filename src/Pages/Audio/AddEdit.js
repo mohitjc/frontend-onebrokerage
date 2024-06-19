@@ -14,17 +14,17 @@ import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
 import { FiPlus } from "react-icons/fi";
+import environment from "../../environment";
 
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
-  const [audio, setAudio] = useState("");
   const [categoryOptions, setCategories] = useState([]);
   const [form, setform] = useState({
     id: "",
     title: "",
-    image: "",
     category: "",
+    audio: "",
   });
 
   const [filters, setFilters] = useState({
@@ -50,8 +50,9 @@ const AddEdit = () => {
     let f = {
       ...p,
       category_type: "master",
+      type: "audio",
     };
-    ApiClient.get(shared.listApi, f).then((res) => {
+    ApiClient.get("category/listing", f).then((res) => {
       if (res.success) {
         let categoryOptions = res.data.map(({ id, name }) => {
           return { id: id, name: name };
@@ -71,8 +72,6 @@ const AddEdit = () => {
     let url = shared.addApi;
     let value = {
       ...form,
-      ...images,
-      parent_category: !form.parent_category ? null : form.parent_category,
     };
     if (value.id) {
       method = "put";
@@ -84,7 +83,6 @@ const AddEdit = () => {
     loader(true);
     ApiClient.allApi(url, value, method).then((res) => {
       if (res.success) {
-        // ToastsStore.success(res.message)
         history(`/${shared.url}`);
       }
       loader(false);
@@ -104,8 +102,7 @@ const AddEdit = () => {
           });
 
           payload.id = id;
-          if (payload.parent_category?._id)
-            payload.parent_category = payload.parent_category?._id;
+          if (payload?.category?.id) payload.category = payload.category?.id;
           setform({
             ...payload,
           });
@@ -131,13 +128,20 @@ const AddEdit = () => {
 
   const uploadAudio = (e) => {
     let files = e.target.files;
-    let file = files?.item(0).name;
-    setAudio(file);
+    if (!files) return;
+    loader(true);
+    ApiClient.multiImageUpload("upload/audio", files, {}, "file").then(
+      (res) => {
+        if (res.success) {
+          setform({ ...form, audio: res?.filePath });
+        }
+        loader(false);
+      }
+    );
   };
-  console.log("audio", audio);
 
   useEffect(() => {
-    getCategoriesList({ type: form.type });
+    getCategoriesList();
   }, [form.type]);
 
   return (
@@ -171,8 +175,8 @@ const AddEdit = () => {
                   type="text"
                   name="title"
                   label="Title"
-                  value={form.name}
-                  onChange={(e) => setform({ ...form, name: e })}
+                  value={form.title}
+                  onChange={(e) => setform({ ...form, title: e })}
                   required
                 />
               </div>
@@ -185,58 +189,61 @@ const AddEdit = () => {
                   onChange={(e) => {
                     setform({ ...form, category: e });
                   }}
-                  options={options}
+                  options={categoryOptions}
                   theme="search"
                   required
                 />
               </div>
-              {form.type && (
-                <div className=" mb-3">
-                  <FormControl
-                    type="select"
-                    name="type"
-                    label="Parent Category"
-                    value={form.parent_category}
-                    onChange={(e) => setform({ ...form, parent_category: e })}
-                    options={[
-                      { name: "Set as Parent", id: "" },
-                      ...categoryOptions,
-                    ]}
-                    theme="search"
-                  />
-                </div>
-              )}
+
               <div className="mb-3">
-                <label className="lablefontcls">Audio File</label>
-                {/*<br></br>
+                <label className="lablefontcls">Audio</label>
+                {/* <br></br>
                 <ImageUpload
                   model="users"
                   result={(e) => imageResult(e, "image")}
                   value={images.image || form.image}
                   multiple={false}
                   label="Choose file"
-                />
-                 {submitted && !images.image && (
+                /> */}
+                {/* {submitted && !images.image && (
                   <div className="text-danger small mt-1">
                     image is required.
                   </div>
                 )} */}
-                <label
-                  className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-4 text-center `}
-                >
-                  <input
-                    type="file"
-                    className="hidden"
-                    accept="audio/*"
-                    onChange={(e) => {
-                      uploadAudio(e);
-                    }}
-                  />
-                  <div className="flex flex-col items-center justify-center">
-                    <FiPlus className="text-2xl text-[#EB6A59]" />
-                    <span>Choose File..</span>
+                {!form.audio && (
+                  <label
+                    className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-4 text-center `}
+                  >
+                    <input
+                      type="file"
+                      className="hidden"
+                      accept="audio/*"
+                      onChange={(e) => {
+                        uploadAudio(e);
+                      }}
+                    />
+                    <div className="flex flex-col items-center justify-center">
+                      <FiPlus className="text-2xl text-[#EB6A59]" />
+                      <span>Choose File..</span>
+                    </div>
+                  </label>
+                )}
+                {form.audio && (
+                  <div>
+                    <audio
+                      src={`${environment.sasurl}/${form?.audio}`}
+                      width={300}
+                      controls
+                    />
+                    <a
+                      onClick={() => {
+                        setform({ ...form, audio: "" });
+                      }}
+                    >
+                      remove
+                    </a>
                   </div>
-                </label>
+                )}
               </div>
             </div>
 

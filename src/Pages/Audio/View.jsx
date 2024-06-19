@@ -41,50 +41,43 @@ const View = () => {
   return (
     <>
       <Layout>
-  
-
-
-
-   
-
-
-
         <div className="bg-white shadow-box rounded-lg w-full p-4 ">
-           <div className="flex items-center mb-8">
-                <Tooltip placement="top" title="Back">
-                  <span
-                    onClick={() => history(-1)}
-                    className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3"
-                  >
-                    <i className="fa fa-angle-left text-lg"></i>
-                  </span>
-                </Tooltip>
-                <div>
-                  <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
-                  {shared.addTitle} Details
-                  </h3>
-                
-                </div>
+          <div className="flex items-center mb-8">
+            <Tooltip placement="top" title="Back">
+              <span
+                onClick={() => history(-1)}
+                className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3"
+              >
+                <i className="fa fa-angle-left text-lg"></i>
+              </span>
+            </Tooltip>
+            <div>
+              <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
+                {shared.addTitle} Details
+              </h3>
             </div>
+          </div>
 
           <div className="grid grid-cols-12 gap-4">
             <div className="sideclass col-span-12 md:col-span-12">
-           
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Name</label>
-                  <div className="profiledetailscls">{data?.name || "--"}</div>
+                  <label className="profileheddingcls">Title</label>
+                  <div className="profiledetailscls">{data?.title || "--"}</div>
                 </div>
                 <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Type</label>
+                  <label className="profileheddingcls">Category</label>
                   <div className="profiledetailscls capitalize">
-                    {data?.type || "--"}
+                    {data?.category || "--"}
                   </div>
                 </div>
                 <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Image</label>
+                  <label className="profileheddingcls">Video</label>
                   <div className="profiledetailscls">
-                    <img src={methodModel.noImg(data?.image)} className="h-32"/>
+                    <img
+                      src={methodModel.noImg(data?.image)}
+                      className="h-32"
+                    />
                   </div>
                 </div>
               </div>

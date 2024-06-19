@@ -1,6 +1,6 @@
 const types = [
-  { id: "how", name: "How to" },
-  { id: "history", name: "History" },
+  { id: "s551sadd51", name: "How to" },
+  { id: "634b063e3e4c97eed2d0ab75", name: "History" },
 ];
 
 const shared = {
@@ -9,12 +9,12 @@ const shared = {
   addTitle: "Video",
   url: "videos",
   types: [...types],
-  addApi: "videos/add",
-  editApi: "videos/update",
-  detailApi: "videos/detail",
-  listApi: "videos/listing",
-  statusApi: "videos/update",
-  deleteApi: "videos/delete",
+  addApi: "video/add",
+  editApi: "video/update",
+  detailApi: "video/detail",
+  listApi: "video/list",
+  statusApi: "video/update",
+  deleteApi: "video/delete",
 };
 
 export default shared;

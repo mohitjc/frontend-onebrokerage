@@ -237,7 +237,6 @@ class ApiClient {
     return new Promise(function (fulfill, reject) {
       axios
         .post(url, body, configupdate)
-
         .then(function (response) {
           fulfill(response && response.data);
         })

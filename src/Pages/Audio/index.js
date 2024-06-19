@@ -11,10 +11,11 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import SweetAlert from "../../components/SweetAlert/SweetAlert";
 
-const Category = () => {
+const Audio = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
+
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loaging, setLoader] = useState(true);
@@ -94,7 +95,7 @@ const Category = () => {
     // }
     Swal.fire({
       title: "Are you sure?",
-      text: `Do you want to delete this`,
+      text: `Do you want to delete this video`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -238,4 +239,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default Audio;

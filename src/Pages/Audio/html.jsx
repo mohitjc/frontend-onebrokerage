@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import methodModel from "../../methods/methods";
 import { PiEyeLight } from "react-icons/pi";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
+import environment from "../../environment";
 const Html = ({
   sorting,
   filter,
@@ -34,6 +35,28 @@ const Html = ({
   total = { total },
 }) => {
   const user = useSelector((state) => state.user);
+  const [categoryOptions, setCategories] = useState([]);
+
+  const getCategoriesList = (p = {}) => {
+    let f = {
+      ...p,
+      category_type: "master",
+      type: "audio",
+    };
+    ApiClient.get("category/listing", f).then((res) => {
+      if (res.success) {
+        let categoryOptions = res.data.map(({ id, name }) => {
+          return { id: id, name: name };
+        });
+        setCategories(categoryOptions);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getCategoriesList();
+  }, []);
+
   const columns = [
     {
       key: "title",
@@ -47,16 +70,20 @@ const Html = ({
       key: "category",
       name: "Category",
       render: (row) => {
-        return <span className="capitalize">{row?.category?.name}</span>;
+        return <span className="capitalize">{row?.category_detail?.name}</span>;
       },
     },
     {
-      key: "image",
-      name: "Image",
+      key: "video",
+      name: "Video",
       render: (row) => {
         return (
           <>
-            <img src={methodModel.noImg(row?.image)} height={30} width={30} />
+            <video
+              src={`${environment.sasurl}/${row?.video}`}
+              width={130}
+              controls
+            />
           </>
         );
       },
@@ -236,7 +263,7 @@ const Html = ({
               result={(e) => {
                 filter({ type: e.value });
               }}
-              options={shared.types}
+              options={categoryOptions}
             />
             <SelectDropdown
               id="statusDropdown"

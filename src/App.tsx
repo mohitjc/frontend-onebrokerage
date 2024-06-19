@@ -119,10 +119,12 @@ function App() {
     { url: "/customers/detail/:id", element: <GrooveGroupDetail /> },
     { url: "/videos", element: <Videos /> },
     { url: "/videos/add", element: <AddVideos /> },
+    { url: "/videos/edit/:id", element: <AddVideos /> },
     { url: "/videos/detail/:id", element: <ViewVideos /> },
 
     { url: "/audio", element: <Audio /> },
     { url: "/audio/add", element: <AddAudio /> },
+    { url: "/audio/edit/:id", element: <AddAudio /> },
     { url: "/audio/detail/:id", element: <ViewAudio /> },
   ];
 

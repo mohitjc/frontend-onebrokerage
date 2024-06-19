@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
 import { FiPlus } from "react-icons/fi";
+import environment from "../../environment";
 
 const AddEdit = () => {
   const { id } = useParams();
@@ -23,8 +24,8 @@ const AddEdit = () => {
   const [form, setform] = useState({
     id: "",
     title: "",
-    image: "",
     category: "",
+    video: "",
   });
 
   const [filters, setFilters] = useState({
@@ -50,8 +51,9 @@ const AddEdit = () => {
     let f = {
       ...p,
       category_type: "master",
+      type: "video",
     };
-    ApiClient.get(shared.listApi, f).then((res) => {
+    ApiClient.get("category/listing", f).then((res) => {
       if (res.success) {
         let categoryOptions = res.data.map(({ id, name }) => {
           return { id: id, name: name };
@@ -71,8 +73,7 @@ const AddEdit = () => {
     let url = shared.addApi;
     let value = {
       ...form,
-      ...images,
-      parent_category: !form.parent_category ? null : form.parent_category,
+      ...video,
     };
     if (value.id) {
       method = "put";
@@ -84,7 +85,6 @@ const AddEdit = () => {
     loader(true);
     ApiClient.allApi(url, value, method).then((res) => {
       if (res.success) {
-        // ToastsStore.success(res.message)
         history(`/${shared.url}`);
       }
       loader(false);
@@ -104,8 +104,7 @@ const AddEdit = () => {
           });
 
           payload.id = id;
-          if (payload.parent_category?._id)
-            payload.parent_category = payload.parent_category?._id;
+          if (payload?.category?.id) payload.category = payload.category?.id;
           setform({
             ...payload,
           });
@@ -131,15 +130,21 @@ const AddEdit = () => {
 
   const uploadVideo = (e) => {
     let files = e.target.files;
-    let file = files?.item(0).name;
-    setVideo(file);
+    if (!files) return;
+    loader(true);
+    ApiClient.multiImageUpload("upload/video", files, {}, "file").then(
+      (res) => {
+        if (res.success) {
+          setform({ ...form, video: res?.filePath });
+        }
+        loader(false);
+      }
+    );
   };
 
   useEffect(() => {
-    getCategoriesList({ type: form.type });
+    getCategoriesList();
   }, [form.type]);
-
-  console.log("VIDEO", video);
 
   return (
     <>
@@ -172,8 +177,8 @@ const AddEdit = () => {
                   type="text"
                   name="title"
                   label="Title"
-                  value={form.name}
-                  onChange={(e) => setform({ ...form, name: e })}
+                  value={form.title}
+                  onChange={(e) => setform({ ...form, title: e })}
                   required
                 />
               </div>
@@ -182,31 +187,16 @@ const AddEdit = () => {
                   type="select"
                   name="category"
                   label="Category"
-                  value={form.type}
+                  value={form.category}
                   onChange={(e) => {
-                    setform({ ...form, type: e, parent_category: "" });
+                    setform({ ...form, category: e });
                   }}
-                  options={options}
+                  options={categoryOptions}
                   theme="search"
                   required
                 />
               </div>
-              {form.type && (
-                <div className=" mb-3">
-                  <FormControl
-                    type="select"
-                    name="type"
-                    label="Parent Category"
-                    value={form.parent_category}
-                    onChange={(e) => setform({ ...form, parent_category: e })}
-                    options={[
-                      { name: "Set as Parent", id: "" },
-                      ...categoryOptions,
-                    ]}
-                    theme="search"
-                  />
-                </div>
-              )}
+
               <div className="mb-3">
                 <label className="lablefontcls">Video</label>
                 {/* <br></br>
@@ -222,7 +212,7 @@ const AddEdit = () => {
                     image is required.
                   </div>
                 )} */}
-                {!video && (
+                {!form.video && (
                   <label
                     className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-4 text-center `}
                   >
@@ -240,7 +230,22 @@ const AddEdit = () => {
                     </div>
                   </label>
                 )}
-                {video && <>video uploaded</>}
+                {form.video && (
+                  <div>
+                    <video
+                      src={`${environment.sasurl}/${form?.video}`}
+                      width={300}
+                      controls
+                    />
+                    <a
+                      onClick={() => {
+                        setform({ ...form, video: "" });
+                      }}
+                    >
+                      remove
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
 
