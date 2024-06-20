@@ -176,7 +176,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                     <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                                       {itm.icon}
                                       <span className=" text-inherit leading-none sidebar_text">
-                                        {" "}
                                         {itm.name}
                                       </span>
                                     </span>
@@ -216,7 +215,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                                     className="text-inherit leading-none sidebar_text"
                                                     title={sitm.name}
                                                   >
-                                                    {" "}
                                                     {sitm.name}
                                                   </span>
                                                 </NavLink>

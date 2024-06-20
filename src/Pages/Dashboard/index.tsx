@@ -4,8 +4,21 @@ import Chart from "../../components/Charts/Chart";
 import { IoHandRightOutline } from "react-icons/io5";
 import PieChart from "../../components/Charts/Piechart";
 import DoughnutChart from "../../components/Charts/DonutChart";
+import ApiClient from "../../methods/api/apiClient";
 
 const Dashboard = () => {
+  const [data, setData]: any = useState();
+  const getAllCounts = () => {
+    ApiClient.get("dashboard/all-counts").then((res: any) => {
+      if (res.success) {
+        setData(res.data?.[0]);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getAllCounts();
+  }, []);
   return (
     <>
       <Layout>
@@ -18,7 +31,9 @@ const Dashboard = () => {
           <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div className="flex flex-col-reverse  border border-gray-200 shadow-sm px-6 py-2 rounded-lg relative">
               <dt className="text-base leading-7 text-black/40">Total Users</dt>
-              <dd className="text-2xl font-bold leading-9  text-black">12</dd>
+              <dd className="text-2xl font-bold leading-9  text-black">
+                {data?.totalUsers}
+              </dd>
               <img
                 src="../assets/img/d1.svg"
                 className="absolute  right-6 top-1/2 -translate-y-1/2 h-7"
@@ -28,7 +43,9 @@ const Dashboard = () => {
               <dt className="text-base leading-7 text-black/40">
                 Total Products
               </dt>
-              <dd className="text-2xl font-bold leading-9  text-black">300+</dd>
+              <dd className="text-2xl font-bold leading-9  text-black">
+                {data?.totalProducts}
+              </dd>
               <img
                 src="../assets/img/d2.svg"
                 className="absolute  text-green-500 right-6 top-1/2 -translate-y-1/2 h-7"
@@ -38,7 +55,9 @@ const Dashboard = () => {
               <dt className="text-base leading-7 text-black/40">
                 Total Categories
               </dt>
-              <dd className="text-2xl font-bold leading-9  text-black">40</dd>
+              <dd className="text-2xl font-bold leading-9  text-black">
+                {data?.totalCategory}
+              </dd>
               <img
                 src="../assets/img/d4.svg"
                 className="absolute  right-6 top-1/2 -translate-y-1/2 h-7"
@@ -46,9 +65,11 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-col-reverse  border border-gray-200 shadow-sm px-6 py-2 rounded-lg relative">
               <dt className="text-base leading-7 text-black/40">
-                Total Questions
+                Total Reviews
               </dt>
-              <dd className="text-2xl font-bold leading-9  text-black">50+</dd>
+              <dd className="text-2xl font-bold leading-9  text-black">
+                {data?.totalReview}
+              </dd>
               <img
                 src="../assets/img/d3.svg"
                 className="absolute  right-6 top-1/2 -translate-y-1/2 h-7"

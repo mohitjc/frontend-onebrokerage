@@ -59,6 +59,7 @@ const Layout = ({ children }) => {
   };
 
   const [state, setstate] = useState(false);
+
   useEffect(() => {
     setstate(localStorage.getItem("sidebar"));
   }, [localStorage.getItem("sidebar")]);
