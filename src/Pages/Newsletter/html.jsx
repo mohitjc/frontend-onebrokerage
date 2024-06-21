@@ -101,7 +101,7 @@ const Html = ({
                 </Tooltip>
               ) : (
                 <></>
-              )}*/}
+              )}
               {isAllow(`delete${shared.check}`) ? (
                 <Tooltip placement="top" title="Delete">
                   {" "}
@@ -114,7 +114,7 @@ const Html = ({
                 </Tooltip>
               ) : (
                 <></>
-              )}
+              )}*/}
             </div>
           </>
         );

@@ -368,7 +368,7 @@ const Subscribers = () => {
                           )}
                         </div>
 
-                        <div className="flex justify-between gap-2 flex-wrap mt-6">
+                        <div className="flex justify-end gap-2 flex-wrap mt-6">
                           <div className="btns flex items-center gap-2 shrink-0">
                             <button
                               type="button"
