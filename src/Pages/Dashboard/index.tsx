@@ -71,7 +71,7 @@ const Dashboard = () => {
                 {data?.totalReview}
               </dd>
               <img
-                src="../assets/img/d3.svg"
+                src="../assets/img/d5.svg"
                 className="absolute  right-6 top-1/2 -translate-y-1/2 h-7"
               />
             </div>

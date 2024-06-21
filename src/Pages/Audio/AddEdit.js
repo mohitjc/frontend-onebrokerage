@@ -100,7 +100,8 @@ const AddEdit = () => {
           });
 
           payload.id = id;
-          if (payload?.category?._id) payload.category = payload.category?._id;
+          if (payload?.category?.id) payload.category = payload.category?.id;
+
           setform({
             ...payload,
           });
