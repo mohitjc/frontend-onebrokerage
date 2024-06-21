@@ -13,9 +13,6 @@ import { GrUserSettings } from "react-icons/gr";
 import { SiPlanet, SiSuperuser } from "react-icons/si";
 import {
   MdContentPaste,
-  MdEventAvailable,
-  MdOutlineEmojiEvents,
-  MdOutlineEventAvailable,
   MdOutlineGroups,
   MdOutlineMarkEmailRead,
   MdOutlineOndemandVideo,
@@ -134,9 +131,9 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       key: "",
     },
     {
-      name: "Emails",
+      name: "Subscribers",
       icon: <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />,
-      url: "/emails",
+      url: "/subscribers",
       key: "",
     },
     {

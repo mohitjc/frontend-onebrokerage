@@ -14,7 +14,7 @@ import FormControl from "../../components/common/FormControl";
 import MultiSelectDropdown from "../../components/common/MultiSelectDropdown";
 import methodModel from "../../methods/methods";
 
-const Newsletter = () => {
+const Subscribers = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
@@ -398,4 +398,4 @@ const Newsletter = () => {
   );
 };
 
-export default Newsletter;
+export default Subscribers;

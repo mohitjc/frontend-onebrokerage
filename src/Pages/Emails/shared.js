@@ -1,8 +1,8 @@
 const shared = {
-  check: "Emails",
+  check: "Subscribers",
   title: "Subscribers",
-  addTitle: "Subscribes",
-  url: "emails",
+  addTitle: "Subscribers",
+  url: "subscribers",
   addApi: "subscribe/add",
   editApi: "subscribe",
   detailApi: "subscribe/detail",

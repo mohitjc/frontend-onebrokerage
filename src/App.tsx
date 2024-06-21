@@ -112,7 +112,7 @@ function App() {
     { url: "/blog/add", element: <AddEditBlog /> },
     { url: "/blog/detail/:id", element: <ViewBlog /> },
     { url: "/blog/edit/:id", element: <AddEditBlog /> },
-    { url: "/emails", element: <Emails /> },
+    { url: "/subscribers", element: <Emails /> },
     { url: "/customers", element: <GrooveGroup /> },
     { url: "/customers/edit/:id", element: <AddEditGrooveGroup /> },
     { url: "/customers/add", element: <AddEditGrooveGroup /> },
