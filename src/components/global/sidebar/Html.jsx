@@ -129,23 +129,34 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       icon: <FaBlog className="text-[#fff] shrink-0 text-lg" />,
       url: "/blog",
       key: "",
+      tab: "blogs",
+      menu: [
+        {
+          name: "Blogs",
+          icon: <FaBlog className="text-[#fff] shrink-0 text-lg" />,
+          url: "/blog",
+          key: "",
+        },
+        {
+          name: "Videos",
+          icon: (
+            <MdOutlineOndemandVideo className="text-[#fff] shrink-0 text-lg" />
+          ),
+          url: "/videos",
+          key: "",
+        },
+        {
+          name: "Audio",
+          icon: <MdOutlineAudioFile className="text-[#fff] shrink-0 text-lg" />,
+          url: "/audio",
+          key: "",
+        },
+      ],
     },
     {
       name: "Subscribers",
       icon: <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />,
       url: "/subscribers",
-      key: "",
-    },
-    {
-      name: "Videos",
-      icon: <MdOutlineOndemandVideo className="text-[#fff] shrink-0 text-lg" />,
-      url: "/videos",
-      key: "",
-    },
-    {
-      name: "Audio",
-      icon: <MdOutlineAudioFile className="text-[#fff] shrink-0 text-lg" />,
-      url: "/audio",
       key: "",
     },
   ];
@@ -193,7 +204,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                 >
                                   <Disclosure.Panel className="pl-[30px] mt-[4px] ">
                                     <ul className="space-y-2">
-                                      {itm.menu.map((sitm) => {
+                                      {itm.menu?.map((sitm) => {
                                         return (
                                           <>
                                             {isAllow(sitm.key) ? (
