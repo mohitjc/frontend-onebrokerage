@@ -60,6 +60,7 @@ import ViewVideos from "./Pages/Videos/View";
 import Audio from "./Pages/Audio";
 import AddAudio from "./Pages/Audio/AddEdit";
 import ViewAudio from "./Pages/Audio/View";
+import Send from "./Pages/Emails/Send";
 
 const { persistor, store } = configureStoreProd();
 
@@ -113,6 +114,7 @@ function App() {
     { url: "/blog/detail/:id", element: <ViewBlog /> },
     { url: "/blog/edit/:id", element: <AddEditBlog /> },
     { url: "/subscribers", element: <Emails /> },
+    { url: "/subscribers/send-newsletter", element: <Send /> },
     { url: "/customers", element: <GrooveGroup /> },
     { url: "/customers/edit/:id", element: <AddEditGrooveGroup /> },
     { url: "/customers/add", element: <AddEditGrooveGroup /> },

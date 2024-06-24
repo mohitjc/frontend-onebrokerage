@@ -160,12 +160,12 @@ const Html = ({
           </form>
 
           <div className="flex gap-2 ml-auto">
-            <button
+            <Link
+              to={"/subscribers/send-newsletter"}
               className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
-              onClick={onClickSendNewsletter}
             >
               Send Newsletter
-            </button>{" "}
+            </Link>
             {/* <SelectDropdown
               id="statusDropdown"
               displayValue="name"
