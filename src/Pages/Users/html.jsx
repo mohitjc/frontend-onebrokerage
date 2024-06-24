@@ -70,7 +70,7 @@ const Html = ({
         return <span className="">{row?.roleDetails?.name}</span>;
       },
     },
-    {
+    /* {
       key: "mobileNo",
       name: "Mobile No",
       render: (row) => {
@@ -84,7 +84,7 @@ const Html = ({
         );
       },
     },
-    /* {
+     {
       key: "timezone",
       name: "Timezone",
       render: (row) => {

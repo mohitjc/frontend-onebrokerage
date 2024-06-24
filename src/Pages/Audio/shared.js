@@ -6,7 +6,7 @@ const types = [
 const shared = {
   check: "Audio",
   title: "Audios",
-  addTitle: "Audios",
+  addTitle: "Audio",
   url: "audio",
   types: [...types],
   addApi: "audio/add",

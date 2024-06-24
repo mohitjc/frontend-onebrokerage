@@ -1,14 +1,15 @@
 const shared = {
-  check: "Emails",
+  check: "Subscribers",
   title: "Subscribers",
-  addTitle: "Subscribes",
-  url: "subscribe",
+  addTitle: "Subscribers",
+  url: "subscribers",
   addApi: "subscribe/add",
   editApi: "subscribe",
   detailApi: "subscribe/detail",
   listApi: "subscribe/listing",
   statusApi: "subscribe/status/change",
   deleteApi: "subscribe/delete",
+  sendNewsletter: "newsletter/send",
 };
 
 export default shared;

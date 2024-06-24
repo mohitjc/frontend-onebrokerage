@@ -9,13 +9,11 @@ import { TbCategoryPlus } from "react-icons/tb";
 import { BiCartAdd } from "react-icons/bi";
 import { PiNewspaper } from "react-icons/pi";
 import { GrUserSettings } from "react-icons/gr";
+import { VscSymbolMisc } from "react-icons/vsc";
 
 import { SiPlanet, SiSuperuser } from "react-icons/si";
 import {
   MdContentPaste,
-  MdEventAvailable,
-  MdOutlineEmojiEvents,
-  MdOutlineEventAvailable,
   MdOutlineGroups,
   MdOutlineMarkEmailRead,
   MdOutlineOndemandVideo,
@@ -103,24 +101,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/product",
       key: "",
     },
-    {
-      name: "FAQ",
-      icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
-      url: "/faq",
-      key: "",
-    },
-    {
-      name: "Content",
-      icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
-      url: "/content",
-      key: "",
-    },
-    {
-      name: "Newsletter",
-      icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
-      url: "/newsletter",
-      key: "",
-    },
+
     {
       name: "Tags",
       icon: <LiaUserTagSolid className="text-[#fff] shrink-0 text-lg" />,
@@ -132,24 +113,65 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       icon: <FaBlog className="text-[#fff] shrink-0 text-lg" />,
       url: "/blog",
       key: "",
+      tab: "blogs",
+      menu: [
+        {
+          name: "Blogs",
+          icon: <FaBlog className="text-[#fff] shrink-0 text-lg" />,
+          url: "/blog",
+          key: "",
+        },
+        {
+          name: "Videos",
+          icon: (
+            <MdOutlineOndemandVideo className="text-[#fff] shrink-0 text-lg" />
+          ),
+          url: "/videos",
+          key: "",
+        },
+        {
+          name: "Audio",
+          icon: <MdOutlineAudioFile className="text-[#fff] shrink-0 text-lg" />,
+          url: "/audio",
+          key: "",
+        },
+      ],
     },
+
     {
-      name: "Emails",
-      icon: <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />,
-      url: "/emails",
+      name: "Misc",
+      icon: <VscSymbolMisc className="text-[#fff] shrink-0 text-lg" />,
+      url: "/misc",
       key: "",
-    },
-    {
-      name: "Videos",
-      icon: <MdOutlineOndemandVideo className="text-[#fff] shrink-0 text-lg" />,
-      url: "/videos",
-      key: "",
-    },
-    {
-      name: "Audio",
-      icon: <MdOutlineAudioFile className="text-[#fff] shrink-0 text-lg" />,
-      url: "/audio",
-      key: "",
+      tab: "Misc",
+      menu: [
+        {
+          name: "FAQ",
+          icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
+          url: "/faq",
+          key: "",
+        },
+        {
+          name: "Content",
+          icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
+          url: "/content",
+          key: "",
+        },
+        {
+          name: "Newsletter",
+          icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
+          url: "/newsletter",
+          key: "",
+        },
+        {
+          name: "Subscribers",
+          icon: (
+            <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />
+          ),
+          url: "/subscribers",
+          key: "",
+        },
+      ],
     },
   ];
 
@@ -176,7 +198,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                     <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                                       {itm.icon}
                                       <span className=" text-inherit leading-none sidebar_text">
-                                        {" "}
                                         {itm.name}
                                       </span>
                                     </span>
@@ -197,7 +218,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                 >
                                   <Disclosure.Panel className="pl-[30px] mt-[4px] ">
                                     <ul className="space-y-2">
-                                      {itm.menu.map((sitm) => {
+                                      {itm.menu?.map((sitm) => {
                                         return (
                                           <>
                                             {isAllow(sitm.key) ? (
@@ -216,7 +237,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                                     className="text-inherit leading-none sidebar_text"
                                                     title={sitm.name}
                                                   >
-                                                    {" "}
                                                     {sitm.name}
                                                   </span>
                                                 </NavLink>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import ApiClient from "../../methods/api/apiClient";
 import "./style.scss";
 import loader from "../../methods/loader";
@@ -9,15 +9,45 @@ import axios from "axios";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { Dialog, Transition } from "@headlessui/react";
+import FormControl from "../../components/common/FormControl";
+import MultiSelectDropdown from "../../components/common/MultiSelectDropdown";
+import methodModel from "../../methods/methods";
 
-const Newsletter = () => {
+const Subscribers = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loaging, setLoader] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [emails, setEmails] = useState();
+  const [form, setForm] = useState({
+    to: [],
+    subject: "",
+    body: "",
+  });
+
+  const formValidation = [
+    {
+      key: "to",
+      required: true,
+    },
+    { key: "subject", required: true },
+    { key: "body", required: true },
+  ];
   const history = useNavigate();
+
+  const closeModal = () => {
+    setIsOpen(!isOpen);
+    setForm({
+      to: [],
+      subject: "",
+      body: "",
+    });
+  };
 
   const sortClass = (key) => {
     let cls = "fa-sort";
@@ -56,6 +86,17 @@ const Newsletter = () => {
         setTotal(res.total);
       }
       setLoader(false);
+    });
+  };
+
+  const emailsList = () => {
+    ApiClient.get("subscribe/listing").then((res) => {
+      if (res.success) {
+        let _emails = res?.data.map(({ id, email }) => {
+          return { id: email, name: email };
+        });
+        setEmails(_emails);
+      }
     });
   };
 
@@ -183,10 +224,37 @@ const Newsletter = () => {
     return value;
   };
 
+  const handleSubmit = (e) => {
+    let url = shared.sendNewsletter;
+    e.preventDefault();
+    setSubmitted(true);
+
+    let invalid = methodModel.getFormError(formValidation, form);
+
+    if (invalid || form.emails?.length == 0) return;
+    let method = "post";
+
+    let value = {
+      ...form,
+    };
+
+    loader(true);
+    ApiClient.allApi(url, value, method).then((res) => {
+      if (res.success) {
+        // ToastsStore.success(res.message)
+        history(`/${shared.url}`);
+        closeModal();
+        setSubmitted(false);
+      }
+      loader(false);
+    });
+  };
+
   useEffect(() => {
     if (user && user.loggedIn) {
       setFilter({ ...filters, search: searchState.data });
       getData({ search: searchState.data, page: 1 });
+      emailsList();
     }
   }, []);
 
@@ -211,9 +279,123 @@ const Newsletter = () => {
         statusChange={statusChange}
         changestatus={changestatus}
         exportfun={exportfun}
+        onClickSendNewsletter={() => setIsOpen(true)}
       />
+
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/70" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-[40px] bg-white px-4 py-6 lg:px-10 lg:py-14 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Title
+                    as="h3"
+                    className=" font-semibold text-[25px] leading-6 text-black mb-6 lg:mb-10"
+                  >
+                    NewsLetter
+                  </Dialog.Title>
+
+                  <div className="tabs_styles">
+                    <form onSubmit={handleSubmit}>
+                      <div className="mt-2">
+                        <div className="col-span-12 md:col-span-6 mb-3">
+                          <FormControl
+                            type="text"
+                            name="subject"
+                            label="Subject"
+                            value={form.subject}
+                            onChange={(e) => {
+                              setForm({ ...form, subject: e });
+                            }}
+                            required
+                          />
+                          {submitted && !form.subject && (
+                            <div className="text-danger small mt-1 capitalize ">
+                              Subject is required.
+                            </div>
+                          )}
+                        </div>
+                        <div className="col-span-12 md:col-span-6 mb-3">
+                          <label className="mb-1">
+                            To<span class="star">*</span>
+                          </label>
+                          <MultiSelectDropdown
+                            options={emails}
+                            result={({ value }) => {
+                              setForm({ ...form, to: value });
+                            }}
+                            intialValue={form.to}
+                          />
+                          {submitted && form.to?.length == 0 && (
+                            <div className="text-danger small mt-1 capitalize ">
+                              Email is required.
+                            </div>
+                          )}
+                        </div>
+                        <div className="col-span-12 md:col-span-6 mb-6">
+                          <FormControl
+                            type="editor"
+                            name="body"
+                            label="Body"
+                            value={form.body}
+                            onChange={(e) => setForm({ ...form, body: e })}
+                            required
+                          />
+                          {submitted && !form.body && (
+                            <div className="text-danger small mt-1">
+                              Text is required.
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="flex justify-end gap-2 flex-wrap mt-6">
+                          <div className="btns flex items-center gap-2 shrink-0">
+                            <button
+                              type="button"
+                              onClick={closeModal}
+                              className="bg-gray-400 py-3 px-2 w-32 text-white text-[14px] font-medium"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              type="submit"
+                              className="bg-[#263238] py-3 px-2 w-32 text-white text-[14px] font-medium"
+                            >
+                              Send
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     </>
   );
 };
 
-export default Newsletter;
+export default Subscribers;

@@ -48,8 +48,8 @@ export const rolePermissions = [
     key: "Blogs",
   },
   {
-    name: "Emails",
-    key: "Emails",
+    name: "Subscribers",
+    key: "Subscribers",
   },
   {
     name: "Videos",

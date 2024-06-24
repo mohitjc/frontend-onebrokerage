@@ -258,7 +258,7 @@ const Html = ({
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"
-              placeholder="All Type"
+              placeholder="All Category"
               intialValue={filters.category}
               result={(e) => {
                 filter({ category: e.value });

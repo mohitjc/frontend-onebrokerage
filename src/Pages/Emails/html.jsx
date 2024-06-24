@@ -31,6 +31,7 @@ const Html = ({
   changestatus,
   isAllow,
   total = { total },
+  onClickSendNewsletter,
 }) => {
   const user = useSelector((state) => state.user);
   const columns = [
@@ -158,8 +159,14 @@ const Html = ({
             </button>
           </form>
 
-          {/* <div className="flex gap-2 ml-auto">
-            <SelectDropdown
+          <div className="flex gap-2 ml-auto">
+            <button
+              className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
+              onClick={onClickSendNewsletter}
+            >
+              Send Newsletter
+            </button>{" "}
+            {/* <SelectDropdown
               id="statusDropdown"
               displayValue="name"
               placeholder="All Status"
@@ -180,8 +187,8 @@ const Html = ({
               </>
             ) : (
               <></>
-            )}
-          </div> */}
+            )}*/}
+          </div>
         </div>
 
         {!loaging ? (
