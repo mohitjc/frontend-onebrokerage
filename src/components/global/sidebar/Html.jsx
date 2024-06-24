@@ -9,6 +9,7 @@ import { TbCategoryPlus } from "react-icons/tb";
 import { BiCartAdd } from "react-icons/bi";
 import { PiNewspaper } from "react-icons/pi";
 import { GrUserSettings } from "react-icons/gr";
+import { VscSymbolMisc } from "react-icons/vsc";
 
 import { SiPlanet, SiSuperuser } from "react-icons/si";
 import {
@@ -100,24 +101,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/product",
       key: "",
     },
-    {
-      name: "FAQ",
-      icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
-      url: "/faq",
-      key: "",
-    },
-    {
-      name: "Content",
-      icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
-      url: "/content",
-      key: "",
-    },
-    {
-      name: "Newsletter",
-      icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
-      url: "/newsletter",
-      key: "",
-    },
+
     {
       name: "Tags",
       icon: <LiaUserTagSolid className="text-[#fff] shrink-0 text-lg" />,
@@ -153,11 +137,41 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
         },
       ],
     },
+
     {
-      name: "Subscribers",
-      icon: <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />,
-      url: "/subscribers",
+      name: "Misc",
+      icon: <VscSymbolMisc className="text-[#fff] shrink-0 text-lg" />,
+      url: "/misc",
       key: "",
+      tab: "Misc",
+      menu: [
+        {
+          name: "FAQ",
+          icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
+          url: "/faq",
+          key: "",
+        },
+        {
+          name: "Content",
+          icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
+          url: "/content",
+          key: "",
+        },
+        {
+          name: "Newsletter",
+          icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
+          url: "/newsletter",
+          key: "",
+        },
+        {
+          name: "Subscribers",
+          icon: (
+            <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />
+          ),
+          url: "/subscribers",
+          key: "",
+        },
+      ],
     },
   ];
 
