@@ -194,7 +194,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                             {({ open }) => (
                               <>
                                 <tooltip placement="right" title={itm.name}>
-                                  <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#4A545E]  hover:!text-[#5577FF] gap-[12px] hover:bg-[#EB6A59] transition-all duration-300">
+                                  <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#fff]  hover:!text-[#fff] gap-[12px] hover:bg-[#EB6A59] transition-all duration-300">
                                     <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                                       {itm.icon}
                                       <span className=" text-inherit leading-none sidebar_text">
@@ -204,7 +204,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                     <TiArrowSortedDown
                                       className={`${
                                         open ? "" : "-rotate-90 transform"
-                                      } h-4 w-4 transition-all duration-500  text-[#7E8B99]`}
+                                      } h-4 w-4 transition-all duration-500  text-[#fff]`}
                                     />
                                   </Disclosure.Button>
                                 </tooltip>
@@ -226,10 +226,10 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                                 {" "}
                                                 <NavLink
                                                   className={(isActive) =>
-                                                    "p-2.5 rounded-md block text-sm font-normal text-[#4A545E] cursor-pointer hover:!text-[#5577FF] hover:bg-[#EB6A59] !no-underline transition-all " +
+                                                    "p-2.5 rounded-md block text-sm font-normal text-[#d6d6d6] hover:text-[#fff] cursor-pointer  hover:bg-[#EB6A59] !no-underline transition-all " +
                                                     (location?.pathname ==
                                                       sitm.url &&
-                                                      " !text-[#5577FF] !bg-[#5577FF]/10 !font-medium")
+                                                      " !text-[#fff] !font-medium")
                                                   }
                                                   to={sitm.url}
                                                 >
