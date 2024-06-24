@@ -10,8 +10,8 @@ import { BiCartAdd } from "react-icons/bi";
 import { PiNewspaper } from "react-icons/pi";
 import { GrUserSettings } from "react-icons/gr";
 import { VscSymbolMisc } from "react-icons/vsc";
+import { GoFileMedia } from "react-icons/go";
 
-import { SiPlanet, SiSuperuser } from "react-icons/si";
 import {
   MdContentPaste,
   MdOutlineGroups,
@@ -113,14 +113,15 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       icon: <FaBlog className="text-[#fff] shrink-0 text-lg" />,
       url: "/blog",
       key: "",
-      tab: "blogs",
+    },
+
+    {
+      name: "Media Library",
+      icon: <GoFileMedia className="text-[#fff] shrink-0 text-lg" />,
+      url: "/media",
+      key: "",
+      tab: "media",
       menu: [
-        {
-          name: "Blogs",
-          icon: <FaBlog className="text-[#fff] shrink-0 text-lg" />,
-          url: "/blog",
-          key: "",
-        },
         {
           name: "Videos",
           icon: (
@@ -139,11 +140,11 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     },
 
     {
-      name: "Misc",
-      icon: <VscSymbolMisc className="text-[#fff] shrink-0 text-lg" />,
-      url: "/misc",
+      name: "Content Management",
+      icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
+      url: "/content-management",
       key: "",
-      tab: "Misc",
+      tab: "content-management",
       menu: [
         {
           name: "FAQ",

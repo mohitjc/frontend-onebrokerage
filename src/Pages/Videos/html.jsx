@@ -81,7 +81,8 @@ const Html = ({
           <>
             <video
               src={`${environment.sasurl}/${row?.video}`}
-              width={130}
+              width="130px"
+              className="h-20 object-cover"
               controls
             />
           </>
