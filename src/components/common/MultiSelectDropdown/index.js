@@ -12,11 +12,27 @@ const MultiSelectDropdown = ({
   const [selectedValues, setSelectedValues] = useState([]);
 
   const handleChange = (e) => {
-    let value = [];
-    value = e.map((itm) => {
-      return itm.value;
+    let isAll = e.find(function (option) {
+      return option.value === "all";
     });
-    result({ event: "value", value: value });
+    if (isAll) {
+      let value = [];
+      value = options?.map((itm) => {
+        return itm.id;
+      });
+      result({ event: "value", value: value });
+    } else {
+      let value = [];
+      value = e.map((itm) => {
+        return itm.value;
+      });
+      result({ event: "value", value: value });
+    }
+    // let value = [];
+    // value = e.map((itm) => {
+    //   return itm.value;
+    // });
+    // result({ event: "value", value: value });
   };
 
   useEffect(() => {

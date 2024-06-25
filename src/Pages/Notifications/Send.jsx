@@ -38,7 +38,7 @@ function Send() {
 
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || form.to?.length == 0) return;
+    if (invalid || form.emails?.length == 0) return;
     let method = "post";
 
     let value = {
@@ -59,7 +59,7 @@ function Send() {
   const emailsList = () => {
     ApiClient.get("subscribe/listing").then((res) => {
       if (res.success) {
-        let _emails = res?.data.map(({ email }) => {
+        let _emails = res?.data.map(({ id, email }) => {
           return { id: email, name: email };
         });
         setEmails(_emails);
@@ -86,7 +86,7 @@ function Send() {
           </Tooltip>
           <div>
             <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
-              Newsletter
+              Notification
             </h3>
           </div>
         </div>

@@ -7,7 +7,7 @@ import { RiHome6Line, RiUserSettingsLine } from "react-icons/ri";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { TbCategoryPlus } from "react-icons/tb";
 import { BiCartAdd } from "react-icons/bi";
-import { PiNewspaper } from "react-icons/pi";
+import { PiBellSimpleLight, PiNewspaper } from "react-icons/pi";
 import { GrUserSettings } from "react-icons/gr";
 import { VscSymbolMisc } from "react-icons/vsc";
 import { GoFileMedia } from "react-icons/go";
@@ -101,7 +101,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/product",
       key: "",
     },
-
     {
       name: "Tags",
       icon: <LiaUserTagSolid className="text-[#fff] shrink-0 text-lg" />,
@@ -114,13 +113,18 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/blog",
       key: "",
     },
-
     {
-      name: "Media Library",
-      icon: <GoFileMedia className="text-[#fff] shrink-0 text-lg" />,
-      url: "/media",
+      name: "Notifications",
+      icon: <PiBellSimpleLight className="text-[#fff] shrink-0 text-lg" />,
+      url: "/notifications",
       key: "",
-      tab: "media",
+    },
+    {
+      name: "Content Library",
+      icon: <GoFileMedia className="text-[#fff] shrink-0 text-lg" />,
+      url: "/content-library",
+      key: "",
+      tab: "content-library",
       menu: [
         {
           name: "Videos",
@@ -138,7 +142,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
         },
       ],
     },
-
     {
       name: "Content Management",
       icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,

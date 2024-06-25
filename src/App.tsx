@@ -60,7 +60,9 @@ import ViewVideos from "./Pages/Videos/View";
 import Audio from "./Pages/Audio";
 import AddAudio from "./Pages/Audio/AddEdit";
 import ViewAudio from "./Pages/Audio/View";
-import Send from "./Pages/Emails/Send";
+import SendNewsletter from "./Pages/Emails/Send";
+import Notifications from "./Pages/Notifications";
+import SendNotification from "./Pages/Notifications/Send";
 
 const { persistor, store } = configureStoreProd();
 
@@ -114,7 +116,7 @@ function App() {
     { url: "/blog/detail/:id", element: <ViewBlog /> },
     { url: "/blog/edit/:id", element: <AddEditBlog /> },
     { url: "/subscribers", element: <Emails /> },
-    { url: "/subscribers/send-newsletter", element: <Send /> },
+    { url: "/subscribers/send-newsletter", element: <SendNewsletter /> },
     { url: "/customers", element: <GrooveGroup /> },
     { url: "/customers/edit/:id", element: <AddEditGrooveGroup /> },
     { url: "/customers/add", element: <AddEditGrooveGroup /> },
@@ -128,6 +130,8 @@ function App() {
     { url: "/audio/add", element: <AddAudio /> },
     { url: "/audio/edit/:id", element: <AddAudio /> },
     { url: "/audio/detail/:id", element: <ViewAudio /> },
+    { url: "/notifications", element: <Notifications /> },
+    { url: "/notifications/send-notification", element: <SendNotification /> },
   ];
 
   return (
