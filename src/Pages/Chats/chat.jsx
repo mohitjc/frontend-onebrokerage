@@ -4,7 +4,7 @@ function Chat() {
   return (
     <div className="col-span-8 2xl:col-span-9">
 
-<div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-[550px]">
+<div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-full md:h-[450px] lg:h-[550px] xl:h-[650px]">
   
   <div  className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
     <div className="chat-message">

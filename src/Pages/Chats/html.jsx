@@ -16,6 +16,7 @@ import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { PiEyeLight } from "react-icons/pi";
 import Lists from "./lists";
 import Chat from "./chat";
+import { IoSearchOutline } from "react-icons/io5";
 const Html = ({
   sorting,
   filter,
@@ -51,11 +52,12 @@ const Html = ({
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
-        <div className="!p-4 ">
+        <div className="">
         <div className="grid grid-cols-12 gap-4  ">
 
           <div className="col-span-4 2xl:col-span-3">
-          <form
+              <div className="bg-gray-100 p-6 h-full">
+              <form
             className="flex items-center max-w-sm"
             onSubmit={(e) => {
               e.preventDefault();
@@ -73,7 +75,7 @@ const Html = ({
                 onChange={(e) => {
                   setFilter({ ...filters, search: e.target.value });
                 }}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                 placeholder="Search"
                 required
               />
@@ -87,27 +89,14 @@ const Html = ({
             </div>
             <button
               type="submit"
-              className="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="p-2.5 text-sm font-medium h-10 text-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              <svg
-                className="w-4 h-4"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
-              <span className="sr-only">Search</span>
+              <IoSearchOutline />
+              
             </button>
           </form>
           <Lists />
+              </div>
           </div>
          
           <Chat />
