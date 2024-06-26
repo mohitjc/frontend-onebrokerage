@@ -1,66 +1,85 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import methodModel from '../../../methods/methods';
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import Sidebar from '../sidebar';
-import { FiMenu, FiX, } from "react-icons/fi";
+import methodModel from "../../../methods/methods";
+import { Fragment } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import Sidebar from "../sidebar";
+import { FiMenu, FiX } from "react-icons/fi";
 import { CiSettings } from "react-icons/ci";
 import { LuLogOut, LuUser } from "react-icons/lu";
 import { RxDashboard } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
+import { MdOutlineChat } from "react-icons/md";
+import { Tooltip } from "antd";
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
-
-const Html = ({ isOpen, toggle, searchHandle, search, user, isOpen1, searchChange, clear, Logout }) => {
+const Html = ({
+  isOpen,
+  toggle,
+  searchHandle,
+  search,
+  user,
+  isOpen1,
+  searchChange,
+  clear,
+  Logout,
+}) => {
   return (
     <nav
       component="header"
-      className={`${isOpen ? "min-sidebar w-[calc(100%-80px)]" : "w-[calc(100%-280px)] "
-        } shadow-btn py-1.5 bg-white border-b  fixed transition-[width] duration-300 ml-auto right-0 z-10 flex items-center !px-5
+      className={`${
+        isOpen ? "min-sidebar w-[calc(100%-80px)]" : "w-[calc(100%-280px)] "
+      } shadow-btn py-1.5 bg-white border-b  fixed transition-[width] duration-300 ml-auto right-0 z-10 flex items-center !px-5
       `}
     >
-
-
       <button
         onClick={toggle}
-        className="h-9 w-9 shrink-0 shadow-btn hover:shadow-none p-1 rounded-lg border border-gray-100 !text-primary">
+        className="h-9 w-9 shrink-0 shadow-btn hover:shadow-none p-1 rounded-lg border border-gray-100 !text-primary"
+      >
         {!isOpen ? (
           <FiMenu className="w-full h-full" />
         ) : (
           <FiX className="w-full h-full" />
         )}
       </button>
-
       {/* <form className='headerSearch ml-3' onSubmit={searchHandle}>
         <input type="text" placeholder="Search..." value={search} onChange={e => searchChange(e.target.value)} className="Searchbar"></input>
         <i className="fa fa-search" onClick={searchHandle} aria-hidden="true"></i>
         {search ? <i className="fa fa-times" onClick={clear} aria-hidden="true"></i> : <></>}
       </form> */}
-
       {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button> */}
-
-
-
+      <Link to={"/chat"}>
+        <Tooltip placement="top" title="Chats">
+          <MdOutlineChat className="text-2xl" />
+        </Tooltip>
+      </Link>
       <Menu as="div" className="relative  ml-auto">
         <div>
           <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-1 text-sm font-semibold text-gray-900 ">
             <div className="flex items-center">
               <div className="flex items-center">
-                <img alt="image" src={methodModel.userImg(user.image)} className="h-12 w-12 rounded-full object-cover" />
+                <img
+                  alt="image"
+                  src={methodModel.userImg(user.image)}
+                  className="h-12 w-12 rounded-full object-cover"
+                />
                 <div className="ml-2 text-left">
                   <b className="capitalize">{user.fullName}</b>
-                  <p className="grayCls mb-0 text-capitalize">{user.customerRole?.name}</p>
+                  <p className="grayCls mb-0 text-capitalize">
+                    {user.customerRole?.name}
+                  </p>
                 </div>
               </div>
-              <i className="fa fa-angle-down top-1 relative h-5 w-5 text-gray-400" aria-hidden="true" />
+              <i
+                className="fa fa-angle-down top-1 relative h-5 w-5 text-gray-400"
+                aria-hidden="true"
+              />
             </div>
-
           </Menu.Button>
         </div>
 
@@ -80,38 +99,37 @@ const Html = ({ isOpen, toggle, searchHandle, search, user, isOpen1, searchChang
                   <Link
                     to="/profile"
                     className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm flex items-center gap-2'
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm flex items-center gap-2"
                     )}
                   >
-                   <LuUser /> Profile
+                    <LuUser /> Profile
                   </Link>
                 )}
               </Menu.Item>
               <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                to="/dashboard"
-                                className={classNames(
-                                  active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                  'block px-4 py-2 text-sm flex align-center flex items-center gap-2'
-                                )}
-                              >
-                              <RxDashboard /> Dashboard
-                              </Link>
-                            )}
-                          </Menu.Item>
+                {({ active }) => (
+                  <Link
+                    to="/dashboard"
+                    className={classNames(
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm flex align-center flex items-center gap-2"
+                    )}
+                  >
+                    <RxDashboard /> Dashboard
+                  </Link>
+                )}
+              </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
                   <Link
                     to="/profile/change-password"
                     className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm flex items-center gap-2'
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block px-4 py-2 text-sm flex items-center gap-2"
                     )}
                   >
-                   <IoSettingsOutline />
-
+                    <IoSettingsOutline />
                     Change Password
                   </Link>
                 )}
@@ -121,39 +139,33 @@ const Html = ({ isOpen, toggle, searchHandle, search, user, isOpen1, searchChang
                 <p className="border-t"></p>
               </Menu.Item>
 
-
               <Menu.Item className="">
                 {({ active }) => (
                   <a
                     type="submit"
                     onClick={() => Logout()}
                     className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block w-full px-4 py-2 text-left text-sm ancortag flex items-center gap-2'
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      "block w-full px-4 py-2 text-left text-sm ancortag flex items-center gap-2"
                     )}
                   >
-                   <LuLogOut /> Logout
+                    <LuLogOut /> Logout
                   </a>
                 )}
               </Menu.Item>
-
             </div>
           </Menu.Items>
         </Transition>
       </Menu>
-
-
-      {
-        isOpen1 ? (
-          <div className="w-100 mobi-dropdown">
-            <Sidebar />
-          </div>
-        ) : (
-          <></>
-        )
-      }
-    </nav >
+      {isOpen1 ? (
+        <div className="w-100 mobi-dropdown">
+          <Sidebar />
+        </div>
+      ) : (
+        <></>
+      )}
+    </nav>
   );
-}
+};
 
-export default Html
+export default Html;

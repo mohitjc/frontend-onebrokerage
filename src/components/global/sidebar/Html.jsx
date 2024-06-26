@@ -66,12 +66,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/dashboard",
       key: "",
     },
-    {
-      name: "Chats",
-      icon: <MdOutlineChat className="text-[#fff] shrink-0 text-lg" />,
-      url: "/chat",
-      key: "",
-    },
+    // {
+    //   name: "Chats",
+    //   icon: <MdOutlineChat className="text-[#fff] shrink-0 text-lg" />,
+    //   url: "/chat",
+    //   key: "",
+    // },
     {
       name: "Onboarding Questions",
       icon: <RiUserSettingsLine className="text-[#fff] shrink-0 text-lg" />,
