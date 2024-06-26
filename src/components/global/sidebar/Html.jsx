@@ -18,6 +18,7 @@ import {
   MdOutlineMarkEmailRead,
   MdOutlineOndemandVideo,
   MdOutlineAudioFile,
+  MdOutlineChat,
 } from "react-icons/md";
 
 import { LuUser2 } from "react-icons/lu";
@@ -63,6 +64,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       name: "Dashboard",
       icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
       url: "/dashboard",
+      key: "",
+    },
+    {
+      name: "Chats",
+      icon: <MdOutlineChat className="text-[#fff] shrink-0 text-lg" />,
+      url: "/chat",
       key: "",
     },
     {
