@@ -44,25 +44,28 @@ const Html = ({
             {" "}
             {shared.title}
           </h3>
-          <p class="text-sm font-normal text-[#75757A]">
+          <p className="text-sm font-normal text-[#75757A]">
             Here you can see all about your {shared.title}
           </p>
         </div>
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
-        <div className="flex p-4 items-center flex-wrap">
+        <div className="!p-4 ">
+        <div className="grid grid-cols-12 gap-4  ">
+
+          <div className="col-span-4 2xl:col-span-3">
           <form
-            class="flex items-center max-w-sm"
+            className="flex items-center max-w-sm"
             onSubmit={(e) => {
               e.preventDefault();
               filter();
             }}
           >
-            <label for="simple-search" class="sr-only">
+            <label for="simple-search" className="sr-only">
               Search
             </label>
-            <div class="relative w-full">
+            <div className="relative w-full">
               <input
                 type="text"
                 id="simple-search"
@@ -70,7 +73,7 @@ const Html = ({
                 onChange={(e) => {
                   setFilter({ ...filters, search: e.target.value });
                 }}
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                 placeholder="Search"
                 required
               />
@@ -84,10 +87,10 @@ const Html = ({
             </div>
             <button
               type="submit"
-              class="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               <svg
-                class="w-4 h-4"
+                className="w-4 h-4"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -101,14 +104,14 @@ const Html = ({
                   d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                 />
               </svg>
-              <span class="sr-only">Search</span>
+              <span className="sr-only">Search</span>
             </button>
           </form>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 py-4 px-4">
           <Lists />
+          </div>
+         
           <Chat />
+        </div>
         </div>
       </div>
     </Layout>

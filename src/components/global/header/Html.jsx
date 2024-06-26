@@ -8,7 +8,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { CiSettings } from "react-icons/ci";
 import { LuLogOut, LuUser } from "react-icons/lu";
 import { RxDashboard } from "react-icons/rx";
-import { IoSettingsOutline } from "react-icons/io5";
+import { IoChatbubblesOutline, IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineChat } from "react-icons/md";
 import { Tooltip } from "antd";
 
@@ -53,12 +53,16 @@ const Html = ({
       {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button> */}
+
+      <div className="flex items-center gap-4 ml-auto">
+
+      
       <Link to={"/chat"}>
         <Tooltip placement="top" title="Chats">
-          <MdOutlineChat className="text-2xl" />
+          <IoChatbubblesOutline className="text-2xl bg-gray-100 h-10 w-10 p-2 text-primary hover:shadow-sm rounded-full" />
         </Tooltip>
       </Link>
-      <Menu as="div" className="relative  ml-auto">
+      <Menu as="div" className="relative">
         <div>
           <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-1 text-sm font-semibold text-gray-900 ">
             <div className="flex items-center">
@@ -157,6 +161,7 @@ const Html = ({
           </Menu.Items>
         </Transition>
       </Menu>
+      </div>
       {isOpen1 ? (
         <div className="w-100 mobi-dropdown">
           <Sidebar />
