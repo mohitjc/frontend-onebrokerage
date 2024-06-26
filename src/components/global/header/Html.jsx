@@ -45,14 +45,7 @@ const Html = ({
           <FiX className="w-full h-full" />
         )}
       </button>
-      {/* <form className='headerSearch ml-3' onSubmit={searchHandle}>
-        <input type="text" placeholder="Search..." value={search} onChange={e => searchChange(e.target.value)} className="Searchbar"></input>
-        <i className="fa fa-search" onClick={searchHandle} aria-hidden="true"></i>
-        {search ? <i className="fa fa-times" onClick={clear} aria-hidden="true"></i> : <></>}
-      </form> */}
-      {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button> */}
+
       <Link to={"/chat"}>
         <Tooltip placement="top" title="Chats">
           <MdOutlineChat className="text-2xl" />
