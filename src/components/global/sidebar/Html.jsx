@@ -11,6 +11,7 @@ import { PiBellSimpleLight, PiNewspaper } from "react-icons/pi";
 import { GrUserSettings } from "react-icons/gr";
 import { VscSymbolMisc } from "react-icons/vsc";
 import { GoFileMedia } from "react-icons/go";
+import { TfiLayoutMediaCenterAlt } from "react-icons/tfi";
 
 import {
   MdContentPaste,
@@ -116,7 +117,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     },
     {
       name: "Blogs",
-      icon: <FaBlog className="text-[#fff] shrink-0 text-lg" />,
+      icon: <TfiLayoutMediaCenterAlt className="text-[#fff] shrink-0 text-lg" />,
       url: "/blog",
       key: "",
     },

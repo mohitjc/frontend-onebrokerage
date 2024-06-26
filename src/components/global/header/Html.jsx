@@ -8,7 +8,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { CiSettings } from "react-icons/ci";
 import { LuLogOut, LuUser } from "react-icons/lu";
 import { RxDashboard } from "react-icons/rx";
-import { IoSettingsOutline } from "react-icons/io5";
+import { IoChatbubblesOutline, IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineChat } from "react-icons/md";
 import { Tooltip } from "antd";
 
@@ -46,110 +46,112 @@ const Html = ({
         )}
       </button>
 
-      <Link to={"/chat"}>
-        <Tooltip placement="top" title="Chats">
-          <MdOutlineChat className="text-2xl" />
-        </Tooltip>
-      </Link>
-      <Menu as="div" className="relative  ml-auto">
-        <div>
-          <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-1 text-sm font-semibold text-gray-900 ">
-            <div className="flex items-center">
+      <div className="flex items-center gap-4 ml-auto">
+        <Link to={"/chat"}>
+          <Tooltip placement="top" title="Chats">
+            <IoChatbubblesOutline className="text-2xl bg-gray-100 h-10 w-10 p-2 text-primary hover:shadow-sm rounded-full" />
+          </Tooltip>
+        </Link>
+        <Menu as="div" className="relative">
+          <div>
+            <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-1 text-sm font-semibold text-gray-900 ">
               <div className="flex items-center">
-                <img
-                  alt="image"
-                  src={methodModel.userImg(user.image)}
-                  className="h-12 w-12 rounded-full object-cover"
-                />
-                <div className="ml-2 text-left">
-                  <b className="capitalize">{user.fullName}</b>
-                  <p className="grayCls mb-0 text-capitalize">
-                    {user.customerRole?.name}
-                  </p>
+                <div className="flex items-center">
+                  <img
+                    alt="image"
+                    src={methodModel.userImg(user.image)}
+                    className="h-12 w-12 rounded-full object-cover"
+                  />
+                  <div className="ml-2 text-left">
+                    <b className="capitalize">{user.fullName}</b>
+                    <p className="grayCls mb-0 text-capitalize">
+                      {user.customerRole?.name}
+                    </p>
+                  </div>
                 </div>
+                <i
+                  className="fa fa-angle-down top-1 relative h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
               </div>
-              <i
-                className="fa fa-angle-down top-1 relative h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-            </div>
-          </Menu.Button>
-        </div>
+            </Menu.Button>
+          </div>
 
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <Link
-                    to="/profile"
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm flex items-center gap-2"
-                    )}
-                  >
-                    <LuUser /> Profile
-                  </Link>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <Link
-                    to="/dashboard"
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm flex align-center flex items-center gap-2"
-                    )}
-                  >
-                    <RxDashboard /> Dashboard
-                  </Link>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <Link
-                    to="/profile/change-password"
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm flex items-center gap-2"
-                    )}
-                  >
-                    <IoSettingsOutline />
-                    Change Password
-                  </Link>
-                )}
-              </Menu.Item>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <div className="py-1">
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link
+                      to="/profile"
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm flex items-center gap-2"
+                      )}
+                    >
+                      <LuUser /> Profile
+                    </Link>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link
+                      to="/dashboard"
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm flex align-center flex items-center gap-2"
+                      )}
+                    >
+                      <RxDashboard /> Dashboard
+                    </Link>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link
+                      to="/profile/change-password"
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm flex items-center gap-2"
+                      )}
+                    >
+                      <IoSettingsOutline />
+                      Change Password
+                    </Link>
+                  )}
+                </Menu.Item>
 
-              <Menu.Item className="divide-y-1 divide-gray-800 pt-1  mt-2">
-                <p className="border-t"></p>
-              </Menu.Item>
+                <Menu.Item className="divide-y-1 divide-gray-800 pt-1  mt-2">
+                  <p className="border-t"></p>
+                </Menu.Item>
 
-              <Menu.Item className="">
-                {({ active }) => (
-                  <a
-                    type="submit"
-                    onClick={() => Logout()}
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block w-full px-4 py-2 text-left text-sm ancortag flex items-center gap-2"
-                    )}
-                  >
-                    <LuLogOut /> Logout
-                  </a>
-                )}
-              </Menu.Item>
-            </div>
-          </Menu.Items>
-        </Transition>
-      </Menu>
+                <Menu.Item className="">
+                  {({ active }) => (
+                    <a
+                      type="submit"
+                      onClick={() => Logout()}
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block w-full px-4 py-2 text-left text-sm ancortag flex items-center gap-2"
+                      )}
+                    >
+                      <LuLogOut /> Logout
+                    </a>
+                  )}
+                </Menu.Item>
+              </div>
+            </Menu.Items>
+          </Transition>
+        </Menu>
+      </div>
       {isOpen1 ? (
         <div className="w-100 mobi-dropdown">
           <Sidebar />
