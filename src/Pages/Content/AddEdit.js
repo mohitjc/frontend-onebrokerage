@@ -24,6 +24,7 @@ const AddEdit = () => {
     keywords: [],
     meta_title: "",
     meta_description: "",
+    privacy: false,
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -35,13 +36,14 @@ const AddEdit = () => {
     { key: "description", required: true, message: "Description is required" }, */
     // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
   ];
+  console.log("FORM", form);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-    let invalid = methodModel.getFormError(formValidation, form);
+    // let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid) return;
+    // if (invalid) return;
     let method = "post";
     let url = shared.addApi;
     let value = {
@@ -112,7 +114,6 @@ const AddEdit = () => {
               </div>
             </div>
 
-            <h3 className="ViewUser mb-3"></h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className=" mb-3">
                 <FormControl
@@ -125,7 +126,7 @@ const AddEdit = () => {
                 />
               </div>
 
-              <div className="col-span-2 mb-3">
+              <div className=" mb-3">
                 <FormControl
                   type="editor"
                   name="description"
@@ -145,7 +146,7 @@ const AddEdit = () => {
                   required
                 />
               </div>
-              <div className="col-span-2 mb-3">
+              <div className=" mb-3">
                 <FormControl
                   type="editor"
                   name="meta_description"
@@ -155,7 +156,7 @@ const AddEdit = () => {
                   required
                 />
               </div>
-              <div className="col-span-2 mb-3">
+              <div className=" mb-3">
                 <FormControl
                   type="text"
                   name="keywords"
@@ -169,6 +170,20 @@ const AddEdit = () => {
                   }
                   required
                 />
+              </div>
+              <div className=" mb-3">
+                <p className="text-sm">Show/Hide on Homepage</p>
+                <label className="inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    value=""
+                    className="sr-only peer"
+                    onChange={(e) =>
+                      setform({ ...form, privacy: e.target.checked })
+                    }
+                  />
+                  <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#EB6A59]"></div>
+                </label>
               </div>
             </div>
 

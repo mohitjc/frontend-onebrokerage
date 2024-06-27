@@ -3,12 +3,12 @@ const shared = {
   title: "Notifications",
   addTitle: "Notifications",
   url: "notifications",
-  addApi: "notifications/add",
-  editApi: "notifications",
-  detailApi: "notifications/detail",
-  listApi: "notifications/listing",
-  statusApi: "notifications/status/change",
-  deleteApi: "notifications/delete",
+  addApi: "notification/add",
+  editApi: "notification",
+  detailApi: "notification/detail",
+  listApi: "notification/list",
+  statusApi: "notification/status/change",
+  deleteApi: "notification/delete",
   sendNotification: "notifications/send",
 };
 

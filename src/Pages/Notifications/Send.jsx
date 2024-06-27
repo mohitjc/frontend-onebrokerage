@@ -17,28 +17,24 @@ function Send() {
   const [emails, setEmails] = useState();
 
   const [form, setForm] = useState({
-    to: [],
-    subject: "",
-    body: "",
+    title: "",
   });
   const formValidation = [
     {
-      key: "to",
+      key: "title",
       required: true,
     },
-    { key: "subject", required: true },
-    { key: "body", required: true },
   ];
   const history = useNavigate();
 
   const handleSubmit = (e) => {
-    let url = shared.sendNewsletter;
+    let url = "notification/add";
     e.preventDefault();
     setSubmitted(true);
 
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || form.emails?.length == 0) return;
+    if (invalid) return;
     let method = "post";
 
     let value = {
@@ -99,11 +95,11 @@ function Send() {
                   <div className="col-span-12 md:col-span-6 mb-3">
                     <FormControl
                       type="text"
-                      name="subject"
-                      label="Subject"
-                      value={form.subject}
+                      name="title"
+                      label="Title"
+                      value={form.title}
                       onChange={(e) => {
-                        setForm({ ...form, subject: e });
+                        setForm({ ...form, title: e });
                       }}
                       required
                     />
@@ -113,7 +109,7 @@ function Send() {
                       </div>
                     )}
                   </div>
-                  <div className="col-span-12 md:col-span-6 mb-3">
+                  {/* <div className="col-span-12 md:col-span-6 mb-3">
                     <label className="mb-1">
                       To<span class="star">*</span>
                     </label>
@@ -144,7 +140,7 @@ function Send() {
                         Text is required.
                       </div>
                     )}
-                  </div>
+                  </div> */}
 
                   <div className="flex justify-end gap-2 flex-wrap mt-6">
                     <div className="btns flex items-center gap-2 shrink-0">

@@ -3,17 +3,12 @@ import Layout from "../../components/global/layout";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import { Tooltip } from "antd";
-import { FiEdit3, FiPlus } from "react-icons/fi";
-import { BsTrash3 } from "react-icons/bs";
 import Table from "../../components/Table";
 import SelectDropdown from "../../components/common/SelectDropdown";
-import statusModel from "../../models/status.model";
-import datepipeModel from "../../models/datepipemodel";
 import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
-import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
-import { PiEyeLight } from "react-icons/pi";
+
 const Html = ({
   sorting,
   filter,
@@ -36,38 +31,38 @@ const Html = ({
   const user = useSelector((state) => state.user);
   const columns = [
     {
-      key: "notification",
-      name: "Notification",
+      key: "title",
+      name: "Title",
       render: (row) => {
-        return <span className="capitalize">{row?.notification}</span>;
+        return <span className="capitalize">{row?.title}</span>;
       },
     },
 
-    {
-      key: "action",
-      name: "Action",
-      render: (itm) => {
-        return (
-          <>
-            <div className="flex items-center justify-start gap-1.5">
-              {isAllow(`delete${shared.check}`) ? (
-                <Tooltip placement="top" title="Delete">
-                  {" "}
-                  <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg "
-                    onClick={() => deleteItem(itm.id)}
-                  >
-                    <LiaTrashAlt />
-                  </span>{" "}
-                </Tooltip>
-              ) : (
-                <></>
-              )}
-            </div>
-          </>
-        );
-      },
-    },
+    // {
+    //   key: "action",
+    //   name: "Action",
+    //   render: (itm) => {
+    //     return (
+    //       <>
+    //         <div className="flex items-center justify-start gap-1.5">
+    //           {/* {isAllow(`delete${shared.check}`) ? ( */}
+    //           <Tooltip placement="top" title="Delete">
+    //             {" "}
+    //             <span
+    //               className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg "
+    //               onClick={() => deleteItem(itm.id)}
+    //             >
+    //               <LiaTrashAlt />
+    //             </span>{" "}
+    //           </Tooltip>
+    //           {/* ) : (
+    //             <></>
+    //           )} */}
+    //         </div>
+    //       </>
+    //     );
+    //   },
+    // },
   ];
   return (
     <Layout>
