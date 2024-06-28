@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import FormControl from "../../components/common/FormControl";
 import MultiSelectDropdown from "../../components/common/MultiSelectDropdown";
 import Layout from "../../components/global/layout";
+import UsersMultiSelectDropdown from "../../components/common/UsersMultiSelectDropdown ";
 import { Tooltip } from "antd";
 
 function Send() {
@@ -15,13 +16,26 @@ function Send() {
 
   const [submitted, setSubmitted] = useState(false);
   const [emails, setEmails] = useState();
+  const options = [
+    { id: "product", name: "Product" },
+    { id: "blog", name: "Blog" },
+    { id: "normal", name: "Normal" },
+  ];
+
+  const [users, setUsers] = useState([]);
 
   const [form, setForm] = useState({
+    type: "",
     title: "",
+    users: [],
   });
   const formValidation = [
     {
       key: "title",
+      required: true,
+    },
+    {
+      key: "type",
       required: true,
     },
   ];
@@ -34,7 +48,7 @@ function Send() {
 
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid) return;
+    if (invalid || form?.users.length == 0) return;
     let method = "post";
 
     let value = {
@@ -63,10 +77,28 @@ function Send() {
     });
   };
 
+  const getUsersList = () => {
+    ApiClient.get("user/frontend/lisitng").then((res) => {
+      if (res.success) {
+        let user = res?.data.map(({ fullName, email, experience_level }) => {
+          return {
+            id: email,
+            name: fullName,
+            experience_level: experience_level,
+          };
+        });
+        setUsers(user);
+      }
+    });
+  };
+
   useEffect(() => {
     if (user && user.loggedIn) {
       emailsList();
     }
+  }, []);
+  useEffect(() => {
+    getUsersList();
   }, []);
   return (
     <Layout>
@@ -91,8 +123,45 @@ function Send() {
           <div className="sideclass col-span-12 md:col-span-12">
             <div className="tabs_styles">
               <form onSubmit={handleSubmit}>
-                <div className="mt-2">
-                  <div className="col-span-12 md:col-span-6 mb-3">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div className="mb-3">
+                    <FormControl
+                      type="select"
+                      name="type"
+                      label="Notification Type"
+                      value={form.type}
+                      onChange={(e) => {
+                        setForm({ ...form, type: e });
+                      }}
+                      options={options}
+                      theme="search"
+                      required
+                    />
+                    {submitted && !form.type && (
+                      <div className="text-danger small mt-1 capitalize ">
+                        Please select notification type.
+                      </div>
+                    )}
+                  </div>
+                  <div className=" mb-3">
+                    <label className="mb-1">
+                      Select Users<span class="star">*</span>
+                    </label>
+                    <UsersMultiSelectDropdown
+                      options={users}
+                      result={({ value }) => {
+                        setForm({ ...form, users: value });
+                      }}
+                      intialValue={form.users}
+                    />
+                    {submitted && form.users.length == 0 && (
+                      <div className="text-danger small mt-1 capitalize ">
+                        Please Select users.
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/*<div className="col-span-6 md:col-span-6 mb-3">
                     <FormControl
                       type="text"
                       name="title"
@@ -109,7 +178,7 @@ function Send() {
                       </div>
                     )}
                   </div>
-                  {/* <div className="col-span-12 md:col-span-6 mb-3">
+                  <div className="col-span-12 md:col-span-6 mb-3">
                     <label className="mb-1">
                       To<span class="star">*</span>
                     </label>
@@ -125,33 +194,45 @@ function Send() {
                         Email is required.
                       </div>
                     )}
-                  </div>
-                  <div className="col-span-12 md:col-span-6 mb-6">
-                    <FormControl
+                  </div>*/}
+                <div className="col-span-12 md:col-span-6 mb-6">
+                  {/* <FormControl
                       type="editor"
-                      name="body"
-                      label="Body"
-                      value={form.body}
-                      onChange={(e) => setForm({ ...form, body: e })}
+                      name="title"
+                      label="Title"
+                      value={form.title}
+                      onChange={(e) => setForm({ ...form, title: e })}
                       required
-                    />
-                    {submitted && !form.body && (
-                      <div className="text-danger small mt-1">
-                        Text is required.
-                      </div>
-                    )}
-                  </div> */}
-
-                  <div className="flex justify-end gap-2 flex-wrap mt-6">
-                    <div className="btns flex items-center gap-2 shrink-0">
-                      <button
-                        type="submit"
-                        className="bg-[#263238] py-3 px-2 w-32 text-white text-[14px] font-medium"
-                      >
-                        Send
-                      </button>
-                    </div>
+                    /> */}
+                  <label className="mb-1">
+                    Notification Title<span class="star">*</span>
+                  </label>
+                  <div>
+                    <textarea
+                      name="title"
+                      label="Title"
+                      value={form.title}
+                      onChange={(e) =>
+                        setForm({ ...form, title: e.target.value })
+                      }
+                      rows={3}
+                      className="w-[100%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
+                    ></textarea>
                   </div>
+                  {submitted && !form.title && (
+                    <div className="text-danger small mt-1">
+                      Please enter text to send notification.
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex justify-end col-span-12 md:col-span-6">
+                  <button
+                    type="submit"
+                    className="bg-[#263238] py-3 px-2 w-32 text-white text-[14px] font-medium"
+                  >
+                    Send
+                  </button>
                 </div>
               </form>
             </div>
