@@ -17,6 +17,7 @@ import { PiEyeLight } from "react-icons/pi";
 import Lists from "./lists";
 import Chat from "./chat";
 import { IoSearchOutline } from "react-icons/io5";
+import socketModel from "../../models/socketModel";
 const Html = ({
   sorting,
   filter,
@@ -36,7 +37,84 @@ const Html = ({
   total = { total },
 }) => {
   const user = useSelector((state) => state.user);
+  const [message, setMessage] = useState("");
+  const [chatMessages, setChatMessages] = useState([]);
+  const [chatRooms, setChatRooms] = useState();
+  const [chatRoomId, setChatRoomId] = useState("");
+  const [activeChat, setActiveChat] = useState();
 
+  const handleSendMessage = () => {
+    let value = {};
+    if (message) {
+      value = {
+        room_id: chatRoomId,
+        type: "TEXT",
+        content: message,
+        user_id: user?._id,
+      };
+    }
+
+    socketModel.emit("send-message", value);
+    getChatMessages();
+    setMessage("");
+  };
+
+  const getChatRoomsList = () => {
+    ApiClient.get("chat/room-members").then((res) => {
+      if (res.success) {
+        console.log("res", res);
+        setChatRooms(res.data.data);
+      }
+    });
+  };
+  const getChatMessages = () => {
+    ApiClient.get("chat/messages", { room_id: chatRoomId }).then((res) => {
+      if (res.success) {
+        setChatMessages(res.data.data);
+      }
+    });
+  };
+
+  const getActiveChat = (id) => {
+    ApiClient.get("chat/room-members", { room_id: id }).then((res) => {
+      if (res.success) {
+        setActiveChat(res.data.data?.[0]);
+      }
+    });
+  };
+
+  const uploadImage = () => {};
+
+  const handleChatClick = (id) => {
+    setChatRoomId(id);
+    let value = {
+      room_id: id,
+      user_id: user?._id,
+    };
+    socketModel.emit("join-room", value);
+    if (id) {
+      getChatMessages();
+      getActiveChat(id);
+    }
+  };
+
+  useEffect(() => {
+    if (chatRoomId != "") getChatMessages();
+  }, [chatRoomId]);
+
+  useEffect(() => {
+    socketModel.on("receive-message", (data) => {
+      console.log("data", data);
+    });
+  }, []);
+
+  useEffect(() => {
+    {
+      getChatRoomsList();
+    }
+  }, []);
+
+  console.log("ACTIVE", activeChat);
   return (
     <Layout>
       <div className="flex flex-wrap justify-between items-center gap-y-4">
@@ -93,11 +171,31 @@ const Html = ({
                     <IoSearchOutline />
                   </button>
                 </form>
-                <Lists />
+                <Lists
+                  user={user}
+                  chats={chatRooms}
+                  onChatRoomClick={(id) => {
+                    handleChatClick(id);
+                  }}
+                />
               </div>
             </div>
 
-            <Chat />
+            {chatRoomId != "" ? (
+              <Chat
+                user={user}
+                activeChat={activeChat}
+                onSendClick={handleSendMessage}
+                onInputChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+                uploadImage={uploadImage}
+                message={message}
+                chatMessages={chatMessages}
+              />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

@@ -49,18 +49,18 @@ const Newsletter = () => {
     // if (user.customerRole?._id == environment.glRoleId)
     //   filter.groupId = user.groupId?._id || "";
 
-    ApiClient.get(shared.listApi, filter).then((res) => {
-      if (res.success) {
-        setData(
-          res.data.map((itm) => {
-            itm.id = itm._id;
-            return itm;
-          })
-        );
-        setTotal(res.total);
-      }
-      setLoader(false);
-    });
+    // ApiClient.get(shared.listApi, filter).then((res) => {
+    //   if (res.success) {
+    //     setData(
+    //       res.data.map((itm) => {
+    //         itm.id = itm._id;
+    //         return itm;
+    //       })
+    //     );
+    //     setTotal(res.total);
+    //   }
+    //   setLoader(false);
+    // });
   };
 
   const clear = () => {
