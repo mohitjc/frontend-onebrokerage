@@ -101,6 +101,7 @@ function App() {
     { url: "/faq/edit/:id", element: <AddEditFAQ /> },
     { url: "/content", element: <Content /> },
     { url: "/content/detail/:slug", element: <ViewContent /> },
+    { url: "/content/add", element: <AddEditContent /> },
     { url: "/content/edit/:slug", element: <AddEditContent /> },
     { url: "/newsletter", element: <Newsletter /> },
     { url: "/newsletter/detail/:id", element: <ViewNewsletter /> },

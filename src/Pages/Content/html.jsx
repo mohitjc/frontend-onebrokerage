@@ -91,31 +91,31 @@ const Html = ({
               ) : (
                 <></>
               )}
-              {isAllow(`edit${shared.check}`) ? (
-                <Tooltip placement="top" title="Edit">
-                  <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => edit(itm.slug)}
-                  >
-                    <LiaEdit />
-                  </a>
-                </Tooltip>
-              ) : (
-                <></>
-              )}
-              {/* {isAllow(`delete${shared.check}`) ? (
-                <Tooltip placement="top" title="Delete">
-                  {" "}
-                  <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={() => deleteItem(itm.id)}
-                  >
-                    <LiaTrashAlt />
-                  </span>{" "}
-                </Tooltip>
-              ) : (
+              {/* {isAllow(`edit${shared.check}`) ? ( */}
+              <Tooltip placement="top" title="Edit">
+                <a
+                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                  onClick={(e) => edit(itm.slug)}
+                >
+                  <LiaEdit />
+                </a>
+              </Tooltip>
+              {/* ) : (
                 <></>
               )} */}
+              {/* {isAllow(`delete${shared.check}`) ? (  */}
+              <Tooltip placement="top" title="Delete">
+                {" "}
+                <span
+                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                  onClick={() => deleteItem(itm.id)}
+                >
+                  <LiaTrashAlt />
+                </span>{" "}
+              </Tooltip>
+              {/* ) : (
+                <></>
+              )}  */}
             </div>
           </>
         );
@@ -154,18 +154,18 @@ const Html = ({
 
         <a id="downloadFile"></a>
 
-        {/*    <div className="flex">
-          {isAllow(`add${shared.check}`) ? (
-            <Link
-              className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-              to={`/${shared.url}/add`}
-            >
-              <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
-            </Link>
-          ) : (
+        <div className="flex">
+          {/* {isAllow(`add${shared.check}`) ? ( */}
+          <Link
+            className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+            to={`/${shared.url}/add`}
+          >
+            <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
+          </Link>
+          {/* ) : (
             <></>
-          )}
-        </div> */}
+          )} */}
+        </div>
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
