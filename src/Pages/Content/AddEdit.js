@@ -114,6 +114,10 @@ const AddEdit = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+              <div className="ones_rows">
+
+            
               <div className=" mb-3">
                 <FormControl
                   type="text"
@@ -133,6 +137,11 @@ const AddEdit = () => {
                   onChange={(e) => setform({ ...form, description: e })}
                 />
               </div>
+
+              </div>
+
+
+              <div className="twos-rows">
               <div className=" mb-3">
                 <FormControl
                   type="text"
@@ -151,6 +160,8 @@ const AddEdit = () => {
                   onChange={(e) => setform({ ...form, meta_description: e })}
                 />
               </div>
+              </div>
+
               <div className=" mb-3">
                 <FormControl
                   type="text"
@@ -167,7 +178,7 @@ const AddEdit = () => {
               </div>
               <div className=" mb-3">
                 <p className="text-sm">Show/Hide on Homepage</p>
-                <label className="inline-flex items-center cursor-pointer">
+                <label className="inline-flex items-center cursor-pointer mt-3">
                   <input
                     type="checkbox"
                     value={form?.isHide}
