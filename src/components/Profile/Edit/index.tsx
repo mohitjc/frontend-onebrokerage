@@ -11,13 +11,12 @@ import { login_success } from "../../../Pages/actions/user";
 const EditProfile = () => {
   const user = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
-  const [data, setData] = useState("");
+  const [data, setData]: any = useState("");
   const [form, setForm]: any = useState({
     id: "",
     email: "",
     mobileNo: "",
-    firstName: "",
-    lastName: "",
+    fullName: "",
   });
   const [images, setImages]: any = useState({ image: "" });
   const history = useNavigate();
@@ -109,6 +108,8 @@ const EditProfile = () => {
       gallaryData();
     }
   }, []);
+
+  console.log("DATA", data);
 
   return (
     <>

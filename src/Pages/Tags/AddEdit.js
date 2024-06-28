@@ -21,13 +21,13 @@ const AddEdit = () => {
     id: "",
     name: "",
     type: "",
-    image: "",
+    color: "#f5655a",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);
   const formValidation = [
-    /*     { key: "status", required: true }, */
+    { key: "color", required: true },
     { key: "type", required: true, message: "Type is required" },
     /* { key: "timezone", required: true },
     { key: "description", required: true, message: "Description is required" }, */
@@ -160,6 +160,25 @@ const AddEdit = () => {
                 {submitted && !form.type && (
                   <span className="text-danger">type is required.</span>
                 )}
+              </div>
+              <div className=" mb-3">
+                <div className="grid grid-cols-2 gap-4 items-end">
+                  <FormControl
+                    type="color"
+                    name="color"
+                    label="Color"
+                    value={form.color}
+                    onChange={(e) => setform({ ...form, color: e })}
+                    required
+                  />
+                  <FormControl
+                    type="text"
+                    name="color"
+                    value={form.color}
+                    onChange={(e) => setform({ ...form, color: e })}
+                    required
+                  />
+                </div>
               </div>
 
               <div className="mb-3">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineArrowDown, HiOutlineArrowUp } from "react-icons/hi";
 import Pagination from "react-pagination-js";
 
@@ -15,6 +15,7 @@ const Table = ({
   page = 1,
   result = (e) => {},
   nodata = "Data Not Found",
+  filters,
 }) => {
   const [pageSize, setPageSize] = useState(count);
 
@@ -80,26 +81,23 @@ const Table = ({
                       {columns.map((itm) => (
                         <th
                           scope="col"
-                          className={`px-6 py-3 ${
+                          className={`px-6 py-3   ${
                             itm.sort ? "cursor-pointer" : ""
                           }`}
                           onClick={() => headclick(itm)}
                           key={itm.key}
                         >
-                          {itm.name}{" "}
+                        <span className="inline-flex items-center gap-1">
+
+                        <span>  {itm.name}{" "}</span>
                           {itm.sort ? (
                             <>
-                              {true ? (
-                                <span className="ml-2">
-                                  <HiOutlineArrowDown className="shrink-0 inline text-sm" />
-                                </span>
-                              ) : (
-                                <span className="ml-2">
-                                  <HiOutlineArrowUp className="shrink-0 inline text-sm" />
-                                </span>
-                              )}
+                              <span className="">
+                                <HiOutlineArrowDown className=" inline text-sm" />
+                              </span>
                             </>
                           ) : null}
+                        </span>
                         </th>
                       ))}
                     </tr>

@@ -17,6 +17,7 @@ const Users = () => {
   const [total, setTotal] = useState(0);
   const [loaging, setLoader] = useState(true);
   const history = useNavigate();
+  const isAdmin = user?.role?.name == "Admin";
 
   const sortClass = (key) => {
     let cls = "fa-sort";
@@ -43,19 +44,31 @@ const Users = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p, email: user.email };
+    let filter = { ...filters, ...p };
 
     // if (user.customerRole?._id == environment.glRoleId)
     //   filter.groupId = user.groupId?._id || "";
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
-        setData(
-          res.data.map((itm) => {
-            itm.id = itm._id;
-            return itm;
-          })
-        );
+        if (isAdmin) {
+          setData(
+            res.data.map((itm) => {
+              itm.id = itm._id;
+              return itm;
+            })
+          );
+        } else {
+          setData(
+            res.data
+              .map((itm) => {
+                itm.id = itm._id;
+                return itm;
+              })
+              .filter((itm) => itm.roleDetails.name !== "Admin")
+          );
+        }
+
         setTotal(res.total);
       }
       setLoader(false);
@@ -68,6 +81,7 @@ const Users = () => {
       search: "",
       status: "",
       page: 1,
+      role: "",
     };
     setFilter({ ...filters, ...f });
     getData({ ...f });
@@ -131,8 +145,14 @@ const Users = () => {
     getData({ status: e, page: 1 });
   };
 
+  const getRolesData = (id) => {
+    setFilter({ ...filters, role: id, page: 1 });
+    getData({ role: id, page: 1 });
+  };
+
   const statusChange = (itm) => {
     // if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
+    if (!isAllow(`edit${shared.check}`)) return;
     let status = "active";
     if (itm.status == "active") status = "deactive";
 
@@ -148,7 +168,7 @@ const Users = () => {
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to ${
-        status == "active" ? "Activate" : "Deactivate"
+        status == "active" ? "Activate" : "Inactivate"
       } this user?`,
       icon: "warning",
       showCancelButton: true,
@@ -182,6 +202,20 @@ const Users = () => {
     history(url);
   };
 
+  const uploadFile = (e) => {
+    let files = e.target.files;
+    let file = files?.item(0);
+    let url = "user/import-users";
+    if (!file) return;
+    loader(true);
+    ApiClient.postFormFileData(url, { file }).then((res) => {
+      if (res.success) {
+        console.log("res", res);
+      }
+      loader(false);
+    });
+  };
+
   const exportfun = async () => {
     const token = await localStorage.getItem("token");
     const req = await axios({
@@ -200,10 +234,10 @@ const Users = () => {
   };
 
   const isAllow = (key = "") => {
-    let permissions = user.role?.permissions;
+    let permissions = user.role?.permissions?.[0];
     let value = permissions?.[key];
-    return true;
-    // return value
+    // return true;
+    return value;
   };
 
   useEffect(() => {
@@ -234,6 +268,8 @@ const Users = () => {
         statusChange={statusChange}
         changestatus={changestatus}
         exportfun={exportfun}
+        getRolesData={getRolesData}
+        uploadFile={uploadFile}
       />
     </>
   );

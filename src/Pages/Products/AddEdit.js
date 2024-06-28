@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
 import MultiSelectDropdown from "../../components/common/MultiSelectDropdown";
+import Swal from "sweetalert2";
 
 let options = [];
 let productTypeoptions = [
@@ -37,7 +38,10 @@ const AddEdit = () => {
   const [submitted, setSubmitted] = useState(false);
   const [subcategory, setSubcategory] = useState([]);
   const [productTags, setProductTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
   const user = useSelector((state) => state.user);
+  const deletedTags = findDeletedItems(selectedTags, form.tags);
+
   const formValidation = [
     {
       key: "product_type",
@@ -94,13 +98,15 @@ const AddEdit = () => {
   };
 
   const handleSubmit = (e) => {
+    let url = shared.addApi;
     e.preventDefault();
     setSubmitted(true);
+
     let invalid = methodModel.getFormError(formValidation, form);
 
     if (invalid || !images.images || form.tags?.length == 0) return;
     let method = "post";
-    let url = shared.addApi;
+
     let value = {
       ...form,
       ...images,
@@ -111,27 +117,67 @@ const AddEdit = () => {
     if (value.id) {
       method = "put";
       url = shared.editApi;
+      value.deleted_tags = deletedTags;
     } else {
       value.addedBy = user._id;
       value.groupId = user?.groupId?._id;
       delete value.id;
     }
-
-    loader(true);
-    ApiClient.allApi(url, value, method).then((res) => {
-      if (res.success) {
-        // ToastsStore.success(res.message)
-        history(`/${shared.url}`);
-      }
-      loader(false);
-    });
+    if (deletedTags.length > 0) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: `The tag you are deleting is associated with review on product. Still you want to delete ?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          loader(true);
+          ApiClient.allApi(url, value, method).then((res) => {
+            if (res.success) {
+              history(`/${shared.url}`);
+            }
+            loader(false);
+          });
+        }
+      });
+    } else {
+      loader(true);
+      ApiClient.allApi(url, value, method).then((res) => {
+        if (res.success) {
+          // ToastsStore.success(res.message)
+          history(`/${shared.url}`);
+        }
+        loader(false);
+      });
+    }
   };
+
+  function findDeletedItems(initialArray, updatedArray) {
+    // Create a copy of the initial array
+    let initialCopy = [...initialArray];
+    // Loop through the updated array
+    updatedArray.forEach((item) => {
+      // Check if the item exists in the initial copy
+      let index = initialCopy.indexOf(item);
+      if (index !== -1) {
+        // If found, remove it from the initial copy
+        initialCopy.splice(index, 1);
+      }
+    });
+
+    // At this point, the initial copy contains the deleted items
+    return initialCopy;
+  }
 
   useEffect(() => {
     if (id) {
       loader(true);
       ApiClient.get(shared.detailApi, { id }).then((res) => {
         if (res.success) {
+          setSelectedTags(res.data.tags);
           let value = res.data;
           let payload = form;
 
@@ -183,8 +229,6 @@ const AddEdit = () => {
     }
   }, [form.product_type]);
 
-  console.log("FORM", form);
-
   return (
     <>
       <Layout>
@@ -210,7 +254,7 @@ const AddEdit = () => {
             </div>
 
             <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 md:col-span-6 lg:col-span-8">
+              <div className="col-span-12 ">
                 <div className="grid grid-cols-12 gap-4">
                   <div className="col-span-12 md:col-span-6 mb-3">
                     <FormControl
@@ -299,9 +343,9 @@ const AddEdit = () => {
                       </label>
                       <MultiSelectDropdown
                         options={productTags}
-                        result={({ value }) =>
-                          setform({ ...form, tags: value })
-                        }
+                        result={({ value }) => {
+                          setform({ ...form, tags: value });
+                        }}
                         intialValue={form.tags}
                       />
                       {submitted && form.tags.length == 0 && (
@@ -332,7 +376,7 @@ const AddEdit = () => {
                 </div>
               </div>
 
-              <div className="col-span-12 md:col-span-6 lg:col-span-4">
+              <div className="col-span-12">
                 <div className="grid grid-cols-1">
                   <div className="col-span-12 mb-3">
                     <label className="lablefontcls mb-2 inline-flex">

@@ -59,6 +59,7 @@ const Layout = ({ children }) => {
   };
 
   const [state, setstate] = useState(false);
+
   useEffect(() => {
     setstate(localStorage.getItem("sidebar"));
   }, [localStorage.getItem("sidebar")]);
@@ -70,7 +71,7 @@ const Layout = ({ children }) => {
         <Header isOpen={isOpen} setIsOpen={setIsopen} />
 
         <div className={`main-wrapper flex ${isOpen ? "active-sidebar" : ""}`}>
-          <div className="main-sidebar scrollbar transition-[width] duration-300 overflow-hidden">
+          <div className="main-sidebar scrollbar transition-[width] duration-300 ">
             <div className="sidebar-brand text-center">
               <Link to="/">
                 <div className="editLogo">

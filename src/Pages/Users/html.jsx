@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/global/layout";
 import "./style.scss";
 import { Link } from "react-router-dom";
-import { Tooltip } from "antd";
+import { Button, Tooltip } from "antd";
 import { FiEdit3, FiPlus } from "react-icons/fi";
 import { BsTrash3 } from "react-icons/bs";
 import Table from "../../components/Table";
@@ -31,8 +31,20 @@ const Html = ({
   changestatus,
   isAllow,
   total = { total },
+  sortClass,
+  getRolesData,
+  uploadFile,
 }) => {
   const user = useSelector((state) => state.user);
+  const [roles, setRoles] = useState([]);
+
+  const getRolesList = () => {
+    ApiClient.get("role/listing").then((res) => {
+      if (res.success) {
+        setRoles(res.data);
+      }
+    });
+  };
   const columns = [
     {
       key: "fullName",
@@ -47,10 +59,18 @@ const Html = ({
       name: "Email",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.email}</span>;
+        return <span className="">{row?.email}</span>;
       },
     },
     {
+      key: "role",
+      name: "role",
+      sort: true,
+      render: (row) => {
+        return <span className="">{row?.roleDetails?.name}</span>;
+      },
+    },
+    /* {
       key: "mobileNo",
       name: "Mobile No",
       render: (row) => {
@@ -64,7 +84,7 @@ const Html = ({
         );
       },
     },
-    /* {
+     {
       key: "timezone",
       name: "Timezone",
       render: (row) => {
@@ -100,32 +120,42 @@ const Html = ({
         return (
           <>
             <div className="flex items-center justify-start gap-1.5">
-              <Tooltip placement="top" title="View">
-                <a
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={(e) => view(itm.id)}
-                >
-                  <PiEyeLight />
-                </a>
-              </Tooltip>
-              <Tooltip placement="top" title="Edit">
-                <a
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={(e) => edit(itm.id)}
-                >
-                  <LiaEdit />
-                </a>
-              </Tooltip>
-
-              <Tooltip placement="top" title="Delete">
-                {" "}
-                <span
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={() => deleteItem(itm.id)}
-                >
-                  <LiaTrashAlt />
-                </span>{" "}
-              </Tooltip>
+              {isAllow(`read${shared.check}`) ? (
+                <Tooltip placement="top" title="View">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => view(itm.id)}
+                  >
+                    <PiEyeLight />
+                  </a>
+                </Tooltip>
+              ) : (
+                <></>
+              )}
+              {isAllow(`edit${shared.check}`) ? (
+                <Tooltip placement="top" title="Edit">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => edit(itm.id)}
+                  >
+                    <LiaEdit />
+                  </a>
+                </Tooltip>
+              ) : (
+                <></>
+              )}
+              {isAllow(`delete${shared.check}`) ? (
+                <Tooltip placement="top" title="Delete">
+                  <span
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={() => deleteItem(itm.id)}
+                  >
+                    <LiaTrashAlt />
+                  </span>
+                </Tooltip>
+              ) : (
+                <></>
+              )}
             </div>
           </>
         );
@@ -145,9 +175,11 @@ const Html = ({
     });
   };
  */
-  //   useEffect(() => {
-  //       getGroups()
-  //   }, [])
+  useEffect(() => {
+    getRolesList();
+  }, []);
+
+  console.log("user", user);
 
   return (
     <Layout>
@@ -243,6 +275,18 @@ const Html = ({
           </form>
 
           <div className="flex gap-2 ml-auto">
+            {user?.role?.name == "Admin" && (
+              <SelectDropdown
+                id="statusDropdown"
+                displayValue="name"
+                placeholder="All Roles"
+                intialValue={filters.role}
+                result={(e) => {
+                  getRolesData(e.value);
+                }}
+                options={roles.filter((item) => item.name != "Customer")}
+              />
+            )}
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"
@@ -253,6 +297,22 @@ const Html = ({
               }}
               options={statusModel.list}
             />
+            {/* <label
+              className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center `}
+            >
+              <input
+                type="file"
+                className="hidden"
+                // accept="file/*"
+                onChange={(e) => {
+                  uploadFile(e);
+                }}
+              />
+              <div className="flex gap-2 items-center justify-center">
+                <FiPlus className="text-2xl text-[#EB6A59]" />
+                <span>Import Users</span>
+              </div>
+            </label> */}
             {/* <SelectDropdown
                             id="statusDropdown"
                             displayValue="name"
@@ -262,7 +322,7 @@ const Html = ({
                             result={e => filter({ groupId: e.value })}
                             options={groups}
                         /> */}
-            {filters.status || filters.groupId ? (
+            {filters.status || filters.groupId || filters.role ? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
@@ -285,10 +345,14 @@ const Html = ({
               columns={columns}
               page={filters.page}
               count={filters.count}
+              filters={filters}
               total={total}
               result={(e) => {
                 if (e.event == "page") pageChange(e.value);
-                if (e.event == "sort") sorting(e.value);
+                if (e.event == "sort") {
+                  sorting(e.value);
+                  sortClass(e.value);
+                }
                 if (e.event == "count") count(e.value);
               }}
             />

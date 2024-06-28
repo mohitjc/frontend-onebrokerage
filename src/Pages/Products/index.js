@@ -132,8 +132,19 @@ const Products = () => {
     getData({ status: e, page: 1 });
   };
 
+  const handleMarkPopular = (e, id) => {
+    let checked = e.target.checked;
+    let f = { id: id, isPopular: checked };
+    ApiClient.put(shared.editApi, f).then((res) => {
+      if (res.success) {
+        getData();
+      }
+    });
+  };
+
   const statusChange = (itm) => {
     /*  if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return; */
+    if (!isAllow(`edit${shared.check}`)) return;
     let status = "active";
     if (itm.status == "active") status = "deactive";
     Swal.fire({
@@ -184,11 +195,11 @@ const Products = () => {
     link.click();
   };
 
-  const isAllow = (key = "") => {
-    let permissions = user.role?.permissions;
+  const isAllow = (key = "read") => {
+    let permissions = user.role?.permissions?.[0];
     let value = permissions?.[key];
-    return true;
-    // return value
+    // return true;
+    return value;
   };
 
   useEffect(() => {
@@ -219,6 +230,7 @@ const Products = () => {
         statusChange={statusChange}
         changestatus={changestatus}
         exportfun={exportfun}
+        handleMarkPopular={handleMarkPopular}
       />
     </>
   );

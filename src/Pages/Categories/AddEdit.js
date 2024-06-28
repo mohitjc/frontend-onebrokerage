@@ -182,7 +182,7 @@ const AddEdit = () => {
                   required
                 />
               </div>
-              {form.type && (
+              {form.type && form.type !== "video" && form.type !== "audio" && (
                 <div className=" mb-3">
                   <FormControl
                     type="select"

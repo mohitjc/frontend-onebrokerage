@@ -24,7 +24,6 @@ const AddEdit = () => {
     title: "",
     description: "",
     image: "",
-    category: "",
   });
 
   const history = useNavigate();
@@ -156,7 +155,7 @@ const AddEdit = () => {
             <div className="grid grid-cols-12 gap-4 lg:gap-8">
               <div className="col-span-12 md:col-span-6 lg:col-span-8">
                 <div className="grid grid-cols-12 gap-4">
-                  <div className="col-span-12 md:col-span-6 mb-3">
+                  <div className="col-span-12 md:col-span-12 mb-3">
                     <FormControl
                       type="text"
                       name="title"
@@ -167,7 +166,7 @@ const AddEdit = () => {
                     />
                   </div>
 
-                  <div className="col-span-12 md:col-span-6 mb-3">
+                  {/* <div className="col-span-12 md:col-span-6 mb-3">
                     <FormControl
                       type="select"
                       name="category"
@@ -179,7 +178,7 @@ const AddEdit = () => {
                       options={options}
                       theme="search"
                     />
-                  </div>
+                  </div> */}
                   <div className="col-span-12 md:col-span-12 mb-3">
                     <FormControl
                       type="editor"
@@ -202,9 +201,9 @@ const AddEdit = () => {
                 <div className="grid grid-cols-1">
                   <div className="col-span-12 mb-3">
                     <div>
-                    <label className="lablefontcls mb-2 inline-flex">
-                      Image
-                    </label>
+                      <label className="lablefontcls mb-2 inline-flex">
+                        Image
+                      </label>
                     </div>
 
                     <ImageUpload

@@ -44,7 +44,7 @@ const Questions = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p,sortBy:'order asc' };
+    let filter = { ...filters, ...p, sortBy: "order asc" };
 
     // if (user.customerRole?._id == environment.glRoleId)
     //   filter.groupId = user.groupId?._id || "";
@@ -201,10 +201,10 @@ const Questions = () => {
   };
 
   const isAllow = (key = "") => {
-    let permissions = user.role?.permissions;
+    let permissions = user.role?.permissions?.[0];
     let value = permissions?.[key];
-    return true;
-    // return value
+    // return true;
+    return value;
   };
 
   useEffect(() => {

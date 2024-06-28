@@ -35,8 +35,13 @@ const AddEdit = () => {
     // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
   ];
 
-  const getCategories = () => {
-    ApiClient.get("category/listing").then((res) => {
+  const getCategories = (p = {}) => {
+    let f = {
+      ...p,
+      category_type: "master",
+      type: "faq",
+    };
+    ApiClient.get("category/listing", f).then((res) => {
       if (res.success) {
         options = res?.data.map(({ id, name }) => {
           return { id: id, name: name };

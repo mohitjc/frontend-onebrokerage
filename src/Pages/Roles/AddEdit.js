@@ -1,61 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import ApiClient from '../../methods/api/apiClient';
-import loader from '../../methods/loader';
-import methodModel from '../../methods/methods';
-import { rolePermission, rolePermissions, roleType } from '../../models/type.model';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import Layout from '../../components/global/layout';
+import React, { useState, useEffect } from "react";
+import ApiClient from "../../methods/api/apiClient";
+import loader from "../../methods/loader";
+import methodModel from "../../methods/methods";
+import {
+  rolePermission,
+  rolePermissions,
+  roleType,
+} from "../../models/type.model";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Layout from "../../components/global/layout";
 import { Tooltip } from "antd";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
+import environment from "../../environment";
 
 const AddEditRole = () => {
-
-  const permissions = rolePermissions
-  const permission = rolePermission
+  const permissions = rolePermissions;
+  const permission = rolePermission;
 
   const defaultvalue = () => {
     let keys = { ...roleType };
     Object.keys(roleType).map((itm) => {
-      if (itm != 'permissions') keys[itm] = '';
+      if (itm != "permissions") keys[itm] = "";
     });
     Object.keys(roleType.permissions).map((itm) => {
       keys.permissions[itm] = false;
     });
-    keys.status = 'active';
+    keys.status = "active";
     return keys;
   };
+
   const { id } = useParams();
-  const [form, setform] = useState({...roleType});
+  const [form, setform] = useState({ ...roleType });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);
-  const formValidation = [
-    { key: 'status', required: true },
-  ];
+  const formValidation = [{ key: "status", required: true }];
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
     if (invalid) return;
-    let method = 'post';
-    let url = 'api/role';
+    let method = "post";
+    let url = "role/add";
     let value = {
       ...form,
+      loginPannel: form.id == environment.userRoleId ? "front" : "admin",
     };
     if (value.id) {
-      method = 'put';
-      url = 'api/role';
+      method = "put";
+      url = "role/update";
     } else {
-      value.addedBy=user._id
+      value.addedBy = user._id;
       delete value.id;
     }
-
     loader(true);
     ApiClient.allApi(url, value, method).then((res) => {
       if (res.success) {
         // ToastsStore.success(res.message);
-        history('/roles');
+        history("/roles");
       }
       loader(false);
     });
@@ -64,22 +67,21 @@ const AddEditRole = () => {
   useEffect(() => {
     if (id) {
       loader(true);
-      ApiClient.get('api/role', { id }).then((res) => {
+      ApiClient.get("role/detail", { id }).then((res) => {
         if (res.success) {
           let value = res.data;
           let payload = roleType;
-          let permissions=value.permissions?.[0]||[]
+          let permissions = value.permissions?.[0] || [];
 
           Object.keys(payload).map((itm) => {
-            if(itm!='permissions') payload[itm] = value[itm];
+            if (itm != "permissions") payload[itm] = value[itm];
           });
-  
+
           Object.keys(roleType.permissions).map((itm) => {
-            payload.permissions[itm] = permissions[itm]||false;
+            payload.permissions[itm] = permissions[itm] || false;
           });
-          console.log('payload', payload);
-          console.log('permissions', permissions);
-          payload.id=id
+
+          payload.id = id;
           setform({
             ...payload,
           });
@@ -110,48 +112,47 @@ const AddEditRole = () => {
   };
 
   const handleAllPermission = (e) => {
-    let key = e.name
-    let checked = e.checked
+    let key = e.name;
+    let checked = e.checked;
 
     let keys = {};
-    permission.map(itm => {
-      keys = { ...keys, [`${itm.key}${key}`]: checked }
-    })
+    permission.map((itm) => {
+      keys = { ...keys, [`${itm.key}${key}`]: checked };
+    });
 
     setform({
       ...form,
       permissions: {
         ...form.permissions,
-        ...keys
+        ...keys,
       },
     });
-  }
+  };
 
-  const HandleAllRead = (check, key = 'read') => {
+  const HandleAllRead = (check, key = "read") => {
     let value = check ? true : false;
 
     let keys = {};
-    permissions.map(itm => {
-      keys = { ...keys, [`${key}${itm.key}`]: value }
-    })
+    permissions.map((itm) => {
+      keys = { ...keys, [`${key}${itm.key}`]: value };
+    });
 
     setform({
       ...form,
       permissions: {
         ...form.permissions,
-        ...keys
-      }
-    })
+        ...keys,
+      },
+    });
   };
 
-
   const isCheckAll = (key) => {
-    let value = true
-    permission.map(itm => {
-      if (!form.permissions[`${itm.key}${key}`]) value = false
-    })
-    return value
-  }
+    let value = true;
+    permission.map((itm) => {
+      if (!form.permissions[`${itm.key}${key}`]) value = false;
+    });
+    return value;
+  };
 
   const setpermission = (key, value) => {
     setform({
@@ -163,31 +164,37 @@ const AddEditRole = () => {
     });
   };
 
-  const isAllPCheck = (key = 'read') => {
+  const isAllPCheck = (key = "read") => {
     let value = true;
-    permissions.map(itm => {
-      if (!form.permissions[`${key}${itm.key}`]) value = false
-    })
-    return value
+    permissions.map((itm) => {
+      if (!form.permissions[`${key}${itm.key}`]) value = false;
+    });
+    return value;
   };
-
 
   return (
     <>
       <Layout>
         <form onSubmit={handleSubmit}>
           <div className="pprofile1">
-
-
-            <div className='flex justify-between items-center mb-8'>
-
-              <div className='flex items-center'>
+            <div className="flex justify-between items-center mb-8">
+              <div className="flex items-center">
                 <Tooltip placement="top" title="Back">
-                  <Link to="/roles" className="!px-4  py-2 flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border  transition-all    mr-3"><i className='fa fa-angle-left text-lg'></i></Link>
+                  <Link
+                    to="/roles"
+                    className="!px-4  py-2 flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border  transition-all    mr-3"
+                  >
+                    <i className="fa fa-angle-left text-lg"></i>
+                  </Link>
                 </Tooltip>
                 <div>
-                  <h3 className="text-2xl font-semibold text-[#111827]">   {form && form.id ? 'Edit' : 'Add'} Role</h3>
-                  <p class="text-sm font-normal text-[#75757A]">Here you can see all about your  Roles</p>
+                  <h3 className="text-2xl font-semibold text-[#111827]">
+                    {" "}
+                    {form && form.id ? "Edit" : "Add"} Role
+                  </h3>
+                  <p class="text-sm font-normal text-[#75757A]">
+                    Here you can see all about your Roles
+                  </p>
                 </div>
               </div>
 
@@ -201,90 +208,117 @@ const AddEditRole = () => {
                   value={form.name}
                   onChange={(e) => setform({ ...form, name: e.target.value })}
                   required
+                  disabled={form?.name}
                 />
               </div>
             </div>
 
             <div className="shadow-box w-full bg-white rounded-lg mb-6">
               <div className="scrollbar w-full overflow-auto">
-
                 <div class="table_section tablepadding">
-                  <p className='text-xl font-semibold text-[#111827] px-4 pb-2'>Permissions</p>
+                  <p className="text-xl font-semibold text-[#111827] px-4 pb-2">
+                    Permissions
+                  </p>
                   <table class="w-full">
                     <thead class="table_head roleTable">
                       <tr class="border-b border-[#EAECF0]">
-                        <th scope="col" class="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-3 ' onClick={e => sorting('name')}"></th>
-                        <th scope="col" class="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-3 ' onClick={e => sorting('name')}">
+                        <th
+                          scope="col"
+                          class="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-4 text-left bg-[#F7FAFF] !py-3 ' onClick={e => sorting('name')}"
+                        ></th>
+                        <th
+                          scope="col"
+                          class="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-4 text-left bg-[#F7FAFF] !py-3 ' onClick={e => sorting('name')}"
+                        >
                           <input
-                            type="checkbox" 
+                            type="checkbox"
                             onChange={(e) => HandleAll(e.target.checked)}
-                          checked={isAllChecked()}
-                            />
-
-                          All</th>
-                        {permission.map(itm => {
-                          return <>
-                            <th scope="col" class="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-3.5 text-left bg-[#F7FAFF] !py-3 ' onClick={e => sorting('name')}">
-                              <input
-                                type="checkbox"
-                                onChange={(e) => HandleAllRead(e.target.checked, itm.key)}
-                                checked={isAllPCheck(itm.key)}
-                              />{itm.name}
-                            </th>
-                          </>
+                            checked={isAllChecked()}
+                            className="h-4 w-4"
+                          />
+                          All
+                        </th>
+                        {permission.map((itm) => {
+                          return (
+                            <>
+                              <th
+                                scope="col"
+                                class="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-4 text-left bg-[#F7FAFF] !py-3 ' onClick={e => sorting('name')}"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="h-4 w-4"
+                                  onChange={(e) =>
+                                    HandleAllRead(e.target.checked, itm.key)
+                                  }
+                                  checked={isAllPCheck(itm.key)}
+                                />
+                                {itm.name}
+                              </th>
+                            </>
+                          );
                         })}
-
-
                       </tr>
                     </thead>
-                    <tbody className='roleTable'>
-
-                      {permissions.map(itm => {
-                        return <>
-                          <tr>
-                            <td className="!text-typo !border-l-0 cursor-pointer !px-5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
-                              {itm.name}
-                            </td>
-                            <td className="!text-typo !border-l-0 cursor-pointer !px-5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
-                              <input
-                                type="checkbox"
-                                className="h-4 w-4 green_check cursor-pointer shrink-0 rounded-[4px] !border !border-[#3C3E49A3] !text-white"
-                                name={itm.key}
-                                onChange={(e) =>
-                                  handleAllPermission(e.target)
-                                }
-                                checked={isCheckAll(itm.key)}
-                              />
-                            </td>
-                            {permission.map(pitm => {
-                              return <td className="!text-typo !border-l-0 cursor-pointer !px-5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
-                                <div Name="checkList">
-                                  <label className="mb-0">
-                                    <input
-                                      type="checkbox"
-                                      className="h-4 w-4 green_check cursor-pointer shrink-0 rounded-[4px] !border !border-[#3C3E49A3] !text-white"
-                                      checked={form.permissions[`${pitm.key}${itm.key}`]}
-                                      onChange={(e) =>
-                                        setpermission(`${pitm.key}${itm.key}`, e.target.checked)
-                                      }
-                                    />
-                                  </label>
-                                </div>
+                    <tbody className="roleTable">
+                      {permissions.map((itm) => {
+                        return (
+                          <>
+                            <tr>
+                              <td className="!text-typo !border-l-0 cursor-pointer !px-4 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                                {itm.name}
                               </td>
-                            })}
-                          </tr>
-                        </>
+                              <td className="!text-typo !border-l-0 cursor-pointer !px-4 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                                <input
+                                  type="checkbox"
+                                  className="h-4 w-4 green_check cursor-pointer shrink-0 rounded-[4px] !border !border-[#3C3E49A3] !text-white"
+                                  name={itm.key}
+                                  onChange={(e) =>
+                                    handleAllPermission(e.target)
+                                  }
+                                  checked={isCheckAll(itm.key)}
+                                />
+                              </td>
+                              {permission.map((pitm) => {
+                                return (
+                                  <td className="!text-typo !border-l-0 cursor-pointer !px-4 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                                    <div Name="checkList">
+                                      <label className="mb-0">
+                                        <input
+                                          type="checkbox"
+                                          className="h-4 w-4 green_check cursor-pointer shrink-0 rounded-[4px] !border !border-[#3C3E49A3] !text-white"
+                                          checked={
+                                            form.permissions[
+                                              `${pitm.key}${itm.key}`
+                                            ]
+                                          }
+                                          onChange={(e) =>
+                                            setpermission(
+                                              `${pitm.key}${itm.key}`,
+                                              e.target.checked
+                                            )
+                                          }
+                                        />
+                                      </label>
+                                    </div>
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          </>
+                        );
                       })}
                     </tbody>
                   </table>
                 </div>
-
               </div>
             </div>
 
             <div className="flex items-center justify-end">
-
-              <button type="submit" className="text-white bg-[#EB6A59] bg-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+              <button
+                type="submit"
+                className="text-white bg-[#EB6A59] bg-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+              >
                 Save
               </button>
             </div>

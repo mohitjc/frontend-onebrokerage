@@ -7,15 +7,21 @@ import { RiHome6Line, RiUserSettingsLine } from "react-icons/ri";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { TbCategoryPlus } from "react-icons/tb";
 import { BiCartAdd } from "react-icons/bi";
-import { PiNewspaper } from "react-icons/pi";
+import { PiBellSimpleLight, PiNewspaper } from "react-icons/pi";
+import { GrUserSettings } from "react-icons/gr";
+import { VscSymbolMisc } from "react-icons/vsc";
+import { GoFileMedia } from "react-icons/go";
+import { TfiLayoutMediaCenterAlt } from "react-icons/tfi";
 
-import { SiPlanet, SiSuperuser } from "react-icons/si";
 import {
   MdContentPaste,
-  MdEventAvailable,
-  MdOutlineEmojiEvents,
-  MdOutlineEventAvailable,
+  MdOutlineGroups,
+  MdOutlineMarkEmailRead,
+  MdOutlineOndemandVideo,
+  MdOutlineAudioFile,
+  MdOutlineChat,
 } from "react-icons/md";
+
 import { LuUser2 } from "react-icons/lu";
 import { CiSettings } from "react-icons/ci";
 import { LiaHistorySolid, LiaUserTagSolid } from "react-icons/lia";
@@ -61,6 +67,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/dashboard",
       key: "",
     },
+    // {
+    //   name: "Chats",
+    //   icon: <MdOutlineChat className="text-[#fff] shrink-0 text-lg" />,
+    //   url: "/chat",
+    //   key: "",
+    // },
     {
       name: "Onboarding Questions",
       icon: <RiUserSettingsLine className="text-[#fff] shrink-0 text-lg" />,
@@ -71,6 +83,18 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       name: "Users",
       icon: <FiUsers className="text-[#fff] shrink-0 text-lg" />,
       url: "/user",
+      key: "",
+    },
+    {
+      name: "Groove Group",
+      icon: <MdOutlineGroups className="text-[#fff] shrink-0 text-lg" />,
+      url: "/customers",
+      key: "",
+    },
+    {
+      name: "Roles",
+      icon: <GrUserSettings className="text-[#fff] shrink-0 text-lg" />,
+      url: "/roles",
       key: "",
     },
     {
@@ -86,24 +110,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       key: "",
     },
     {
-      name: "FAQ",
-      icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
-      url: "/faq",
-      key: "",
-    },
-    {
-      name: "Content",
-      icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
-      url: "/content",
-      key: "",
-    },
-    {
-      name: "Newsletter",
-      icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
-      url: "/newsletter",
-      key: "",
-    },
-    {
       name: "Tags",
       icon: <LiaUserTagSolid className="text-[#fff] shrink-0 text-lg" />,
       url: "/tag",
@@ -111,9 +117,73 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     },
     {
       name: "Blogs",
-      icon: <FaBlog className="text-[#fff] shrink-0 text-lg" />,
+      icon: <TfiLayoutMediaCenterAlt className="text-[#fff] shrink-0 text-lg" />,
       url: "/blog",
       key: "",
+    },
+    {
+      name: "Notifications",
+      icon: <PiBellSimpleLight className="text-[#fff] shrink-0 text-lg" />,
+      url: "/notifications",
+      key: "",
+    },
+    {
+      name: "Content Library",
+      icon: <GoFileMedia className="text-[#fff] shrink-0 text-lg" />,
+      url: "/content-library",
+      key: "",
+      tab: "content-library",
+      menu: [
+        {
+          name: "Videos",
+          icon: (
+            <MdOutlineOndemandVideo className="text-[#fff] shrink-0 text-lg" />
+          ),
+          url: "/videos",
+          key: "",
+        },
+        {
+          name: "Audio",
+          icon: <MdOutlineAudioFile className="text-[#fff] shrink-0 text-lg" />,
+          url: "/audio",
+          key: "",
+        },
+      ],
+    },
+    {
+      name: "Content Management",
+      icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
+      url: "/content-management",
+      key: "",
+      tab: "content-management",
+      menu: [
+        {
+          name: "FAQ",
+          icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
+          url: "/faq",
+          key: "",
+        },
+        {
+          name: "Content",
+          icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
+          url: "/content",
+          key: "",
+        },
+        {
+          name: "Newsletter",
+          icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
+          url: "/newsletter",
+          key: "",
+        },
+        {
+          name: "Subscribers",
+          icon: (
+            <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />
+          ),
+          url: "/subscribers",
+          key: "",
+        },
+      ],
     },
   ];
 
@@ -136,18 +206,17 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                             {({ open }) => (
                               <>
                                 <tooltip placement="right" title={itm.name}>
-                                  <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#4A545E]  hover:!text-[#5577FF] gap-[12px] hover:bg-[#EB6A59] transition-all duration-300">
+                                  <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#fff]  hover:!text-[#fff] gap-[12px] hover:bg-[#EB6A59] transition-all duration-300">
                                     <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                                       {itm.icon}
                                       <span className=" text-inherit leading-none sidebar_text">
-                                        {" "}
                                         {itm.name}
                                       </span>
                                     </span>
                                     <TiArrowSortedDown
                                       className={`${
                                         open ? "" : "-rotate-90 transform"
-                                      } h-4 w-4 transition-all duration-500  text-[#7E8B99]`}
+                                      } h-4 w-4 transition-all duration-500  text-[#fff]`}
                                     />
                                   </Disclosure.Button>
                                 </tooltip>
@@ -161,7 +230,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                 >
                                   <Disclosure.Panel className="pl-[30px] mt-[4px] ">
                                     <ul className="space-y-2">
-                                      {itm.menu.map((sitm) => {
+                                      {itm.menu?.map((sitm) => {
                                         return (
                                           <>
                                             {isAllow(sitm.key) ? (
@@ -169,10 +238,10 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                                 {" "}
                                                 <NavLink
                                                   className={(isActive) =>
-                                                    "p-2.5 rounded-md block text-sm font-normal text-[#4A545E] cursor-pointer hover:!text-[#5577FF] hover:bg-[#EB6A59] !no-underline transition-all " +
+                                                    "p-2.5 rounded-md block text-sm font-normal text-[#d6d6d6] hover:text-[#fff] cursor-pointer  hover:bg-[#EB6A59] !no-underline transition-all " +
                                                     (location?.pathname ==
                                                       sitm.url &&
-                                                      " !text-[#5577FF] !bg-[#5577FF]/10 !font-medium")
+                                                      " !text-[#fff] !font-medium")
                                                   }
                                                   to={sitm.url}
                                                 >
@@ -180,7 +249,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                                     className="text-inherit leading-none sidebar_text"
                                                     title={sitm.name}
                                                   >
-                                                    {" "}
                                                     {sitm.name}
                                                   </span>
                                                 </NavLink>

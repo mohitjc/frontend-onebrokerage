@@ -117,6 +117,7 @@ const Blogs = () => {
 
   const statusChange = (itm) => {
     /*  if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return; */
+    if (!isAllow(`edit${shared.check}`)) return;
     let status = "active";
     if (itm.status == "active") status = "deactive";
     Swal.fire({
@@ -170,10 +171,10 @@ const Blogs = () => {
   };
 
   const isAllow = (key = "") => {
-    let permissions = user.role?.permissions;
+    let permissions = user.role?.permissions?.[0];
     let value = permissions?.[key];
-    return true;
-    // return value
+    // return true;
+    return value;
   };
 
   useEffect(() => {

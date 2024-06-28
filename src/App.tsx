@@ -50,6 +50,20 @@ import ViewTag from "./Pages/Tags/View";
 import Blogs from "./Pages/Blogs";
 import AddEditBlog from "./Pages/Blogs/AddEdit";
 import ViewBlog from "./Pages/Blogs/View";
+import Emails from "./Pages/Emails";
+import GrooveGroup from "./Pages/GrooveGroup";
+import GrooveGroupDetail from "./Pages/GrooveGroup/View";
+import AddEditGrooveGroup from "./Pages/GrooveGroup/AddEdit";
+import Videos from "./Pages/Videos";
+import AddVideos from "./Pages/Videos/AddEdit";
+import ViewVideos from "./Pages/Videos/View";
+import Audio from "./Pages/Audio";
+import AddAudio from "./Pages/Audio/AddEdit";
+import ViewAudio from "./Pages/Audio/View";
+import SendNewsletter from "./Pages/Emails/Send";
+import Notifications from "./Pages/Notifications";
+import SendNotification from "./Pages/Notifications/Send";
+import Chats from "./Pages/Chats";
 
 const { persistor, store } = configureStoreProd();
 
@@ -87,6 +101,7 @@ function App() {
     { url: "/faq/edit/:id", element: <AddEditFAQ /> },
     { url: "/content", element: <Content /> },
     { url: "/content/detail/:slug", element: <ViewContent /> },
+    { url: "/content/add", element: <AddEditContent /> },
     { url: "/content/edit/:slug", element: <AddEditContent /> },
     { url: "/newsletter", element: <Newsletter /> },
     { url: "/newsletter/detail/:id", element: <ViewNewsletter /> },
@@ -102,6 +117,24 @@ function App() {
     { url: "/blog/add", element: <AddEditBlog /> },
     { url: "/blog/detail/:id", element: <ViewBlog /> },
     { url: "/blog/edit/:id", element: <AddEditBlog /> },
+    { url: "/subscribers", element: <Emails /> },
+    { url: "/subscribers/send-newsletter", element: <SendNewsletter /> },
+    { url: "/customers", element: <GrooveGroup /> },
+    { url: "/customers/edit/:id", element: <AddEditGrooveGroup /> },
+    { url: "/customers/add", element: <AddEditGrooveGroup /> },
+    { url: "/customers/detail/:id", element: <GrooveGroupDetail /> },
+    { url: "/videos", element: <Videos /> },
+    { url: "/videos/add", element: <AddVideos /> },
+    { url: "/videos/edit/:id", element: <AddVideos /> },
+    { url: "/videos/detail/:id", element: <ViewVideos /> },
+
+    { url: "/audio", element: <Audio /> },
+    { url: "/audio/add", element: <AddAudio /> },
+    { url: "/audio/edit/:id", element: <AddAudio /> },
+    { url: "/audio/detail/:id", element: <ViewAudio /> },
+    { url: "/notifications", element: <Notifications /> },
+    { url: "/notifications/send-notification", element: <SendNotification /> },
+    { url: "/chat", element: <Chats /> },
   ];
 
   return (

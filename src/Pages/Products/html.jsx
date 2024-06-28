@@ -32,9 +32,30 @@ const Html = ({
   changestatus,
   isAllow,
   total = { total },
+  handleMarkPopular,
 }) => {
   const user = useSelector((state) => state.user);
   const columns = [
+    {
+      key: "popular",
+      name: "Popular",
+      sort: false,
+      render: (row) => {
+        console.log("row", row);
+        return (
+          <input
+            type="checkbox"
+            className="h-4 w-4 green_check cursor-pointer shrink-0 rounded-[4px] !border !border-[#3C3E49A3] !text-white"
+            name={`popular${row._id}`}
+            id={row._id}
+            onChange={(e) => {
+              handleMarkPopular(e, row._id);
+            }}
+            checked={row?.isPopular}
+          />
+        );
+      },
+    },
     {
       key: "name",
       name: "Name",
@@ -108,15 +129,19 @@ const Html = ({
         return (
           <>
             <div className="flex items-center justify-start gap-1.5">
-              <Tooltip placement="top" title="View">
-                <a
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={(e) => view(itm.id)}
-                >
-                  <PiEyeLight />
-                </a>
-              </Tooltip>
-              {isAllow(`edit${shared.check}`) && itm.addedBy == user._id ? (
+              {isAllow(`read${shared.check}`) ? (
+                <Tooltip placement="top" title="View">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => view(itm.id)}
+                  >
+                    <PiEyeLight />
+                  </a>
+                </Tooltip>
+              ) : (
+                <></>
+              )}
+              {isAllow(`edit${shared.check}`) ? (
                 <Tooltip placement="top" title="Edit">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -128,7 +153,7 @@ const Html = ({
               ) : (
                 <></>
               )}
-              {isAllow(`delete${shared.check}`) && itm.addedBy == user._id ? (
+              {isAllow(`delete${shared.check}`) ? (
                 <Tooltip placement="top" title="Delete">
                   {" "}
                   <span

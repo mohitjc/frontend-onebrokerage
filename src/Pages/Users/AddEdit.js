@@ -16,11 +16,15 @@ import PhoneInput from "react-phone-input-2";
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
+  const [roleOptions, setRoleOptions] = useState([]);
+  const [login, setLoginPannel] = useState("");
   const [form, setform] = useState({
     id: "",
     fullName: "",
     email: "",
     mobileNo: "",
+    role: "",
+    loginPannel: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -29,12 +33,11 @@ const AddEdit = () => {
   const formValidation = [
     { key: "mobileNo", required: true },
     { key: "email", required: true, message: "Email is required", email: true },
-    /* { key: "timezone", required: true },
-    { key: "description", required: true, message: "Description is required" }, */
-    // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
+    { key: "role", required: true },
   ];
 
-  const timezones = timezoneModel.list;
+  const isSubAdmin = user?.role?.name !== "Admin";
+  const isAdmin = user?.role?.name == "Admin";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,8 +49,6 @@ const AddEdit = () => {
     let url = shared.addApi;
     let value = {
       ...form,
-      ...images,
-      role: "user",
     };
     if (value.id) {
       method = "put";
@@ -80,6 +81,7 @@ const AddEdit = () => {
             payload[itm] = value[itm];
           });
 
+          if (payload.role?._id) payload.role = payload.role._id;
           payload.id = id;
           setform({
             ...payload,
@@ -118,6 +120,34 @@ const AddEdit = () => {
     return value;
   };
 
+  const getRolesList = () => {
+    ApiClient.get("role/listing").then((res) => {
+      if (res.success) {
+        let filtered = res?.data.filter((itm) => itm.status == "active");
+        if (isAdmin) {
+          filtered = res?.data.filter(
+            (itm) => itm.status == "active" && itm.name != "Customer"
+          );
+        }
+
+        if (isSubAdmin) {
+          filtered = res?.data.filter(
+            (itm) => itm.status == "active" && itm.name != "Admin"
+          );
+        }
+        setRoleOptions(
+          filtered.map(({ _id, name }) => {
+            return { id: _id, name: name };
+          })
+        );
+      }
+    });
+  };
+
+  useEffect(() => {
+    getRolesList();
+  }, [user?.role?.name]);
+
   return (
     <>
       <Layout>
@@ -155,6 +185,26 @@ const AddEdit = () => {
               </div>
               <div className="mobile_number mb-3">
                 <FormControl
+                  type="select"
+                  name="role"
+                  label="Role"
+                  value={form.role}
+                  options={roleOptions}
+                  onChange={(e) => {
+                    setform({ ...form, role: e });
+                  }}
+                  required
+                  theme="search"
+                  disabled={id ? true : false}
+                />
+                {submitted && !form.role && (
+                  <div className="invalid-feedback d-block">
+                    Role is required
+                  </div>
+                )}
+              </div>
+              <div className="mobile_number mb-3">
+                <FormControl
                   type="phone"
                   name="mobileNo"
                   label="Mobile No"
@@ -164,7 +214,7 @@ const AddEdit = () => {
                 />
                 {submitted && !form.mobileNo && (
                   <div className="invalid-feedback d-block">
-                    mobile is required
+                    Mobile is required
                   </div>
                 )}
               </div>
@@ -180,55 +230,10 @@ const AddEdit = () => {
                 />
                 {form.email && submitted && !inValidEmail && (
                   <div className="invalid-feedback d-block">
-                    please enter valid email
+                    Please enter valid email
                   </div>
                 )}
               </div>
-              {/* <div className="mb-3">
-                <label>
-                  Mobile No<span className="star">*</span>
-                </label>
-                <PhoneInput
-                  country={"us"}
-                  value={form.phone}
-                  enableSearch={true}
-                  limitMaxLength
-                  required
-                  onChange={(e) => setform({ ...form, phone: e })}
-                  countryCodeEditable={true}
-                  minlegth="10"
-                />
-                {submitted && getError("phone").invalid ? (
-                  <div className="invalid-feedback d-block">
-                    Min Length is 10
-                  </div>
-                ) : (
-                  <></>
-                )}
-              </div> */}
-
-              {/* < div className="mb-3">
-                <FormControl
-                  type="date"
-                  name="date"
-                  label="DOB"
-                  value={datepipeModel.datetodatepicker(form.date_of_birth)}
-                  onChange={(e) => {
-                    setform({ ...form, date_of_birth: e });
-                  }}
-                  // required
-                  error={
-                    getDateErrr(form.date_of_birth) && submitted
-                      ? "Entered date is less than Current Date"
-                      : ""
-                  }
-                />
-              </div> */}
-
-              {/* <div className="col-span-12 md:col-span-6">
-                                <label className='lablefontcls'>Image</label><br></br>
-                                <ImageUpload model="users" result={e => imageResult(e, 'image')} value={images.image || form.image} />
-                            </div> */}
             </div>
 
             <div className="text-right">

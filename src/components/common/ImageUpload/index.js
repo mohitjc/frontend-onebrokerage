@@ -16,38 +16,32 @@ const ImageUpload = ({
   const inputElement = useRef();
   const [img, setImg] = useState("");
   const [loading, setLoader] = useState(false);
+
   const uploadImage = async (e) => {
+    let url = "upload/multiple-images";
     let files = e.target.files;
-    let i = 0;
-    let imgfile = [];
-    for (let item of files) {
-      imgfile.push(item);
+    if (files?.length > 1) {
+      url = "upload/multiple-images";
     }
 
     let images = [];
     if (img) images = img;
     setLoader(true);
-    for await (let item of imgfile) {
-      let file = files.item(i);
-      console.log("i", i);
-      console.log("file", file);
-      const res = await ApiClient.multiImageUpload('upload/image',files);
-      if (res.fileName) {
-        let image = res.fileName;
+    ApiClient.multiImageUpload(url, files, {}, "files").then((res) => {
+      console.log("res", res);
+      if (res.files) {
+        let image = res.files.map((itm) => itm.fileName);
         if (!multiple) {
-          setImg(image);
-          result({ event: "value", value: image });
+          setImg(image[0]);
+          result({ event: "value", value: image[0] });
         } else {
-          images.push(image);
+          images = [...images, ...image];
+          setImg(images);
+          result({ event: "value", value: images });
         }
       }
-      i++;
-    }
-    setLoader(false);
-    if (multiple) {
-      setImg(images);
-      result({ event: "value", value: images });
-    }
+      setLoader(false);
+    });
   };
 
   const remove = (index) => {

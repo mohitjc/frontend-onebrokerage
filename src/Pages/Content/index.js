@@ -134,18 +134,10 @@ const Content = () => {
 
   const statusChange = (itm) => {
     // if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
+    if (!isAllow(`edit${shared.check}`)) return;
     let status = "active";
     if (itm.status == "active") status = "deactive";
 
-    // if (window.confirm(`Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`)) {
-    //     loader(true)
-    //     ApiClient.put(shared.statusApi, { id: itm.id, status }).then(res => {
-    //         if (res.success) {
-    //             getData()
-    //         }
-    //         loader(false)
-    //     })
-    // }
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to ${
@@ -165,11 +157,6 @@ const Content = () => {
           }
           loader(false);
         });
-        //   Swal.fire({
-
-        //     // text: `Sucessfully ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
-        //     icon: "success"
-        //   });
       }
     });
   };
@@ -201,10 +188,10 @@ const Content = () => {
   };
 
   const isAllow = (key = "") => {
-    let permissions = user.role?.permissions;
+    let permissions = user.role?.permissions?.[0];
     let value = permissions?.[key];
-    return true;
-    // return value
+    // return true;
+    return value;
   };
 
   useEffect(() => {
