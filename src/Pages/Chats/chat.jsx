@@ -39,13 +39,13 @@ function Chat({
                   </div>
                 </div>
                 <div>
-                  <p className="text-[10px]">11:43 AM</p>
+                  {/* <p className="text-[10px]">11:43 AM</p> */}
                 </div>
               </div>
             </div>
           </div>
           <div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-[100%] md:h-[450px] lg:h-[550px] xl:h-[650px] overflow-auto">
-            <div className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+            <div id="chat-box" className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
               {chatMessages.map((message) => {
                 return (
                   <>

@@ -43,6 +43,13 @@ const Html = ({
   const [chatRoomId, setChatRoomId] = useState("");
   const [activeChat, setActiveChat] = useState();
 
+  const chatScroll = () => {
+    // Scroll to the bottom after sending a message
+    var chatBox = document.getElementById('chat-box');
+    if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+
   const handleSendMessage = () => {
     let value = {};
     if (message) {
@@ -52,11 +59,19 @@ const Html = ({
         content: message,
         user_id: user?._id,
       };
+
+      chatMessages.push({...value,sender:value.user_id})
+      setChatMessages([...chatMessages])
+      setTimeout(() => {
+        chatScroll()
+      }, 100)
+
+      socketModel.emit("send-message", value);
+      setMessage("");
     }
 
-    socketModel.emit("send-message", value);
-    getChatMessages();
-    setMessage("");
+  
+   
   };
 
   const getChatRoomsList = () => {
@@ -67,10 +82,13 @@ const Html = ({
       }
     });
   };
-  const getChatMessages = () => {
-    ApiClient.get("chat/messages", { room_id: chatRoomId }).then((res) => {
+  const getChatMessages = (id) => {
+    ApiClient.get("chat/messages", { room_id: id }).then((res) => {
       if (res.success) {
         setChatMessages(res.data.data);
+        setTimeout(() => {
+          chatScroll()
+        }, 100)
       }
     });
   };
@@ -86,25 +104,31 @@ const Html = ({
   const uploadImage = () => {};
 
   const handleChatClick = (id) => {
-    setChatRoomId(id);
-    let value = {
-      room_id: id,
-      user_id: user?._id,
-    };
-    socketModel.emit("join-room", value);
+
     if (id) {
-      getChatMessages();
+      console.log("handleChatClick",id)
+      setChatRoomId(id);
+      getChatMessages(id);
       getActiveChat(id);
     }
   };
 
   useEffect(() => {
-    if (chatRoomId != "") getChatMessages();
+    if (chatRoomId != ""){
+      let value = {
+        room_id: chatRoomId,
+        user_id: user?._id,
+      };
+      socketModel.emit("join-room", value);
+      getChatMessages(chatRoomId);
+    }
+    console.log("chatRoomId",chatRoomId)
   }, [chatRoomId]);
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
       console.log("data", data);
+      getChatMessages(data.data.room_id)
     });
   }, []);
 
@@ -114,7 +138,6 @@ const Html = ({
     }
   }, []);
 
-  console.log("ACTIVE", activeChat);
   return (
     <Layout>
       <div className="flex flex-wrap justify-between items-center gap-y-4">
