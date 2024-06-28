@@ -94,11 +94,11 @@ function Chat({
                 );
               })}
 
-              <div class="flex items-center justify-center py-4">
+              {/* <div class="flex items-center justify-center py-4">
                 <div class="border-t border-gray-300 w-full"></div>
                 <span class="px-3 text-gray-500 text-sm">Yesterday</span>
                 <div class="border-t border-gray-300 w-full"></div>
-              </div>
+              </div> */}
             </div>
             <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
               <div className="relative flex">
