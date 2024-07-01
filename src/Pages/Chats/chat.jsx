@@ -39,7 +39,7 @@ function Chat({
                   </div>
                 </div>
                 <div>
-                  <p className="text-[10px]">11:43 AM</p>
+                  <p className="text-[14px]">11:43 AM</p>
                 </div>
               </div>
             </div>
@@ -85,7 +85,7 @@ function Chat({
                           <img
                             src={methodModel.noImg(message.sender_image)}
                             alt="My profile"
-                            className="w-6 h-6 rounded-full order-2"
+                            className="w-6 h-6 rounded-full order-2 object-cover"
                           />
                         </div>
                       </div>
@@ -135,15 +135,15 @@ function Chat({
                     }
                   }}
                   placeholder="Write your message!"
-                  className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-100 rounded-md py-3"
+                  className="w-full focus:outline-none focus:placeholder-gray-400 mr-2  text-gray-600 placeholder-gray-600 pl-12 bg-gray-100 rounded-md py-3"
                 />
-                <div className="absolute right-0 items-center inset-y-0 hidden sm:flex gap-2">
+                <div className=" items-center inset-y-0 hidden sm:flex gap-2">
                   <label
                     type="button"
                     onChange={(e) => {
                       uploadImage(e);
                     }}
-                    className="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-100 focus:outline-none"
+                    className="inline-flex cursor-pointer items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-100 focus:outline-none"
                   >
                     <input type="file" className="hidden" accept="image/*" />
                     <svg
