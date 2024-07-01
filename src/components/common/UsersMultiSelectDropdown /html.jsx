@@ -16,15 +16,14 @@ const Html = ({ options, selectedValues, handleChange, displayValue, id }) => {
       experienceLabels[option.experience_level] = option.experience_level;
   });
 
-  console.log("groupedMembers", groupedMembers);
-  console.log("experienceLabels", experienceLabels);
-
   let groupedOptions = Object.keys(experienceLabels).map((level) => ({
     label: experienceLabels[level],
     options: groupedMembers[level].map((member) => {
+      console.log("member", member);
       return {
         value: member.id,
         label: member.name,
+        email: member.email,
       };
     }),
   }));
@@ -54,7 +53,7 @@ const Html = ({ options, selectedValues, handleChange, displayValue, id }) => {
               value.label
             ) : (
               <div className="flex ">
-                {value.label} ({value.value})
+                {value.label} ({value.email})
               </div>
             )
           }
