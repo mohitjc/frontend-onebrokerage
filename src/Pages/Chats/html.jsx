@@ -178,6 +178,12 @@ const Html = ({
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
         <div className="">
           <div className="grid grid-cols-12 gap-4  ">
+            {chatRooms?.length == 0 && !search && (
+              <div className="col-span-12 h-[400px] bgs_starts flex items-center justify-center">
+                <div className="w-52 mx-auto">No Chats.</div>
+              </div>
+            )}
+
             <div className="col-span-4 2xl:col-span-3">
               <div className="bg-gray-100 p-6 h-full">
                 <form

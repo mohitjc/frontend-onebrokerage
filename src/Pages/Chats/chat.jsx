@@ -44,9 +44,6 @@ function Chat({
                     </p>
                   </div>
                 </div>
-                <div>
-                  <p className="text-[14px]">11:43 AM</p>
-                </div>
               </div>
             </div>
           </div>
@@ -66,11 +63,10 @@ function Chat({
                               <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-100 text-gray-600">
                                 {message.content}
                               </span>
-                            
                             </div>
                             <span className="text-gray-400 !mt-0 text-[10px] ">
-                                {moment(message?.createdAt).format("LT")}
-                              </span>
+                              {moment(message?.createdAt).format("LT")}
+                            </span>
                           </div>
                           <img
                             src={methodModel.noImg(message.sender_image)}
@@ -111,20 +107,20 @@ function Chat({
               </div> */}
             </div>
             <div className="border-t-2 border-gray-200 pt-4 mb-2 sm:mb-0 relative">
-            {showEmojis == true && (
-                    <EmojiPicker
-                      skinTonesDisabled={true}
-                      onEmojiClick={onEmojiClick}
-                      height={380}
-                      className="absolute bottom-0 "
-                      // previewConfig={{
-                      //   showPreview: false,
-                      // }}
-                    />
-                  )}
+              {showEmojis == true && (
+                <EmojiPicker
+                  skinTonesDisabled={true}
+                  onEmojiClick={onEmojiClick}
+                  height={380}
+                  className="absolute bottom-0 "
+                  // previewConfig={{
+                  //   showPreview: false,
+                  // }}
+                />
+              )}
               <div className="relative flex">
                 <span className="absolute inset-y-0 flex items-center">
-                <a
+                  <a
                     onClick={() => onEmojiIconClick(true)}
                     className={`open-emojis automation-emoji position-absolute cursor-pointer px-2 text-gray-600`}
                     type="button"
@@ -147,8 +143,6 @@ function Chat({
                   className="w-full focus:outline-none focus:placeholder-gray-400 mr-2  text-gray-600 placeholder-gray-600 pl-12 bg-gray-100 rounded-md py-3"
                 />
                 <div className="items-center inset-y-0 hidden sm:flex gap-2">
-                
-                 
                   <label
                     type="button"
                     onChange={(e) => {
