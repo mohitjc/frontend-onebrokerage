@@ -44,6 +44,8 @@ const Html = ({
   const [activeChat, setActiveChat] = useState();
   const [showEmojis, setShowEmojis] = useState(false);
 
+  const isChatActive = activeChat?.room_id == chatRoomId;
+
   const chatScroll = () => {
     // Scroll to the bottom after sending a message
     var chatBox = document.getElementById("chat-box");
@@ -134,12 +136,12 @@ const Html = ({
       socketModel.emit("join-room", value);
       getChatMessages(chatRoomId);
     }
-    console.log("chatRoomId", chatRoomId);
   }, [chatRoomId]);
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
       console.log("data", data);
+      setChatRoomId(data.room_id);
       getChatMessages(data.data.room_id);
     });
   }, []);
@@ -212,6 +214,7 @@ const Html = ({
                   onChatRoomClick={(id) => {
                     handleChatClick(id);
                   }}
+                  activeChat={chatRoomId}
                 />
               </div>
             </div>
