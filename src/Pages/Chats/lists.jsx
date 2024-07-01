@@ -36,7 +36,7 @@ const Chat = ({ chat, onChatClick, sender, isActive }) => {
       <div className="">
         <div
           className={` ${
-            isActive ? "bg-[#EB6A59]" : "bg-white"
+            isActive ? "bg-[#EB6A59] text-white" : "bg-white"
           } hover:bg-[#EB6A59] group hover:!text-gray-100 group  p-2 mb-3`}
         >
           <a
@@ -59,7 +59,7 @@ const Chat = ({ chat, onChatClick, sender, isActive }) => {
                       {sender?.fullName}
                     </p>
 
-                    <p className="text-[12px] text-gray-600 group-hover:!text-gray-100 line-clamp-1 ">
+                    <p className="text-[12px]  line-clamp-1 ">
                       {chat.room_details.subject}
                     </p>
                   </div>

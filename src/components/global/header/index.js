@@ -56,9 +56,15 @@ const Header = ({ setIsOpen, isOpen }) => {
     socketModel.emit("notify-message", { user_id: user?._id });
 
     socketModel.on("notify-message", (data) => {
-      console.log("data", data);
+      let count = data.data.unread_count;
+      localStorage.setItem("unreadMessages", count);
       setUnreadMessagesCount(data.data.unread_count);
     });
+  }, []);
+
+  useEffect(() => {
+    let messagecount = localStorage.getItem("unreadMessages");
+    setUnreadMessagesCount(messagecount);
   }, []);
 
   useEffect(() => {

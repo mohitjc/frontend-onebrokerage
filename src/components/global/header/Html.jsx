@@ -49,11 +49,15 @@ const Html = ({
 
       <div className="flex items-center gap-4 ml-auto">
         <Link to={"/chat"}>
-          <Tooltip placement="top" title="Chats">
-            <span className="text-[10px]">{messageCount}</span>
+          <div className="relative">
+            {messageCount > 0 && (
+              <p className="text-[10px] absolute -right-3 top-0 bg-[#EB6A59] h-6 w-6 p-1 flex items-center justify-center text-white rounded-full">
+                <span>{messageCount}</span>
+              </p>
+            )}
 
             <IoChatbubblesOutline className="text-2xl bg-gray-100 h-10 w-10 p-2 text-primary hover:shadow-sm rounded-full" />
-          </Tooltip>
+          </div>
         </Link>
         <Menu as="div" className="relative">
           <div>
