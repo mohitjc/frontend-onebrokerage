@@ -29,7 +29,7 @@ function Chat({
                     />
                   </div>
                   <div className="">
-                    <p className="text-[16px] font-semibold capatilize">
+                    <p className="text-[16px] font-semibold capitalize">
                       {sender?.fullName}
                     </p>
 
@@ -100,7 +100,7 @@ function Chat({
                 <div class="border-t border-gray-300 w-full"></div>
               </div> */}
             </div>
-            <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
+            <div className="border-t-2 border-gray-200 pt-4 mb-2 sm:mb-0">
               <div className="relative flex">
                 <span className="absolute inset-y-0 flex items-center">
                   <button
@@ -165,7 +165,7 @@ function Chat({
                   <button
                     type="button"
                     onClick={onSendClick}
-                    className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-primary focus:outline-none"
+                    className="inline-flex items-center justify-center  px-4 py-3 transition duration-500 ease-in-out text-white bg-primary focus:outline-none"
                   >
                     <span className="font-bold">Send</span>
                     <svg
