@@ -5,6 +5,9 @@ import { LiaTrashAlt } from "react-icons/lia";
 function Lists({ chats, onChatRoomClick, user, activeChat }) {
   return (
     <div className="">
+      {chats?.length == 0 && (
+        <div className="text-gray-600 text-center py-6">no chats.</div>
+      )}
       <div className="py-4 max-h-[650px] overflow-y-auto pr-4 mt-4">
         {chats &&
           chats.map((chat) => {

@@ -43,6 +43,7 @@ const Html = ({
   const [chatRoomId, setChatRoomId] = useState("");
   const [activeChat, setActiveChat] = useState();
   const [showEmojis, setShowEmojis] = useState(false);
+  const [search, setSearch] = useState("");
 
   const isChatActive = activeChat?.room_id == chatRoomId;
 
@@ -90,7 +91,11 @@ const Html = ({
   };
 
   const getChatRoomsList = () => {
-    ApiClient.get("chat/room-members").then((res) => {
+    let f = {};
+    if (search) {
+      f = { search: search };
+    }
+    ApiClient.get("chat/room-members", f).then((res) => {
       if (res.success) {
         console.log("res", res);
         setChatRooms(res.data.data);
@@ -185,19 +190,24 @@ const Html = ({
                     <input
                       type="text"
                       id="simple-search"
-                      value={filters.search}
+                      value={search}
                       onChange={(e) => {
-                        setFilter({ ...filters, search: e.target.value });
+                        setSearch(e.target.value);
                       }}
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
-                      placeholder="Search"
-                      required
+                      placeholder="Search..."
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          getChatRoomsList();
+                        }
+                      }}
                     />
                     {filters?.search && (
                       <i
                         className="fa fa-times absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"
                         aria-hidden="true"
-                        onClick={(e) => clear()}
+                        onClick={() => getChatRoomsList()}
                       ></i>
                     )}
                   </div>
@@ -205,7 +215,11 @@ const Html = ({
                     type="submit"
                     className="p-2.5 text-sm font-medium h-10 text-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
-                    <IoSearchOutline />
+                    <IoSearchOutline
+                      onClick={() => {
+                        getChatRoomsList();
+                      }}
+                    />
                   </button>
                 </form>
                 <Lists
