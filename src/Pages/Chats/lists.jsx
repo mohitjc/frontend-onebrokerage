@@ -2,9 +2,12 @@ import moment from "moment";
 import React from "react";
 import { LiaTrashAlt } from "react-icons/lia";
 
-function Lists({ chats, onChatRoomClick, user,  activeChat }) {
+function Lists({ chats, onChatRoomClick, user, activeChat }) {
   return (
     <div className="">
+      {chats?.length == 0 && (
+        <div className="text-gray-600 text-center py-6">no chats.</div>
+      )}
       <div className="py-4 max-h-[650px] overflow-y-auto pr-4 mt-4">
         {chats &&
           chats.map((chat) => {
@@ -12,7 +15,12 @@ function Lists({ chats, onChatRoomClick, user,  activeChat }) {
               (_user) => _user.id !== user._id
             );
             return (
-              <Chat chat={chat} onChatClick={onChatRoomClick} sender={sender}   activeChat={activeChat} />
+              <Chat
+                chat={chat}
+                onChatClick={onChatRoomClick}
+                sender={sender}
+                isActive={chat?.room_id == activeChat}
+              />
             );
           })}
       </div>
@@ -22,11 +30,15 @@ function Lists({ chats, onChatRoomClick, user,  activeChat }) {
 
 export default Lists;
 
-const Chat = ({ chat, onChatClick, sender , activeChat }) => {
+const Chat = ({ chat, onChatClick, sender, isActive }) => {
   return (
     <>
       <div className="">
-        <div className={`bg-white ${activeChat?"bg-[#EB6A59]":""} hover:bg-[#EB6A59] group hover:!text-gray-100 group  p-2 mb-3`}>
+        <div
+          className={` ${
+            isActive ? "bg-[#EB6A59]" : "bg-white"
+          } hover:bg-[#EB6A59] group hover:!text-gray-100 group  p-2 mb-3`}
+        >
           <a
             onClick={() => {
               onChatClick(chat.room_details._id);
@@ -43,23 +55,21 @@ const Chat = ({ chat, onChatClick, sender , activeChat }) => {
                 </div>
                 <div className="">
                   <div className="">
-                  <p className="text-[14px] font-semibold">
-                    {sender?.fullName}
-                  </p>
-                 
-                  <p className="text-[12px] text-gray-600 group-hover:!text-gray-100 line-clamp-1 ">
-                    {chat.room_details.subject}
-                  </p>
+                    <p className="text-[14px] font-semibold">
+                      {sender?.fullName}
+                    </p>
 
+                    <p className="text-[12px] text-gray-600 group-hover:!text-gray-100 line-clamp-1 ">
+                      {chat.room_details.subject}
+                    </p>
                   </div>
-                 
                 </div>
               </div>
               <div>
-              <p className="text-[10px]">
-                    {moment(chat.room_details?.createdAt).format("LT")}
-                  </p>
-            </div>
+                <p className="text-[10px]">
+                  {moment(chat.room_details?.createdAt).format("LT")}
+                </p>
+              </div>
             </div>
           </a>
         </div>

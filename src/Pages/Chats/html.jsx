@@ -42,6 +42,25 @@ const Html = ({
   const [chatRooms, setChatRooms] = useState();
   const [chatRoomId, setChatRoomId] = useState("");
   const [activeChat, setActiveChat] = useState();
+  const [showEmojis, setShowEmojis] = useState(false);
+  const [search, setSearch] = useState("");
+
+  const isChatActive = activeChat?.room_id == chatRoomId;
+
+  const chatScroll = () => {
+    // Scroll to the bottom after sending a message
+    var chatBox = document.getElementById("chat-box");
+    if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+  };
+
+  chatRooms?.forEach((item) => {
+    item.createdAt = new Date(item.createdAt);
+  });
+
+  // Step 2: Sort the array based on createdAt field
+  chatRooms?.sort((a, b) => {
+    return b.createdAt - a.createdAt;
+  });
 
   const handleSendMessage = () => {
     let value = {};
@@ -52,25 +71,44 @@ const Html = ({
         content: message,
         user_id: user?._id,
       };
-    }
 
-    socketModel.emit("send-message", value);
-    getChatMessages();
-    setMessage("");
+      chatMessages.push({ ...value, sender: value.user_id });
+      setChatMessages([...chatMessages]);
+      setTimeout(() => {
+        chatScroll();
+      }, 100);
+
+      socketModel.emit("send-message", value);
+      setMessage("");
+    }
+  };
+
+  const handleEmojiClick = ({ emoji }) => {
+    const _value = message;
+    let _message = message.length > 0 ? `${_value} ${emoji}` : `${emoji}`;
+    setMessage(_message);
+    setShowEmojis(false);
   };
 
   const getChatRoomsList = () => {
-    ApiClient.get("chat/room-members").then((res) => {
+    let f = {};
+    if (search) {
+      f = { search: search };
+    }
+    ApiClient.get("chat/room-members", f).then((res) => {
       if (res.success) {
         console.log("res", res);
         setChatRooms(res.data.data);
       }
     });
   };
-  const getChatMessages = () => {
-    ApiClient.get("chat/messages", { room_id: chatRoomId }).then((res) => {
+  const getChatMessages = (id) => {
+    ApiClient.get("chat/messages", { room_id: id }).then((res) => {
       if (res.success) {
         setChatMessages(res.data.data);
+        setTimeout(() => {
+          chatScroll();
+        }, 100);
       }
     });
   };
@@ -86,27 +124,44 @@ const Html = ({
   const uploadImage = () => {};
 
   const handleChatClick = (id) => {
-    setChatRoomId(id);
-    let value = {
-      room_id: id,
-      user_id: user?._id,
-    };
-    socketModel.emit("join-room", value);
     if (id) {
-      getChatMessages();
-      getActiveChat(id);
+      setChatRoomId(id);
     }
   };
 
   useEffect(() => {
-    if (chatRoomId != "") getChatMessages();
+    if (chatRoomId != "") {
+      let value = {
+        room_id: chatRoomId,
+        user_id: user?._id,
+      };
+      socketModel.emit("join-room", value);
+      getChatMessages(chatRoomId);
+      getActiveChat(chatRoomId);
+    }
   }, [chatRoomId]);
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
       console.log("data", data);
+      setChatRoomId(data.room_id);
+      getChatMessages(data.data.room_id);
+    });
+    socketModel.emit("notify-message", { user_id: user?._id });
+    socketModel.on("notify-message", (value) => {
+      console.log("VALUE", value);
     });
   }, []);
+
+  const handleClearSearch = () => {
+    setSearch("");
+    ApiClient.get("chat/room-members").then((res) => {
+      if (res.success) {
+        console.log("res", res);
+        setChatRooms(res.data.data);
+      }
+    });
+  };
 
   useEffect(() => {
     {
@@ -114,7 +169,6 @@ const Html = ({
     }
   }, []);
 
-  console.log("ACTIVE", activeChat);
   return (
     <Layout>
       <div className="flex flex-wrap justify-between items-center gap-y-4">
@@ -148,19 +202,24 @@ const Html = ({
                     <input
                       type="text"
                       id="simple-search"
-                      value={filters.search}
+                      value={search}
                       onChange={(e) => {
-                        setFilter({ ...filters, search: e.target.value });
+                        setSearch(e.target.value);
                       }}
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
-                      placeholder="Search"
-                      required
+                      placeholder="Search..."
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          getChatRoomsList();
+                        }
+                      }}
                     />
-                    {filters?.search && (
+                    {search && (
                       <i
                         className="fa fa-times absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"
                         aria-hidden="true"
-                        onClick={(e) => clear()}
+                        onClick={handleClearSearch}
                       ></i>
                     )}
                   </div>
@@ -168,7 +227,11 @@ const Html = ({
                     type="submit"
                     className="p-2.5 text-sm font-medium h-10 text-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
-                    <IoSearchOutline />
+                    <IoSearchOutline
+                      onClick={() => {
+                        getChatRoomsList();
+                      }}
+                    />
                   </button>
                 </form>
                 <Lists
@@ -177,7 +240,7 @@ const Html = ({
                   onChatRoomClick={(id) => {
                     handleChatClick(id);
                   }}
-                  activeChat={activeChat}
+                  activeChat={chatRoomId}
                 />
               </div>
             </div>
@@ -193,6 +256,11 @@ const Html = ({
                 uploadImage={uploadImage}
                 message={message}
                 chatMessages={chatMessages}
+                onEmojiIconClick={() => {
+                  setShowEmojis(!showEmojis);
+                }}
+                onEmojiClick={handleEmojiClick}
+                showEmojis={showEmojis}
               />
             ) : (
               <></>

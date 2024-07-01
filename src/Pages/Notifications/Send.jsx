@@ -160,6 +160,18 @@ function Send() {
                       </div>
                     )}
                   </div>
+                  {form.type == "product" && (
+                    <div className=" mb-3">
+                      <FormControl
+                        name="url"
+                        label="Product URL"
+                        value={form.product_url}
+                        onChange={(e) => {
+                          setForm({ ...form, product_url: e });
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
                 {/*<div className="col-span-6 md:col-span-6 mb-3">
                     <FormControl
