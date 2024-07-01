@@ -26,7 +26,6 @@ const Html = ({
   changestatus,
   isAllow,
   total = { total },
-  onClickSendNewsletter,
 }) => {
   const user = useSelector((state) => state.user);
   const columns = [
