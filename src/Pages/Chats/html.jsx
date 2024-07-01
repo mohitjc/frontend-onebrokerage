@@ -177,6 +177,7 @@ const Html = ({
                   onChatRoomClick={(id) => {
                     handleChatClick(id);
                   }}
+                  activeChat={activeChat}
                 />
               </div>
             </div>

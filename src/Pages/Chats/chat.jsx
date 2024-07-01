@@ -29,7 +29,7 @@ function Chat({
                     />
                   </div>
                   <div className="">
-                    <p className="text-[16px] font-semibold">
+                    <p className="text-[16px] font-semibold capatilize">
                       {sender?.fullName}
                     </p>
 

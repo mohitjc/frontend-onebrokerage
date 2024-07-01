@@ -2,7 +2,7 @@ import moment from "moment";
 import React from "react";
 import { LiaTrashAlt } from "react-icons/lia";
 
-function Lists({ chats, onChatRoomClick, user }) {
+function Lists({ chats, onChatRoomClick, user,  activeChat }) {
   return (
     <div className="">
       <div className="py-4 max-h-[650px] overflow-y-auto pr-4 mt-4">
@@ -12,7 +12,7 @@ function Lists({ chats, onChatRoomClick, user }) {
               (_user) => _user.id !== user._id
             );
             return (
-              <Chat chat={chat} onChatClick={onChatRoomClick} sender={sender} />
+              <Chat chat={chat} onChatClick={onChatRoomClick} sender={sender}   activeChat={activeChat} />
             );
           })}
       </div>
@@ -22,11 +22,11 @@ function Lists({ chats, onChatRoomClick, user }) {
 
 export default Lists;
 
-const Chat = ({ chat, onChatClick, sender }) => {
+const Chat = ({ chat, onChatClick, sender , activeChat }) => {
   return (
     <>
       <div className="">
-        <div className="bg-white hover:bg-[#EB6A59] group hover:!text-gray-100 group  p-2 mb-3">
+        <div className={`bg-white ${activeChat?"bg-[#EB6A59]":""} hover:bg-[#EB6A59] group hover:!text-gray-100 group  p-2 mb-3`}>
           <a
             onClick={() => {
               onChatClick(chat.room_details._id);
