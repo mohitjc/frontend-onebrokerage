@@ -127,6 +127,7 @@ const Html = ({
         user_id: user?._id,
       };
       socketModel.emit("join-room", value);
+      socketModel.emit("unread-count", value);
       getChatMessages(chatRoomId);
       getActiveChat(chatRoomId);
     }
