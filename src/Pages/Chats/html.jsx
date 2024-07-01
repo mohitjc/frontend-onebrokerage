@@ -125,10 +125,7 @@ const Html = ({
 
   const handleChatClick = (id) => {
     if (id) {
-      console.log("handleChatClick", id);
       setChatRoomId(id);
-      getChatMessages(id);
-      getActiveChat(id);
     }
   };
 
@@ -140,6 +137,7 @@ const Html = ({
       };
       socketModel.emit("join-room", value);
       getChatMessages(chatRoomId);
+      getActiveChat(chatRoomId);
     }
   }, [chatRoomId]);
 
@@ -149,7 +147,21 @@ const Html = ({
       setChatRoomId(data.room_id);
       getChatMessages(data.data.room_id);
     });
+    socketModel.emit("notify-message", { user_id: user?._id });
+    socketModel.on("notify-message", (value) => {
+      console.log("VALUE", value);
+    });
   }, []);
+
+  const handleClearSearch = () => {
+    setSearch("");
+    ApiClient.get("chat/room-members").then((res) => {
+      if (res.success) {
+        console.log("res", res);
+        setChatRooms(res.data.data);
+      }
+    });
+  };
 
   useEffect(() => {
     {
@@ -203,11 +215,11 @@ const Html = ({
                         }
                       }}
                     />
-                    {filters?.search && (
+                    {search && (
                       <i
                         className="fa fa-times absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"
                         aria-hidden="true"
-                        onClick={() => getChatRoomsList()}
+                        onClick={handleClearSearch}
                       ></i>
                     )}
                   </div>
