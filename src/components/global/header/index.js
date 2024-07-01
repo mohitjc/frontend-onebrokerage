@@ -13,7 +13,8 @@ const Header = ({ setIsOpen, isOpen }) => {
     localStorage.setItem("sidebar", !isOpen);
   };
   const [isOpen1, setIsOpen1] = useState(false);
-  const [messageCount, setUnreadMessagesCount] = useState(0);
+  let messagecount = localStorage.getItem("unreadMessages")||0;
+  const [messageCount, setUnreadMessagesCount] = useState(messagecount);
   const toggle1 = () => setIsOpen1(!isOpen1);
   const history = useNavigate();
   const dispatch = useDispatch();
@@ -62,10 +63,7 @@ const Header = ({ setIsOpen, isOpen }) => {
     });
   }, []);
 
-  useEffect(() => {
-    let messagecount = localStorage.getItem("unreadMessages");
-    setUnreadMessagesCount(messagecount);
-  }, []);
+
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
