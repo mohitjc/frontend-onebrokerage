@@ -80,13 +80,16 @@ function Send() {
   const getUsersList = () => {
     ApiClient.get("user/frontend/lisitng").then((res) => {
       if (res.success) {
-        let user = res?.data.map(({ fullName, email, experience_level }) => {
-          return {
-            id: email,
-            name: fullName,
-            experience_level: experience_level,
-          };
-        });
+        let user = res?.data.map(
+          ({ id, fullName, email, experience_level }) => {
+            return {
+              id: id,
+              name: fullName,
+              experience_level: experience_level,
+              email: email,
+            };
+          }
+        );
         setUsers(user);
       }
     });

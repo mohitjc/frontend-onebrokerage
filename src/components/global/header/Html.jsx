@@ -26,6 +26,7 @@ const Html = ({
   searchChange,
   clear,
   Logout,
+  messageCount,
 }) => {
   return (
     <nav
@@ -49,6 +50,8 @@ const Html = ({
       <div className="flex items-center gap-4 ml-auto">
         <Link to={"/chat"}>
           <Tooltip placement="top" title="Chats">
+            <span className="text-[10px]">{messageCount}</span>
+
             <IoChatbubblesOutline className="text-2xl bg-gray-100 h-10 w-10 p-2 text-primary hover:shadow-sm rounded-full" />
           </Tooltip>
         </Link>

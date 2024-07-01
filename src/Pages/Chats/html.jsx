@@ -53,15 +53,6 @@ const Html = ({
     if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
   };
 
-  chatRooms?.forEach((item) => {
-    item.createdAt = new Date(item.createdAt);
-  });
-
-  // Step 2: Sort the array based on createdAt field
-  chatRooms?.sort((a, b) => {
-    return b.createdAt - a.createdAt;
-  });
-
   const handleSendMessage = () => {
     let value = {};
     if (message) {
@@ -147,10 +138,11 @@ const Html = ({
       setChatRoomId(data.room_id);
       getChatMessages(data.data.room_id);
     });
-    socketModel.emit("notify-message", { user_id: user?._id });
-    socketModel.on("notify-message", (value) => {
-      console.log("VALUE", value);
-    });
+    // socketModel.emit("notify-message", { user_id: user?._id });
+    // socketModel.on("notify-message", (value) => {
+    //   console.log("VALUE", value);
+    //   setUnreadMessagesCount(data.unread_count);
+    // });
   }, []);
 
   const handleClearSearch = () => {
