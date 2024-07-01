@@ -1,5 +1,8 @@
 import React from "react";
 import methodModel from "../../methods/methods";
+import moment from "moment";
+import { PiSmileyBold } from "react-icons/pi";
+import EmojiPicker from "emoji-picker-react";
 
 function Chat({
   user,
@@ -9,6 +12,9 @@ function Chat({
   chatMessages,
   onSendClick,
   activeChat,
+  onEmojiClick,
+  onEmojiIconClick,
+  showEmojis,
 }) {
   const sender = activeChat?.user_details?.find(
     (_user) => _user._id !== user?._id
@@ -38,14 +44,15 @@ function Chat({
                     </p>
                   </div>
                 </div>
-                <div>
-                  {/* <p className="text-[10px]">11:43 AM</p> */}
-                </div>
+                <div>{/* <p className="text-[10px]">11:43 AM</p> */}</div>
               </div>
             </div>
           </div>
           <div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-[100%] md:h-[450px] lg:h-[550px] xl:h-[650px] overflow-auto">
-            <div id="chat-box" className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+            <div
+              id="chat-box"
+              className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+            >
               {chatMessages.map((message) => {
                 return (
                   <>
@@ -56,9 +63,9 @@ function Chat({
                             <div>
                               <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-100 text-gray-600">
                                 {message.content}
-                                {/* <span className="text-gray-400 ">
+                              </span>
+                              <span className="text-gray-400 ">
                                 {moment(message?.createdAt).format("LT")}
-                              </span> */}
                               </span>
                             </div>
                           </div>
@@ -73,14 +80,14 @@ function Chat({
                       <div className="chat-message">
                         <div className="flex items-end justify-end">
                           <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                            <div>
+                            <div className="">
                               <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
                                 {message.content}
-                                {/* <span className="text-gray-400 ">
-                                {moment(message?.createdAt).format("LT")}
-                              </span> */}
                               </span>
                             </div>
+                            <label className="text-gray-400 !mt-2 text-[10px] ">
+                              {moment(message?.createdAt).format("LT")}
+                            </label>
                           </div>
                           <img
                             src={methodModel.noImg(message.sender_image)}
@@ -124,6 +131,7 @@ function Chat({
                     </svg>
                   </button>
                 </span>
+
                 <input
                   type="text"
                   onChange={onInputChange}
@@ -138,6 +146,23 @@ function Chat({
                   className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-100 rounded-md py-3"
                 />
                 <div className="absolute right-0 items-center inset-y-0 hidden sm:flex gap-2">
+                  <a
+                    onClick={() => onEmojiIconClick(true)}
+                    className={`open-emojis automation-emoji position-absolute cursor-pointer`}
+                    type="button"
+                  >
+                    <PiSmileyBold />
+                  </a>
+                  {showEmojis == true && (
+                    <EmojiPicker
+                      skinTonesDisabled={true}
+                      onEmojiClick={onEmojiClick}
+                      height={380}
+                      // previewConfig={{
+                      //   showPreview: false,
+                      // }}
+                    />
+                  )}
                   <label
                     type="button"
                     onChange={(e) => {

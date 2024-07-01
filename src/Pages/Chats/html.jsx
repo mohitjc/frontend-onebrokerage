@@ -42,13 +42,22 @@ const Html = ({
   const [chatRooms, setChatRooms] = useState();
   const [chatRoomId, setChatRoomId] = useState("");
   const [activeChat, setActiveChat] = useState();
+  const [showEmojis, setShowEmojis] = useState(false);
 
   const chatScroll = () => {
     // Scroll to the bottom after sending a message
-    var chatBox = document.getElementById('chat-box');
+    var chatBox = document.getElementById("chat-box");
     if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
-  }
+  };
 
+  chatRooms?.forEach((item) => {
+    item.createdAt = new Date(item.createdAt);
+  });
+
+  // Step 2: Sort the array based on createdAt field
+  chatRooms?.sort((a, b) => {
+    return b.createdAt - a.createdAt;
+  });
 
   const handleSendMessage = () => {
     let value = {};
@@ -60,18 +69,22 @@ const Html = ({
         user_id: user?._id,
       };
 
-      chatMessages.push({...value,sender:value.user_id})
-      setChatMessages([...chatMessages])
+      chatMessages.push({ ...value, sender: value.user_id });
+      setChatMessages([...chatMessages]);
       setTimeout(() => {
-        chatScroll()
-      }, 100)
+        chatScroll();
+      }, 100);
 
       socketModel.emit("send-message", value);
       setMessage("");
     }
+  };
 
-  
-   
+  const handleEmojiClick = ({ emoji }) => {
+    const _value = message;
+    let _message = message.length > 0 ? `${_value} ${emoji}` : `${emoji}`;
+    setMessage(_message);
+    setShowEmojis(false);
   };
 
   const getChatRoomsList = () => {
@@ -87,8 +100,8 @@ const Html = ({
       if (res.success) {
         setChatMessages(res.data.data);
         setTimeout(() => {
-          chatScroll()
-        }, 100)
+          chatScroll();
+        }, 100);
       }
     });
   };
@@ -104,9 +117,8 @@ const Html = ({
   const uploadImage = () => {};
 
   const handleChatClick = (id) => {
-
     if (id) {
-      console.log("handleChatClick",id)
+      console.log("handleChatClick", id);
       setChatRoomId(id);
       getChatMessages(id);
       getActiveChat(id);
@@ -114,7 +126,7 @@ const Html = ({
   };
 
   useEffect(() => {
-    if (chatRoomId != ""){
+    if (chatRoomId != "") {
       let value = {
         room_id: chatRoomId,
         user_id: user?._id,
@@ -122,13 +134,13 @@ const Html = ({
       socketModel.emit("join-room", value);
       getChatMessages(chatRoomId);
     }
-    console.log("chatRoomId",chatRoomId)
+    console.log("chatRoomId", chatRoomId);
   }, [chatRoomId]);
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
       console.log("data", data);
-      getChatMessages(data.data.room_id)
+      getChatMessages(data.data.room_id);
     });
   }, []);
 
@@ -215,6 +227,11 @@ const Html = ({
                 uploadImage={uploadImage}
                 message={message}
                 chatMessages={chatMessages}
+                onEmojiIconClick={() => {
+                  setShowEmojis(!showEmojis);
+                }}
+                onEmojiClick={handleEmojiClick}
+                showEmojis={showEmojis}
               />
             ) : (
               <></>
