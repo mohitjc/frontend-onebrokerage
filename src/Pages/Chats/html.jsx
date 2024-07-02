@@ -149,7 +149,13 @@ const Html = ({
       console.log("data", data);
       if(currectChat.current==data.data.room_id){
         messages.current.push({...data.data})
-        setChatMessages([...messages.current]);
+
+        const uniqueMessages = Array.from(new Set(messages.current.map(message => message._id))).map(id => {
+          return messages.current.find(message => message._id === id);
+        });
+
+        console.log("uniqueMessages",uniqueMessages)
+        setChatMessages([...uniqueMessages]);
         setTimeout(() => {
           chatScroll();
         }, 100);
