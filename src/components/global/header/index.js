@@ -28,7 +28,6 @@ const Header = ({ setIsOpen, isOpen }) => {
     // localStorage.removeItem("loginTime")
     history("/login");
   };
-  console.log(user?.lastLogin, "lastLogin");
 
   // logout after 1 day
   function autoLogout() {
@@ -53,14 +52,21 @@ const Header = ({ setIsOpen, isOpen }) => {
     autoLogout();
   }, []);
 
+
+
   useEffect(() => {
-    socketModel.emit("notify-message", { user_id: user?._id });
+    let notify=sessionStorage.getItem('notify-message')
+    if(!notify){
+      console.log("notify",notify)
+      socketModel.emit("notify-message", { user_id: user?._id });
+    }
 
     socketModel.on("notify-message", (data) => {
       let count = data.data.unread_count;
       localStorage.setItem("unreadMessages", count);
       setUnreadMessagesCount(data.data.unread_count);
     });
+    sessionStorage.setItem('notify-message','true')
   }, []);
 
 
