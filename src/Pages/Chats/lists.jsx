@@ -10,7 +10,7 @@ function Lists({ chats, onChatRoomClick, user, activeChat }) {
       {chats?.length == 0 && (
         <div className="text-gray-600 text-center py-6">no chats.</div>
       )}
-      <div className="py-4 max-h-[650px] overflow-y-auto pr-4 mt-4">
+      <div className="py-4 max-h-[200px]  lg:max-h-[650px] overflow-y-auto pr-4 mt-4">
         {chats &&
           chats.map((chat) => {
             const sender = chat.user_details.find(
@@ -50,25 +50,25 @@ const Chat = ({ chat, onChatClick, sender, isActive }) => {
               <div className="flex items-center gap-2 cursor-pointer">
                 <div className="shrink-0">
                   <img
-                    className="h-12 w-12 rounded-full"
+                    className="h-6 w-6  xl:h-12 xl:w-12 rounded-full object-cover"
                     src={methodModel.noImg(sender?.image)}
                     alt=""
                   />
                 </div>
                 <div className="">
                   <div className="">
-                    <p className="text-[14px] font-semibold">
+                    <p className="xl:text-[15px] text-[12px] font-semibold">
                       {sender?.fullName}
                     </p>
 
-                    <p className="text-[12px]  line-clamp-1 ">
+                    <p className="xl:text-[12px] text-[10px] w-20 xl:w-32 line-clamp-1 ">
                       {chat.room_details.subject}
                     </p>
                   </div>
                 </div>
               </div>
               <div>
-                <p className="text-[10px]">
+                <p className="text-[10px] shrink-0">
                   <FromNow date={chat.room_details?.createdAt} />
                   {/* {moment(chat.room_details?.createdAt).format("LT")} */}
                 </p>

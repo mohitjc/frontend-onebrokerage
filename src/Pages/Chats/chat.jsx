@@ -22,24 +22,24 @@ function Chat({
   return (
     <>
       {chatMessages && (
-        <div className="col-span-8 2xl:col-span-9">
+        <div className="col-span-12 md:col-span-7 2xl:col-span-9">
           <div className="bg-gray-100">
             <div className=" p-4">
               <div className="flex items-center justify-between  ">
                 <div className="flex items-center gap-2 cursor-pointer">
                   <div className="shrink-0">
                     <img
-                      className="h-12 w-12 rounded-full"
+                      className="h-6 w-6  xl:h-12 xl:w-12 rounded-full object-cover"
                       src={methodModel.noImg(sender?.image)}
                       alt=""
                     />
                   </div>
                   <div className="">
-                    <p className="text-[16px] font-semibold capitalize">
+                    <p className="xl:text-[15px] text-[12px] font-semibold capitalize">
                       {sender?.fullName}
                     </p>
 
-                    <p className="text-[12px] text-gray-600 line-clamp-1 ">
+                    <p className="xl:text-[12px] text-[10px] w-20 xl:w-32 line-clamp-1 ">
                       {activeChat?.room_details?.subject}
                     </p>
                   </div>
@@ -47,7 +47,7 @@ function Chat({
               </div>
             </div>
           </div>
-          <div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-[100%] md:h-[450px] lg:h-[550px] xl:h-[650px] overflow-auto">
+          <div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-[auto] md:h-[350px] lg:h-[550px] xl:h-[650px] overflow-auto">
             <div
               id="chat-box"
               className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
@@ -142,7 +142,7 @@ function Chat({
                   placeholder="Write your message!"
                   className="w-full focus:outline-none focus:placeholder-gray-400 mr-2  text-gray-600 placeholder-gray-600 pl-12 bg-gray-100 rounded-md py-3"
                 />
-                <div className="items-center inset-y-0 hidden sm:flex gap-2">
+                <div className="items-center inset-y-0 flex gap-2">
                   <label
                     type="button"
                     onChange={(e) => {
