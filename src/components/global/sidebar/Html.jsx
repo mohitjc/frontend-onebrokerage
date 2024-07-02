@@ -33,8 +33,6 @@ import { FaBlog, FaQuestion } from "react-icons/fa";
 
 const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
   const [activeplan, setActiveplan] = useState();
-  // const user = useSelector((state) => state.user);
-  console.log(user?.customerRole, "userrrrrrrrrrrrr");
   const role = user?.customerRole?.name === "Group Leader";
   const getactivePlan = () => {
     let filter = {};

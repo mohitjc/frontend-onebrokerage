@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../components/global/layout";
 import "./style.scss";
 import { Link } from "react-router-dom";
@@ -18,6 +18,7 @@ import Lists from "./lists";
 import Chat from "./chat";
 import { IoSearchOutline } from "react-icons/io5";
 import socketModel from "../../models/socketModel";
+import loader from "../../methods/loader";
 const Html = ({
   sorting,
   filter,
@@ -45,6 +46,11 @@ const Html = ({
   const [showEmojis, setShowEmojis] = useState(false);
   const [search, setSearch] = useState("");
 
+  let ar = sessionStorage.getItem("activeRooms");
+  const activeRooms = useRef(ar ? JSON.parse(ar) : []);
+  const currectChat = useRef();
+  const messages = useRef([]);
+
   const isChatActive = activeChat?.room_id == chatRoomId;
 
   const chatScroll = () => {
@@ -62,13 +68,6 @@ const Html = ({
         content: message,
         user_id: user?._id,
       };
-      console.log("CHAT", chatRoomId);
-      chatMessages.push({ ...value, sender: value.user_id });
-      setChatMessages([...chatMessages]);
-      setTimeout(() => {
-        chatScroll();
-      }, 100);
-
       socketModel.emit("send-message", value);
       setMessage("");
     }
@@ -78,7 +77,7 @@ const Html = ({
     const _value = message;
     let _message = message.length > 0 ? `${_value} ${emoji}` : `${emoji}`;
     setMessage(_message);
-    setShowEmojis(false);
+    // setShowEmojis(false);
   };
 
   const getChatRoomsList = () => {
@@ -94,13 +93,17 @@ const Html = ({
     });
   };
   const getChatMessages = (id) => {
+    loader(true);
     ApiClient.get("chat/messages", { room_id: id }).then((res) => {
       if (res.success) {
-        setChatMessages(res.data.data);
+        let data = res.data.data;
+        setChatMessages(data);
+        messages.current = data;
         setTimeout(() => {
           chatScroll();
         }, 100);
       }
+      loader(false);
     });
   };
 
@@ -117,6 +120,7 @@ const Html = ({
   const handleChatClick = (id) => {
     if (id) {
       setChatRoomId(id);
+      currectChat.current = id;
     }
   };
 
@@ -126,7 +130,18 @@ const Html = ({
         room_id: chatRoomId,
         user_id: user?._id,
       };
-      socketModel.emit("join-room", value);
+
+      if (!activeRooms.current.includes(chatRoomId)) {
+        console.log("activeRooms", activeRooms);
+        activeRooms.current.push(chatRoomId);
+        sessionStorage.setItem(
+          "activeRooms",
+          JSON.stringify(activeRooms.current)
+        );
+        socketModel.emit("join-room", value);
+      }
+      socketModel.emit("unread-count", value);
+
       getChatMessages(chatRoomId);
       getActiveChat(chatRoomId);
     }
@@ -135,21 +150,29 @@ const Html = ({
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
       console.log("data", data);
-      setChatRoomId(data.room_id);
-      getChatMessages(data.data.room_id);
+      if (currectChat.current == data.data.room_id) {
+        messages.current.push({ ...data.data });
+
+        const uniqueMessages = Array.from(
+          new Set(messages.current.map((message) => message._id))
+        ).map((id) => {
+          return messages.current.find((message) => message._id === id);
+        });
+
+        console.log("uniqueMessages", uniqueMessages);
+        setChatMessages([...uniqueMessages]);
+        setTimeout(() => {
+          chatScroll();
+        }, 100);
+      }
+      getChatRoomsList();
     });
-    // socketModel.emit("notify-message", { user_id: user?._id });
-    // socketModel.on("notify-message", (value) => {
-    //   console.log("VALUE", value);
-    //   setUnreadMessagesCount(data.unread_count);
-    // });
   }, []);
 
   const handleClearSearch = () => {
     setSearch("");
     ApiClient.get("chat/room-members").then((res) => {
       if (res.success) {
-        console.log("res", res);
         setChatRooms(res.data.data);
       }
     });

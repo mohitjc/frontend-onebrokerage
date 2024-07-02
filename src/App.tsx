@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -136,6 +136,8 @@ function App() {
     { url: "/notifications/send-notification", element: <SendNotification /> },
     { url: "/chat", element: <Chats /> },
   ];
+
+  sessionStorage.clear()
 
   return (
     <>
