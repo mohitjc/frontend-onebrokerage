@@ -17,7 +17,7 @@ function Chat({
   showEmojis,
 }) {
   const sender = activeChat?.user_details?.find(
-    (_user) => _user._id !== user?._id
+    (_user) => _user?._id !== user._id
   );
   return (
     <>

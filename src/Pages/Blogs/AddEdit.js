@@ -18,7 +18,8 @@ let options = [];
 
 const AddEdit = () => {
   const { id } = useParams();
-  const [images, setImages] = useState({ image: "" });
+  const [images, setImages] = useState({ image: "", cover_image: "" });
+
   const [form, setform] = useState({
     id: "",
     title: "",
@@ -211,6 +212,25 @@ const AddEdit = () => {
                       result={(e) => imageResult(e, "image")}
                       value={images.image || form.images}
                       label="Choose Images"
+                    />
+                    {submitted && !images.image && (
+                      <div className="text-danger small mt-1">
+                        image is required.
+                      </div>
+                    )}
+                  </div>
+                  <div className="col-span-12 mb-3">
+                    <div>
+                      <label className="lablefontcls mb-2 inline-flex">
+                        Cover Image
+                      </label>
+                    </div>
+
+                    <ImageUpload
+                      model="users"
+                      result={(e) => imageResult(e, "cover_image")}
+                      value={images.image || form.images}
+                      label="Choose Image"
                     />
                     {submitted && !images.image && (
                       <div className="text-danger small mt-1">
