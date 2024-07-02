@@ -60,8 +60,10 @@ function Send() {
     setSubmitted(true);
 
     let invalid = methodModel.getFormError(formValidation, form);
+    if ((form?.product_url || form?.video_url || form?.audio_url) && !validUrl)
+      return;
 
-    if (invalid || form?.users.length == 0 || !validUrl) return;
+    if (invalid || form?.users.length == 0) return;
     let method = "post";
 
     let value = {
@@ -205,6 +207,11 @@ function Send() {
                           setForm({ ...form, product_url: e });
                         }}
                       />
+                      {submitted && !validUrl && (
+                        <div className="text-danger small mt-1 capitalize ">
+                          URL is not valid.
+                        </div>
+                      )}
                     </div>
                   )}
                   {form.type == "video" && (
@@ -217,6 +224,11 @@ function Send() {
                           setForm({ ...form, video_url: e });
                         }}
                       />
+                      {submitted && !validUrl && (
+                        <div className="text-danger small mt-1 capitalize ">
+                          URL is not valid.
+                        </div>
+                      )}
                     </div>
                   )}
                   {form.type == "audio" && (
@@ -229,6 +241,11 @@ function Send() {
                           setForm({ ...form, audio_url: e });
                         }}
                       />
+                      {submitted && !validUrl && (
+                        <div className="text-danger small mt-1 capitalize ">
+                          URL is not valid.
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>

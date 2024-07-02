@@ -62,7 +62,7 @@ const Html = ({
         content: message,
         user_id: user?._id,
       };
-
+      console.log("CHAT", chatRoomId);
       chatMessages.push({ ...value, sender: value.user_id });
       setChatMessages([...chatMessages]);
       setTimeout(() => {
