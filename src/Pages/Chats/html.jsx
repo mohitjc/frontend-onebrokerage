@@ -184,7 +184,7 @@ const Html = ({
               </div>
             )}
 
-            <div className="col-span-4 2xl:col-span-3">
+            <div className="col-span-12 md:col-span-5 2xl:col-span-3">
               <div className="bg-gray-100 p-6 h-full">
                 <form
                   className="flex items-center max-w-sm"
