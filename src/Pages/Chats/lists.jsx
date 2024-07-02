@@ -1,6 +1,8 @@
 import moment from "moment";
 import React from "react";
 import { LiaTrashAlt } from "react-icons/lia";
+import methodModel from "../../methods/methods";
+import FromNow from "../../components/Time/FromNow";
 
 function Lists({ chats, onChatRoomClick, user, activeChat }) {
   return (
@@ -12,7 +14,7 @@ function Lists({ chats, onChatRoomClick, user, activeChat }) {
         {chats &&
           chats.map((chat) => {
             const sender = chat.user_details.find(
-              (_user) => _user.id !== user._id
+              (_user) => _user._id != user._id
             );
             return (
               <Chat
@@ -49,7 +51,7 @@ const Chat = ({ chat, onChatClick, sender, isActive }) => {
                 <div className="shrink-0">
                   <img
                     className="h-12 w-12 rounded-full"
-                    src="/assets/img/person.jpg"
+                    src={methodModel.noImg(sender?.image)}
                     alt=""
                   />
                 </div>
@@ -67,7 +69,8 @@ const Chat = ({ chat, onChatClick, sender, isActive }) => {
               </div>
               <div>
                 <p className="text-[10px]">
-                  {moment(chat.room_details?.createdAt).format("LT")}
+                  <FromNow date={chat.room_details?.createdAt} />
+                  {/* {moment(chat.room_details?.createdAt).format("LT")} */}
                 </p>
               </div>
             </div>

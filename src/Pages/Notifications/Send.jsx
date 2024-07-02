@@ -16,6 +16,11 @@ function Send() {
 
   const [submitted, setSubmitted] = useState(false);
   const [emails, setEmails] = useState();
+  const usersTypeOptions = [
+    { id: "experienced", name: "Experienced" },
+    { id: "beginner", name: "Beginner" },
+    { id: "intermediate", name: "Intermediate" },
+  ];
   const options = [
     { id: "product", name: "Product" },
     { id: "blog", name: "Blog" },
@@ -28,6 +33,7 @@ function Send() {
     type: "",
     title: "",
     users: [],
+    user_type: [],
   });
   const formValidation = [
     {
@@ -143,6 +149,23 @@ function Send() {
                     {submitted && !form.type && (
                       <div className="text-danger small mt-1 capitalize ">
                         Please select notification type.
+                      </div>
+                    )}
+                  </div>
+                  <div className=" mb-3">
+                    <label className="mb-1">
+                      User Type<span class="star">*</span>
+                    </label>
+                    <MultiSelectDropdown
+                      options={usersTypeOptions}
+                      result={({ value }) => {
+                        setForm({ ...form, user_type: value, users: [] });
+                      }}
+                      intialValue={form.user_type}
+                    />
+                    {submitted && form.users.length == 0 && (
+                      <div className="text-danger small mt-1 capitalize ">
+                        Please Select users.
                       </div>
                     )}
                   </div>

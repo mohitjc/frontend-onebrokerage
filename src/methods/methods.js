@@ -234,6 +234,38 @@ function containsSpaceonly(text) {
   return /\s/.test(text);
 }
 
+const msToTime = (milliseconds, ago = true) => {
+  //get hours from milliseconds
+  var hours = milliseconds / (1000 * 60 * 60);
+  var absoluteHours = Math.floor(hours);
+  var h = absoluteHours;
+  //get remainder from hours and convert to minutes
+  var minutes = (hours - absoluteHours) * 60;
+  var absoluteminutes = Math.floor(minutes);
+  var m = absoluteminutes;
+
+  //get remainder from minutes and convert to seconds
+  var seconds = (minutes - absoluteminutes) * 60;
+  var absoluteseconds = Math.floor(seconds);
+  var s = absoluteseconds;
+
+  var time = "";
+  if (h > 0) {
+    time += `${h}h`;
+  }
+  if (m > 0) {
+    time += ` ${m}m`;
+  }
+
+  if (ago) {
+    if ((h == 0) & (m == 0)) {
+      time += `a few seconds`;
+    }
+    time += " ago";
+  }
+  return time;
+};
+
 const methodModel = {
   userImg,
   route,
@@ -250,5 +282,6 @@ const methodModel = {
   isTranslatePage,
   generatekeysArr,
   containsSpaceonly,
+  msToTime,
 };
 export default methodModel;
