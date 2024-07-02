@@ -30,7 +30,7 @@ function Chat({
                   <div className="shrink-0">
                     <img
                       className="h-12 w-12 rounded-full"
-                      src="/assets/img/person.jpg"
+                      src={methodModel.noImg(sender?.image)}
                       alt=""
                     />
                   </div>

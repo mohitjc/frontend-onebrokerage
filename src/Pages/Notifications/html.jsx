@@ -158,7 +158,7 @@ const Html = ({
               to={"/notifications/send-notification"}
               className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
             >
-              Send Notification
+              Create Notification
             </Link>
             {/* <SelectDropdown
               id="statusDropdown"
