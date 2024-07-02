@@ -17,14 +17,16 @@ function Send() {
   const [submitted, setSubmitted] = useState(false);
   const [emails, setEmails] = useState();
   const usersTypeOptions = [
-    { id: "experienced", name: "Experienced" },
-    { id: "beginner", name: "Beginner" },
-    { id: "intermediate", name: "Intermediate" },
+    { id: "Experienced", name: "Experienced" },
+    { id: "Beginner", name: "Beginner" },
+    { id: "Intermediate", name: "Intermediate" },
   ];
   const options = [
     { id: "product", name: "Product" },
     { id: "blog", name: "Blog" },
     { id: "normal", name: "Normal" },
+    { id: "video", name: "Video" },
+    { id: "audio", name: "Audio" },
   ];
 
   const [users, setUsers] = useState([]);
@@ -34,18 +36,23 @@ function Send() {
     title: "",
     users: [],
     user_type: [],
+    product_url: "",
+    video_url: "",
+    audio_url: "",
   });
   const formValidation = [
     {
       key: "title",
       required: true,
     },
-    {
-      key: "type",
-      required: true,
-    },
   ];
   const history = useNavigate();
+
+  const validUrl = methodModel.urlValidation(
+    form?.product_url || form?.video_url || form?.audio_url
+  );
+
+  console.log("validUrl", validUrl);
 
   const handleSubmit = (e) => {
     let url = "notification/add";
@@ -54,7 +61,7 @@ function Send() {
 
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || form?.users.length == 0) return;
+    if (invalid || form?.users.length == 0 || !validUrl) return;
     let method = "post";
 
     let value = {
@@ -84,7 +91,9 @@ function Send() {
   };
 
   const getUsersList = () => {
-    ApiClient.get("user/frontend/lisitng").then((res) => {
+    ApiClient.get("user/frontend/lisitng", {
+      experience_level: form.user_type.toString(),
+    }).then((res) => {
       if (res.success) {
         let user = res?.data.map(
           ({ id, fullName, email, experience_level }) => {
@@ -108,7 +117,7 @@ function Send() {
   }, []);
   useEffect(() => {
     getUsersList();
-  }, []);
+  }, [form.user_type]);
   return (
     <Layout>
       <div className="bg-white shadow-box rounded-lg w-full p-4 mt-6">
@@ -194,6 +203,30 @@ function Send() {
                         value={form.product_url}
                         onChange={(e) => {
                           setForm({ ...form, product_url: e });
+                        }}
+                      />
+                    </div>
+                  )}
+                  {form.type == "video" && (
+                    <div className=" mb-3">
+                      <FormControl
+                        name="url"
+                        label="Video URL"
+                        value={form.video_url}
+                        onChange={(e) => {
+                          setForm({ ...form, video_url: e });
+                        }}
+                      />
+                    </div>
+                  )}
+                  {form.type == "audio" && (
+                    <div className=" mb-3">
+                      <FormControl
+                        name="url"
+                        label="Audio URL"
+                        value={form.audio_url}
+                        onChange={(e) => {
+                          setForm({ ...form, audio_url: e });
                         }}
                       />
                     </div>
