@@ -18,9 +18,9 @@ function Send() {
   const [emails, setEmails] = useState();
   const [media, setMediaList] = useState([]);
   const usersTypeOptions = [
-    { id: "Experienced", name: "Experienced" },
     { id: "Beginner", name: "Beginner" },
     { id: "Intermediate", name: "Intermediate" },
+    { id: "Experienced", name: "Experienced" },
   ];
   const options = [
     { id: "product", name: "Product" },
