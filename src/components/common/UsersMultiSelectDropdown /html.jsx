@@ -19,7 +19,6 @@ const Html = ({ options, selectedValues, handleChange, displayValue, id }) => {
   let groupedOptions = Object.keys(experienceLabels).map((level) => ({
     label: experienceLabels[level],
     options: groupedMembers[level].map((member) => {
-      console.log("member", member);
       return {
         value: member.id,
         label: member.name,

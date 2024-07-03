@@ -51,8 +51,6 @@ const Html = ({
   const currectChat = useRef();
   const messages = useRef([]);
 
-  const isChatActive = activeChat?.room_id == chatRoomId;
-
   const chatScroll = () => {
     // Scroll to the bottom after sending a message
     var chatBox = document.getElementById("chat-box");

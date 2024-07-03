@@ -16,6 +16,7 @@ function Send() {
 
   const [submitted, setSubmitted] = useState(false);
   const [emails, setEmails] = useState();
+  const [media, setMediaList] = useState([]);
   const usersTypeOptions = [
     { id: "Experienced", name: "Experienced" },
     { id: "Beginner", name: "Beginner" },
@@ -39,6 +40,8 @@ function Send() {
     product_url: "",
     video_url: "",
     audio_url: "",
+    video: "",
+    audio: "",
   });
   const formValidation = [
     {
@@ -92,6 +95,24 @@ function Send() {
     });
   };
 
+  const getMediaList = () => {
+    let url = "";
+    if (form.type == "video") {
+      url = "video/list";
+    }
+    if (form.type == "audio") {
+      url = "audio/list";
+    }
+    ApiClient.get(url).then((res) => {
+      if (res.success) {
+        const data = res.data.map(({ _id, title }) => {
+          return { id: _id, name: title };
+        });
+        setMediaList(data);
+      }
+    });
+  };
+
   const getUsersList = () => {
     ApiClient.get("user/frontend/lisitng", {
       experience_level: form.user_type.toString(),
@@ -120,6 +141,10 @@ function Send() {
   useEffect(() => {
     getUsersList();
   }, [form.user_type]);
+
+  useEffect(() => {
+    if (form.type == "video" || form.type == "audio") getMediaList();
+  }, [form.type]);
   return (
     <Layout>
       <div className="bg-white shadow-box rounded-lg w-full p-4 mt-6">
@@ -215,38 +240,70 @@ function Send() {
                     </div>
                   )}
                   {form.type == "video" && (
-                    <div className=" mb-3">
-                      <FormControl
-                        name="url"
-                        label="Video URL"
-                        value={form.video_url}
-                        onChange={(e) => {
-                          setForm({ ...form, video_url: e });
-                        }}
-                      />
-                      {submitted && !validUrl && (
-                        <div className="text-danger small mt-1 capitalize ">
-                          URL is not valid.
-                        </div>
-                      )}
-                    </div>
+                    <>
+                      <div className=" mb-3">
+                        <FormControl
+                          name="url"
+                          label="Video URL"
+                          value={form.video_url}
+                          onChange={(e) => {
+                            setForm({ ...form, video_url: e });
+                          }}
+                        />
+                        {submitted && !validUrl && (
+                          <div className="text-danger small mt-1 capitalize ">
+                            URL is not valid.
+                          </div>
+                        )}
+                      </div>
+                      <div className=" mb-3">
+                        <FormControl
+                          type="select"
+                          name="video"
+                          label="Select Video"
+                          value={form.video}
+                          onChange={(e) => {
+                            setForm({ ...form, video: e });
+                          }}
+                          options={media}
+                          theme="search"
+                          required
+                        />
+                      </div>
+                    </>
                   )}
                   {form.type == "audio" && (
-                    <div className=" mb-3">
-                      <FormControl
-                        name="url"
-                        label="Audio URL"
-                        value={form.audio_url}
-                        onChange={(e) => {
-                          setForm({ ...form, audio_url: e });
-                        }}
-                      />
-                      {submitted && !validUrl && (
-                        <div className="text-danger small mt-1 capitalize ">
-                          URL is not valid.
-                        </div>
-                      )}
-                    </div>
+                    <>
+                      <div className=" mb-3">
+                        <FormControl
+                          name="url"
+                          label="Audio URL"
+                          value={form.audio_url}
+                          onChange={(e) => {
+                            setForm({ ...form, audio_url: e });
+                          }}
+                        />
+                        {submitted && !validUrl && (
+                          <div className="text-danger small mt-1 capitalize ">
+                            URL is not valid.
+                          </div>
+                        )}
+                      </div>
+                      <div className=" mb-3">
+                        <FormControl
+                          type="select"
+                          name="audio"
+                          label="Select Audio"
+                          value={form.audio}
+                          onChange={(e) => {
+                            setForm({ ...form, audio: e });
+                          }}
+                          options={media}
+                          theme="search"
+                          required
+                        />
+                      </div>
+                    </>
                   )}
                 </div>
                 {/*<div className="col-span-6 md:col-span-6 mb-3">

@@ -13,7 +13,7 @@ const Header = ({ setIsOpen, isOpen }) => {
     localStorage.setItem("sidebar", !isOpen);
   };
   const [isOpen1, setIsOpen1] = useState(false);
-  let messagecount = localStorage.getItem("unreadMessages")||0;
+  let messagecount = localStorage.getItem("unreadMessages") || 0;
   const [messageCount, setUnreadMessagesCount] = useState(messagecount);
   const toggle1 = () => setIsOpen1(!isOpen1);
   const history = useNavigate();
@@ -52,12 +52,10 @@ const Header = ({ setIsOpen, isOpen }) => {
     autoLogout();
   }, []);
 
-
-
   useEffect(() => {
-    let notify=sessionStorage.getItem('notify-message')
-    if(!notify){
-      console.log("notify",notify)
+    let notify = sessionStorage.getItem("notify-message");
+    if (!notify) {
+      console.log("notify", notify);
       socketModel.emit("notify-message", { user_id: user?._id });
     }
 
@@ -66,10 +64,8 @@ const Header = ({ setIsOpen, isOpen }) => {
       localStorage.setItem("unreadMessages", count);
       setUnreadMessagesCount(data.data.unread_count);
     });
-    sessionStorage.setItem('notify-message','true')
+    sessionStorage.setItem("notify-message", "true");
   }, []);
-
-
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
