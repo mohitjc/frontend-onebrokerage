@@ -37,11 +37,11 @@ function Send() {
     title: "",
     users: [],
     user_type: [],
-    product_url: "",
-    video_url: "",
-    audio_url: "",
-    video: "",
-    audio: "",
+    productUrl: "",
+    videoUrl: "",
+    audioUrl: "",
+    audioId: "",
+    videoId: "",
   });
   const formValidation = [
     {
@@ -52,10 +52,8 @@ function Send() {
   const history = useNavigate();
 
   const validUrl = methodModel.urlValidation(
-    form?.product_url || form?.video_url || form?.audio_url
+    form?.productUrl || form?.videoUrl || form?.audioUrl
   );
-
-  console.log("validUrl", validUrl);
 
   const handleSubmit = (e) => {
     let url = "notification/add";
@@ -63,7 +61,7 @@ function Send() {
     setSubmitted(true);
 
     let invalid = methodModel.getFormError(formValidation, form);
-    if ((form?.product_url || form?.video_url || form?.audio_url) && !validUrl)
+    if ((form?.productUrl || form?.videoUrl || form?.audioUrl) && !validUrl)
       return;
 
     if (invalid || form?.users.length == 0) return;
@@ -227,9 +225,14 @@ function Send() {
                       <FormControl
                         name="url"
                         label="Product URL"
-                        value={form.product_url}
+                        value={form.productUrl}
                         onChange={(e) => {
-                          setForm({ ...form, product_url: e });
+                          setForm({
+                            ...form,
+                            productUrl: e,
+                            videoUrl: "",
+                            audioUrl: "",
+                          });
                         }}
                       />
                       {submitted && !validUrl && (
@@ -245,9 +248,14 @@ function Send() {
                         <FormControl
                           name="url"
                           label="Video URL"
-                          value={form.video_url}
+                          value={form.videoUrl}
                           onChange={(e) => {
-                            setForm({ ...form, video_url: e });
+                            setForm({
+                              ...form,
+                              videoUrl: e,
+                              productUrl: "",
+                              audioUrl: "",
+                            });
                           }}
                         />
                         {submitted && !validUrl && (
@@ -261,9 +269,13 @@ function Send() {
                           type="select"
                           name="video"
                           label="Select Video"
-                          value={form.video}
+                          value={form.videoId}
                           onChange={(e) => {
-                            setForm({ ...form, video: e });
+                            setForm({
+                              ...form,
+                              videoId: e,
+                              audioId: "",
+                            });
                           }}
                           options={media}
                           theme="search"
@@ -278,9 +290,14 @@ function Send() {
                         <FormControl
                           name="url"
                           label="Audio URL"
-                          value={form.audio_url}
+                          value={form.audioUrl}
                           onChange={(e) => {
-                            setForm({ ...form, audio_url: e });
+                            setForm({
+                              ...form,
+                              audioUrl: e,
+                              productUrl: "",
+                              videoUrl: "",
+                            });
                           }}
                         />
                         {submitted && !validUrl && (
@@ -294,9 +311,9 @@ function Send() {
                           type="select"
                           name="audio"
                           label="Select Audio"
-                          value={form.audio}
+                          value={form.audioId}
                           onChange={(e) => {
-                            setForm({ ...form, audio: e });
+                            setForm({ ...form, audioId: e, videoId: "" });
                           }}
                           options={media}
                           theme="search"
