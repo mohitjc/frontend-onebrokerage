@@ -134,7 +134,7 @@ const AddEdit = () => {
     <>
       <Layout>
         <form onSubmit={handleSubmit}>
-          <div className="pprofile1">
+          <div className="shadow-box w-full bg-white rounded-lg mb-4 p-6">
             <div className="flex items-center mb-8">
               <Tooltip placement="top" title="Back">
                 <Link
@@ -157,42 +157,54 @@ const AddEdit = () => {
             <div className="grid grid-cols-12 gap-4 lg:gap-8">
 
 
-            <div className="col-span-12 mb-3">
-                    <div>
-                      <label className="lablefontcls mb-2 inline-flex">
-                        Cover Image
-                      </label>
-                    </div>
+              <div className="col-span-12 md:col-span-4 mb-3">
+                <div>
+                  <label className="lablefontcls mb-2 inline-flex">
+                    Cover Image
+                  </label>
+                </div>
 
-                    <ImageUpload
-                      model="users"
-                      result={(e) => imageResult(e, "cover_image")}
-                      value={images.image || form.images}
-                      label="Choose Image"
-                    />
-                    {submitted && !images.image && (
-                      <div className="text-danger small mt-1">
-                        image is required.
-                      </div>
-                    )}
+                <ImageUpload
+                  model="users"
+                  result={(e) => imageResult(e, "cover_image")}
+                  value={images.image || form.images}
+                  label="Choose Image"
+                />
+                {submitted && !images.image && (
+                  <div className="text-danger small mt-1">
+                    image is required.
                   </div>
+                )}
+              </div>
 
 
+              <div className="col-span-12 md:col-span-8">
+                <FormControl
+                  type="text"
+                  name="title"
+                  label="Title"
+                  value={form.title}
+                  onChange={(e) => setform({ ...form, title: e })}
+                  required
+                />
 
-              <div className="col-span-12 md:col-span-6 lg:col-span-8">
-                <div className="grid grid-cols-12 gap-4">
-                  <div className="col-span-12 md:col-span-12 mb-3">
-                    <FormControl
-                      type="text"
-                      name="title"
-                      label="Title"
-                      value={form.title}
-                      onChange={(e) => setform({ ...form, title: e })}
-                      required
-                    />
+
+<FormControl
+                  type="editor"
+                  name="description"
+                  label="Description"
+                  value={form.description}
+                  onChange={(e) => setform({ ...form, description: e })}
+                  required
+                />
+                {submitted && !form.description && (
+                  <div className="text-danger small mt-1">
+                    description is required.
                   </div>
+                )}
+              </div>
 
-                  {/* <div className="col-span-12 md:col-span-6 mb-3">
+              {/* <div className="col-span-12 md:col-span-6 mb-3">
                     <FormControl
                       type="select"
                       name="category"
@@ -205,8 +217,87 @@ const AddEdit = () => {
                       theme="search"
                     />
                   </div> */}
-                  <div className="col-span-12 md:col-span-12 mb-3">
-                    <FormControl
+            
+
+
+
+            </div>
+
+
+
+          </div>
+
+          <div className="shadow-box w-full bg-white rounded-lg mt-4 p-6">
+            <div className="flex items-center justify-between gap-2 mb-4 border-b pb-3 border-gray-200">
+                  <p className="text-xl font-semibold">Add Audio</p>
+
+                   <div className="flex items-center gap-2">
+        <span className="text-sm">Show/hide</span>
+        <label className="inline-flex items-center cursor-pointer ">
+          <input
+            type="checkbox"
+            value={form?.isHide}
+            checked={form?.isHide}
+            className="sr-only peer"
+            onChange={(e) =>
+              setform({ ...form, isHide: e.target.checked })
+            }
+          />
+          <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#EB6A59]"></div>
+        </label>
+      </div>
+
+            </div>
+
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12 md:col-span-6">
+                <FormControl
+                  type="text"
+                  name="title"
+                  label="Title"
+                  value={form.title}
+                  onChange={(e) => setform({ ...form, title: e })}
+                  required
+                />
+              </div>
+              <div className="col-span-12 md:col-span-6">
+                <FormControl
+                  type="text"
+                  name="title"
+                  label="Add Audio"
+                  value={form.title}
+                  onChange={(e) => setform({ ...form, title: e })}
+                  required
+                />
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div className="shadow-box w-full bg-white rounded-lg mt-4 p-6">
+
+
+            <div className="">
+
+              <div className="grid grid-cols-12 gap-4 mb-4">
+
+                <div className="col-span-12 md:col-span-6">
+                  <div className="mb-3">
+                  <FormControl
+                  type="text"
+                  name="title"
+                  label="Title"
+                  value={form.title}
+                  onChange={(e) => setform({ ...form, title: e })}
+                  required
+                />
+                  </div>
+
+
+                  <div className="description_blogs">
+                    <FormControl  
                       type="editor"
                       name="description"
                       label="Description"
@@ -221,42 +312,9 @@ const AddEdit = () => {
                     )}
                   </div>
                 </div>
-              </div>
 
-              
-            </div>
+                <div className="col-span-12 md:col-span-6">
 
-
-            <div className="border border-gray-300 rounded-lg p-4">
-
-              <div className="pb-4">
-                    <div className="flex items-center justify-end">
-                        <button className="text-white flex items-center gap-2 bg-[#EB6A59] bg-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><FiPlus/> Add Column</button>
-                    </div>
-              </div>
-
-            <div className="grid grid-cols-12 gap-4 mb-4">
-
-              <div className="col-span-12 md:col-span-6">
-              <div className="description_blogs">
-                    <FormControl
-                      type="editor"
-                      name="description"
-                      label="Description"
-                      value={form.description}
-                      onChange={(e) => setform({ ...form, description: e })}
-                      required
-                    />
-                    {submitted && !form.description && (
-                      <div className="text-danger small mt-1">
-                        description is required.
-                      </div>
-                    )}
-                  </div>
-              </div>
-
-              <div className="col-span-12 md:col-span-6">
-               
                   <div className=" mb-3">
                     <div>
                       <label className="lablefontcls mb-2 inline-flex">
@@ -276,38 +334,36 @@ const AddEdit = () => {
                       </div>
                     )}
                   </div>
-                
-                  <div className=" mb-3">
-                <p className="text-sm">Reverse column</p>
-                <label className="inline-flex items-center cursor-pointer mt-3">
-                  <input
-                    type="checkbox"
-                    value={form?.isHide}
-                    checked={form?.isHide}
-                    className="sr-only peer"
-                    onChange={(e) =>
-                      setform({ ...form, isHide: e.target.checked })
-                    }
-                  />
-                  <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#EB6A59]"></div>
-                </label>
-              </div>
-               
-              </div>
-           
-            </div>
 
-            
+
+                </div>
+
+              </div>
+
+
 
 
             </div>
-
-
 
 
           
+          </div>
 
-            <div className="text-right">
+
+          <div className="shadow-box w-full bg-white rounded-lg mt-4 p-6">
+            <div className="description_lats">
+            <FormControl
+                  type="editor"
+                  name="description"
+                  label="Full Description"
+                  value="cszfv"
+                 
+                  required
+                />
+            </div>
+
+
+          <div className="text-right mt-4">
               <button
                 type="submit"
                 className="text-white bg-[#EB6A59] bg-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
@@ -316,6 +372,11 @@ const AddEdit = () => {
               </button>
             </div>
           </div>
+
+
+
+
+
         </form>
       </Layout>
     </>
