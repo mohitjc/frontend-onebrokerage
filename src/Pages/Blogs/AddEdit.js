@@ -13,6 +13,7 @@ import datepipeModel from "../../models/datepipemodel";
 import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
+import { FiPlus } from "react-icons/fi";
 
 let options = [];
 
@@ -154,6 +155,30 @@ const AddEdit = () => {
             </div>
 
             <div className="grid grid-cols-12 gap-4 lg:gap-8">
+
+
+            <div className="col-span-12 mb-3">
+                    <div>
+                      <label className="lablefontcls mb-2 inline-flex">
+                        Cover Image
+                      </label>
+                    </div>
+
+                    <ImageUpload
+                      model="users"
+                      result={(e) => imageResult(e, "cover_image")}
+                      value={images.image || form.images}
+                      label="Choose Image"
+                    />
+                    {submitted && !images.image && (
+                      <div className="text-danger small mt-1">
+                        image is required.
+                      </div>
+                    )}
+                  </div>
+
+
+
               <div className="col-span-12 md:col-span-6 lg:col-span-8">
                 <div className="grid grid-cols-12 gap-4">
                   <div className="col-span-12 md:col-span-12 mb-3">
@@ -198,9 +223,41 @@ const AddEdit = () => {
                 </div>
               </div>
 
-              <div className="col-span-12 md:col-span-6 lg:col-span-4">
-                <div className="grid grid-cols-1">
-                  <div className="col-span-12 mb-3">
+              
+            </div>
+
+
+            <div className="border border-gray-300 rounded-lg p-4">
+
+              <div className="pb-4">
+                    <div className="flex items-center justify-end">
+                        <button className="text-white flex items-center gap-2 bg-[#EB6A59] bg-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><FiPlus/> Add Column</button>
+                    </div>
+              </div>
+
+            <div className="grid grid-cols-12 gap-4 mb-4">
+
+              <div className="col-span-12 md:col-span-6">
+              <div className="description_blogs">
+                    <FormControl
+                      type="editor"
+                      name="description"
+                      label="Description"
+                      value={form.description}
+                      onChange={(e) => setform({ ...form, description: e })}
+                      required
+                    />
+                    {submitted && !form.description && (
+                      <div className="text-danger small mt-1">
+                        description is required.
+                      </div>
+                    )}
+                  </div>
+              </div>
+
+              <div className="col-span-12 md:col-span-6">
+               
+                  <div className=" mb-3">
                     <div>
                       <label className="lablefontcls mb-2 inline-flex">
                         Image
@@ -219,28 +276,36 @@ const AddEdit = () => {
                       </div>
                     )}
                   </div>
-                  <div className="col-span-12 mb-3">
-                    <div>
-                      <label className="lablefontcls mb-2 inline-flex">
-                        Cover Image
-                      </label>
-                    </div>
-
-                    <ImageUpload
-                      model="users"
-                      result={(e) => imageResult(e, "cover_image")}
-                      value={images.image || form.images}
-                      label="Choose Image"
-                    />
-                    {submitted && !images.image && (
-                      <div className="text-danger small mt-1">
-                        image is required.
-                      </div>
-                    )}
-                  </div>
-                </div>
+                
+                  <div className=" mb-3">
+                <p className="text-sm">Reverse column</p>
+                <label className="inline-flex items-center cursor-pointer mt-3">
+                  <input
+                    type="checkbox"
+                    value={form?.isHide}
+                    checked={form?.isHide}
+                    className="sr-only peer"
+                    onChange={(e) =>
+                      setform({ ...form, isHide: e.target.checked })
+                    }
+                  />
+                  <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#EB6A59]"></div>
+                </label>
               </div>
+               
+              </div>
+           
             </div>
+
+            
+
+
+            </div>
+
+
+
+
+          
 
             <div className="text-right">
               <button
