@@ -30,8 +30,8 @@ const AddEdit = () => {
     title: "",
     description1: "",
     image: "",
-    isHide: false,
-    audio: "",
+    isHide: true,
+    audio: null,
     title1: "",
     description2: "",
     description3: "",
@@ -292,7 +292,7 @@ const AddEdit = () => {
                   theme="search"
                   required
                 />
-                {submitted && !form.isHide && (
+                {submitted && form.isHide == false && (
                   <div className="text-danger small mt-1">
                     audio is required.
                   </div>
