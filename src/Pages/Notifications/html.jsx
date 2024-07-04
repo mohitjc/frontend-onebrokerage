@@ -180,6 +180,16 @@ const Html = ({
           </form>
 
           <div className="flex gap-2 ml-auto">
+            <SelectDropdown
+              id="statusDropdown"
+              displayValue="name"
+              placeholder="All Users"
+              intialValue={filters.experience_type}
+              result={(e) => {
+                filter({ experience_type: e.value });
+              }}
+              options={shared.types}
+            />
             <Link
               to={"/notifications/send-notification"}
               className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"

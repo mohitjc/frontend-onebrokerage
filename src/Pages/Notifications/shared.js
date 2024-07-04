@@ -1,3 +1,9 @@
+const types = [
+  { id: "Beginner", name: "Beginner" },
+  { id: "Intermediate", name: "Intermediate" },
+  { id: "Experienced", name: "Experienced" },
+];
+
 const shared = {
   check: "Notifications",
   title: "Notifications",
@@ -10,6 +16,7 @@ const shared = {
   statusApi: "notification/status/change",
   deleteApi: "notification/remove",
   sendNotification: "notifications/send",
+  types: [...types],
 };
 
 export default shared;
