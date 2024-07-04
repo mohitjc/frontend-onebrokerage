@@ -87,7 +87,7 @@ const AddEdit = () => {
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || !images.image) return;
+    if (invalid || !images.image || !images.cover_image) return;
     let method = "post";
     let url = shared.addApi;
     let value = {
@@ -156,8 +156,6 @@ const AddEdit = () => {
     getMediaList();
   }, []);
 
-  console.log("form", form);
-
   return (
     <>
       <Layout>
@@ -196,7 +194,7 @@ const AddEdit = () => {
                   value={images.cover_image || form.images}
                   label="Choose Image"
                 />
-                {submitted && !images.image && (
+                {submitted && !images.cover_image && (
                   <div className="text-danger small mt-1">
                     image is required.
                   </div>
@@ -212,6 +210,11 @@ const AddEdit = () => {
                   onChange={(e) => setform({ ...form, title: e })}
                   required
                 />
+                {submitted && !form.title && (
+                  <div className="text-danger small mt-1">
+                    title is required.
+                  </div>
+                )}
 
                 <FormControl
                   type="editor"
@@ -289,6 +292,11 @@ const AddEdit = () => {
                   theme="search"
                   required
                 />
+                {submitted && !form.isHide && (
+                  <div className="text-danger small mt-1">
+                    audio is required.
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -306,6 +314,11 @@ const AddEdit = () => {
                       onChange={(e) => setform({ ...form, title1: e })}
                       required
                     />
+                    {submitted && !form.title1 && (
+                      <div className="text-danger small mt-1">
+                        title is required.
+                      </div>
+                    )}
                   </div>
 
                   <div className="description_blogs">
@@ -317,7 +330,7 @@ const AddEdit = () => {
                       onChange={(e) => setform({ ...form, description2: e })}
                       required
                     />
-                    {submitted && !form.description && (
+                    {submitted && !form.description2 && (
                       <div className="text-danger small mt-1">
                         description is required.
                       </div>
@@ -359,7 +372,12 @@ const AddEdit = () => {
                 value={form.description3}
                 onChange={(e) => setform({ ...form, description3: e })}
                 required
-              />
+              />{" "}
+              {submitted && !form.description3 && (
+                <div className="text-danger small mt-1">
+                  description is required.
+                </div>
+              )}
             </div>
 
             <div className="text-right mt-4">
