@@ -64,6 +64,7 @@ import SendNewsletter from "./Pages/Emails/Send";
 import Notifications from "./Pages/Notifications";
 import SendNotification from "./Pages/Notifications/Send";
 import Chats from "./Pages/Chats";
+import ViewNotification from "./Pages/Notifications/View";
 
 const { persistor, store } = configureStoreProd();
 
@@ -133,11 +134,12 @@ function App() {
     { url: "/audio/edit/:id", element: <AddAudio /> },
     { url: "/audio/detail/:id", element: <ViewAudio /> },
     { url: "/notifications", element: <Notifications /> },
+    { url: "/notifications/detail/:id", element: <ViewNotification /> },
     { url: "/notifications/send-notification", element: <SendNotification /> },
     { url: "/chat", element: <Chats /> },
   ];
 
-  sessionStorage.clear()
+  sessionStorage.clear();
 
   return (
     <>

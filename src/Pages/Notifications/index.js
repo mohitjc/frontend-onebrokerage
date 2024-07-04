@@ -54,7 +54,7 @@ const Subscribers = () => {
       if (res.success) {
         setData(
           res.data.map((itm) => {
-            itm.id = itm._id;
+            itm.id = itm.id;
             return itm;
           })
         );
@@ -87,7 +87,7 @@ const Subscribers = () => {
   const deleteItem = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: `Do you want to delete this email?`,
+      text: `Do you want to delete this notification?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -96,7 +96,10 @@ const Subscribers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         loader(true);
-        ApiClient.delete(shared.deleteApi, { id: id }).then((res) => {
+        ApiClient.delete(shared.deleteApi, {
+          notification_id: id,
+          id: user._id,
+        }).then((res) => {
           if (res.success) {
             // ToastsStore.success(res.message)
             clear();

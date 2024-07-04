@@ -8,7 +8,7 @@ const shared = {
   detailApi: "notification/detail",
   listApi: "notification/list",
   statusApi: "notification/status/change",
-  deleteApi: "notification/delete",
+  deleteApi: "notification/remove",
   sendNotification: "notifications/send",
 };
 

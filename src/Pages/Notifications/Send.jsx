@@ -251,7 +251,7 @@ function Send() {
                           });
                         }}
                       />
-                      {submitted && !validUrl && (
+                      {submitted && form.productUrl && !validUrl && (
                         <div className="text-danger small mt-1 capitalize ">
                           URL is not valid.
                         </div>
