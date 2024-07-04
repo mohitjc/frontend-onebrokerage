@@ -182,22 +182,25 @@ const AddEdit = () => {
                   required
                 />
               </div>
-              {form.type && form.type !== "video" && form.type !== "audio" && (
-                <div className=" mb-3">
-                  <FormControl
-                    type="select"
-                    name="type"
-                    label="Parent Category"
-                    value={form.parent_category}
-                    onChange={(e) => setform({ ...form, parent_category: e })}
-                    options={[
-                      { name: "Set as Parent", id: "" },
-                      ...categoryOptions,
-                    ]}
-                    theme="search"
-                  />
-                </div>
-              )}
+              {form.type &&
+                form.type !== "video" &&
+                form.type !== "audio" &&
+                form.type !== "blog" && (
+                  <div className=" mb-3">
+                    <FormControl
+                      type="select"
+                      name="type"
+                      label="Parent Category"
+                      value={form.parent_category}
+                      onChange={(e) => setform({ ...form, parent_category: e })}
+                      options={[
+                        { name: "Set as Parent", id: "" },
+                        ...categoryOptions,
+                      ]}
+                      theme="search"
+                    />
+                  </div>
+                )}
               <div className="mb-3">
                 <label className="lablefontcls">Image</label>
                 <br></br>

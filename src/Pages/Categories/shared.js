@@ -3,6 +3,7 @@ const types = [
   { id: "faq", name: "FAQ" },
   { id: "video", name: "Video" },
   { id: "audio", name: "Audio" },
+  { id: "blog", name: "Blog" },
 ];
 
 const shared = {

@@ -35,6 +35,7 @@ const AddEdit = () => {
     title1: "",
     description2: "",
     description3: "",
+    category: "",
   });
 
   const history = useNavigate();
@@ -69,7 +70,7 @@ const AddEdit = () => {
   const getCategories = (p = {}) => {
     let f = {
       ...p,
-      type: "product",
+      type: "blog",
       category_type: "master",
     };
     ApiClient.get("category/listing", f).then((res) => {
@@ -202,6 +203,19 @@ const AddEdit = () => {
               </div>
 
               <div className="col-span-12 md:col-span-8">
+                <div className="col-span-12 md:col-span-6 mb-3">
+                  <FormControl
+                    type="select"
+                    name="category"
+                    label="Category"
+                    value={form.category}
+                    onChange={(e) => {
+                      setform({ ...form, category: e });
+                    }}
+                    options={options}
+                    theme="search"
+                  />
+                </div>
                 <FormControl
                   type="text"
                   name="title"
@@ -230,20 +244,6 @@ const AddEdit = () => {
                   </div>
                 )}
               </div>
-
-              {/* <div className="col-span-12 md:col-span-6 mb-3">
-                    <FormControl
-                      type="select"
-                      name="category"
-                      label="Category"
-                      value={form.category}
-                      onChange={(e) => {
-                        setform({ ...form, category: e });
-                      }}
-                      options={options}
-                      theme="search"
-                    />
-                  </div> */}
             </div>
           </div>
 
