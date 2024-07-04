@@ -19,13 +19,22 @@ let options = [];
 
 const AddEdit = () => {
   const { id } = useParams();
-  const [images, setImages] = useState({ image: "", cover_image: "" });
+  const [audioList, setAudioList] = useState([]);
+  const [images, setImages] = useState({
+    image: "",
+    cover_image: "",
+  });
 
   const [form, setform] = useState({
     id: "",
     title: "",
-    description: "",
+    description1: "",
     image: "",
+    isHide: false,
+    audio: "",
+    title1: "",
+    description2: "",
+    description3: "",
   });
 
   const history = useNavigate();
@@ -36,10 +45,26 @@ const AddEdit = () => {
     {
       key: "title",
       required: true,
-      message: "title is required",
     },
-    { key: "description", required: true },
+    {
+      key: "title1",
+      required: true,
+    },
+    { key: "description1", required: true },
+    { key: "description2", required: true },
+    { key: "description3", required: true },
   ];
+
+  const getMediaList = () => {
+    ApiClient.get("audio/list").then((res) => {
+      if (res.success) {
+        const data = res.data.map(({ _id, title }) => {
+          return { id: _id, name: title };
+        });
+        setAudioList(data);
+      }
+    });
+  };
 
   const getCategories = (p = {}) => {
     let f = {
@@ -128,7 +153,10 @@ const AddEdit = () => {
 
   useEffect(() => {
     getCategories();
+    getMediaList();
   }, []);
+
+  console.log("form", form);
 
   return (
     <>
@@ -155,8 +183,6 @@ const AddEdit = () => {
             </div>
 
             <div className="grid grid-cols-12 gap-4 lg:gap-8">
-
-
               <div className="col-span-12 md:col-span-4 mb-3">
                 <div>
                   <label className="lablefontcls mb-2 inline-flex">
@@ -167,7 +193,7 @@ const AddEdit = () => {
                 <ImageUpload
                   model="users"
                   result={(e) => imageResult(e, "cover_image")}
-                  value={images.image || form.images}
+                  value={images.cover_image || form.images}
                   label="Choose Image"
                 />
                 {submitted && !images.image && (
@@ -176,7 +202,6 @@ const AddEdit = () => {
                   </div>
                 )}
               </div>
-
 
               <div className="col-span-12 md:col-span-8">
                 <FormControl
@@ -188,16 +213,15 @@ const AddEdit = () => {
                   required
                 />
 
-
-<FormControl
+                <FormControl
                   type="editor"
                   name="description"
                   label="Description"
-                  value={form.description}
-                  onChange={(e) => setform({ ...form, description: e })}
+                  value={form.description1}
+                  onChange={(e) => setform({ ...form, description1: e })}
                   required
                 />
-                {submitted && !form.description && (
+                {submitted && !form.description1 && (
                   <div className="text-danger small mt-1">
                     description is required.
                   </div>
@@ -217,92 +241,80 @@ const AddEdit = () => {
                       theme="search"
                     />
                   </div> */}
-            
-
-
-
             </div>
-
-
-
           </div>
 
           <div className="shadow-box w-full bg-white rounded-lg mt-4 p-6">
             <div className="flex items-center justify-between gap-2 mb-4 border-b pb-3 border-gray-200">
-                  <p className="text-xl font-semibold">Add Audio</p>
+              <p className="text-xl font-semibold">Add Audio</p>
 
-                   <div className="flex items-center gap-2">
-        <span className="text-sm">Show/hide</span>
-        <label className="inline-flex items-center cursor-pointer ">
-          <input
-            type="checkbox"
-            value={form?.isHide}
-            checked={form?.isHide}
-            className="sr-only peer"
-            onChange={(e) =>
-              setform({ ...form, isHide: e.target.checked })
-            }
-          />
-          <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#EB6A59]"></div>
-        </label>
-      </div>
-
+              <div className="flex items-center gap-2">
+                <span className="text-sm">Show/hide</span>
+                <label className="inline-flex items-center cursor-pointer ">
+                  <input
+                    type="checkbox"
+                    value={form?.isHide}
+                    checked={form?.isHide}
+                    className="sr-only peer"
+                    onChange={(e) =>
+                      setform({ ...form, isHide: e.target.checked })
+                    }
+                  />
+                  <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#EB6A59]"></div>
+                </label>
+              </div>
             </div>
 
             <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 md:col-span-6">
+              {/* <div className="col-span-12 md:col-span-6">
                 <FormControl
                   type="text"
                   name="title"
                   label="Title"
-                  value={form.title}
-                  onChange={(e) => setform({ ...form, title: e })}
+                  value={form.audioTitle}
+                  onChange={(e) => setform({ ...form, audioTitle: e })}
                   required
                 />
-              </div>
+              </div> */}
               <div className="col-span-12 md:col-span-6">
                 <FormControl
-                  type="text"
-                  name="title"
-                  label="Add Audio"
-                  value={form.title}
-                  onChange={(e) => setform({ ...form, title: e })}
+                  type="select"
+                  name="audio"
+                  label="Select Audio"
+                  value={form.audio}
+                  onChange={(e) => {
+                    setform({ ...form, audio: e });
+                  }}
+                  options={audioList}
+                  theme="search"
                   required
                 />
               </div>
-
             </div>
-
           </div>
 
-
           <div className="shadow-box w-full bg-white rounded-lg mt-4 p-6">
-
-
             <div className="">
-
               <div className="grid grid-cols-12 gap-4 mb-4">
-
                 <div className="col-span-12 md:col-span-6">
                   <div className="mb-3">
-                  <FormControl
-                  type="text"
-                  name="title"
-                  label="Title"
-                  value={form.title}
-                  onChange={(e) => setform({ ...form, title: e })}
-                  required
-                />
+                    <FormControl
+                      type="text"
+                      name="title"
+                      label="Title"
+                      value={form.title1}
+                      onChange={(e) => setform({ ...form, title1: e })}
+                      required
+                    />
                   </div>
 
-
                   <div className="description_blogs">
-                    <FormControl  
+                    <FormControl
                       type="editor"
                       name="description"
                       label="Description"
-                      value={form.description}
-                      onChange={(e) => setform({ ...form, description: e })}
+                      value={form.description2}
+                      onChange={(e) => setform({ ...form, description2: e })}
                       required
                     />
                     {submitted && !form.description && (
@@ -314,7 +326,6 @@ const AddEdit = () => {
                 </div>
 
                 <div className="col-span-12 md:col-span-6">
-
                   <div className=" mb-3">
                     <div>
                       <label className="lablefontcls mb-2 inline-flex">
@@ -334,36 +345,24 @@ const AddEdit = () => {
                       </div>
                     )}
                   </div>
-
-
                 </div>
-
               </div>
-
-
-
-
             </div>
-
-
-          
           </div>
-
 
           <div className="shadow-box w-full bg-white rounded-lg mt-4 p-6">
             <div className="description_lats">
-            <FormControl
-                  type="editor"
-                  name="description"
-                  label="Full Description"
-                  value="cszfv"
-                 
-                  required
-                />
+              <FormControl
+                type="editor"
+                name="description"
+                label="Description"
+                value={form.description3}
+                onChange={(e) => setform({ ...form, description3: e })}
+                required
+              />
             </div>
 
-
-          <div className="text-right mt-4">
+            <div className="text-right mt-4">
               <button
                 type="submit"
                 className="text-white bg-[#EB6A59] bg-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
@@ -372,11 +371,6 @@ const AddEdit = () => {
               </button>
             </div>
           </div>
-
-
-
-
-
         </form>
       </Layout>
     </>

@@ -17,6 +17,7 @@ function Send() {
   const [submitted, setSubmitted] = useState(false);
   const [emails, setEmails] = useState();
   const [media, setMediaList] = useState([]);
+  const [blogOptions, setBlogOptions] = useState([]);
   const usersTypeOptions = [
     { id: "Beginner", name: "Beginner" },
     { id: "Intermediate", name: "Intermediate" },
@@ -37,6 +38,7 @@ function Send() {
     title: "",
     users: [],
     user_type: [],
+    blogSlug: "",
     productUrl: "",
     videoUrl: "",
     audioUrl: "",
@@ -93,6 +95,19 @@ function Send() {
     });
   };
 
+  const getBlogsist = () => {
+    let url = "blog/listing";
+    ApiClient.get(url).then((res) => {
+      if (res.success) {
+        let filtered = res.data.filter((itm) => itm.status == "active");
+        const list = filtered?.map((blog) => {
+          return { id: blog.slug, name: blog.title };
+        });
+        setBlogOptions(list);
+      }
+    });
+  };
+
   const getMediaList = () => {
     let url = "";
     if (form.type == "video") {
@@ -142,6 +157,7 @@ function Send() {
 
   useEffect(() => {
     if (form.type == "video" || form.type == "audio") getMediaList();
+    if (form.type == "blog") getBlogsist();
   }, [form.type]);
   return (
     <Layout>
@@ -242,28 +258,31 @@ function Send() {
                       )}
                     </div>
                   )}
-                  {form.type == "video" && (
+                  {form.type == "blog" && (
                     <>
                       <div className=" mb-3">
                         <FormControl
-                          name="url"
-                          label="Video URL"
-                          value={form.videoUrl}
+                          type="select"
+                          name="video"
+                          label="Select Blog"
+                          value={form.blogSlug}
                           onChange={(e) => {
                             setForm({
                               ...form,
-                              videoUrl: e,
-                              productUrl: "",
-                              audioUrl: "",
+                              blogSlug: e,
+                              videoId: "",
+                              audioId: "",
                             });
                           }}
+                          options={blogOptions}
+                          theme="search"
+                          required
                         />
-                        {submitted && !validUrl && (
-                          <div className="text-danger small mt-1 capitalize ">
-                            URL is not valid.
-                          </div>
-                        )}
                       </div>
+                    </>
+                  )}
+                  {form.type == "video" && (
+                    <>
                       <div className=" mb-3">
                         <FormControl
                           type="select"
@@ -288,26 +307,6 @@ function Send() {
                     <>
                       <div className=" mb-3">
                         <FormControl
-                          name="url"
-                          label="Audio URL"
-                          value={form.audioUrl}
-                          onChange={(e) => {
-                            setForm({
-                              ...form,
-                              audioUrl: e,
-                              productUrl: "",
-                              videoUrl: "",
-                            });
-                          }}
-                        />
-                        {submitted && !validUrl && (
-                          <div className="text-danger small mt-1 capitalize ">
-                            URL is not valid.
-                          </div>
-                        )}
-                      </div>
-                      <div className=" mb-3">
-                        <FormControl
                           type="select"
                           name="audio"
                           label="Select Audio"
@@ -323,49 +322,8 @@ function Send() {
                     </>
                   )}
                 </div>
-                {/*<div className="col-span-6 md:col-span-6 mb-3">
-                    <FormControl
-                      type="text"
-                      name="title"
-                      label="Title"
-                      value={form.title}
-                      onChange={(e) => {
-                        setForm({ ...form, title: e });
-                      }}
-                      required
-                    />
-                    {submitted && !form.subject && (
-                      <div className="text-danger small mt-1 capitalize ">
-                        Subject is required.
-                      </div>
-                    )}
-                  </div>
-                  <div className="col-span-12 md:col-span-6 mb-3">
-                    <label className="mb-1">
-                      To<span class="star">*</span>
-                    </label>
-                    <MultiSelectDropdown
-                      options={emails}
-                      result={({ value }) => {
-                        setForm({ ...form, to: value });
-                      }}
-                      intialValue={form.to}
-                    />
-                    {submitted && form.to?.length == 0 && (
-                      <div className="text-danger small mt-1 capitalize ">
-                        Email is required.
-                      </div>
-                    )}
-                  </div>*/}
+
                 <div className="col-span-12 md:col-span-6 mb-6">
-                  {/* <FormControl
-                      type="editor"
-                      name="title"
-                      label="Title"
-                      value={form.title}
-                      onChange={(e) => setForm({ ...form, title: e })}
-                      required
-                    /> */}
                   <label className="mb-1">
                     Notification Title<span class="star">*</span>
                   </label>

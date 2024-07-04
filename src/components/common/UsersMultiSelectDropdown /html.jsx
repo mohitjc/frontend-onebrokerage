@@ -47,6 +47,7 @@ const Html = ({ options, selectedValues, handleChange, displayValue, id }) => {
           className="basic-multi-select"
           classNamePrefix="select"
           onChange={(e) => handleChange(e)}
+          closeMenuOnSelect={false}
           getOptionLabel={(value) =>
             value.value == "all" ? (
               value.label
