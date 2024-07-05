@@ -231,6 +231,7 @@ const Html = ({
         <a
           onClick={() => {
             getChatRoomsList({ quickChat: false });
+            setChatRoomId("");
           }}
         >
           Quick Chats
@@ -238,6 +239,7 @@ const Html = ({
         <a
           onClick={() => {
             getChatRoomsList({ quickChat: true });
+            setChatRoomId("");
           }}
           className="ms-2"
         >
