@@ -236,8 +236,8 @@ const Html = ({
       </div>
 
       <Tab.Group>
-        <div className="w-full bg-[#3a3a3a]  py-3 px-4">
-          <Tab.List className="flex gap-2 text-white font-semibold text-[18px]">
+        <div className="inline-flex bg-[#3a3a3a]  py-3 px-4">
+          <Tab.List className="flex gap-2 text-white font-semibold text-[16px]">
             <Tab
               onClick={() => {
                 getChatRoomsList({ quickChat: false });
