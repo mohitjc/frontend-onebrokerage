@@ -58,12 +58,12 @@ const View = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1  gap-4">
-            <div className="col-span-12 md:col-span-8">
+          <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
+            <div className="">
               <label className="profileheddingcls">Title</label>
               <div className="profiledetailscls">{data?.title || "--"}</div>
             </div>
-            <div className="col-span-12 md:col-span-4">
+            <div className="">
               <label className="profileheddingcls">Category</label>
               <div className="profiledetailscls">
                 {data?.category.name || "--"}
@@ -76,7 +76,7 @@ const View = () => {
                   </div>
                 </div>  */}
 
-            <div className="col-span-12 md:col-span-12">
+            <div className="">
               <label className="profileheddingcls">Description</label>
               <div
                 className="profiledetailscls capitalize"
@@ -85,7 +85,7 @@ const View = () => {
                 }}
               ></div>
             </div>
-            <div className="col-span-12 md:col-span-12">
+            <div className="">
               <label className="profileheddingcls">Description</label>
               <div
                 className="profiledetailscls capitalize"
@@ -94,7 +94,7 @@ const View = () => {
                 }}
               ></div>
             </div>
-            <div className="col-span-12 md:col-span-12">
+            <div className="">
               <label className="profileheddingcls">Description</label>
               <div
                 className="profiledetailscls capitalize"
@@ -103,26 +103,34 @@ const View = () => {
                 }}
               ></div>
             </div>
-            {data?.image ? (
+       
+          </div>
+
+          {data?.image ? (
               <>
-                <div className="flex col-span-12 md:col-span-6">
+                <div className="grid grid-cols-12 gap-2 mt-4">
+                  <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Image</label>
                   <div className="flex gap-2 flex-wrap items-center">
                     <img src={methodModel.noImg(data?.image)} width="140" />
                   </div>
-                  <label className="profileheddingcls">Cover Image</label>
+                  </div>
+                  <div className="col-span-12 md:col-span-6">
+                 <label className="profileheddingcls">Cover Image</label>
                   <div className="flex gap-2 flex-wrap items-center">
                     <img
                       src={methodModel.noImg(data?.cover_image)}
                       width="140"
                     />
                   </div>
+                 </div>
                 </div>
               </>
             ) : (
               <></>
             )}
-          </div>
+
+
         </div>
       </Layout>
     </>

@@ -149,7 +149,7 @@ function Chat({
                   skinTonesDisabled={true}
                   onEmojiClick={onEmojiClick}
                   height={380}
-                  className="absolute bottom-0 "
+                  className="absolute bottom-0 z-50"
                   // previewConfig={{
                   //   showPreview: false,
                   // }}

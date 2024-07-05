@@ -233,23 +233,7 @@ function Send() {
                       </div>
                     )}
                   </div>
-                  <div className=" mb-3">
-                    <label className="mb-1">
-                      Select Users<span class="star">*</span>
-                    </label>
-                    <UsersMultiSelectDropdown
-                      options={users}
-                      result={({ value }) => {
-                        setForm({ ...form, users: value });
-                      }}
-                      intialValue={form.users}
-                    />
-                    {submitted && form.users.length == 0 && (
-                      <div className="text-danger small mt-1 capitalize ">
-                        Please Select users.
-                      </div>
-                    )}
-                  </div>
+             
                   {form.type == "product" && (
                     <div className=" mb-3">
                       <FormControl
@@ -336,11 +320,33 @@ function Send() {
                     </>
                   )}
                 </div>
+
+                <div className="col-span-12 mb-3">
+                    <label className="mb-1">
+                      Select Users<span class="star">*</span>
+                    </label>
+                    <UsersMultiSelectDropdown
+                      options={users}
+                      result={({ value }) => {
+                        setForm({ ...form, users: value });
+                      }}
+                      intialValue={form.users}
+                    />
+                    {submitted && form.users.length == 0 && (
+                      <div className="text-danger small mt-1 capitalize ">
+                        Please Select users.
+                      </div>
+                    )}
+                  </div>
+
+
+                <div className="flex items-center gap-2 mb-3">
                 {selectedUsers &&
                   selectedUsers?.length > 0 &&
                   selectedUsers?.map((_user) => {
-                    return <div className="">{_user}</div>;
+                    return <div className="bg-primary text-white rounded-full text-sm px-4 py-1">{_user}</div>;
                   })}
+                </div>
                 <div className="col-span-12 md:col-span-6 mb-6">
                   <label className="mb-1">
                     Notification Title<span class="star">*</span>
