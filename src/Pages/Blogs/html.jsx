@@ -32,6 +32,7 @@ const Html = ({
   changestatus,
   isAllow,
   total = { total },
+  categories,
 }) => {
   const user = useSelector((state) => state.user);
   const columns = [
@@ -237,6 +238,16 @@ const Html = ({
                 changestatus(e.value);
               }}
               options={statusModel.list}
+            />
+            <SelectDropdown
+              id="statusDropdown"
+              displayValue="name"
+              placeholder="All Categories"
+              intialValue={filters.category}
+              result={(e) => {
+                filter({ category: e.value });
+              }}
+              options={categories}
             />
             {/* <SelectDropdown
                             id="statusDropdown"

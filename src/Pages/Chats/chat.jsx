@@ -15,6 +15,7 @@ function Chat({
   onEmojiClick,
   onEmojiIconClick,
   showEmojis,
+  hasImage,
 }) {
   const sender = activeChat?.user_details?.find(
     (_user) => _user?._id !== user._id
@@ -59,10 +60,18 @@ function Chat({
                       <div className="chat-message">
                         <div className="flex items-end">
                           <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                            <div>
-                              <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-100 text-gray-600">
-                                {message.content}
-                              </span>
+                            <div className="">
+                              {message.type == "IMAGE" && (
+                                <img
+                                  src={methodModel.noImg(message.content)}
+                                  className="h-30"
+                                />
+                              )}
+                              {message.type == "TEXT" && (
+                                <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
+                                  {message.content}
+                                </span>
+                              )}
                             </div>
                             <span className="text-gray-400 !mt-0 text-[10px] ">
                               {moment(message?.createdAt).format("LT")}
@@ -80,9 +89,17 @@ function Chat({
                         <div className="flex items-end justify-end">
                           <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
                             <div className="">
-                              <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
-                                {message.content}
-                              </span>
+                              {message.type == "IMAGE" && (
+                                <img
+                                  src={methodModel.noImg(message.content)}
+                                  className="h-30"
+                                />
+                              )}
+                              {message.type == "TEXT" && (
+                                <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
+                                  {message.content}
+                                </span>
+                              )}
                             </div>
                             <label className="text-gray-400 !mt-0 text-[10px] ">
                               {moment(message?.createdAt).format("LT")}
@@ -132,7 +149,8 @@ function Chat({
                 <input
                   type="text"
                   onChange={onInputChange}
-                  value={message}
+                  disabled={hasImage}
+                  value={hasImage ? "" : message}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       e.preventDefault();
@@ -184,6 +202,11 @@ function Chat({
                   </button>
                 </div>
               </div>
+              {hasImage && (
+                <div className="mt-2">
+                  <img src={methodModel.noImg(hasImage)} className="h-20" />
+                </div>
+              )}
             </div>
           </div>
         </div>

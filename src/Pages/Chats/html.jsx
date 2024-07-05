@@ -38,7 +38,11 @@ const Html = ({
   total = { total },
 }) => {
   const user = useSelector((state) => state.user);
-  const [message, setMessage] = useState("");
+  const [img, setImg] = useState("");
+  const [message, setMessage] = useState({
+    type: "",
+    message: "",
+  });
   const [chatMessages, setChatMessages] = useState([]);
   const [chatRooms, setChatRooms] = useState();
   const [chatRoomId, setChatRoomId] = useState("");
@@ -62,24 +66,28 @@ const Html = ({
     if (message) {
       value = {
         room_id: chatRoomId,
-        type: "TEXT",
-        content: message,
+        type: message.type,
+        content: message.message || img,
         user_id: user?._id,
       };
+      console.log("VALUE", value);
       socketModel.emit("send-message", value);
-      setMessage("");
+      setMessage({ message: "", type: "" });
+      setImg("");
+      setShowEmojis(false);
     }
   };
 
   const handleEmojiClick = ({ emoji }) => {
-    const _value = message;
-    let _message = message.length > 0 ? `${_value} ${emoji}` : `${emoji}`;
-    setMessage(_message);
+    const _value = message.message;
+    let _message =
+      message.message.length > 0 ? `${_value} ${emoji}` : `${emoji}`;
+    setMessage({ message: _message });
     // setShowEmojis(false);
   };
 
-  const getChatRoomsList = () => {
-    let f = {};
+  const getChatRoomsList = (p = {}) => {
+    let f = { ...p };
     if (search) {
       f = { search: search };
     }
@@ -91,7 +99,7 @@ const Html = ({
     });
   };
   const getChatMessages = (id) => {
-    loader(true);
+    // loader(true);
     ApiClient.get("chat/messages", { room_id: id }).then((res) => {
       if (res.success) {
         let data = res.data.data;
@@ -101,7 +109,7 @@ const Html = ({
           chatScroll();
         }, 100);
       }
-      loader(false);
+      // loader(false);
     });
   };
 
@@ -113,7 +121,30 @@ const Html = ({
     });
   };
 
-  const uploadImage = () => {};
+  const uploadImage = async (e) => {
+    let url = "upload/multiple-images";
+    let files = e.target.files;
+    if (files?.length > 1) {
+      url = "upload/multiple-images";
+    }
+    let images = [];
+    // if (img) images = img;
+    ApiClient.multiImageUpload(url, files, {}, "files").then((res) => {
+      console.log("res", res);
+      if (res.files) {
+        let image = res.files.map((itm) => itm.fileName);
+        if (files?.length == 1) {
+          setImg(image[0]);
+          setMessage({ message: image[0], type: "IMAGE" });
+          // result({ event: "value", value: image[0] });
+        } else {
+          images = [...images, ...image];
+          // setImg(images);
+          // result({ event: "value", value: images });
+        }
+      }
+    });
+  };
 
   const handleChatClick = (id) => {
     if (id) {
@@ -196,6 +227,24 @@ const Html = ({
         </div>
       </div>
 
+      <div>
+        <a
+          onClick={() => {
+            getChatRoomsList({ quickChat: false });
+          }}
+        >
+          Quick Chats
+        </a>
+        <a
+          onClick={() => {
+            getChatRoomsList({ quickChat: true });
+          }}
+          className="ms-2"
+        >
+          Notification Messages
+        </a>
+      </div>
+
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
         <div className="">
           <div className="grid grid-cols-12 gap-4  ">
@@ -273,7 +322,8 @@ const Html = ({
                   setMessage(e.target.value);
                 }}
                 uploadImage={uploadImage}
-                message={message}
+                message={message.message}
+                hasImage={img}
                 chatMessages={chatMessages}
                 onEmojiIconClick={() => {
                   setShowEmojis(!showEmojis);

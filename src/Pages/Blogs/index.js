@@ -17,6 +17,7 @@ const Blogs = () => {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loaging, setLoader] = useState(true);
+  const [options, setOptions] = useState([]);
   const history = useNavigate();
 
   const sortClass = (key) => {
@@ -184,6 +185,27 @@ const Blogs = () => {
     }
   }, []);
 
+  const getCategories = (p = {}) => {
+    let f = {
+      ...p,
+      type: "blog",
+      category_type: "master",
+    };
+    ApiClient.get("category/listing", f).then((res) => {
+      if (res.success) {
+        const filtered = res?.data.filter((itm) => itm.status == "active");
+        let options = filtered.map(({ id, name }) => {
+          return { id: id, name: name };
+        });
+        setOptions(options);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   return (
     <>
       <Html
@@ -205,6 +227,7 @@ const Blogs = () => {
         statusChange={statusChange}
         changestatus={changestatus}
         exportfun={exportfun}
+        categories={options}
       />
     </>
   );

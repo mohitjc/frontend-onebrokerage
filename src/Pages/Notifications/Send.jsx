@@ -337,8 +337,8 @@ function Send() {
                   )}
                 </div>
                 {selectedUsers &&
-                  selectedUsers.length > 0 &&
-                  selectedUsers.map((_user) => {
+                  selectedUsers?.length > 0 &&
+                  selectedUsers?.map((_user) => {
                     return <div className="">{_user}</div>;
                   })}
                 <div className="col-span-12 md:col-span-6 mb-6">
