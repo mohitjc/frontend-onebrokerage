@@ -3,6 +3,7 @@ import methodModel from "../../methods/methods";
 import moment from "moment";
 import { PiSmileyBold } from "react-icons/pi";
 import EmojiPicker from "emoji-picker-react";
+import { IoClose } from "react-icons/io5";
 
 function Chat({
   user,
@@ -62,10 +63,12 @@ function Chat({
                           <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
                             <div className="">
                               {message.type == "IMAGE" && (
+                                 <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
                                 <img
                                   src={methodModel.noImg(message.content)}
-                                  className="h-30"
+                                  className="h-56 w-56 object-contain"
                                 />
+                                </span>
                               )}
                               {message.type == "TEXT" && (
                                 <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
@@ -90,10 +93,12 @@ function Chat({
                           <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
                             <div className="">
                               {message.type == "IMAGE" && (
+                                   <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
                                 <img
                                   src={methodModel.noImg(message.content)}
-                                  className="h-30"
+                                 className="h-56 w-56 object-contain"
                                 />
+                                </span>
                               )}
                               {message.type == "TEXT" && (
                                 <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
@@ -124,6 +129,16 @@ function Chat({
               </div> */}
             </div>
             <div className="border-t-2 border-gray-200 pt-4 mb-2 sm:mb-0 relative">
+
+            {hasImage && (
+                <div className="my-2 bg-white shadow-md p-2 flex justify-between items-center rounded-lg">
+                  <img src={methodModel.noImg(hasImage)} className="h-10" />
+                  <IoClose title="Remove" className="text-2xl cursor-pointer" />
+
+                </div>
+              )}
+
+
               {showEmojis == true && (
                 <EmojiPicker
                   skinTonesDisabled={true}
@@ -202,11 +217,9 @@ function Chat({
                   </button>
                 </div>
               </div>
-              {hasImage && (
-                <div className="mt-2">
-                  <img src={methodModel.noImg(hasImage)} className="h-20" />
-                </div>
-              )}
+              
+
+
             </div>
           </div>
         </div>
