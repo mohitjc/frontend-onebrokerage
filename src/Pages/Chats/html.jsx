@@ -45,6 +45,7 @@ const Html = ({
 }) => {
   const user = useSelector((state) => state.user);
   const [img, setImg] = useState("");
+  const [openTab, setOpenTab] = useState("chats");
   const [message, setMessage] = useState({
     type: "",
     message: "",
@@ -203,7 +204,7 @@ const Html = ({
           chatScroll();
         }, 100);
       }
-      getChatRoomsList();
+      getChatRoomsList({ quickChat: openTab == "chats" ? false : true });
     });
   }, []);
 
@@ -243,6 +244,7 @@ const Html = ({
               onClick={() => {
                 getChatRoomsList({ quickChat: false });
                 setChatRoomId("");
+                setOpenTab("chats");
               }}
               className={({ selected }) =>
                 classNames(
@@ -258,6 +260,7 @@ const Html = ({
               onClick={() => {
                 getChatRoomsList({ quickChat: true });
                 setChatRoomId("");
+                setOpenTab("messages");
               }}
               className={({ selected }) =>
                 classNames(
