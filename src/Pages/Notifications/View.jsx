@@ -52,13 +52,13 @@ const View = () => {
           <div className="grid grid-cols-12 gap-4">
             <div className="sideclass col-span-12 md:col-span-12">
               <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-12 md:col-span-6">
+                <div className="col-span-12 md:col-span-12">
                   <label className="profileheddingcls">Title</label>
                   <div className="profiledetailscls">{data?.title || "--"}</div>
                 </div>
-                <div className="col-span-12 md:col-span-6">
+                <div className="col-span-12 md:col-span-12">
                   <label className="profileheddingcls">Emails</label>
-                  <div className="profiledetailscls">
+                  <div className="">
                     {data?.users?.map((user) => user.email).join(", ") || "--"}
                   </div>
                 </div>

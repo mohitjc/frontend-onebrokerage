@@ -35,7 +35,7 @@ const Html = ({
       key: "title",
       name: "Title",
       render: (row) => {
-        return <span className="capitalize">{row?.title}</span>;
+        return <span className="capitalize line-clamp-2 max-w-[600px] ">{row?.title}</span>;
       },
     },
     {
@@ -47,9 +47,9 @@ const Html = ({
           .map((user) => user.fullName);
         return (
           <>
-            <span className="capitalize">{users.join(",")}</span>
+            <span className="capitalize ">{users.join(",")}</span>
             {row?.sendToDetail.length - users.length > 0 && (
-              <div>+{row?.sendToDetail.length - users.length} more</div>
+              <div className="text-[#EB6A59]">+{row?.sendToDetail.length - users.length} more</div>
             )}
           </>
         );
