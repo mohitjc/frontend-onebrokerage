@@ -36,7 +36,7 @@ const Html = ({
       name: "Notification Title",
       render: (row) => {
         return (
-          <span className="capitalize line-clamp-2 max-w-[600px] ">
+          <span className="capitalize line-clamp-1 lg:max-w-[200px] xl:max-w-[400px] ">
             {row?.title}
           </span>
         );
@@ -54,7 +54,7 @@ const Html = ({
           <>
             {unique.map((itm) => {
               return (
-                <span className="capitalize line-clamp-2 max-w-[600px] ">
+                <span className="capitalize line-clamp-2 max-w-[400px] ">
                   {itm}
                 </span>
               );
@@ -69,7 +69,7 @@ const Html = ({
       render: (row) => {
         console.log("row", row);
         return (
-          <span className="capitalize line-clamp-2 max-w-[600px] ">
+          <span className="capitalize line-clamp-2 max-w-[400px] ">
             {row?.type}
           </span>
         );
