@@ -321,7 +321,7 @@ const Html = ({
                 activeChat={activeChat}
                 onSendClick={handleSendMessage}
                 onInputChange={(e) => {
-                  setMessage(e.target.value);
+                  setMessage({ message: e.target.value, type: "TEXT" });
                 }}
                 uploadImage={uploadImage}
                 message={message.message}
