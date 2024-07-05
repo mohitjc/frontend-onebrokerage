@@ -217,7 +217,7 @@ const Html = ({
 
   useEffect(() => {
     {
-      getChatRoomsList();
+      getChatRoomsList({ quickChat: false });
     }
   }, []);
 
@@ -451,6 +451,10 @@ const Html = ({
                       }}
                       onEmojiClick={handleEmojiClick}
                       showEmojis={showEmojis}
+                      onImageRemove={() => {
+                        setImg("");
+                        setMessage({ message: "", text: "" });
+                      }}
                     />
                   ) : (
                     <></>

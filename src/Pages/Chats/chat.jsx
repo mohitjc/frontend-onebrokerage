@@ -17,6 +17,7 @@ function Chat({
   onEmojiIconClick,
   showEmojis,
   hasImage,
+  onImageRemove,
 }) {
   const sender = activeChat?.user_details?.find(
     (_user) => _user?._id !== user._id
@@ -63,11 +64,11 @@ function Chat({
                           <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
                             <div className="">
                               {message.type == "IMAGE" && (
-                                 <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
-                                <img
-                                  src={methodModel.noImg(message.content)}
-                                  className="h-56 w-56 object-contain"
-                                />
+                                <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
+                                  <img
+                                    src={methodModel.noImg(message.content)}
+                                    className="h-56 w-56 object-contain"
+                                  />
                                 </span>
                               )}
                               {message.type == "TEXT" && (
@@ -93,11 +94,11 @@ function Chat({
                           <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
                             <div className="">
                               {message.type == "IMAGE" && (
-                                   <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
-                                <img
-                                  src={methodModel.noImg(message.content)}
-                                 className="h-56 w-56 object-contain"
-                                />
+                                <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
+                                  <img
+                                    src={methodModel.noImg(message.content)}
+                                    className="h-56 w-56 object-contain"
+                                  />
                                 </span>
                               )}
                               {message.type == "TEXT" && (
@@ -129,15 +130,19 @@ function Chat({
               </div> */}
             </div>
             <div className="border-t-2 border-gray-200 pt-4 mb-2 sm:mb-0 relative">
-
-            {hasImage && (
+              {hasImage && (
                 <div className="my-2 bg-white shadow-md p-2 flex justify-between items-center rounded-lg">
-                  <img src={methodModel.noImg(hasImage)} className="h-10" />
-                  <IoClose title="Remove" className="text-2xl cursor-pointer" />
-
+                  <div className="flex gap-2 items-center">
+                    <img src={methodModel.noImg(hasImage)} className="h-10" />
+                    <p>{hasImage}</p>
+                  </div>
+                  <IoClose
+                    onClick={onImageRemove}
+                    title="Remove"
+                    className="text-2xl cursor-pointer"
+                  />
                 </div>
               )}
-
 
               {showEmojis == true && (
                 <EmojiPicker
@@ -217,9 +222,6 @@ function Chat({
                   </button>
                 </div>
               </div>
-              
-
-
             </div>
           </div>
         </div>
