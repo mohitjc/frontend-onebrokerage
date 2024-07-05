@@ -19,6 +19,12 @@ import Chat from "./chat";
 import { IoSearchOutline } from "react-icons/io5";
 import socketModel from "../../models/socketModel";
 import loader from "../../methods/loader";
+import { Tab } from "@headlessui/react";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
 const Html = ({
   sorting,
   filter,
@@ -91,11 +97,13 @@ const Html = ({
     if (search) {
       f = { search: search };
     }
+    loader(true);
     ApiClient.get("chat/room-members", f).then((res) => {
       if (res.success) {
         console.log("res", res);
         setChatRooms(res.data.data);
       }
+      loader(false);
     });
   };
   const getChatMessages = (id) => {
@@ -215,7 +223,7 @@ const Html = ({
 
   return (
     <Layout>
-      <div className="flex flex-wrap justify-between items-center gap-y-4">
+      <div className="flex flex-wrap justify-between items-center gap-y-4 mb-3">
         <div>
           <h3 className="text-2xl font-semibold text-[#111827]">
             {" "}
@@ -227,118 +235,232 @@ const Html = ({
         </div>
       </div>
 
-      <div>
-        <a
-          onClick={() => {
-            getChatRoomsList({ quickChat: false });
-            setChatRoomId("");
-          }}
-        >
-          Quick Chats
-        </a>
-        <a
-          onClick={() => {
-            getChatRoomsList({ quickChat: true });
-            setChatRoomId("");
-          }}
-          className="ms-2"
-        >
-          Notification Messages
-        </a>
-      </div>
+      <Tab.Group>
+        <div className="w-full bg-[#3a3a3a]  py-3 px-4">
+          <Tab.List className="flex gap-2 text-white font-semibold text-[18px]">
+            <Tab
+              onClick={() => {
+                getChatRoomsList({ quickChat: false });
+                setChatRoomId("");
+              }}
+              className={({ selected }) =>
+                classNames(
+                  "border-r border-white/40 pr-2 focus:outline-none",
+                  "",
+                  selected ? "text-[#EB6A59]" : "text-white"
+                )
+              }
+            >
+              Quick Chats
+            </Tab>
+            <Tab
+              onClick={() => {
+                getChatRoomsList({ quickChat: true });
+                setChatRoomId("");
+              }}
+              className={({ selected }) =>
+                classNames(
+                  " focus:outline-none",
+                  "",
+                  selected ? "text-[#EB6A59]" : "text-white"
+                )
+              }
+            >
+              Notification Messages
+            </Tab>
+          </Tab.List>
+        </div>
+        <Tab.Panels className=" pt-6 pb-6">
+          <Tab.Panel>
+            <div className="shadow-box w-full bg-white rounded-lg mt-6">
+              <div className="">
+                <div className="grid grid-cols-12 gap-4  ">
+                  {chatRooms?.length == 0 && !search && (
+                    <div className="col-span-12 h-[400px] bgs_starts flex items-center justify-center">
+                      <div className="w-52 mx-auto">No Chats.</div>
+                    </div>
+                  )}
 
-      <div className="shadow-box w-full bg-white rounded-lg mt-6">
-        <div className="">
-          <div className="grid grid-cols-12 gap-4  ">
-            {chatRooms?.length == 0 && !search && (
-              <div className="col-span-12 h-[400px] bgs_starts flex items-center justify-center">
-                <div className="w-52 mx-auto">No Chats.</div>
-              </div>
-            )}
-
-            <div className="col-span-12 md:col-span-5 2xl:col-span-3">
-              <div className="bg-gray-100 p-6 h-full">
-                <form
-                  className="flex items-center max-w-sm"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    filter();
-                  }}
-                >
-                  <label for="simple-search" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative w-full">
-                    <input
-                      type="text"
-                      id="simple-search"
-                      value={search}
-                      onChange={(e) => {
-                        setSearch(e.target.value);
-                      }}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
-                      placeholder="Search..."
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
+                  <div className="col-span-12 md:col-span-5 2xl:col-span-3">
+                    <div className="bg-gray-100 p-6 h-full">
+                      <form
+                        className="flex items-center max-w-sm"
+                        onSubmit={(e) => {
                           e.preventDefault();
-                          getChatRoomsList();
-                        }
-                      }}
-                    />
-                    {search && (
-                      <i
-                        className="fa fa-times absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"
-                        aria-hidden="true"
-                        onClick={handleClearSearch}
-                      ></i>
-                    )}
+                          filter();
+                        }}
+                      >
+                        <label for="simple-search" className="sr-only">
+                          Search
+                        </label>
+                        <div className="relative w-full">
+                          <input
+                            type="text"
+                            id="simple-search"
+                            value={search}
+                            onChange={(e) => {
+                              setSearch(e.target.value);
+                            }}
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
+                            placeholder="Search..."
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                e.preventDefault();
+                                getChatRoomsList();
+                              }
+                            }}
+                          />
+                          {search && (
+                            <i
+                              className="fa fa-times absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"
+                              aria-hidden="true"
+                              onClick={handleClearSearch}
+                            ></i>
+                          )}
+                        </div>
+                        <button
+                          type="submit"
+                          className="p-2.5 text-sm font-medium h-10 text-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        >
+                          <IoSearchOutline
+                            onClick={() => {
+                              getChatRoomsList();
+                            }}
+                          />
+                        </button>
+                      </form>
+                      <Lists
+                        user={user}
+                        chats={chatRooms}
+                        onChatRoomClick={(id) => {
+                          handleChatClick(id);
+                        }}
+                        activeChat={chatRoomId}
+                      />
+                    </div>
                   </div>
-                  <button
-                    type="submit"
-                    className="p-2.5 text-sm font-medium h-10 text-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  >
-                    <IoSearchOutline
-                      onClick={() => {
-                        getChatRoomsList();
+
+                  {chatRoomId != "" ? (
+                    <Chat
+                      user={user}
+                      activeChat={activeChat}
+                      onSendClick={handleSendMessage}
+                      onInputChange={(e) => {
+                        setMessage({ message: e.target.value, type: "TEXT" });
                       }}
+                      uploadImage={uploadImage}
+                      message={message.message}
+                      hasImage={img}
+                      chatMessages={chatMessages}
+                      onEmojiIconClick={() => {
+                        setShowEmojis(!showEmojis);
+                      }}
+                      onEmojiClick={handleEmojiClick}
+                      showEmojis={showEmojis}
                     />
-                  </button>
-                </form>
-                <Lists
-                  user={user}
-                  chats={chatRooms}
-                  onChatRoomClick={(id) => {
-                    handleChatClick(id);
-                  }}
-                  activeChat={chatRoomId}
-                />
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </div>
             </div>
+          </Tab.Panel>
+          <Tab.Panel>
+            <div className="shadow-box w-full bg-white rounded-lg mt-6">
+              <div className="">
+                <div className="grid grid-cols-12 gap-4  ">
+                  {chatRooms?.length == 0 && !search && (
+                    <div className="col-span-12 h-[400px] bgs_starts flex items-center justify-center">
+                      <div className="w-52 mx-auto">No Chats.</div>
+                    </div>
+                  )}
 
-            {chatRoomId != "" ? (
-              <Chat
-                user={user}
-                activeChat={activeChat}
-                onSendClick={handleSendMessage}
-                onInputChange={(e) => {
-                  setMessage({ message: e.target.value, type: "TEXT" });
-                }}
-                uploadImage={uploadImage}
-                message={message.message}
-                hasImage={img}
-                chatMessages={chatMessages}
-                onEmojiIconClick={() => {
-                  setShowEmojis(!showEmojis);
-                }}
-                onEmojiClick={handleEmojiClick}
-                showEmojis={showEmojis}
-              />
-            ) : (
-              <></>
-            )}
-          </div>
-        </div>
-      </div>
+                  <div className="col-span-12 md:col-span-5 2xl:col-span-3">
+                    <div className="bg-gray-100 p-6 h-full">
+                      <form
+                        className="flex items-center max-w-sm"
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          filter();
+                        }}
+                      >
+                        <label for="simple-search" className="sr-only">
+                          Search
+                        </label>
+                        <div className="relative w-full">
+                          <input
+                            type="text"
+                            id="simple-search"
+                            value={search}
+                            onChange={(e) => {
+                              setSearch(e.target.value);
+                            }}
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
+                            placeholder="Search..."
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                e.preventDefault();
+                                getChatRoomsList();
+                              }
+                            }}
+                          />
+                          {search && (
+                            <i
+                              className="fa fa-times absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"
+                              aria-hidden="true"
+                              onClick={handleClearSearch}
+                            ></i>
+                          )}
+                        </div>
+                        <button
+                          type="submit"
+                          className="p-2.5 text-sm font-medium h-10 text-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        >
+                          <IoSearchOutline
+                            onClick={() => {
+                              getChatRoomsList();
+                            }}
+                          />
+                        </button>
+                      </form>
+                      <Lists
+                        user={user}
+                        chats={chatRooms}
+                        onChatRoomClick={(id) => {
+                          handleChatClick(id);
+                        }}
+                        activeChat={chatRoomId}
+                      />
+                    </div>
+                  </div>
+
+                  {chatRoomId != "" ? (
+                    <Chat
+                      user={user}
+                      activeChat={activeChat}
+                      onSendClick={handleSendMessage}
+                      onInputChange={(e) => {
+                        setMessage({ message: e.target.value, type: "TEXT" });
+                      }}
+                      uploadImage={uploadImage}
+                      message={message.message}
+                      hasImage={img}
+                      chatMessages={chatMessages}
+                      onEmojiIconClick={() => {
+                        setShowEmojis(!showEmojis);
+                      }}
+                      onEmojiClick={handleEmojiClick}
+                      showEmojis={showEmojis}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+            </div>
+          </Tab.Panel>
+        </Tab.Panels>
+      </Tab.Group>
     </Layout>
   );
 };

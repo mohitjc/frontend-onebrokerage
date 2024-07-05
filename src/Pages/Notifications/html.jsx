@@ -33,9 +33,25 @@ const Html = ({
   const columns = [
     {
       key: "title",
-      name: "Title",
+      name: "Notification Title",
       render: (row) => {
-        return <span className="capitalize line-clamp-2 max-w-[600px] ">{row?.title}</span>;
+        return (
+          <span className="capitalize line-clamp-2 max-w-[600px] ">
+            {row?.title}
+          </span>
+        );
+      },
+    },
+    {
+      key: "type",
+      name: "Notification Type",
+      render: (row) => {
+        console.log("row", row);
+        return (
+          <span className="capitalize line-clamp-2 max-w-[600px] ">
+            {row?.type}
+          </span>
+        );
       },
     },
     {
@@ -49,7 +65,9 @@ const Html = ({
           <>
             <span className="capitalize ">{users.join(",")}</span>
             {row?.sendToDetail.length - users.length > 0 && (
-              <div className="text-[#EB6A59]">+{row?.sendToDetail.length - users.length} more</div>
+              <div className="text-[#EB6A59]">
+                +{row?.sendToDetail.length - users.length} more
+              </div>
             )}
           </>
         );
@@ -94,7 +112,6 @@ const Html = ({
       <div className="flex flex-wrap justify-between items-center gap-y-4">
         <div>
           <h3 className="text-2xl font-semibold text-[#111827]">
-            {" "}
             {shared.title}
           </h3>
           <p class="text-sm font-normal text-[#75757A]">
@@ -103,9 +120,7 @@ const Html = ({
         </div>
 
         <a id="downloadFile"></a>
-
         {/* <div className="flex">    
-
           {isAllow(`add${shared.check}`) ? (
             <Link
               className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"

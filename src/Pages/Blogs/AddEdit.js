@@ -127,6 +127,7 @@ const AddEdit = () => {
           });
 
           if (payload.category) payload.category = payload.category.id;
+          if (payload.audio) payload.audio = payload.audio._id;
 
           payload.id = id;
           setform({

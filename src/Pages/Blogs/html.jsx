@@ -41,16 +41,17 @@ const Html = ({
       name: "Title",
       sort: true,
       render: (row) => {
+        console.log("row", row);
         return <span className="capitalize">{row?.title}</span>;
       },
     },
-    // {
-    //   key: "category",
-    //   name: "Category",
-    //   render: (row) => {
-    //     return <span className="capitalize">{row?.category}</span>;
-    //   },
-    // },
+    {
+      key: "category",
+      name: "Category",
+      render: (row) => {
+        return <span className="capitalize">{row?.category_detail?.name}</span>;
+      },
+    },
     {
       key: "image",
       name: "Image",
