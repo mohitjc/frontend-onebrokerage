@@ -159,6 +159,20 @@ function Send() {
     if (form.type == "video" || form.type == "audio") getMediaList();
     if (form.type == "blog") getBlogsist();
   }, [form.type]);
+
+  const getNamesByIds = (users, ids) => {
+    const names = ids?.map((userId) => {
+      // Find user with matching id
+      const user = users?.find((user) => user.id === userId);
+      // If user is found, return the name, otherwise handle as needed (e.g., return undefined or throw an error)
+      return user ? user.name : "Unknown"; // Handle case where user is not found
+    });
+
+    return names;
+  };
+
+  const selectedUsers = users && form.users && getNamesByIds(users, form.users);
+
   return (
     <Layout>
       <div className="bg-white shadow-box rounded-lg w-full p-4 mt-6">
@@ -322,7 +336,11 @@ function Send() {
                     </>
                   )}
                 </div>
-
+                {selectedUsers &&
+                  selectedUsers.length > 0 &&
+                  selectedUsers.map((_user) => {
+                    return <div className="">{_user}</div>;
+                  })}
                 <div className="col-span-12 md:col-span-6 mb-6">
                   <label className="mb-1">
                     Notification Title<span class="star">*</span>
