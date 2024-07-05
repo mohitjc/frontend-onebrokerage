@@ -55,17 +55,17 @@ const View = () => {
           <div className="grid grid-cols-12 gap-4">
             <div className="sideclass col-span-12 md:col-span-12">
               <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-12 md:col-span-12">
+                <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">
                     Notification Title
                   </label>
                   <div className="profiledetailscls">{data?.title || "--"}</div>
                 </div>
-                <div className="col-span-12 md:col-span-12">
+                <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Notification Type</label>
                   <div className="profiledetailscls">{data?.type || "--"}</div>
                 </div>
-                <div className="col-span-12 md:col-span-12">
+                <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Users group</label>
                   {unique?.map((itm) => {
                     return (
@@ -75,12 +75,14 @@ const View = () => {
                 </div>
                 <div className="col-span-12 md:col-span-12">
                   <label className="profileheddingcls">Emails</label>
-                  <div className="">
+                  <div className="flex flex-wrap gap-4">
                     {data?.users?.map((user) => {
                       return (
                         <>
-                          <span>{user.fullName}</span> -
-                          <span>{user.email}</span>
+                          <div className="bg-gray-100 rounded-lg p-3">
+                          <p className="text-md text-neutral-800 font-semibold">{user.fullName}</p> 
+                          <p className="text-sm text-neutral-600 font-medium">{user.email}</p>
+                          </div>
                         </>
                       );
                     }) || "--"}
