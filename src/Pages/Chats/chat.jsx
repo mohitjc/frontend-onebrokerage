@@ -94,7 +94,7 @@ function Chat({
                           <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
                             <div className="">
                               {message.type == "IMAGE" && (
-                                <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
+                                <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-gray-100 text-black ">
                                   <img
                                     src={methodModel.noImg(message.content)}
                                     className="h-56 w-56 object-contain"
@@ -102,7 +102,7 @@ function Chat({
                                 </span>
                               )}
                               {message.type == "TEXT" && (
-                                <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
+                                <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-gray-100 text-black ">
                                   {message.content}
                                 </span>
                               )}

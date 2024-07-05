@@ -49,10 +49,15 @@ const Html = ({
         const list = row.sendToDetail.map((_user) => {
           return _user.experience_level;
         });
-        const unique = [...new Set(list)];
+
+        const uniqueList = list.filter(
+          (value, index, array) => array.indexOf(value) === index
+        );
+
+        // const unique = [...new Set(list)];
         return (
           <>
-            {unique.map((itm) => {
+            {uniqueList.map((itm) => {
               return (
                 <span className="capitalize line-clamp-2 max-w-[400px] ">
                   {itm}

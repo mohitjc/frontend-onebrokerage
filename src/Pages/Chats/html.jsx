@@ -178,6 +178,7 @@ const Html = ({
         socketModel.emit("join-room", value);
       }
       socketModel.emit("unread-count", value);
+      socketModel.emit("read-all-message ", value);
 
       getChatMessages(chatRoomId);
       getActiveChat(chatRoomId);
@@ -186,7 +187,7 @@ const Html = ({
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
-      console.log("data", data);
+      console.log("DATA", data);
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
 
