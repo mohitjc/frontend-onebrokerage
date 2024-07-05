@@ -47,7 +47,7 @@ const Chat = ({ chat, onChatClick, sender, isActive }) => {
                 onChatClick(chat.room_details._id);
               }}
             >
-              <div className="flex items-center justify-between  ">
+              <div className="">
                 <div className="flex items-center gap-2 cursor-pointer">
                   <div className="shrink-0">
                     <img
@@ -68,11 +68,9 @@ const Chat = ({ chat, onChatClick, sender, isActive }) => {
                     </div>
                   </div>
                 </div>
-                <div>
-                  <p className="text-[10px] shrink-0">
-                    <FromNow date={chat.room_details?.createdAt} />
-                    {/* {moment(chat.room_details?.createdAt).format("LT")} */}
-                  </p>
+                <div></div>
+                <div className="flex justify-end text-[10px] shrink-0">
+                  <FromNow date={chat.room_details?.createdAt} />
                 </div>
               </div>
             </a>

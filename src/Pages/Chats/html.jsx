@@ -223,6 +223,8 @@ const Html = ({
     }
   }, []);
 
+  console.log("OPEN TAB", openTab);
+
   return (
     <Layout>
       <div className="flex flex-wrap justify-between items-center gap-y-4 mb-3">
