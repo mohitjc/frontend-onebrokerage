@@ -108,7 +108,7 @@ const View = () => {
 
           {data?.image ? (
               <>
-                <div className="grid grid-cols-12 gap-2">
+                <div className="grid grid-cols-12 gap-2 mt-4">
                   <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Image</label>
                   <div className="flex gap-2 flex-wrap items-center">
