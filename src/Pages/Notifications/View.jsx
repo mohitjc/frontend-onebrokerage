@@ -23,7 +23,10 @@ const View = () => {
     });
   };
 
-  console.log("data", data);
+  const list = data?.users?.map((_user) => {
+    return _user.experience_level;
+  });
+  const unique = [...new Set(list)];
 
   useEffect(() => {
     getDetail();
@@ -53,8 +56,22 @@ const View = () => {
             <div className="sideclass col-span-12 md:col-span-12">
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 md:col-span-12">
-                  <label className="profileheddingcls">Title</label>
+                  <label className="profileheddingcls">
+                    Notification Title
+                  </label>
                   <div className="profiledetailscls">{data?.title || "--"}</div>
+                </div>
+                <div className="col-span-12 md:col-span-12">
+                  <label className="profileheddingcls">Notification Type</label>
+                  <div className="profiledetailscls">{data?.type || "--"}</div>
+                </div>
+                <div className="col-span-12 md:col-span-12">
+                  <label className="profileheddingcls">Users group</label>
+                  {unique?.map((itm) => {
+                    return (
+                      <div className="profiledetailscls">{itm || "--"}</div>
+                    );
+                  })}
                 </div>
                 <div className="col-span-12 md:col-span-12">
                   <label className="profileheddingcls">Emails</label>

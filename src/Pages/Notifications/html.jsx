@@ -43,6 +43,27 @@ const Html = ({
       },
     },
     {
+      key: "users",
+      name: "User Experience",
+      render: (row) => {
+        const list = row.sendToDetail.map((_user) => {
+          return _user.experience_level;
+        });
+        const unique = [...new Set(list)];
+        return (
+          <>
+            {unique.map((itm) => {
+              return (
+                <span className="capitalize line-clamp-2 max-w-[600px] ">
+                  {itm}
+                </span>
+              );
+            })}
+          </>
+        );
+      },
+    },
+    {
       key: "type",
       name: "Notification Type",
       render: (row) => {
@@ -54,25 +75,25 @@ const Html = ({
         );
       },
     },
-    {
-      key: "users",
-      name: "Users",
-      render: (row) => {
-        const users = row?.sendToDetail
-          .slice(0, 3)
-          .map((user) => user.fullName);
-        return (
-          <>
-            <span className="capitalize ">{users.join(",")}</span>
-            {row?.sendToDetail.length - users.length > 0 && (
-              <div className="text-[#EB6A59]">
-                +{row?.sendToDetail.length - users.length} more
-              </div>
-            )}
-          </>
-        );
-      },
-    },
+    // {
+    //   key: "users",
+    //   name: "Users",
+    //   render: (row) => {
+    //     const users = row?.sendToDetail
+    //       .slice(0, 3)
+    //       .map((user) => user.fullName);
+    //     return (
+    //       <>
+    //         <span className="capitalize ">{users.join(",")}</span>
+    //         {row?.sendToDetail.length - users.length > 0 && (
+    //           <div className="text-[#EB6A59]">
+    //             +{row?.sendToDetail.length - users.length} more
+    //           </div>
+    //         )}
+    //       </>
+    //     );
+    //   },
+    // },
 
     {
       key: "action",
