@@ -70,7 +70,7 @@ const Html = ({
 
   const handleSendMessage = () => {
     let value = {};
-    if (message) {
+    if (message.message && message.message != "") {
       value = {
         room_id: chatRoomId,
         type: message.type,
@@ -86,10 +86,11 @@ const Html = ({
   };
 
   const handleEmojiClick = ({ emoji }) => {
+    console.log("emoji", emoji);
     const _value = message.message;
     let _message =
       message.message.length > 0 ? `${_value} ${emoji}` : `${emoji}`;
-    setMessage({ message: _message });
+    setMessage({ message: _message, type: "TEXT" });
     // setShowEmojis(false);
   };
 
