@@ -210,10 +210,9 @@ const Html = ({
 
   const handleClearSearch = () => {
     setSearch("");
-    ApiClient.get("chat/room-members").then((res) => {
-      if (res.success) {
-        setChatRooms(res.data.data);
-      }
+    getChatRoomsList({
+      quickChat: openTab == "chats" ? false : true,
+      search: "",
     });
   };
 
