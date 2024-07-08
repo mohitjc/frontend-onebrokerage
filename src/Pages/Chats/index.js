@@ -102,9 +102,6 @@ const Newsletter = () => {
           }
           loader(false);
         });
-        //   Swal.fire({
-        //     icon: "success"
-        //   });
       }
     });
   };
