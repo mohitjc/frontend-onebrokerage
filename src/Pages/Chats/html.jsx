@@ -223,8 +223,6 @@ const Html = ({
     }
   }, []);
 
-  console.log("OPEN TAB", openTab);
-
   return (
     <Layout>
       <div className="flex flex-wrap justify-between items-center gap-y-4 mb-3">
@@ -312,7 +310,9 @@ const Html = ({
                             onKeyDown={(e) => {
                               if (e.key === "Enter") {
                                 e.preventDefault();
-                                getChatRoomsList();
+                                getChatRoomsList({
+                                  quickChat: openTab == "chats" ? false : true,
+                                });
                               }
                             }}
                           />
@@ -330,7 +330,9 @@ const Html = ({
                         >
                           <IoSearchOutline
                             onClick={() => {
-                              getChatRoomsList();
+                              getChatRoomsList({
+                                quickChat: openTab == "chats" ? false : true,
+                              });
                             }}
                           />
                         </button>
@@ -406,7 +408,9 @@ const Html = ({
                             onKeyDown={(e) => {
                               if (e.key === "Enter") {
                                 e.preventDefault();
-                                getChatRoomsList();
+                                getChatRoomsList({
+                                  quickChat: openTab == "chats" ? false : true,
+                                });
                               }
                             }}
                           />
@@ -424,7 +428,9 @@ const Html = ({
                         >
                           <IoSearchOutline
                             onClick={() => {
-                              getChatRoomsList();
+                              getChatRoomsList({
+                                quickChat: openTab == "chats" ? false : true,
+                              });
                             }}
                           />
                         </button>
