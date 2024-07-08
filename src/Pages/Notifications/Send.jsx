@@ -340,7 +340,7 @@ function Send() {
                   </div>
 
 
-                <div className="flex items-center gap-2 mb-3">
+                <div className="flex items-center flex-wrap gap-2 mb-3">
                 {selectedUsers &&
                   selectedUsers?.length > 0 &&
                   selectedUsers?.map((_user) => {
