@@ -28,7 +28,7 @@ function Chat({
       {chatMessages && (
         <div className="col-span-12 md:col-span-7 2xl:col-span-9">
           <div className="bg-gray-100">
-            <div className=" p-4">
+            <div className="w-full p-4">
               <div className="flex items-center justify-between  ">
                 <div className="flex items-center gap-2 cursor-pointer">
                   <div className="shrink-0">
@@ -43,7 +43,7 @@ function Chat({
                       {sender?.fullName}
                     </p>
 
-                    <p className="xl:text-[12px] text-[10px] w-20 xl:w-32 line-clamp-1 ">
+                    <p className="xl:text-[12px] text-[10px] w-full break-all ">
                       {activeChat?.room_details?.subject}
                     </p>
                   </div>
