@@ -50,6 +50,10 @@ function Send() {
       key: "title",
       required: true,
     },
+    {
+      key: "user_type",
+      required: true,
+    },
   ];
   const history = useNavigate();
 
@@ -66,7 +70,8 @@ function Send() {
     if ((form?.productUrl || form?.videoUrl || form?.audioUrl) && !validUrl)
       return;
 
-    if (invalid || form?.users.length == 0) return;
+    if (invalid || form?.users.length == 0 || form.user_type.length == 0)
+      return;
     let method = "post";
 
     let value = {
@@ -227,13 +232,13 @@ function Send() {
                       }}
                       intialValue={form.user_type}
                     />
-                    {submitted && form.users.length == 0 && (
+                    {submitted && form.user_type.length == 0 && (
                       <div className="text-danger small mt-1 capitalize ">
-                        Please Select users.
+                        Please Select user type.
                       </div>
                     )}
                   </div>
-             
+
                   {form.type == "product" && (
                     <div className=" mb-3">
                       <FormControl
@@ -322,30 +327,33 @@ function Send() {
                 </div>
 
                 <div className="col-span-12 mb-3">
-                    <label className="mb-1">
-                      Select Users<span class="star">*</span>
-                    </label>
-                    <UsersMultiSelectDropdown
-                      options={users}
-                      result={({ value }) => {
-                        setForm({ ...form, users: value });
-                      }}
-                      intialValue={form.users}
-                    />
-                    {submitted && form.users.length == 0 && (
-                      <div className="text-danger small mt-1 capitalize ">
-                        Please Select users.
-                      </div>
-                    )}
-                  </div>
-
+                  <label className="mb-1">
+                    Select Users<span class="star">*</span>
+                  </label>
+                  <UsersMultiSelectDropdown
+                    options={users}
+                    result={({ value }) => {
+                      setForm({ ...form, users: value });
+                    }}
+                    intialValue={form.users}
+                  />
+                  {submitted && form.users.length == 0 && (
+                    <div className="text-danger small mt-1 capitalize ">
+                      Please Select users.
+                    </div>
+                  )}
+                </div>
 
                 <div className="flex items-center flex-wrap gap-2 mb-3">
-                {selectedUsers &&
-                  selectedUsers?.length > 0 &&
-                  selectedUsers?.map((_user) => {
-                    return <div className="bg-primary text-white rounded-full text-sm px-4 py-1">{_user}</div>;
-                  })}
+                  {selectedUsers &&
+                    selectedUsers?.length > 0 &&
+                    selectedUsers?.map((_user) => {
+                      return (
+                        <div className="bg-primary text-white rounded-full text-sm px-4 py-1">
+                          {_user}
+                        </div>
+                      );
+                    })}
                 </div>
                 <div className="col-span-12 md:col-span-6 mb-6">
                   <label className="mb-1">

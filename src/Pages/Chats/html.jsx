@@ -182,7 +182,7 @@ const Html = ({
       }
 
       socketModel.emit("unread-count", value);
-      socketModel.emit("read-all-message ", value);
+      socketModel.emit("read-all-message", value);
 
       socketModel.on("read-all-message", (data) => {
         console.log("read-all-message", data);
