@@ -59,7 +59,7 @@ const View = () => {
                   <label className="profileheddingcls">
                     Notification Title
                   </label>
-                  <div className="profiledetailscls">{data?.title || "--"}</div>
+                  <p className="profiledetailscls">{data?.title || "--"}</p>
                 </div>
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Notification Type</label>
@@ -69,13 +69,13 @@ const View = () => {
                   <label className="profileheddingcls">Users group</label>
                   {unique?.map((itm) => {
                     return (
-                      <div className="profiledetailscls">{itm || "--"}</div>
+                      <p className="profiledetailscls">{itm || "--"}</p>
                     );
                   })}
                 </div>
                 <div className="col-span-12 md:col-span-12">
                   <label className="profileheddingcls">Emails</label>
-                  <div className="flex flex-wrap gap-4">
+                  <div className="grid grid-cols-12 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                     {data?.users?.map((user) => {
                       return (
                         <>
