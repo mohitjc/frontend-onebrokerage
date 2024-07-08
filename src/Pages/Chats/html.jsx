@@ -86,7 +86,6 @@ const Html = ({
   };
 
   const handleEmojiClick = ({ emoji }) => {
-    console.log("emoji", emoji);
     const _value = message.message;
     let _message =
       message.message.length > 0 ? `${_value} ${emoji}` : `${emoji}`;
