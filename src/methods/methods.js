@@ -272,7 +272,7 @@ const msToTime = (milliseconds, ago = true) => {
   }
 
   if (ago) {
-    if ((h == 0) & (m == 0)) {
+    if (h == 0 && m == 0) {
       time += `a few seconds`;
     }
     time += " ago";

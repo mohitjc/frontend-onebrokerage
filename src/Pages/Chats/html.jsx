@@ -55,6 +55,7 @@ const Html = ({
   const [chatRoomId, setChatRoomId] = useState("");
   const [activeChat, setActiveChat] = useState();
   const [showEmojis, setShowEmojis] = useState(false);
+  const [initialCount, setInitialCount] = useState(0);
   const [search, setSearch] = useState("");
 
   let ar = sessionStorage.getItem("activeRooms");
@@ -105,6 +106,17 @@ const Html = ({
       if (res.success) {
         console.log("res", res);
         setChatRooms(res.data.data);
+      }
+      loader(false);
+    });
+  };
+
+  const getInitialChatCount = (p = {}) => {
+    let f = { ...p };
+    loader(true);
+    ApiClient.get("chat/room-members", f).then((res) => {
+      if (res.success) {
+        setInitialCount(res.data?.data?.length);
       }
       loader(false);
     });
@@ -224,9 +236,8 @@ const Html = ({
   };
 
   useEffect(() => {
-    {
-      getChatRoomsList({ quickChat: false });
-    }
+    getChatRoomsList({ quickChat: false });
+    getInitialChatCount({ quickChat: false });
   }, []);
 
   return (
@@ -285,74 +296,75 @@ const Html = ({
             <div className="shadow-box w-full bg-white rounded-lg mt-6">
               <div className="">
                 <div className="grid grid-cols-12 gap-4  ">
-                  {chatRooms?.length == 0 && !search && (
+                  {initialCount == 0 && !search ? (
                     <div className="col-span-12 h-[400px] bgs_starts flex items-center justify-center">
                       <div className="w-52 mx-auto">No Chats.</div>
                     </div>
-                  )}
-
-                  <div className="col-span-12 md:col-span-5 2xl:col-span-3">
-                    <div className="bg-gray-100 p-6 h-full">
-                      <form
-                        className="flex items-center max-w-sm"
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          filter();
-                        }}
-                      >
-                        <label for="simple-search" className="sr-only">
-                          Search
-                        </label>
-                        <div className="relative w-full">
-                          <input
-                            type="text"
-                            id="simple-search"
-                            value={search}
-                            onChange={(e) => {
-                              setSearch(e.target.value);
-                            }}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
-                            placeholder="Search..."
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter") {
-                                e.preventDefault();
+                  ) : (
+                    <div className="col-span-12 md:col-span-5 2xl:col-span-3">
+                      <div className="bg-gray-100 p-6 h-full">
+                        <form
+                          className="flex items-center max-w-sm"
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            filter();
+                          }}
+                        >
+                          <label for="simple-search" className="sr-only">
+                            Search
+                          </label>
+                          <div className="relative w-full">
+                            <input
+                              type="text"
+                              id="simple-search"
+                              value={search}
+                              onChange={(e) => {
+                                setSearch(e.target.value);
+                              }}
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
+                              placeholder="Search..."
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                  e.preventDefault();
+                                  getChatRoomsList({
+                                    quickChat:
+                                      openTab == "chats" ? false : true,
+                                  });
+                                }
+                              }}
+                            />
+                            {search && (
+                              <i
+                                className="fa fa-times absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"
+                                aria-hidden="true"
+                                onClick={handleClearSearch}
+                              ></i>
+                            )}
+                          </div>
+                          <button
+                            type="submit"
+                            className="p-2.5 text-sm font-medium h-10 text-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          >
+                            <IoSearchOutline
+                              onClick={() => {
                                 getChatRoomsList({
                                   quickChat: openTab == "chats" ? false : true,
                                 });
-                              }
-                            }}
-                          />
-                          {search && (
-                            <i
-                              className="fa fa-times absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"
-                              aria-hidden="true"
-                              onClick={handleClearSearch}
-                            ></i>
-                          )}
-                        </div>
-                        <button
-                          type="submit"
-                          className="p-2.5 text-sm font-medium h-10 text-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        >
-                          <IoSearchOutline
-                            onClick={() => {
-                              getChatRoomsList({
-                                quickChat: openTab == "chats" ? false : true,
-                              });
-                            }}
-                          />
-                        </button>
-                      </form>
-                      <Lists
-                        user={user}
-                        chats={chatRooms}
-                        onChatRoomClick={(id) => {
-                          handleChatClick(id);
-                        }}
-                        activeChat={chatRoomId}
-                      />
+                              }}
+                            />
+                          </button>
+                        </form>
+                        <Lists
+                          user={user}
+                          chats={chatRooms}
+                          onChatRoomClick={(id) => {
+                            handleChatClick(id);
+                          }}
+                          activeChat={chatRoomId}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {chatRoomId != "" ? (
                     <Chat
@@ -384,74 +396,75 @@ const Html = ({
             <div className="shadow-box w-full bg-white rounded-lg mt-6">
               <div className="">
                 <div className="grid grid-cols-12 gap-4  ">
-                  {chatRooms?.length == 0 && !search && (
+                  {initialCount == 0 && !search ? (
                     <div className="col-span-12 h-[400px] bgs_starts flex items-center justify-center">
                       <div className="w-52 mx-auto">No Chats.</div>
                     </div>
-                  )}
-
-                  <div className="col-span-12 md:col-span-5 2xl:col-span-3">
-                    <div className="bg-gray-100 p-6 h-full">
-                      <form
-                        className="flex items-center max-w-sm"
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          filter();
-                        }}
-                      >
-                        <label for="simple-search" className="sr-only">
-                          Search
-                        </label>
-                        <div className="relative w-full">
-                          <input
-                            type="text"
-                            id="simple-search"
-                            value={search}
-                            onChange={(e) => {
-                              setSearch(e.target.value);
-                            }}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
-                            placeholder="Search..."
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter") {
-                                e.preventDefault();
+                  ) : (
+                    <div className="col-span-12 md:col-span-5 2xl:col-span-3">
+                      <div className="bg-gray-100 p-6 h-full">
+                        <form
+                          className="flex items-center max-w-sm"
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            filter();
+                          }}
+                        >
+                          <label for="simple-search" className="sr-only">
+                            Search
+                          </label>
+                          <div className="relative w-full">
+                            <input
+                              type="text"
+                              id="simple-search"
+                              value={search}
+                              onChange={(e) => {
+                                setSearch(e.target.value);
+                              }}
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
+                              placeholder="Search..."
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                  e.preventDefault();
+                                  getChatRoomsList({
+                                    quickChat:
+                                      openTab == "chats" ? false : true,
+                                  });
+                                }
+                              }}
+                            />
+                            {search && (
+                              <i
+                                className="fa fa-times absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"
+                                aria-hidden="true"
+                                onClick={handleClearSearch}
+                              ></i>
+                            )}
+                          </div>
+                          <button
+                            type="submit"
+                            className="p-2.5 text-sm font-medium h-10 text-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          >
+                            <IoSearchOutline
+                              onClick={() => {
                                 getChatRoomsList({
                                   quickChat: openTab == "chats" ? false : true,
                                 });
-                              }
-                            }}
-                          />
-                          {search && (
-                            <i
-                              className="fa fa-times absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"
-                              aria-hidden="true"
-                              onClick={handleClearSearch}
-                            ></i>
-                          )}
-                        </div>
-                        <button
-                          type="submit"
-                          className="p-2.5 text-sm font-medium h-10 text-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        >
-                          <IoSearchOutline
-                            onClick={() => {
-                              getChatRoomsList({
-                                quickChat: openTab == "chats" ? false : true,
-                              });
-                            }}
-                          />
-                        </button>
-                      </form>
-                      <Lists
-                        user={user}
-                        chats={chatRooms}
-                        onChatRoomClick={(id) => {
-                          handleChatClick(id);
-                        }}
-                        activeChat={chatRoomId}
-                      />
+                              }}
+                            />
+                          </button>
+                        </form>
+                        <Lists
+                          user={user}
+                          chats={chatRooms}
+                          onChatRoomClick={(id) => {
+                            handleChatClick(id);
+                          }}
+                          activeChat={chatRoomId}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {chatRoomId != "" ? (
                     <Chat
