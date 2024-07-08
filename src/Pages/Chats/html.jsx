@@ -61,6 +61,7 @@ const Html = ({
   const activeRooms = useRef(ar ? JSON.parse(ar) : []);
   const currectChat = useRef();
   const messages = useRef([]);
+  const emojiPickerRef = useRef(null);
 
   const chatScroll = () => {
     // Scroll to the bottom after sending a message
@@ -70,7 +71,8 @@ const Html = ({
 
   const handleSendMessage = () => {
     let value = {};
-    if (message.message && message.message != "") {
+    console.log("HERE");
+    if (message.message && message.message?.length > 0) {
       value = {
         room_id: chatRoomId,
         type: message.type,
@@ -178,8 +180,13 @@ const Html = ({
         );
         socketModel.emit("join-room", value);
       }
+
       socketModel.emit("unread-count", value);
       socketModel.emit("read-all-message ", value);
+
+      socketModel.on("read-all-message", (data) => {
+        console.log("read-all-message", data);
+      });
 
       getChatMessages(chatRoomId);
       getActiveChat(chatRoomId);
@@ -364,6 +371,7 @@ const Html = ({
                       }}
                       onEmojiClick={handleEmojiClick}
                       showEmojis={showEmojis}
+                      ref={emojiPickerRef}
                     />
                   ) : (
                     <></>

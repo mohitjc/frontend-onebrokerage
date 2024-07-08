@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import methodModel from "../../methods/methods";
 import moment from "moment";
 import { PiSmileyBold } from "react-icons/pi";
@@ -22,6 +22,7 @@ function Chat({
   const sender = activeChat?.user_details?.find(
     (_user) => _user?._id !== user._id
   );
+
   return (
     <>
       {chatMessages && (
@@ -208,6 +209,7 @@ function Chat({
                   <button
                     type="button"
                     onClick={onSendClick}
+                    disabled={message?.length == 0}
                     className="inline-flex items-center justify-center rounded-lg  px-4 py-3 transition duration-500 ease-in-out text-white bg-primary focus:outline-none"
                   >
                     <span className="font-bold">Send</span>
