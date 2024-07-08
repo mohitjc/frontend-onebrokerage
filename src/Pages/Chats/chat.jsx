@@ -43,7 +43,7 @@ function Chat({
                       {sender?.fullName}
                     </p>
 
-                    <p className="xl:text-[12px] text-[10px] w-20 xl:w-32 line-clamp-1 ">
+                    <p className="xl:text-[12px] text-[10px] w-20 xl:w-32 line--clamp--1 ">
                       {activeChat?.room_details?.subject}
                     </p>
                   </div>
