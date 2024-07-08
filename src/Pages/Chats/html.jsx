@@ -96,7 +96,7 @@ const Html = ({
   const getChatRoomsList = (p = {}) => {
     let f = { ...p };
     if (search) {
-      f = { search: search };
+      f = { search: search, ...p };
     }
     loader(true);
     ApiClient.get("chat/room-members", f).then((res) => {
