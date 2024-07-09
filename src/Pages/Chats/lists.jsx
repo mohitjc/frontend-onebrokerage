@@ -48,27 +48,32 @@ const Chat = ({ chat, onChatClick, sender, isActive }) => {
               }}
             >
               <div className="">
-                <div className="flex items-center gap-2 cursor-pointer">
-                  <div className="shrink-0">
-                    <img
-                      className="h-6 w-6  xl:h-12 xl:w-12 rounded-full object-cover"
-                      src={methodModel.noImg(sender?.image)}
-                      alt=""
-                    />
-                  </div>
-                  <div className="">
+                <div className="flex items-center justify-between cursor-pointer">
+                  <div className="flex items-center gap-2 ">
+                    <div className="shrink-0">
+                      <img
+                        className="h-6 w-6  xl:h-12 xl:w-12 rounded-full object-cover"
+                        src={methodModel.noImg(sender?.image)}
+                        alt=""
+                      />
+                    </div>
                     <div className="">
-                      <p className="xl:text-[15px] text-[12px] font-semibold">
-                        {sender?.fullName}
-                      </p>
+                      <div className="">
+                        <p className="xl:text-[15px] text-[12px] font-semibold">
+                          {sender?.fullName}
+                        </p>
 
-                      <p className="xl:text-[12px] text-[10px] w-20 xl:w-32 line-clamp-1 ">
-                        {chat?.room_details?.subject}
-                      </p>
+                        <p className="xl:text-[12px] text-[10px] w-20 xl:w-32 line-clamp-1 ">
+                          {chat?.room_details?.subject}
+                        </p>
+                      </div>
                     </div>
                   </div>
+                  {chat.chat_count != null && chat.chat_count > 0 && (
+                    <div className="text-[12px]">{chat.chat_count}</div>
+                  )}
                 </div>
-                <div></div>
+
                 <div className="flex justify-end text-[10px] shrink-0">
                   <FromNow date={chat.room_details?.createdAt} />
                 </div>

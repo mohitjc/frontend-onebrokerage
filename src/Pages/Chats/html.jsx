@@ -56,7 +56,9 @@ const Html = ({
   const [activeChat, setActiveChat] = useState();
   const [showEmojis, setShowEmojis] = useState(false);
   const [initialCount, setInitialCount] = useState(0);
+  const [initialMessageCount, setMessageCount] = useState(0);
   const [search, setSearch] = useState("");
+  const [disableChat, setDisableChat] = useState(false);
 
   let ar = sessionStorage.getItem("activeRooms");
   const activeRooms = useRef(ar ? JSON.parse(ar) : []);
@@ -112,6 +114,16 @@ const Html = ({
   };
 
   const getInitialChatCount = (p = {}) => {
+    let f = { ...p };
+    loader(true);
+    ApiClient.get("chat/room-members", f).then((res) => {
+      if (res.success) {
+        setInitialCount(res.data?.data?.length);
+      }
+      loader(false);
+    });
+  };
+  const getInitialMessageCount = (p = {}) => {
     let f = { ...p };
     loader(true);
     ApiClient.get("chat/room-members", f).then((res) => {
@@ -182,6 +194,7 @@ const Html = ({
         room_id: chatRoomId,
         user_id: user?._id,
       };
+      console.log("VALUE", value);
 
       if (!activeRooms.current.includes(chatRoomId)) {
         console.log("activeRooms", activeRooms);
@@ -223,7 +236,10 @@ const Html = ({
           chatScroll();
         }, 100);
       }
-      getChatRoomsList({ quickChat: openTab == "chats" ? false : true });
+      getChatRoomsList({
+        quickChat: openTab == "chats" ? false : true,
+        sortBy: "updatedAt desc",
+      });
     });
   }, []);
 
@@ -235,9 +251,21 @@ const Html = ({
     });
   };
 
+  const handleChatEnable = (checked) => {
+    setDisableChat(checked);
+    loader(true);
+    socketModel.emit("user-chat-update", { admin_id: user._id, chat: checked });
+
+    socketModel.on("user-chat-update", (data) => {
+      console.log("HERE", data);
+    });
+    loader(false);
+  };
+
   useEffect(() => {
     getChatRoomsList({ quickChat: false });
     getInitialChatCount({ quickChat: false });
+    getInitialMessageCount({ quickChat: false });
   }, []);
 
   return (
@@ -251,6 +279,21 @@ const Html = ({
           <p className="text-sm font-normal text-[#75757A]">
             Here you can see all about your {shared.title}
           </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-sm">
+            {disableChat == true ? "Disable" : "Enable"} Chats
+          </span>
+          <label className="inline-flex items-center cursor-pointer ">
+            <input
+              type="checkbox"
+              value={disableChat}
+              checked={disableChat}
+              className="sr-only peer"
+              onChange={(e) => handleChatEnable(e.target.checked)}
+            />
+            <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#EB6A59]"></div>
+          </label>
         </div>
       </div>
 
@@ -396,7 +439,7 @@ const Html = ({
             <div className="shadow-box w-full bg-white rounded-lg mt-6">
               <div className="">
                 <div className="grid grid-cols-12 gap-4  ">
-                  {initialCount == 0 && !search ? (
+                  {initialMessageCount == 0 && !search ? (
                     <div className="col-span-12 h-[400px] bgs_starts flex items-center justify-center">
                       <div className="w-52 mx-auto">No Chats.</div>
                     </div>
