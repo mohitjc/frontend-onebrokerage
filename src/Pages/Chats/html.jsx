@@ -58,7 +58,7 @@ const Html = ({
   const [initialCount, setInitialCount] = useState(0);
   const [initialMessageCount, setMessageCount] = useState(0);
   const [search, setSearch] = useState("");
-  const [disableChat, setDisableChat] = useState(false);
+  const [disableChat, setDisableChat] = useState();
 
   let ar = sessionStorage.getItem("activeRooms");
   const activeRooms = useRef(ar ? JSON.parse(ar) : []);
@@ -74,7 +74,6 @@ const Html = ({
 
   const handleSendMessage = () => {
     let value = {};
-    console.log("HERE");
     if (message.message && message.message?.length > 0) {
       value = {
         room_id: chatRoomId,
@@ -82,7 +81,6 @@ const Html = ({
         content: message.message || img,
         user_id: user?._id,
       };
-      console.log("VALUE", value);
       socketModel.emit("send-message", value);
       setMessage({ message: "", type: "" });
       setImg("");
@@ -99,6 +97,7 @@ const Html = ({
   };
 
   const getChatRoomsList = (p = {}) => {
+    console.log("WORKING>>>>>>>");
     let f = { ...p };
     if (search) {
       f = { search: search, ...p };
@@ -221,6 +220,7 @@ const Html = ({
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
       console.log("DATA", data);
+
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
 
@@ -236,9 +236,9 @@ const Html = ({
           chatScroll();
         }, 100);
       }
+
       getChatRoomsList({
         quickChat: openTab == "chats" ? false : true,
-        sortBy: "updatedAt desc",
       });
     });
   }, []);
@@ -255,10 +255,6 @@ const Html = ({
     setDisableChat(checked);
     loader(true);
     socketModel.emit("user-chat-update", { admin_id: user._id, chat: checked });
-
-    socketModel.on("user-chat-update", (data) => {
-      console.log("HERE", data);
-    });
     loader(false);
   };
 
@@ -266,6 +262,7 @@ const Html = ({
     getChatRoomsList({ quickChat: false });
     getInitialChatCount({ quickChat: false });
     getInitialMessageCount({ quickChat: false });
+    setDisableChat(user.chat_enabled);
   }, []);
 
   return (
@@ -280,21 +277,23 @@ const Html = ({
             Here you can see all about your {shared.title}
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="text-sm">
-            {disableChat == true ? "Disable" : "Enable"} Chats
-          </span>
-          <label className="inline-flex items-center cursor-pointer ">
-            <input
-              type="checkbox"
-              value={disableChat}
-              checked={disableChat}
-              className="sr-only peer"
-              onChange={(e) => handleChatEnable(e.target.checked)}
-            />
-            <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#EB6A59]"></div>
-          </label>
-        </div>
+        {user && (
+          <div className="flex items-center gap-2">
+            <span className="text-sm">
+              {disableChat == true ? "Disable" : "Enable"} Chats
+            </span>
+            <label className="inline-flex items-center cursor-pointer ">
+              <input
+                type="checkbox"
+                value={disableChat}
+                checked={disableChat || user.chat_enabled}
+                className="sr-only peer"
+                onChange={(e) => handleChatEnable(e.target.checked)}
+              />
+              <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#EB6A59]"></div>
+            </label>
+          </div>
+        )}
       </div>
 
       <Tab.Group>

@@ -17,7 +17,6 @@ const Html = ({
   uploadImage,
   submitted,
 }) => {
-  console.log("form", form);
   return (
     <>
       <div className="wrapper_section">

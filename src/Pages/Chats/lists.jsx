@@ -1,5 +1,5 @@
 import moment from "moment";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LiaTrashAlt } from "react-icons/lia";
 import methodModel from "../../methods/methods";
 import FromNow from "../../components/Time/FromNow";
@@ -33,6 +33,13 @@ function Lists({ chats, onChatRoomClick, user, activeChat }) {
 export default Lists;
 
 const Chat = ({ chat, onChatClick, sender, isActive }) => {
+  let _count = chat.admin_chat_count;
+
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    setCount(_count);
+  }, [_count]);
+
   return (
     <>
       {chat && (
@@ -44,6 +51,7 @@ const Chat = ({ chat, onChatClick, sender, isActive }) => {
           >
             <a
               onClick={() => {
+                setCount(0);
                 onChatClick(chat.room_details._id);
               }}
             >
@@ -69,8 +77,8 @@ const Chat = ({ chat, onChatClick, sender, isActive }) => {
                       </div>
                     </div>
                   </div>
-                  {chat.chat_count != null && chat.chat_count > 0 && (
-                    <div className="text-[12px]">{chat.chat_count}</div>
+                  {count != null && count > 0 && !isActive && (
+                    <div className="text-[12px]">{count}</div>
                   )}
                 </div>
 
