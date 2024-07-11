@@ -33,7 +33,7 @@ const Html = ({
   const columns = [
     {
       key: "title",
-      name: "Notification Title",
+      name: "Message Title",
       render: (row) => {
         return (
           <span className="capitalize line-clamp-1 lg:max-w-[200px] xl:max-w-[400px] ">
@@ -70,7 +70,7 @@ const Html = ({
     },
     {
       key: "type",
-      name: "Notification Type",
+      name: "Message Type",
       render: (row) => {
         console.log("row", row);
         return (

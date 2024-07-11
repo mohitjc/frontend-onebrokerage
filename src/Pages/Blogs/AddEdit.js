@@ -23,6 +23,7 @@ const AddEdit = () => {
   const [images, setImages] = useState({
     image: "",
     cover_image: "",
+    subscribeBanner: "",
   });
 
   const [form, setform] = useState({
@@ -36,6 +37,7 @@ const AddEdit = () => {
     description2: "",
     description3: "",
     category: "",
+    bannerUrl: "",
   });
 
   const history = useNavigate();
@@ -55,6 +57,8 @@ const AddEdit = () => {
     { key: "description2", required: true },
     { key: "description3", required: true },
   ];
+
+  const isValidUrl = methodModel.urlValidation(form.bannerUrl);
 
   const getMediaList = () => {
     ApiClient.get("audio/list").then((res) => {
@@ -88,7 +92,14 @@ const AddEdit = () => {
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
 
-    if (invalid || !images.image || !images.cover_image) return;
+    if (
+      invalid ||
+      !images.image ||
+      !images.cover_image ||
+      !images.subscribeBanner ||
+      isValidUrl == false
+    )
+      return;
     let method = "post";
     let url = shared.addApi;
     let value = {
@@ -96,6 +107,8 @@ const AddEdit = () => {
       ...images,
       category: form.category || null,
     };
+
+    console.log("value", value);
 
     if (value.id) {
       method = "put";
@@ -359,6 +372,54 @@ const AddEdit = () => {
                       </div>
                     )}
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="shadow-box w-full bg-white rounded-lg mt-4 p-6">
+            <div className="description_lats">
+              <div className="col-span-12 md:col-span-6">
+                <div className=" mb-3">
+                  <div>
+                    <label className="lablefontcls mb-2 inline-flex">
+                      Subscribe Banner
+                    </label>
+                  </div>
+
+                  <ImageUpload
+                    model="users"
+                    result={(e) => imageResult(e, "subscribeBanner")}
+                    value={images.subscribeBanner}
+                    label="Choose Images"
+                  />
+                  {submitted && !images.subscribeBanner && (
+                    <div className="text-danger small mt-1">
+                      Subscribe banner is required.
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="col-span-12 md:col-span-6">
+                <div className=" mb-3">
+                  <FormControl
+                    type="text"
+                    name="url"
+                    label="Subscribe URL"
+                    value={form.bannerUrl}
+                    onChange={(e) => setform({ ...form, bannerUrl: e })}
+                    required
+                  />
+                  {submitted && !form.bannerUrl && (
+                    <div className="text-danger small mt-1">
+                      Url is required.
+                    </div>
+                  )}
+                  {submitted && !isValidUrl && (
+                    <div className="text-danger small mt-1">
+                      Enter a valid url.
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

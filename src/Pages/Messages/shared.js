@@ -6,8 +6,8 @@ const types = [
 
 const shared = {
   check: "Notifications",
-  title: "Notifications",
-  addTitle: "Notifications",
+  title: "Messages",
+  addTitle: "Message",
   url: "notifications",
   addApi: "notification/add",
   editApi: "notification",

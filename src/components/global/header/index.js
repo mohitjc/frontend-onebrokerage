@@ -27,6 +27,7 @@ const Header = ({ setIsOpen, isOpen }) => {
     localStorage.removeItem("token");
     // localStorage.removeItem("loginTime")
     history("/login");
+    socketModel.emit("user-offline", { user_id: user?._id });
   };
 
   // logout after 1 day

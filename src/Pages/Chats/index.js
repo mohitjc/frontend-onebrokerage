@@ -9,6 +9,7 @@ import axios from "axios";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import socketModel from "../../models/socketModel";
 
 const Newsletter = () => {
   const user = useSelector((state) => state.user);

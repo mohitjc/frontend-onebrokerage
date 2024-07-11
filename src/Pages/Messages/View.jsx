@@ -56,21 +56,17 @@ const View = () => {
             <div className="sideclass col-span-12 md:col-span-12">
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">
-                    Notification Title
-                  </label>
+                  <label className="profileheddingcls">Message Title</label>
                   <p className="profiledetailscls">{data?.title || "--"}</p>
                 </div>
                 <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Notification Type</label>
+                  <label className="profileheddingcls">Message Type</label>
                   <div className="profiledetailscls">{data?.type || "--"}</div>
                 </div>
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Users group</label>
                   {unique?.map((itm) => {
-                    return (
-                      <p className="profiledetailscls">{itm || "--"}</p>
-                    );
+                    return <p className="profiledetailscls">{itm || "--"}</p>;
                   })}
                 </div>
                 <div className="col-span-12 md:col-span-12">
@@ -80,8 +76,12 @@ const View = () => {
                       return (
                         <>
                           <div className="bg-gray-100 rounded-lg p-3">
-                          <p className="text-md text-neutral-800 font-semibold">{user.fullName}</p> 
-                          <p className="text-sm text-neutral-600 font-medium">{user.email}</p>
+                            <p className="text-md text-neutral-800 font-semibold">
+                              {user.fullName}
+                            </p>
+                            <p className="text-sm text-neutral-600 font-medium">
+                              {user.email}
+                            </p>
                           </div>
                         </>
                       );

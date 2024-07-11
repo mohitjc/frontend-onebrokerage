@@ -115,12 +115,14 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     },
     {
       name: "Blogs",
-      icon: <TfiLayoutMediaCenterAlt className="text-[#fff] shrink-0 text-lg" />,
+      icon: (
+        <TfiLayoutMediaCenterAlt className="text-[#fff] shrink-0 text-lg" />
+      ),
       url: "/blog",
       key: "",
     },
     {
-      name: "Notifications",
+      name: "Messages",
       icon: <PiBellSimpleLight className="text-[#fff] shrink-0 text-lg" />,
       url: "/notifications",
       key: "",

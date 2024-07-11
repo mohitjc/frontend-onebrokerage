@@ -66,6 +66,8 @@ const Html = ({
   const messages = useRef([]);
   const emojiPickerRef = useRef(null);
 
+  const isOnline = localStorage.getItem("AdminOnline");
+
   const chatScroll = () => {
     // Scroll to the bottom after sending a message
     var chatBox = document.getElementById("chat-box");
@@ -97,18 +99,17 @@ const Html = ({
   };
 
   const getChatRoomsList = (p = {}) => {
-    console.log("WORKING>>>>>>>");
     let f = { ...p };
     if (search) {
       f = { search: search, ...p };
     }
-    loader(true);
+    // loader(true);
     ApiClient.get("chat/room-members", f).then((res) => {
       if (res.success) {
         console.log("res", res);
         setChatRooms(res.data.data);
       }
-      loader(false);
+      // loader(false);
     });
   };
 
@@ -265,6 +266,26 @@ const Html = ({
     setDisableChat(user.chat_enabled);
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("AdminOnline", true);
+
+    if (isOnline) {
+      socketModel.emit("user-online", { user_id: user._id });
+    }
+
+    socketModel.on("user-online", () => {
+      getChatRoomsList();
+    });
+    socketModel.on("user-offline", () => {
+      getChatRoomsList();
+    });
+
+    return () => {
+      socketModel.emit("user-offline", { user_id: user._id });
+      localStorage.removeItem("AdminOnline");
+    };
+  }, []);
+
   return (
     <Layout>
       <div className="flex flex-wrap justify-between items-center gap-y-4 mb-3">
@@ -403,6 +424,7 @@ const Html = ({
                             handleChatClick(id);
                           }}
                           activeChat={chatRoomId}
+                          isChat={true}
                         />
                       </div>
                     </div>

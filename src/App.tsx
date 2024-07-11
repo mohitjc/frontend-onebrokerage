@@ -61,10 +61,11 @@ import Audio from "./Pages/Audio";
 import AddAudio from "./Pages/Audio/AddEdit";
 import ViewAudio from "./Pages/Audio/View";
 import SendNewsletter from "./Pages/Emails/Send";
-import Notifications from "./Pages/Notifications";
-import SendNotification from "./Pages/Notifications/Send";
+import Notifications from "./Pages/Messages";
+import SendNotification from "./Pages/Messages/Send";
 import Chats from "./Pages/Chats";
-import ViewNotification from "./Pages/Notifications/View";
+import ViewNotification from "./Pages/Messages/View";
+import socketModel from "./models/socketModel";
 
 const { persistor, store } = configureStoreProd();
 

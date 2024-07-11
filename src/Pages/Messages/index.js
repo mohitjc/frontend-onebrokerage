@@ -14,7 +14,7 @@ import FormControl from "../../components/common/FormControl";
 import MultiSelectDropdown from "../../components/common/MultiSelectDropdown";
 import methodModel from "../../methods/methods";
 
-const Subscribers = () => {
+const Notifications = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({
@@ -229,4 +229,4 @@ const Subscribers = () => {
   );
 };
 
-export default Subscribers;
+export default Notifications;

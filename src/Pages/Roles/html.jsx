@@ -153,8 +153,7 @@ const Html = ({
                             {/* dropdown */}
                             <td className="px-6 py-4">
                               <div className="flex items-center justify-start gap-1.5">
-                                {isAllow(`editRoles`) &&
-                                itm.name == "Sub Admin" ? (
+                                {isAllow(`editRoles`) && itm.name == "Staff" ? (
                                   <Tooltip placement="top" title="Edit">
                                     <a
                                       className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"

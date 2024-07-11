@@ -11,6 +11,7 @@ import { FcOvertime } from "react-icons/fc";
 import { BsExclamationTriangle } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { login_success } from "../../../Pages/actions/user";
+import socketModel from "../../../models/socketModel";
 
 const Layout = ({ children }) => {
   const user = useSelector((state) => state.user);

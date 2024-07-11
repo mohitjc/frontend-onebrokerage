@@ -4,7 +4,7 @@ import { LiaTrashAlt } from "react-icons/lia";
 import methodModel from "../../methods/methods";
 import FromNow from "../../components/Time/FromNow";
 
-function Lists({ chats, onChatRoomClick, user, activeChat }) {
+function Lists({ chats, onChatRoomClick, user, activeChat, isChat }) {
   return (
     <div className="">
       {chats?.length == 0 && (
@@ -22,6 +22,7 @@ function Lists({ chats, onChatRoomClick, user, activeChat }) {
                 onChatClick={onChatRoomClick}
                 sender={sender}
                 isActive={chat?.room_id == activeChat}
+                isChat={isChat}
               />
             );
           })}
@@ -32,7 +33,7 @@ function Lists({ chats, onChatRoomClick, user, activeChat }) {
 
 export default Lists;
 
-const Chat = ({ chat, onChatClick, sender, isActive }) => {
+const Chat = ({ chat, onChatClick, sender, isActive, isChat }) => {
   let _count = chat.admin_chat_count;
 
   const [count, setCount] = useState(0);
@@ -64,6 +65,9 @@ const Chat = ({ chat, onChatClick, sender, isActive }) => {
                         src={methodModel.noImg(sender?.image)}
                         alt=""
                       />
+                      {isChat && (
+                        <span>{chat?.issOnline ? "Online" : "Offline"}</span>
+                      )}
                     </div>
                     <div className="">
                       <div className="">
