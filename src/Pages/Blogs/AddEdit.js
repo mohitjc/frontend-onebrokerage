@@ -244,6 +244,7 @@ const AddEdit = () => {
                   </div>
                 )}
 
+                <div className="mt-3">
                 <FormControl
                   type="editor"
                   name="description"
@@ -257,6 +258,7 @@ const AddEdit = () => {
                     description is required.
                   </div>
                 )}
+                </div>
               </div>
             </div>
           </div>
