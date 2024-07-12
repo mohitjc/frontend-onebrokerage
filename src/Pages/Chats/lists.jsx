@@ -67,7 +67,7 @@ const Chat = ({ chat, onChatClick, sender, isActive, isChat }) => {
                       />
                       {isChat && (
                         <span>
-                          {chat?.issOnline ? (
+                          {sender?.isOnline ? (
                             <div className="bg-green-500 border border-white h-3.5 w-3.5 rounded-full absolute right-0 bottom-0"></div>
                           ) : (
                             <div className="rounded-full"></div>
