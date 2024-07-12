@@ -59,7 +59,7 @@ const Chat = ({ chat, onChatClick, sender, isActive, isChat }) => {
               <div className="">
                 <div className="flex items-center justify-between cursor-pointer">
                   <div className="flex items-center gap-2 ">
-                    <div className="shrink-0">
+                    <div className="shrink-0 relative">
                       <img
                         className="h-6 w-6  xl:h-12 xl:w-12 rounded-full object-cover"
                         src={methodModel.noImg(sender?.image)}
@@ -68,9 +68,9 @@ const Chat = ({ chat, onChatClick, sender, isActive, isChat }) => {
                       {isChat && (
                         <span>
                           {chat?.issOnline ? (
-                            <div class="bg-[#138d33] h-3 w-3 rounded-full"></div>
+                            <div className="bg-green-500 border border-white h-3.5 w-3.5 rounded-full absolute right-0 bottom-0"></div>
                           ) : (
-                            <div class="bg-[#fdc809] h-3 w-3 rounded-full"></div>
+                            <div className="rounded-full"></div>
                           )}
                         </span>
                       )}
