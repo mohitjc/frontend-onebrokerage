@@ -260,8 +260,10 @@ const Html = ({
   const updateChatRooms = (id, status) => {
     console.log("SOCKET CALLED");
     chatRooms?.forEach((room) => {
+      console.log("ROOM", room);
       // Find and update 'isOnline' for each user_details entry matching socketUserId
       room?.user_details?.forEach((_user) => {
+        console.log("ROOMUSER", _user._id, id);
         if (_user._id === id) {
           _user.isOnline = status; // Update isOnline status
         }
@@ -282,13 +284,23 @@ const Html = ({
     socketModel.on("user-online", (data) => {
       console.log("userOnline");
       const userId = data.data.user_id;
-      if (userId != user._id) updateChatRooms(userId, true);
+      if (userId != user._id) {
+        // updateChatRooms(userId, true);
+        getChatRoomsList({
+          quickChat: false,
+        });
+      }
     });
 
     socketModel.on("user-offline", (data) => {
       console.log("userOffline");
       const userId = data.data.user_id;
-      if (userId != user._id) updateChatRooms(userId, false);
+      if (userId != user._id) {
+        // updateChatRooms(userId, false);
+        getChatRoomsList({
+          quickChat: false,
+        });
+      }
     });
 
     return () => {

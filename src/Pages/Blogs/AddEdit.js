@@ -13,13 +13,19 @@ import datepipeModel from "../../models/datepipemodel";
 import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiTrash } from "react-icons/fi";
 
 let options = [];
 
 const AddEdit = () => {
   const { id } = useParams();
   const [audioList, setAudioList] = useState([]);
+  const [subscribe, setSubscribe] = useState([
+    {
+      banner: "",
+      url: "",
+    },
+  ]);
   const [images, setImages] = useState({
     image: "",
     cover_image: "",
@@ -37,7 +43,6 @@ const AddEdit = () => {
     description2: "",
     description3: "",
     category: "",
-    bannerUrl: "",
   });
 
   const history = useNavigate();
@@ -57,9 +62,6 @@ const AddEdit = () => {
     { key: "description2", required: true },
     { key: "description3", required: true },
   ];
-
-  const isValidUrl =
-    form?.bannerUrl && methodModel.urlValidation(form?.bannerUrl);
 
   const getMediaList = () => {
     ApiClient.get("audio/list").then((res) => {
@@ -88,17 +90,32 @@ const AddEdit = () => {
     });
   };
 
+  function hasEmptyKey(objectsArray) {
+    // Iterate through each object in the array
+    for (let obj of objectsArray) {
+      // Check each key in the current object
+      for (let key in obj) {
+        // If any key's value is empty, return true
+        if (!obj[key]) {
+          return true;
+        }
+      }
+    }
+    // If no empty key is found, return false
+    return false;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
+    let isValidBanner = hasEmptyKey(subscribe);
 
     if (
       invalid ||
       !images.image ||
       !images.cover_image ||
-      !images.subscribeBanner ||
-      isValidUrl == false
+      isValidBanner == true
     )
       return;
     let method = "post";
@@ -107,9 +124,8 @@ const AddEdit = () => {
       ...form,
       ...images,
       category: form.category || null,
+      banners: [...subscribe],
     };
-
-    console.log("value", value);
 
     if (value.id) {
       method = "put";
@@ -117,7 +133,6 @@ const AddEdit = () => {
     } else {
       delete value.id;
     }
-
     loader(true);
     ApiClient.allApi(url, value, method).then((res) => {
       if (res.success) {
@@ -141,6 +156,7 @@ const AddEdit = () => {
 
           if (payload.category) payload.category = payload.category.id;
           if (payload.audio) payload.audio = payload.audio._id;
+          if (value.banners) setSubscribe(value.banners);
 
           payload.id = id;
           setform({
@@ -164,6 +180,48 @@ const AddEdit = () => {
     if (submitted == true) {
       setSubmitted(false);
     }
+  };
+
+  const handleAddMore = (e) => {
+    e.preventDefault();
+    let obj = { banner: "", url: "" };
+    let value = [...subscribe];
+    value.push(obj);
+
+    let _value = [...value];
+    setSubscribe(_value);
+  };
+
+  const handleUrlChange = (e, index) => {
+    let url = e;
+    let _value = [...subscribe];
+    let __value = { ..._value[index] };
+    __value.url = url;
+    _value[index] = __value;
+
+    setSubscribe(_value);
+  };
+
+  const handleImageSelect = (e, index) => {
+    let img = e.value;
+    let _value = [...subscribe];
+    let __value = { ..._value[index] };
+    __value.banner = img;
+    _value[index] = __value;
+
+    setSubscribe(_value);
+  };
+
+  const handleRemoveBanner = (index) => {
+    let _value = [...subscribe];
+
+    //remove value
+    let __value = [..._value].filter((itm, _index) => {
+      return index != _index;
+    });
+
+    _value = __value;
+    setSubscribe(_value);
   };
 
   useEffect(() => {
@@ -378,50 +436,81 @@ const AddEdit = () => {
           </div>
 
           <div className="shadow-box w-full bg-white rounded-lg mt-4 p-6">
-            <div className="description_lats">
-              <div className="col-span-12 md:col-span-6">
-                <div className=" mb-3">
-                  <div>
-                    <label className="lablefontcls mb-2 inline-flex">
-                      Subscribe Banner
-                    </label>
-                  </div>
+            <div
+              className={`description_lats grid grid-cols-1 md:grid-cols-${
+                subscribe?.length > 1 ? 2 : 1
+              } gap-4`}
+            >
+              {subscribe?.map((itm, index) => {
+                return (
+                  <>
+                    <div className="flex flex-col gap-4 relative">
+                      {index > 0 && (
+                        <div
+                          onClick={() => {
+                            handleRemoveBanner(index);
+                          }}
+                          title="Remove"
+                          className="btns_delte px-2 py-1 bg-primary cursor-pointer text-white absolute right-0 top-0 rounded-lg"
+                        >
+                          <FiTrash />
+                        </div>
+                      )}
+                      <div className=" ">
+                        <div className=" mb-3">
+                          <div>
+                            <label className="lablefontcls mb-2 inline-flex">
+                              Banner Image
+                            </label>
+                          </div>
 
-                  <ImageUpload
-                    model="users"
-                    result={(e) => imageResult(e, "subscribeBanner")}
-                    value={images.subscribeBanner}
-                    label="Choose Images"
-                  />
-                  {submitted && !images.subscribeBanner && (
-                    <div className="text-danger small mt-1">
-                      Subscribe banner is required.
+                          <ImageUpload
+                            model="users"
+                            result={(e) => handleImageSelect(e, index)}
+                            value={subscribe[index].banner}
+                            label="Choose Image"
+                          />
+                          {submitted && !subscribe[index].banner && (
+                            <div className="text-danger small mt-1">
+                              Subscribe banner is required.
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="">
+                        <div className=" mb-3">
+                          <FormControl
+                            type="text"
+                            name="url"
+                            label="Banner URL"
+                            value={subscribe[index].url}
+                            onChange={(e) => handleUrlChange(e, index)}
+                            // required
+                          />
+                          {submitted && !subscribe[index].url && (
+                            <div className="text-danger small mt-1">
+                              Url is required.
+                            </div>
+                          )}
+                          {/* {submitted && subscribe[0].url && (
+                            <div className="text-danger small mt-1">
+                              Enter a valid url.
+                            </div>
+                          )} */}
+                        </div>
+                      </div>
                     </div>
-                  )}
-                </div>
-              </div>
-              <div className="col-span-12 md:col-span-6">
-                <div className=" mb-3">
-                  <FormControl
-                    type="text"
-                    name="url"
-                    label="Subscribe URL"
-                    value={form.bannerUrl}
-                    onChange={(e) => setform({ ...form, bannerUrl: e })}
-                    required
-                  />
-                  {submitted && !form.bannerUrl && (
-                    <div className="text-danger small mt-1">
-                      Url is required.
-                    </div>
-                  )}
-                  {submitted && form.bannerUrl && !isValidUrl && (
-                    <div className="text-danger small mt-1">
-                      Enter a valid url.
-                    </div>
-                  )}
-                </div>
-              </div>
+                  </>
+                );
+              })}
+            </div>
+            <div className="text-right mt-2">
+              <button
+                onClick={handleAddMore}
+                className="text-white bg-[#EB6A59] bg-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              >
+                Add more
+              </button>
             </div>
           </div>
 
