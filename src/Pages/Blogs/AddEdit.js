@@ -58,7 +58,8 @@ const AddEdit = () => {
     { key: "description3", required: true },
   ];
 
-  const isValidUrl = methodModel.urlValidation(form.bannerUrl);
+  const isValidUrl =
+    form?.bannerUrl && methodModel.urlValidation(form?.bannerUrl);
 
   const getMediaList = () => {
     ApiClient.get("audio/list").then((res) => {
@@ -120,7 +121,6 @@ const AddEdit = () => {
     loader(true);
     ApiClient.allApi(url, value, method).then((res) => {
       if (res.success) {
-        // ToastsStore.success(res.message)
         history(`/${shared.url}`);
       }
       loader(false);
@@ -415,7 +415,7 @@ const AddEdit = () => {
                       Url is required.
                     </div>
                   )}
-                  {submitted && !isValidUrl && (
+                  {submitted && form.bannerUrl && !isValidUrl && (
                     <div className="text-danger small mt-1">
                       Enter a valid url.
                     </div>
