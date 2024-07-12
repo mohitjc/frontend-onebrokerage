@@ -66,8 +66,6 @@ const Html = ({
   const messages = useRef([]);
   const emojiPickerRef = useRef(null);
 
-  const isOnline = localStorage.getItem("AdminOnline");
-
   const chatScroll = () => {
     // Scroll to the bottom after sending a message
     var chatBox = document.getElementById("chat-box");
@@ -259,6 +257,18 @@ const Html = ({
     loader(false);
   };
 
+  const updateChatRooms = (id, status) => {
+    console.log("SOCKET CALLED");
+    chatRooms?.forEach((room) => {
+      // Find and update 'isOnline' for each user_details entry matching socketUserId
+      room?.user_details?.forEach((_user) => {
+        if (_user._id === id) {
+          _user.isOnline = status; // Update isOnline status
+        }
+      });
+    });
+  };
+
   useEffect(() => {
     getChatRoomsList({ quickChat: false });
     getInitialChatCount({ quickChat: false });
@@ -267,22 +277,22 @@ const Html = ({
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("AdminOnline", true);
+    socketModel.emit("user-online", { user_id: user._id });
 
-    if (isOnline) {
-      socketModel.emit("user-online", { user_id: user._id });
-    }
-
-    socketModel.on("user-online", () => {
-      getChatRoomsList();
+    socketModel.on("user-online", (data) => {
+      console.log("userOnline");
+      const userId = data.data.user_id;
+      if (userId != user._id) updateChatRooms(userId, true);
     });
-    socketModel.on("user-offline", () => {
-      getChatRoomsList();
+
+    socketModel.on("user-offline", (data) => {
+      console.log("userOffline");
+      const userId = data.data.user_id;
+      if (userId != user._id) updateChatRooms(userId, false);
     });
 
     return () => {
       socketModel.emit("user-offline", { user_id: user._id });
-      localStorage.removeItem("AdminOnline");
     };
   }, []);
 
