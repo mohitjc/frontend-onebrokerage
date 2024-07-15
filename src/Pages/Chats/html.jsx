@@ -287,7 +287,7 @@ const Html = ({
       if (userId != user._id) {
         // updateChatRooms(userId, true);
         getChatRoomsList({
-          quickChat: false,
+          quickChat: openTab == "chats" ? false : true,
         });
       }
     });
@@ -298,7 +298,7 @@ const Html = ({
       if (userId != user._id) {
         // updateChatRooms(userId, false);
         getChatRoomsList({
-          quickChat: false,
+          quickChat: openTab == "chats" ? false : true,
         });
       }
     });
