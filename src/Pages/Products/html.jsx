@@ -64,24 +64,24 @@ const Html = ({
         return <span className="capitalize">{row?.name}</span>;
       },
     },
-    {
-      key: "category_detail",
-      name: "Category",
-      render: (row) => {
-        return <span className="capitalize">{row?.category_detail.name}</span>;
-      },
-    },
-    {
-      key: "sub_category_detail",
-      name: "Sub Category",
-      render: (row) => {
-        return (
-          <span className="capitalize">
-            {row?.sub_category_detail?.name || "--"}
-          </span>
-        );
-      },
-    },
+    // {
+    //   key: "category_detail",
+    //   name: "Category",
+    //   render: (row) => {
+    //     return <span className="capitalize">{row?.category_detail.name}</span>;
+    //   },
+    // },
+    // {
+    //   key: "sub_category_detail",
+    //   name: "Sub Category",
+    //   render: (row) => {
+    //     return (
+    //       <span className="capitalize">
+    //         {row?.sub_category_detail?.name || "--"}
+    //       </span>
+    //     );
+    //   },
+    // },
     {
       key: "product_type",
       name: "Product Type",
