@@ -8,18 +8,18 @@ import environment from "../../environment";
 import axios from "axios";
 import shared from "./shared";
 import { useSelector } from "react-redux";
-import Swal from "sweetalert2";
-import SweetAlert from "../../components/SweetAlert/SweetAlert";
+import Swal from "sweetalert2"; 
 
 const Audio = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
-
+  const [copySuccess, setCopySuccess] = useState(false);
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loaging, setLoader] = useState(true);
   const history = useNavigate();
+  const[selectId,setSelectId] = useState() 
 
   const sortClass = (key) => {
     let cls = "fa-sort";
@@ -214,6 +214,35 @@ const Audio = () => {
     }
   }, []);
 
+  const handlePublish = (id,isPublish) => {
+    const value = {
+      id: id,
+      isPublish: !isPublish,
+    };
+   let method = "put";
+   let  url = shared.editApi;
+    loader(true);
+    ApiClient.allApi(url, value, method).then((res) => {
+      if (res.success) {
+        getData();
+      }
+      loader(false);
+    });
+  };
+
+  const handleCopy = async(text,id)=>{
+    setSelectId(id)
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopySuccess(true);
+      setTimeout(()=>{
+        setCopySuccess(false);
+      },[1000])
+    } catch (err) {
+      setCopySuccess(false);
+    }
+   }
+
   return (
     <>
       <Html
@@ -235,6 +264,10 @@ const Audio = () => {
         statusChange={statusChange}
         changestatus={changestatus}
         exportfun={exportfun}
+        handlePublish={handlePublish}
+        handleCopy ={handleCopy}
+        selectId={selectId}
+        copySuccess={copySuccess}
       />
     </>
   );

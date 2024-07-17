@@ -12,14 +12,17 @@ import shared from "./shared";
 import datepipeModel from "../../models/datepipemodel";
 import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
+import { rolePermission, rolePermissions, roleType } from "../../models/type.model";
 
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
   const [roleOptions, setRoleOptions] = useState([]);
   const [login, setLoginPannel] = useState("");
-  const [form, setform] = useState({
-    id: "",
+  const[form1,setForm1] = useState({...roleType})
+  const permissions = rolePermissions;
+  const permission = rolePermission;
+  const [form, setform] = useState({ 
     fullName: "",
     email: "",
     mobileNo: "",
@@ -47,10 +50,21 @@ const AddEdit = () => {
     if (invalid) return;
     let method = "post";
     let url = shared.addApi;
-    let value = {
+     let value ;
+   if(form?.role == "666fe2aeaf5c4fffdaedb8bf" )  
+     value = {
       ...form,
-    };
-    if (value.id) {
+      ...form1,
+      id : id
+
+    }  
+    else {
+      value = {
+        ...form,
+        id : id,
+      }
+    }
+    if (id) {
       method = "put";
       url = shared.editApi;
     } else {
@@ -67,8 +81,7 @@ const AddEdit = () => {
       }
       loader(false);
     });
-  };
-
+  }; 
   useEffect(() => {
     if (id) {
       loader(true);
@@ -76,7 +89,22 @@ const AddEdit = () => {
         if (res.success) {
           let value = res.data;
           let payload = form;
+          let payload1 = form1;
+          let permissions = value.permissions?.[0] || [];
 
+          Object.keys(payload1).map((itm) => {
+            if (itm != "permissions") payload1[itm] = value[itm];
+          });
+
+          Object.keys(roleType.permissions).map((itm) => {
+            payload1.permissions[itm] = permissions[itm] || false;
+          });
+
+          payload.id = id;
+          setForm1({
+            ...payload1,
+          });
+        
           Object.keys(payload).map((itm) => {
             payload[itm] = value[itm];
           });
@@ -121,7 +149,7 @@ const AddEdit = () => {
   };
 
   const getRolesList = () => {
-    ApiClient.get("role/listing").then((res) => {
+    ApiClient.get("role/listing").then((res) => { 
       if (res.success) {
         let filtered = res?.data.filter((itm) => itm.status == "active");
         if (isAdmin) {
@@ -142,11 +170,88 @@ const AddEdit = () => {
         );
       }
     });
-  };
+  }; 
 
   useEffect(() => {
     getRolesList();
   }, [user?.role?.name]);
+
+  const setpermission = (key, value) => {
+    setForm1({
+      ...form1,
+      permissions: {
+        ...form1.permissions,
+        [key]: value,
+      },
+    });
+  };
+
+  const HandleAll = (check) => {
+    let value = check ? true : false;
+    let permissions = form1.permissions;
+    Object.keys(permissions).map((itm) => {
+      permissions[itm] = value;
+    });
+    setForm1({ ...form1, permissions: permissions });
+  };
+  const isAllChecked = () => {
+    let value = true;
+    let permissions = form1.permissions;
+    Object.keys(permissions).map((itm) => {
+      if (!permissions[itm]) value = false;
+    });
+    return value;
+  }
+
+  const HandleAllRead = (check, key = "read") => {
+    let value = check ? true : false;
+
+    let keys = {};
+    permissions.map((itm) => {
+      keys = { ...keys, [`${key}${itm.key}`]: value };
+    });
+
+    setForm1({
+      ...form1,
+      permissions: {
+        ...form1.permissions,
+        ...keys,
+      },
+    });
+  };
+  const isAllPCheck = (key = "read") => {
+    let value = true;
+    permissions.map((itm) => {
+      if (!form1.permissions[`${key}${itm.key}`]) value = false;
+    });
+    return value;
+  };
+
+  const handleAllPermission = (e) => {
+    let key = e.name;
+    let checked = e.checked;
+
+    let keys = {};
+    permission.map((itm) => {
+      keys = { ...keys, [`${itm.key}${key}`]: checked };
+    });
+
+    setForm1({
+      ...form1,
+      permissions: {
+        ...form1.permissions,
+        ...keys,
+      },
+    });
+  };
+
+  const isCheckAll = (key) => {
+    let value = true;
+    permission.map((itm) => {
+      if (!form1.permissions[`${itm.key}${key}`]) value = false;
+    });
+    return value;
+  }; 
 
   return (
     <>
@@ -235,7 +340,108 @@ const AddEdit = () => {
                 )}
               </div>
             </div>
-
+            {form?.role == "666fe2aeaf5c4fffdaedb8bf" ? 
+            <div className="shadow-box w-full bg-white rounded-lg mb-6">
+              <div className="scrollbar w-full overflow-auto">
+                <div class="table_section tablepadding">
+                  <p className="text-xl font-semibold text-[#111827] px-4 pb-2">
+                    Permissions
+                  </p>
+                  <table class="w-full">
+                    <thead class="table_head roleTable">
+                      <tr class="border-b border-[#EAECF0]">
+                        <th
+                          scope="col"
+                          class="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-4 text-left bg-[#F7FAFF] !py-3 ' onClick={e => sorting('name')}"
+                        ></th>
+                        <th
+                          scope="col"
+                          class="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-4 text-left bg-[#F7FAFF] !py-3 ' onClick={e => sorting('name')}"
+                        >
+                          <input
+                            type="checkbox"
+                            onChange={(e) => HandleAll(e.target.checked)}
+                            checked={isAllChecked()}
+                            className="h-4 w-4"
+                          />
+                          All
+                        </th>
+                        {permission.map((itm) => {
+                          return (
+                            <>
+                              <th
+                                scope="col"
+                                class="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-4 text-left bg-[#F7FAFF] !py-3 ' onClick={e => sorting('name')}"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="h-4 w-4"
+                                  onChange={(e) =>
+                                    HandleAllRead(e.target.checked, itm.key)
+                                  }
+                                  checked={isAllPCheck(itm.key)}
+                                />
+                                {itm.name}
+                              </th>
+                            </>
+                          );
+                        })}
+                      </tr>
+                    </thead>
+                    <tbody className="roleTable">
+                      {permissions.map((itm) => {
+                        return (
+                          <>
+                            <tr>
+                              <td className="!text-typo !border-l-0 cursor-pointer !px-4 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                                {itm.name}
+                              </td>
+                              <td className="!text-typo !border-l-0 cursor-pointer !px-4 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                                <input
+                                  type="checkbox"
+                                  className="h-4 w-4 green_check cursor-pointer shrink-0 rounded-[4px] !border !border-[#3C3E49A3] !text-white"
+                                  name={itm.key}
+                                  onChange={(e) =>
+                                    handleAllPermission(e.target)
+                                  }
+                                  checked={isCheckAll(itm.key)}
+                                />
+                              </td>
+                              {permission.map((pitm) => {
+                                return (
+                                  <td className="!text-typo !border-l-0 cursor-pointer !px-4 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                                    <div Name="checkList">
+                                      <label className="mb-0">
+                                        <input
+                                          type="checkbox"
+                                          className="h-4 w-4 green_check cursor-pointer shrink-0 rounded-[4px] !border !border-[#3C3E49A3] !text-white"
+                                          checked={
+                                            form1.permissions[
+                                              `${pitm.key}${itm.key}`
+                                            ]
+                                          }
+                                          onChange={(e) =>
+                                            setpermission(
+                                              `${pitm.key}${itm.key}`,
+                                              e.target.checked
+                                            )
+                                          }
+                                        />
+                                      </label>
+                                    </div>
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          </>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+             : "" }
             <div className="text-right">
               <button
                 type="submit"

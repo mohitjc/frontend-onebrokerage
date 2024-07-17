@@ -73,6 +73,12 @@ const View = () => {
                   </div>
                 </div>
                 <div className="col-span-12 md:col-span-6">
+                  <label className="profileheddingcls">Tags</label>
+                  <div className="profiledetailscls capitalize">
+                    {data?.tags || "--"}
+                  </div>
+                </div>
+                <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Video</label>
                   <div className="profiledetailscls">
                     <video

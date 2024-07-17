@@ -4,17 +4,13 @@ import loader from "../../methods/loader";
 import methodModel from "../../methods/methods";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Layout from "../../components/global/layout";
-import statusModel from "../../models/status.model";
 import { Tooltip } from "antd";
 import FormControl from "../../components/common/FormControl";
-import timezoneModel from "../../models/timezone.model";
 import shared from "./shared";
-import datepipeModel from "../../models/datepipemodel";
 import { useSelector } from "react-redux";
-import PhoneInput from "react-phone-input-2";
-import ImageUpload from "../../components/common/ImageUpload";
 import { FiPlus, FiTrash } from "react-icons/fi";
 import environment from "../../environment";
+import moment from "moment";
 
 const AddEdit = () => {
   const { id } = useParams();
@@ -26,14 +22,9 @@ const AddEdit = () => {
     title: "",
     category: "",
     video: "",
+    tags: "",
   });
-
-  const [filters, setFilters] = useState({
-    page: 1,
-    count: 10,
-    search: "",
-    type: "",
-  });
+  const [date, setDate] = useState(null);
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);
@@ -73,12 +64,13 @@ const AddEdit = () => {
     let value = {
       ...form,
       ...video,
+      date: date,
     };
     if (value.id) {
       method = "put";
       url = shared.editApi;
     } else {
-      delete value.id;
+      delete value.id; 
     }
 
     loader(true);
@@ -107,6 +99,7 @@ const AddEdit = () => {
           setform({
             ...payload,
           });
+          setDate(res?.data?.date ? moment(res?.data?.date).format("YYYY-MM-DD") : null)
 
           let img = images;
           Object.keys(img).map((itm) => {
@@ -118,14 +111,6 @@ const AddEdit = () => {
       });
     }
   }, [id]);
-
-  const imageResult = (e, key) => {
-    images[key] = e.value;
-    setImages(images);
-    if (submitted == true) {
-      setSubmitted(false);
-    }
-  };
 
   const uploadVideo = (e) => {
     let files = e.target.files;
@@ -205,24 +190,32 @@ const AddEdit = () => {
                   </div>
                 )}
               </div>
+              <div className=" mb-3">
+                <FormControl
+                  type="text"
+                  name="tags"
+                  label="Tags"
+                  value={form.tags}
+                  onChange={(e) => setform({ ...form, tags: e })}
+                />
+              </div>
+             
+                <div className=" mb-3">
+                  <FormControl
+                    type="date"
+                    name="date"
+                    label="Publish Date"
+                    value={date}
+                    onChange={(e) => setDate(e)}
+                  />
+                </div>
+            
 
               <div className="mb-3">
                 <div>
                   <label className="lablefontcls ">Video</label>
                 </div>
-                {/* <br></br>
-                <ImageUpload
-                  model="users"
-                  result={(e) => imageResult(e, "image")}
-                  value={images.image || form.image}
-                  multiple={false}
-                  label="Choose file"
-                /> */}
-                {/* {submitted && !images.image && (
-                  <div className="text-danger small mt-1">
-                    image is required.
-                  </div>
-                )} */}
+
                 {!form.video && (
                   <label
                     className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-4 text-center `}

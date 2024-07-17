@@ -15,27 +15,22 @@ import PhoneInput from "react-phone-input-2";
 import ImageUpload from "../../components/common/ImageUpload";
 import { FiPlus, FiTrash } from "react-icons/fi";
 import environment from "../../environment";
+import moment from "moment";
 
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
   const [categoryOptions, setCategories] = useState([]);
+  const [date, setDate] = useState(null);
   const [form, setform] = useState({
     id: "",
     title: "",
     category: "",
     audio: "",
-  });
-
-  const [filters, setFilters] = useState({
-    page: 1,
-    count: 10,
-    search: "",
-    type: "",
-  });
+    tags : "",
+  }); 
   const history = useNavigate();
-  const [submitted, setSubmitted] = useState(false);
-  const user = useSelector((state) => state.user);
+  const [submitted, setSubmitted] = useState(false); 
   const formValidation = [
     { key: "title", required: true },
     { key: "category", required: true },
@@ -70,12 +65,13 @@ const AddEdit = () => {
     let url = shared.addApi;
     let value = {
       ...form,
+      date : date,
     };
     if (value.id) {
       method = "put";
       url = shared.editApi;
     } else {
-      delete value.id;
+      delete value.id; 
     }
 
     loader(true);
@@ -105,6 +101,7 @@ const AddEdit = () => {
           setform({
             ...payload,
           });
+          setDate(res?.data?.date ? moment(res?.data?.date).format("YYYY-MM-DD") : null)
 
           let img = images;
           Object.keys(img).map((itm) => {
@@ -141,7 +138,7 @@ const AddEdit = () => {
 
   useEffect(() => {
     getCategoriesList();
-  }, [form.type]);
+  }, [form.type]); 
 
   return (
     <>
@@ -203,24 +200,31 @@ const AddEdit = () => {
                   </div>
                 )}
               </div>
+              <div className=" mb-3">
+                <FormControl
+                  type="text"
+                  name="tags"
+                  label="Tags"
+                  value={form.tags}
+                  onChange={(e) => setform({ ...form, tags: e })}
+                />
+              </div> 
+                <div className=" mb-3">
+                  <FormControl
+                    type="date"
+                    name="date"
+                    label="Publish Date"
+                    value={date}
+                    onChange={(e) => setDate(e)}
+                  />
+                </div>
+            
 
               <div className="mb-3">
                 <div>
                   <label className="lablefontcls">Audio</label>
                 </div>
-                {/* <br></br>
-                <ImageUpload
-                  model="users"
-                  result={(e) => imageResult(e, "image")}
-                  value={images.image || form.image}
-                  multiple={false}
-                  label="Choose file"
-                /> */}
-                {/* {submitted && !images.image && (
-                  <div className="text-danger small mt-1">
-                    image is required.
-                  </div>
-                )} */}
+               
                 {!form.audio && (
                   <label
                     className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-4 text-center `}
