@@ -1,36 +1,19 @@
 import React, { useState, useEffect } from "react";
 import ApiClient from "../../methods/api/apiClient";
 import loader from "../../methods/loader";
-import methodModel from "../../methods/methods";
-import {
-  rolePermission,
-  rolePermissions,
-  roleType,
-} from "../../models/type.model";
+import methodModel from "../../methods/methods"; 
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Layout from "../../components/global/layout";
 import { Tooltip } from "antd";
 import { useSelector } from "react-redux";
 import environment from "../../environment";
 
-const AddEditRole = () => {
-  const permissions = rolePermissions;
-  const permission = rolePermission;
-
-  const defaultvalue = () => {
-    let keys = { ...roleType };
-    Object.keys(roleType).map((itm) => {
-      if (itm != "permissions") keys[itm] = "";
-    });
-    Object.keys(roleType.permissions).map((itm) => {
-      keys.permissions[itm] = false;
-    });
-    keys.status = "active";
-    return keys;
-  };
+const AddEditRole = () => { 
 
   const { id } = useParams();
-  const [form, setform] = useState({ ...roleType });
+  const [form, setform] = useState({
+    name: "",
+    status: "active", });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);
@@ -45,9 +28,10 @@ const AddEditRole = () => {
     let url = "role/add";
     let value = {
       ...form,
-      loginPannel: form.id == environment.userRoleId ? "front" : "admin",
+      loginPannel: id == environment.userRoleId ? "front" : "admin",
+      id : id,
     };
-    if (value.id) {
+    if (id) {
       method = "put";
       url = "role/update";
     } else {
@@ -56,8 +40,7 @@ const AddEditRole = () => {
     }
     loader(true);
     ApiClient.allApi(url, value, method).then((res) => {
-      if (res.success) {
-        // ToastsStore.success(res.message);
+      if (res.success) { 
         history("/roles");
       }
       loader(false);
@@ -68,109 +51,16 @@ const AddEditRole = () => {
     if (id) {
       loader(true);
       ApiClient.get("role/detail", { id }).then((res) => {
-        if (res.success) {
-          let value = res.data;
-          let payload = roleType;
-          let permissions = value.permissions?.[0] || [];
-
-          Object.keys(payload).map((itm) => {
-            if (itm != "permissions") payload[itm] = value[itm];
-          });
-
-          Object.keys(roleType.permissions).map((itm) => {
-            payload.permissions[itm] = permissions[itm] || false;
-          });
-
-          payload.id = id;
+        if (res.success) {   
           setform({
-            ...payload,
+            name : res?.data?.name,
+            status : res?.data?.status
           });
         }
         loader(false);
       });
-    } else {
-      setform(defaultvalue());
-    }
-  }, [id]);
-
-  const HandleAll = (check) => {
-    let value = check ? true : false;
-    let permissions = form.permissions;
-    Object.keys(permissions).map((itm) => {
-      permissions[itm] = value;
-    });
-    setform({ ...form, permissions: permissions });
-  };
-
-  const isAllChecked = () => {
-    let value = true;
-    let permissions = form.permissions;
-    Object.keys(permissions).map((itm) => {
-      if (!permissions[itm]) value = false;
-    });
-    return value;
-  };
-
-  const handleAllPermission = (e) => {
-    let key = e.name;
-    let checked = e.checked;
-
-    let keys = {};
-    permission.map((itm) => {
-      keys = { ...keys, [`${itm.key}${key}`]: checked };
-    });
-
-    setform({
-      ...form,
-      permissions: {
-        ...form.permissions,
-        ...keys,
-      },
-    });
-  };
-
-  const HandleAllRead = (check, key = "read") => {
-    let value = check ? true : false;
-
-    let keys = {};
-    permissions.map((itm) => {
-      keys = { ...keys, [`${key}${itm.key}`]: value };
-    });
-
-    setform({
-      ...form,
-      permissions: {
-        ...form.permissions,
-        ...keys,
-      },
-    });
-  };
-
-  const isCheckAll = (key) => {
-    let value = true;
-    permission.map((itm) => {
-      if (!form.permissions[`${itm.key}${key}`]) value = false;
-    });
-    return value;
-  };
-
-  const setpermission = (key, value) => {
-    setform({
-      ...form,
-      permissions: {
-        ...form.permissions,
-        [key]: value,
-      },
-    });
-  };
-
-  const isAllPCheck = (key = "read") => {
-    let value = true;
-    permissions.map((itm) => {
-      if (!form.permissions[`${key}${itm.key}`]) value = false;
-    });
-    return value;
-  };
+    }  
+  }, [id]); 
 
   return (
     <>
@@ -190,7 +80,7 @@ const AddEditRole = () => {
                 <div>
                   <h3 className="text-2xl font-semibold text-[#111827]">
                     {" "}
-                    {form && form.id ? "Edit" : "Add"} Role
+                    {id ? "Edit" : "Add"} Role
                   </h3>
                   <p class="text-sm font-normal text-[#75757A]">
                     Here you can see all about your Roles
@@ -213,7 +103,7 @@ const AddEditRole = () => {
               </div>
             </div>
 
-            <div className="shadow-box w-full bg-white rounded-lg mb-6">
+            {/* <div className="shadow-box w-full bg-white rounded-lg mb-6">
               <div className="scrollbar w-full overflow-auto">
                 <div class="table_section tablepadding">
                   <p className="text-xl font-semibold text-[#111827] px-4 pb-2">
@@ -312,7 +202,7 @@ const AddEditRole = () => {
                   </table>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="flex items-center justify-end">
               <button

@@ -16,6 +16,13 @@ import methodModel from "../../methods/methods";
 import { PiEyeLight } from "react-icons/pi";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import environment from "../../environment";
+import { MdOutlinePublish } from "react-icons/md";
+import { IoMdCopy } from "react-icons/io";
+import { MdOutlineDownload } from "react-icons/md";
+import { SlCalender } from "react-icons/sl";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 const Html = ({
   sorting,
   filter,
@@ -32,6 +39,14 @@ const Html = ({
   data,
   changestatus,
   isAllow,
+  handlePublish,
+  handleCopy,
+  copySuccess,
+  handleCalendarToggle,
+  isOpen,
+  selectedDate,
+  handleDateChange,
+  selectId,
   total = { total },
 }) => {
   const user = useSelector((state) => state.user);
@@ -52,7 +67,6 @@ const Html = ({
       }
     });
   };
-
   useEffect(() => {
     getCategoriesList();
   }, []);
@@ -63,7 +77,23 @@ const Html = ({
       name: "Title",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.title}</span>;
+        return (
+          <>
+            <div className="w-32 cursor-pointer" onClick={() => view(row?.id)}>
+              <Tooltip placement="top" title="View">
+                <span className="capitalize">{row?.title || "N/A"} </span>
+              </Tooltip>
+            </div>
+          </>
+        );
+      },
+    },
+    {
+      key: "tags",
+      name: "Tags",
+      sort: true,
+      render: (row) => {
+        return <span className="capitalize">{row?.tags}</span>;
       },
     },
     {
@@ -87,6 +117,13 @@ const Html = ({
             />
           </>
         );
+      },
+    },
+    {
+      key: "publish date",
+      name: "Publish Date",
+      render: (row) => {
+        return <span className="capitalize">{row?.date ? moment(row?.date)?.format("YYYY-MM-DD") : "N/A"}</span>;
       },
     },
     {
@@ -118,7 +155,7 @@ const Html = ({
         return (
           <>
             <div className="flex items-center justify-start gap-1.5">
-              {isAllow(`read${shared.check}`) ? (
+              {/* {isAllow(`read${shared.check}`) ? (
                 <Tooltip placement="top" title="View">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -129,7 +166,7 @@ const Html = ({
                 </Tooltip>
               ) : (
                 <></>
-              )}
+              )} */}
               {isAllow(`edit${shared.check}`) ? (
                 <Tooltip placement="top" title="Edit">
                   <a
@@ -155,6 +192,38 @@ const Html = ({
               ) : (
                 <></>
               )}
+              {/* {itm?.isPublish ? (
+                <Tooltip placement="top" title="un-publish">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => handlePublish(itm.id, itm?.isPublish)}
+                  >
+                    <MdOutlineDownload />
+                  </a>
+                </Tooltip>
+              ) : (
+                <Tooltip placement="top" title="publish">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => handlePublish(itm.id, itm?.isPublish)}
+                  >
+                    <MdOutlinePublish />
+                  </a>
+                </Tooltip>
+              )} */}
+              {selectId === itm?.id && copySuccess ? (
+                "Copied!"
+              ) : (
+                <Tooltip placement="top" title="copy link">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => handleCopy(itm.video, itm?.id)}
+                  >
+                    <IoMdCopy />
+                  </a>
+                </Tooltip>
+              )}
+ 
             </div>
           </>
         );
