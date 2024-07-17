@@ -122,14 +122,14 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/blog",
       key: "",
     },
-    {
-      name: "Orders Management",
-      icon: (
-        <HiOutlineShoppingCart className="text-[#fff] shrink-0 text-lg" />
-      ),
-      url: "/orders",
-      key: "",
-    },
+    // {
+    //   name: "Orders Management",
+    //   icon: (
+    //     <HiOutlineShoppingCart className="text-[#fff] shrink-0 text-lg" />
+    //   ),
+    //   url: "/orders",
+    //   key: "",
+    // },
     {
       name: "Messages",
       icon: <PiBellSimpleLight className="text-[#fff] shrink-0 text-lg" />,
