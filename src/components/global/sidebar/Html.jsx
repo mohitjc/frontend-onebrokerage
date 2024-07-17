@@ -30,6 +30,7 @@ import ApiClient from "../../../methods/api/apiClient";
 import { UserCircleIcon } from "@heroicons/react/20/solid";
 import { FiUsers } from "react-icons/fi";
 import { FaBlog, FaQuestion } from "react-icons/fa";
+import { HiOutlineShoppingCart } from "react-icons/hi";
 
 const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
   const [activeplan, setActiveplan] = useState();
@@ -124,7 +125,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     {
       name: "Orders Management",
       icon: (
-        <TfiLayoutMediaCenterAlt className="text-[#fff] shrink-0 text-lg" />
+        <HiOutlineShoppingCart className="text-[#fff] shrink-0 text-lg" />
       ),
       url: "/orders",
       key: "",
