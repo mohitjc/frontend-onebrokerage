@@ -217,7 +217,7 @@ const Html = ({
                 <Tooltip placement="top" title="copy link">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => handleCopy(itm.video, itm?.id)}
+                    onClick={(e) => handleCopy(`${environment.sasurl}${itm.video}`, itm?.id)}
                   >
                     <IoMdCopy />
                   </a>
