@@ -247,10 +247,10 @@ const AddEdit = () => {
                   </label>
                 )}
                 {form.audio && (
-                  <div className="relative inline-flex">
+                  <div className="relative ">
                     <audio
                       src={`${environment.sasurl}/${form?.audio}`}
-                      width={300}
+                      className="w-full"
                       controls
                     />
                     <a
