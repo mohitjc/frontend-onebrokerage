@@ -21,8 +21,7 @@ import {
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
-  const [roleOptions, setRoleOptions] = useState([]);
-  const [login, setLoginPannel] = useState("");
+  const [roleOptions, setRoleOptions] = useState([]); 
   const [form1, setForm1] = useState({ ...roleType });
   const permissions = rolePermissions;
   const permission = rolePermission;
@@ -54,19 +53,12 @@ const AddEdit = () => {
     if (invalid) return;
     let method = "post";
     let url = shared.addApi;
-    let value;
-    if (form?.role == "666fe2aeaf5c4fffdaedb8bf")
-      value = {
+    
+     let value = {
         ...form,
         ...form1,
         id: id,
       };
-    else {
-      value = {
-        ...form,
-        id: id,
-      };
-    }
     if (id) {
       method = "put";
       url = shared.editApi;
@@ -129,27 +121,7 @@ const AddEdit = () => {
     }
   }, [id]);
 
-  const imageResult = (e, key) => {
-    images[key] = e.value;
-    setImages(images);
-  };
-
-  const getError = (key) => {
-    return submitted
-      ? methodModel.getError(key, form, formValidation)?.message
-      : "";
-  };
-
-  const getDateErrr = (start, end = new Date()) => {
-    let value = false;
-    if (start && end) {
-      if (new Date(start).getTime() < new Date(end).getTime()) {
-        value = true;
-      }
-    }
-
-    return value;
-  };
+ 
 
   const getRolesList = () => {
     ApiClient.get("role/listing").then((res) => {
@@ -173,6 +145,7 @@ const AddEdit = () => {
             return { id: _id, name: name };
           })
         );
+        setform({...form, role : res?.data ? res?.data[0]?.id : ""})
       }
     });
   };
@@ -257,6 +230,7 @@ const AddEdit = () => {
     });
     return value;
   };
+ 
 
   return (
     <>
@@ -294,7 +268,7 @@ const AddEdit = () => {
                 />
               </div>
               <div className="mobile_number mb-3">
-                <FormControl
+                <FormControl 
                   type="select"
                   name="role"
                   label="Role"
@@ -305,7 +279,7 @@ const AddEdit = () => {
                   }}
                   required
                   theme="search"
-                  disabled={id ? true : false}
+                  disabled
                 />
                 {submitted && !form.role && (
                   <div className="invalid-feedback d-block">
