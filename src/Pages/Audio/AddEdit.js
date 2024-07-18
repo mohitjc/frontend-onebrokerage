@@ -16,21 +16,23 @@ import ImageUpload from "../../components/common/ImageUpload";
 import { FiPlus, FiTrash } from "react-icons/fi";
 import environment from "../../environment";
 import moment from "moment";
+import { FaTrash } from "react-icons/fa";
 
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
   const [categoryOptions, setCategories] = useState([]);
   const [date, setDate] = useState(null);
+  const [tagValue, setTagValue] = useState("");
+  const [tags, setTags] = useState([]);
   const [form, setform] = useState({
     id: "",
     title: "",
     category: "",
     audio: "",
-    tags : "",
-  }); 
+  });
   const history = useNavigate();
-  const [submitted, setSubmitted] = useState(false); 
+  const [submitted, setSubmitted] = useState(false);
   const formValidation = [
     { key: "title", required: true },
     { key: "category", required: true },
@@ -65,13 +67,14 @@ const AddEdit = () => {
     let url = shared.addApi;
     let value = {
       ...form,
-      date : date,
+      date: date,
+      tags: tags,
     };
     if (value.id) {
       method = "put";
       url = shared.editApi;
     } else {
-      delete value.id; 
+      delete value.id;
     }
 
     loader(true);
@@ -97,11 +100,14 @@ const AddEdit = () => {
 
           payload.id = id;
           if (payload?.category?.id) payload.category = payload.category?.id;
+          if (value.tags) setTags(value.tags);
 
           setform({
             ...payload,
           });
-          setDate(res?.data?.date ? moment(res?.data?.date).format("YYYY-MM-DD") : null)
+          setDate(
+            value?.date ? moment(res?.data?.date).format("YYYY-MM-DD") : null
+          );
 
           let img = images;
           Object.keys(img).map((itm) => {
@@ -136,9 +142,21 @@ const AddEdit = () => {
     );
   };
 
+  const handleTagRemove = (index) => {
+    let _value = [...tags];
+
+    //remove value
+    let __value = [..._value].filter((itm, _index) => {
+      return index != _index;
+    });
+
+    _value = __value;
+    setTags(_value);
+  };
+
   useEffect(() => {
     getCategoriesList();
-  }, [form.type]); 
+  }, [form.type]);
 
   return (
     <>
@@ -205,26 +223,46 @@ const AddEdit = () => {
                   type="text"
                   name="tags"
                   label="Tags"
-                  value={form.tags}
-                  onChange={(e) => setform({ ...form, tags: e })}
+                  value={tagValue}
+                  onChange={(e) => setTagValue(e)}
+                  onkeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      setTagValue("");
+                      setTags([...tags, e.target.value]);
+                    }
+                  }}
                 />
-              </div> 
-                <div className=" mb-3">
-                  <FormControl
-                    type="date"
-                    name="date"
-                    label="Publish Date"
-                    value={date}
-                    onChange={(e) => setDate(e)}
-                  />
+                <div className="flex items-center flex-wrap gap-2 mt-4 mb-3">
+                  {tags &&
+                    tags.map((_tag, index) => {
+                      return (
+                        <div className="bg-primary flex items-center gap-1 text-white rounded-full text-sm px-4 py-1">
+                          <span>{_tag}</span>
+                          <FaTrash
+                            onClick={() => handleTagRemove(index)}
+                            className="text-xs cursor-pointer"
+                          />
+                        </div>
+                      );
+                    })}
                 </div>
-            
+              </div>
+              <div className=" mb-3">
+                <FormControl
+                  type="date"
+                  name="date"
+                  label="Publish Date"
+                  value={date}
+                  onChange={(e) => setDate(e)}
+                />
+              </div>
 
               <div className="mb-3">
                 <div>
                   <label className="lablefontcls">Audio</label>
                 </div>
-               
+
                 {!form.audio && (
                   <label
                     className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-4 text-center `}
