@@ -8,17 +8,17 @@ export const rolePermissions = [
     key: "onboardingQuestions",
   },
   {
-    name: "Users",
-    key: "Users",
+    name: "staff",
+    key: "staff",
   },
   {
     name: "Groove Group",
     key: "grooveGroup",
   },
-  {
-    name: "Roles",
-    key: "Roles",
-  },
+  // {
+  //   name: "Roles",
+  //   key: "Roles",
+  // },
   {
     name: "Categories",
     key: "Categories",

@@ -54,7 +54,7 @@ const Sidebar = ({ isOpen }) => {
   };
 
   const isAllow = (url = "") => {
-    let permissions = role?.permissions;
+    let permissions = user?.permissions;
     let arr = url.split(",");
     let value = false;
     arr.map((itm) => {

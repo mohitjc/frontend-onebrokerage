@@ -65,7 +65,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       name: "Dashboard",
       icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
       url: "/dashboard",
-      key: "",
+      key: "readDashboard",
     },
     // {
     //   name: "Chats",
@@ -77,43 +77,43 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       name: "Onboarding Questions",
       icon: <RiUserSettingsLine className="text-[#fff] shrink-0 text-lg" />,
       url: "/question",
-      key: "",
+      key: "readonboardingQuestions",
     },
     {
-      name: "Users",
+      name: "Staff",
       icon: <FiUsers className="text-[#fff] shrink-0 text-lg" />,
       url: "/user",
-      key: "",
+      key: "readstaff",
     },
     {
       name: "Groove Group",
       icon: <MdOutlineGroups className="text-[#fff] shrink-0 text-lg" />,
       url: "/customers",
-      key: "",
+      key: "readgrooveGroup",
     },
-    {
-      name: "Roles",
-      icon: <GrUserSettings className="text-[#fff] shrink-0 text-lg" />,
-      url: "/roles",
-      key: "",
-    },
+    // {
+    //   name: "Roles",
+    //   icon: <GrUserSettings className="text-[#fff] shrink-0 text-lg" />,
+    //   url: "/roles",
+    //   key: "",
+    // },
     {
       name: "Categories",
       icon: <TbCategoryPlus className="text-[#fff] shrink-0 text-lg" />,
       url: "/category",
-      key: "",
+      key: "readCategories",
     },
     {
       name: "Products",
       icon: <BiCartAdd className="text-[#fff] shrink-0 text-lg" />,
       url: "/product",
-      key: "",
+      key: "readProducts",
     },
     {
       name: "Tags",
       icon: <LiaUserTagSolid className="text-[#fff] shrink-0 text-lg" />,
       url: "/tag",
-      key: "",
+      key: "readTags",
     },
     {
       name: "Blogs",
@@ -121,16 +121,8 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
         <TfiLayoutMediaCenterAlt className="text-[#fff] shrink-0 text-lg" />
       ),
       url: "/blog",
-      key: "",
-    },
-    // {
-    //   name: "Orders Management",
-    //   icon: (
-    //     <HiOutlineShoppingCart className="text-[#fff] shrink-0 text-lg" />
-    //   ),
-    //   url: "/orders",
-    //   key: "",
-    // },
+      key: "readBlogs",
+    }, 
     {
       name: "Messages",
       icon: <PiBellSimpleLight className="text-[#fff] shrink-0 text-lg" />,
@@ -141,13 +133,13 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       name: "Orders Management",
       icon: <BsCartCheck className="text-[#fff] shrink-0 text-lg" />,
       url: "/orders",
-      key: "",
+      key: "readorders",
     },
     {
       name: "Content Library",
       icon: <GoFileMedia className="text-[#fff] shrink-0 text-lg" />,
       url: "/content-library",
-      key: "",
+      key: "readVideos",
       tab: "content-library",
       menu: [
         {
@@ -156,40 +148,39 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
             <MdOutlineOndemandVideo className="text-[#fff] shrink-0 text-lg" />
           ),
           url: "/videos",
-          key: "",
+          key: "readVideos",
         },
         {
           name: "Audio",
           icon: <MdOutlineAudioFile className="text-[#fff] shrink-0 text-lg" />,
           url: "/audio",
-          key: "",
+          key: "readAudio",
         },
       ],
     },
     {
       name: "Content Management",
       icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
-      url: "/content-management",
-      key: "",
+      url: "/content-management", 
       tab: "content-management",
       menu: [
         {
           name: "FAQ",
           icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
           url: "/faq",
-          key: "",
+          key: "readFAQ",
         },
         {
           name: "Content",
           icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
           url: "/content",
-          key: "",
+          key: "readContent",
         },
         {
           name: "Newsletter",
           icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
           url: "/newsletter",
-          key: "",
+          key: "readNewsletter",
         },
         {
           name: "Subscribers",
@@ -197,7 +188,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
             <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />
           ),
           url: "/subscribers",
-          key: "",
+          key: "readSubscribers",
         },
       ],
     },
