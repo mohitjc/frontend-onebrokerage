@@ -45,7 +45,7 @@ const Blogs = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p, email: user.email };
+    let filter = { ...filters, ...p, email: user.email,isScrap:'No' };
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {

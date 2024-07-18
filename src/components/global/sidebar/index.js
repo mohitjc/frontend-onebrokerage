@@ -54,21 +54,14 @@ const Sidebar = ({ isOpen }) => {
   };
 
   const isAllow = (url = "") => {
-    let permissions = user?.permissions;
+    let permissions = user?.permissions?.[0];
     let arr = url.split(",");
     let value = false;
     arr.map((itm) => {
       if (permissions?.[itm]) value = permissions?.[itm];
     });
 
-    if (
-      user?.verifiedGroupLeader != "approved" &&
-      user.customerRole?._id == environment.glRoleId
-    ) {
-      value = false;
-    }
-
-    if (!url) value = true;
+    if (!url||user.role.name=='Admin') value = true;
     return value;
   };
 

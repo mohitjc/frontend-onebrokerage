@@ -86,6 +86,7 @@ const time = (p) => {
 }
 
 const datetime = (p) => {
+    if(!p) return ''
     return `${date(p)}, ${time(isototime(p))}`
 }
 
@@ -143,6 +144,7 @@ const isotodate = (p) => {
 }
 
 const datetodatepicker = (p) => {
+    if(!p) return ''
     let value=p?.split('.')?.[0]
     return `${value}`
 }

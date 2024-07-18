@@ -209,6 +209,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                     <li>
                       {itm.menu ? (
                         <>
+                        {isAllow(itm.menu.map(itm=>itm.key).toString())?<>
                           <Disclosure as="div" defaultOpen={tabclass(itm.tab)}>
                             {({ open }) => (
                               <>
@@ -270,6 +271,8 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                               </>
                             )}
                           </Disclosure>
+                        </>:<></>}
+                         
                         </>
                       ) : (
                         <>

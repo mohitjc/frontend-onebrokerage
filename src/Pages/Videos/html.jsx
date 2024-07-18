@@ -212,27 +212,38 @@ const Html = ({
       },
     },
     {
-      key: "status",
+      key: "isPublish",
       name: "Status",
       render: (row) => {
         return (
-          <>
-            <div className="w-32" onClick={() => statusChange(row)}>
-              <span
-                className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-                          ${
-                            row.status == "deactive"
-                              ? " bg-gray-200 text-black"
-                              : "bg-[#ee695e] text-white"
-                          }`}
-              >
-                {row.status == "deactive" ? "inactive" : "active"}
-              </span>
-            </div>
-          </>
+          <span className="capitalize">
+            {row?.isPublish?'Published':'Unpublished'}
+          </span>
         );
       },
     },
+    // {
+    //   key: "status",
+    //   name: "Status",
+    //   render: (row) => {
+    //     return (
+    //       <>
+    //         <div className="w-32" onClick={() => statusChange(row)}>
+    //           <span
+    //             className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+    //                       ${
+    //                         row.status == "deactive"
+    //                           ? " bg-gray-200 text-black"
+    //                           : "bg-[#ee695e] text-white"
+    //                       }`}
+    //           >
+    //             {row.status == "deactive" ? "inactive" : "active"}
+    //           </span>
+    //         </div>
+    //       </>
+    //     );
+    //   },
+    // },
     {
       key: "action",
       name: "Action",
@@ -424,7 +435,7 @@ const Html = ({
               }}
               options={categoryOptions}
             />
-            <SelectDropdown
+            {/* <SelectDropdown
               id="statusDropdown"
               displayValue="name"
               placeholder="All Status"
@@ -433,8 +444,23 @@ const Html = ({
                 changestatus(e.value);
               }}
               options={statusModel.list}
-            />
-            {filters.status || filters.type || filters.category ? (
+            /> */}
+
+  <SelectDropdown
+                id="statusDropdown"
+                displayValue="name"
+                placeholder="All Status"
+                intialValue={filters.isPublish}
+                result={(e) => {
+                  filter({ isPublish: e.value,page:1 });
+                }}
+                options={[
+                  {id:'true',name:'Published'},
+                  {id:'false',name:'Unpublished'},
+                ]}
+              />
+
+            {filters.isPublish || filters.type || filters.category ? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
