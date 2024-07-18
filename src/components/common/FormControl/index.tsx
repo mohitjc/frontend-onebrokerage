@@ -26,6 +26,7 @@ export default function FormControl({
   value,
   disabled = false,
   theme = "",
+  onkeyDown = (e: any) => {},
 }: any) {
   const [text, setText] = useState("");
 
@@ -227,6 +228,7 @@ export default function FormControl({
               console.log("e", e.target);
               onChange(e.target.value);
             }}
+            onKeyDown={onkeyDown}
           />
         )}
 

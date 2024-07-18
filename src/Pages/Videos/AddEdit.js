@@ -11,18 +11,20 @@ import { useSelector } from "react-redux";
 import { FiPlus, FiTrash } from "react-icons/fi";
 import environment from "../../environment";
 import moment from "moment";
+import { FaTrash } from "react-icons/fa";
 
 const AddEdit = () => {
   const { id } = useParams();
   const [images, setImages] = useState({ image: "" });
   const [video, setVideo] = useState("");
   const [categoryOptions, setCategories] = useState([]);
+  const [tagValue, setTagValue] = useState("");
+  const [tags, setTags] = useState([]);
   const [form, setform] = useState({
     id: "",
     title: "",
     category: "",
     video: "",
-    tags: "",
   });
   const [date, setDate] = useState(null);
   const history = useNavigate();
@@ -70,6 +72,7 @@ const AddEdit = () => {
         ...form,
         ...video,
         date: date,
+        tags: tags,
         isPublish: true,
       };
     } else {
@@ -77,6 +80,7 @@ const AddEdit = () => {
         ...form,
         ...video,
         date: date,
+        tags: tags,
         isPublish: false,
       };
     }
@@ -110,6 +114,7 @@ const AddEdit = () => {
 
           payload.id = id;
           if (payload?.category?.id) payload.category = payload.category?.id;
+          if (value.tags) setTags(value.tags);
           setform({
             ...payload,
           });
@@ -142,6 +147,17 @@ const AddEdit = () => {
         loader(false);
       }
     );
+  };
+  const handleTagRemove = (index) => {
+    let _value = [...tags];
+
+    //remove value
+    let __value = [..._value].filter((itm, _index) => {
+      return index != _index;
+    });
+
+    _value = __value;
+    setTags(_value);
   };
 
   useEffect(() => {
@@ -213,9 +229,31 @@ const AddEdit = () => {
                   type="text"
                   name="tags"
                   label="Tags"
-                  value={form.tags}
-                  onChange={(e) => setform({ ...form, tags: e })}
+                  value={tagValue}
+                  onChange={(e) => setTagValue(e)}
+                  onkeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      setTagValue("");
+                      setTags([...tags, e.target.value]);
+                    }
+                  }}
                 />
+
+                <div className="flex items-center flex-wrap gap-2 mt-4 mb-3">
+                  {tags &&
+                    tags.map((_tag, index) => {
+                      return (
+                        <div className="bg-primary flex items-center gap-1 text-white rounded-full text-sm px-4 py-1">
+                          <span>{_tag}</span>
+                          <FaTrash
+                            onClick={() => handleTagRemove(index)}
+                            className="text-xs cursor-pointer"
+                          />
+                        </div>
+                      );
+                    })}
+                </div>
               </div>
 
               <div className=" mb-3">
