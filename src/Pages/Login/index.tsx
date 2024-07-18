@@ -9,6 +9,7 @@ import methodModel from "../../methods/methods";
 import { useDispatch, useSelector } from "react-redux";
 import { login_success } from "../actions/user";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import socketModel from "../../models/socketModel";
 
 const Login = () => {
   const history = useNavigate();
@@ -105,6 +106,8 @@ const Login = () => {
     loader(true);
     ApiClient.post(url, data).then(async (res) => {
       if (res.success == true) {
+        socketModel.emit("user-online", { user_id: user._id });
+
         if (remember) {
           localStorage.setItem("remember", JSON.stringify(data));
         } else {
@@ -168,7 +171,7 @@ const Login = () => {
           </form>
         ) : (
           <form className="w-11/12 md:w-7/12	mx-auto" onSubmit={hendleSubmit}>
-           <div className="">
+            <div className="">
               <h1 className="text-[40px] font-semibold text-white ">Sign In</h1>
               <span className="flex w-10 h-1 bg-[#EB6A59] mt-1"></span>
             </div>
@@ -195,7 +198,7 @@ const Login = () => {
                     placeholder="Password"
                     required
                   />
-                     {eyes.password ? (
+                  {eyes.password ? (
                     <FiEye
                       className="top-3 right-3 absolute text-white cursor-pointer"
                       onClick={() =>
@@ -228,14 +231,14 @@ const Login = () => {
               </>
             )}
 
-<div className="flex">
+            <div className="flex">
               <label className="flex items-center pointer">
                 <input
                   type="checkbox"
                   checked={remember}
                   onChange={(e) => setRemember(e.target.checked)}
                   className="mr-2 h-4 w-4 cursor-pointer"
-                  style={{ accentColor: '#EB6A59' }}
+                  style={{ accentColor: "#EB6A59" }}
                 />{" "}
                 <span className="text-[14px] font-normal text-white">
                   Remember Me

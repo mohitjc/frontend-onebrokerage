@@ -34,9 +34,6 @@ const AddEdit = () => {
     { key: "video", required: true },
     ,
   ];
-  let today = moment().format("YYYY-MM-DD");
-
-  const isToday = moment(date).isSame(today);
 
   const options = shared.types;
 
@@ -59,34 +56,23 @@ const AddEdit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-    let value = {};
     let invalid = methodModel.getFormError(formValidation, form);
 
     if (invalid) return;
     let method = "post";
     let url = shared.addApi;
-    if (isToday) {
-      value = {
-        ...form,
-        ...video,
-        date: date,
-        isPublish: true,
-      };
-    } else {
-      value = {
-        ...form,
-        ...video,
-        date: date,
-        isPublish: false,
-      };
-    }
-
+    let value = {
+      ...form,
+      ...video,
+      date: date,
+    };
     if (value.id) {
       method = "put";
       url = shared.editApi;
     } else {
-      delete value.id;
+      delete value.id; 
     }
+
     loader(true);
     ApiClient.allApi(url, value, method).then((res) => {
       if (res.success) {
@@ -113,11 +99,7 @@ const AddEdit = () => {
           setform({
             ...payload,
           });
-          setDate(
-            res?.data?.date
-              ? moment(res?.data?.date).format("YYYY-MM-DD")
-              : null
-          );
+          setDate(res?.data?.date ? moment(res?.data?.date).format("YYYY-MM-DD") : null)
 
           let img = images;
           Object.keys(img).map((itm) => {
@@ -217,16 +199,17 @@ const AddEdit = () => {
                   onChange={(e) => setform({ ...form, tags: e })}
                 />
               </div>
-
-              <div className=" mb-3">
-                <FormControl
-                  type="date"
-                  name="date"
-                  label="Publish Date"
-                  value={date}
-                  onChange={(e) => setDate(e)}
-                />
-              </div>
+             
+                <div className=" mb-3">
+                  <FormControl
+                    type="date"
+                    name="date"
+                    label="Publish Date"
+                    value={date}
+                    onChange={(e) => setDate(e)}
+                  />
+                </div>
+            
 
               <div className="mb-3">
                 <div>

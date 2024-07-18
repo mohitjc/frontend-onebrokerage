@@ -126,7 +126,7 @@ const Html = ({
     loader(true);
     ApiClient.get("chat/room-members", f).then((res) => {
       if (res.success) {
-        setInitialCount(res.data?.data?.length);
+        setMessageCount(res.data?.data?.length);
       }
       loader(false);
     });
@@ -279,7 +279,7 @@ const Html = ({
   }, []);
 
   useEffect(() => {
-    socketModel.emit("user-online", { user_id: user._id });
+    // socketModel.emit("user-online", { user_id: user._id });
 
     socketModel.on("user-online", (data) => {
       console.log("userOnline");
@@ -303,9 +303,9 @@ const Html = ({
       }
     });
 
-    return () => {
-      socketModel.emit("user-offline", { user_id: user._id });
-    };
+    // return () => {
+    //    socketModel.emit("user-offline", { user_id: user._id });
+    // };
   }, []);
 
   return (

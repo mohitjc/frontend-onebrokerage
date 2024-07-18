@@ -19,7 +19,7 @@ const Video = () => {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loaging, setLoader] = useState(true);
-  const[selectId,setSelectId] = useState() 
+  const [selectId, setSelectId] = useState();
   const [copySuccess, setCopySuccess] = useState(false);
   const history = useNavigate();
 
@@ -230,20 +230,20 @@ const Video = () => {
       }
       loader(false);
     });
-  }; 
+  };
 
-   const handleCopy = async(text,id)=>{
-    setSelectId(id)
+  const handleCopy = async (text, id) => {
+    setSelectId(id);
     try {
       await navigator.clipboard.writeText(text);
       setCopySuccess(true);
-      setTimeout(()=>{
+      setTimeout(() => {
         setCopySuccess(false);
-      },[1000])
+      }, [1000]);
     } catch (err) {
       setCopySuccess(false);
     }
-   }
+  };
 
   return (
     <>
@@ -266,11 +266,10 @@ const Video = () => {
         statusChange={statusChange}
         changestatus={changestatus}
         exportfun={exportfun}
-        handlePublish={handlePublish} 
+        handlePublish={handlePublish}
         selectId={selectId}
         handleCopy={handleCopy}
         copySuccess={copySuccess}
-      
       />
     </>
   );

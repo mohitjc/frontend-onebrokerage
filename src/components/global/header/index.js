@@ -22,12 +22,12 @@ const Header = ({ setIsOpen, isOpen }) => {
   const searchState = { data: "" };
 
   const Logout = () => {
+    socketModel.emit("user-offline", { user_id: user?._id });
     dispatch(logout());
     localStorage.removeItem("persist:admin-app");
     localStorage.removeItem("token");
     // localStorage.removeItem("loginTime")
     history("/login");
-    socketModel.emit("user-offline", { user_id: user?._id });
   };
 
   // logout after 1 day

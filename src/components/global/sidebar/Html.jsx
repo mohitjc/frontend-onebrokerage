@@ -31,6 +31,7 @@ import { UserCircleIcon } from "@heroicons/react/20/solid";
 import { FiUsers } from "react-icons/fi";
 import { FaBlog, FaQuestion } from "react-icons/fa";
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import { BsCartCheck } from "react-icons/bs";
 
 const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
   const [activeplan, setActiveplan] = useState();
@@ -134,6 +135,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       name: "Messages",
       icon: <PiBellSimpleLight className="text-[#fff] shrink-0 text-lg" />,
       url: "/notifications",
+      key: "",
+    },
+    {
+      name: "Orders Management",
+      icon: <BsCartCheck className="text-[#fff] shrink-0 text-lg" />,
+      url: "/orders",
       key: "",
     },
     {

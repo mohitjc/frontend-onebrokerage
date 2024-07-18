@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import ApiClient from "../../methods/api/apiClient";
 import loader from "../../methods/loader";
-import methodModel from "../../methods/methods"; 
+import methodModel from "../../methods/methods";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Layout from "../../components/global/layout";
 import { Tooltip } from "antd";
 import { useSelector } from "react-redux";
 import environment from "../../environment";
 
-const AddEditRole = () => { 
-
+const AddEditRole = () => {
   const { id } = useParams();
   const [form, setform] = useState({
     name: "",
-    status: "active", });
+    status: "active",
+  });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);
@@ -29,7 +29,7 @@ const AddEditRole = () => {
     let value = {
       ...form,
       loginPannel: id == environment.userRoleId ? "front" : "admin",
-      id : id,
+      id: id,
     };
     if (id) {
       method = "put";
@@ -40,7 +40,7 @@ const AddEditRole = () => {
     }
     loader(true);
     ApiClient.allApi(url, value, method).then((res) => {
-      if (res.success) { 
+      if (res.success) {
         history("/roles");
       }
       loader(false);
@@ -51,16 +51,16 @@ const AddEditRole = () => {
     if (id) {
       loader(true);
       ApiClient.get("role/detail", { id }).then((res) => {
-        if (res.success) {   
+        if (res.success) {
           setform({
-            name : res?.data?.name,
-            status : res?.data?.status
+            name: res?.data?.name,
+            status: res?.data?.status,
           });
         }
         loader(false);
       });
-    }  
-  }, [id]); 
+    }
+  }, [id]);
 
   return (
     <>

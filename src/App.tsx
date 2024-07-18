@@ -66,6 +66,7 @@ import SendNotification from "./Pages/Messages/Send";
 import Chats from "./Pages/Chats";
 import ViewNotification from "./Pages/Messages/View";
 import socketModel from "./models/socketModel";
+import Orders from "./Pages/Orders/index";
 
 const { persistor, store } = configureStoreProd();
 
@@ -138,6 +139,7 @@ function App() {
     { url: "/notifications/detail/:id", element: <ViewNotification /> },
     { url: "/notifications/send-notification", element: <SendNotification /> },
     { url: "/chat", element: <Chats /> },
+    { url: "/orders", element: <Orders /> },
   ];
 
   sessionStorage.clear();

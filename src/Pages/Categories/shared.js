@@ -1,5 +1,5 @@
 const types = [
-  { id: "product", name: "Product" },
+  // { id: "product", name: "Product" },
   { id: "faq", name: "FAQ" },
   { id: "video", name: "Video" },
   { id: "audio", name: "Audio" },

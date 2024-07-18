@@ -46,7 +46,17 @@ const Html = ({
       key: "to",
       name: "Email",
       render: (row) => {
-        return <span className="capitalize">{row?.to}</span>;
+        const users = row?.to.slice(0, 3).map((user) => user);
+        return (
+          <>
+            <span className="capitalize ">{users.join(",")}</span>
+            {row?.to.length - users.length > 0 && (
+              <div className="text-[#EB6A59]">
+                +{row?.to.length - users.length} more
+              </div>
+            )}
+          </>
+        );
       },
     },
     /* {

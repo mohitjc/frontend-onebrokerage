@@ -7,8 +7,11 @@ import { useParams } from "react-router-dom";
 import shared from "./shared";
 import loader from "../../methods/loader";
 import { Tooltip } from "antd";
+import methodModel from "../../methods/methods";
+import environment from "../../environment";
 
 const View = () => {
+  const [host, setHost] = useState();
   const [data, setData] = useState();
   const history = useNavigate();
   const { id } = useParams();
@@ -19,6 +22,15 @@ const View = () => {
       loader(false);
       if (res.success) {
         setData(res.data);
+        getHostDetail(res.data.addedBy);
+      }
+    });
+  };
+
+  const getHostDetail = (id) => {
+    ApiClient.get("category/detail", { id: id }).then((res) => {
+      if (res.success) {
+        setHost(res.data);
       }
     });
   };
@@ -30,7 +42,7 @@ const View = () => {
   return (
     <>
       <Layout>
-        <div className="bg-white shadow-box rounded-lg w-full p-4 mt-6">
+        <div className="bg-white shadow-box rounded-lg w-full p-4 ">
           <div className="flex items-center mb-8">
             <Tooltip placement="top" title="Back">
               <span
@@ -52,33 +64,28 @@ const View = () => {
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Title</label>
-                  <div className="profiledetailscls">
-                    {data?.subject || "--"}
-                  </div>
-                </div>
-                <div className="col-span-12 md:col-span-12">
-                  <label className="profileheddingcls">Content</label>
-                  <div
-                    className="profiledetailscls"
-                    dangerouslySetInnerHTML={{ __html: data?.body || "--" }}
-                  ></div>
+                  <div className="profiledetailscls">{data?.title || "--"}</div>
                 </div>
                 <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Emails</label>
+                  <label className="profileheddingcls">Category</label>
+                  <div className="profiledetailscls capitalize">
+                    {data?.category?.name || "--"}
+                  </div>
+                </div>
+                <div className="col-span-12 md:col-span-6">
+                  <label className="profileheddingcls">Tags</label>
+                  <div className="profiledetailscls capitalize">
+                    {data?.tags || "--"}
+                  </div>
+                </div>
+                <div className="col-span-12 md:col-span-6">
+                  <label className="profileheddingcls">Video</label>
                   <div className="profiledetailscls">
-                    {data?.to?.map((email) => {
-                      return (
-                        <>
-                          <div className="bg-gray-100 rounded-lg p-3 mb-1">
-                            <p className="text-md text-neutral-800 font-semibold">
-                              {email}
-                            </p>
-                          </div>
-                        </>
-                      );
-                    }) || "--"}
-
-                    {/* {data?.to || "--"} */}
+                    <video
+                      src={`${environment.sasurl}/${data?.video}`}
+                      width={250}
+                      controls
+                    />
                   </div>
                 </div>
               </div>
