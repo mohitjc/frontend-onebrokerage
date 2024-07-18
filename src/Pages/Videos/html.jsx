@@ -22,6 +22,9 @@ import { MdOutlineDownload } from "react-icons/md";
 import { SlCalender } from "react-icons/sl";
 
 import moment from "moment";
+import Modal from "../../components/common/Modal";
+import loader from "../../methods/loader";
+import { toast } from "react-toastify";
 const Html = ({
   sorting,
   filter,
@@ -70,7 +73,86 @@ const Html = ({
     getCategoriesList();
   }, []);
 
+  const [ids,setIds]=useState([])
+  const [show,setShow]=useState(false)
+  const [form,setForm]=useState({
+    publishNow:'',
+    date:''
+  })
+
+  const allIds=(e)=>{
+    if(e.target.checked){
+      let ids=data.map(itm=>itm.id)
+      setIds([...ids])
+    }else{
+     setIds([])
+    }
+  }
+
+  const addId=(e)=>{
+    if(e.target.checked){
+      ids.push(e.target.value)
+      setIds([...ids])
+    }else{
+     let arr=ids.filter(itm=>itm!=e.target.value)
+     setIds([...arr])
+    }
+  }
+
+  const onPublish=()=>{
+    console.log("form",form)
+    let date=datepipeModel.datetoIsotime(new Date())
+    if(form.publishNow=='no') date=datepipeModel.datetoIsotime(form.date)
+    console.log("date",date)
+  let payload={
+    ids:ids,
+    date:date
+  }
+  loader(true)
+  ApiClient.put('video/publish',payload).then(res=>{
+    loader(false)
+    if(res.success){
+     filter()
+     setIds([])
+     setShow(false)
+    }
+  })
+  }
+
+  const addPublish=()=>{
+    if(!ids.length){
+      toast.error("Please Select videos")
+      return
+    }
+    setForm({ publishNow:'yes', date:''})
+    setShow(true)
+  }
+
   const columns = [
+    {
+      key: "title",
+      name: <>
+      <div class="flex items-center mb-4">
+              <input id="default-checkbox" onClick={allIds} type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+              <label
+             
+              for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Select All</label>
+            </div>
+      </>,
+      // sort: true,
+      render: (row) => {
+        return (
+          <>
+            <div class="flex items-center mb-4">
+              <input
+               checked={ids.includes(row.id)}
+              onChange={addId} type="checkbox" value={row.id} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+              
+            </div>
+          </>
+        );
+      },
+    },
     {
       key: "title",
       name: "Title",
@@ -124,7 +206,7 @@ const Html = ({
       render: (row) => {
         return (
           <span className="capitalize">
-            {row?.date ? moment(row?.date)?.format("YYYY-MM-DD") : "N/A"}
+            {datepipeModel.datetime(datepipeModel.datetodatepicker(row.date))}
           </span>
         );
       },
@@ -236,7 +318,8 @@ const Html = ({
   ];
 
   return (
-    <Layout>
+    <>
+     <Layout>
       <div className="flex flex-wrap justify-between items-center gap-y-4">
         <div>
           <h3 className="text-2xl font-semibold text-[#111827]">
@@ -269,7 +352,9 @@ const Html = ({
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
-        <div className="flex p-4 items-center flex-wrap">
+        <div className="flex p-4 items-center flex-wrap gap-2">
+          <button type="button" onClick={addPublish} className="bg-primary leading-10 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2">Publish Videos</button>
+          
           <form
             class="flex items-center max-w-sm"
             onSubmit={(e) => {
@@ -393,6 +478,50 @@ const Html = ({
         )}
       </div>
     </Layout>
+
+      {show ? <>
+        <Modal
+          title="Publish Videos"
+          result={() => {
+            setShow(false)
+          }}
+          body={<>
+            <div>
+              <form onSubmit={e => { e.preventDefault(); onPublish() }}>
+                <div className="grid col-span-2 gap-3">
+                  <div>
+                    <label>publish now?</label>
+                    <div>
+                    <div class="inline-flex items-center mb-4 mr-2">
+                      <input checked={form.publishNow=='yes'?true:false} onChange={e=>setForm({...form,publishNow:e.target.value})} id="default-radio-1" type="radio" value="yes" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                      <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+                    </div>
+                    <div class="inline-flex items-center">
+                      <input checked={form.publishNow=='no'?true:false} onChange={e=>setForm({...form,publishNow:e.target.value})} id="default-radio-2" type="radio" value="no" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                      <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+                    </div>
+                    </div>
+                  </div>
+                  {form.publishNow=='no'?<>
+                    <div>
+                  <label>publish Date</label>
+                  <input type="datetime-local" required value={form.date} onChange={e=>setForm({...form,date:e.target.value})} className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2" />
+                  </div>
+                  </>:<></>}
+                 
+                </div>
+                <div className="text-right mt-3">
+                <button type="submit" onClick={addPublish} className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2">Publish</button>
+                </div>
+              </form>
+            </div>
+          </>}
+
+        />
+      </> : <></>}
+  
+    </>
+   
   );
 };
 

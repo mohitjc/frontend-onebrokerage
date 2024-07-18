@@ -143,13 +143,8 @@ const isotodate = (p) => {
 }
 
 const datetodatepicker = (p) => {
-    let time=isototime(p)
-    if(time){
-        time=time.split(':')
-        // time.pop()
-        time=time.join(':')
-    }
-    return `${datetostring(p)}T${time}`
+    let value=p?.split('.')?.[0]
+    return `${value}`
 }
 
 const DaysNo = (s, e) => {

@@ -218,7 +218,7 @@ const AddEdit = () => {
                 />
               </div>
 
-              <div className=" mb-3">
+              {/* <div className=" mb-3">
                 <FormControl
                   type="date"
                   name="date"
@@ -226,7 +226,7 @@ const AddEdit = () => {
                   value={date}
                   onChange={(e) => setDate(e)}
                 />
-              </div>
+              </div> */}
 
               <div className="mb-3">
                 <div>
