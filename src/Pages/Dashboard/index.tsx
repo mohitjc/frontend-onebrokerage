@@ -8,6 +8,7 @@ import ApiClient from "../../methods/api/apiClient";
 
 const Dashboard = () => {
   const [data, setData]: any = useState();
+  const[rewardGraph,setRewardGraph] = useState([])
   const getAllCounts = () => {
     ApiClient.get("dashboard/all-counts").then((res: any) => {
       if (res.success) {
@@ -18,7 +19,21 @@ const Dashboard = () => {
 
   useEffect(() => {
     getAllCounts();
+    getRewardGraph()
   }, []);
+
+   const getRewardGraph=()=>{  
+     const payload ={
+      Token: "sFov-YObWxbL-o2y9PTBh7PG7XwqDRb85FuDK4yEcbQ",
+      email: "maheshm%2B1071%40parasightsolutions.com",
+      aggregation: "monthly"
+     }
+    ApiClient.post("dashboard/graph/rewards",{payload}).then((res: any) => {
+      if (res.success) {
+        setRewardGraph(res.data);
+      }
+    });
+   }
   return (
     <>
       <Layout>
