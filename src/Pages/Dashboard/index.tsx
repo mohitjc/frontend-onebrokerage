@@ -30,7 +30,7 @@ const Dashboard = () => {
      }
     ApiClient.post("dashboard/graph/rewards",payload).then((res: any) => {
       if (res.success) {
-        setRewardGraph(res.data);
+        // setRewardGraph(res.data);
       }
     });
    }
