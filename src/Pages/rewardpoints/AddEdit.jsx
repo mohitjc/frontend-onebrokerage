@@ -19,7 +19,7 @@ import Swal from "sweetalert2";
 let options = [
   { name: "login", id: "login" },
   { name: "Add reviews", id: "addreviews" },
-  { name: "My Favroute ", id: "myfavourite" },
+  { name: "My Favourite ", id: "myfavourite" },
 ];
 let productTypeoptions = [
   { id: "Therapeutic Use", name: "Therapeutic Benefits" },

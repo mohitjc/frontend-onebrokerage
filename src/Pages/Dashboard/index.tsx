@@ -28,7 +28,7 @@ const Dashboard = () => {
       email: "maheshm%2B1071%40parasightsolutions.com",
       aggregation: "monthly"
      }
-    ApiClient.post("dashboard/graph/rewards",{payload}).then((res: any) => {
+    ApiClient.post("dashboard/graph/rewards",payload).then((res: any) => {
       if (res.success) {
         setRewardGraph(res.data);
       }

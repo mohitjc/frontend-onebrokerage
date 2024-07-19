@@ -144,17 +144,17 @@ const Html = ({
     const MAX_TAGS_TO_DISPLAY = 2;
     const displayedTags = tags.slice(0, MAX_TAGS_TO_DISPLAY);
     const remainingCount = tags.length - MAX_TAGS_TO_DISPLAY;
-    const showMoreText = remainingCount > 0 ? ` + ${remainingCount}more` : '';
+    const showMoreText = remainingCount > 0 ? ` +${remainingCount} more` : '';
 
     return (
-      <span className="capitalize">
+      <span className="capitalize flex flex-wrap items-center gap-1">
         {displayedTags && displayedTags.map((tag, index) => (
           <React.Fragment key={index}>
-            <span>{tag}</span>
-            {index !== displayedTags.length - 1 && <span>, </span>}
+            <span className=" bg-primary px-2 py-1 text-xs text-white rounded-md">{tag}</span>
+            {index !== displayedTags.length - 1 && <></>}
           </React.Fragment>
         ))}
-        {showMoreText}
+       <span className="lowecase text-xs" > {showMoreText}</span>
       </span>
     );
   }
@@ -164,17 +164,18 @@ const Html = ({
       key: "title",
       name: (
         <>
-          <div class="flex items-center mb-4">
+          <div className="flex  items-center">
             <input
               id="default-checkbox"
               onClick={allIds}
+              style={{ accentColor: "#EB6A59" }}
               type="checkbox"
               value=""
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              className="w-4 h-4 cursor-pointer rounded "
             />
             <label
               for="default-checkbox"
-              class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              className=" text-xs cursor-pointer font-medium "
             >
               Select All
             </label>
@@ -188,10 +189,11 @@ const Html = ({
             <div className="flex items-center ">
               <input
                 checked={ids.includes(row.id)}
+                style={{ accentColor: "#EB6A59" }}
                 onChange={addId}
                 type="checkbox"
                 value={row.id}
-                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                className="w-4 h-4 cursor-pointer  rounded "
               />
             </div>
           </>
@@ -219,7 +221,7 @@ const Html = ({
       name: "Tags",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{renderTags(row?.tags)}</span>;
+        return <span className="capitalize w-52">{renderTags(row?.tags)}</span>;
       },
     },
     {
@@ -261,9 +263,10 @@ const Html = ({
       name: "Status",
       render: (row) => {
         return (
-          <span className="capitalize">
-            {row?.isPublish == "pulished"?"Published":row?.isPublish === "un_published"?"Unpublished":"Yet to publish"}
+          <span className="capitalize block text-center">
+            {row?.isPublish == "pulished"? <><p className="bg-primary flex items-center justify-center px-2 py-1 rounded text-center text-white">Published</p></>:row?.isPublish === "un_published"?<><p className="bg-gray-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">un-published</p></>:<><p className="bg-orange-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">Yet To published</p></>}
           </span>
+          
         );
       },
     },
@@ -370,7 +373,7 @@ const Html = ({
               {" "}
               {shared.title}
             </h3>
-            <p class="text-sm font-normal text-[#75757A]">
+            <p className="text-sm font-normal text-[#75757A]">
               Here you can see all about your {shared.title}
             </p>
           </div>
@@ -406,18 +409,18 @@ const Html = ({
             </button>
 
             <form
-              class="flex items-center max-w-sm"
+              className="flex items-center max-w-sm"
               onSubmit={(e) => {
                 e.preventDefault();
                 filter();
               }}
             >
-              <label for="simple-search" class="sr-only">
+              <label for="simple-search" className="sr-only">
                 Search
               </label>
-              <div class="relative w-full">
-                {/* <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+              <div className="relative w-full">
+                {/* <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
                                 </svg>
                             </div> */}
@@ -428,7 +431,7 @@ const Html = ({
                   onChange={(e) => {
                     setFilter({ ...filters, search: e.target.value });
                   }}
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                   placeholder="Search"
                   required
                 />
@@ -442,10 +445,10 @@ const Html = ({
               </div>
               <button
                 type="submit"
-                class="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 <svg
-                  class="w-4 h-4"
+                  className="w-4 h-4"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -459,7 +462,7 @@ const Html = ({
                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                   />
                 </svg>
-                <span class="sr-only">Search</span>
+                <span className="sr-only">Search</span>
               </button>
             </form>
 
@@ -549,6 +552,7 @@ const Html = ({
         <>
           <Modal
             title="Publish Videos"
+            className="max-w-xl"
             result={() => {
               setShow(false);
             }}
@@ -563,34 +567,38 @@ const Html = ({
                   >
                     <div className="grid col-span-2 gap-3">
                       <div>
-                        <label>What would you like to do</label>
+                        <p className="text-2xl font-semibold text-center">What would you like to do</p>
+                        <div className="flex items-center justify-center mt-4 gap-4 mb-4">
+
+                     
                         <>
                           <button
                             type="button"
                             onClick={(e) => setForm({ ...form, publish: 'pulished' })}
-                            className={`${form?.publish == "pulished" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            className={`${form?.publish == "pulished" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                           >
                             Publish
                           </button>
                           <button
                             type="button"
                             onClick={(e) => setForm({ ...form, publish: 'un_published' })}
-                            className={`${form?.publish == "un_published" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            className={`${form?.publish == "un_published" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                           >
                             Un-publish
                           </button>
                           <button
                             type="button"
                             onClick={(e) => setForm({ ...form, publish: 'yet_to_publish' })}
-                            className={`${form?.publish == "yet_to_publish" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            className={`${form?.publish == "yet_to_publish" ? "bg-primary" : " bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                           >
                             Yet to publish
                           </button>
                         </>
+                        </div>
                         {form?.publish == "yet_to_publish" &&
                           <div>
                             <div>
-                              <label>Publish Date</label>
+                              <label className="block mb-2">Publish Date</label>
                               <input
                                 type="datetime-local"
                                 required
@@ -599,14 +607,14 @@ const Html = ({
                                 onChange={(e) =>
                                   setForm({ ...form, date: e.target.value })
                                 }
-                                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
+                                className="relative shadow-box cursor-pointer bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
                               />
                             </div>
                           </div>
                         }
                       </div>
                     </div>
-                    <div className="text-right mt-3">
+                    <div className="text-right mt-5">
                       <button
                         type="submit"
                         className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
