@@ -449,7 +449,7 @@ const Html = ({
                 { id: "yet_to_publish", name: "Yet To publish" },
               ]}
             />
-            {filters.isPublish || filters.type || filters.category ? (
+            {filters.type || filters.category ? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
