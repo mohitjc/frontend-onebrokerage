@@ -5,12 +5,23 @@ import { IoHandRightOutline } from "react-icons/io5";
 import PieChart from "../../components/Charts/Piechart";
 import DoughnutChart from "../../components/Charts/DonutChart";
 import ApiClient from "../../methods/api/apiClient";
+import SelectDropdown from "../../components/common/SelectDropdown";
+import loader from "../../methods/loader";
 
 const Dashboard = () => {
-  const [data, setData]: any = useState();
-  const[rewardGraph,setRewardGraph] = useState([])
+  const [data, setData] = useState();
+  const [rewardGraph, setRewardGraph] = useState([]);
+  const [totalAmounts, setTotalAmount] = useState([]);
+  const [dates, setDates] = useState([]);
+  const [aggregation, setAggregation] = useState("monthly");
+  const list = [
+    { id: "daily", name: "Daily" },
+    { id: "weekly", name: "Weekly" },
+    { id: "monthly", name: "Monthly" },
+    { id: "yearly", name: "Yearly" },
+  ];
   const getAllCounts = () => {
-    ApiClient.get("dashboard/all-counts").then((res: any) => {
+    ApiClient.get("dashboard/all-counts").then((res) => {
       if (res.success) {
         setData(res.data?.[0]);
       }
@@ -19,21 +30,41 @@ const Dashboard = () => {
 
   useEffect(() => {
     getAllCounts();
-    getRewardGraph()
   }, []);
 
-   const getRewardGraph=()=>{  
-     const payload ={
+  useEffect(() => {
+    getRewardGraph();
+  }, [aggregation]);
+
+  const getRewardGraph = () => {
+    loader(true)
+    const payload = {
       Token: "sFov-YObWxbL-o2y9PTBh7PG7XwqDRb85FuDK4yEcbQ",
       email: "maheshm%2B1071%40parasightsolutions.com",
-      aggregation: "monthly"
-     }
-    ApiClient.post("dashboard/graph/rewards",payload).then((res: any) => {
+      aggregation: aggregation,
+    };
+    ApiClient.post("dashboard/graph/rewards", payload).then((res) => {
       if (res.success) {
-        // setRewardGraph(res.data);
+        loader(false)
+        for (const date in res.data) {
+          if (res.data.hasOwnProperty(date)) {
+            totalAmounts?.push(res.data[date].totalAmount);
+            dates?.push(date);
+            setTotalAmount(totalAmounts)
+            setDates(dates)
+          }
+        }
+       
       }
     });
-   }
+  };
+
+  const changestatus = (e) => {
+    setAggregation(e);
+  };
+
+   console?.log(totalAmounts,dates,'??????')
+
   return (
     <>
       <Layout>
@@ -93,30 +124,52 @@ const Dashboard = () => {
           </div>
 
           <div className="grid grid-cols-12 gap-4 mt-6">
-            <div className="col-span-12 md:col-span-12">
+            {/* <div className="col-span-12 md:col-span-12">
               <div className="chatr_ones border border-gray-200 p-6 rounded-lg">
                 <div className="names_heads">
                   <h5 className="font-semibold text-xl">Categories</h5>
                 </div>
                 <Chart />
               </div>
-            </div>
+            </div> */}
 
-            <div className="col-span-12 md:col-span-6">
+            {/* <div className="col-span-12 md:col-span-6">
               <div className="chatr_ones border border-gray-200 p-6 rounded-lg">
                 <div className="names_heads">
                   <h5 className="font-semibold text-xl">Products</h5>
                 </div>
                 <PieChart />
               </div>
-            </div>
+            </div> */}
 
-            <div className="col-span-12 md:col-span-6">
+            {/* <div className="col-span-12 md:col-span-6">
               <div className="chatr_ones border border-gray-200 p-6 rounded-lg">
                 <div className="names_heads">
                   <h5 className="font-semibold text-xl">Questions</h5>
                 </div>
                 <DoughnutChart />
+              </div>
+            </div> */}
+            <div className="col-span-12 md:col-span-12">
+              <div className="chatr_ones border border-gray-200 p-6 rounded-lg">
+                <div className="names_heads">
+                  <h5 className="font-semibold text-xl">Reward Points</h5>
+                </div>
+                <SelectDropdown
+                  // id="statusDropdown"
+                  displayValue="name"
+                  intialValue={aggregation}
+                  result={(e) => {
+                    changestatus(e.value);
+                  }}
+                  options={list}
+                />
+                <Chart
+                  totalAmounts={totalAmounts}
+                  dates={dates}
+                  name={"Reward Points"}
+                  type={""}
+                />
               </div>
             </div>
           </div>

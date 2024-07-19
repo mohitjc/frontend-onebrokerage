@@ -156,7 +156,7 @@ const Html = ({
       render: (itm) => {
         return (
           <>
-            <div className="flex items-center justify-start gap-1.5"> 
+            <div className="flex items-center justify-start gap-1.5">
               {isAllow(`edit${shared.check}`) ? (
                 <Tooltip placement="top" title="Edit">
                   <a
@@ -274,7 +274,7 @@ const Html = ({
               )}
             </div>
             <button
-              onClick={onsearchClick}
+              type="submit"
               class="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               <svg

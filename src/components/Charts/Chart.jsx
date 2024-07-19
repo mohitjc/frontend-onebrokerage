@@ -1,7 +1,7 @@
 import React from "react";
 import ReactEcharts from "echarts-for-react";
 
-const Chart = () => {
+const Chart = ({totalAmounts,dates,names,type}) => {
   const getOption = () => {
     return {
       // title: {
@@ -9,8 +9,8 @@ const Chart = () => {
       // },
       tooltip: {},
       xAxis: {
-        type: "category",
-        data: [
+        type:  type ? type :"category",
+         data: dates ? dates :  [
           "Candies",
           "Gummies",
           "Capsules",
@@ -24,9 +24,9 @@ const Chart = () => {
       },
       series: [
         {
-          name: "Category",
+          name: names ? names :  "Category",
           type: "bar",
-          data: [120, 200, 150, 80, 30, 60],
+          data: totalAmounts ? totalAmounts :  [120, 200, 150, 80, 30, 60],
         },
       ],
     };
