@@ -19,7 +19,7 @@ import Swal from "sweetalert2";
 let options = [
   { name: "login", id: "login" },
   { name: "Add reviews", id: "addreviews" },
-  { name: "My Favroute ", id: "myfavourite" },
+  { name: "My favorite ", id: "myfavourite" },
 ];
 let productTypeoptions = [
   { id: "Therapeutic Use", name: "Therapeutic Benefits" },
@@ -116,49 +116,38 @@ const AddEditReward = () => {
             </div>
 
             <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 ">
-                <div className="grid grid-cols-12 gap-4">
-                  <div
-                    className={`col-span-12 md:col-span-${
-                      form.category ? "6" : "12"
-                    } mb-3`}
-                  >
-                    <FormControl
-                      type="select"
-                      name="transaction_for"
-                      label="Tranaction for"
-                      value={form.transaction_for}
-                      onChange={(e) => {
-                        setform({ ...form, transaction_for: e });
-                      }}
-                      options={options}
-                      theme="search"
-                      required
-                    />
-                    {/* {submitted && !form.transaction_for && (
-                      <div className="text-danger small mt-1">
-                        parent category is required.
-                      </div>
-                    )} */}
-                  </div>
-                </div>
-                <div className="col-spam-12  pl-3 mb-3">
-                  <label>
-                    Reward Points
-                    <span className="star">*</span>
-                  </label>
-                  <input
-                    className="relative  border bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
-                    value={form?.reward_points || ""}
-                    maxLength="10"
-                    onChange={(e) => {
-                      setform({
-                        ...form,
-                        reward_points: methodModel.isNumber(e),
-                      });
-                    }}
-                  />
-                  {/* {submitted && !OneMonth.unit_amount ? (
+              <div className="col-span-12 md:col-span-6 ">
+                <FormControl
+                  type="select"
+                  name="transaction_for"
+                  label="Tranaction for"
+                  value={form.transaction_for}
+                  onChange={(e) => {
+                    setform({ ...form, transaction_for: e });
+                  }}
+                  options={options}
+                  theme="search"
+                  required
+                />
+              </div>
+
+              <div className="col-span-12  md:col-span-6 pl-3 mb-3">
+                <label>
+                  Reward Points
+                  <span className="star">*</span>
+                </label>
+                <input
+                  className="relative  border bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
+                  value={form?.reward_points || ""}
+                  maxLength="10"
+                  onChange={(e) => {
+                    setform({
+                      ...form,
+                      reward_points: methodModel.isNumber(e),
+                    });
+                  }}
+                />
+                {/* {submitted && !OneMonth.unit_amount ? (
                           <div className="text-danger text-[12px] mt-[3px]">
                             {" "}
                             Monthly price is required
@@ -166,7 +155,6 @@ const AddEditReward = () => {
                         ) : (
                           <></>
                         )} */}
-                </div>
               </div>
             </div>
 
