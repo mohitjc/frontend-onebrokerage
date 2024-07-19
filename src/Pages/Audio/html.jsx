@@ -480,6 +480,7 @@ const Html = ({
         <>
           <Modal
             title="Publish Audios"
+              className="max-w-xl"
             result={() => {
               setShow(false);
             }}
@@ -494,7 +495,8 @@ const Html = ({
                   >
                     <div className="grid col-span-2 gap-3">
                       <div>
-                        <label>What would you like to do</label>
+                      <p className="text-2xl font-semibold text-center">What would you like to do</p>
+                      <div className="flex items-center justify-center mt-4 gap-4 mb-4">
                         <>
                           <button
                             type="button"
@@ -518,10 +520,11 @@ const Html = ({
                             Yet to publish
                           </button>
                         </>
+                        </div>
                         {form?.publish == "yet_to_publish" &&
                           <div>
                             <div>
-                              <label>Publish Date</label>
+                            <label className="block mb-2">Publish Date</label>
                               <input
                                 type="datetime-local"
                                 required
