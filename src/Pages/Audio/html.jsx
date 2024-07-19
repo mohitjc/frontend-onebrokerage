@@ -501,21 +501,21 @@ const Html = ({
                           <button
                             type="button"
                             onClick={(e) => setForm({ ...form, publish: 'pulished' })}
-                            className={`${form?.publish == "pulished" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            className={`${form?.publish == "pulished" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                           >
                             Publish
                           </button>
                           <button
                             type="button"
                             onClick={(e) => setForm({ ...form, publish: 'un_published' })}
-                            className={`${form?.publish == "un_published" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            className={`${form?.publish == "un_published" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                           >
                             Un-publish
                           </button>
                           <button
                             type="button"
                             onClick={(e) => setForm({ ...form, publish: 'yet_to_publish' })}
-                            className={`${form?.publish == "yet_to_publish" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            className={`${form?.publish == "yet_to_publish" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                           >
                             Yet to publish
                           </button>
