@@ -79,7 +79,7 @@ const Html = ({
     publishNow: "",
     date: "",
     publish: false,
-    isPublish: ""
+    isPublish: "",
   });
 
   const allIds = (e) => {
@@ -103,14 +103,15 @@ const Html = ({
 
   const onPublish = () => {
     let date = datepipeModel.datetoIsotime(new Date());
-    if (form?.publish === "yet_to_publish") date = datepipeModel.datetoIsotime(form?.date);
+    if (form?.publish === "yet_to_publish")
+      date = datepipeModel.datetoIsotime(form?.date);
     let payload = {
       ids: ids,
       date: date,
-      isPublish: form?.publish
-    }
-    if(form?.publish === 'pulished'){
-      delete payload?.date
+      isPublish: form?.publish,
+    };
+    if (form?.publish === "pulished") {
+      delete payload?.date;
     }
     loader(true);
     ApiClient.put("video/publish", payload).then((res) => {
@@ -144,20 +145,21 @@ const Html = ({
     const MAX_TAGS_TO_DISPLAY = 2;
     const displayedTags = tags.slice(0, MAX_TAGS_TO_DISPLAY);
     const remainingCount = tags.length - MAX_TAGS_TO_DISPLAY;
-    const showMoreText = remainingCount > 0 ? ` + ${remainingCount}more` : '';
+    const showMoreText = remainingCount > 0 ? ` + ${remainingCount}more` : "";
 
     return (
       <span className="capitalize">
-        {displayedTags && displayedTags.map((tag, index) => (
-          <React.Fragment key={index}>
-            <span>{tag}</span>
-            {index !== displayedTags.length - 1 && <span>, </span>}
-          </React.Fragment>
-        ))}
+        {displayedTags &&
+          displayedTags.map((tag, index) => (
+            <React.Fragment key={index}>
+              <span>{tag}</span>
+              {index !== displayedTags.length - 1 && <span>, </span>}
+            </React.Fragment>
+          ))}
         {showMoreText}
       </span>
     );
-  }
+  };
 
   const columns = [
     {
@@ -262,7 +264,11 @@ const Html = ({
       render: (row) => {
         return (
           <span className="capitalize">
-            {row?.isPublish == "pulished"?"Published":row?.isPublish === "un_published"?"Unpublished":"Yet to publish"}
+            {row?.isPublish == "pulished"
+              ? "Published"
+              : row?.isPublish === "un_published"
+              ? "Unpublished"
+              : "Yet to publish"}
           </span>
         );
       },
@@ -567,27 +573,45 @@ const Html = ({
                         <>
                           <button
                             type="button"
-                            onClick={(e) => setForm({ ...form, publish: 'pulished' })}
-                            className={`${form?.publish == "pulished" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            onClick={(e) =>
+                              setForm({ ...form, publish: "pulished" })
+                            }
+                            className={`${
+                              form?.publish == "pulished"
+                                ? "bg-primary"
+                                : "text-primary"
+                            } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                           >
                             Publish
                           </button>
                           <button
                             type="button"
-                            onClick={(e) => setForm({ ...form, publish: 'un_published' })}
-                            className={`${form?.publish == "un_published" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            onClick={(e) =>
+                              setForm({ ...form, publish: "un_published" })
+                            }
+                            className={`${
+                              form?.publish == "un_published"
+                                ? "bg-primary"
+                                : "text-primary"
+                            } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                           >
                             Un-publish
                           </button>
                           <button
                             type="button"
-                            onClick={(e) => setForm({ ...form, publish: 'yet_to_publish' })}
-                            className={`${form?.publish == "yet_to_publish" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            onClick={(e) =>
+                              setForm({ ...form, publish: "yet_to_publish" })
+                            }
+                            className={`${
+                              form?.publish == "yet_to_publish"
+                                ? "bg-primary"
+                                : "text-primary"
+                            } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                           >
                             Yet to publish
                           </button>
                         </>
-                        {form?.publish == "yet_to_publish" &&
+                        {form?.publish == "yet_to_publish" && (
                           <div>
                             <div>
                               <label>Publish Date</label>
@@ -595,7 +619,9 @@ const Html = ({
                                 type="datetime-local"
                                 required
                                 value={form.date}
-                                min={`${new Date().toLocaleDateString('en-CA')}T00:00`}
+                                min={`${new Date().toLocaleDateString(
+                                  "en-CA"
+                                )}T00:00`}
                                 onChange={(e) =>
                                   setForm({ ...form, date: e.target.value })
                                 }
@@ -603,14 +629,19 @@ const Html = ({
                               />
                             </div>
                           </div>
-                        }
+                        )}
                       </div>
                     </div>
                     <div className="text-right mt-3">
                       <button
                         type="submit"
                         className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-                      >{form?.publish == "pulished" ? "Publish" : form?.publish == "un_published" ? "Unpublish" : "Yet to Publish"}
+                      >
+                        {form?.publish == "pulished"
+                          ? "Publish"
+                          : form?.publish == "un_published"
+                          ? "Unpublish"
+                          : "Yet to Publish"}
                       </button>
                     </div>
                   </form>
