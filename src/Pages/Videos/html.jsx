@@ -132,21 +132,21 @@ const Html = ({
     {
       key: "title",
       name: <>
-      <div class="flex items-center mb-4">
-              <input id="default-checkbox" onClick={allIds} type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+      <div className="flex items-center ">
+              <input  style={{ accentColor: "#EB6A59" }} id="default-checkbox" onClick={allIds} type="checkbox" value="" className="w-4 h-4  bg-gray-100 border-gray-300 rounded " />
               <label
              
-              for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Select All</label>
+              for="default-checkbox" className="cursor-pointer text-xs" ><span>Select All</span></label>
             </div>
       </>,
       // sort: true,
       render: (row) => {
         return (
           <>
-            <div class="flex items-center mb-4">
+            <div className="flex items-center ">
               <input
                checked={ids.includes(row.id)}
-              onChange={addId} type="checkbox" value={row.id} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+              onChange={addId} type="checkbox" value={row.id} className="w-4 h-4 cursor-pointer  bg-gray-100 border-gray-300 rounded "  style={{ accentColor: "#EB6A59" }} />
               
             </div>
           </>
@@ -174,7 +174,9 @@ const Html = ({
       name: "Tags",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.tags}</span>;
+        return <> <div className="w-52 flex items-center flex-wrap gap-2">
+
+         <span className="capitalize bg-primary px-2 py-1 text-xs text-white rounded-md">{row?.tags}</span></div></>;
       },
     },
     {
@@ -216,9 +218,10 @@ const Html = ({
       name: "Status",
       render: (row) => {
         return (
-          <span className="capitalize">
-            {row?.isPublish?'Published':'Unpublished'}
-          </span>
+          <span className={`capitalize px-2 py-1 text-xs text-white rounded-md ${row?.isPublish ? 'bg-primary' : 'bg-gray-400'}`}>
+          {row?.isPublish ? 'Published' : 'Unpublished'}
+        </span>
+        
         );
       },
     },
@@ -327,6 +330,8 @@ const Html = ({
       },
     },
   ];
+  
+
 
   return (
     <>
@@ -508,6 +513,7 @@ const Html = ({
       {show ? <>
         <Modal
           title="Publish Videos"
+          className="max-w-lg"
           result={() => {
             setShow(false)
           }}
@@ -515,23 +521,41 @@ const Html = ({
             <div>
               <form onSubmit={e => { e.preventDefault(); onPublish() }}>
                 <div className="grid col-span-2 gap-3">
-                  <div>
-                    <label>publish now?</label>
-                    <div>
-                    <div class="inline-flex items-center mb-4 mr-2">
-                      <input checked={form.publishNow=='yes'?true:false} onChange={e=>setForm({...form,publishNow:e.target.value})} id="default-radio-1" type="radio" value="yes" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                      <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
-                    </div>
-                    <div class="inline-flex items-center">
-                      <input checked={form.publishNow=='no'?true:false} onChange={e=>setForm({...form,publishNow:e.target.value})} id="default-radio-2" type="radio" value="no" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                      <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
-                    </div>
-                    </div>
-                  </div>
+                <div className="">
+      <label className="mb-3">Publish now?</label>
+      <div>
+        <div className={`inline-flex items-center mr-2 mt-2 px-4 py-2 rounded-lg  ${form.publishNow === 'yes' ? 'bg-primary ' : 'bg-gray-100 '}`}>
+          <input
+            style={{ accentColor: "#EB6A59" }}
+            checked={form.publishNow === 'yes'}
+            onChange={e => setForm({ ...form, publishNow: e.target.value })}
+            id="default-radio-1"
+            type="radio"
+            value="yes"
+            name="default-radio"
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 cursor-pointer"
+          />
+          <label htmlFor="default-radio-1" className={`ms-2 text-sm font-medium  cursor-pointer ${form.publishNow === 'no' ? 'text-black' : 'text-white '}`}>Yes</label>
+        </div>
+        <div className={`inline-flex items-center px-4 py-2 rounded-lg  ${form.publishNow === 'no' ? 'bg-primary' : 'bg-gray-100 '}`}>
+          <input
+            style={{ accentColor: "#EB6A59" }}
+            checked={form.publishNow === 'no'}
+            onChange={e => setForm({ ...form, publishNow: e.target.value })}
+            id="default-radio-2"
+            type="radio"
+            value="no"
+            name="default-radio"
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 cursor-pointer"
+          />
+          <label htmlFor="default-radio-2" className={`ms-2 text-sm font-medium  cursor-pointer ${form.publishNow === 'no' ? 'text-white' : 'text-black '}`}>No</label>
+        </div>
+      </div>
+    </div>
                   {form.publishNow=='no'?<>
-                    <div>
+                    <div className="mb-3">
                   <label>publish Date</label>
-                  <input type="datetime-local" required value={form.date} onChange={e=>setForm({...form,date:e.target.value})} className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2" />
+                  <input type="datetime-local" required value={form.date} onChange={e=>setForm({...form,date:e.target.value})} className="relative mt-2 shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2" />
                   </div>
                   </>:<></>}
                  
