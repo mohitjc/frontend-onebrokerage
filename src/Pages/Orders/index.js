@@ -86,7 +86,7 @@ const Orders = () => {
       category: "",
       page: 1,
     };
-    setFilter({ ...filters, ...f });
+    setFilter({ ...filters, search: "" });
     getOrderDetails(customer?.customerId.value || null);
   };
 
