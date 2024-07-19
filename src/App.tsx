@@ -69,6 +69,7 @@ import socketModel from "./models/socketModel";
 import Orders from "./Pages/Orders/index";
 import RewardPoints from "./Pages/rewardpoints";
 import AddEditReward from "./Pages/rewardpoints/AddEdit";
+import RewardPointDetails from "./Pages/rewardpoints/View";
 
 const { persistor, store } = configureStoreProd();
 
@@ -143,6 +144,7 @@ function App() {
     { url: "/rewardpoints", element: <RewardPoints /> },
     { url: "/rewardpoints/add", element: <AddEditReward /> }, 
     { url: "/rewardpoints/edit/:id", element: <AddEditReward /> },
+    { url: "/rewardpoints/detail/:id", element: <RewardPointDetails /> },
   ];
 
   sessionStorage.clear();
