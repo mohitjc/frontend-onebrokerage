@@ -520,10 +520,10 @@ const Html = ({
                             <div>
                               <label>Publish Date</label>
                               <input
-                                type="date"
+                                type="datetime-local"
                                 required
                                 value={form.date}
-                                min={new Date().toISOString().slice(0, 10)}
+                                min={`${new Date().toLocaleDateString('en-CA')}T00:00`}
                                 onChange={(e) =>
                                   setForm({ ...form, date: e.target.value })
                                 }
