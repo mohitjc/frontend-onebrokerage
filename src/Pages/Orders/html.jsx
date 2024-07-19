@@ -41,6 +41,8 @@ const Html = ({
   handleCopy,
   copySuccess,
   hanldeUserChange,
+  onsearchClick,
+  customer,
 
   selectId,
   total = { total },
@@ -154,19 +156,7 @@ const Html = ({
       render: (itm) => {
         return (
           <>
-            <div className="flex items-center justify-start gap-1.5">
-              {/* {isAllow(`read${shared.check}`) ? (
-                <Tooltip placement="top" title="View">
-                  <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => view(itm.id)}
-                  >
-                    <PiEyeLight />
-                  </a>
-                </Tooltip>
-              ) : (
-                <></>
-              )} */}
+            <div className="flex items-center justify-start gap-1.5"> 
               {isAllow(`edit${shared.check}`) ? (
                 <Tooltip placement="top" title="Edit">
                   <a
@@ -192,25 +182,6 @@ const Html = ({
               ) : (
                 <></>
               )}
-              {/* {itm?.isPublish ? (
-                <Tooltip placement="top" title="un-publish">
-                  <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => handlePublish(itm.id, itm?.isPublish)}
-                  >
-                    <MdOutlineDownload />
-                  </a>
-                </Tooltip>
-              ) : (
-                <Tooltip placement="top" title="publish">
-                  <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => handlePublish(itm.id, itm?.isPublish)}
-                  >
-                    <MdOutlinePublish />
-                  </a>
-                </Tooltip>
-              )} */}
               {selectId === itm?.id && copySuccess ? (
                 "Copied!"
               ) : (
@@ -303,7 +274,7 @@ const Html = ({
               )}
             </div>
             <button
-              type="submit"
+              onClick={onsearchClick}
               class="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               <svg
@@ -327,7 +298,7 @@ const Html = ({
 
           <div className="flex gap-2 ml-auto w-64">
             <Select
-              value={filters?.customerId || null}
+              value={customer?.customerId || null}
               onChange={(e) => hanldeUserChange(e)}
               options={users}
               className="w-50"
