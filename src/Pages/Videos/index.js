@@ -68,7 +68,7 @@ const Video = () => {
     let f = {
       type: "",
       search: "",
-      isPublish: "",
+      isPublish: "un_published",
       category: "",
       page: 1,
     };
