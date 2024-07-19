@@ -256,15 +256,7 @@ const AddEdit = () => {
                 </div>
               </div>
 
-              {/* <div className=" mb-3">
-                <FormControl
-                  type="date"
-                  name="date"
-                  label="Publish Date"
-                  value={date}
-                  onChange={(e) => setDate(e)}
-                />
-              </div> */}
+            
 
               <div className="mb-3">
                 <div>
