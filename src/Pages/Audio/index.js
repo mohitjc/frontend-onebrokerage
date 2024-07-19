@@ -8,18 +8,18 @@ import environment from "../../environment";
 import axios from "axios";
 import shared from "./shared";
 import { useSelector } from "react-redux";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 
 const Audio = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
-  const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
+  const [filters, setFilter] = useState({ page: 1, count: 10, search: "", isPublish: "un_published" });
   const [copySuccess, setCopySuccess] = useState(false);
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loaging, setLoader] = useState(true);
   const history = useNavigate();
-  const[selectId,setSelectId] = useState() 
+  const [selectId, setSelectId] = useState()
 
   const sortClass = (key) => {
     let cls = "fa-sort";
@@ -68,6 +68,7 @@ const Audio = () => {
       search: "",
       status: "",
       category: "",
+      isPublish: "",
       page: 1,
     };
     setFilter({ ...filters, ...f });
@@ -148,9 +149,8 @@ const Audio = () => {
     // }
     Swal.fire({
       title: "Are you sure?",
-      text: `Do you want to ${
-        status == "active" ? "Activate" : "Deactivate"
-      } this`,
+      text: `Do you want to ${status == "active" ? "Activate" : "Deactivate"
+        } this`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -214,13 +214,13 @@ const Audio = () => {
     }
   }, []);
 
-  const handlePublish = (id,isPublish) => {
+  const handlePublish = (id, isPublish) => {
     const value = {
       id: id,
       isPublish: !isPublish,
     };
-   let method = "put";
-   let  url = shared.editApi;
+    let method = "put";
+    let url = shared.editApi;
     loader(true);
     ApiClient.allApi(url, value, method).then((res) => {
       if (res.success) {
@@ -230,18 +230,18 @@ const Audio = () => {
     });
   };
 
-  const handleCopy = async(text,id)=>{
+  const handleCopy = async (text, id) => {
     setSelectId(id)
     try {
       await navigator.clipboard.writeText(text);
       setCopySuccess(true);
-      setTimeout(()=>{
+      setTimeout(() => {
         setCopySuccess(false);
-      },[1000])
+      }, [1000])
     } catch (err) {
       setCopySuccess(false);
     }
-   }
+  }
 
   return (
     <>
@@ -265,7 +265,7 @@ const Audio = () => {
         changestatus={changestatus}
         exportfun={exportfun}
         handlePublish={handlePublish}
-        handleCopy ={handleCopy}
+        handleCopy={handleCopy}
         selectId={selectId}
         copySuccess={copySuccess}
       />

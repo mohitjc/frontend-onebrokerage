@@ -14,12 +14,15 @@ import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
 import methodModel from "../../methods/methods";
 import { PiEyeLight } from "react-icons/pi";
+import Modal from "../../components/common/Modal";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import environment from "../../environment";
 import { MdOutlinePublish } from "react-icons/md";
 import { IoMdCopy } from "react-icons/io";
 import { MdOutlineDownload } from "react-icons/md";
 import moment from "moment";
+import loader from "../../methods/loader";
+import { toast } from "react-toastify";
 const Html = ({
   sorting,
   filter,
@@ -36,14 +39,16 @@ const Html = ({
   data,
   changestatus,
   isAllow,
-  handlePublish,
   handleCopy,
   selectId,
   copySuccess,
   total = { total },
 }) => {
-  const user = useSelector((state) => state.user);
   const [categoryOptions, setCategories] = useState([]);
+
+  useEffect(() => {
+    getCategoriesList();
+  }, []);
 
   const getCategoriesList = (p = {}) => {
     let f = {
@@ -61,11 +66,102 @@ const Html = ({
     });
   };
 
-  useEffect(() => {
-    getCategoriesList();
-  }, []);
+  const [ids, setIds] = useState([]);
+  const [show, setShow] = useState(false);
+  const [form, setForm] = useState({
+    publishNow: "",
+    date: "",
+    publish: false,
+    isPublish: ""
+  });
+
+  const allIds = (e) => {
+    if (e.target.checked) {
+      let ids = data.map((itm) => itm.id);
+      setIds([...ids]);
+    } else {
+      setIds([]);
+    }
+  };
+  const addId = (e) => {
+    if (e.target.checked) {
+      ids.push(e.target.value);
+      setIds([...ids]);
+    } else {
+      let arr = ids.filter((itm) => itm != e.target.value);
+      setIds([...arr]);
+    }
+  };
+  const onPublish = () => {
+    let date = datepipeModel.datetoIsotime(new Date());
+    if (form?.publish === "yet_to_publish") date = datepipeModel.datetoIsotime(form?.date);
+    let payload = {
+      ids: ids,
+      date: date,
+      isPublish: form?.publish
+    }
+    if (form?.publish === 'pulished') {
+      delete payload?.date
+    }
+    loader(true);
+    ApiClient.put("audio/publish", payload).then((res) => {
+      if (res.success) {
+        filter();
+        setIds([]);
+        setShow(false);
+      }
+      loader(false);
+    });
+  };
+  const addPublish = () => {
+    if (!ids.length) {
+      toast.error("Please Select Audios");
+      return;
+    }
+    else {
+      setForm({ publishNow: "yes", date: "", publish: "pulished" });
+      setShow(true);
+    }
+  };
 
   const columns = [
+    {
+      key: "title",
+      name: (
+        <>
+          <div class="flex items-center mb-4">
+            <input
+              id="default-checkbox"
+              onClick={allIds}
+              type="checkbox"
+              value=""
+              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            />
+            <label
+              for="default-checkbox"
+              class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Select All
+            </label>
+          </div>
+        </>
+      ),
+      render: (row) => {
+        return (
+          <>
+            <div className="flex items-center ">
+              <input
+                checked={ids.includes(row.id)}
+                onChange={addId}
+                type="checkbox"
+                value={row.id}
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+            </div>
+          </>
+        );
+      },
+    },
     {
       key: "title",
       name: "Title",
@@ -112,22 +208,13 @@ const Html = ({
       },
     },
     {
-      key: "status",
+      key: "isPublish",
       name: "Status",
       render: (row) => {
         return (
           <>
             <div className="" onClick={() => statusChange(row)}>
-              <span
-                className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-                          ${
-                            row.status == "deactive"
-                              ? " bg-gray-200 text-black"
-                              : "bg-[#ee695e] text-white"
-                          }`}
-              >
-                {row.status == "deactive" ? "inactive" : "active"}
-              </span>
+            {row?.isPublish == "pulished"?"Published":row?.isPublish === "un_published"?"Unpublished":"Yet to publish"}
             </div>
           </>
         );
@@ -177,7 +264,7 @@ const Html = ({
               ) : (
                 <></>
               )}
-                {/* {itm?.isPublish ? (
+              {/* {itm?.isPublish ? (
                  <Tooltip placement="top" title="un-publish">
                  <a
                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -197,14 +284,14 @@ const Html = ({
                 </a>
               </Tooltip>
               )} */}
-                    {selectId === itm?.id && copySuccess ? (
+              {selectId === itm?.id && copySuccess ? (
                 "Copied!"
               ) : (
                 <Tooltip placement="top" title="copy link">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) => handleCopy(`${environment.sasurl}${itm.audio}`, itm?.id)}
-                   
+
                   >
                     <IoMdCopy />
                   </a>
@@ -252,6 +339,13 @@ const Html = ({
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
         <div className="flex p-4 items-center flex-wrap">
+          <button
+            type="button"
+            onClick={addPublish}
+            className="bg-primary leading-10 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2 mr-4"
+          >
+            Publish Audios
+          </button>
           <form
             class="flex items-center max-w-sm"
             onSubmit={(e) => {
@@ -325,13 +419,17 @@ const Html = ({
               id="statusDropdown"
               displayValue="name"
               placeholder="All Status"
-              intialValue={filters.status}
+              intialValue={filters.isPublish}
               result={(e) => {
-                changestatus(e.value);
+                filter({ isPublish: e.value, page: 1 });
               }}
-              options={statusModel.list}
+              options={[
+                { id: "pulished", name: "Published" },
+                { id: "un_published", name: "Unpublished" },
+                { id: "yet_to_publish", name: "Yet To publish" },
+              ]}
             />
-            {filters.status || filters.type || filters.category ? (
+            {filters.isPublish || filters.type || filters.category ? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
@@ -374,6 +472,84 @@ const Html = ({
           <></>
         )}
       </div>
+
+      {show ? (
+        <>
+          <Modal
+            title="Publish Audios"
+            result={() => {
+              setShow(false);
+            }}
+            body={
+              <>
+                <div>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      onPublish();
+                    }}
+                  >
+                    <div className="grid col-span-2 gap-3">
+                      <div>
+                        <label>What would you like to do</label>
+                        <>
+                          <button
+                            type="button"
+                            onClick={(e) => setForm({ ...form, publish: 'pulished' })}
+                            className={`${form?.publish == "pulished" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                          >
+                            Publish
+                          </button>
+                          <button
+                            type="button"
+                            onClick={(e) => setForm({ ...form, publish: 'un_published' })}
+                            className={`${form?.publish == "un_published" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                          >
+                            Un-publish
+                          </button>
+                          <button
+                            type="button"
+                            onClick={(e) => setForm({ ...form, publish: 'yet_to_publish' })}
+                            className={`${form?.publish == "yet_to_publish" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                          >
+                            Yet to publish
+                          </button>
+                        </>
+                        {form?.publish == "yet_to_publish" &&
+                          <div>
+                            <div>
+                              <label>Publish Date</label>
+                              <input
+                                type="date"
+                                required
+                                value={form.date}
+                                min={new Date().toISOString().slice(0, 10)}
+                                onChange={(e) =>
+                                  setForm({ ...form, date: e.target.value })
+                                }
+                                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
+                              />
+                            </div>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                    <div className="text-right mt-3">
+                      <button
+                        type="submit"
+                        className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+                      >{form?.publish == "pulished" ? "Publish" : form?.publish == "un_published" ? "Unpublish" : "Yet to Publish"}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </>
+            }
+          />
+        </>
+      ) : (
+        <></>
+      )}
     </Layout>
   );
 };

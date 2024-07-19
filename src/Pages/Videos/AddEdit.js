@@ -61,29 +61,29 @@ const AddEdit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-    let value = {};
+   
     let invalid = methodModel.getFormError(formValidation, form);
 
     if (invalid) return;
     let method = "post";
     let url = shared.addApi;
-    if (isToday) {
-      value = {
+    // if (isToday) {
+    //   value = {
+    //     ...form,
+    //     ...video,
+    //     date: date,
+    //     tags: tags,
+    //     isPublish: true,
+    //   };
+    // } else {
+    let  value = {
         ...form,
         ...video,
-        date: date,
+        // date: date,
         tags: tags,
-        isPublish: true,
+        // isPublish: false,
       };
-    } else {
-      value = {
-        ...form,
-        ...video,
-        date: date,
-        tags: tags,
-        isPublish: false,
-      };
-    }
+    // }
 
     if (value.id) {
       method = "put";
@@ -256,15 +256,7 @@ const AddEdit = () => {
                 </div>
               </div>
 
-              {/* <div className=" mb-3">
-                <FormControl
-                  type="date"
-                  name="date"
-                  label="Publish Date"
-                  value={date}
-                  onChange={(e) => setDate(e)}
-                />
-              </div> */}
+            
 
 <div className="col-span-12 md:col-span-12 mb-3">
                 <div>
