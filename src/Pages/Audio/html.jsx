@@ -72,7 +72,7 @@ const Html = ({
     publishNow: "",
     date: "",
     publish: false,
-    isPublish: ""
+    isPublish: "",
   });
 
   const allIds = (e) => {
@@ -94,19 +94,21 @@ const Html = ({
   };
   const onPublish = () => {
     let date = datepipeModel.datetoIsotime(new Date());
-    if (form?.publish === "yet_to_publish") date = datepipeModel.datetoIsotime(form?.date);
+    if (form?.publish === "yet_to_publish")
+      date = datepipeModel.datetoIsotime(form?.date);
     let payload = {
       ids: ids,
       date: date,
-      isPublish: form?.publish
-    }
-    if (form?.publish === 'pulished') {
-      delete payload?.date
+      isPublish: form?.publish,
+    };
+    if (form?.publish === "pulished") {
+      delete payload?.date;
     }
     loader(true);
     ApiClient.put("audio/publish", payload).then((res) => {
       if (res.success) {
-        filter();
+        setFilter({ ...filters, isPublish: form?.publish });
+        filter({ isPublish: form?.publish });
         setIds([]);
         setShow(false);
       }
@@ -117,8 +119,7 @@ const Html = ({
     if (!ids.length) {
       toast.error("Please Select Audios");
       return;
-    }
-    else {
+    } else {
       setForm({ publishNow: "yes", date: "", publish: "pulished" });
       setShow(true);
     }
@@ -138,10 +139,7 @@ const Html = ({
               value=""
               class="w-4 h-4 cursor-pointer"
             />
-            <label
-              for="default-checkbox"
-              class=" text-xs cursor-pointer"
-            >
+            <label for="default-checkbox" class=" text-xs cursor-pointer">
               Select All
             </label>
           </div>
@@ -184,7 +182,9 @@ const Html = ({
       key: "category",
       name: "Category",
       render: (row) => {
-        return <span className="capitalize w-52">{row?.category_detail?.name}</span>;
+        return (
+          <span className="capitalize w-52">{row?.category_detail?.name}</span>
+        );
       },
     },
     {
@@ -206,7 +206,11 @@ const Html = ({
       key: "publish date",
       name: "Publish Date",
       render: (row) => {
-        return <span className="capitalize shrink-0">{row?.date ? moment(row?.date)?.format("YYYY-MM-DD") : "N/A"}</span>;
+        return (
+          <span className="capitalize shrink-0">
+            {row?.date ? moment(row?.date)?.format("YYYY-MM-DD") : "N/A"}
+          </span>
+        );
       },
     },
     {
@@ -216,8 +220,25 @@ const Html = ({
         return (
           <>
             <div className="" onClick={() => statusChange(row)}>
-            {row?.isPublish == "pulished"? <><p className="bg-primary flex items-center justify-center px-2 py-1 rounded text-center text-white">Published</p></>:row?.isPublish === "un_published"?<><p className="bg-gray-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">un-published</p></>:<><p className="bg-orange-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">Yet To published</p></>}
-
+              {row?.isPublish == "pulished" ? (
+                <>
+                  <p className="bg-primary flex items-center justify-center px-2 py-1 rounded text-center text-white">
+                    Published
+                  </p>
+                </>
+              ) : row?.isPublish === "un_published" ? (
+                <>
+                  <p className="bg-gray-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">
+                    un-published
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="bg-orange-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">
+                    Yet To published
+                  </p>
+                </>
+              )}
             </div>
           </>
         );
@@ -293,8 +314,9 @@ const Html = ({
                 <Tooltip placement="top" title="copy link">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => handleCopy(`${environment.sasurl}${itm.audio}`, itm?.id)}
-
+                    onClick={(e) =>
+                      handleCopy(`${environment.sasurl}${itm.audio}`, itm?.id)
+                    }
                   >
                     <IoMdCopy />
                   </a>
@@ -480,7 +502,7 @@ const Html = ({
         <>
           <Modal
             title="Publish Audios"
-              className="max-w-xl"
+            className="max-w-xl"
             result={() => {
               setShow(false);
             }}
@@ -495,41 +517,63 @@ const Html = ({
                   >
                     <div className="grid col-span-2 gap-3">
                       <div>
-                      <p className="text-2xl font-semibold text-center">What would you like to do</p>
-                      <div className="flex items-center justify-center mt-4 gap-4 mb-4">
-                        <>
-                          <button
-                            type="button"
-                            onClick={(e) => setForm({ ...form, publish: 'pulished' })}
-                            className={`${form?.publish == "pulished" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
-                          >
-                            Publish
-                          </button>
-                          <button
-                            type="button"
-                            onClick={(e) => setForm({ ...form, publish: 'un_published' })}
-                            className={`${form?.publish == "un_published" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
-                          >
-                            Un-publish
-                          </button>
-                          <button
-                            type="button"
-                            onClick={(e) => setForm({ ...form, publish: 'yet_to_publish' })}
-                            className={`${form?.publish == "yet_to_publish" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
-                          >
-                            Yet to publish
-                          </button>
-                        </>
+                        <p className="text-2xl font-semibold text-center">
+                          What would you like to do
+                        </p>
+                        <div className="flex items-center justify-center mt-4 gap-4 mb-4">
+                          <>
+                            <button
+                              type="button"
+                              onClick={(e) =>
+                                setForm({ ...form, publish: "pulished" })
+                              }
+                              className={`${
+                                form?.publish == "pulished"
+                                  ? "bg-primary"
+                                  : "text-primary"
+                              } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            >
+                              Publish
+                            </button>
+                            <button
+                              type="button"
+                              onClick={(e) =>
+                                setForm({ ...form, publish: "un_published" })
+                              }
+                              className={`${
+                                form?.publish == "un_published"
+                                  ? "bg-primary"
+                                  : "text-primary"
+                              } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            >
+                              Un-publish
+                            </button>
+                            <button
+                              type="button"
+                              onClick={(e) =>
+                                setForm({ ...form, publish: "yet_to_publish" })
+                              }
+                              className={`${
+                                form?.publish == "yet_to_publish"
+                                  ? "bg-primary"
+                                  : "text-primary"
+                              } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            >
+                              Yet to publish
+                            </button>
+                          </>
                         </div>
-                        {form?.publish == "yet_to_publish" &&
+                        {form?.publish == "yet_to_publish" && (
                           <div>
                             <div>
-                            <label className="block mb-2">Publish Date</label>
+                              <label className="block mb-2">Publish Date</label>
                               <input
                                 type="datetime-local"
                                 required
                                 value={form.date}
-                                min={`${new Date().toLocaleDateString('en-CA')}T00:00`}
+                                min={`${new Date().toLocaleDateString(
+                                  "en-CA"
+                                )}T00:00`}
                                 onChange={(e) =>
                                   setForm({ ...form, date: e.target.value })
                                 }
@@ -537,14 +581,19 @@ const Html = ({
                               />
                             </div>
                           </div>
-                        }
+                        )}
                       </div>
                     </div>
                     <div className="text-right mt-3">
                       <button
                         type="submit"
                         className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-                      >{form?.publish == "pulished" ? "Publish" : form?.publish == "un_published" ? "Unpublish" : "Yet to Publish"}
+                      >
+                        {form?.publish == "pulished"
+                          ? "Publish"
+                          : form?.publish == "un_published"
+                          ? "Unpublish"
+                          : "Yet to Publish"}
                       </button>
                     </div>
                   </form>
