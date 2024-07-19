@@ -79,7 +79,7 @@ const Html = ({
     publishNow: "",
     date: "",
     publish: false,
-    isPublish: ""
+    isPublish: "",
   });
 
   const allIds = (e) => {
@@ -103,19 +103,20 @@ const Html = ({
 
   const onPublish = () => {
     let date = datepipeModel.datetoIsotime(new Date());
-    if (form?.publish === "yet_to_publish") date = datepipeModel.datetoIsotime(form?.date);
+    if (form?.publish === "yet_to_publish")
+      date = datepipeModel.datetoIsotime(form?.date);
     let payload = {
       ids: ids,
       date: date,
-      isPublish: form?.publish
-    }
-    if (form?.publish === 'pulished') {
-      delete payload?.date
+      isPublish: form?.publish,
+    };
+    if (form?.publish === "pulished") {
+      delete payload?.date;
     }
     loader(true);
     ApiClient.put("video/publish", payload).then((res) => {
       if (res.success) {
-        setFilter({ ...filters, isPublish: form?.publish })
+        setFilter({ ...filters, isPublish: form?.publish });
         filter({ isPublish: form?.publish });
         setIds([]);
         setShow(false);
@@ -128,24 +129,22 @@ const Html = ({
     if (!ids.length) {
       toast.error("Please Select videos");
       return;
-    }
-    else if(filters?.isPublish == "pulished"){
+    } else if (filters?.isPublish == "pulished") {
       let payload = {
         ids: ids,
-        isPublish: "un_published"
-      }
+        isPublish: "un_published",
+      };
       loader(true);
       ApiClient.put("video/publish", payload).then((res) => {
         if (res.success) {
-          setFilter({ ...filters, isPublish: "un_published" })
+          setFilter({ ...filters, isPublish: "un_published" });
           filter({ isPublish: "un_published" });
           setIds([]);
           setShow(false);
         }
         loader(false);
       });
-    }
-    else {
+    } else {
       setForm({ publishNow: "yes", date: "", publish: "pulished" });
       setShow(true);
     }
@@ -158,20 +157,23 @@ const Html = ({
     const MAX_TAGS_TO_DISPLAY = 2;
     const displayedTags = tags.slice(0, MAX_TAGS_TO_DISPLAY);
     const remainingCount = tags.length - MAX_TAGS_TO_DISPLAY;
-    const showMoreText = remainingCount > 0 ? ` +${remainingCount} more` : '';
+    const showMoreText = remainingCount > 0 ? ` +${remainingCount} more` : "";
 
     return (
       <span className="capitalize flex flex-wrap items-center gap-1">
-        {displayedTags && displayedTags.map((tag, index) => (
-          <React.Fragment key={index}>
-            <span className=" bg-primary px-2 py-1 text-xs text-white rounded-md">{tag}</span>
-            {index !== displayedTags.length - 1 && <></>}
-          </React.Fragment>
-        ))}
-        <span className="lowecase text-xs" > {showMoreText}</span>
+        {displayedTags &&
+          displayedTags.map((tag, index) => (
+            <React.Fragment key={index}>
+              <span className=" bg-primary px-2 py-1 text-xs text-white rounded-md">
+                {tag}
+              </span>
+              {index !== displayedTags.length - 1 && <></>}
+            </React.Fragment>
+          ))}
+        <span className="lowecase text-xs"> {showMoreText}</span>
       </span>
     );
-  }
+  };
 
   const columns = [
     {
@@ -278,9 +280,26 @@ const Html = ({
       render: (row) => {
         return (
           <span className="capitalize block text-center">
-            {row?.isPublish == "pulished" ? <><p className="bg-primary flex items-center justify-center px-2 py-1 rounded text-center text-white">Published</p></> : row?.isPublish === "un_published" ? <><p className="bg-gray-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">un-published</p></> : <><p className="bg-orange-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">Yet To published</p></>}
+            {row?.isPublish == "pulished" ? (
+              <>
+                <p className="bg-primary flex items-center justify-center px-2 py-1 rounded text-center text-white">
+                  Published
+                </p>
+              </>
+            ) : row?.isPublish === "un_published" ? (
+              <>
+                <p className="bg-gray-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">
+                  un-published
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="bg-orange-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">
+                  Yet To published
+                </p>
+              </>
+            )}
           </span>
-
         );
       },
     },
@@ -377,7 +396,6 @@ const Html = ({
       },
     },
   ];
-
   return (
     <>
       <Layout>
@@ -418,7 +436,9 @@ const Html = ({
               type="button"
               onClick={addPublish}
               className="bg-primary leading-10 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-            >{filters?.isPublish == "pulished" ? "Unpublish" : "Publish"} Videos
+            >
+              {filters?.isPublish == "pulished" ? "Unpublish" : "Publish"}{" "}
+              Videos
             </button>
 
             <form
@@ -580,59 +600,98 @@ const Html = ({
                   >
                     <div className="grid col-span-2 gap-3">
                       <div>
-                        <p className="text-2xl font-semibold text-center">What would you like to do</p>
+                        <p className="text-2xl font-semibold text-center">
+                          What would you like to do
+                        </p>
                         <div className="flex items-center justify-center mt-4 gap-4 mb-4">
-
-
                           <>
-                            {filters?.isPublish == "pulished" || filters?.isPublish == "un_published" ? null :
+                            {filters?.isPublish == "pulished" ||
+                            filters?.isPublish == "un_published" ? null : (
                               <button
                                 type="button"
-                                onClick={(e) => setForm({ ...form, publish: 'pulished' })}
-                                className={`${form?.publish == "pulished" || form?.publish == "yet_to_publish" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                                onClick={(e) =>
+                                  setForm({ ...form, publish: "pulished" })
+                                }
+                                className={`${
+                                  form?.publish == "pulished" ||
+                                  form?.publish == "yet_to_publish"
+                                    ? "bg-primary"
+                                    : "bg-gray-200 !text-black"
+                                } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                               >
                                 Publish
                               </button>
-                            }
-                            {filters?.isPublish != "un_published" ?
+                            )}
+                            {filters?.isPublish != "un_published" ? (
                               <button
                                 type="button"
-                                onClick={(e) => setForm({ ...form, publish: 'un_published' })}
-                                className={`${form?.publish == "un_published" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                                onClick={(e) =>
+                                  setForm({ ...form, publish: "un_published" })
+                                }
+                                className={`${
+                                  form?.publish == "un_published"
+                                    ? "bg-primary"
+                                    : "bg-gray-200 !text-black"
+                                } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                               >
                                 Unpublish
                               </button>
-                              : null}
+                            ) : null}
                           </>
                         </div>
-                        {form?.publish == "un_published" || filters?.isPublish == "yet_to_publish" ?
-                          null
-                          :
+                        {form?.publish == "un_published" ||
+                        filters?.isPublish == "yet_to_publish" ? null : (
                           <div className="flex items-center justify-center gap-4">
-                            
-                            
                             <div className="flex items-center justify-center gap-4">
-  <label 
-    htmlFor="Now" 
-    className={`mr-4 bg-gray-200 px-4 flex items-center cursor-pointer gap-2 py-2 rounded ${form?.publish === "pulished" ? 'bg-primary text-white' : ''}`}
-    onClick={e => setForm({ ...form, publish: "pulished" })}
-  >
-    <input type="radio"  style={{ accentColor: "#EB6A59" }} id="now" checked={form?.publish === "pulished"} name="fav_language" value="Now" /> 
-    Now
-  </label>
-  <label 
-    htmlFor="Later" 
-    className={`ml-2 bg-gray-200 px-4 py-2 flex items-center gap-2 cursor-pointer rounded ${form?.publish === "yet_to_publish" ? 'bg-primary text-white' : ''}`}
-    onClick={e => setForm({ ...form, publish: "yet_to_publish" })}
-  >
-    <input type="radio"  style={{ accentColor: "#EB6A59" }} id="later" checked={form?.publish === "yet_to_publish"} name="fav_language" value="Later" /> 
-    Later
-  </label>
-</div>
-                          
+                              <label
+                                htmlFor="Now"
+                                className={`mr-4 bg-gray-200 px-4 flex items-center cursor-pointer gap-2 py-2 rounded ${
+                                  form?.publish === "pulished"
+                                    ? "bg-primary text-white"
+                                    : ""
+                                }`}
+                                onClick={(e) =>
+                                  setForm({ ...form, publish: "pulished" })
+                                }
+                              >
+                                <input
+                                  type="radio"
+                                  style={{ accentColor: "#EB6A59" }}
+                                  id="now"
+                                  checked={form?.publish === "pulished"}
+                                  name="fav_language"
+                                  value="Now"
+                                />
+                                Now
+                              </label>
+                              <label
+                                htmlFor="Later"
+                                className={`ml-2 bg-gray-200 px-4 py-2 flex items-center gap-2 cursor-pointer rounded ${
+                                  form?.publish === "yet_to_publish"
+                                    ? "bg-primary text-white"
+                                    : ""
+                                }`}
+                                onClick={(e) =>
+                                  setForm({
+                                    ...form,
+                                    publish: "yet_to_publish",
+                                  })
+                                }
+                              >
+                                <input
+                                  type="radio"
+                                  style={{ accentColor: "#EB6A59" }}
+                                  id="later"
+                                  checked={form?.publish === "yet_to_publish"}
+                                  name="fav_language"
+                                  value="Later"
+                                />
+                                Later
+                              </label>
+                            </div>
                           </div>
-                        }
-                        {form?.publish == "yet_to_publish" &&
+                        )}
+                        {form?.publish == "yet_to_publish" && (
                           <div>
                             <div>
                               <label className="block mb-2">Publish Date</label>
@@ -640,7 +699,9 @@ const Html = ({
                                 type="datetime-local"
                                 required
                                 value={form.date}
-                                min={`${new Date().toLocaleDateString('en-CA')}T00:00`}
+                                min={`${new Date().toLocaleDateString(
+                                  "en-CA"
+                                )}T00:00`}
                                 onChange={(e) =>
                                   setForm({ ...form, date: e.target.value })
                                 }
@@ -648,14 +709,21 @@ const Html = ({
                               />
                             </div>
                           </div>
-                        }
+                        )}
                       </div>
                     </div>
                     <div className="text-right mt-5">
                       <button
                         type="submit"
                         className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-                      >{form?.publish == "pulished" ? filters?.isPublish == "yet_to_publish" ? "Publish Now" : "Publish" : form?.publish == "un_published" ? "Unpublish" : "Yet to Publish"}
+                      >
+                        {form?.publish == "pulished"
+                          ? filters?.isPublish == "yet_to_publish"
+                            ? "Publish Now"
+                            : "Publish"
+                          : form?.publish == "un_published"
+                          ? "Unpublish"
+                          : "Yet to Publish"}
                       </button>
                     </div>
                   </form>
