@@ -183,8 +183,8 @@ const AddEdit = () => {
             </div>
 
             <h3 className="ViewUser mb-3"></h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <div className=" mb-3">
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12 md:col-span-6 ">
                 <FormControl
                   type="text"
                   name="title"
@@ -199,7 +199,7 @@ const AddEdit = () => {
                   </div>
                 )}
               </div>
-              <div className=" mb-3">
+              <div className="col-span-12 md:col-span-6 ">
                 <FormControl
                   type="select"
                   name="category"
@@ -218,7 +218,7 @@ const AddEdit = () => {
                   </div>
                 )}
               </div>
-              <div className=" mb-3">
+              <div className="col-span-12 ">
                 <FormControl
                   type="text"
                   name="tags"
@@ -233,7 +233,7 @@ const AddEdit = () => {
                     }
                   }}
                 />
-                <div className="flex items-center flex-wrap gap-2 mt-4 mb-3">
+                <div className="flex items-center flex-wrap gap-2 mt-4 ">
                   {tags &&
                     tags.map((_tag, index) => {
                       return (
@@ -248,7 +248,7 @@ const AddEdit = () => {
                     })}
                 </div>
               </div>
-              <div className=" mb-3">
+              {/* <div className=" mb-3">
                 <FormControl
                   type="date"
                   name="date"
@@ -256,9 +256,9 @@ const AddEdit = () => {
                   value={date}
                   onChange={(e) => setDate(e)}
                 />
-              </div>
+              </div> */}
 
-              <div className="mb-3">
+              <div className="mb-3 col-span-12">
                 <div>
                   <label className="lablefontcls">Audio</label>
                 </div>

@@ -129,17 +129,18 @@ const Html = ({
       key: "title",
       name: (
         <>
-          <div class="flex items-center mb-4">
+          <div class="flex items-center">
             <input
               id="default-checkbox"
+              style={{ accentColor: "#EB6A59" }}
               onClick={allIds}
               type="checkbox"
               value=""
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              class="w-4 h-4 cursor-pointer"
             />
             <label
               for="default-checkbox"
-              class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              class=" text-xs cursor-pointer"
             >
               Select All
             </label>
@@ -153,9 +154,10 @@ const Html = ({
               <input
                 checked={ids.includes(row.id)}
                 onChange={addId}
+                style={{ accentColor: "#EB6A59" }}
                 type="checkbox"
                 value={row.id}
-                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                class="w-4 h-4 cursor-pointer"
               />
             </div>
           </>
@@ -182,7 +184,7 @@ const Html = ({
       key: "category",
       name: "Category",
       render: (row) => {
-        return <span className="capitalize">{row?.category_detail?.name}</span>;
+        return <span className="capitalize w-52">{row?.category_detail?.name}</span>;
       },
     },
     {
@@ -214,7 +216,8 @@ const Html = ({
         return (
           <>
             <div className="" onClick={() => statusChange(row)}>
-            {row?.isPublish == "pulished"?"Published":row?.isPublish === "un_published"?"Unpublished":"Yet to publish"}
+            {row?.isPublish == "pulished"? <><p className="bg-primary flex items-center justify-center px-2 py-1 rounded text-center text-white">Published</p></>:row?.isPublish === "un_published"?<><p className="bg-gray-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">un-published</p></>:<><p className="bg-orange-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">Yet To published</p></>}
+
             </div>
           </>
         );
