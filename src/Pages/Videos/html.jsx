@@ -115,7 +115,8 @@ const Html = ({
     loader(true);
     ApiClient.put("video/publish", payload).then((res) => {
       if (res.success) {
-        filter();
+        setFilter({ ...filters, isPublish: form?.publish })
+        filter({isPublish: form?.publish});
         setIds([]);
         setShow(false);
       }
