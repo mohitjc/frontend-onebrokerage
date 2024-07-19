@@ -119,6 +119,22 @@ const Html = ({
       toast.error("Please Select Audios");
       return;
     }
+    else if(filters?.isPublish == "pulished"){
+      let payload = {
+        ids: ids,
+        isPublish: "un_published"
+      }
+      loader(true);
+      ApiClient.put("audio/publish", payload).then((res) => {
+        if (res.success) {
+          setFilter({ ...filters, isPublish: "un_published" })
+          filter({ isPublish: "un_published" });
+          setIds([]);
+          setShow(false);
+        }
+        loader(false);
+      });
+    }
     else {
       setForm({ publishNow: "yes", date: "", publish: "pulished" });
       setShow(true);

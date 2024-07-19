@@ -586,7 +586,7 @@ const Html = ({
 
 
                           <>
-                            {filters?.isPublish == "pulished" ? null :
+                            {filters?.isPublish == "pulished" || filters?.isPublish == "un_published" ? null :
                               <button
                                 type="button"
                                 onClick={(e) => setForm({ ...form, publish: 'pulished' })}
