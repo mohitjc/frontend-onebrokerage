@@ -418,7 +418,7 @@ const Html = ({
               type="button"
               onClick={addPublish}
               className="bg-primary leading-10 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-            >{filters?.isPublish == "pulished" ? "Unpublished" : "Publish"} Videos
+            >{filters?.isPublish == "pulished" ? "Unpublish" : "Publish"} Videos
             </button>
 
             <form
@@ -505,7 +505,6 @@ const Html = ({
                 id="statusDropdown"
                 displayValue="name"
                 hideDefaultPosition={true}
-                // placeholder="All Status"
                 intialValue={filters.isPublish}
                 result={(e) => {
                   filter({ isPublish: e.value, page: 1 });
@@ -604,13 +603,6 @@ const Html = ({
                                 Unpublish
                               </button>
                               : null}
-                            {/* <button
-                            type="button"
-                            onClick={(e) => setForm({ ...form, publish: 'yet_to_publish' })}
-                            className={`${form?.publish == "yet_to_publish" ? "bg-primary" : " bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
-                          >
-                            Yet to publish
-                          </button> */}
                           </>
                         </div>
                         {form?.publish == "un_published" || filters?.isPublish == "yet_to_publish" ?
