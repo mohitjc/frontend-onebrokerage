@@ -174,7 +174,7 @@ const Html = ({
       name: "Tags",
       sort: true,
       render: (row) => {
-        return <> <div className="w-52 flex items-center flex-wrap gap-2">
+        return <> <div className="w-52 break-all flex items-center flex-wrap gap-2">
 
          <span className="capitalize bg-primary px-2 py-1 text-xs text-white rounded-md">{row?.tags}</span></div></>;
       },
