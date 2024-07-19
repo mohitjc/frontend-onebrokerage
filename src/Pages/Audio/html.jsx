@@ -573,37 +573,47 @@ const Html = ({
                         </div>
                         {form?.publish == "un_published" ||
                         filters?.isPublish == "yet_to_publish" ? null : (
-                          <div>
+                          <div className="flex items-center justify-center gap-4">
                             <label
-                              for="Now"
-                              className="mr-4"
+                              htmlFor="Now"
+                              className={`mr-4 bg-gray-200 px-4 flex items-center cursor-pointer gap-2 py-2 rounded ${
+                                form?.publish === "pulished"
+                                  ? "bg-primary text-white"
+                                  : ""
+                              }`}
                               onClick={(e) =>
                                 setForm({ ...form, publish: "pulished" })
                               }
                             >
                               <input
                                 type="radio"
+                                style={{ accentColor: "#EB6A59" }}
                                 id="now"
-                                checked={form?.publish == "pulished"}
+                                checked={form?.publish === "pulished"}
                                 name="fav_language"
                                 value="Now"
-                              />{" "}
+                              />
                               Now
                             </label>
                             <label
-                              for="Later"
-                              className="ml-2"
+                              htmlFor="Later"
+                              className={`ml-2 bg-gray-200 px-4 py-2 flex items-center gap-2 cursor-pointer rounded ${
+                                form?.publish === "yet_to_publish"
+                                  ? "bg-primary text-white"
+                                  : ""
+                              }`}
                               onClick={(e) =>
                                 setForm({ ...form, publish: "yet_to_publish" })
                               }
                             >
                               <input
                                 type="radio"
+                                style={{ accentColor: "#EB6A59" }}
                                 id="later"
-                                checked={form?.publish == "yet_to_publish"}
+                                checked={form?.publish === "yet_to_publish"}
                                 name="fav_language"
                                 value="Later"
-                              />{" "}
+                              />
                               Later
                             </label>
                           </div>
