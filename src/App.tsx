@@ -67,6 +67,8 @@ import Chats from "./Pages/Chats";
 import ViewNotification from "./Pages/Messages/View";
 import socketModel from "./models/socketModel";
 import Orders from "./Pages/Orders/index";
+import RewardPoints from "./Pages/rewardpoints";
+import AddEditReward from "./Pages/rewardpoints/AddEdit";
 
 const { persistor, store } = configureStoreProd();
 
@@ -89,7 +91,6 @@ function App() {
     { url: "/user/add", element: <AddEditUsers /> },
     { url: "/user/detail/:id", element: <UserDetail /> },
     { url: "/", element: <Navigate to="/login" /> },
-
     { url: "/category", element: <Category /> },
     { url: "/category/add", element: <AddEditCategory /> },
     { url: "/category/detail/:id", element: <ViewCategory /> },
@@ -130,7 +131,6 @@ function App() {
     { url: "/videos/add", element: <AddVideos /> },
     { url: "/videos/edit/:id", element: <AddVideos /> },
     { url: "/videos/detail/:id", element: <ViewVideos /> },
-
     { url: "/audio", element: <Audio /> },
     { url: "/audio/add", element: <AddAudio /> },
     { url: "/audio/edit/:id", element: <AddAudio /> },
@@ -140,6 +140,9 @@ function App() {
     { url: "/notifications/send-notification", element: <SendNotification /> },
     { url: "/chat", element: <Chats /> },
     { url: "/orders", element: <Orders /> },
+    { url: "/rewardpoints", element: <RewardPoints /> },
+    { url: "/rewardpoints/add", element: <AddEditReward /> }, 
+    { url: "/rewardpoints/edit/:id", element: <AddEditReward /> },
   ];
 
   sessionStorage.clear();

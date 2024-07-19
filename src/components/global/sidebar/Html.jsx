@@ -28,7 +28,7 @@ import { LiaHistorySolid, LiaUserTagSolid } from "react-icons/lia";
 import environment from "../../../environment";
 import ApiClient from "../../../methods/api/apiClient";
 import { UserCircleIcon } from "@heroicons/react/20/solid";
-import { FiUsers } from "react-icons/fi";
+import { FiGift, FiUsers } from "react-icons/fi";
 import { FaBlog, FaQuestion } from "react-icons/fa";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { BsCartCheck } from "react-icons/bs";
@@ -134,6 +134,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       icon: <BsCartCheck className="text-[#fff] shrink-0 text-lg" />,
       url: "/orders",
       key: "readorders",
+    },
+    {
+      name: "Reward Points",
+      icon: <FiGift className="text-[#fff] shrink-0 text-lg" />,
+      url: "/rewardpoints",
+      key: "rewardpoints",
     },
     {
       name: "Content Library",
