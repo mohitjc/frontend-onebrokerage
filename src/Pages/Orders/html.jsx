@@ -24,6 +24,7 @@ import { SlCalender } from "react-icons/sl";
 import Pagination from "react-pagination-js";
 
 import moment from "moment";
+import DateRangePicker from "../../components/common/DateRangePicker";
 const Html = ({
   sorting,
   filter,
@@ -47,6 +48,7 @@ const Html = ({
 }) => {
   const user = useSelector((state) => state.user);
   const [users, setUsers] = useState([]);
+  // const [filters, setFilters] = useState({startDate:'',endDate:''});
 
   const getUsersList = () => {
     const url = "orders/get/users";
@@ -266,7 +268,7 @@ const Html = ({
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
-        <div className="flex p-4 items-center flex-wrap">
+        <div className="flex p-4 items-center flex-wrap gap-3">
           <form
             class="flex items-center max-w-sm"
             onSubmit={(e) => {
@@ -325,6 +327,20 @@ const Html = ({
             </button>
           </form>
 
+          <div>
+              <DateRangePicker
+              value={{
+                startDate:filters.startDate,
+                endDate:filters.endDate
+              }}
+
+              onChange={e=>{
+                filter({startDate:datepipeModel.datetostring(e.startDate),endDate:datepipeModel.datetostring(e.endDate)})
+              }}
+              />
+            
+          </div>
+
           <div className="flex gap-2 ml-auto w-64">
             <Select
               value={filters?.customerId || null}
@@ -344,7 +360,7 @@ const Html = ({
               options={users}
             /> */}
 
-            {/* {filters.search ? (
+            {filters.search ||filters.customerId? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
@@ -355,7 +371,7 @@ const Html = ({
               </>
             ) : (
               <></>
-            )} */}
+            )}
           </div>
         </div>
 
@@ -366,7 +382,7 @@ const Html = ({
                 <tr>
                   <th className="text-left">Date</th>
                   <th className="text-left">Name</th>
-                  {/* <th className="text-left">Order Id</th> */}
+                  <th className="text-left">Employee</th>
                   <th className="text-left">Price</th>
                 </tr>
               </thead>
@@ -380,7 +396,7 @@ const Html = ({
                             <tr>
                               <td>{moment(itm?.createdTime).format("LL")}</td>
                               <td>{itm?.name}</td>
-                              {/* <td>{itm?.orderRef?.id || "--"}</td> */}
+                              <td>{_order?.employee?.name || "--"}</td>
                               <td>${itm?.price}</td>
                             </tr>
                           </>

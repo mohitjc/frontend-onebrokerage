@@ -4,12 +4,8 @@ import "./style.scss";
 import loader from "../../methods/loader";
 import Html from "./html";
 import { useNavigate } from "react-router-dom";
-import environment from "../../environment";
-import axios from "axios";
-import shared from "./shared";
 import { useSelector } from "react-redux";
-import Swal from "sweetalert2";
-import SweetAlert from "../../components/SweetAlert/SweetAlert";
+import datepipeModel from "../../models/datepipemodel";
 
 const Video = () => {
   const user = useSelector((state) => state.user);
@@ -18,7 +14,9 @@ const Video = () => {
     page: 1,
     count: 5,
     search: "",
-    customerId: { value: "51TQ1AAFHREX2", label: "A Danielle Adams" },
+    startDate:datepipeModel.datetostring(new Date()),
+    endDate:datepipeModel.datetostring(new Date()),
+    customerId:''
   });
 
   const [orders, setOrders] = useState([]);
@@ -37,7 +35,8 @@ const Video = () => {
       loader(true);
       ApiClient.get(url + "?" + parms).then((res) => {
         if (res?.success) {
-          getOrderDetails(res?.data?.customers?.elements?.[0]?.id);
+          let customer=res?.data?.customers?.elements?.[0]?.id
+          filter({customer,customerId:e});
         }
       });
     } else {
@@ -58,19 +57,42 @@ const Video = () => {
       }
       loader(false);
     });
-  };
+  };  
 
-  const getOrderDetails = (customerId) => {
-    let url = "orders/get";
-    let encodedString = customerId
-      ? "%20IN%20%28%27" + encodeURIComponent(customerId) + "%27%29"
-      : "%20IN%20%28%2751TQ1AAFHREX2%27%29";
+  const getOrderDetails = (p) => {
+    let url = "orders/get/all";
 
-    let params = `expand=credits%2Cdiscounts%2Cemployee%2ClineItems%2ClineItems.discounts%2ClineItems.modifications%2CorderType%2Cpayments%2Crefunds%2CserviceCharge%2CorderAdditionalCharges&filter=customer.id${encodedString}&limit=${filters?.count}&offset=${filters?.page}&Token=2f02f294-b57b-1783-2ef6-173f1fb628bb`;
+    let filt={
+      ...filters,
+      ...p
+    }
 
-    ApiClient.get(url + "?" + params).then((res) => {
+    let start=new Date(`${filt.startDate}T00:00:00`).getTime()
+    let end=new Date(`${filt.endDate}T23:59:00`).getTime()
+
+      let f={
+        expand:'credits,credits.dccInfo,credits.employee,credits.tender,discounts,employee,lineItems,lineItems.discounts,lineItems.modifications,orderType,payments.additionalCharges,payments.dccInfo,payments.employee,payments.tender,refunds.additionalCharges,refunds.employee,refunds.payment.tender,refunds.overrideMerchantTender,refunds.payment.dccInfo,serviceCharge',
+        filter1:'touched=true',
+        filter:filt?.customer?`customer.id IN ('${filt?.customer}')`:'',
+        filter2:`clientCreatedTime>${start}`,
+        filter3:`clientCreatedTime<${end}`,
+        orderBy:'clientCreatedTime DESC',
+        limit:51,
+        number:'1721365711318',
+        Token:'2f02f294-b57b-1783-2ef6-173f1fb628bb',
+        search:filt.search
+      }
+
+      // if(f.filter){
+      //   url="orders/get"
+      // }
+
+      loader(true)
+    ApiClient.get(url,f).then((res) => {
       if (res.success) {
-        setOrders(res.data.elements);
+        let data=res?.data?.elements||res?.data||[]
+        console.log("ApiClient ddd",data)
+        setOrders(data);
         setTotal(res?.data?.total);
       }
       loader(false);
@@ -79,14 +101,13 @@ const Video = () => {
 
   const clear = () => {
     let f = {
-      type: "",
       search: "",
-      status: "",
-      category: "",
       page: 1,
+      customerId:'',
+      customer:''
     };
     setFilter({ ...filters, ...f });
-    getOrderDetails("");
+    getOrderDetails(f);
   };
 
   const filter = (p = {}) => {

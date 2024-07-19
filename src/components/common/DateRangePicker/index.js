@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { DateRange } from 'react-date-range';
 import datepipeModel from "../../../models/datepipemodel";
 import { useSelector } from 'react-redux';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 import "./style.scss";
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
