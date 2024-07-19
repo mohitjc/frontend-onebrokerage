@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import SweetAlert from "../../components/SweetAlert/SweetAlert";
 
-const Video = () => {
+const Orders = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({
@@ -22,8 +22,6 @@ const Video = () => {
   const [customer, setCustomer] = useState({
     customerId: { value: "51TQ1AAFHREX2", label: "A Danielle Adams" },
   });
-
-  
 
   const [orders, setOrders] = useState([]);
   const [total, setTotal] = useState(0);
@@ -68,7 +66,8 @@ const Video = () => {
       ? "%20IN%20%28%27" + encodeURIComponent(customerId) + "%27%29"
       : "%20IN%20%28%2751TQ1AAFHREX2%27%29";
 
-    let params = `expand=credits%2Cdiscounts%2Cemployee%2ClineItems%2ClineItems.discounts%2ClineItems.modifications%2CorderType%2Cpayments%2Crefunds%2CserviceCharge%2CorderAdditionalCharges&filter=customer.id${encodedString}&limit=${filters?.count}&offset=${filters?.page}&Token=2f02f294-b57b-1783-2ef6-173f1fb628bb`;
+    let params = `expand=credits%2Cdiscounts%2Cemployee%2ClineItems%2ClineItems.discounts%2ClineItems.modifications%2CorderType%2Cpayments%2Crefunds%2CserviceCharge%2CorderAdditionalCharges&filter=customer.id${encodedString}&limit=${filters?.count}&offset=${filters?.page}&Token=2f02f294-b57b-1783-2ef6-173f1fb628bb&search=${filters.search}
+`;
 
     ApiClient.get(url + "?" + params).then((res) => {
       if (res.success) {
@@ -88,6 +87,7 @@ const Video = () => {
       page: 1,
     };
     setFilter({ ...filters, ...f });
+
     getOrderDetails("");
   };
 
@@ -97,7 +97,7 @@ const Video = () => {
       ...p,
     };
     setFilter({ ...filters, ...f });
-    getOrderDetails({ ...f });
+    getOrderDetails();
   };
 
   const pageChange = (e) => {
@@ -149,4 +149,4 @@ const Video = () => {
   );
 };
 
-export default Video;
+export default Orders;
