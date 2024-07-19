@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import datepipeModel from "../../models/datepipemodel";
 
-const Video = () => {
+const Orders = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({
@@ -39,17 +39,12 @@ const Video = () => {
           filter({customer,customerId:e});
         }
       });
-    } else {
-      loader(true);
-      getOrderDetails("");
-    }
+    } 
   };
 
   const getInitialOrders = () => {
     let url = "orders/get/all";
-
     let params = `expand=credits%2Ccredits.dccInfo%2Ccredits.employee%2Ccredits.tender%2Cdiscounts%2Cemployee%2ClineItems%2ClineItems.discounts%2ClineItems.modifications%2CorderType%2Cpayments.additionalCharges%2Cpayments.dccInfo%2Cpayments.employee%2Cpayments.tender%2Crefunds.additionalCharges%2Crefunds.employee%2Crefunds.payment.tender%2Crefunds.overrideMerchantTender%2Crefunds.payment.dccInfo%2CserviceCharge&filter1=touched%3Dtrue&filter2=clientCreatedTime%3E1718856000000&filter3=clientCreatedTime%3C1721447999000&orderBy=clientCreatedTime%20DESC&limit=51&number=1721365711318&Token=2f02f294-b57b-1783-2ef6-173f1fb628bb`;
-
     ApiClient.get(url + "?" + params).then((res) => {
       if (res.success) {
         setOrders(res.data.elements);
@@ -116,7 +111,7 @@ const Video = () => {
       ...p,
     };
     setFilter({ ...filters, ...f });
-    getOrderDetails({ ...f });
+    getOrderDetails(f);
   };
 
   const pageChange = (e) => {
@@ -144,7 +139,6 @@ const Video = () => {
 
   useEffect(() => {
     if (user && user.loggedIn) {
-      // getOrderDetails();
       getInitialOrders();
     }
   }, []);
@@ -167,4 +161,4 @@ const Video = () => {
   );
 };
 
-export default Video;
+export default Orders;
