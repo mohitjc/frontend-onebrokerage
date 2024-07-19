@@ -41,7 +41,6 @@ const Html = ({
   handleCopy,
   copySuccess,
   hanldeUserChange,
-  onsearchClick,
   customer,
 
   selectId,

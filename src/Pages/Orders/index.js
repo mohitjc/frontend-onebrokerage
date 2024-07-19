@@ -87,8 +87,7 @@ const Orders = () => {
       page: 1,
     };
     setFilter({ ...filters, ...f });
-
-    getOrderDetails("");
+    getOrderDetails(customer?.customerId.value || null);
   };
 
   const filter = (p = {}) => {
@@ -97,7 +96,7 @@ const Orders = () => {
       ...p,
     };
     setFilter({ ...filters, ...f });
-    getOrderDetails();
+    getOrderDetails(customer?.customerId.value || null);
   };
 
   const pageChange = (e) => {
