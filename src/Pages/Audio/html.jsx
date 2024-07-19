@@ -106,7 +106,8 @@ const Html = ({
     loader(true);
     ApiClient.put("audio/publish", payload).then((res) => {
       if (res.success) {
-        filter();
+        setFilter({ ...filters, isPublish: form?.publish })
+        filter({ isPublish: form?.publish });
         setIds([]);
         setShow(false);
       }
@@ -117,6 +118,22 @@ const Html = ({
     if (!ids.length) {
       toast.error("Please Select Audios");
       return;
+    }
+    else if(filters?.isPublish == "pulished"){
+      let payload = {
+        ids: ids,
+        isPublish: "un_published"
+      }
+      loader(true);
+      ApiClient.put("audio/publish", payload).then((res) => {
+        if (res.success) {
+          setFilter({ ...filters, isPublish: "un_published" })
+          filter({ isPublish: "un_published" });
+          setIds([]);
+          setShow(false);
+        }
+        loader(false);
+      });
     }
     else {
       setForm({ publishNow: "yes", date: "", publish: "pulished" });
@@ -216,7 +233,7 @@ const Html = ({
         return (
           <>
             <div className="" onClick={() => statusChange(row)}>
-            {row?.isPublish == "pulished"? <><p className="bg-primary flex items-center justify-center px-2 py-1 rounded text-center text-white">Published</p></>:row?.isPublish === "un_published"?<><p className="bg-gray-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">un-published</p></>:<><p className="bg-orange-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">Yet To published</p></>}
+              {row?.isPublish == "pulished" ? <><p className="bg-primary flex items-center justify-center px-2 py-1 rounded text-center text-white">Published</p></> : row?.isPublish === "un_published" ? <><p className="bg-gray-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">un-published</p></> : <><p className="bg-orange-400 flex items-center justify-center px-2 py-1 rounded text-center text-white">Yet To published</p></>}
 
             </div>
           </>
@@ -480,7 +497,7 @@ const Html = ({
         <>
           <Modal
             title="Publish Audios"
-              className="max-w-xl"
+            className="max-w-xl"
             result={() => {
               setShow(false);
             }}
@@ -495,36 +512,36 @@ const Html = ({
                   >
                     <div className="grid col-span-2 gap-3">
                       <div>
-                      <p className="text-2xl font-semibold text-center">What would you like to do</p>
-                      <div className="flex items-center justify-center mt-4 gap-4 mb-4">
-                        <>
-                          <button
-                            type="button"
-                            onClick={(e) => setForm({ ...form, publish: 'pulished' })}
-                            className={`${form?.publish == "pulished" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
-                          >
-                            Publish
-                          </button>
-                          <button
-                            type="button"
-                            onClick={(e) => setForm({ ...form, publish: 'un_published' })}
-                            className={`${form?.publish == "un_published" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
-                          >
-                            Un-publish
-                          </button>
-                          <button
-                            type="button"
-                            onClick={(e) => setForm({ ...form, publish: 'yet_to_publish' })}
-                            className={`${form?.publish == "yet_to_publish" ? "bg-primary" : "bg-gray-200 !text-black"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
-                          >
-                            Yet to publish
-                          </button>
-                        </>
+                        <p className="text-2xl font-semibold text-center">What would you like to do</p>
+                        <div className="flex items-center justify-center mt-4 gap-4 mb-4">
+                          <>
+                            <button
+                              type="button"
+                              onClick={(e) => setForm({ ...form, publish: 'pulished' })}
+                              className={`${form?.publish == "pulished" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            >
+                              Publish
+                            </button>
+                            <button
+                              type="button"
+                              onClick={(e) => setForm({ ...form, publish: 'un_published' })}
+                              className={`${form?.publish == "un_published" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            >
+                              Un-publish
+                            </button>
+                            <button
+                              type="button"
+                              onClick={(e) => setForm({ ...form, publish: 'yet_to_publish' })}
+                              className={`${form?.publish == "yet_to_publish" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                            >
+                              Yet to publish
+                            </button>
+                          </>
                         </div>
                         {form?.publish == "yet_to_publish" &&
                           <div>
                             <div>
-                            <label className="block mb-2">Publish Date</label>
+                              <label className="block mb-2">Publish Date</label>
                               <input
                                 type="datetime-local"
                                 required

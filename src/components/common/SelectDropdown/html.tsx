@@ -20,6 +20,7 @@ const Html = ({
   disabled,
   name = "",
   noDefault,
+  hideDefaultPosition = false,
   theme = "normal",
 }: any) => {
   const categoryVal = () => {
@@ -98,6 +99,8 @@ const Html = ({
                     }  right-0 shadow-lg !py-2 !mt-1.5 overflow-auto bg-white  rounded-lg scrollbar capitalize`}
                   >
                     <div className="mt-2">
+                      {hideDefaultPosition?null:
+                      <>
                       {noDefault ? (
                         <Menu.Item disabled={disabled}>
                           {({ active }) => (
@@ -129,6 +132,7 @@ const Html = ({
                           )}
                         </Menu.Item>
                       )}
+                      </>}
                       {options &&
                         options.map((itm: any) => {
                           return (
