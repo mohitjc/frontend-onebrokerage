@@ -236,8 +236,8 @@ const Html = ({
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
-        <div className="flex p-4 items-center flex-wrap gap-3">
-          <form
+        <div className="flex p-4 items-end justify-between  flex-wrap gap-3">
+          {/* <form
             class="flex items-center max-w-sm"
             onSubmit={(e) => {
               e.preventDefault();
@@ -248,11 +248,6 @@ const Html = ({
               Search
             </label>
             <div class="relative w-full">
-              {/* <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
-                                </svg>
-                            </div> */}
               <input
                 type="text"
                 id="simple-search"
@@ -293,9 +288,10 @@ const Html = ({
               </svg>
               <span class="sr-only">Search</span>
             </button>
-          </form>
+          </form> */}
 
           <div>
+            <label>By Date</label>
               <DateRangePicker
               value={{
                 startDate:filters.startDate,
@@ -309,26 +305,25 @@ const Html = ({
             
           </div>
 
-          <div className="flex gap-2 ml-auto w-64">
+          <div className="ml-auto flex items-end">
+              <div className="">
+             <div className="">
+             <label>By User</label>
+             </div>
             <Select
               value={filters?.customerId || null}
               onChange={(e) => hanldeUserChange(e)}
               options={users}
-              className="w-50"
+              className="w-96"
               placeholder="Select User"
             />
-            {/* <SelectDropdown
-              id="statusDropdown"
-              displayValue="name"
-              placeholder="All Users"
-              intialValue={filters?.customerId || null}
-              result={(e) => {
-                filter({ customerId: e.value });
-              }}
-              options={users}
-            /> */}
+        
+              </div>
 
-            {filters.search ||filters.customerId? (
+           
+          </div>
+
+          {filters.search ||filters.customerId? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
@@ -340,7 +335,6 @@ const Html = ({
             ) : (
               <></>
             )}
-          </div>
         </div>
 
         <>

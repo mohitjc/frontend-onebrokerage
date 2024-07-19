@@ -130,7 +130,7 @@ const Login = () => {
     e.preventDefault();
     let eventId = methodModel.getPrams("eventId");
     loader(true);
-    ApiClient.post("api/find/user", { email: attandanceEmail }, "", true).then(
+    ApiClient.post("api/find/user", { email: attandanceEmail }).then(
       (res2) => {
         if (res2.success) {
           let url = `/login?eventId=${eventId}&email=${attandanceEmail}&attended=true`;
