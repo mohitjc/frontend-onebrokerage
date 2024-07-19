@@ -74,10 +74,12 @@ const Html = ({
   }, []);
 
   const [ids, setIds] = useState([]);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false); 
   const [form, setForm] = useState({
     publishNow: "",
     date: "",
+    publish : false,
+    isPublish : ""
   });
 
   const allIds = (e) => {
@@ -99,13 +101,14 @@ const Html = ({
     }
   };
 
-  const onPublish = () => {
+  const onPublish = () => { 
     let date = datepipeModel.datetoIsotime(new Date());
-    if (form.publishNow == "no") date = datepipeModel.datetoIsotime(form.date);
-    let payload = {
-      ids: ids,
-      date: date,
-    };
+    if (form.publishNow == "no") date = datepipeModel.datetoIsotime(form.date); 
+     let  payload ={
+        ids: ids,
+        date: date,
+        isPublish: ""
+       } 
     loader(true);
     ApiClient.put("video/publish", payload).then((res) => {
       loader(false);
@@ -122,32 +125,37 @@ const Html = ({
       toast.error("Please Select videos");
       return;
     }
-    setForm({ publishNow: "yes", date: "" });
-    setShow(true);
+    if (form?.publish == false ){
+      setForm({isPublish : "un_published"})
+    }
+     else {
+      setForm({ publishNow: "yes", date: "" });
+      setShow(true);
+     }
+  
   };
 
   const renderTags = (tags) => {
     if (!tags || tags.length === 0) {
       return <span className="capitalize">No Tags</span>;
     }
-    const MAX_TAGS_TO_DISPLAY = 2;
-    const displayedTags = tags.slice(0, MAX_TAGS_TO_DISPLAY);
+    const MAX_TAGS_TO_DISPLAY = 2;   
+    const displayedTags = tags.slice(0, MAX_TAGS_TO_DISPLAY);  
     const remainingCount = tags.length - MAX_TAGS_TO_DISPLAY;
-    const showMoreText = remainingCount > 0 ? ` + ${remainingCount}` : "";
+    const showMoreText = remainingCount > 0 ? ` + ${remainingCount}more` : '';
 
     return (
       <span className="capitalize">
-        {displayedTags &&
-          displayedTags.map((tag, index) => (
-            <React.Fragment key={index}>
-              <span>{tag}</span>
-              {index !== displayedTags.length - 1 && <span>, </span>}
-            </React.Fragment>
-          ))}
+        {displayedTags && displayedTags.map((tag, index) => (
+          <React.Fragment key={index}>
+            <span>{tag}</span>
+            {index !== displayedTags.length - 1 && <span>, </span>}
+          </React.Fragment>
+        ))}
         {showMoreText}
       </span>
     );
-  };
+  }
 
   const columns = [
     {
@@ -252,7 +260,7 @@ const Html = ({
       render: (row) => {
         return (
           <span className="capitalize">
-            {row?.isPublish ? "Published" : "Unpublished"}
+            {row?.isPublish}
           </span>
         );
       },
@@ -487,6 +495,7 @@ const Html = ({
                   { id: "pulished", name: "Published" },
                   { id: "un_published", name: "Unpublished" },
                   { id: "yet_to_publish", name: "Yet To publish" },
+                  
                 ]}
               />
 
@@ -553,7 +562,26 @@ const Html = ({
                   >
                     <div className="grid col-span-2 gap-3">
                       <div>
-                        <label>What would you like to do </label>
+                        <label>What would you like to do</label>
+                        <>
+                        <button
+                        type="button"
+                        onClick={(e) =>
+                          setForm({ ...form, publish: true })
+                        }
+                        className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+                      >
+                        Publish
+                      </button>
+                      <button
+                          type="submit"
+                          onClick={addPublish}
+                        className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+                      >
+                        Un-publish
+                      </button>
+                      </>
+                      {form?.publish ? 
                         <div>
                           <div class="inline-flex items-center mb-4 mr-2">
                             <input
@@ -571,7 +599,7 @@ const Html = ({
                               for="default-radio-1"
                               class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                             >
-                              Publish
+                              Publish Now
                             </label>
                           </div>
                           <div class="inline-flex items-center">
@@ -590,29 +618,15 @@ const Html = ({
                               for="default-radio-2"
                               class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                             >
-                              Un-publish
+                              Later
                             </label>
                           </div>
                         </div>
+                         : ""}
                       </div>
-                      {form.publishNow == "yes" ? (
+                      {form.publishNow == "no" ? (
                         <>
-                          <button
-                            type="submit"
-                            onClick={addPublish("")}
-                            className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-                          >
-                            Publish Now
-                          </button>
-                          <button
-                            type="submit"
-                            onClick={addPublish("")}
-                            className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-                          >
-                            Publish Now
-                          </button>
-
-                          {/* <div>
+                          <div>
                             <label>publish Date</label>
                             <input
                               type="datetime-local"
@@ -623,7 +637,7 @@ const Html = ({
                               }
                               className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
                             />
-                          </div> */}
+                          </div>
                         </>
                       ) : (
                         <></>
