@@ -74,12 +74,12 @@ const Html = ({
   }, []);
 
   const [ids, setIds] = useState([]);
-  const [show, setShow] = useState(false); 
+  const [show, setShow] = useState(false);
   const [form, setForm] = useState({
     publishNow: "",
     date: "",
-    publish : false,
-    isPublish : ""
+    publish: false,
+    isPublish: ""
   });
 
   const allIds = (e) => {
@@ -101,22 +101,25 @@ const Html = ({
     }
   };
 
-  const onPublish = () => { 
+  const onPublish = () => {
     let date = datepipeModel.datetoIsotime(new Date());
-    if (form.publishNow == "no") date = datepipeModel.datetoIsotime(form.date); 
-     let  payload ={
-        ids: ids,
-        date: date,
-        isPublish: ""
-       } 
+    if (form?.publish === "yet_to_publish") date = datepipeModel.datetoIsotime(form?.date);
+    let payload = {
+      ids: ids,
+      date: date,
+      isPublish: form?.publish
+    }
+    if(form?.publish === 'pulished'){
+      delete payload?.date
+    }
     loader(true);
     ApiClient.put("video/publish", payload).then((res) => {
-      loader(false);
       if (res.success) {
         filter();
         setIds([]);
         setShow(false);
       }
+      loader(false);
     });
   };
 
@@ -125,22 +128,21 @@ const Html = ({
       toast.error("Please Select videos");
       return;
     }
-    if (form?.publish == false ){
-      setForm({isPublish : "un_published"})
-    }
-     else {
-      setForm({ publishNow: "yes", date: "" });
+    // if (form?.publish == false ){
+    //   setForm({isPublish : "un_published"})
+    // }
+    else {
+      setForm({ publishNow: "yes", date: "", publish: "pulished" });
       setShow(true);
-     }
-  
+    }
   };
 
   const renderTags = (tags) => {
     if (!tags || tags.length === 0) {
       return <span className="capitalize">No Tags</span>;
     }
-    const MAX_TAGS_TO_DISPLAY = 2;   
-    const displayedTags = tags.slice(0, MAX_TAGS_TO_DISPLAY);  
+    const MAX_TAGS_TO_DISPLAY = 2;
+    const displayedTags = tags.slice(0, MAX_TAGS_TO_DISPLAY);
     const remainingCount = tags.length - MAX_TAGS_TO_DISPLAY;
     const showMoreText = remainingCount > 0 ? ` + ${remainingCount}more` : '';
 
@@ -260,7 +262,7 @@ const Html = ({
       render: (row) => {
         return (
           <span className="capitalize">
-            {row?.isPublish}
+            {row?.isPublish == "pulished"?"Published":row?.isPublish === "un_published"?"Unpublished":"Yet to publish"}
           </span>
         );
       },
@@ -358,8 +360,6 @@ const Html = ({
       },
     },
   ];
-  
-
 
   return (
     <>
@@ -497,7 +497,6 @@ const Html = ({
                   { id: "pulished", name: "Published" },
                   { id: "un_published", name: "Unpublished" },
                   { id: "yet_to_publish", name: "Yet To publish" },
-                  
                 ]}
               />
 
@@ -566,92 +565,52 @@ const Html = ({
                       <div>
                         <label>What would you like to do</label>
                         <>
-                        <button
-                        type="button"
-                        onClick={(e) =>
-                          setForm({ ...form, publish: true })
-                        }
-                        className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-                      >
-                        Publish
-                      </button>
-                      <button
-                          type="submit"
-                          onClick={addPublish}
-                        className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-                      >
-                        Un-publish
-                      </button>
-                      </>
-                      {form?.publish ? 
-                        <div>
-                          <div class="inline-flex items-center mb-4 mr-2">
-                            <input
-                              checked={form.publishNow == "yes" ? true : false}
-                              onChange={(e) =>
-                                setForm({ ...form, publishNow: e.target.value })
-                              }
-                              id="default-radio-1"
-                              type="radio"
-                              value="yes"
-                              name="default-radio"
-                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                            />
-                            <label
-                              for="default-radio-1"
-                              class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                            >
-                              Publish Now
-                            </label>
-                          </div>
-                          <div class="inline-flex items-center">
-                            <input
-                              checked={form.publishNow == "no" ? true : false}
-                              onChange={(e) =>
-                                setForm({ ...form, publishNow: e.target.value })
-                              }
-                              id="default-radio-2"
-                              type="radio"
-                              value="no"
-                              name="default-radio"
-                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                            />
-                            <label
-                              for="default-radio-2"
-                              class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                            >
-                              Later
-                            </label>
-                          </div>
-                        </div>
-                         : ""}
-                      </div>
-                      {form.publishNow == "no" ? (
-                        <>
-                          <div>
-                            <label>publish Date</label>
-                            <input
-                              type="datetime-local"
-                              required
-                              value={form.date}
-                              onChange={(e) =>
-                                setForm({ ...form, date: e.target.value })
-                              }
-                              className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
-                            />
-                          </div>
+                          <button
+                            type="button"
+                            onClick={(e) => setForm({ ...form, publish: 'pulished' })}
+                            className={`${form?.publish == "pulished" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                          >
+                            Publish
+                          </button>
+                          <button
+                            type="button"
+                            onClick={(e) => setForm({ ...form, publish: 'un_published' })}
+                            className={`${form?.publish == "un_published" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                          >
+                            Un-publish
+                          </button>
+                          <button
+                            type="button"
+                            onClick={(e) => setForm({ ...form, publish: 'yet_to_publish' })}
+                            className={`${form?.publish == "yet_to_publish" ? "bg-primary" : "text-primary"} leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                          >
+                            Yet to publish
+                          </button>
                         </>
-                      ) : (
-                        <></>
-                      )}
+                        {form?.publish == "yet_to_publish" &&
+                          <div>
+                            <div>
+                              <label>Publish Date</label>
+                              <input
+                                type="date"
+                                required
+                                value={form.date}
+                                min={new Date().toISOString().slice(0, 10)}
+                                onChange={(e) =>
+                                  setForm({ ...form, date: e.target.value })
+                                }
+                                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
+                              />
+                            </div>
+                          </div>
+                        }
+                      </div>
                     </div>
                     <div className="text-right mt-3">
                       <button
                         type="submit"
-                        onClick={addPublish}
                         className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-                      >
-                        Publish
+                      >{form?.publish == "pulished" ? "Publish" : form?.publish == "un_published" ? "Unpublish" : "Yet to Publish"}
                       </button>
                     </div>
                   </form>

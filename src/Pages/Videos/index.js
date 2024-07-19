@@ -14,7 +14,7 @@ import SweetAlert from "../../components/SweetAlert/SweetAlert";
 const Video = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
-  const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
+  const [filters, setFilter] = useState({ page: 1, count: 10, search: "", isPublish: "un_published" });
 
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
@@ -150,9 +150,8 @@ const Video = () => {
     // }
     Swal.fire({
       title: "Are you sure?",
-      text: `Do you want to ${
-        status == "active" ? "Activate" : "Deactivate"
-      } this`,
+      text: `Do you want to ${status == "active" ? "Activate" : "Deactivate"
+        } this`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
