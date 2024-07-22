@@ -14,12 +14,12 @@ const Video = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({ page: 1, count: 10, search: "", isPublish: "un_published" });
-
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loaging, setLoader] = useState(true);
   const [selectId, setSelectId] = useState();
   const [copySuccess, setCopySuccess] = useState(false);
+  const [ids, setIds] = useState([]);
   const history = useNavigate();
 
   const sortClass = (key) => {
@@ -213,6 +213,8 @@ const Video = () => {
         selectId={selectId}
         handleCopy={handleCopy}
         copySuccess={copySuccess}
+        ids={ids}
+        setIds={setIds}
       />
     </>
   );

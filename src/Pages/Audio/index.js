@@ -20,6 +20,8 @@ const Audio = () => {
   const [loaging, setLoader] = useState(true);
   const history = useNavigate();
   const [selectId, setSelectId] = useState()
+  const [categoryOptions, setCategories] = useState([]);
+  const [ids, setIds] = useState([]);
 
   const sortClass = (key) => {
     let cls = "fa-sort";
@@ -80,7 +82,8 @@ const Audio = () => {
       ...p,
     };
     setFilter({ ...filters, ...f });
-    getData({ ...f });
+    getData({ ...f }); 
+    setIds([])
   };
 
   const deleteItem = (id) => {
@@ -253,6 +256,10 @@ const Audio = () => {
         handleCopy={handleCopy}
         selectId={selectId}
         copySuccess={copySuccess}
+        categoryOptions={categoryOptions}
+        setCategories={setCategories}
+        ids={ids}
+        setIds={setIds}
       />
     </>
   );
