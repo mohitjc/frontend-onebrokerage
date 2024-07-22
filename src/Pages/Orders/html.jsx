@@ -242,7 +242,7 @@ const Html = ({
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
-        <div className="flex p-4 items-end justify-between  flex-wrap gap-3">
+        <div className="flex p-4 items-end justify-end  flex-wrap gap-4">
           {/* <form
             class="flex items-center max-w-sm"
             onSubmit={(e) => {
@@ -296,18 +296,18 @@ const Html = ({
             </button>
           </form> */}
 
-          <div className=" flex gap-2">
-            <div className="mr-auto">
+          <div className=" flex gap-4">
+            <div className="mr-auto ">
             <label>Search By</label>
-            <div className="flex gap-3">
+            <div className="flex gap-3 mt-2">
             <div class="flex items-center">
-    <input id="default-radio-1" type="radio" value="user" checked={searchBy=='user'?true:false} onChange={e=>setSearchBy(e.target.value)} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-    <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">User</label>
-</div>
-<div class="flex items-center">
-    <input id="default-radio-2" type="radio" checked={searchBy=='date'?true:false} value="date" onChange={e=>setSearchBy(e.target.value)} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-    <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Date</label>
-</div>
+                  <input id="default-radio-1" type="radio" value="user" checked={searchBy=='user'?true:false} onChange={e=>setSearchBy(e.target.value)} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 "/>
+                  <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">User</label>
+              </div>
+              <div class="flex items-center">
+                  <input id="default-radio-2" type="radio" checked={searchBy=='date'?true:false} value="date" onChange={e=>setSearchBy(e.target.value)} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 "/>
+                  <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Date</label>
+              </div>
             </div>
             </div>
            
@@ -370,25 +370,25 @@ const Html = ({
             <table className="w-full">
               <thead>
                 <tr>
-                  <th className="text-left">Order ID</th>
-                  <th className="text-left">Date</th>
-                  <th className="text-left">Name</th>
-                  <th className="text-left">Employee</th>
-                  <th className="text-left">Price</th>
+                  <th className="text-left px-6 py-4">Order ID</th>
+                  <th className="text-left px-6 py-4">Date</th>
+                  <th className="text-left px-6 py-4">Name</th>
+                  <th className="text-left px-6 py-4">Employee</th>
+                  <th className="text-left px-6 py-4">Price</th>
                 </tr>
               </thead>
               <tbody>
                 {data?.map((_order) => {
                   return <tr>
-                  <td className="w-[150px]">{_order.id}</td>
-                  <td className="w-[150px]">{moment(_order?.createdTime).format("LL")}</td>
-                  <td className="w-[400px]">
+                  <td className="w-[150px] px-6 py-4">{_order.id}</td>
+                  <td className="w-[150px] px-6 py-4">{moment(_order?.createdTime).format("LL")}</td>
+                  <td className="w-[400px] px-6 py-4">
                     <div className="flex gap-1 flex-wrap">{_order?.lineItems?.elements.map(itm=>{
                     return <span className="inline-block px-[10px] py-[3px] text-white rounded bg-[#f7665c] text-[12px]">{itm?.name} || ${pipeModel.number(itm.price)}</span>
                   })}</div>
                     </td>
-                  <td>{_order?.employee?.name || "--"}</td>
-                  <td>${pipeModel.number(_order?.total)}</td>
+                  <td className="px-6 py-4">{_order?.employee?.name || "--"}</td>
+                  <td className="px-6 py-4">${pipeModel.number(_order?.total)}</td>
                 </tr>
                   // return (
                   //   <>
