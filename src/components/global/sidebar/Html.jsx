@@ -28,7 +28,7 @@ import { LiaHistorySolid, LiaUserTagSolid } from "react-icons/lia";
 import environment from "../../../environment";
 import ApiClient from "../../../methods/api/apiClient";
 import { UserCircleIcon } from "@heroicons/react/20/solid";
-import { FiGift, FiUsers } from "react-icons/fi";
+import { FiGift, FiSettings, FiUsers } from "react-icons/fi";
 import { FaBlog, FaQuestion } from "react-icons/fa";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { BsCartCheck } from "react-icons/bs";
@@ -197,6 +197,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
           key: "readSubscribers",
         },
       ],
+    },
+    {
+      name: "Settings",
+      icon: <FiSettings className="text-[#fff] shrink-0 text-lg" />,
+      url: "/profile/settings",
+      key: "settings",
     },
   ];
 
