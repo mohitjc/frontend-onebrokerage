@@ -136,6 +136,7 @@ const AddEdit = () => {
       }
     );
   };
+
   const handleTagRemove = (index) => {
     let _value = [...tags];
 
