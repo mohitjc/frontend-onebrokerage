@@ -294,11 +294,7 @@ const AddEdit = () => {
                 {form.video && (
                   <div className="relative inline-flex">
                     <video
-<<<<<<< HEAD
-                      src={`${form?.video}`}
-=======
                       src={form?.video}
->>>>>>> 99b8c48e173449bbfede06125dba745ddb2af55a
                       width={300}
                       className="h-44"
                       controls
