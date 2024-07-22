@@ -8,14 +8,14 @@ import { BsTrash3 } from "react-icons/bs";
 import Table from "../../components/Table";
 import SelectDropdown from "../../components/common/SelectDropdown";
 import statusModel from "../../models/status.model";
-import datepipeModel from "../../models/datepipemodel"; 
+import datepipeModel from "../../models/datepipemodel";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
 import methodModel from "../../methods/methods";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { PiEyeLight } from "react-icons/pi";
 import shared from "./shared";
-const Html = ({ 
+const Html = ({
   filter,
   edit,
   view,
@@ -36,22 +36,21 @@ const Html = ({
 }) => {
   const user = useSelector((state) => state.user);
   const columns = [
-   
     {
       key: "transaction",
-      name: "Transaction For", 
+      name: "Transaction For",
       render: (row) => {
         return <span className="capitalize">{row?.transaction_for}</span>;
       },
     },
- 
+
     {
       key: "reward",
       name: "Reward Points",
       render: (row) => {
         return <span className="capitalize">{row?.reward_points || "--"}</span>;
       },
-    }, 
+    },
     {
       key: "action",
       name: "Action",
@@ -83,7 +82,7 @@ const Html = ({
               ) : (
                 <></>
               )}
-              {isAllow(`delete${shared.check}`) ? (
+              {/* {isAllow(`delete${shared.check}`) ? (
                 <Tooltip placement="top" title="Delete">
                   {" "}
                   <span
@@ -95,15 +94,13 @@ const Html = ({
                 </Tooltip>
               ) : (
                 <></>
-              )}
+              )} */}
             </div>
           </>
         );
       },
     },
   ];
-
- 
 
   return (
     <Layout>
@@ -125,7 +122,7 @@ const Html = ({
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
                     </button> */}
 
-          {isAllow(`add${shared.check}`) ? (
+          {/* {isAllow(`add${shared.check}`) ? (
             <Link
               className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
               to={`/${shared.url}/add`}
@@ -134,7 +131,7 @@ const Html = ({
             </Link>
           ) : (
             <></>
-          )}
+          )} */}
         </div>
       </div>
 
@@ -150,7 +147,7 @@ const Html = ({
             <label for="simple-search" class="sr-only">
               Search
             </label>
-            <div class="relative w-full"> 
+            <div class="relative w-full">
               <input
                 type="text"
                 id="simple-search"

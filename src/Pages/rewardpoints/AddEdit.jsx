@@ -45,7 +45,7 @@ const AddEditReward = () => {
     e.preventDefault();
     setSubmitted(true);
     let invalid = methodModel.getFormError(formValidation, form);
-    if (invalid) return;
+    if (invalid || !form.reward_points) return;
     let method = "post";
     let url = "settings/add";
     let value;
@@ -127,6 +127,7 @@ const AddEditReward = () => {
                   options={options}
                   theme="search"
                   required
+                  disabled={form.transaction_for}
                 />
               </div>
 
@@ -146,14 +147,13 @@ const AddEditReward = () => {
                     });
                   }}
                 />
-                {/* {submitted && !OneMonth.unit_amount ? (
-                          <div className="text-danger text-[12px] mt-[3px]">
-                            {" "}
-                            Monthly price is required
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
+                {submitted && !form?.reward_points ? (
+                  <div className="text-danger text-[12px] mt-[3px]">
+                    Reward points are required
+                  </div>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
 
