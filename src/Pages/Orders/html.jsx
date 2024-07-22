@@ -25,6 +25,7 @@ import Pagination from "react-pagination-js";
 
 import moment from "moment";
 import DateRangePicker from "../../components/common/DateRangePicker";
+import pipeModel from "../../models/pipeModel";
 const Html = ({
   sorting,
   filter,
@@ -365,9 +366,11 @@ const Html = ({
 
         <>
           <div className="px-4">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full">
               <thead>
                 <tr>
+                  <th className="text-left">Order ID</th>
                   <th className="text-left">Date</th>
                   <th className="text-left">Name</th>
                   <th className="text-left">Employee</th>
@@ -376,25 +379,38 @@ const Html = ({
               </thead>
               <tbody>
                 {data?.map((_order) => {
-                  return (
-                    <>
-                      {_order?.lineItems?.elements.map((itm) => {
-                        return (
-                          <>
-                            <tr>
-                              <td>{moment(itm?.createdTime).format("LL")}</td>
-                              <td>{itm?.name}</td>
-                              <td>{_order?.employee?.name || "--"}</td>
-                              <td>${itm?.price}</td>
-                            </tr>
-                          </>
-                        );
-                      })}
-                    </>
-                  );
+                  return <tr>
+                  <td className="w-[150px]">{_order.id}</td>
+                  <td className="w-[150px]">{moment(_order?.createdTime).format("LL")}</td>
+                  <td className="w-[400px]">
+                    <div className="flex gap-1 flex-wrap">{_order?.lineItems?.elements.map(itm=>{
+                    return <span className="inline-block px-[10px] py-[3px] text-white rounded bg-[#f7665c] text-[12px]">{itm?.name} || ${pipeModel.number(itm.price)}</span>
+                  })}</div>
+                    </td>
+                  <td>{_order?.employee?.name || "--"}</td>
+                  <td>${pipeModel.number(_order?.total)}</td>
+                </tr>
+                  // return (
+                  //   <>
+                  //     {_order?.lineItems?.elements.map((itm) => {
+                  //       return (
+                  //         <>
+                  //           <tr>
+                  //             <td>{moment(itm?.createdTime).format("LL")}</td>
+                  //             <td>{itm?.name}</td>
+                  //             <td>{_order?.employee?.name || "--"}</td>
+                  //             <td>${itm?.price}</td>
+                  //           </tr>
+                  //         </>
+                  //       );
+                  //     })}
+                  //   </>
+                  // );
                 })}
               </tbody>
             </table>
+            </div>
+           
             {total > filters.count ? (
               <div className="paginationWrapper  mt-15">
                 <Pagination
