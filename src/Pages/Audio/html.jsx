@@ -223,7 +223,7 @@ const Html = ({
       render: (row) => {
         return (
           <span className="capitalize shrink-0">
-            {row?.date ? moment(row?.date)?.format("YYYY-MM-DD") : "N/A"}
+            {row?.date ? moment(row?.date)?.format("YYYY-MM-DD") : ""}
           </span>
         );
       },
