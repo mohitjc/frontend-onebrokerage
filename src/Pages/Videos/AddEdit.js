@@ -195,7 +195,7 @@ const AddEdit = () => {
                 <FormControl
                   type="select"
                   name="category"
-                  label="Content Playlist"
+                  label="Content Category"
                   value={form.category}
                   onChange={(e) => {
                     setform({ ...form, category: e });

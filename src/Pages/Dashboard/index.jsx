@@ -81,14 +81,27 @@ const Dashboard = () => {
     ApiClient.post("dashboard/graph/rewards", payload).then((res) => {
       if (res.success) {
         loader(false)
-        for (const date in res.data) {
-          if (res.data.hasOwnProperty(date)) {
-            totalAmounts?.push(res.data[date].totalAmount);
-            dates?.push(date);
-            setTotalAmount(totalAmounts)
-            setDates(dates)
+
+        let data=res.data
+        let arr=Object.keys(data)
+        arr=arr.map(itm=>{
+          return {
+            totalAmount:data[itm].totalAmount?.toFixed(2),
+            count:data[itm].count,
+            date:itm
           }
-        }
+        }) 
+
+        // console.log("arr",arr)
+        setDates(arr)
+        // for (const date in res.data) {
+        //   if (res.data.hasOwnProperty(date)) {
+        //     totalAmounts?.push(res.data[date].totalAmount);
+        //     dates?.push(date);
+        //     setTotalAmount(totalAmounts)
+        //     setDates(dates)
+        //   }
+        // }
        
       }
     });
@@ -103,8 +116,7 @@ const Dashboard = () => {
   getProducts(p)
  }
 
-
- console.log(productData,'?????');
+ 
 
   return (
     <>
@@ -208,11 +220,18 @@ const Dashboard = () => {
                   </div>
                 </div>
                
-                <Chart
+                {/* <Chart
                   totalAmounts={totalAmounts}
                   dates={dates}
                   name={"Reward Points"}
                   type={""}
+                /> */}
+                 <LineChart
+                  legends={[
+                    {label:'Total Reward',key:'count'},
+                    {label:'Total Amount',key:'totalAmount'},
+                  ]}
+                  data={dates}
                 />
               </div>
             </div>

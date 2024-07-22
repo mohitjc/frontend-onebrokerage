@@ -3,23 +3,16 @@ import Layout from "../../components/global/layout";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import { Tooltip } from "antd";
-import { FiEdit3, FiPlus } from "react-icons/fi";
-import { BsTrash3 } from "react-icons/bs";
+import {FiPlus } from "react-icons/fi"; 
 import Table from "../../components/Table";
-import SelectDropdown from "../../components/common/SelectDropdown";
-import statusModel from "../../models/status.model";
+import SelectDropdown from "../../components/common/SelectDropdown"; 
 import datepipeModel from "../../models/datepipemodel";
 import shared from "./shared";
-import ApiClient from "../../methods/api/apiClient";
-import { useSelector } from "react-redux";
-import methodModel from "../../methods/methods";
-import { PiEyeLight } from "react-icons/pi";
+import ApiClient from "../../methods/api/apiClient"; 
 import Modal from "../../components/common/Modal";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
-import environment from "../../environment";
-import { MdOutlinePublish } from "react-icons/md";
-import { IoMdCopy } from "react-icons/io";
-import { MdOutlineDownload } from "react-icons/md";
+import environment from "../../environment"; 
+import { IoMdCopy } from "react-icons/io"; 
 import moment from "moment";
 import loader from "../../methods/loader";
 import { toast } from "react-toastify";
@@ -36,16 +29,17 @@ const Html = ({
   filters,
   setFilter,
   loaging,
-  data,
-  changestatus,
+  data, 
   isAllow,
   handleCopy,
   selectId,
   copySuccess,
+  categoryOptions,
+  setCategories,
+  ids,
+  setIds,
   total = { total },
 }) => {
-  const [categoryOptions, setCategories] = useState([]);
-
   useEffect(() => {
     getCategoriesList();
   }, []);
@@ -66,7 +60,7 @@ const Html = ({
     });
   };
 
-  const [ids, setIds] = useState([]);
+ 
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({
     publishNow: "",
@@ -92,6 +86,7 @@ const Html = ({
       setIds([...arr]);
     }
   };
+
   const onPublish = () => {
     let date = datepipeModel.datetoIsotime(new Date());
     if (form?.publish === "yet_to_publish")
@@ -195,7 +190,7 @@ const Html = ({
     },
     {
       key: "category",
-      name: "Category",
+      name: "Content Category",
       render: (row) => {
         return (
           <span className="capitalize w-52">{row?.category_detail?.name}</span>
@@ -223,7 +218,7 @@ const Html = ({
       render: (row) => {
         return (
           <span className="capitalize shrink-0">
-             {moment(row.date).format("DD MMM YYYY")}
+             {moment(row.date).format("DD MMM YYYY") || "-"}
           </span>
         );
       },

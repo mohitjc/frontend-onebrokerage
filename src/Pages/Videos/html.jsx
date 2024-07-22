@@ -49,6 +49,8 @@ const Html = ({
   selectedDate,
   handleDateChange,
   selectId,
+  ids,
+  setIds,
   total = { total },
 }) => {
   const user = useSelector((state) => state.user);
@@ -73,7 +75,7 @@ const Html = ({
     getCategoriesList();
   }, []);
 
-  const [ids, setIds] = useState([]);
+
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({
     publishNow: "",
@@ -242,7 +244,7 @@ const Html = ({
     // },
     {
       key: "category",
-      name: "Category",
+      name: "Content Category",
       render: (row) => {
         return <span className="capitalize">{row?.category_detail?.name}</span>;
       },
@@ -269,7 +271,7 @@ const Html = ({
       render: (row) => {
         return (
           <span className="capitalize">
-            {moment(row.date).format("DD MMM YYYY")}
+            {moment(row.date).format("DD MMM YYYY") || "-"}
           </span>
         );
       },
@@ -303,28 +305,6 @@ const Html = ({
         );
       },
     },
-    // {
-    //   key: "status",
-    //   name: "Status",
-    //   render: (row) => {
-    //     return (
-    //       <>
-    //         <div className="w-32" onClick={() => statusChange(row)}>
-    //           <span
-    //             className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize
-    //                       ${
-    //                         row.status == "deactive"
-    //                           ? " bg-gray-200 text-black"
-    //                           : "bg-[#ee695e] text-white"
-    //                       }`}
-    //           >
-    //             {row.status == "deactive" ? "inactive" : "active"}
-    //           </span>
-    //         </div>
-    //       </>
-    //     );
-    //   },
-    // },
     {
       key: "action",
       name: "Action",
@@ -701,9 +681,7 @@ const Html = ({
                                 type="date"
                                 required
                                 value={form.date}
-                                min={`${new Date().toLocaleDateString(
-                                  "en-CA"
-                                )}T00:00`}
+                                min={new Date()}
                                 onChange={(e) =>
                                   setForm({ ...form, date: e.target.value })
                                 }
