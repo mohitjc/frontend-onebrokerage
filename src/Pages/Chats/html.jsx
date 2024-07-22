@@ -276,6 +276,18 @@ const Html = ({
     getInitialChatCount({ quickChat: false });
     getInitialMessageCount({ quickChat: false });
     setDisableChat(user.chat_enabled);
+    // Hit admin settings api to get the available time and if admin is available enable the chat
+    ApiClient.get(`admin/setting-detail`).then((res) => {
+      if (res.success) {
+        const startTime = new Date(res?.data?.availability_start)
+        const endTime = new Date(res?.data?.availability_end)
+        if (new Date() >= startTime && new Date() <= endTime) {
+          handleChatEnable(true)
+        } else {
+          handleChatEnable(false)
+        }
+      }
+    })
   }, []);
 
   useEffect(() => {
@@ -325,11 +337,11 @@ const Html = ({
             <span className="text-sm">
               {disableChat == true ? "Disable" : "Enable"} Chats
             </span>
-            <label className="inline-flex items-center cursor-pointer ">
+            <label className="inline-flex items-center cursor-pointer">
               <input
                 type="checkbox"
                 value={disableChat}
-                checked={disableChat || user.chat_enabled}
+                checked={disableChat}
                 className="sr-only peer"
                 onChange={(e) => handleChatEnable(e.target.checked)}
               />
