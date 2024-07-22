@@ -75,7 +75,6 @@ const Html = ({
     getCategoriesList();
   }, []);
 
-
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({
     publishNow: "",
@@ -362,9 +361,7 @@ const Html = ({
                 <Tooltip placement="top" title="copy link">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) =>
-                      handleCopy(`${environment.sasurl}${itm.video}`, itm?.id)
-                    }
+                    onClick={(e) => handleCopy(`${itm.video}`, itm?.id)}
                   >
                     <IoMdCopy />
                   </a>
@@ -412,16 +409,18 @@ const Html = ({
 
         <div className="shadow-box w-full bg-white rounded-lg mt-6">
           <div className="flex p-4 items-center flex-wrap gap-2">
-          {data?.length >0 ? 
-            <button
-              type="button"
-              onClick={addPublish}
-              className="bg-primary leading-10 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-            >
-              {filters?.isPublish == "pulished" ? "Unpublish" : "Publish"}{" "}
-              Videos
-            </button>
-            : ""}
+            {data?.length > 0 ? (
+              <button
+                type="button"
+                onClick={addPublish}
+                className="bg-primary leading-10 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+              >
+                {filters?.isPublish == "pulished" ? "Unpublish" : "Publish"}{" "}
+                Videos
+              </button>
+            ) : (
+              ""
+            )}
 
             <form
               className="flex items-center max-w-sm"
