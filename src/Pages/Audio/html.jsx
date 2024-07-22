@@ -209,7 +209,7 @@ const Html = ({
         return (
           <>
             <audio
-              src={`${environment.sasurl}/${row?.audio}`}
+              src={row?.audio}
               width={80}
               controls
             />
@@ -302,27 +302,7 @@ const Html = ({
                 </Tooltip>
               ) : (
                 <></>
-              )}
-              {/* {itm?.isPublish ? (
-                 <Tooltip placement="top" title="un-publish">
-                 <a
-                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                   onClick={(e) => handlePublish(itm.id,itm?.isPublish)}
-                 >
-                   <MdOutlineDownload />
-                 </a>
-               </Tooltip>
-              
-              ) : (
-                <Tooltip placement="top" title="publish">
-                <a
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={(e) => handlePublish(itm.id,itm?.isPublish)}
-                >
-                  <MdOutlinePublish />
-                </a>
-              </Tooltip>
-              )} */}
+              )} 
               {selectId === itm?.id && copySuccess ? (
                 "Copied!"
               ) : (

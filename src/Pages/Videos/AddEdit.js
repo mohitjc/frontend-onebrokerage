@@ -66,6 +66,7 @@ const AddEdit = () => {
 
     if (invalid) return;
     let method = "post";
+<<<<<<< HEAD
     let url = shared.addApi;
     // if (isToday) {
     //   value = {
@@ -83,6 +84,14 @@ const AddEdit = () => {
       tags: tags,
       // isPublish: false,
     };
+=======
+    let url = shared.addApi; 
+    let  value = {
+        ...form,
+        ...video, 
+        tags: tags, 
+      };
+>>>>>>> 99b8c48e173449bbfede06125dba745ddb2af55a
     // }
 
     if (value.id) {
@@ -285,7 +294,11 @@ const AddEdit = () => {
                 {form.video && (
                   <div className="relative inline-flex">
                     <video
+<<<<<<< HEAD
                       src={`${form?.video}`}
+=======
+                      src={form?.video}
+>>>>>>> 99b8c48e173449bbfede06125dba745ddb2af55a
                       width={300}
                       className="h-44"
                       controls

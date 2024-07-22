@@ -254,7 +254,7 @@ const Html = ({
         return (
           <>
             <video
-              src={`${environment.sasurl}/${row?.video}`}
+              src={row?.video}
               width="130px"
               className="h-20 object-cover"
               controls
