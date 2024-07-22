@@ -45,14 +45,14 @@ function buildBlobName(file) {
 }
 
 class ApiClient {
-  static post(url1, payload, base = "", hideError = false) {
+  static post(url1, payload,params={},base = "", hideError = false) {
     let url = baseUrl + url1;
     if (base) url = base + url1;
 
     setAuthorizationToken(axios);
     return new Promise(function (fulfill, reject) {
       axios
-        .post(url, JSON.stringify(payload), config)
+        .post(url, JSON.stringify(payload), {...config,params:params})
         .then(function (response) {
           fulfill(response && response.data);
         })

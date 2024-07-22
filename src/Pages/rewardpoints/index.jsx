@@ -17,7 +17,7 @@ const RewardPoints = () => {
     page: 1,
     count: 10,
     search: "",
-    transaction_for: "",
+    // transaction_for: "",
   });
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
@@ -48,7 +48,7 @@ const RewardPoints = () => {
   const clear = () => {
     let f = {
       search: "",
-      transaction_for: "",
+      // transaction_for: "",
       page: 1,
     };
     setFilter({ ...filters, ...f });
@@ -95,8 +95,8 @@ const RewardPoints = () => {
     getData({ ...filters, count: e });
   };
   const changestatus = (e) => {
-    setFilter({ ...filters, transaction_for: e, page: 1 });
-    getData({ transaction_for: e, page: 1 });
+    setFilter({ ...filters,   page: 1 });
+    getData({   page: 1 });
   };
 
   const handleMarkPopular = (e, id) => {
@@ -152,7 +152,7 @@ const RewardPoints = () => {
   const list = [
     { name: "login", id: "login" },
     { name: "Add reviews", id: "addreviews" },
-    { name: "My Favroute ", id: "myfavourite" },
+    { name: "My Favourite ", id: "myfavourite" },
   ];
 
   return (
