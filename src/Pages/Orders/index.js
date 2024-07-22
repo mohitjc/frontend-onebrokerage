@@ -44,7 +44,6 @@ const Orders = () => {
 
   const getOrderDetails = (p) => {
     let url = "orders/get/all";
-
     let filt = {
       ...filters,
       ...p,
