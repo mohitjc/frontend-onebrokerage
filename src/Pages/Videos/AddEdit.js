@@ -61,18 +61,17 @@ const AddEdit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-   
+
     let invalid = methodModel.getFormError(formValidation, form);
 
     if (invalid) return;
     let method = "post";
-    let url = shared.addApi; 
-    let  value = {
-        ...form,
-        ...video, 
-        tags: tags, 
-      };
-    // }
+    let url = shared.addApi;
+    let value = {
+      ...form,
+      ...video,
+      tags: tags,
+    };
 
     if (value.id) {
       method = "put";
@@ -137,6 +136,7 @@ const AddEdit = () => {
       }
     );
   };
+
   const handleTagRemove = (index) => {
     let _value = [...tags];
 
@@ -171,9 +171,6 @@ const AddEdit = () => {
                 <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
                   {form && form.id ? "Edit" : "Add"} {shared.addTitle}
                 </h3>
-                {/* <p class="text-xs lg:text-sm font-normal text-[#75757A]">
-                  Here you can see all about your {shared.addTitle}
-                </p> */}
               </div>
             </div>
 
@@ -245,9 +242,7 @@ const AddEdit = () => {
                 </div>
               </div>
 
-            
-
-<div className="col-span-12 md:col-span-12 mb-3">
+              <div className="col-span-12 md:col-span-12 mb-3">
                 <div>
                   <label className="lablefontcls ">Video</label>
                 </div>

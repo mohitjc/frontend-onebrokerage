@@ -14,9 +14,9 @@ const Orders = () => {
     page: 1,
     count: 50,
     search: "",
-    startDate:datepipeModel.datetostring(new Date()),
-    endDate:datepipeModel.datetostring(new Date()),
-    customerId:''
+    startDate: datepipeModel.datetostring(new Date()),
+    endDate: datepipeModel.datetostring(new Date()),
+    customerId: "",
   });
 
   const [orders, setOrders] = useState([]);
@@ -35,47 +35,46 @@ const Orders = () => {
       loader(true);
       ApiClient.get(url + "?" + parms).then((res) => {
         if (res?.success) {
-          let customer=res?.data?.customers?.elements?.[0]?.id
-          filter({customer,customerId:e});
+          let customer = res?.data?.customers?.elements?.[0]?.id;
+          filter({ customer, customerId: e });
         }
       });
-    } 
+    }
   };
-
 
   const getOrderDetails = (p) => {
     let url = "orders/get/all";
-
-    let filt={
+    let filt = {
       ...filters,
-      ...p
+      ...p,
+    };
+
+    let start = new Date(`${filt.startDate}T00:00:00`).getTime();
+    let end = new Date(`${filt.endDate}T23:59:00`).getTime();
+
+    let f = {
+      expand:
+        "credits,credits.dccInfo,credits.employee,credits.tender,discounts,employee,lineItems,lineItems.discounts,lineItems.modifications,orderType,payments.additionalCharges,payments.dccInfo,payments.employee,payments.tender,refunds.additionalCharges,refunds.employee,refunds.payment.tender,refunds.overrideMerchantTender,refunds.payment.dccInfo,serviceCharge",
+      filter1: "touched=true",
+      filter: filt?.customer ? `customer.id IN ('${filt?.customer}')` : "",
+      filter2: `clientCreatedTime>${start}`,
+      filter3: `clientCreatedTime<${end}`,
+      orderBy: "clientCreatedTime DESC",
+      count: filters.count,
+      page: filters.page,
+      number: "1721365711318",
+      Token: "2f02f294-b57b-1783-2ef6-173f1fb628bb",
+      search: filt.search,
+    };
+
+    if (f.filter) {
+      url = "orders/get";
     }
 
-    let start=new Date(`${filt.startDate}T00:00:00`).getTime()
-    let end=new Date(`${filt.endDate}T23:59:00`).getTime()
-
-      let f={
-        expand:'credits,credits.dccInfo,credits.employee,credits.tender,discounts,employee,lineItems,lineItems.discounts,lineItems.modifications,orderType,payments.additionalCharges,payments.dccInfo,payments.employee,payments.tender,refunds.additionalCharges,refunds.employee,refunds.payment.tender,refunds.overrideMerchantTender,refunds.payment.dccInfo,serviceCharge',
-        filter1:'touched=true',
-        filter:filt?.customer?`customer.id IN ('${filt?.customer}')`:'',
-        filter2:`clientCreatedTime>${start}`,
-        filter3:`clientCreatedTime<${end}`,
-        orderBy:'clientCreatedTime DESC',
-        count:filters.count,
-        page:filters.page,
-        number:'1721365711318',
-        Token:'2f02f294-b57b-1783-2ef6-173f1fb628bb',
-        search:filt.search
-      }
-
-      if(f.filter){
-        url="orders/get"
-      }
-
-      loader(true)
-    ApiClient.get(url,f).then((res) => {
+    loader(true);
+    ApiClient.get(url, f).then((res) => {
       if (res.success) {
-        let data=res?.data?.elements||res?.data||[]
+        let data = res?.data?.elements || res?.data || [];
         // console.log("ApiClient ddd",data)
         setOrders(data);
         setTotal(res?.data?.total);
@@ -88,8 +87,8 @@ const Orders = () => {
     let f = {
       search: "",
       page: 1,
-      customerId:'',
-      customer:''
+      customerId: "",
+      customer: "",
     };
     setFilter({ ...filters, ...f });
     getOrderDetails(f);
@@ -112,7 +111,6 @@ const Orders = () => {
     setFilter({ ...filters, count: e });
     // getData({ ...filters, count: e });
   };
-
   const isAllow = (key = "") => {
     let permissions = user.role?.permissions?.[0];
     let value = permissions?.[key];

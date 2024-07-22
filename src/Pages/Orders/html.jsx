@@ -290,6 +290,38 @@ const Html = ({
             </button>
           </form> */}
 
+        
+
+          <div className=" flex gap-2 items-end">
+              <div className="">
+             <div className="">
+             <label>By User</label>
+             </div>
+            <Select
+              value={filters?.customerId || null}
+              onChange={(e) => hanldeUserChange(e)}
+              options={users}
+              className="w-96"
+              placeholder="Select User"
+            />
+        
+              </div>
+              {filters.search ||filters.customerId? (
+              <>
+                <button
+                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
+                  onClick={() => clear()}
+                >
+                  Reset
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
+
+           
+          </div>
+
           <div>
             <label>By Date</label>
               <DateRangePicker
@@ -305,36 +337,7 @@ const Html = ({
             
           </div>
 
-          <div className="ml-auto flex items-end">
-              <div className="">
-             <div className="">
-             <label>By User</label>
-             </div>
-            <Select
-              value={filters?.customerId || null}
-              onChange={(e) => hanldeUserChange(e)}
-              options={users}
-              className="w-96"
-              placeholder="Select User"
-            />
-        
-              </div>
-
-           
-          </div>
-
-          {filters.search ||filters.customerId? (
-              <>
-                <button
-                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
-                  onClick={() => clear()}
-                >
-                  Reset
-                </button>
-              </>
-            ) : (
-              <></>
-            )}
+          
         </div>
 
         <>
