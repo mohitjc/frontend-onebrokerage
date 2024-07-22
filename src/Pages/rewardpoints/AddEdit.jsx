@@ -31,7 +31,6 @@ const AddEditReward = () => {
     reward_points: "",
     transaction_for: "",
   });
-
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);

@@ -17,6 +17,7 @@ const SelectDropdown = ({
   name,
   required = false,
   theme = "normal",
+  hideDefaultPosition,
 }: any) => {
   const handleChange = (e: any) => {
     let v = e;
@@ -43,6 +44,7 @@ const SelectDropdown = ({
         options={options}
         selectedValues={intialValue}
         handleChange={handleChange}
+        hideDefaultPosition={hideDefaultPosition}
       />
     </>
   );

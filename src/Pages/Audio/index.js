@@ -68,7 +68,6 @@ const Audio = () => {
       search: "",
       status: "",
       category: "",
-      isPublish: "",
       page: 1,
     };
     setFilter({ ...filters, ...f });

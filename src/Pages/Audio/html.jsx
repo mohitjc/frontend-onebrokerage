@@ -119,6 +119,21 @@ const Html = ({
     if (!ids.length) {
       toast.error("Please Select Audios");
       return;
+    } else if (filters?.isPublish == "pulished") {
+      let payload = {
+        ids: ids,
+        isPublish: "un_published",
+      };
+      loader(true);
+      ApiClient.put("audio/publish", payload).then((res) => {
+        if (res.success) {
+          setFilter({ ...filters, isPublish: "un_published" });
+          filter({ isPublish: "un_published" });
+          setIds([]);
+          setShow(false);
+        }
+        loader(false);
+      });
     } else {
       setForm({ publishNow: "yes", date: "", publish: "pulished" });
       setShow(true);
@@ -369,7 +384,7 @@ const Html = ({
             onClick={addPublish}
             className="bg-primary leading-10 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2 mr-4"
           >
-            Publish Audios
+            {filters?.isPublish == "pulished" ? "Unpublish" : "Publish"} Audios
           </button>
           <form
             class="flex items-center max-w-sm"
@@ -443,7 +458,7 @@ const Html = ({
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"
-              placeholder="All Status"
+              hideDefaultPosition={true}
               intialValue={filters.isPublish}
               result={(e) => {
                 filter({ isPublish: e.value, page: 1 });
@@ -454,7 +469,7 @@ const Html = ({
                 { id: "yet_to_publish", name: "Yet To publish" },
               ]}
             />
-            {filters.isPublish || filters.type || filters.category ? (
+            {filters.type || filters.category ? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
@@ -522,47 +537,87 @@ const Html = ({
                         </p>
                         <div className="flex items-center justify-center mt-4 gap-4 mb-4">
                           <>
-                            <button
-                              type="button"
+                            {filters?.isPublish == "pulished" ||
+                            filters?.isPublish == "un_published" ? null : (
+                              <button
+                                type="button"
+                                onClick={(e) =>
+                                  setForm({ ...form, publish: "pulished" })
+                                }
+                                className={`${
+                                  form?.publish == "pulished" ||
+                                  form?.publish == "yet_to_publish"
+                                    ? "bg-primary"
+                                    : "bg-gray-200 !text-black"
+                                } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                              >
+                                Publish
+                              </button>
+                            )}
+                            {filters?.isPublish != "un_published" ? (
+                              <button
+                                type="button"
+                                onClick={(e) =>
+                                  setForm({ ...form, publish: "un_published" })
+                                }
+                                className={`${
+                                  form?.publish == "un_published"
+                                    ? "bg-primary"
+                                    : "bg-gray-200 !text-black"
+                                } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
+                              >
+                                Unpublish
+                              </button>
+                            ) : null}
+                          </>
+                        </div>
+                        {form?.publish == "un_published" ||
+                        filters?.isPublish == "yet_to_publish" ? null : (
+                          <div className="flex items-center justify-center gap-4">
+                            <label
+                              htmlFor="Now"
+                              className={`mr-4 bg-gray-200 px-4 flex items-center cursor-pointer gap-2 py-2 rounded ${
+                                form?.publish === "pulished"
+                                  ? "bg-primary text-white"
+                                  : ""
+                              }`}
                               onClick={(e) =>
                                 setForm({ ...form, publish: "pulished" })
                               }
-                              className={`${
-                                form?.publish == "pulished"
-                                  ? "bg-primary"
-                                  : "text-primary"
-                              } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                             >
-                              Publish
-                            </button>
-                            <button
-                              type="button"
-                              onClick={(e) =>
-                                setForm({ ...form, publish: "un_published" })
-                              }
-                              className={`${
-                                form?.publish == "un_published"
-                                  ? "bg-primary"
-                                  : "text-primary"
-                              } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
-                            >
-                              Un-publish
-                            </button>
-                            <button
-                              type="button"
+                              <input
+                                type="radio"
+                                style={{ accentColor: "#EB6A59" }}
+                                id="now"
+                                checked={form?.publish === "pulished"}
+                                name="fav_language"
+                                value="Now"
+                              />
+                              Now
+                            </label>
+                            <label
+                              htmlFor="Later"
+                              className={`ml-2 bg-gray-200 px-4 py-2 flex items-center gap-2 cursor-pointer rounded ${
+                                form?.publish === "yet_to_publish"
+                                  ? "bg-primary text-white"
+                                  : ""
+                              }`}
                               onClick={(e) =>
                                 setForm({ ...form, publish: "yet_to_publish" })
                               }
-                              className={`${
-                                form?.publish == "yet_to_publish"
-                                  ? "bg-primary"
-                                  : "text-primary"
-                              } leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2`}
                             >
-                              Yet to publish
-                            </button>
-                          </>
-                        </div>
+                              <input
+                                type="radio"
+                                style={{ accentColor: "#EB6A59" }}
+                                id="later"
+                                checked={form?.publish === "yet_to_publish"}
+                                name="fav_language"
+                                value="Later"
+                              />
+                              Later
+                            </label>
+                          </div>
+                        )}
                         {form?.publish == "yet_to_publish" && (
                           <div>
                             <div>
@@ -577,20 +632,22 @@ const Html = ({
                                 onChange={(e) =>
                                   setForm({ ...form, date: e.target.value })
                                 }
-                                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
+                                className="relative shadow-box cursor-pointer bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
                               />
                             </div>
                           </div>
                         )}
                       </div>
                     </div>
-                    <div className="text-right mt-3">
+                    <div className="text-right mt-5">
                       <button
                         type="submit"
                         className="bg-primary leading-10 h-10 inline-flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
                       >
                         {form?.publish == "pulished"
-                          ? "Publish"
+                          ? filters?.isPublish == "yet_to_publish"
+                            ? "Publish Now"
+                            : "Publish"
                           : form?.publish == "un_published"
                           ? "Unpublish"
                           : "Yet to Publish"}
