@@ -66,33 +66,12 @@ const AddEdit = () => {
 
     if (invalid) return;
     let method = "post";
-<<<<<<< HEAD
     let url = shared.addApi;
-    // if (isToday) {
-    //   value = {
-    //     ...form,
-    //     ...video,
-    //     date: date,
-    //     tags: tags,
-    //     isPublish: true,
-    //   };
-    // } else {
     let value = {
       ...form,
       ...video,
-      // date: date,
       tags: tags,
-      // isPublish: false,
     };
-=======
-    let url = shared.addApi; 
-    let  value = {
-        ...form,
-        ...video, 
-        tags: tags, 
-      };
->>>>>>> 99b8c48e173449bbfede06125dba745ddb2af55a
-    // }
 
     if (value.id) {
       method = "put";
