@@ -236,7 +236,7 @@ const Html = ({
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
-        <div className="flex p-4 items-end justify-between  flex-wrap gap-3">
+        <div className="flex p-4 items-end justify-end  flex-wrap gap-3">
           {/* <form
             class="flex items-center max-w-sm"
             onSubmit={(e) => {
@@ -305,7 +305,7 @@ const Html = ({
             
           </div>
 
-          <div className="ml-auto flex items-end">
+          <div className=" flex items-end">
               <div className="">
              <div className="">
              <label>By User</label>
