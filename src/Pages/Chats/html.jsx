@@ -279,15 +279,15 @@ const Html = ({
     // Hit admin settings api to get the available time and if admin is available enable the chat
     ApiClient.get(`admin/setting-detail`).then((res) => {
       if (res.success) {
-        const startTime = new Date(res?.data?.availability_start)
-        const endTime = new Date(res?.data?.availability_end)
+        const startTime = new Date(res?.data?.availability_start);
+        const endTime = new Date(res?.data?.availability_end);
         if (new Date() >= startTime && new Date() <= endTime) {
-          handleChatEnable(true)
+          handleChatEnable(true);
         } else {
-          handleChatEnable(false)
+          handleChatEnable(false);
         }
       }
-    })
+    });
   }, []);
 
   useEffect(() => {
