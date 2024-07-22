@@ -66,22 +66,11 @@ const AddEdit = () => {
 
     if (invalid) return;
     let method = "post";
-    let url = shared.addApi;
-    // if (isToday) {
-    //   value = {
-    //     ...form,
-    //     ...video,
-    //     date: date,
-    //     tags: tags,
-    //     isPublish: true,
-    //   };
-    // } else {
+    let url = shared.addApi; 
     let  value = {
         ...form,
-        ...video,
-        // date: date,
-        tags: tags,
-        // isPublish: false,
+        ...video, 
+        tags: tags, 
       };
     // }
 
@@ -287,7 +276,7 @@ const AddEdit = () => {
                 {form.video && (
                   <div className="relative inline-flex">
                     <video
-                      src={`${environment.sasurl}/${form?.video}`}
+                      src={form?.video}
                       width={300}
                       className="h-44"
                       controls

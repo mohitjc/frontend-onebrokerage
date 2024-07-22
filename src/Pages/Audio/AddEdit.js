@@ -287,7 +287,7 @@ const AddEdit = () => {
                 {form.audio && (
                   <div className="relative ">
                     <audio
-                      src={`${environment.sasurl}/${form?.audio}`}
+                      src={form?.audio}
                       className="w-full"
                       controls
                     />
