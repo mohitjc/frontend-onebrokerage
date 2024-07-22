@@ -223,7 +223,7 @@ const Html = ({
       render: (row) => {
         return (
           <span className="capitalize shrink-0">
-            {row?.date ? moment(row?.date)?.format("YYYY-MM-DD") : ""}
+             {moment(row.date).format("DD MMM YYYY")}
           </span>
         );
       },
@@ -359,13 +359,15 @@ const Html = ({
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
         <div className="flex p-4 items-center flex-wrap">
-          <button
+          {data?.length >0 ? 
+          <button 
             type="button"
             onClick={addPublish}
             className="bg-primary leading-10 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2 mr-4"
           >
             {filters?.isPublish == "pulished" ? "Unpublish" : "Publish"} Audios
           </button>
+           : ""}
           <form
             class="flex items-center max-w-sm"
             onSubmit={(e) => {
@@ -496,7 +498,7 @@ const Html = ({
       {show ? (
         <>
           <Modal
-            title="Publish Audios"
+            title="Publish Audio"
             className="max-w-xl"
             result={() => {
               setShow(false);
@@ -603,12 +605,10 @@ const Html = ({
                             <div>
                               <label className="block mb-2">Publish Date</label>
                               <input
-                                type="datetime-local"
+                                type="date"
                                 required
                                 value={form.date}
-                                min={`${new Date().toLocaleDateString(
-                                  "en-CA"
-                                )}T00:00`}
+                                min={new Date()}
                                 onChange={(e) =>
                                   setForm({ ...form, date: e.target.value })
                                 }
