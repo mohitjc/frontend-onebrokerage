@@ -236,7 +236,7 @@ const Html = ({
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
-        <div className="flex p-4 items-end justify-end  flex-wrap gap-3">
+        <div className="flex p-4 items-end justify-between  flex-wrap gap-3">
           {/* <form
             class="flex items-center max-w-sm"
             onSubmit={(e) => {
@@ -290,6 +290,38 @@ const Html = ({
             </button>
           </form> */}
 
+        
+
+          <div className=" flex gap-2 items-end">
+              <div className="">
+             <div className="">
+             <label>By User</label>
+             </div>
+            <Select
+              value={filters?.customerId || null}
+              onChange={(e) => hanldeUserChange(e)}
+              options={users}
+              className="w-96"
+              placeholder="Select User"
+            />
+        
+              </div>
+              {filters.search ||filters.customerId? (
+              <>
+                <button
+                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
+                  onClick={() => clear()}
+                >
+                  Reset
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
+
+           
+          </div>
+
           <div>
             <label>By Date</label>
               <DateRangePicker
@@ -305,36 +337,7 @@ const Html = ({
             
           </div>
 
-          <div className=" flex items-end">
-              <div className="">
-             <div className="">
-             <label>By User</label>
-             </div>
-            <Select
-              value={filters?.customerId || null}
-              onChange={(e) => hanldeUserChange(e)}
-              options={users}
-              className="w-96"
-              placeholder="Select User"
-            />
-        
-              </div>
-
-           
-          </div>
-
-          {filters.search ||filters.customerId? (
-              <>
-                <button
-                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
-                  onClick={() => clear()}
-                >
-                  Reset
-                </button>
-              </>
-            ) : (
-              <></>
-            )}
+          
         </div>
 
         <>
