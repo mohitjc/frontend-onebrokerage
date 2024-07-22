@@ -337,11 +337,11 @@ const Html = ({
             <span className="text-sm">
               {disableChat == true ? "Disable" : "Enable"} Chats
             </span>
-            <label className="inline-flex items-center cursor-pointer ">
+            <label className="inline-flex items-center cursor-pointer">
               <input
                 type="checkbox"
                 value={disableChat}
-                checked={disableChat || user.chat_enabled}
+                checked={disableChat}
                 className="sr-only peer"
                 onChange={(e) => handleChatEnable(e.target.checked)}
               />
