@@ -203,7 +203,7 @@ const AddEdit = () => {
                 <FormControl
                   type="select"
                   name="category"
-                  label="Content Category"
+                  label="Content Playlist"
                   value={form.category}
                   onChange={(e) => {
                     setform({ ...form, category: e });

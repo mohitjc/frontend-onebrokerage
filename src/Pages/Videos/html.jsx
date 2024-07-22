@@ -243,7 +243,7 @@ const Html = ({
     // },
     {
       key: "category",
-      name: "Content Category",
+      name: "Content Playlist",
       render: (row) => {
         return <span className="capitalize">{row?.category_detail?.name}</span>;
       },

@@ -296,17 +296,17 @@ const Html = ({
             </button>
           </form> */}
 
-          <div className=" flex gap-4">
+          <div className=" flex gap-6">
             <div className="mr-auto ">
             <label>Search By</label>
             <div className="flex gap-3 mt-2">
             <div class="flex items-center">
-                  <input id="default-radio-1" type="radio" value="user" checked={searchBy=='user'?true:false} onChange={e=>setSearchBy(e.target.value)} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 "/>
-                  <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">User</label>
+                  <input id="default-radio-1"   style={{ accentColor: "#EB6A59" }} type="radio" value="user" checked={searchBy=='user'?true:false} onChange={e=>setSearchBy(e.target.value)} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 "/>
+                  <label for="default-radio-1" class="ms-2 cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-300">User</label>
               </div>
               <div class="flex items-center">
-                  <input id="default-radio-2" type="radio" checked={searchBy=='date'?true:false} value="date" onChange={e=>setSearchBy(e.target.value)} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 "/>
-                  <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Date</label>
+                  <input id="default-radio-2 "  style={{ accentColor: "#EB6A59" }} type="radio" checked={searchBy=='date'?true:false} value="date" onChange={e=>setSearchBy(e.target.value)} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 "/>
+                  <label for="default-radio-2" class="ms-2 text-sm cursor-pointer font-medium text-gray-900 dark:text-gray-300">Date</label>
               </div>
             </div>
             </div>

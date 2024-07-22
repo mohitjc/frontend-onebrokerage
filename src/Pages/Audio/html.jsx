@@ -189,7 +189,7 @@ const Html = ({
     },
     {
       key: "category",
-      name: "Content Category",
+      name: "Content Playlist",
       render: (row) => {
         return (
           <span className="capitalize w-52">{row?.category_detail?.name}</span>
