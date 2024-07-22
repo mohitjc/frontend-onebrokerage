@@ -51,15 +51,12 @@ const Dashboard = () => {
       if(res.success){
         let data=res.data.monthly
         let arr=Object.keys(data)
-
         arr=arr.map(itm=>{
           return {
             count:data[itm],
             date:itm
           }
-        })
-        console.log("data",data)
-        console.log("arr",arr)
+        }) 
         setProductData(arr)
       }
     })
@@ -106,6 +103,8 @@ const Dashboard = () => {
   getProducts(p)
  }
 
+
+ console.log(productData,'?????');
 
   return (
     <>
