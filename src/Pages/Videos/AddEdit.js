@@ -61,29 +61,17 @@ const AddEdit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-   
+
     let invalid = methodModel.getFormError(formValidation, form);
 
     if (invalid) return;
     let method = "post";
     let url = shared.addApi;
-    // if (isToday) {
-    //   value = {
-    //     ...form,
-    //     ...video,
-    //     date: date,
-    //     tags: tags,
-    //     isPublish: true,
-    //   };
-    // } else {
-    let  value = {
-        ...form,
-        ...video,
-        // date: date,
-        tags: tags,
-        // isPublish: false,
-      };
-    // }
+    let value = {
+      ...form,
+      ...video,
+      tags: tags,
+    };
 
     if (value.id) {
       method = "put";
@@ -148,6 +136,7 @@ const AddEdit = () => {
       }
     );
   };
+
   const handleTagRemove = (index) => {
     let _value = [...tags];
 
@@ -256,9 +245,7 @@ const AddEdit = () => {
                 </div>
               </div>
 
-            
-
-<div className="col-span-12 md:col-span-12 mb-3">
+              <div className="col-span-12 md:col-span-12 mb-3">
                 <div>
                   <label className="lablefontcls ">Video</label>
                 </div>
@@ -287,7 +274,7 @@ const AddEdit = () => {
                 {form.video && (
                   <div className="relative inline-flex">
                     <video
-                      src={`${environment.sasurl}/${form?.video}`}
+                      src={form?.video}
                       width={300}
                       className="h-44"
                       controls

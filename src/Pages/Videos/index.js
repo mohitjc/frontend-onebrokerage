@@ -8,8 +8,7 @@ import environment from "../../environment";
 import axios from "axios";
 import shared from "./shared";
 import { useSelector } from "react-redux";
-import Swal from "sweetalert2";
-import SweetAlert from "../../components/SweetAlert/SweetAlert";
+import Swal from "sweetalert2"; 
 
 const Video = () => {
   const user = useSelector((state) => state.user);
@@ -84,17 +83,7 @@ const Video = () => {
     getData({ ...f });
   };
 
-  const deleteItem = (id) => {
-    // if (window.confirm("Do you want to delete this")) {
-    //     loader(true)
-    //     ApiClient.delete(shared.deleteApi, { id: id }).then(res => {
-    //         if (res.success) {
-    //             // ToastsStore.success(res.message)
-    //             clear()
-    //         }
-    //         loader(false)
-    //     })
-    // }
+  const deleteItem = (id) => { 
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to delete this video`,
@@ -107,15 +96,11 @@ const Video = () => {
       if (result.isConfirmed) {
         loader(true);
         ApiClient.delete(shared.deleteApi, { id: id }).then((res) => {
-          if (res.success) {
-            // ToastsStore.success(res.message)
+          if (res.success) { 
             clear();
           }
           loader(false);
-        });
-        //   Swal.fire({
-        //     icon: "success"
-        //   });
+        }); 
       }
     });
   };
@@ -133,46 +118,7 @@ const Video = () => {
     getData({ status: e, page: 1 });
   };
 
-  const statusChange = (itm) => {
-    if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
-    let status = "active";
-    if (itm.status == "active") status = "deactive";
-
-    // if (window.confirm(`Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`)) {
-    //     loader(true)
-    //     ApiClient.put(shared.statusApi, { id: itm.id, status }).then(res => {
-    //         if (res.success) {
-    //             getData()
-    //         }
-    //         loader(false)
-    //     })
-    // }
-    Swal.fire({
-      title: "Are you sure?",
-      text: `Do you want to ${status == "active" ? "Activate" : "Deactivate"
-        } this`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        loader(true);
-        ApiClient.put(shared.statusApi, { id: itm.id, status }).then((res) => {
-          if (res.success) {
-            getData();
-          }
-          loader(false);
-        });
-        //   Swal.fire({
-
-        //     // text: `Sucessfully ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
-        //     icon: "success"
-        //   });
-      }
-    });
-  };
+ 
 
   const edit = (id) => {
     history(`/${shared.url}/edit/${id}`);
@@ -260,8 +206,7 @@ const Video = () => {
         filter={filter}
         loaging={loaging}
         data={data}
-        total={total}
-        statusChange={statusChange}
+        total={total} 
         changestatus={changestatus}
         exportfun={exportfun}
         handlePublish={handlePublish}

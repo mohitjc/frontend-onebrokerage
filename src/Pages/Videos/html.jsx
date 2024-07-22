@@ -254,7 +254,7 @@ const Html = ({
         return (
           <>
             <video
-              src={`${environment.sasurl}/${row?.video}`}
+              src={row?.video}
               width="130px"
               className="h-20 object-cover"
               controls
@@ -269,7 +269,7 @@ const Html = ({
       render: (row) => {
         return (
           <span className="capitalize">
-            {datepipeModel.datetime(datepipeModel.datetodatepicker(row.date))}
+            {moment(row.date).format("DD MMM YYYY")}
           </span>
         );
       },
@@ -432,6 +432,7 @@ const Html = ({
 
         <div className="shadow-box w-full bg-white rounded-lg mt-6">
           <div className="flex p-4 items-center flex-wrap gap-2">
+          {data?.length >0 ? 
             <button
               type="button"
               onClick={addPublish}
@@ -440,6 +441,7 @@ const Html = ({
               {filters?.isPublish == "pulished" ? "Unpublish" : "Publish"}{" "}
               Videos
             </button>
+            : ""}
 
             <form
               className="flex items-center max-w-sm"
@@ -696,7 +698,7 @@ const Html = ({
                             <div>
                               <label className="block mb-2">Publish Date</label>
                               <input
-                                type="datetime-local"
+                                type="date"
                                 required
                                 value={form.date}
                                 min={`${new Date().toLocaleDateString(

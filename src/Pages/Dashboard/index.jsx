@@ -14,6 +14,7 @@ const Dashboard = () => {
   const [productData, setProductData] = useState([]);
   const [totalAmounts, setTotalAmount] = useState([]);
   const [dates, setDates] = useState([]);
+  const [filters, setFilter] = useState({monthly:'monthly'});
   const [aggregation, setAggregation] = useState("monthly");
   const list = [
     { id: "daily", name: "Daily" },
@@ -29,7 +30,7 @@ const Dashboard = () => {
     });
   };
 
-  const getProducts=()=>{
+  const getProducts=(p={})=>{
     let f={
       "expand": "tags",
       "expand1": "categories",
@@ -42,11 +43,21 @@ const Dashboard = () => {
       "offset": 1,
       "limit": 1000,
       "Token": "2f02f294-b57b-1783-2ef6-173f1fb628bb",
-      "monthly": "monthly"
+      "monthly": "monthly",
+      ...p
     }
+    
     ApiClient.post('dashboard/graph/products',{},f).then(res=>{
       if(res.success){
-        let data=res.data.data
+        let data=res.data.monthly
+        let arr=Object.keys(data)
+        arr=arr.map(itm=>{
+          return {
+            count:data[itm],
+            date:itm
+          }
+        }) 
+        setProductData(arr)
       }
     })
   }
@@ -87,8 +98,13 @@ const Dashboard = () => {
     setAggregation(e);
   };
 
- 
+ const filter=(p={})=>{
+  setFilter({...filters,...p})
+  getProducts(p)
+ }
 
+
+ console.log(productData,'?????');
 
   return (
     <>
@@ -208,9 +224,9 @@ const Dashboard = () => {
                   <SelectDropdown
                   // id="statusDropdown"
                   displayValue="name"
-                  intialValue={aggregation}
+                  intialValue={filters.monthly}
                   result={(e) => {
-                    changestatus(e.value);
+                    filter({monthly:e.value})
                   }}
                   options={list}
                 />
@@ -219,7 +235,7 @@ const Dashboard = () => {
 
                 <LineChart
                   legends={[
-                    {label:'data',key:'count'}
+                    {label:'Products',key:'count'}
                   ]}
                   data={productData}
                 />
