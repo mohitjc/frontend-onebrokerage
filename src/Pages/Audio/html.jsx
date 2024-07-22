@@ -3,16 +3,16 @@ import Layout from "../../components/global/layout";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import { Tooltip } from "antd";
-import {FiPlus } from "react-icons/fi"; 
+import { FiPlus } from "react-icons/fi";
 import Table from "../../components/Table";
-import SelectDropdown from "../../components/common/SelectDropdown"; 
+import SelectDropdown from "../../components/common/SelectDropdown";
 import datepipeModel from "../../models/datepipemodel";
 import shared from "./shared";
-import ApiClient from "../../methods/api/apiClient"; 
+import ApiClient from "../../methods/api/apiClient";
 import Modal from "../../components/common/Modal";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
-import environment from "../../environment"; 
-import { IoMdCopy } from "react-icons/io"; 
+import environment from "../../environment";
+import { IoMdCopy } from "react-icons/io";
 import moment from "moment";
 import loader from "../../methods/loader";
 import { toast } from "react-toastify";
@@ -29,7 +29,7 @@ const Html = ({
   filters,
   setFilter,
   loaging,
-  data, 
+  data,
   isAllow,
   handleCopy,
   selectId,
@@ -60,7 +60,6 @@ const Html = ({
     });
   };
 
- 
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({
     publishNow: "",
@@ -203,11 +202,7 @@ const Html = ({
       render: (row) => {
         return (
           <>
-            <audio
-              src={row?.audio}
-              width={80}
-              controls
-            />
+            <audio src={row?.audio} width={80} controls />
           </>
         );
       },
@@ -218,7 +213,7 @@ const Html = ({
       render: (row) => {
         return (
           <span className="capitalize shrink-0">
-             {moment(row.date).format("DD MMM YYYY") || "-"}
+            {moment(row.date).format("DD MMM YYYY") || "-"}
           </span>
         );
       },
@@ -297,16 +292,14 @@ const Html = ({
                 </Tooltip>
               ) : (
                 <></>
-              )} 
+              )}
               {selectId === itm?.id && copySuccess ? (
                 "Copied!"
               ) : (
                 <Tooltip placement="top" title="copy link">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) =>
-                      handleCopy(`${environment.sasurl}${itm.audio}`, itm?.id)
-                    }
+                    onClick={(e) => handleCopy(`${itm.audio}`, itm?.id)}
                   >
                     <IoMdCopy />
                   </a>
@@ -354,15 +347,18 @@ const Html = ({
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
         <div className="flex p-4 items-center flex-wrap">
-          {data?.length >0 ? 
-          <button 
-            type="button"
-            onClick={addPublish}
-            className="bg-primary leading-10 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2 mr-4"
-          >
-            {filters?.isPublish == "pulished" ? "Unpublish" : "Publish"} Audios
-          </button>
-           : ""}
+          {data?.length > 0 ? (
+            <button
+              type="button"
+              onClick={addPublish}
+              className="bg-primary leading-10 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2 mr-4"
+            >
+              {filters?.isPublish == "pulished" ? "Unpublish" : "Publish"}{" "}
+              Audios
+            </button>
+          ) : (
+            ""
+          )}
           <form
             class="flex items-center max-w-sm"
             onSubmit={(e) => {
