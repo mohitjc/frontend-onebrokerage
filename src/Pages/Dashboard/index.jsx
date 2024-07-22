@@ -12,9 +12,10 @@ import LineChart from "../../components/common/LineChart";
 const Dashboard = () => {
   const [data, setData] = useState();
   const [productData, setProductData] = useState([]);
+  const [orderData, setOrderData] = useState([]);
   const [totalAmounts, setTotalAmount] = useState([]);
   const [dates, setDates] = useState([]);
-  const [filters, setFilter] = useState({monthly:'monthly'});
+  const [filters, setFilter] = useState({monthly:'monthly',type:'monthly',startDate:'',endDate:''});
   const [aggregation, setAggregation] = useState("monthly");
   const list = [
     { id: "daily", name: "Daily" },
@@ -30,6 +31,34 @@ const Dashboard = () => {
     });
   };
 
+  
+
+  const getOrders=(p={})=>{
+    let f={
+      ...filters,
+      ...p
+    }
+    
+    ApiClient.get('orders/graph/data',f).then(res=>{
+      if(res.success){
+        let data=res.data
+        // let arr=Object.keys(data)
+        data=data.map(itm=>{
+          let date=`${itm._id.date_year}-${itm._id.date_month}-${itm._id.day}`
+          if(f.type=='monthly') date=`${itm._id.date_year}-${itm._id.date_month}`
+          if(f.type=='yearly') date=`${itm._id.date_year}`
+          return {
+            avgOrderValue:itm.avgOrderValue.toFixed(2),
+            totalOrders:itm.totalOrders,
+            totalSale:itm.totalSale.toFixed(2),
+            date:date
+          }
+        }) 
+        setOrderData(data)
+      }
+    })
+  }
+
   const getProducts=(p={})=>{
     let f={
       "expand": "tags",
@@ -43,7 +72,7 @@ const Dashboard = () => {
       "offset": 1,
       "limit": 1000,
       "Token": "2f02f294-b57b-1783-2ef6-173f1fb628bb",
-      "monthly": "monthly",
+      "monthly": filters.monthly,
       ...p
     }
     
@@ -63,8 +92,9 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    getProducts()
+    // getProducts()
     getAllCounts();
+    getOrders();
   }, []);
 
   useEffect(() => {
@@ -113,7 +143,8 @@ const Dashboard = () => {
 
  const filter=(p={})=>{
   setFilter({...filters,...p})
-  getProducts(p)
+  // getProducts(p)
+  getOrders(p)
  }
 
  
@@ -243,9 +274,9 @@ const Dashboard = () => {
                   <SelectDropdown
                   // id="statusDropdown"
                   displayValue="name"
-                  intialValue={filters.monthly}
+                  intialValue={filters.type}
                   result={(e) => {
-                    filter({monthly:e.value})
+                    filter({type:e.value})
                   }}
                   options={list}
                 />
@@ -254,9 +285,11 @@ const Dashboard = () => {
 
                 <LineChart
                   legends={[
-                    {label:'Products',key:'count'}
+                    {label:'Total Order',key:'totalOrders'},
+                    {label:'Total Sale',key:'totalSale'},
+                    {label:'Avg Order Value',key:'avgOrderValue'},
                   ]}
-                  data={productData}
+                  data={orderData}
                 />
               </div>
             </div>
