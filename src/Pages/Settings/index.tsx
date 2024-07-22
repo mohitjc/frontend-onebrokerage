@@ -8,11 +8,14 @@ import { useParams } from "react-router-dom";
 import { TimePicker } from 'antd';
 import moment from "moment";
 import { toast } from "react-toastify";
+import socketModel from "../../models/socketModel";
+import { useSelector } from "react-redux";
 
 const Settings = () => {
   const [tabs, setTabs] = useState("profile");
   const [form, setForm]: any = useState({ startTime: null, endTime: null });
   const { tab }: any = useParams();
+  const user = useSelector((state:any) => state.user)
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -35,6 +38,13 @@ const Settings = () => {
       }
       ApiClient.put(`admin/setting-update`, payload).then(res => {
         if (res.success) {
+          const startTime = new Date(form?.startTime)
+          const endTime = new Date(form?.endTime)
+          if (new Date() >= startTime && new Date() <= endTime){
+            socketModel.emit("user-chat-update", { admin_id: user._id, chat: true });
+          }else{
+            socketModel.emit("user-chat-update", { admin_id: user._id, chat: false });
+          }
           toast.success("Available Time Set Successfully")
         }
       })
