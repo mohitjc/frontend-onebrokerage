@@ -18,6 +18,8 @@ import speechModel from "../../models/speech.model";
 
 const AddEdit = () => {
   const { id } = useParams();
+  const [data, setData] = useState("");
+
   const [images, setImages] = useState({ image: "" });
   const [roleOptions, setRoleOptions] = useState([]);
   const [form, setform] = useState({
@@ -130,6 +132,7 @@ const AddEdit = () => {
         if (res.success) {
           let value = res.data;
           let payload = form;
+          setData(value);
 
           Object.keys(payload).map((itm) => {
             payload[itm] = value[itm];
@@ -367,6 +370,14 @@ const AddEdit = () => {
             </div>
             {sortedQuestions?.map((item, index) => {
               let key = questionsKeys[item.title];
+              let answer = data[key];
+              if (data[key] == true) {
+                answer = "Yes";
+              }
+              if (data[key] == false) {
+                answer = "No";
+              }
+
               return (
                 <div key={index} className={"mt-0 pb-4"}>
                   <div className="text-xl mb-3 font-bold mb-2 ">
@@ -412,9 +423,15 @@ const AddEdit = () => {
                                   className="sr-only peer"
                                   name="futuristic-radio"
                                   type="checkbox"
-                                  checked={selectedValues[key]?.includes(
-                                    option.name
-                                  )}
+                                  checked={
+                                    selectedValues[key]
+                                      ? selectedValues[key]?.includes(
+                                          option.name
+                                        )
+                                      : answer?.includes(option.name)
+                                      ? true
+                                      : false
+                                  }
                                   onChange={() => {
                                     handleCheckboxChange(
                                       type,
@@ -429,9 +446,15 @@ const AddEdit = () => {
                                 <input
                                   className="sr-only peer"
                                   type="radio"
-                                  checked={selectedValues[key]?.includes(
-                                    option.name
-                                  )}
+                                  checked={
+                                    selectedValues[key]
+                                      ? selectedValues[key]?.includes(
+                                          option.name
+                                        )
+                                      : option.name === answer
+                                      ? true
+                                      : false
+                                  }
                                   // value={answer}
                                   onChange={() => {
                                     handleCheckboxChange(
