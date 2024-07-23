@@ -207,17 +207,17 @@ const Html = ({
         );
       },
     },
-    {
-      key: "publish date",
-      name: "Publish Date",
-      render: (row) => {
-        return (
-          <span className="capitalize shrink-0">
-            {moment(row.date).format("DD MMM YYYY") || "-"}
-          </span>
-        );
-      },
-    },
+    // {
+    //   key: "publish date",
+    //   name: "Publish Date",
+    //   render: (row) => {
+    //     return (
+    //       <span className="capitalize shrink-0">
+    //         {moment(row.date).format("DD MMM YYYY") || "-"}
+    //       </span>
+    //     );
+    //   },
+    // },
     {
       key: "isPublish",
       name: "Status",
