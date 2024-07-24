@@ -74,6 +74,8 @@ const AddEdit = () => {
       value.primary_interest == "Health & Wellness"
         ? "Health & Wellness"
         : "Therapeutic Use";
+    value.current_medications =
+      value.current_medications == "Yes" ? true : false;
 
     value.previous_experience =
       value.previous_experience == "Yes" ? true : false;
@@ -84,14 +86,11 @@ const AddEdit = () => {
     if (value.current_medications == true) {
       value.current_medications_desc = currentMedication;
     }
-
     value.personalize_recommendation =
       value.personalize_recommendation == "Yes" ? true : false;
 
-    value.current_medications =
-      value.current_medications == "Yes" ? true : false;
-
     value.privacy_consent = value.privacy_consent == "Yes" ? true : false;
+
     loader(true);
     ApiClient.allApi(url, value, method).then((res) => {
       if (res.success) {
@@ -495,7 +494,8 @@ const AddEdit = () => {
                     })}
                   </div>
                   {key == "current_medications" &&
-                    selectedValues["current_medications"] === "Yes" && (
+                    (selectedValues["current_medications"] === "Yes" ||
+                      data?.current_medications) && (
                       <div className="mt-2">
                         <span className="text-black font-medium text-[15px]">
                           If "Yes", please explain
@@ -527,7 +527,8 @@ const AddEdit = () => {
                     )}
 
                   {key == "previous_experience" &&
-                    selectedValues["previous_experience"] === "Yes" && (
+                    (selectedValues["previous_experience"] === "Yes" ||
+                      data?.previous_experience) && (
                       <div className="mt-2">
                         <span className="text-black font-medium text-[15px]">
                           If "Yes", please explain
