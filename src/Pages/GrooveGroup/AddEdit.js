@@ -133,7 +133,10 @@ const AddEdit = () => {
           let value = res.data;
           let payload = form;
           setData(value);
-
+          if (value.current_medications == true)
+            setCurrentMedication(value.current_medications_desc);
+          if (value.previous_experience == true)
+            setComment(value.previous_experience_desc);
           Object.keys(payload).map((itm) => {
             payload[itm] = value[itm];
           });
@@ -199,7 +202,7 @@ const AddEdit = () => {
 
   const handleSelectAll = (item, key) => {
     const allOptions = item?.options;
-    if (selectAll) {
+    if (hasAllOptions(allOptions, selectedValues[key])) {
       // Deselect all
       setSelectedValues((prevValues) => {
         return {
@@ -207,7 +210,7 @@ const AddEdit = () => {
           [key]: [],
         };
       });
-      setSelectAll(!selectAll);
+      // setSelectAll(!selectAll);
     } else {
       // Select all
       setSelectedValues((prevValues) => {
@@ -216,7 +219,7 @@ const AddEdit = () => {
           [key]: allOptions.map((itm) => itm.name),
         };
       });
-      setSelectAll(!selectAll);
+      // setSelectAll(!selectAll);
     }
   };
 
@@ -277,6 +280,11 @@ const AddEdit = () => {
     const recognition = speechModel.recognition;
     recognition.stop();
     setSpeachStart(false);
+  };
+
+  const hasAllOptions = (arr1, arr2) => {
+    const hasAll = arr1.every(({ name }) => arr2?.includes(name));
+    return hasAll;
   };
 
   useEffect(() => {
@@ -394,7 +402,11 @@ const AddEdit = () => {
                             className="sr-only peer"
                             name="futuristic-radio"
                             type="checkbox"
-                            checked={selectAll}
+                            // checked={selectAll}
+                            checked={hasAllOptions(
+                              item.options,
+                              selectedValues[key]
+                            )}
                             onChange={() => {
                               handleSelectAll(item, key);
                             }}
@@ -402,7 +414,7 @@ const AddEdit = () => {
 
                           <div className="w-10 h-10 shrink-0 bg-transparent border border-black rounded-full overflow-hidden flex items-center justify-center transition duration-300 ease-in-out peer-checked:opacity-100 peer-checked:grayscale-0 opacity-50 grayscale">
                             <img
-                              src="../assets/img/coin/c1.svg"
+                              src="../../assets/img/coin/c1.svg"
                               className="h-full w-full object-cover"
                               alt="Coin Image"
                             />
