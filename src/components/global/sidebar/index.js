@@ -61,7 +61,7 @@ const Sidebar = ({ isOpen }) => {
       if (permissions?.[itm]) value = permissions?.[itm];
     });
 
-    if (!url||user.role.name=='Admin') value = true;
+    if (!url || user?.role?.name == "Admin") value = true;
     return value;
   };
 

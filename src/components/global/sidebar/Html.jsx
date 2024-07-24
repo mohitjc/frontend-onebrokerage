@@ -122,7 +122,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       ),
       url: "/blog",
       key: "readBlogs",
-    }, 
+    },
     {
       name: "Messages",
       icon: <PiBellSimpleLight className="text-[#fff] shrink-0 text-lg" />,
@@ -167,7 +167,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     {
       name: "Content Management",
       icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
-      url: "/content-management", 
+      url: "/content-management",
       tab: "content-management",
       menu: [
         {
@@ -221,70 +221,78 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                     <li>
                       {itm.menu ? (
                         <>
-                        {isAllow(itm.menu.map(itm=>itm.key).toString())?<>
-                          <Disclosure as="div" defaultOpen={tabclass(itm.tab)}>
-                            {({ open }) => (
-                              <>
-                                <tooltip placement="right" title={itm.name}>
-                                  <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#fff]  hover:!text-[#fff] gap-[12px] hover:bg-[#EB6A59] transition-all duration-300">
-                                    <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
-                                      {itm.icon}
-                                      <span className=" text-inherit leading-none sidebar_text">
-                                        {itm.name}
-                                      </span>
-                                    </span>
-                                    <TiArrowSortedDown
-                                      className={`${
-                                        open ? "" : "-rotate-90 transform"
-                                      } h-4 w-4 transition-all duration-500  text-[#fff]`}
-                                    />
-                                  </Disclosure.Button>
-                                </tooltip>
-                                <Transition
-                                  enter="transition duration-300 ease-in-out"
-                                  enterFrom="transform scale-95 opacity-0"
-                                  enterTo="transform scale-300 opacity-300"
-                                  leave="transition duration-300 ease-in-out"
-                                  leaveFrom="transform scale-300 opacity-300"
-                                  leaveTo="transform scale-95 opacity-0"
-                                >
-                                  <Disclosure.Panel className="pl-[30px] mt-[4px] ">
-                                    <ul className="space-y-2">
-                                      {itm.menu?.map((sitm) => {
-                                        return (
-                                          <>
-                                            {isAllow(sitm.key) ? (
-                                              <li>
-                                                {" "}
-                                                <NavLink
-                                                  className={(isActive) =>
-                                                    "p-2.5 rounded-md block text-sm font-normal text-[#d6d6d6] hover:text-[#fff] cursor-pointer  hover:bg-[#EB6A59] !no-underline transition-all " +
-                                                    (location?.pathname ==
-                                                      sitm.url &&
-                                                      " !text-[#fff] !font-medium")
-                                                  }
-                                                  to={sitm.url}
-                                                >
-                                                  <span
-                                                    className="text-inherit leading-none sidebar_text"
-                                                    title={sitm.name}
-                                                  >
-                                                    {sitm.name}
-                                                  </span>
-                                                </NavLink>
-                                              </li>
-                                            ) : null}
-                                          </>
-                                        );
-                                      })}
-                                    </ul>
-                                  </Disclosure.Panel>
-                                </Transition>
-                              </>
-                            )}
-                          </Disclosure>
-                        </>:<></>}
-                         
+                          {isAllow(
+                            itm.menu.map((itm) => itm.key).toString()
+                          ) ? (
+                            <>
+                              <Disclosure
+                                as="div"
+                                defaultOpen={tabclass(itm.tab)}
+                              >
+                                {({ open }) => (
+                                  <>
+                                    <tooltip placement="right" title={itm.name}>
+                                      <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#fff]  hover:!text-[#fff] gap-[12px] hover:bg-[#EB6A59] transition-all duration-300">
+                                        <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
+                                          {itm.icon}
+                                          <span className=" text-inherit leading-none sidebar_text">
+                                            {itm.name}
+                                          </span>
+                                        </span>
+                                        <TiArrowSortedDown
+                                          className={`${
+                                            open ? "" : "-rotate-90 transform"
+                                          } h-4 w-4 transition-all duration-500  text-[#fff]`}
+                                        />
+                                      </Disclosure.Button>
+                                    </tooltip>
+                                    <Transition
+                                      enter="transition duration-300 ease-in-out"
+                                      enterFrom="transform scale-95 opacity-0"
+                                      enterTo="transform scale-300 opacity-300"
+                                      leave="transition duration-300 ease-in-out"
+                                      leaveFrom="transform scale-300 opacity-300"
+                                      leaveTo="transform scale-95 opacity-0"
+                                    >
+                                      <Disclosure.Panel className="pl-[30px] mt-[4px] ">
+                                        <ul className="space-y-2">
+                                          {itm.menu?.map((sitm) => {
+                                            return (
+                                              <>
+                                                {isAllow(sitm.key) ? (
+                                                  <li>
+                                                    {" "}
+                                                    <NavLink
+                                                      className={(isActive) =>
+                                                        "p-2.5 rounded-md block text-sm font-normal text-[#d6d6d6] hover:text-[#fff] cursor-pointer  hover:bg-[#EB6A59] !no-underline transition-all " +
+                                                        (location?.pathname ==
+                                                          sitm.url &&
+                                                          " !text-[#fff] !font-medium")
+                                                      }
+                                                      to={sitm.url}
+                                                    >
+                                                      <span
+                                                        className="text-inherit leading-none sidebar_text"
+                                                        title={sitm.name}
+                                                      >
+                                                        {sitm.name}
+                                                      </span>
+                                                    </NavLink>
+                                                  </li>
+                                                ) : null}
+                                              </>
+                                            );
+                                          })}
+                                        </ul>
+                                      </Disclosure.Panel>
+                                    </Transition>
+                                  </>
+                                )}
+                              </Disclosure>
+                            </>
+                          ) : (
+                            <></>
+                          )}
                         </>
                       ) : (
                         <>

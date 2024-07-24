@@ -60,8 +60,7 @@ const View = () => {
           </div>
 
           <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 md:col-span-8">
-
+            <div className="col-span-12 md:col-span-8">
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Name</label>
@@ -70,7 +69,7 @@ const View = () => {
                 <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Category</label>
                   <div className="profiledetailscls capitalize">
-                    {data?.category.name || "--"}
+                    {data?.category?.name || "--"}
                   </div>
                 </div>
                 {data?.sub_category && (
@@ -114,7 +113,7 @@ const View = () => {
                 ) : (
                   <></>
                 )}
-           
+
                 {data?.qr_pdf ? (
                   <>
                     <div className="col-span-6">
@@ -137,15 +136,13 @@ const View = () => {
                   <></>
                 )}
               </div>
-              </div>
+            </div>
 
-
-              <div className="col-span-12 md:col-span-4">
+            <div className="col-span-12 md:col-span-4">
               <div className="">
-              {data?.qr_image ? (
+                {data?.qr_image ? (
                   <>
                     <div className="">
-                     
                       <div className="flex gap-2 flex-wrap items-center">
                         <img
                           src={methodModel.noImg(data?.qr_image)}
@@ -158,11 +155,8 @@ const View = () => {
                   <></>
                 )}
               </div>
-              </div>
+            </div>
           </div>
-
-
-            
         </div>
       </Layout>
     </>
