@@ -4,60 +4,16 @@ export const rolePermissions = [
     key: "Dashboard",
   },
   {
-    name: "Onboarding Questions",
-    key: "onboardingQuestions",
-  },
-  {
-    name: "staff",
+    name: "Staff",
     key: "staff",
   },
   {
-    name: "Groove Group",
+    name: "Students",
     key: "grooveGroup",
-  },
-  // {
-  //   name: "Roles",
-  //   key: "Roles",
-  // },
-  {
-    name: "Categories",
-    key: "Categories",
-  },
-  {
-    name: "Products",
-    key: "Products",
-  },
-  {
-    name: "FAQ",
-    key: "FAQ",
   },
   {
     name: "Content",
     key: "Content",
-  },
-  {
-    name: "Newsletter",
-    key: "Newsletter",
-  },
-  {
-    name: "Tags",
-    key: "Tags",
-  },
-  {
-    name: "Blogs",
-    key: "Blogs",
-  },
-  {
-    name: "Subscribers",
-    key: "Subscribers",
-  },
-  {
-    name: "Videos",
-    key: "Videos",
-  },
-  {
-    name: "Audio",
-    key: "Audio",
   },
 ];
 

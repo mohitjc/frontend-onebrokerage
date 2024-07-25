@@ -29,7 +29,7 @@ const AddEdit = () => {
     fullName: "",
     email: "",
     mobileNo: "",
-    role: "",
+    role: "staff",
     loginPannel: "",
   });
   const history = useNavigate();
@@ -39,11 +39,7 @@ const AddEdit = () => {
   const formValidation = [
     { key: "mobileNo", required: true },
     { key: "email", required: true, message: "Email is required", email: true },
-    { key: "role", required: true },
   ];
-
-  const isSubAdmin = user?.role?.name !== "Admin";
-  const isAdmin = user?.role?.name == "Admin";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,13 +54,13 @@ const AddEdit = () => {
         ...form,
         ...form1,
         id: id,
+        role:"staff"
       };
     if (id) {
       method = "put";
       url = shared.editApi;
     } else {
       value.addedBy = user._id;
-      value.groupId = user?.groupId?._id;
       delete value.id;
     }
 
@@ -121,38 +117,6 @@ const AddEdit = () => {
     }
   }, [id]);
 
- 
-
-  const getRolesList = () => {
-    ApiClient.get("role/listing").then((res) => {
-      if (res.success) {
-        let filtered = res?.data.filter(
-          (itm) => itm.status == "active" && itm.name == "Staff"
-        );
-        // if (isAdmin) {
-        //   filtered = res?.data.filter(
-        //     (itm) => itm.status == "active" && itm.name != "Customer"
-        //   );
-        // }
-
-        // if (isSubAdmin) {
-        //   filtered = res?.data.filter(
-        //     (itm) => itm.status == "active" && itm.name != "Admin"
-        //   );
-        // }
-        setRoleOptions(
-          filtered.map(({ _id, name }) => {
-            return { id: _id, name: name };
-          })
-        );
-        setform({...form, role : res?.data ? res?.data[0]?.id : ""})
-      }
-    });
-  };
-
-  useEffect(() => {
-    getRolesList();
-  }, [user?.role?.name]);
 
   const setpermission = (key, value) => {
     setForm1({
@@ -267,7 +231,7 @@ const AddEdit = () => {
                   required
                 />
               </div>
-              <div className="mobile_number mb-3">
+              {/* <div className="mobile_number mb-3">
                 <FormControl 
                   type="select"
                   name="role"
@@ -286,7 +250,7 @@ const AddEdit = () => {
                     Role is required
                   </div>
                 )}
-              </div>
+              </div> */}
               <div className="mobile_number mb-3">
                 <FormControl
                   type="phone"
@@ -319,7 +283,7 @@ const AddEdit = () => {
                 )}
               </div>
             </div>
-            {form?.role == "666fe2aeaf5c4fffdaedb8bf" ? (
+            {form?.role == "staff" ? (
               <div className="shadow-box w-full bg-white rounded-lg mb-6">
                 <div className="scrollbar w-full overflow-auto">
                   <div class="table_section tablepadding">

@@ -8,8 +8,10 @@ import ApiClient from "../../methods/api/apiClient";
 import SelectDropdown from "../../components/common/SelectDropdown";
 import loader from "../../methods/loader";
 import LineChart from "../../components/common/LineChart";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
+  const user=useSelector(state=>state.user)
   const [data, setData] = useState();
   const [productData, setProductData] = useState([]);
   const [orderData, setOrderData] = useState([]);
@@ -59,46 +61,13 @@ const Dashboard = () => {
     })
   }
 
-  const getProducts=(p={})=>{
-    let f={
-      "expand": "tags",
-      "expand1": "categories",
-      "expand2": "taxRates",
-      "expand3": "modifierGroups",
-      "expand4": "itemStock",
-      "expand5": "options",
-      "expand6": "menuItem",
-      "orderBy": "name ASC",
-      "offset": 1,
-      "limit": 1000,
-      "Token": "2f02f294-b57b-1783-2ef6-173f1fb628bb",
-      "monthly": filters.monthly,
-      ...p
-    }
-    
-    ApiClient.post('dashboard/graph/products',{},f).then(res=>{
-      if(res.success){
-        let data=res.data.monthly
-        let arr=Object.keys(data)
-        arr=arr.map(itm=>{
-          return {
-            count:data[itm],
-            date:itm
-          }
-        }) 
-        setProductData(arr)
-      }
-    })
-  }
-
   useEffect(() => {
-    // getProducts()
-    getAllCounts();
-    getOrders();
+    // getAllCounts();
+    // getOrders();
   }, []);
 
   useEffect(() => {
-    getRewardGraph();
+    // getRewardGraph();
   }, [aggregation]);
 
   const getRewardGraph = () => {
@@ -154,7 +123,7 @@ const Dashboard = () => {
       <Layout>
         <h4 className="text-2xl font-bold mb-3 flex items-center gap-2">
           <IoHandRightOutline className="text-3xl slow-shake text-[#EB6A59]" />
-          <span className="">Hi,</span> Admin Shroom
+          <span className="">Hi,</span> {user?.fullName}
         </h4>
 
         <div className="shadow-box w-full bg-white rounded-lg mt-6 p-6">

@@ -6,9 +6,6 @@ import loader from "../../methods/loader";
 import "./profile.scss";
 import methodModel from "../../methods/methods";
 import { useSelector } from "react-redux";
-import { LiaUserSolid } from "react-icons/lia";
-import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
-import questionsKeys from "./questions";
 
 const Profile = () => {
   const user = useSelector((state: any) => state.user);
@@ -24,18 +21,9 @@ const Profile = () => {
     });
   };
 
-  const getQuestionsList = () => {
-    ApiClient.get(`onboarding-questions/list`, { id: user._id }).then((res) => {
-      if (res.success) {
-        setQuestions(res.data);
-      }
-    });
-  };
-
   useEffect(() => {
     if (user.loggedIn) {
       gallaryData();
-      getQuestionsList();
     }
   }, []);
 

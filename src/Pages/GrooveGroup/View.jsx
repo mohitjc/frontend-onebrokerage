@@ -33,22 +33,12 @@ const View = () => {
     });
   };
 
-  const getQuestionsList = () => {
-    ApiClient.get(`onboarding-questions/list`, { id: user._id }).then((res) => {
-      if (res.success) {
-        setQuestions(res.data);
-      }
-    });
-  };
   const sortedQuestions = questions?.sort((a, b) => a.order - b.order);
 
   useEffect(() => {
     getDetail();
   }, []);
 
-  useEffect(() => {
-    if (data) getQuestionsList();
-  }, [data]);
 
   return (
     <>
@@ -71,7 +61,7 @@ const View = () => {
           </div>
 
           <div className="grid grid-cols-12 gap-6">
-            <div className="col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-3">
+            <div className="col-span-12">
               <div className="flex items-center justify-center py-8 shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 sticky top-2">
                 <div className="flex flex-col items-center gap-4">
                   <div className="text-center">
@@ -104,51 +94,6 @@ const View = () => {
               </div>
             </div>
 
-            <div className="col-span-12 md:col-span-8 lg:col-span-8  xl:col-span-9  ">
-              <div className="p-6 shadow-box overflow-hidden rounded-lg bg-white ">
-                <div className="mt-5">
-                  <label className="text-2xl font-semibold mb-8 inline-flex">
-                    Onboarding Answers :-
-                  </label>
-                  {sortedQuestions?.map((item, index) => {
-                    let key = questionsKeys[item.title];
-                    let answer = data[key];
-                    if (data[key] == true || data[key] == false) {
-                      answer = data[key] == true ? "Yes" : "No";
-                    }
-                    if (Array.isArray(answer)) {
-                      answer = answer.join(", ");
-                    }
-                    return (
-                      <div
-                        key={index}
-                        className={`${
-                          index > 0
-                            ? "mt-3  last:border-0 border-b border-gray-200 pb-4"
-                            : "mt-0 last:border-0 border-b border-gray-200 pb-4"
-                        }`}
-                      >
-                        <div className="text-xl mb-3 font-bold mb-2 ">
-                          {item.title}
-                        </div>
-                        <div className="flex items-start font-semibold gap-2 mb-2 ">
-                          <span className="h-6 w-6 justify-center flex items-center bg-gray-200 shrink-0">
-                            Q
-                          </span>{" "}
-                          {item.question}
-                        </div>
-                        <div className="flex items-start font-regular gap-2">
-                          <span className="h-6 w-6 justify-center text-white flex items-center bg-[#EB6A59] shrink-0">
-                            A
-                          </span>
-                          <span> {answer}</span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </Layout>

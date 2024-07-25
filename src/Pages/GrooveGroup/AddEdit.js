@@ -19,6 +19,12 @@ const AddEdit = () => {
     fullName: "",
     email: "",
     mobileNo: "",
+    dob:'',
+    address:'',
+    address2:'',
+    state:'',
+    zipcode:'',
+    country:'',
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -175,6 +181,64 @@ const AddEdit = () => {
                   </div>
                 )}
               </div>
+              <div className="mb-3">
+                <FormControl
+                  type="date"
+                  label="DOB"
+                  value={form.dob}
+                  onChange={(e) => setform({ ...form, dob: e })}
+                  required
+                />
+              </div>
+              <div className="col-span-full">
+                <h4>Address</h4>
+              </div>
+
+              <div className="mb-3">
+                <FormControl
+                  type="text"
+                  label="Street Address"
+                  value={form.address1}
+                  onChange={(e) => setform({ ...form, address1: e })}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <FormControl
+                  type="text"
+                  label="Street Address Line 2"
+                  value={form.address2}
+                  onChange={(e) => setform({ ...form, address2: e })}
+                />
+              </div>
+              <div className="mb-3">
+                <FormControl
+                  type="text"
+                  label="State / Province"
+                  value={form.state}
+                  onChange={(e) => setform({ ...form, state: e })}
+                />
+              </div>
+
+              <div className="mb-3">
+                <FormControl
+                  type="text"
+                  label="Postal / Zip Code"
+                  value={form.zipcode}
+                  maxlength="6"
+                  onChange={(e) => setform({ ...form, zipcode: e })}
+                />
+              </div>
+
+              <div className="mb-3">
+                <FormControl
+                  type="text"
+                  label="Country"
+                  value={form.country}
+                  onChange={(e) => setform({ ...form, country: e })}
+                />
+              </div>
+              
             </div>
 
             <div className="text-right">

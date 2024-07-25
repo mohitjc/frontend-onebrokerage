@@ -22,16 +22,9 @@ import {
   MdOutlineChat,
 } from "react-icons/md";
 
-import { LuUser2 } from "react-icons/lu";
-import { CiSettings } from "react-icons/ci";
-import { LiaHistorySolid, LiaUserTagSolid } from "react-icons/lia";
 import environment from "../../../environment";
 import ApiClient from "../../../methods/api/apiClient";
-import { UserCircleIcon } from "@heroicons/react/20/solid";
-import { FiGift, FiSettings, FiUsers } from "react-icons/fi";
-import { FaBlog, FaQuestion } from "react-icons/fa";
-import { HiOutlineShoppingCart } from "react-icons/hi";
-import { BsCartCheck } from "react-icons/bs";
+import { FiUsers } from "react-icons/fi";
 
 const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
   const [activeplan, setActiveplan] = useState();
