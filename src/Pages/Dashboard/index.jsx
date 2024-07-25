@@ -160,7 +160,7 @@ const Dashboard = () => {
         <div className="shadow-box w-full bg-white rounded-lg mt-6 p-6">
           <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div className="flex flex-col-reverse  border border-gray-200 shadow-sm px-6 py-2 rounded-lg relative">
-              <dt className="text-base leading-7 text-black/40">Total Users</dt>
+              <dt className="text-base leading-7 text-black/40">Total Staff</dt>
               <dd className="text-2xl font-bold leading-9  text-black">
                 {data?.totalUsers}
               </dd>
@@ -171,7 +171,7 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-col-reverse  border border-gray-200 shadow-sm px-6 py-2 rounded-lg relative">
               <dt className="text-base leading-7 text-black/40">
-                Total Products
+                Total Students
               </dt>
               <dd className="text-2xl font-bold leading-9  text-black">
                 {data?.totalProducts}
@@ -195,7 +195,7 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-col-reverse  border border-gray-200 shadow-sm px-6 py-2 rounded-lg relative">
               <dt className="text-base leading-7 text-black/40">
-                Total Reviews
+                Total Assignment
               </dt>
               <dd className="text-2xl font-bold leading-9  text-black">
                 {data?.totalReview}
@@ -237,7 +237,7 @@ const Dashboard = () => {
             <div className="col-span-12 md:col-span-12">
               <div className="chatr_ones border border-gray-200 p-6 rounded-lg">
                 <div className="flex items-center justify-between">
-                  <h5 className="font-semibold text-xl">Reward Points</h5>
+                  <h5 className="font-semibold text-xl">Assignment</h5>
                   <div className="">
                   <SelectDropdown
                   // id="statusDropdown"
@@ -259,8 +259,8 @@ const Dashboard = () => {
                 /> */}
                  <LineChart
                   legends={[
-                    {label:'Total Reward',key:'count'},
-                    {label:'Total Amount',key:'totalAmount'},
+                    {label:'Total Assignment',key:'count'},
+                    // {label:'Total Amount',key:'totalAmount'},
                   ]}
                   data={dates}
                 />
@@ -269,7 +269,7 @@ const Dashboard = () => {
             <div className="col-span-12 md:col-span-12">
               <div className="chatr_ones border border-gray-200 p-6 rounded-lg">
                 <div className="flex items-center justify-between">
-                  <h5 className="font-semibold text-xl">Products</h5>
+                  <h5 className="font-semibold text-xl">Students</h5>
                   <div className="">
                   <SelectDropdown
                   // id="statusDropdown"
@@ -285,9 +285,9 @@ const Dashboard = () => {
 
                 <LineChart
                   legends={[
-                    {label:'Total Order',key:'totalOrders'},
-                    {label:'Total Sale',key:'totalSale'},
-                    {label:'Avg Order Value',key:'avgOrderValue'},
+                    {label:'Total Students',key:'totalOrders'},
+                    // {label:'Total Sale',key:'totalSale'},
+                    // {label:'Avg Order Value',key:'avgOrderValue'},
                   ]}
                   data={orderData}
                 />

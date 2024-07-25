@@ -67,12 +67,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/dashboard",
       key: "readDashboard",
     },
-    // {
-    //   name: "Chats",
-    //   icon: <MdOutlineChat className="text-[#fff] shrink-0 text-lg" />,
-    //   url: "/chat",
-    //   key: "",
-    // },
     {
       name: "Staff",
       icon: <FiUsers className="text-[#fff] shrink-0 text-lg" />,
@@ -80,7 +74,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       key: "readstaff",
     },
     {
-      name: "Customers",
+      name: "Students",
       icon: <MdOutlineGroups className="text-[#fff] shrink-0 text-lg" />,
       url: "/customers",
       key: "readgrooveGroup",
@@ -91,48 +85,48 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     //   url: "/category",
     //   key: "readCategories",
     // },
-    {
-      name: "Blogs",
-      icon: (
-        <TfiLayoutMediaCenterAlt className="text-[#fff] shrink-0 text-lg" />
-      ),
-      url: "/blog",
-      key: "readBlogs",
-    },
-    {
-      name: "Content Management",
-      icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
-      url: "/content-management",
-      tab: "content-management",
-      menu: [
-        // {
-        //   name: "FAQ",
-        //   icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
-        //   url: "/faq",
-        //   key: "readFAQ",
-        // },
-        {
-          name: "Content",
-          icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
-          url: "/content",
-          key: "readContent",
-        },
-        // {
-        //   name: "Newsletter",
-        //   icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
-        //   url: "/newsletter",
-        //   key: "readNewsletter",
-        // },
-        // {
-        //   name: "Subscribers",
-        //   icon: (
-        //     <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />
-        //   ),
-        //   url: "/subscribers",
-        //   key: "readSubscribers",
-        // },
-      ],
-    },
+    // {
+    //   name: "Blogs",
+    //   icon: (
+    //     <TfiLayoutMediaCenterAlt className="text-[#fff] shrink-0 text-lg" />
+    //   ),
+    //   url: "/blog",
+    //   key: "readBlogs",
+    // },
+    // {
+    //   name: "Content Management",
+    //   icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
+    //   url: "/content-management",
+    //   tab: "content-management",
+    //   menu: [
+    //     {
+    //       name: "FAQ",
+    //       icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
+    //       url: "/faq",
+    //       key: "readFAQ",
+    //     },
+    //     {
+    //       name: "Content",
+    //       icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
+    //       url: "/content",
+    //       key: "readContent",
+    //     },
+    //     {
+    //       name: "Newsletter",
+    //       icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
+    //       url: "/newsletter",
+    //       key: "readNewsletter",
+    //     },
+    //     {
+    //       name: "Subscribers",
+    //       icon: (
+    //         <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />
+    //       ),
+    //       url: "/subscribers",
+    //       key: "readSubscribers",
+    //     },
+    //   ],
+    // },
     // {
     //   name: "Settings",
     //   icon: <FiSettings className="text-[#fff] shrink-0 text-lg" />,
