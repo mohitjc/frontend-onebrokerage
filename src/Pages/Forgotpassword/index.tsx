@@ -40,12 +40,12 @@ const Forgotpassword = () => {
       <AuthLayout>
       <form className="w-7/12	mx-auto" onSubmit={hendleSubmit}>
           <div className="">
-            <h1 className="text-[40px] font-semibold text-white">
+            <h1 className="text-[40px] font-semibold text-[#333]">
               Forgot Passowrd
             </h1>
-            <span className="flex w-10 h-1 bg-[#EB6A59] mt-1"></span>
+            <span className="flex w-10 h-1 bg-[#063688] mt-1"></span>
           </div>
-          <p className="text-[20px] font-normal text-white mt-4">
+          <p className="text-[20px] font-normal text-[#333] mt-4">
             {" "}
             No worries! Just enter your email and we’ll send you a reset
             password link.
@@ -54,7 +54,7 @@ const Forgotpassword = () => {
             <div className="inputWrapper">
               <input
                 type="email"
-                className="mb-4 w-full text-sm text-white  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
+                className="mb-4 w-full text-sm text-[#333]  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
                 placeholder="Email*"
                 value={form.email}
                 required
@@ -66,17 +66,17 @@ const Forgotpassword = () => {
           <div className="flex items-center justify-center mt-6">
             <button
               type="submit"
-              className="h-11 rounded-full w-52 text-center text-white bg-[#EB6A59]  font-semibold hover:opacity-80 transition-all"
+              className="h-11 rounded-full w-52 text-center text-[#fff] bg-[#063688]  font-semibold hover:opacity-80 transition-all"
             >
               Send Recovery Email
             </button>
           </div>
 
-          <p className="text-white text-center font-normal text-[14px] mt-4">
+          <p className="text-[#333] text-center font-normal text-[14px] mt-4">
             {" "}
             Just Remember?
             <Link
-              className="text-[#EB6A59] text-[14px] !font-semibold"
+              className="text-[#063688] text-[14px] !font-semibold"
               to="/login"
             >
               {" "}

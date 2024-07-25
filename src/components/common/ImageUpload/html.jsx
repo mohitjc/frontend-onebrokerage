@@ -17,7 +17,7 @@ const Html = ({
   return (
     <>
       <label
-        className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-8 py-4 text-center ${
+        className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#063688] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-8 py-4 text-center ${
           img && !multiple ? "d-none" : ""
         }`}
       >
@@ -33,7 +33,7 @@ const Html = ({
           }}
         />
         <div className="flex flex-col items-center justify-center">
-          <FiPlus className="text-2xl text-[#EB6A59]" />
+          <FiPlus className="text-2xl text-[#063688]" />
           <span>{label || "Please upload images"}</span>
         </div>
       </label>

@@ -84,7 +84,7 @@ const Html = ({
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 1
-                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-[#EB6A59] text-white"
+                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-[#063688] text-white"
                   : "!text-[#667085] hover:!text-[#667085]"
                   }`}
                 onClick={(e) => changeInterval(1)}>
@@ -94,7 +94,7 @@ const Html = ({
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 3
-                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-[#EB6A59] text-white"
+                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-[#063688] text-white"
                   : "!text-[#667085] hover:!text-[#667085]"
                   }`}
                 onClick={(e) => changeInterval(3)}>
@@ -104,7 +104,7 @@ const Html = ({
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 6
-                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-[#EB6A59] text-white"
+                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-[#063688] text-white"
                   : "!text-[#667085] hover:!text-[#667085]"
                   }`}
                 onClick={(e) => changeInterval(6)}>
@@ -114,7 +114,7 @@ const Html = ({
             <li>
               <a
                 className={`!px-3 !py-2 whitespace-nowrap text-sm block cursor-pointer text-center min-w-[120px] font-medium ${interval == 12
-                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-[#EB6A59] text-white"
+                  ? "shadow-btn rounded-md font-semibold text-[#344054]  bg-[#063688] text-white"
                   : "!text-[#667085] hover:!text-[#667085]"
                   }`}
                 onClick={(e) => changeInterval(12)}>
@@ -154,7 +154,7 @@ const Html = ({
                         <h2 className="text-typo text-3xl font-semibold">
                           {getPrice(item)} {currencyiso?.toUpperCase()}
                         </h2>
-                        <div className="border !border-[#E9E7FB]  !rounded-md bg-[#EB6A59] !px-2 py-0.5 text-xs font-medium !text-[#fff]">
+                        <div className="border !border-[#E9E7FB]  !rounded-md bg-[#063688] !px-2 py-0.5 text-xs font-medium !text-[#fff]">
                           0% off
                         </div>
                         <p>
@@ -197,7 +197,7 @@ const Html = ({
                                           {isChecked(item, fitm) ? (
                                             <IoCheckmarkCircle className="text-xl text-green-700" />
                                           ) : (
-                                            <IoCloseCircle className="text-xl text-[#EB6A59]" />
+                                            <IoCloseCircle className="text-xl text-[#063688]" />
                                           )}
                                           {/* <i class={`material-icons ${isChecked(item, fitm) ? 'text-success' : 'text-danger'} planIcon`}>{isChecked(item, fitm) ? 'check' : 'close'}</i> */}
                                       <p className="capitalize">{fitm.name}</p>    
@@ -260,7 +260,7 @@ const Html = ({
                             </p>
                           ) : null}
                           <button
-                            className="!px-4 bg-[#fff] text-black hover:text-black  text-typo text-sm font-normal py-2.5 flex items-center justify-center gap-2 border-[#EB6A59] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed w-full mt-8"
+                            className="!px-4 bg-[#fff] text-black hover:text-black  text-typo text-sm font-normal py-2.5 flex items-center justify-center gap-2 border-[#063688] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed w-full mt-8"
                             disabled={getPrice(item)||item.planType=='free' ? false : true}
                             onClick={(e) => getplandetails(item)}>
                             {activeplan?.isActive ? "Upgrade" : "Get Started"}

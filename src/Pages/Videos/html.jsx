@@ -185,7 +185,7 @@ const Html = ({
             <input
               id="default-checkbox"
               onClick={allIds}
-              style={{ accentColor: "#EB6A59" }}
+              style={{ accentColor: "#063688" }}
               type="checkbox"
               value=""
               className="w-4 h-4 cursor-pointer rounded "
@@ -206,7 +206,7 @@ const Html = ({
             <div className="flex items-center ">
               <input
                 checked={ids.includes(row.id)}
-                style={{ accentColor: "#EB6A59" }}
+                style={{ accentColor: "#063688" }}
                 onChange={addId}
                 type="checkbox"
                 value={row.id}
@@ -314,7 +314,7 @@ const Html = ({
               {isAllow(`edit${shared.check}`) ? (
                 <Tooltip placement="top" title="Edit">
                   <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) => edit(itm.id)}
                   >
                     <LiaEdit />
@@ -327,7 +327,7 @@ const Html = ({
                 <Tooltip placement="top" title="Delete">
                   {" "}
                   <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg "
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg "
                     onClick={() => deleteItem(itm.id)}
                   >
                     <LiaTrashAlt />
@@ -339,7 +339,7 @@ const Html = ({
               {/* {itm?.isPublish ? (
                 <Tooltip placement="top" title="un-publish">
                   <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) => handlePublish(itm.id, itm?.isPublish)}
                   >
                     <MdOutlineDownload />
@@ -348,7 +348,7 @@ const Html = ({
               ) : (
                 <Tooltip placement="top" title="publish">
                   <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) => handlePublish(itm.id, itm?.isPublish)}
                   >
                     <MdOutlinePublish />
@@ -360,7 +360,7 @@ const Html = ({
               ) : (
                 <Tooltip placement="top" title="copy link">
                   <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) => handleCopy(`${itm.video}`, itm?.id)}
                   >
                     <IoMdCopy />
@@ -445,7 +445,7 @@ const Html = ({
                   onChange={(e) => {
                     setFilter({ ...filters, search: e.target.value });
                   }}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#063688]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                   placeholder="Search"
                   required
                 />
@@ -459,7 +459,7 @@ const Html = ({
               </div>
               <button
                 type="submit"
-                className="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#063688] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 <svg
                   className="w-4 h-4"
@@ -637,7 +637,7 @@ const Html = ({
                               >
                                 <input
                                   type="radio"
-                                  style={{ accentColor: "#EB6A59" }}
+                                  style={{ accentColor: "#063688" }}
                                   id="now"
                                   checked={form?.publish === "pulished"}
                                   name="fav_language"
@@ -661,7 +661,7 @@ const Html = ({
                               >
                                 <input
                                   type="radio"
-                                  style={{ accentColor: "#EB6A59" }}
+                                  style={{ accentColor: "#063688" }}
                                   id="later"
                                   checked={form?.publish === "yet_to_publish"}
                                   name="fav_language"

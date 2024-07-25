@@ -68,26 +68,26 @@ const View = () => {
                   <div className="text-center">
                     <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
                       {" "}
-                      <LiaUserSolid className="text-xl text-[#EB6A59]" />
+                      <LiaUserSolid className="text-xl text-[#063688]" />
                       {data && data.fullName}
                     </p>
                   </div>
                   <div className="text-center">
                     <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
-                      <MdOutlineEmail className="text-xl text-[#EB6A59]" />
+                      <MdOutlineEmail className="text-xl text-[#063688]" />
                       {data && data.email}
                     </p>
                   </div>
 
                   <div className="text-center">
                     <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
-                      <MdOutlinePhone className="text-xl text-[#EB6A59]" />+
+                      <MdOutlinePhone className="text-xl text-[#063688]" />+
                       {data?.mobileNo || "--"}
                     </p>
                   </div>
                   <div className="text-center">
                     <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
-                      <GrUserSettings className="text-xl text-[#EB6A59]" />
+                      <GrUserSettings className="text-xl text-[#063688]" />
                     </p>
                     {data?.role?.name || "--"}
                   </div>

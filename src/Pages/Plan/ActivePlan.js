@@ -61,7 +61,7 @@ const ActivePlan = () => {
       </div>
 
       <div className="mt-6 shadow-box bg-white rounded-lg overflow-hidden">
-        <div className="bg-[#EB6A59] !p-5 flex gap-[18px] items-center">
+        <div className="bg-[#063688] !p-5 flex gap-[18px] items-center">
           <div className="rounded-lg border !border-[#FFFFFF4D] bg-[#8778EA] !p-3 flex flex-col !gap-1 min-w-[175px]">
             <h4 className="text-2xl font-medium text-white">
               {/* <span className="uppercase">{activeplan?.subscription?.plan?.currency}</span>  */}
@@ -135,7 +135,7 @@ const ActivePlan = () => {
                 Change payment method
               </Link>
               <Link
-                className="bg-btn bg-[#EB6A59] hover:no-underline !px-4 h-10 flex items-center justify-center text-sm font-normal text-white hover:!text-white rounded-lg"
+                className="bg-btn bg-[#063688] hover:no-underline !px-4 h-10 flex items-center justify-center text-sm font-normal text-white hover:!text-white rounded-lg"
                 to="/plans">
                 Change Plan
               </Link>
