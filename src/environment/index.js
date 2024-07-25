@@ -1,9 +1,8 @@
-
 const environment = {
-  api: 'http://195.35.8.196:6082/',
+  api: '',
   map_api_key: '',
-  userRoleId: 'user',
-  adminRoleId: 'admin',
+  userRoleId: '',
+  adminRoleId: '',
 };
 
 export default environment;
