@@ -15,7 +15,6 @@ const Header = ({ setIsOpen, isOpen }) => {
   const [isOpen1, setIsOpen1] = useState(false);
   let messagecount = localStorage.getItem("unreadMessages") || 0;
   const [messageCount, setUnreadMessagesCount] = useState(messagecount);
-  const toggle1 = () => setIsOpen1(!isOpen1);
   const history = useNavigate();
   const dispatch = useDispatch();
 
@@ -30,43 +29,6 @@ const Header = ({ setIsOpen, isOpen }) => {
     history("/login");
   };
 
-  // logout after 1 day
-  function autoLogout() {
-    const oneDayInMillis = 24 * 60 * 60 * 1000; // One day in milliseconds
-    const currentTime = new Date().getTime();
-
-    if (user?.lastLogin) {
-      const lastLoginTime = new Date(user?.lastLogin).getTime();
-      const timeDifference = currentTime - lastLoginTime;
-
-      if (timeDifference >= oneDayInMillis) {
-        console.log("Logging out user...");
-        Logout();
-      }
-    } else {
-      // No last login time found, assuming user is logging in for the first time
-      console.log("Logging in user for the first time...");
-    }
-  }
-
-  useEffect(() => {
-    autoLogout();
-  }, []);
-
-  useEffect(() => {
-    let notify = sessionStorage.getItem("notify-message");
-    if (!notify) {
-      console.log("notify", notify);
-      socketModel.emit("notify-message", { user_id: user?._id });
-    }
-
-    socketModel.on("notify-message", (data) => {
-      let count = data.data.unread_count;
-      localStorage.setItem("unreadMessages", count);
-      setUnreadMessagesCount(data.data.unread_count);
-    });
-    sessionStorage.setItem("notify-message", "true");
-  }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });

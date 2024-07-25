@@ -45,7 +45,7 @@ const Layout = ({ children }) => {
   };
 
   const logowhite = () => {
-    let value = "/assets/img/logo-white.png";
+    let value = "/assets/img/logo.png";
     return value;
   };
 

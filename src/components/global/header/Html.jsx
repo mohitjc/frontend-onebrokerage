@@ -5,12 +5,9 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import Sidebar from "../sidebar";
 import { FiMenu, FiX } from "react-icons/fi";
-import { CiSettings } from "react-icons/ci";
 import { LuLogOut, LuUser } from "react-icons/lu";
 import { RxDashboard } from "react-icons/rx";
-import { IoChatbubblesOutline, IoSettingsOutline } from "react-icons/io5";
-import { MdOutlineChat } from "react-icons/md";
-import { Tooltip } from "antd";
+import {IoSettingsOutline } from "react-icons/io5";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -48,17 +45,6 @@ const Html = ({
       </button>
 
       <div className="flex items-center gap-4 ml-auto">
-        <Link to={"/chat"}>
-          <div className="relative">
-            {messageCount > 0 && (
-              <p className="text-[10px] absolute -right-3 top-0 bg-[#EB6A59] h-6 w-6 p-1 flex items-center justify-center text-white rounded-full">
-                <span>{messageCount}</span>
-              </p>
-            )}
-
-            <IoChatbubblesOutline className="text-2xl bg-gray-100 h-10 w-10 p-2 text-primary hover:shadow-sm rounded-full" />
-          </div>
-        </Link>
         <Menu as="div" className="relative">
           <div>
             <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-1 text-sm font-semibold text-gray-900 ">

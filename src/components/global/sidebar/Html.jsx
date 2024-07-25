@@ -74,47 +74,23 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     //   key: "",
     // },
     {
-      name: "Onboarding Questions",
-      icon: <RiUserSettingsLine className="text-[#fff] shrink-0 text-lg" />,
-      url: "/question",
-      key: "readonboardingQuestions",
-    },
-    {
       name: "Staff",
       icon: <FiUsers className="text-[#fff] shrink-0 text-lg" />,
       url: "/user",
       key: "readstaff",
     },
     {
-      name: "Groove Group",
+      name: "Customers",
       icon: <MdOutlineGroups className="text-[#fff] shrink-0 text-lg" />,
       url: "/customers",
       key: "readgrooveGroup",
     },
     // {
-    //   name: "Roles",
-    //   icon: <GrUserSettings className="text-[#fff] shrink-0 text-lg" />,
-    //   url: "/roles",
-    //   key: "",
+    //   name: "Categories",
+    //   icon: <TbCategoryPlus className="text-[#fff] shrink-0 text-lg" />,
+    //   url: "/category",
+    //   key: "readCategories",
     // },
-    {
-      name: "Categories",
-      icon: <TbCategoryPlus className="text-[#fff] shrink-0 text-lg" />,
-      url: "/category",
-      key: "readCategories",
-    },
-    {
-      name: "Products",
-      icon: <BiCartAdd className="text-[#fff] shrink-0 text-lg" />,
-      url: "/product",
-      key: "readProducts",
-    },
-    {
-      name: "Tags",
-      icon: <LiaUserTagSolid className="text-[#fff] shrink-0 text-lg" />,
-      url: "/tag",
-      key: "readTags",
-    },
     {
       name: "Blogs",
       icon: (
@@ -124,86 +100,45 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       key: "readBlogs",
     },
     {
-      name: "Messages",
-      icon: <PiBellSimpleLight className="text-[#fff] shrink-0 text-lg" />,
-      url: "/notifications",
-      key: "",
-    },
-    {
-      name: "Orders Management",
-      icon: <BsCartCheck className="text-[#fff] shrink-0 text-lg" />,
-      url: "/orders",
-      key: "readorders",
-    },
-    {
-      name: "Reward Points",
-      icon: <FiGift className="text-[#fff] shrink-0 text-lg" />,
-      url: "/rewardpoints",
-      key: "rewardpoints",
-    },
-    {
-      name: "Content Library",
-      icon: <GoFileMedia className="text-[#fff] shrink-0 text-lg" />,
-      url: "/content-library",
-      key: "readVideos",
-      tab: "content-library",
-      menu: [
-        {
-          name: "Videos",
-          icon: (
-            <MdOutlineOndemandVideo className="text-[#fff] shrink-0 text-lg" />
-          ),
-          url: "/videos",
-          key: "readVideos",
-        },
-        {
-          name: "Audio",
-          icon: <MdOutlineAudioFile className="text-[#fff] shrink-0 text-lg" />,
-          url: "/audio",
-          key: "readAudio",
-        },
-      ],
-    },
-    {
       name: "Content Management",
       icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
       url: "/content-management",
       tab: "content-management",
       menu: [
-        {
-          name: "FAQ",
-          icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
-          url: "/faq",
-          key: "readFAQ",
-        },
+        // {
+        //   name: "FAQ",
+        //   icon: <FaQuestion className="text-[#fff] shrink-0 text-lg" />,
+        //   url: "/faq",
+        //   key: "readFAQ",
+        // },
         {
           name: "Content",
           icon: <MdContentPaste className="text-[#fff] shrink-0 text-lg" />,
           url: "/content",
           key: "readContent",
         },
-        {
-          name: "Newsletter",
-          icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
-          url: "/newsletter",
-          key: "readNewsletter",
-        },
-        {
-          name: "Subscribers",
-          icon: (
-            <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />
-          ),
-          url: "/subscribers",
-          key: "readSubscribers",
-        },
+        // {
+        //   name: "Newsletter",
+        //   icon: <PiNewspaper className="text-[#fff] shrink-0 text-lg" />,
+        //   url: "/newsletter",
+        //   key: "readNewsletter",
+        // },
+        // {
+        //   name: "Subscribers",
+        //   icon: (
+        //     <MdOutlineMarkEmailRead className="text-[#fff] shrink-0 text-lg" />
+        //   ),
+        //   url: "/subscribers",
+        //   key: "readSubscribers",
+        // },
       ],
     },
-    {
-      name: "Settings",
-      icon: <FiSettings className="text-[#fff] shrink-0 text-lg" />,
-      url: "/profile/settings",
-      key: "settings",
-    },
+    // {
+    //   name: "Settings",
+    //   icon: <FiSettings className="text-[#fff] shrink-0 text-lg" />,
+    //   url: "/profile/settings",
+    //   key: "settings",
+    // },
   ];
 
   return (
