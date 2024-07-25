@@ -163,7 +163,7 @@ const Login = () => {
               {/* <label><input type="checkbox" checked={remember} onChange={(e)=>setRemember(e.target.checked)} className="mr-2" /> Remember Me</label> */}
               <button
                 type="submit"
-                className="!px-4 w-full text-sm font-normal text-white h-11 flex items-center justify-center gap-2 !bg-[#EB6A59] rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"
+                className="!px-4 w-full text-sm font-normal text-white h-11 flex items-center justify-center gap-2 !bg-[#063688] rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"
               >
                 Mark Attendence
               </button>
@@ -172,17 +172,17 @@ const Login = () => {
         ) : (
           <form className="w-11/12 md:w-7/12	mx-auto" onSubmit={hendleSubmit}>
             <div className="">
-              <h1 className="text-[40px] font-semibold text-white ">Sign In</h1>
-              <span className="flex w-10 h-1 bg-[#EB6A59] mt-1"></span>
+              <h1 className="text-[40px] font-semibold text-[#333] ">Sign In</h1>
+              <span className="flex w-10 h-1 bg-[#063688] mt-1"></span>
             </div>
-            <p className="text-[20px] font-normal text-white mt-4">
+            <p className="text-[20px] font-normal text-[#333] mt-4">
               Please enter your valid details
             </p>
             {step == 1 ? (
               <div className="mt-5">
                 <input
                   type="text"
-                  className="mb-4 w-full text-sm text-white  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
+                  className="mb-4 w-full text-sm text-[#333]  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
                   placeholder="Email"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -192,7 +192,7 @@ const Login = () => {
                 <div className="relative mb-6">
                   <input
                     type={eyes.password ? "text" : "password"}
-                    className="mb-4 w-full text-sm text-white  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
+                    className="mb-4 w-full text-sm text-[#333]  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
@@ -200,14 +200,14 @@ const Login = () => {
                   />
                   {eyes.password ? (
                     <FiEye
-                      className="top-3 right-3 absolute text-white cursor-pointer"
+                      className="top-3 right-3 absolute text-[#333] cursor-pointer"
                       onClick={() =>
                         setEyes({ ...eyes, password: !eyes.password })
                       }
                     />
                   ) : (
                     <FiEyeOff
-                      className="top-3 right-3 absolute text-white cursor-pointer"
+                      className="top-3 right-3 absolute text-[#333] cursor-pointer"
                       onClick={() =>
                         setEyes({ ...eyes, password: !eyes.password })
                       }
@@ -222,7 +222,7 @@ const Login = () => {
                   type="text"
                   maxLength={6}
                   minLength={6}
-                  className="mb-4 w-full text-sm text-white  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
+                  className="mb-4 w-full text-sm text-[#333]  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
                   placeholder="Enter OTP"
                   value={otp}
                   onChange={(e) => setOTP(e.target.value)}
@@ -238,14 +238,14 @@ const Login = () => {
                   checked={remember}
                   onChange={(e) => setRemember(e.target.checked)}
                   className="mr-2 h-4 w-4 cursor-pointer"
-                  style={{ accentColor: "#EB6A59" }}
+                  style={{ accentColor: "#063688" }}
                 />{" "}
-                <span className="text-[14px] font-normal text-white">
+                <span className="text-[14px] font-normal text-[#333]">
                   Remember Me
                 </span>
               </label>
               <Link
-                className="font-semibold  text-[14px] ml-auto text-[#EB6A59]"
+                className="font-semibold  text-[14px] ml-auto text-[#063688]"
                 to="/forgotpassword"
               >
                 {" "}
@@ -260,7 +260,7 @@ const Login = () => {
                 Sign in
               </button>
             </div>
-            {/* <p className='text-sm mt-3 text-center'>Don't have an account? <Link to="/signup" className='text-[#EB6A59] text-sm'>Sign Up</Link></p> */}
+            {/* <p className='text-sm mt-3 text-center'>Don't have an account? <Link to="/signup" className='text-[#063688] text-sm'>Sign Up</Link></p> */}
           </form>
         )}
       </AuthLayout>

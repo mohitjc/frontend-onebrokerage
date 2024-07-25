@@ -77,26 +77,26 @@ const View = () => {
                   <div className="text-center">
                     <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
                       {" "}
-                      <LiaUserSolid className="text-xl text-[#EB6A59]" />
+                      <LiaUserSolid className="text-xl text-[#063688]" />
                       {data && data.fullName}
                     </p>
                   </div>
                   <div className="text-center">
                     <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
-                      <MdOutlineEmail className="text-xl text-[#EB6A59]" />
+                      <MdOutlineEmail className="text-xl text-[#063688]" />
                       {data && data.email}
                     </p>
                   </div>
 
                   <div className="text-center">
                     <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
-                      <MdOutlinePhone className="text-xl text-[#EB6A59]" />+
+                      <MdOutlinePhone className="text-xl text-[#063688]" />+
                       {data?.mobileNo || "--"}
                     </p>
                   </div>
                   <div className="text-center">
                     <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
-                      <GrUserSettings className="text-xl text-[#EB6A59]" />
+                      <GrUserSettings className="text-xl text-[#063688]" />
                     </p>
                     {data?.role?.name || "--"}
                   </div>
@@ -138,7 +138,7 @@ const View = () => {
                           {item.question}
                         </div>
                         <div className="flex items-start font-regular gap-2">
-                          <span className="h-6 w-6 justify-center text-white flex items-center bg-[#EB6A59] shrink-0">
+                          <span className="h-6 w-6 justify-center text-white flex items-center bg-[#063688] shrink-0">
                             A
                           </span>
                           <span> {answer}</span>

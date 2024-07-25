@@ -99,7 +99,7 @@ const Setting = () => {
 
         <div className='flex items-center justify-end'>
           <button
-            className='bg-[#EB6A59] px-4 py-2 rounded-lg text-white mt-4'
+            className='bg-[#063688] px-4 py-2 rounded-lg text-white mt-4'
             onClick={handleSave}
           >
             Save

@@ -63,19 +63,19 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     },
     {
       name: "Dashboard",
-      icon: <RiHome6Line className="text-[#fff] shrink-0 text-lg" />,
+      icon: <RiHome6Line className="text-inherit shrink-0 text-lg" />,
       url: "/dashboard",
       key: "readDashboard",
     },
     {
       name: "Staff",
-      icon: <FiUsers className="text-[#fff] shrink-0 text-lg" />,
+      icon: <FiUsers className="text-inherit shrink-0 text-lg" />,
       url: "/user",
       key: "readstaff",
     },
     {
       name: "Students",
-      icon: <MdOutlineGroups className="text-[#fff] shrink-0 text-lg" />,
+      icon: <MdOutlineGroups className="text-inherit shrink-0 text-lg" />,
       url: "/customers",
       key: "readgrooveGroup",
     },
@@ -161,7 +161,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                 {({ open }) => (
                                   <>
                                     <tooltip placement="right" title={itm.name}>
-                                      <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#fff]  hover:!text-[#fff] gap-[12px] hover:bg-[#EB6A59] transition-all duration-300">
+                                      <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#fff]  hover:!text-[#fff] gap-[12px] hover:bg-[#063688] transition-all duration-300">
                                         <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                                           {itm.icon}
                                           <span className=" text-inherit leading-none sidebar_text">
@@ -193,7 +193,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                                                     {" "}
                                                     <NavLink
                                                       className={(isActive) =>
-                                                        "p-2.5 rounded-md block text-sm font-normal text-[#d6d6d6] hover:text-[#fff] cursor-pointer  hover:bg-[#EB6A59] !no-underline transition-all " +
+                                                        "p-2.5 rounded-md block text-sm font-normal text-[#d6d6d6] hover:text-[#fff] cursor-pointer  hover:bg-[#063688] !no-underline transition-all " +
                                                         (location?.pathname ==
                                                           sitm.url &&
                                                           " !text-[#fff] !font-medium")
@@ -229,15 +229,15 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
                             <>
                               <tooltip
                                 placement="top"
-                                color="#EB6A59"
+                                color="#063688"
                                 title={itm.name}
                               >
                                 <NavLink
                                   to={itm.url}
                                   className={(isActive) =>
-                                    "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#fff] hover:!text-[#fff] hover:bg-[#EB6A59] !no-underline transition-all " +
-                                    (location?.pathname == itm.url &&
-                                      " !text-[#fff] !bg-[#EB6A59] !font-medium")
+                                    "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#333] hover:!text-[#fff] hover:bg-[#063688] !no-underline transition-all " +
+                                    (location?.pathname === itm.url &&
+                                      " !text-[#fff] !bg-[#063688] !font-medium")
                                   }
                                 >
                                   {itm.icon}

@@ -47,8 +47,8 @@ const Chat = ({ chat, onChatClick, sender, isActive, isChat }) => {
         <div className="">
           <div
             className={` ${
-              isActive ? "bg-[#EB6A59] text-white" : "bg-white"
-            } hover:bg-[#EB6A59] group hover:!text-gray-100 group  p-2 mb-3`}
+              isActive ? "bg-[#063688] text-white" : "bg-white"
+            } hover:bg-[#063688] group hover:!text-gray-100 group  p-2 mb-3`}
           >
             <a
               onClick={() => {

@@ -345,7 +345,7 @@ const Html = ({
                 className="sr-only peer"
                 onChange={(e) => handleChatEnable(e.target.checked)}
               />
-              <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#EB6A59]"></div>
+              <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#063688]"></div>
             </label>
           </div>
         )}
@@ -364,7 +364,7 @@ const Html = ({
                 classNames(
                   "border-r border-white/40 pr-2 focus:outline-none",
                   "",
-                  selected ? "text-[#EB6A59]" : "text-white"
+                  selected ? "text-[#063688]" : "text-white"
                 )
               }
             >
@@ -380,7 +380,7 @@ const Html = ({
                 classNames(
                   " focus:outline-none",
                   "",
-                  selected ? "text-[#EB6A59]" : "text-white"
+                  selected ? "text-[#063688]" : "text-white"
                 )
               }
             >
@@ -418,7 +418,7 @@ const Html = ({
                               onChange={(e) => {
                                 setSearch(e.target.value);
                               }}
-                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#063688]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                               placeholder="Search..."
                               onKeyDown={(e) => {
                                 if (e.key === "Enter") {
@@ -440,7 +440,7 @@ const Html = ({
                           </div>
                           <button
                             type="submit"
-                            className="p-2.5 text-sm font-medium h-10 text-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            className="p-2.5 text-sm font-medium h-10 text-white  border border-[#063688] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                           >
                             <IoSearchOutline
                               onClick={() => {
@@ -519,7 +519,7 @@ const Html = ({
                               onChange={(e) => {
                                 setSearch(e.target.value);
                               }}
-                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#EB6A59]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  h-10 focus:ring-orange-500 focus:border-[#063688]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                               placeholder="Search..."
                               onKeyDown={(e) => {
                                 if (e.key === "Enter") {
@@ -541,7 +541,7 @@ const Html = ({
                           </div>
                           <button
                             type="submit"
-                            className="p-2.5 text-sm font-medium h-10 text-white  border border-[#EB6A59] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            className="p-2.5 text-sm font-medium h-10 text-white  border border-[#063688] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                           >
                             <IoSearchOutline
                               onClick={() => {

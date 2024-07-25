@@ -140,7 +140,7 @@ const Html = ({
                           ${
                             itm.status == "deactive"
                               ? " bg-gray-200 text-black"
-                              : "bg-[#ee695e] text-white"
+                              : "bg-[#063688] text-white"
                           }`}
                                 >
                                   {itm.status == "deactive"
@@ -156,7 +156,7 @@ const Html = ({
                                 {isAllow(`editRoles`) && itm.name == "Staff" ? (
                                   <Tooltip placement="top" title="Edit">
                                     <a
-                                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                                       onClick={(e) => edit(itm.id)}
                                     >
                                       <LiaEdit />
@@ -171,7 +171,7 @@ const Html = ({
                                   <>
                                     <Tooltip placement="top" title="Delete">
                                       <span
-                                        className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg "
+                                        className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg "
                                         onClick={() => deleteItem(itm.id)}
                                       >
                                         <LiaTrashAlt />

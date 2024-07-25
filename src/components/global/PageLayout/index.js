@@ -367,7 +367,7 @@ const PageLayout = ({ children }) => {
                       />
                     </div>
                     <div className=" w-full ">
-                      <button className="bg-[#EB6A59] text-white	py-3 px-8 text-base	 w-full text-sm rounded flex items-center	mt-8">
+                      <button className="bg-[#063688] text-white	py-3 px-8 text-base	 w-full text-sm rounded flex items-center	mt-8">
                         Subscribe Now{" "}
                         <img
                           className="ms-4	"

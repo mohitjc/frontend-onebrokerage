@@ -153,7 +153,7 @@ const Dashboard = () => {
     <>
       <Layout>
         <h4 className="text-2xl font-bold mb-3 flex items-center gap-2">
-          <IoHandRightOutline className="text-3xl slow-shake text-[#EB6A59]" />
+          <IoHandRightOutline className="text-3xl slow-shake text-[#063688]" />
           <span className="">Hi,</span> Admin Shroom
         </h4>
 
