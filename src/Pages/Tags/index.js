@@ -46,9 +46,6 @@ const Tags = () => {
     setLoader(true);
     let filter = { ...filters, ...p, email: user.email };
 
-    // if (user.customerRole?._id == environment.glRoleId)
-    //   filter.groupId = user.groupId?._id || "";
-
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
         setData(

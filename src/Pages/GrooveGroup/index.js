@@ -45,8 +45,6 @@ const Users = () => {
     setLoader(true);
     let filter = { ...filters, ...p };
 
-    // if (user.customerRole?._id == environment.glRoleId)
-    //   filter.groupId = user.groupId?._id || "";
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {

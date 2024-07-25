@@ -34,16 +34,6 @@ const handleError = (err, hideError) => {
   if (!hideError) toast.error(message);
 };
 
-const sasKey = environment.sasKey;
-const sasurl = environment.sasurl;
-const container = environment.container;
-
-function buildBlobName(file) {
-  var filename = file.name.substring(0, file.name.lastIndexOf("."));
-  var ext = file.name.substring(file.name.lastIndexOf("."));
-  return filename + "_" + Math.random().toString(16).slice(2) + ext;
-}
-
 class ApiClient {
   static post(url1, payload,params={},base = "", hideError = false) {
     let url = baseUrl + url1;
@@ -254,50 +244,6 @@ class ApiClient {
     });
   }
 
-  static async azureUpload({ file }) {
-    return new Promise(function (fulfill, reject) {
-      var blobName = buildBlobName(file);
-      var login = `${sasurl}/${container}/${blobName}?${sasKey}`;
-      var blockBlobClient = new BlockBlobClient(
-        login,
-        new AnonymousCredential()
-      );
-      blockBlobClient
-        .uploadBrowserData(file)
-        .then((res) => {
-          console.log("res", res);
-          fulfill({ success: true, fileName: blobName });
-        })
-        .catch((err) => {
-          console.log("err", err);
-          fulfill({ success: false, message: err });
-        });
-    });
-  }
-
-  static async azureBlobDelete({ fileName }) {
-    const options = {
-      deleteSnapshots: "include", // or 'only'
-    };
-    return new Promise(function (fulfill, reject) {
-      var blobName = fileName;
-      var login = `${sasurl}/${container}/${blobName}?${sasKey}`;
-      var blockBlobClient = new BlockBlobClient(
-        login,
-        new AnonymousCredential()
-      );
-      blockBlobClient
-        .deleteIfExists(options)
-        .then((res) => {
-          fulfill({ success: true });
-          console.log("delete res", res);
-        })
-        .catch((err) => {
-          console.log("delete err", err);
-          fulfill({ success: false, message: err });
-        });
-    });
-  }
 }
 
 export default ApiClient;

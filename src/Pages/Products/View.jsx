@@ -120,7 +120,7 @@ const View = () => {
                       <label className="profileheddingcls">Download PDF</label>
                       <div className="flex gap-2 flex-wrap items-center">
                         <a
-                          href={`${environment.apiUrl}/document/${data?.qr_pdf}`}
+                          href={`${environment.api}/document/${data?.qr_pdf}`}
                           download={data?.qr_pdf}
                           target="blank"
                         >

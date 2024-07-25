@@ -76,7 +76,7 @@ const View = () => {
                   <label className="profileheddingcls">Audio</label>
                   <div className="profiledetailscls">
                     <audio
-                      src={`${environment.sasurl}/${data?.audio}`}
+                      src={`${environment.api}/${data?.audio}`}
                       width={100}
                       controls
                     />

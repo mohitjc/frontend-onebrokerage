@@ -240,7 +240,7 @@ const AddEdit = () => {
                 {form.video && (
                   <div className="relative inline-flex">
                     <video
-                      src={`${environment.sasurl}/${form?.video}`}
+                      src={`${environment.api}/${form?.video}`}
                       width={300}
                       className="h-44"
                       controls

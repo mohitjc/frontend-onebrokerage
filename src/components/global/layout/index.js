@@ -125,28 +125,6 @@ const Layout = ({ children }) => {
           </div> */}
           <main className="main">
             <div className="mainarea ">
-              {user?.verifiedGroupLeader != "approved" &&
-              user.customerRole?._id == environment.glRoleId ? (
-                <>
-                  <div className="py-3 shadow-md mb-4 bg-gray-100 rounded-md text-[#EB6A59] mb-3 text-center">
-                    {" "}
-                    {user?.verifiedGroupLeader == "decline" ? (
-                      <p className="flex items-center gap-x-2 text-lg  justify-center">
-                        {" "}
-                        <BsExclamationTriangle className="text-4xl animate-bounce" />
-                        Your request is declined{" "}
-                      </p>
-                    ) : (
-                      <p className="flex items-center gap-x-2 text-lg  justify-center">
-                        <FcOvertime className="text-4xl animate-bounce" />
-                        Your profile still is under review
-                      </p>
-                    )}
-                  </div>
-                </>
-              ) : (
-                <></>
-              )}
               {children}
             </div>
           </main>

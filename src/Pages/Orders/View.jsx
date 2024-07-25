@@ -82,7 +82,7 @@ const View = () => {
                   <label className="profileheddingcls">Video</label>
                   <div className="profiledetailscls">
                     <video
-                      src={`${environment.sasurl}/${data?.video}`}
+                      src={`${environment.api}/${data?.video}`}
                       width={250}
                       controls
                     />

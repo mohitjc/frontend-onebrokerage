@@ -21,7 +21,6 @@ const Signup = () => {
     email: "",
     password: "",
     fullName: "",
-    customerRole: environment.customerRoleId,
     loginId: "",
   });
   const [remember, setRemember] = useState(false);
@@ -82,11 +81,6 @@ const Signup = () => {
     };
 
     if (groupId) data.groupId = groupId;
-    if (data.customerRole == environment.glRoleId) {
-      if (!data.groupId) {
-        return;
-      }
-    }
 
     loader(true);
 
@@ -222,56 +216,6 @@ const Signup = () => {
             </div>
           </div>
 
-          {methodModel.getPrams("eventId") ||
-          methodModel.getPrams("groupId") ? (
-            <></>
-          ) : (
-            <>
-              <div className="mb-3">
-                <FormControl
-                  type="radio"
-                  options={[
-                    { id: environment.customerRoleId, name: "No" },
-                    { id: environment.glRoleId, name: "Yes" },
-                  ]}
-                  label="Do You Want To Be A Group Leader"
-                  value={form.customerRole}
-                  onChange={(e: any) => {
-                    setForm({ ...form, customerRole: e, groupId: null });
-                  }}
-                />
-              </div>
-            </>
-          )}
-
-          {form.customerRole == environment.glRoleId ? (
-            <>
-              <div className="mb-3 relative">
-                <FormControl
-                  type="select"
-                  options={groups}
-                  displayValue="name"
-                  placeholder="Select Group"
-                  label="Group"
-                  value={form.groupId}
-                  onChange={(e: any) => {
-                    setForm({ ...form, groupId: e });
-                  }}
-                />
-                {submitted && !form.groupId ? (
-                  <>
-                    <div className="text-[#EB6A59] text-sm">
-                      Group is required
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
 
           <div className="flex">
             <label className="flex items-center pointer">

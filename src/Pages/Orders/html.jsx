@@ -112,7 +112,7 @@ const Html = ({
         return (
           <>
             <video
-              src={`${environment.sasurl}/${row?.video}`}
+              src={`${environment.api}/${row?.video}`}
               width="130px"
               className="h-20 object-cover"
               controls
@@ -193,7 +193,7 @@ const Html = ({
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#EB6A5914] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) =>
-                      handleCopy(`${environment.sasurl}${itm.video}`, itm?.id)
+                      handleCopy(`${environment.api}${itm.video}`, itm?.id)
                     }
                   >
                     <IoMdCopy />
