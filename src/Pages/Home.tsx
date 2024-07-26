@@ -18,20 +18,20 @@ const Home = () => {
                     <div className="box-inner relative">
                       <img
                         className="absolute lg:top-0 lg:left-0 lg:h-16 left-10 top-8 lg:w-16 h-10 w-10 "
-                        src="assets/img/skill/h1.png"
+                        src="assets/img/skill/h1.png" alt=""
                       />
                       <img
                         className="absolute lg:left-20 md:left-20 md:top:5 lg:top-10 lg:h-20 lg:w-20 md:h-12 md:w-12 h-8 w-8"
-                        src="assets/img/skill/h3.png"
+                        src="assets/img/skill/h3.png" alt=""
                       />
                       <img
                         className="absolute lg:right-14 lg:h-28 lg:w-28 md:h-16 md:w-16 md:right-10 right-0 h-20 w-20"
-                        src="assets/img/skill/h4.png"
+                        src="assets/img/skill/h4.png" alt=""
                       />
                       <div className="img_ceter relative">
                         <img
                           src="assets/img/skill/h2.png"
-                          className="object-contain lg:w-1/2 mx-auto lg:h-1/2 sm:w-1/2 "
+                          className="object-contain lg:w-1/2 mx-auto lg:h-1/2 sm:w-1/2 " alt=""
                         />
                         <div className=" left-1/2 transform -translate-x-1/2 lg:absolute md:absolute relative md:bottom-0 lg:bottom-14 bottom-10 w-62 md:w-72">
                           <div className="bg-white rounded-md p-4 shadow-md  flex justify-center items-center">
@@ -39,19 +39,19 @@ const Home = () => {
                               <div className="img_lists flex flex-wrap">
                                 <img
                                   className="h-6 w-6 -mr-2 rounded-full object-contain"
-                                  src="assets/img/skill/avatar.png"
+                                  src="assets/img/skill/avatar.png" alt=""
                                 />
                                 <img
                                   className="h-6 w-6  -mr-2 rounded-full object-contain"
-                                  src="assets/img/skill/avatar.png"
+                                  src="assets/img/skill/avatar.png" alt=""
                                 />
                                 <img
                                   className="h-6 w-6 -mr-2 rounded-full object-contain"
-                                  src="assets/img/skill/avatar.png"
+                                  src="assets/img/skill/avatar.png" alt=""
                                 />
                                 <img
                                   className="h-6 w-6 -mr-2 rounded-full object-contain"
-                                  src="assets/img/skill/avatar.png"
+                                  src="assets/img/skill/avatar.png" alt=""
                                 />
                               </div>
                               <div className="textitems text-center gap-y-2">

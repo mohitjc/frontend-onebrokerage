@@ -146,8 +146,8 @@ const Dashboard = () => {
                 {data?.totalProducts}
               </dd>
               <img
-                src="../assets/img/d2.svg"
-                className="absolute  text-green-500 right-6 top-1/2 -translate-y-1/2 h-7"
+                src="../assets/img/d1.svg"
+                className="absolute  right-6 top-1/2 -translate-y-1/2 h-7"
               />
             </div>
             <div className="flex flex-col-reverse  border border-gray-200 shadow-sm px-6 py-2 rounded-lg relative">
@@ -170,8 +170,8 @@ const Dashboard = () => {
                 {data?.totalReview}
               </dd>
               <img
-                src="../assets/img/d5.svg"
-                className="absolute  right-6 top-1/2 -translate-y-1/2 h-7"
+                src="../assets/img/d2.svg"
+                className="absolute  text-green-500 right-6 top-1/2 -translate-y-1/2 h-7"
               />
             </div>
           </div>

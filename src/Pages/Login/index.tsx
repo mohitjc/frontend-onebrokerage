@@ -170,12 +170,12 @@ const Login = () => {
             </div>
           </form>
         ) : (
-          <form className="w-11/12 md:w-7/12	mx-auto" onSubmit={hendleSubmit}>
+          <form className="w-11/12 lg:w-7/12 md:w-9/12	mx-auto bg-[#1245940a] border border-[#00000024] p-[24px] rounded-[30px]" onSubmit={hendleSubmit}>
             <div className="">
-              <h1 className="text-[40px] font-semibold text-[#333] ">Sign In</h1>
+              <h1 className="text-[30px] font-semibold text-[#333] ">Sign In</h1>
               <span className="flex w-10 h-1 bg-[#063688] mt-1"></span>
             </div>
-            <p className="text-[20px] font-normal text-[#333] mt-4">
+            <p className="text-[16px] font-normal text-[#333] mt-4">
               Please enter your valid details
             </p>
             {step == 1 ? (
