@@ -19,7 +19,6 @@ import Resetpassword from "./Pages/Resetpassword";
 import Roles from "./Pages/Roles";
 import AddEditRole from "./Pages/Roles/AddEdit";
 import Dashboard from "./Pages/Dashboard";
-import Signup from "./Pages/Signup";
 import configureStoreProd from "./Pages/config/configureStore.prod";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -30,9 +29,6 @@ import AddEditUsers from "./Pages/Users/AddEdit";
 import Category from "./Pages/Categories";
 import AddEditCategory from "./Pages/Categories/AddEdit";
 import ViewCategory from "./Pages/Categories/View";
-import Products from "./Pages/Products";
-import AddEditProducts from "./Pages/Products/AddEdit";
-import ViewProducts from "./Pages/Products/View";
 import FAQ from "./Pages/FAQ";
 import AddEditFAQ from "./Pages/FAQ/AddEdit";
 import ViewFAQ from "./Pages/FAQ/View";
@@ -41,9 +37,6 @@ import AddEditContent from "./Pages/Content/AddEdit";
 import ViewContent from "./Pages/Content/View";
 import Newsletter from "./Pages/Newsletter";
 import ViewNewsletter from "./Pages/Newsletter/View";
-import Questions from "./Pages/Questions";
-import AddEditQuestion from "./Pages/Questions/AddEdit";
-import ViewQuestion from "./Pages/Questions/View";
 import Tags from "./Pages/Tags";
 import AddEditTag from "./Pages/Tags/AddEdit";
 import ViewTag from "./Pages/Tags/View";
@@ -54,22 +47,11 @@ import Emails from "./Pages/Emails";
 import GrooveGroup from "./Pages/GrooveGroup";
 import GrooveGroupDetail from "./Pages/GrooveGroup/View";
 import AddEditGrooveGroup from "./Pages/GrooveGroup/AddEdit";
-import Videos from "./Pages/Videos";
-import AddVideos from "./Pages/Videos/AddEdit";
-import ViewVideos from "./Pages/Videos/View";
-import Audio from "./Pages/Audio";
-import AddAudio from "./Pages/Audio/AddEdit";
-import ViewAudio from "./Pages/Audio/View";
 import SendNewsletter from "./Pages/Emails/Send";
 import Notifications from "./Pages/Messages";
 import SendNotification from "./Pages/Messages/Send";
 import Chats from "./Pages/Chats";
 import ViewNotification from "./Pages/Messages/View";
-import socketModel from "./models/socketModel";
-import Orders from "./Pages/Orders/index";
-import RewardPoints from "./Pages/rewardpoints";
-import AddEditReward from "./Pages/rewardpoints/AddEdit";
-import RewardPointDetails from "./Pages/rewardpoints/View";
 
 const { persistor, store } = configureStoreProd();
 
@@ -96,10 +78,6 @@ function App() {
     { url: "/category/add", element: <AddEditCategory /> },
     { url: "/category/detail/:id", element: <ViewCategory /> },
     { url: "/category/edit/:id", element: <AddEditCategory /> },
-    { url: "/product", element: <Products /> },
-    { url: "/product/add", element: <AddEditProducts /> },
-    { url: "/product/detail/:id", element: <ViewProducts /> },
-    { url: "/product/edit/:id", element: <AddEditProducts /> },
     { url: "/faq", element: <FAQ /> },
     { url: "/faq/add", element: <AddEditFAQ /> },
     { url: "/faq/detail/:id", element: <ViewFAQ /> },
@@ -110,10 +88,6 @@ function App() {
     { url: "/content/edit/:slug", element: <AddEditContent /> },
     { url: "/newsletter", element: <Newsletter /> },
     { url: "/newsletter/detail/:id", element: <ViewNewsletter /> },
-    { url: "/question", element: <Questions /> },
-    { url: "/question/add", element: <AddEditQuestion /> },
-    { url: "/question/detail/:id", element: <ViewQuestion /> },
-    { url: "/question/edit/:id", element: <AddEditQuestion /> },
     { url: "/tag", element: <Tags /> },
     { url: "/tag/add", element: <AddEditTag /> },
     { url: "/tag/detail/:id", element: <ViewTag /> },
@@ -128,23 +102,10 @@ function App() {
     { url: "/customers/edit/:id", element: <AddEditGrooveGroup /> },
     { url: "/customers/add", element: <AddEditGrooveGroup /> },
     { url: "/customers/detail/:id", element: <GrooveGroupDetail /> },
-    { url: "/videos", element: <Videos /> },
-    { url: "/videos/add", element: <AddVideos /> },
-    { url: "/videos/edit/:id", element: <AddVideos /> },
-    { url: "/videos/detail/:id", element: <ViewVideos /> },
-    { url: "/audio", element: <Audio /> },
-    { url: "/audio/add", element: <AddAudio /> },
-    { url: "/audio/edit/:id", element: <AddAudio /> },
-    { url: "/audio/detail/:id", element: <ViewAudio /> },
     { url: "/notifications", element: <Notifications /> },
     { url: "/notifications/detail/:id", element: <ViewNotification /> },
     { url: "/notifications/send-notification", element: <SendNotification /> },
     { url: "/chat", element: <Chats /> },
-    { url: "/orders", element: <Orders /> },
-    { url: "/rewardpoints", element: <RewardPoints /> },
-    { url: "/rewardpoints/add", element: <AddEditReward /> }, 
-    { url: "/rewardpoints/edit/:id", element: <AddEditReward /> },
-    { url: "/rewardpoints/detail/:id", element: <RewardPointDetails /> },
   ];
 
   sessionStorage.clear();

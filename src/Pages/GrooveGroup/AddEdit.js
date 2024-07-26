@@ -16,7 +16,8 @@ const AddEdit = () => {
   const [images, setImages] = useState({ image: "" });
   const [form, setform] = useState({
     id: "",
-    fullName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     mobileNo: "",
     dob:'',
@@ -125,10 +126,19 @@ const AddEdit = () => {
               <div className=" mb-3">
                 <FormControl
                   type="text"
+                  label="First Name"
+                  value={form.firstName}
+                  onChange={(e) => setform({ ...form, firstName: e })}
+                  required
+                />
+              </div>
+              <div className=" mb-3">
+                <FormControl
+                  type="text"
                   name="full_name"
-                  label="Full Name"
-                  value={form.fullName}
-                  onChange={(e) => setform({ ...form, fullName: e })}
+                  label="Last Name"
+                  value={form.lastName}
+                  onChange={(e) => setform({ ...form, lastName: e })}
                   required
                 />
               </div>
@@ -150,21 +160,7 @@ const AddEdit = () => {
                 )}
               </div> */}
 
-              <div className="mobile_number mb-3">
-                <FormControl
-                  type="phone"
-                  name="mobileNo"
-                  label="Mobile No"
-                  value={form.mobileNo}
-                  onChange={(e) => setform({ ...form, mobileNo: e })}
-                  required
-                />
-                {submitted && !form.mobileNo && (
-                  <div className="invalid-feedback d-block">
-                    Mobile is required
-                  </div>
-                )}
-              </div>
+              
               <div className=" mb-3">
                 <FormControl
                   type="text"
@@ -178,6 +174,21 @@ const AddEdit = () => {
                 {form.email && submitted && !inValidEmail && (
                   <div className="invalid-feedback d-block">
                     Please enter valid email
+                  </div>
+                )}
+              </div>
+              <div className="mobile_number mb-3">
+                <FormControl
+                  type="phone"
+                  name="mobileNo"
+                  label="Mobile No"
+                  value={form.mobileNo}
+                  onChange={(e) => setform({ ...form, mobileNo: e })}
+                  required
+                />
+                {submitted && !form.mobileNo && (
+                  <div className="invalid-feedback d-block">
+                    Mobile is required
                   </div>
                 )}
               </div>
@@ -198,8 +209,8 @@ const AddEdit = () => {
                 <FormControl
                   type="text"
                   label="Street Address"
-                  value={form.address1}
-                  onChange={(e) => setform({ ...form, address1: e })}
+                  value={form.address}
+                  onChange={(e) => setform({ ...form, address: e })}
                   required
                 />
               </div>

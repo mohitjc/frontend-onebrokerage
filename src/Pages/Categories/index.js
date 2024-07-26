@@ -9,7 +9,6 @@ import axios from "axios";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import SweetAlert from "../../components/SweetAlert/SweetAlert";
 
 const Category = () => {
   const user = useSelector((state) => state.user);
