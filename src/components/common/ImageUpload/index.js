@@ -18,19 +18,20 @@ const ImageUpload = ({
   const [loading, setLoader] = useState(false);
 
   const uploadImage = async (e) => {
-    let url = "upload/multiple-images";
+    let url = "user/uploadImage";
     let files = e.target.files;
     if (files?.length > 1) {
-      url = "upload/multiple-images";
+      url = "user/uploadImage";
     }
 
     let images = [];
     if (img) images = img;
     setLoader(true);
-    ApiClient.multiImageUpload(url, files, {}, "files").then((res) => {
+    ApiClient.multiImageUpload(url, files, {}, "file").then((res) => {
       console.log("res", res);
-      if (res.files) {
-        let image = res.files.map((itm) => itm.fileName);
+      if (res.image) {
+        // let image = res.files.map((itm) => itm.fileName);
+        let image = [res.image]
         if (!multiple) {
           setImg(image[0]);
           result({ event: "value", value: image[0] });

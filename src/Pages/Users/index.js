@@ -49,23 +49,13 @@ const Users = () => {
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
-        if (isAdmin) {
-          setData(
-            res.data.map((itm) => {
+        setData(
+          res.data
+            .map((itm) => {
               itm.id = itm._id;
               return itm;
             })
-          );
-        } else {
-          setData(
-            res.data
-              .map((itm) => {
-                itm.id = itm._id;
-                return itm;
-              })
-              .filter((itm) => itm.roleDetails.name !== "Admin")
-          );
-        }
+        );
 
         setTotal(res.total);
       }

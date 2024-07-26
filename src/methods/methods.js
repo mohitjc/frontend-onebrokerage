@@ -28,14 +28,14 @@ const generatekeysArr = (arr, key = "typeofresult") => {
 const userImg = (img,modal='img') => {
   let value = "/assets/img/person.jpg";
   // if (img) value = environment.api + 'img/' + img
-  if (img) value = `${environment.api}/${modal}/${img}`;
+  if (img) value = `${environment.api}/img/${img}`;
   return value;
 };
 
 const noImg = (img, modal = "img") => {
   let value = "/assets/img/placeholder.png";
   // if (img) value = environment.api + 'img/' + img
-  if (img) value = `${environment.api}/${modal}/${img}`;
+  if (img) value = `${environment.api}img/${img}`;
   return value;
 };
 
