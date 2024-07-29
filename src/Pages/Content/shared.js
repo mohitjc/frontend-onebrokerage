@@ -8,7 +8,7 @@ const shared = {
   detailApi: "content-management/detail",
   listApi: "content-management/listing",
   statusApi: "content-management/update",
-  deleteApi: "content-management/update",
+  deleteApi: "content-management/delete",
 };
 
 export default shared;

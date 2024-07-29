@@ -43,13 +43,6 @@ const Html = ({
         return <span className="capitalize">{row?.title}</span>;
       },
     },
-    /*  {
-      key: "category",
-      name: "Type",
-      render: (row) => {
-        return <span className="capitalize">{row?.type}</span>;
-      },
-    }, */
     {
       key: "status",
       name: "Status",
@@ -91,7 +84,7 @@ const Html = ({
               ) : (
                 <></>
               )}
-              {/* {isAllow(`edit${shared.check}`) ? ( */}
+              {isAllow(`edit${shared.check}`) ? (
               <Tooltip placement="top" title="Edit">
                 <a
                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -100,22 +93,19 @@ const Html = ({
                   <LiaEdit />
                 </a>
               </Tooltip>
-              {/* ) : (
+              ) : (
                 <></>
-              )} */}
+              )}
               {/* {isAllow(`delete${shared.check}`) ? (  
               <Tooltip placement="top" title="Delete">
                 {" "}
                 <span
                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={() => deleteItem(itm.id)}
+                  onClick={() => deleteItem(itm.slug)}
                 >
                   <LiaTrashAlt />
                 </span>{" "}
-              </Tooltip>
-              {/* ) : (
-                <></>
-              )}  */}
+              </Tooltip>):<></>} */}
             </div>
           </>
         );
@@ -156,12 +146,12 @@ const Html = ({
 
         <div className="flex">
           {/* {isAllow(`add${shared.check}`) ? ( */}
-          <Link
+          {/* <Link
             className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
             to={`/${shared.url}/add`}
           >
             <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
-          </Link>
+          </Link> */}
           {/* ) : (
             <></>
           )} */}

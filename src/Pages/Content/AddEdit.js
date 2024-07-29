@@ -19,8 +19,9 @@ const AddEdit = () => {
   const [form, setform] = useState({
     id: "",
     title: "",
+    slug:'',
     description: "",
-    keywords: [],
+    meta_keyword: '',
     meta_title: "",
     meta_description: "",
   });
@@ -41,18 +42,21 @@ const AddEdit = () => {
     // let invalid = methodModel.getFormError(formValidation, form);
 
     // if (invalid) return;
+
+
+
     let method = "post";
     let url = shared.addApi;
     let value = {
       ...form,
-      // slug: slug,
     };
+
+    const slug=value.title.toLowerCase().replaceAll(' ','-')
     if (value.id) {
       method = "put";
       url = shared.editApi;
     } else {
-      value.addedBy = user._id;
-      value.groupId = user?.groupId?._id;
+      value.slug=slug
       delete value.id;
     }
 
@@ -131,7 +135,7 @@ const AddEdit = () => {
                   type="text"
                   name="meta_title"
                   label="Meta Title"
-                  value={form.title}
+                  value={form.meta_title}
                   onChange={(e) => setform({ ...form, meta_title: e })}
                 />
               </div>
@@ -161,11 +165,11 @@ const AddEdit = () => {
                   type="text"
                   name="keywords"
                   label="Keywords"
-                  value={form.keywords}
+                  value={form.meta_keyword}
                   onChange={(e) =>
                     setform({
                       ...form,
-                      keywords: e,
+                      meta_keyword:e,
                     })
                   }
                 />

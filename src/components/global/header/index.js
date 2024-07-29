@@ -4,7 +4,6 @@ import "./style.scss";
 import Html from "./Html";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../Pages/actions/user";
-import socketModel from "../../../models/socketModel";
 
 import { memo } from 'react';
 
@@ -23,7 +22,6 @@ const Header=memo(function Header ({ setIsOpen, isOpen }) {
   const searchState = { data: "" };
 
   const Logout = () => {
-    socketModel.emit("user-offline", { user_id: user?._id });
     dispatch(logout());
     localStorage.removeItem("persist:admin-app");
     localStorage.removeItem("token");

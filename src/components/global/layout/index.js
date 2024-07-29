@@ -11,7 +11,6 @@ import { FcOvertime } from "react-icons/fc";
 import { BsExclamationTriangle } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { login_success } from "../../../Pages/actions/user";
-import socketModel from "../../../models/socketModel";
 
 import { memo } from 'react';
 
@@ -40,7 +39,6 @@ const Layout=memo(function Layout ({ children }) {
         });
       }
     }
-    console.log("layout call")
   }, []);
 
   const logo = () => {

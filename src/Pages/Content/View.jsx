@@ -9,7 +9,6 @@ import loader from "../../methods/loader";
 import { Tooltip } from "antd";
 
 const View = () => {
-  const [host, setHost] = useState();
   const [data, setData] = useState();
   const history = useNavigate();
   const { slug } = useParams();
@@ -20,15 +19,6 @@ const View = () => {
       loader(false);
       if (res.success) {
         setData(res.data);
-        getHostDetail(res.data.slug);
-      }
-    });
-  };
-
-  const getHostDetail = (slug) => {
-    ApiClient.get("content/detail", { slug: slug }).then((res) => {
-      if (res.success) {
-        setHost(res.data);
       }
     });
   };
@@ -59,18 +49,24 @@ const View = () => {
           </div>
           <div className="grid grid-cols-12 gap-4">
             <div className="sideclass col-span-12 md:col-span-12">
-              <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-12 md:col-span-6">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="">
                   <label className="profileheddingcls">Title</label>
                   <div className="profiledetailscls">{data?.title || "--"}</div>
                 </div>
-                <div className="col-span-12 md:col-span-6">
+                <div className="">
+                  <label className="profileheddingcls">Meta Title</label>
+                  <div className="profiledetailscls ">
+                    {data?.meta_title || "--"}
+                  </div>
+                </div>
+                {/* <div className="col-span-12 md:col-span-6">
                   <label className="profileheddingcls">Status</label>
                   <div className="profiledetailscls capitalize">
                     {data?.status || "--"}
                   </div>
-                </div>
-                <div className="col-span-12 md:col-span-6">
+                </div> */}
+                <div className="col-span-full">
                   <label className="profileheddingcls">Description</label>
                   <div
                     className="profiledetailscls capitalize"
@@ -79,19 +75,9 @@ const View = () => {
                     }}
                   ></div>
                 </div>
-                <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Keywords</label>
-                  <div className="profiledetailscls ">
-                    {data?.keywords.join(",") || "--"}
-                  </div>
-                </div>
-                <div className="col-span-12 md:col-span-12">
-                  <label className="profileheddingcls">Meta Title</label>
-                  <div className="profiledetailscls ">
-                    {data?.meta_title || "--"}
-                  </div>
-                </div>
-                <div className="col-span-12 md:col-span-12">
+               
+                
+                <div className="col-span-full">
                   <label className="profileheddingcls">Meta Description</label>
                   <div
                     className="profiledetailscls"
@@ -99,6 +85,12 @@ const View = () => {
                       __html: data?.meta_description || "--",
                     }}
                   ></div>
+                </div>
+                <div className="">
+                  <label className="profileheddingcls">Keywords</label>
+                  <div className="profiledetailscls ">
+                    {data?.meta_keyword|| "--"}
+                  </div>
                 </div>
               </div>
             </div>

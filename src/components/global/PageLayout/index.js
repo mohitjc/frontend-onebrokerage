@@ -12,7 +12,6 @@ import { FaGithub } from "react-icons/fa6";
 import { FaDribbble } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { login_success, logout } from "../../../Pages/actions/user";
-import socketModel from "../../../models/socketModel";
 
 const PageLayout = ({ children }) => {
   const user = useSelector((state) => state.user);
