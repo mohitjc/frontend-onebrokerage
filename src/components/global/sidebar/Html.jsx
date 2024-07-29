@@ -16,10 +16,6 @@ import { TfiLayoutMediaCenterAlt } from "react-icons/tfi";
 import {
   MdContentPaste,
   MdOutlineGroups,
-  MdOutlineMarkEmailRead,
-  MdOutlineOndemandVideo,
-  MdOutlineAudioFile,
-  MdOutlineChat,
 } from "react-icons/md";
 
 import environment from "../../../environment";
@@ -72,12 +68,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/customers",
       key: "readgrooveGroup",
     },
-    // {
-    //   name: "Categories",
-    //   icon: <TbCategoryPlus className="text-[#fff] shrink-0 text-lg" />,
-    //   url: "/category",
-    //   key: "readCategories",
-    // },
+    {
+      name: "Content Management",
+      icon: <MdContentPaste className="text-inherit shrink-0 text-lg" />,
+      url: "/content",
+      key: "readContent",
+    },
     // {
     //   name: "Blogs",
     //   icon: (

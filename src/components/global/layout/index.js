@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./style.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../sidebar";
@@ -13,7 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { login_success } from "../../../Pages/actions/user";
 import socketModel from "../../../models/socketModel";
 
-const Layout = ({ children }) => {
+import { memo } from 'react';
+
+
+const Layout=memo(function Layout ({ children }) {
   const user = useSelector((state) => state.user);
   const history = useNavigate();
   const [isOpen, setIsopen] = useState(false);
@@ -37,6 +40,7 @@ const Layout = ({ children }) => {
         });
       }
     }
+    console.log("layout call")
   }, []);
 
   const logo = () => {
@@ -132,5 +136,5 @@ const Layout = ({ children }) => {
       </div>
     </>
   );
-};
+});
 export default Layout;

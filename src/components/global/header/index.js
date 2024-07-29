@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../Pages/actions/user";
 import socketModel from "../../../models/socketModel";
 
-const Header = ({ setIsOpen, isOpen }) => {
+import { memo } from 'react';
+
+const Header=memo(function Header ({ setIsOpen, isOpen }) {
   const user = useSelector((state) => state.user);
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -74,6 +76,6 @@ const Header = ({ setIsOpen, isOpen }) => {
       messageCount={messageCount}
     />
   );
-};
+});
 
 export default Header;

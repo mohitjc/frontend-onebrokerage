@@ -24,7 +24,7 @@ const AddEdit = () => {
     address:'',
     address2:'',
     state:'',
-    zipcode:'',
+    zipCode:'',
     country:'',
   });
   const history = useNavigate();
@@ -235,9 +235,9 @@ const AddEdit = () => {
                 <FormControl
                   type="text"
                   label="Postal / Zip Code"
-                  value={form.zipcode}
+                  value={form.zipCode}
                   maxlength="6"
-                  onChange={(e) => setform({ ...form, zipcode: e })}
+                  onChange={(e) => setform({ ...form, zipCode: e })}
                 />
               </div>
 
