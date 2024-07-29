@@ -38,7 +38,10 @@ const Forgotpassword = () => {
   return (
     <>
       <AuthLayout>
-      <form className="w-11/12 xl:w-7/12 lg:w-8/12 	mx-auto bg-[#00358508] border border-[#00000024] p-[24px] rounded-[30px]" onSubmit={hendleSubmit}>
+        <form
+          className="w-11/12 xl:w-7/12 lg:w-8/12 	mx-auto bg-[#00358508] border border-[#00000017] p-[24px] rounded-[30px] shadow-c shadow-c"
+          onSubmit={hendleSubmit}
+        >
           <div className="">
             <h1 className="text-[30px] font-semibold text-[#333] ">
               Forgot Passowrd
@@ -51,10 +54,13 @@ const Forgotpassword = () => {
             password link.
           </p>
           <div className=" mt-5">
-            <div className="inputWrapper">
+            <div className="relative">
+              <div className="absolute  z-[99] p-3 px-4 bg-[#00358512] text-[#0035859c] rounded-tl-[7px] rounded-bl-[7px]">
+                <i className="fa fa-envelope " aria-hidden="true"></i>
+              </div>
               <input
                 type="email"
-                className="mb-4 w-full text-sm text-[#333]  h-10 flex items-center gap-2 overflow-hidden bg-transparent border-b border-white/37"
+                className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  mb-0 bginput w-full pl-[55px]"
                 placeholder="Email*"
                 value={form.email}
                 required

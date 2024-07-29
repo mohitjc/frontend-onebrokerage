@@ -80,9 +80,9 @@ const Layout=memo(function Layout ({ children }) {
                 <div className="editLogo">
                   <img
                     src={logowhite()}
-                    width="200"
+                    width="120"
                     height="35"
-                    className="pl-3 show-logo"
+                    className=" show-logo"
                   />
                   <img src={logos()} className="hide-logo" />
                 </div>

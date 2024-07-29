@@ -7,6 +7,8 @@ import "./style.scss";
 import AuthLayout from "../../components/AuthLayout";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+
 
 const Resetpassword = () => {
   const history = useNavigate();
@@ -34,7 +36,7 @@ const Resetpassword = () => {
     id: "",
   });
   const [submitted, setSubmitted] = useState(false);
-  const [eyes, setEyes] = useState({ password: false, confirmPassword: false });
+  const [eyes, setEyes] = useState({ newPassword: false, confirmPassword: false });
 
   const getError = (key: any) => {
     return methodModel.getError(key, form, formValidation);
@@ -76,35 +78,28 @@ const Resetpassword = () => {
   return (
     <>
       <AuthLayout>
-        <form className="" onSubmit={hendleSubmit}>
-          <div className="text-center mb-4">
-            <h3 className="text-left lgtext">New Password</h3>
-
-            <p className="para_forget_new">
+        <form
+          className="w-11/12 xl:w-7/12 lg:w-8/12 	mx-auto bg-[#00358508] border border-[#00000024] p-[24px] rounded-[30px]"
+          onSubmit={hendleSubmit}
+        >
+          <div className=" mb-4">
+            <h3 className="text-[30px] font-semibold text-[#333] ">
+              New Password
+            </h3>
+            <span className="flex w-10 h-1 bg-[#063688] mt-1"></span>
+            <p className="text-[16px] font-normal text-[#333] mt-4 mb-4">
               Please create a new password that you don’t use on any other site.
             </p>
           </div>
 
           <div className="mb-3">
-            {/* <div className="inputWrapper mb-3">
-                                        <label>Code</label>
-                               
-                                    <input
-                                        type="text"
-                                        className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 mb-0 bginput w-full"
-                                        value={form.code}
-                                        onChange={e => setForm({ ...form, code: e.target.value })}
-                                        placeholder="Code"
-                                        required
-                                    />
-                                            </div> */}
-            {/* <label>New Password<span className="start">*</span></label> */}
-
-            <div className="mb-3">
-              <div className="inputWrapper">
+          <div className="relative">
+                <div className="absolute  z-[99] p-3 px-4 bg-[#00358512] text-[#0035859c] rounded-tl-[7px] rounded-bl-[7px]">
+                  <i className="fa fa-lock " aria-hidden="true"></i>
+                </div>
                 <input
-                  type={eyes.password ? "text" : "password"}
-                  className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 mb-0 bginput w-full"
+                  type={eyes.newPassword ? "text" : "password"}
+                  className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  mb-0 bginput w-full pl-[55px]"
                   value={form.newPassword}
                   minLength={9}
                   maxLength={16}
@@ -114,10 +109,21 @@ const Resetpassword = () => {
                   placeholder="New Password"
                   required
                 />
-                <i
-                  className={eyes.password ? "fa fa-eye" : "fa fa-eye-slash"}
-                  onClick={() => setEyes({ ...eyes, password: !eyes.password })}
-                ></i>
+               {eyes.newPassword ? (
+                    <FiEye
+                      className="top-4 right-3 absolute text-[#333] cursor-pointer"
+                      onClick={() =>
+                        setEyes({ ...eyes, newPassword: !eyes.newPassword })
+                      }
+                    />
+                  ) : (
+                    <FiEyeOff
+                      className="top-4 right-3 absolute text-[#333] cursor-pointer"
+                      onClick={() =>
+                        setEyes({ ...eyes, newPassword: !eyes.newPassword })
+                      }
+                    />
+                  )}
               </div>
 
               {submitted && getError("newPassword").invalid ? (
@@ -127,14 +133,16 @@ const Resetpassword = () => {
               ) : (
                 <></>
               )}
-            </div>
-            <div className="inputWrapper">
+            <div className="mb-3">
               {/* <label>Confirm Password<span className="start">*</span></label> */}
 
-              <div className="inputWrapper">
+              <div className="relative">
+              <div className="absolute  z-[99] p-3 px-4 bg-[#00358512] text-[#0035859c] rounded-tl-[7px] rounded-bl-[7px]">
+                  <i className="fa fa-lock " aria-hidden="true"></i>
+                </div>
                 <input
                   type={eyes.confirmPassword ? "text" : "password"}
-                  className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 mb-0 bginput w-full"
+                  className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  mb-0 bginput w-full pl-[55px]"
                   value={form.confirmPassword}
                   minLength={9}
                   maxLength={16}
@@ -144,14 +152,21 @@ const Resetpassword = () => {
                   placeholder="Confirm Password"
                   required
                 />
-                <i
-                  className={
-                    eyes.confirmPassword ? "fa fa-eye" : "fa fa-eye-slash"
-                  }
-                  onClick={() =>
-                    setEyes({ ...eyes, confirmPassword: !eyes.confirmPassword })
-                  }
-                ></i>
+                  {eyes.confirmPassword ? (
+                    <FiEye
+                      className="top-4 right-3 absolute text-[#333] cursor-pointer"
+                      onClick={() =>
+                        setEyes({ ...eyes, confirmPassword: !eyes.confirmPassword })
+                      }
+                    />
+                  ) : (
+                    <FiEyeOff
+                      className="top-4 right-3 absolute text-[#333] cursor-pointer"
+                      onClick={() =>
+                        setEyes({ ...eyes, confirmPassword: !eyes.confirmPassword })
+                      }
+                    />
+                  )}
               </div>
               {submitted && getError("confirmPassword").err.confirmMatch ? (
                 <div className="invalid-feedback d-block">
