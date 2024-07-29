@@ -107,34 +107,41 @@ const View = () => {
                 </div>
                <div className="grid grid-cols-12 p-4">
                <div className="col-span-6 flex items-center mb-3">
-                  <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Name:</label>
+                  <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Address Line 1:</label>
                   <p className="text-[14px] text-black font-medium ms-3">
                     {" "}
                     {/* <LiaUserSolid className="text-xl text-[#063688]" /> */}
-                    {data && data.fullName}
+                    {data && data.address}
                   </p>
                 </div>
                   <div className="col-span-6 flex items-center mb-3">
-                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Email:</label>
+                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Address Line 2:</label>
                    <p className="text-[14px] text-black font-medium ms-3">
                     {/* <MdOutlineEmail className="text-xl text-[#063688]" /> */}
-                    {data && data.email}
+                    {data && data.address2}
                   </p>
                 </div>
 
                   <div className="col-span-6 flex items-center mb-3">
-                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Mobile Number:</label>
+                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">State / Province:</label>
                    <p className="text-[14px] text-black font-medium ms-3">
                     {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
-                    {data?.mobileNo || "--"}
+                    {data?.state || "--"}
                   </p>
                 </div>
                   <div className="col-span-6 flex items-center mb-3">
-                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Role:</label>
+                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Postal / Zip Code:</label>
                    <p className="text-[14px] text-black font-medium ms-3">
                     {/* <GrUserSettings className="text-xl text-[#063688]" /> */}
                   </p>
-                  {data?.role?.name || "--"}
+                  {data?.zipCode|| "--"}
+                </div>
+                <div className="col-span-6 flex items-center mb-3">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Country:</label>
+                   <p className="text-[14px] text-black font-medium ms-3">
+                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
+                    {data?.country || "--"}
+                  </p>
                 </div>
                </div>
               </div>

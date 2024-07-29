@@ -39,8 +39,6 @@ const View = () => {
     getDetail();
   }, []);
 
-
-
   return (
     <>
       <Layout>
@@ -63,37 +61,81 @@ const View = () => {
 
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12">
-              <div className="flex items-center justify-center py-8 shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 sticky top-2">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="text-center">
-                    <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
-                      {" "}
-                      <LiaUserSolid className="text-xl text-[#063688]" />
-                      {data && data.fullName}
-                    </p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
-                      <MdOutlineEmail className="text-xl text-[#063688]" />
-                      {data && data.email}
-                    </p>
-                  </div>
-
-                  <div className="text-center">
-                    <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
-                      <MdOutlinePhone className="text-xl text-[#063688]" />+
-                      {data?.mobileNo || "--"}
-                    </p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-md text-gray-700 flex items-center  flex flex-col font-semibold ">
-                      <GrUserSettings className="text-xl text-[#063688]" />
-                    </p>
-                    {data?.role?.name || "--"}
-                  </div>
+              <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
+                <div>
+                  <h4 className="p-4 bg-[#0636881a] font-medium">Basic Information</h4>
                 </div>
+               <div className="grid grid-cols-12 p-4">
+               <div className="col-span-6 flex items-center mb-3">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Name:</label>
+                  <p className="text-[14px] text-black font-medium ms-3">
+                    {" "}
+                    {/* <LiaUserSolid className="text-xl text-[#063688]" /> */}
+                    {data && data.fullName}
+                  </p>
+                </div>
+                  <div className="col-span-6 flex items-center mb-3">
+                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Email:</label>
+                   <p className="text-[14px] text-black font-medium ms-3">
+                    {/* <MdOutlineEmail className="text-xl text-[#063688]" /> */}
+                    {data && data.email}
+                  </p>
+                </div>
+
+                  <div className="col-span-6 flex items-center mb-3">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Mobile Number:</label>
+                   <p className="text-[14px] text-black font-medium ms-3">
+                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
+                    {data?.mobileNo || "--"}
+                  </p>
+                </div>
+                  <div className="col-span-6 flex items-center mb-3">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Role:</label>
+                   <p className="text-[14px] text-black font-medium ms-3">
+                    {/* <GrUserSettings className="text-xl text-[#063688]" /> */}
+                  </p>
+                  {data?.role?.name || "--"}
+                </div>
+               </div>
               </div>
+             
             </div>
+            {/* <div className="col-span-12">
+              <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
+                <div>
+                  <h4 className="p-4 bg-[#0636881a] font-medium">Address</h4>
+                </div>
+               <div className="grid grid-cols-12 p-4">
+               <div className="col-span-6 flex items-center mb-3">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Name:</label>
+                  <p className="text-[14px] text-black font-medium ms-3">
+                    {" "}
+                    {data && data.fullName}
+                  </p>
+                </div>
+                  <div className="col-span-6 flex items-center mb-3">
+                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Email:</label>
+                   <p className="text-[14px] text-black font-medium ms-3">
+                    {data && data.email}
+                  </p>
+                </div>
+
+                  <div className="col-span-6 flex items-center mb-3">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Mobile Number:</label>
+                   <p className="text-[14px] text-black font-medium ms-3">
+                    {data?.mobileNo || "--"}
+                  </p>
+                </div>
+                  <div className="col-span-6 flex items-center mb-3">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Role:</label>
+                   <p className="text-[14px] text-black font-medium ms-3">
+                  </p>
+                  {data?.role?.name || "--"}
+                </div>
+               </div>
+              </div>
+             
+            </div> */}
           </div>
         </div>
       </Layout>
