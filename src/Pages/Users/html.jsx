@@ -62,14 +62,14 @@ const Html = ({
         return <span className="">{row?.email}</span>;
       },
     },
-    {
-      key: "role",
-      name: "role",
-      sort: true,
-      render: (row) => {
-        return <span className="">{row?.roleDetails?.name}</span>;
-      },
-    },
+    // {
+    //   key: "role",
+    //   name: "role",
+    //   sort: true,
+    //   render: (row) => {
+    //     return <span className="">{row?.roleDetails?.name}</span>;
+    //   },
+    // },
     /* {
       key: "mobileNo",
       name: "Mobile No",
@@ -99,7 +99,7 @@ const Html = ({
           <>
             <div className="w-32" onClick={() => statusChange(row)}>
               <span
-                className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                className={`bg-[#063688] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
                           ${
                             row.status == "deactive"
                               ? " bg-gray-200 text-black"
