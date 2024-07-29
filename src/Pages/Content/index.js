@@ -48,13 +48,12 @@ const Content = () => {
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
-        setData(
-          res.data.map((itm) => {
-            itm.id = itm._id;
-            return itm;
-          })
-        );
-        setTotal(res.total);
+        let data=res.data.map((itm) => {
+          itm.id = itm._id;
+          return itm;
+        })
+        setData(data);
+        setTotal(res?.total||data.length);
       }
       setLoader(false);
     });
@@ -102,7 +101,7 @@ const Content = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         loader(true);
-        ApiClient.delete(shared.deleteApi, { id: id }).then((res) => {
+        ApiClient.delete(shared.deleteApi, { slug: id }).then((res) => {
           if (res.success) {
             // ToastsStore.success(res.message)
             clear();
@@ -185,11 +184,13 @@ const Content = () => {
   };
 
   const isAllow = (key = "") => {
-    let permissions = user.role?.permissions?.[0];
+    let permissions = user?.permissions?.[0];
     let value = permissions?.[key];
+    if(user.role=='admin') value=true
     // return true;
     return value;
   };
+
 
   useEffect(() => {
     if (user && user.loggedIn) {

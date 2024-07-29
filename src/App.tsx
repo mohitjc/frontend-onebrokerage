@@ -48,7 +48,11 @@ function App() {
     <>
       <Provider store={store}>
         <PersistGate loading={"loading ..."} persistor={persistor}>
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<div id="loader" className="loaderDiv">
+        <div>
+          <img src="/assets/img/loader.gif" alt="logo" className="loaderlogo" />
+        </div>
+      </div>}>
           <Router>
             <Routes>
               {routes.map((itm) => {
