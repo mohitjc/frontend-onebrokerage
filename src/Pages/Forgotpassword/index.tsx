@@ -38,14 +38,14 @@ const Forgotpassword = () => {
   return (
     <>
       <AuthLayout>
-      <form className="w-7/12	mx-auto" onSubmit={hendleSubmit}>
+      <form className="w-11/12 xl:w-7/12 lg:w-8/12 	mx-auto bg-[#00358508] border border-[#00000024] p-[24px] rounded-[30px]" onSubmit={hendleSubmit}>
           <div className="">
-            <h1 className="text-[40px] font-semibold text-[#333]">
+            <h1 className="text-[30px] font-semibold text-[#333] ">
               Forgot Passowrd
             </h1>
             <span className="flex w-10 h-1 bg-[#063688] mt-1"></span>
           </div>
-          <p className="text-[20px] font-normal text-[#333] mt-4">
+          <p className="text-[16px] font-normal text-[#333] mt-4">
             {" "}
             No worries! Just enter your email and we’ll send you a reset
             password link.

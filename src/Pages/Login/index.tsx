@@ -170,7 +170,7 @@ const Login = () => {
             </div>
           </form>
         ) : (
-          <form className="w-11/12 lg:w-7/12 md:w-9/12	mx-auto bg-[#1245940a] border border-[#00000024] p-[24px] rounded-[30px]" onSubmit={hendleSubmit}>
+          <form className="w-11/12 xl:w-7/12 lg:w-8/12 	mx-auto bg-[#00358508] border border-[#00000024] p-[24px] rounded-[30px]" onSubmit={hendleSubmit}>
             <div className="">
               <h1 className="text-[30px] font-semibold text-[#333] ">Sign In</h1>
               <span className="flex w-10 h-1 bg-[#063688] mt-1"></span>
