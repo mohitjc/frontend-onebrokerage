@@ -177,7 +177,23 @@ export default function FormControl({
               })}
             </div>
           </>
-        ) : type == "editor" ? (
+        ) :type=='textarea'?<>
+        <textarea
+            name={name}
+            className="relative shadow-box bg-white w-full rounded-lg h-[150px] flex items-center gap-2 overflow-hidden px-2"
+            required={required}
+            placeholder={placeholder}
+            value={value || ""}
+            maxLength={maxlength}
+            minLength={minlength}
+            disabled={disabled}
+            onChange={(e) => {
+              console.log("e", e.target);
+              onChange(e.target.value);
+            }}
+            onKeyDown={onkeyDown}
+          />
+        </>: type == "editor" ? (
           <>
             <Editor
               textareaName="description"

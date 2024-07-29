@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Suspense } from "react";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -6,106 +6,40 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import NotFoundPage from "./Pages/NotFoundPage";
 import "react-toastify/dist/ReactToastify.css";
 import "react-phone-input-2/lib/style.css";
 import "./scss/main.scss";
-import Profile from "./Pages/Profile";
-import Settings from "./Pages/Settings";
-import Forgotpassword from "./Pages/Forgotpassword";
-import Resetpassword from "./Pages/Resetpassword";
-import Roles from "./Pages/Roles";
-import AddEditRole from "./Pages/Roles/AddEdit";
-import Dashboard from "./Pages/Dashboard";
 import configureStoreProd from "./Pages/config/configureStore.prod";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
-import Users from "./Pages/Users";
-import UserDetail from "./Pages/Users/View";
-import AddEditUsers from "./Pages/Users/AddEdit";
-import Category from "./Pages/Categories";
-import AddEditCategory from "./Pages/Categories/AddEdit";
-import ViewCategory from "./Pages/Categories/View";
-import FAQ from "./Pages/FAQ";
-import AddEditFAQ from "./Pages/FAQ/AddEdit";
-import ViewFAQ from "./Pages/FAQ/View";
-import Content from "./Pages/Content";
-import AddEditContent from "./Pages/Content/AddEdit";
-import ViewContent from "./Pages/Content/View";
-import Newsletter from "./Pages/Newsletter";
-import ViewNewsletter from "./Pages/Newsletter/View";
-import Tags from "./Pages/Tags";
-import AddEditTag from "./Pages/Tags/AddEdit";
-import ViewTag from "./Pages/Tags/View";
-import Blogs from "./Pages/Blogs";
-import AddEditBlog from "./Pages/Blogs/AddEdit";
-import ViewBlog from "./Pages/Blogs/View";
-import Emails from "./Pages/Emails";
-import GrooveGroup from "./Pages/GrooveGroup";
-import GrooveGroupDetail from "./Pages/GrooveGroup/View";
-import AddEditGrooveGroup from "./Pages/GrooveGroup/AddEdit";
-import SendNewsletter from "./Pages/Emails/Send";
-import Notifications from "./Pages/Messages";
-import SendNotification from "./Pages/Messages/Send";
-import Chats from "./Pages/Chats";
-import ViewNotification from "./Pages/Messages/View";
+import { lazy } from 'react';
+
 
 const { persistor, store } = configureStoreProd();
 
 function App() {
   const routes = [
-    // {url:'',element:<Home />},
-    { url: "/login", element: <Login /> },
-    // {url:'/signup',element:<Signup />},
-    { url: "/dashboard", element: <Dashboard /> },
-    { url: "*", element: <NotFoundPage /> },
-    { url: "/profile", element: <Profile /> },
-    { url: "/profile/:tab", element: <Settings /> },
-    { url: "/forgotpassword", element: <Forgotpassword /> },
-    { url: "/resetpassword", element: <Resetpassword /> },
-    { url: "/roles", element: <Roles /> },
-    { url: "/roles/add", element: <AddEditRole /> },
-    { url: "/roles/edit/:id", element: <AddEditRole /> },
-    { url: "/user", element: <Users /> },
-    { url: "/user/edit/:id", element: <AddEditUsers /> },
-    { url: "/user/add", element: <AddEditUsers /> },
-    { url: "/user/detail/:id", element: <UserDetail /> },
+    { url: "/login",path:'Login'},
+    { url: "/dashboard", path:'Dashboard'},
+    { url: "*",path:'NotFoundPage' },
+    { url: "/profile",path:'Profile' },
+    { url: "/profile/:tab", path:'Settings' },
+    { url: "/forgotpassword", path:'Forgotpassword' },
+    { url: "/resetpassword", path:'Resetpassword' },
+    { url: "/user",path:'Users' },
+    { url: "/user/edit/:id", path:'Users/AddEdit' },
+    { url: "/user/add", path:'Users/AddEdit' },
+    { url: "/user/detail/:id",path:'Users/View' },
     { url: "/", element: <Navigate to="/login" /> },
-    { url: "/category", element: <Category /> },
-    { url: "/category/add", element: <AddEditCategory /> },
-    { url: "/category/detail/:id", element: <ViewCategory /> },
-    { url: "/category/edit/:id", element: <AddEditCategory /> },
-    { url: "/faq", element: <FAQ /> },
-    { url: "/faq/add", element: <AddEditFAQ /> },
-    { url: "/faq/detail/:id", element: <ViewFAQ /> },
-    { url: "/faq/edit/:id", element: <AddEditFAQ /> },
-    { url: "/content", element: <Content /> },
-    { url: "/content/detail/:slug", element: <ViewContent /> },
-    { url: "/content/add", element: <AddEditContent /> },
-    { url: "/content/edit/:slug", element: <AddEditContent /> },
-    { url: "/newsletter", element: <Newsletter /> },
-    { url: "/newsletter/detail/:id", element: <ViewNewsletter /> },
-    { url: "/tag", element: <Tags /> },
-    { url: "/tag/add", element: <AddEditTag /> },
-    { url: "/tag/detail/:id", element: <ViewTag /> },
-    { url: "/tag/edit/:id", element: <AddEditTag /> },
-    { url: "/blog", element: <Blogs /> },
-    { url: "/blog/add", element: <AddEditBlog /> },
-    { url: "/blog/detail/:id", element: <ViewBlog /> },
-    { url: "/blog/edit/:id", element: <AddEditBlog /> },
-    { url: "/subscribers", element: <Emails /> },
-    { url: "/subscribers/send-newsletter", element: <SendNewsletter /> },
-    { url: "/customers", element: <GrooveGroup /> },
-    { url: "/customers/edit/:id", element: <AddEditGrooveGroup /> },
-    { url: "/customers/add", element: <AddEditGrooveGroup /> },
-    { url: "/customers/detail/:id", element: <GrooveGroupDetail /> },
-    { url: "/notifications", element: <Notifications /> },
-    { url: "/notifications/detail/:id", element: <ViewNotification /> },
-    { url: "/notifications/send-notification", element: <SendNotification /> },
-    { url: "/chat", element: <Chats /> },
+    { url: "/content", path:'Content' },
+    { url: "/content/detail/:slug",path:'Content/View' },
+    { url: "/content/add",path:'Content/AddEdit'},
+    { url: "/content/edit/:slug", path:'Content/AddEdit'},
+    { url: "/customers", path:'GrooveGroup' },
+    { url: "/customers/edit/:id",path:'GrooveGroup/AddEdit' },
+    { url: "/customers/add", path:'GrooveGroup/AddEdit'},
+    { url: "/customers/detail/:id",path:'GrooveGroup/View' },
   ];
 
   sessionStorage.clear();
@@ -114,13 +48,16 @@ function App() {
     <>
       <Provider store={store}>
         <PersistGate loading={"loading ..."} persistor={persistor}>
+        <Suspense fallback={<div>loading...</div>}>
           <Router>
             <Routes>
               {routes.map((itm) => {
-                return <Route path={itm.url} element={itm.element} />;
+                const Element = lazy(() => import(`./Pages/${itm.path}`));
+                return <Route path={itm.url} element={itm.path?<Element/>:itm.element} />;
               })}
             </Routes>
           </Router>
+          </Suspense>
         </PersistGate>
       </Provider>
       <div id="loader" className="loaderDiv d-none">

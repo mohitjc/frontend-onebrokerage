@@ -23,7 +23,6 @@ const AddEdit = () => {
     keywords: [],
     meta_title: "",
     meta_description: "",
-    isHide: false,
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -46,7 +45,7 @@ const AddEdit = () => {
     let url = shared.addApi;
     let value = {
       ...form,
-      slug: slug,
+      // slug: slug,
     };
     if (value.id) {
       method = "put";
@@ -115,10 +114,8 @@ const AddEdit = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
-              <div className="ones_rows">
-
-            
-              <div className=" mb-3">
+                   
+            <div className=" mb-3">
                 <FormControl
                   type="text"
                   name="title"
@@ -128,20 +125,7 @@ const AddEdit = () => {
                 />
               </div>
 
-              <div className=" mb-3">
-                <FormControl
-                  type="editor"
-                  name="description"
-                  label="Description"
-                  value={form.description}
-                  onChange={(e) => setform({ ...form, description: e })}
-                />
-              </div>
 
-              </div>
-
-
-              <div className="twos-rows">
               <div className=" mb-3">
                 <FormControl
                   type="text"
@@ -151,15 +135,25 @@ const AddEdit = () => {
                   onChange={(e) => setform({ ...form, meta_title: e })}
                 />
               </div>
-              <div className=" mb-3">
+
+              <div className="col-span-full mb-3">
                 <FormControl
                   type="editor"
+                  name="description"
+                  label="Description"
+                  value={form.description}
+                  onChange={(e) => setform({ ...form, description: e })}
+                />
+              </div>
+
+              <div className="col-span-full mb-3">
+                <FormControl
+                  type="textarea"
                   name="meta_description"
                   label="Meta Description"
                   value={form.meta_description}
                   onChange={(e) => setform({ ...form, meta_description: e })}
                 />
-              </div>
               </div>
 
               <div className=" mb-3">
@@ -175,21 +169,6 @@ const AddEdit = () => {
                     })
                   }
                 />
-              </div>
-              <div className=" mb-3">
-                <p className="text-sm">Show/Hide on Homepage</p>
-                <label className="inline-flex items-center cursor-pointer mt-3">
-                  <input
-                    type="checkbox"
-                    value={form?.isHide}
-                    checked={form?.isHide}
-                    className="sr-only peer"
-                    onChange={(e) =>
-                      setform({ ...form, isHide: e.target.checked })
-                    }
-                  />
-                  <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#063688]"></div>
-                </label>
               </div>
             </div>
 

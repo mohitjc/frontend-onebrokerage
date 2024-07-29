@@ -179,8 +179,6 @@ const Html = ({
     getRolesList();
   }, []);
 
-  console.log("user", user);
-
   return (
     <Layout>
       <div className="flex flex-wrap justify-between items-center gap-y-4">
