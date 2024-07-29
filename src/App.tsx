@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "react-phone-input-2/lib/style.css";
+import 'react-quill/dist/quill.snow.css';
 import "./scss/main.scss";
 import configureStoreProd from "./Pages/config/configureStore.prod";
 import { Provider } from "react-redux";

@@ -2,8 +2,7 @@ import { useState } from "react";
 import methodModel from "../../../methods/methods";
 import SelectDropdown from "../SelectDropdown";
 import "./style.scss";
-import { Editor } from "@tinymce/tinymce-react";
-import tinymcModel from "../../../models/tinymc.model";
+import ReactQuill from 'react-quill';
 import PhoneInput from "react-phone-input-2";
 export default function FormControl({
   name,
@@ -195,22 +194,7 @@ export default function FormControl({
           />
         </>: type == "editor" ? (
           <>
-            <Editor
-              textareaName="description"
-              value={value}
-              onEditorChange={(newValue, editor) => {
-                console.log("newValue", newValue);
-                onChange(newValue);
-              }}
-              disabled={disabled}
-              apiKey={tinymcModel.apiKey}
-              init={{
-                //   selector: "textarea#autocompleter-cardmenuitem",
-                height: 250,
-                plugins: tinymcModel.plugins,
-                toolbar: tinymcModel.toolbar,
-              }}
-            />
+          <ReactQuill theme="snow" value={value} onChange={onChange} />
           </>
         ) : type == "checkbox" ? (
           <>

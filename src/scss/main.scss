@@ -3,6 +3,11 @@
 // Colors
 @import './colors';
 
+.ql-editor{
+  height: 200px;
+  overflow: auto;
+}
+
 .text-danger{
   color: red;
 }
