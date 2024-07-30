@@ -287,7 +287,7 @@ const AddEdit = () => {
               <div className="shadow-box w-full bg-white rounded-lg mb-6">
                 <div className="scrollbar w-full overflow-auto">
                   <div class="table_section tablepadding">
-                    <p className="text-xl font-semibold text-[#111827] px-4 pb-2">
+                    <p className="text-xl font-semibold text-[#111827] px-4 py-2">
                       Permissions
                     </p>
                     <table class="w-full">
@@ -305,7 +305,7 @@ const AddEdit = () => {
                               type="checkbox"
                               onChange={(e) => HandleAll(e.target.checked)}
                               checked={isAllChecked()}
-                              className="h-4 w-4"
+                              className="h-4 w-4 me-1"
                             />
                             All
                           </th>
@@ -318,7 +318,7 @@ const AddEdit = () => {
                                 >
                                   <input
                                     type="checkbox"
-                                    className="h-4 w-4"
+                                    className="h-4 w-4 me-1"
                                     onChange={(e) =>
                                       HandleAllRead(e.target.checked, itm.key)
                                     }

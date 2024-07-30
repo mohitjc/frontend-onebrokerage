@@ -7,7 +7,7 @@ const AuthLayout=({children}:any)=>{
        <div className="col-span-12 md:col-span-6 lg:col-span-5 xl:col-span-4 hidden md:block">
          <div className="relative flex flex-col items-center justify-center h-screen py-8 overflow-auto">
          <div className=" w-full max-w-md px-8 py-6 mx-auto overflow-y-auto rounded-lg ">
-           <Link to="/" className="absolute top-[10px] left-[10px] xl:w-[180px] z-[99] "><img src="/assets/img/logo-w.png" className="md:w-[130px] lg:w-[150px]  mx-auto  " alt="logo" /></Link>
+           <Link to="/" className="absolute top-[10px] left-[10px] xl:w-[180px] z-[99] "><img src="/assets/img/logo-w.png" className="md:w-[160px] lg:w-[150px]  mx-auto  " alt="logo" /></Link>
            <img src="/assets/img/login-s.png" alt="bg-logon" width="auto" height="auto" className=" object-center object-cover absolute inset-0 w-full h-full z-10" />
            </div>
           

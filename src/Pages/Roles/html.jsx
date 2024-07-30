@@ -136,7 +136,7 @@ const Html = ({
                                 onClick={() => statusChange(itm)}
                               >
                                 <span
-                                  className={`bg-[#EEE] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                                  className={`bg-[#063688] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
                           ${
                             itm.status == "deactive"
                               ? " bg-gray-200 text-black"
