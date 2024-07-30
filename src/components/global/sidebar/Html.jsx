@@ -66,7 +66,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       name: "Students",
       icon: <MdOutlineGroups className="text-inherit shrink-0 text-lg" />,
       url: "/customers",
-      key: "readgrooveGroup",
+      key: "readCustomers",
     },
     {
       name: "Content Management",

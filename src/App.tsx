@@ -37,10 +37,10 @@ function App() {
     { url: "/content/detail/:slug",path:'Content/View' },
     { url: "/content/add",path:'Content/AddEdit'},
     { url: "/content/edit/:slug", path:'Content/AddEdit'},
-    { url: "/customers", path:'GrooveGroup' },
-    { url: "/customers/edit/:id",path:'GrooveGroup/AddEdit' },
-    { url: "/customers/add", path:'GrooveGroup/AddEdit'},
-    { url: "/customers/detail/:id",path:'GrooveGroup/View' },
+    { url: "/customers", path:'Customers' },
+    { url: "/customers/edit/:id",path:'Customers/AddEdit' },
+    { url: "/customers/add", path:'Customers/AddEdit'},
+    { url: "/customers/detail/:id",path:'Customers/View' },
   ];
 
   sessionStorage.clear();

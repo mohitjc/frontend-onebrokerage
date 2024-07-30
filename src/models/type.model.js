@@ -9,7 +9,7 @@ export const rolePermissions = [
   },
   {
     name: "Students",
-    key: "grooveGroup",
+    key: "Customers",
   },
   {
     name: "Content",

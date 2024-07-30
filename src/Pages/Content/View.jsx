@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/global/layout";
 import { useEffect, useState } from "react";
-import datepipeModel from "../../models/datepipemodel";
 import ApiClient from "../../methods/api/apiClient";
 import { useParams } from "react-router-dom";
 import shared from "./shared";

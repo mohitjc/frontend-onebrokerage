@@ -1,5 +1,5 @@
 const shared = {
-  check: "grooveGroup",
+  check: "Customers",
   title: "Students",
   addTitle: "Student",
   url: "customers",
