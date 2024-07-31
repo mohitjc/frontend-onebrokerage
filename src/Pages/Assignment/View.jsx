@@ -177,6 +177,36 @@ const View = () => {
             </div>
            
           </div>
+          <div>
+              <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
+               Staff Details
+              </h3>
+            </div>
+            <div className="grid grid-cols-12 gap-6">
+            <div className="col-span-12">
+              <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
+               
+               <div className="grid grid-cols-12 p-4">
+               <div className="col-span-6 flex items-center mb-3">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Name:</label>
+                  <p className="text-[14px] text-black font-medium ms-3"> 
+                    {data && data.staff?.fullName || "--"}
+                  </p>
+                </div>         
+                <div className="col-span-6 flex items-center mb-3">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Email:</label>
+                  <p className="text-[14px] text-black font-medium ms-3"> 
+                    {data && data.staff?.email ||"--"}
+                  </p>
+                </div>
+                
+               
+               </div>
+              </div>
+             
+            </div>
+           
+          </div>
 
           <h3 className="text-lg lg:text-2xl font-semibold text-[#111827] mt-6">
                 Counter Offers
