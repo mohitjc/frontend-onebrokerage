@@ -23,6 +23,8 @@ function App() {
   const routes = [
     { url: "/login",path:'Login'},
     { url: "/dashboard", path:'Dashboard'},
+    { url: "/assignment", path:'Assignment'},
+    { url: "/assignment/detail/:id", path:'Assignment/View'},
     { url: "*",path:'NotFoundPage' },
     { url: "/profile",path:'Profile' },
     { url: "/profile/:tab", path:'Settings' },
