@@ -43,6 +43,8 @@ function App() {
     { url: "/customers/edit/:id",path:'Customers/AddEdit' },
     { url: "/customers/add", path:'Customers/AddEdit'},
     { url: "/customers/detail/:id",path:'Customers/View' },
+    { url: "/contract",path:'Contract' },
+    { url: "/contract/detail/:id",path:'Contract/View' },
   ];
 
   sessionStorage.clear();
