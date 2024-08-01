@@ -21,7 +21,7 @@ const Assignment = () => {
   const [loaging, setLoader] = useState(true);
   const [counterModal, setCounterModal] = useState(false);
   const [counterForm, setCounterForm] = useState({
-    price:''
+    counterOffer:''
   });
   const[status,setStatus] = useState("pending")
   const history = useNavigate();
@@ -236,13 +236,23 @@ const Assignment = () => {
     }
   }, []);
 
-  const counterOffer=()=>{
-    setCounterForm({price:''})
+  const counterOffer=(item)=>{
+    console.log("form",item)
+
+    setCounterForm({counterOffer:'',assignment_id:item?.id||item?._id,message:''})
     setCounterModal(true)
   }
 
   const counterSubmit=()=>{
-    console.log("form",counterForm)
+    let payload={...counterForm}
+    loader(true)
+    ApiClient.post(`counter-offer/create`,payload).then(res=>{
+      loader(false)
+      if(res?.success){
+        setCounterModal(false)
+        setCounterForm({})
+      }else{}
+    })
   }
 
   return (
@@ -284,11 +294,21 @@ const Assignment = () => {
             <FormControl
             type="number"
             label="Amount"
-            value={counterForm.price}
+            value={counterForm.counterOffer}
             maxlength="10"
             onChange={e=>{
-              setCounterForm({...counterForm,price:e})
+              setCounterForm({...counterForm,counterOffer:Number(e)})
             }}
+            required={true}
+            />
+            <FormControl
+            type="textarea"
+            label="Message"
+            value={counterForm.message||''}
+            onChange={e=>{
+              setCounterForm({...counterForm,message:e})
+            }}
+            required={true}
             />
           </div>
           <div className="mt-3 text-right">

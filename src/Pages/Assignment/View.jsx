@@ -15,6 +15,7 @@ const View = () => {
   const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
   const [total, setTotal] = useState(0);
   const [data, setData] = useState();
+  const [counterOfferData, setcounterOfferData] = useState();
 
   const history = useNavigate();
   const { id } = useParams();
@@ -28,9 +29,21 @@ const View = () => {
       }
     });
   };
+  const getConterOffers = (p={}) => {
+    let payload={...filters,...p}
+    loader(true);
+    ApiClient.get(shared.counterListApi, { ...payload }).then((res) => {
+      loader(false);
+      if (res.success) {
+        setcounterOfferData(res.data);
+        setTotal(res?.total)
+      }
+    });
+  };
 
   useEffect(() => {
     getDetail();
+    getConterOffers({assignment_id:id});
   }, []);
 
   const statusChange=()=>{
@@ -43,18 +56,18 @@ const View = () => {
 
   const columns = [
     {
-      key: "fullName",
-      name: "Title",
+      key: "message",
+      name: "Message",
       render: (row) => {
-        return <span className="capitalize">{row?.title}</span>;
+        return <Tooltip placement="top" title={row?.message}><span className="capitalize" title="">{row?.message?row?.message?.slice(0,30):'--'}</span></Tooltip>
       },
     },
     {
-      key: "email",
-      name: "Due date ",
+      key: "price",
+      name: "Price ",
       render: (row) => {
         return (
-          <span className="">{moment(row?.dueDate).format("DD-MM-YYYY")}</span>
+          <span className="">{row?.counterOffer}</span>
         );
       },
     },
@@ -80,32 +93,12 @@ const View = () => {
       },
     },
     {
-      key: "action",
-      name: "Action",
+      key: "createdAt",
+      name: "Created At",
       render: (itm) => {
         return (
           <>
-            <div className="flex items-center justify-start gap-1.5">
-
-              {itm.status=='pending'?<>
-                <Tooltip placement="top" title="Accept">
-                <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => statusChange('accepted',itm)}
-                  >
-                  <span class="material-symbols-outlined">check</span>
-                  </a>
-                  </Tooltip>
-                  <Tooltip placement="top" title="Reject">
-                  <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => statusChange('rejected',itm)}
-                  >
-                  <span class="material-symbols-outlined">close</span>
-                  </a>
-                  </Tooltip>
-              </>:<></>}
-            </div>
+            <span>{moment(itm?.createdAt).format('DD-MM-YYYY')}</span>
           </>
         );
       },
@@ -114,7 +107,7 @@ const View = () => {
 
   const pageChange = (e) => {
     setFilter({ ...filters, page: e });
-    getData({ page: e });
+    getConterOffers({ page: e });
   };
 
 
@@ -214,7 +207,7 @@ const View = () => {
 
               <Table
               className="mb-3"
-              data={data}
+              data={counterOfferData}
               columns={columns}
               page={filters.page}
               count={filters.count}
