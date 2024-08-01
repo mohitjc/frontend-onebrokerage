@@ -62,7 +62,7 @@ export default function FormControl({
       <div className="formWrapper  relative">
         {label ? (
           <>
-            <label className="text-sm">
+            <label className="text-sm mb-2 block">
               {label}{" "}
               {required ? (
                 <>
@@ -216,7 +216,7 @@ export default function FormControl({
           <input
             type={type}
             name={name}
-            className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
+            className="relative  bg-white w-full rounded-lg h-11 flex items-center gap-2 overflow-hidden px-2 border border-[#eee]"
             required={required}
             placeholder={placeholder}
             value={value || ""}

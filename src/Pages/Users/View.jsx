@@ -74,7 +74,7 @@ const View = () => {
             <Tooltip placement="top" title="Back">
               <span
                 onClick={() => history(-1)}
-                className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3"
+                className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3 bg-[#05388fed] text-white"
               >
                 <i className="fa fa-angle-left text-lg"></i>
               </span>
@@ -93,24 +93,24 @@ const View = () => {
                   <h4 className="p-4 bg-[#0636881a] font-medium">Basic Information</h4>
                 </div>
                <div className="grid grid-cols-12 p-4">
-               <div className="col-span-6 flex items-center mb-3">
-                  <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Name:</label>
+               <div className="col-span-6 flex items-center mb-4">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">Name:</label>
                   <p className="text-[14px] text-black font-medium ms-3">
                     {" "}
                     {/* <LiaUserSolid className="text-xl text-[#063688]" /> */}
                     {data && data.fullName}
                   </p>
                 </div>
-                  <div className="col-span-6 flex items-center mb-3">
-                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Email:</label>
+                  <div className="col-span-6 flex items-center mb-4">
+                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[160px]">Email:</label>
                    <p className="text-[14px] text-black font-medium ms-3">
                     {/* <MdOutlineEmail className="text-xl text-[#063688]" /> */}
                     {data && data.email}
                   </p>
                 </div>
 
-                  <div className="col-span-6 flex items-center mb-3">
-                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Mobile Number:</label>
+                  <div className="col-span-6 flex items-center mb-4">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[160px]">Mobile Number:</label>
                    <p className="text-[14px] text-black font-medium ms-3">
                     {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
                     {data?.mobileNo || "--"}

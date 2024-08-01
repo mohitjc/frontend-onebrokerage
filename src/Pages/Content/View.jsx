@@ -30,12 +30,12 @@ const View = () => {
   return (
     <>
       <Layout>
-        <div className="bg-white shadow-box rounded-lg w-full p-4 mt-6">
+        <div className=" w-full p-4 ">
           <div className="flex items-center mb-8">
             <Tooltip placement="top" title="Back">
               <span
                 onClick={() => history(-1)}
-                className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3"
+                className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3 bg-[#05388fed] text-white"
               >
                 <i className="fa fa-angle-left text-lg"></i>
               </span>
@@ -46,53 +46,63 @@ const View = () => {
               </h3>
             </div>
           </div>
-          <div className="grid grid-cols-12 gap-4">
-            <div className="sideclass col-span-12 md:col-span-12">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="">
-                  <label className="profileheddingcls">Title</label>
-                  <div className="profiledetailscls">{data?.title || "--"}</div>
+         
+
+          <div className="grid grid-cols-12 gap-6">
+            <div className="col-span-12">
+              <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
+                <div>
+                  <h4 className="p-4 bg-[#0636881a] font-medium">Content Information</h4>
                 </div>
-                <div className="">
-                  <label className="profileheddingcls">Meta Title</label>
-                  <div className="profiledetailscls ">
+               <div className="grid grid-cols-12 p-4">
+               <div className="col-span-6 flex items-center mb-4">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">Title:</label>
+                  <p className="text-[14px] text-black font-medium ms-3">
+                    {" "}
+                    {/* <LiaUserSolid className="text-xl text-[#063688]" /> */}
+                    {data?.title || "--"}
+                  </p>
+                </div>
+                  <div className="col-span-6 flex items-center mb-4">
+                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[160px]">Meta Title:</label>
+                   <p className="text-[14px] text-black font-medium ms-3">
+                    {/* <MdOutlineEmail className="text-xl text-[#063688]" /> */}
                     {data?.meta_title || "--"}
-                  </div>
+                  </p>
                 </div>
-                {/* <div className="col-span-12 md:col-span-6">
-                  <label className="profileheddingcls">Status</label>
-                  <div className="profiledetailscls capitalize">
-                    {data?.status || "--"}
-                  </div>
-                </div> */}
-                <div className="col-span-full">
-                  <label className="profileheddingcls">Description</label>
-                  <div
-                    className="profiledetailscls capitalize"
-                    dangerouslySetInnerHTML={{
+
+                  <div className="col-span-6 flex items-center mb-4">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[160px]">Description:</label>
+                   <p className="text-[14px] text-black font-medium ms-3"  dangerouslySetInnerHTML={{
                       __html: data?.description || "--",
-                    }}
-                  ></div>
-                </div>
-               
+                    }}>
+                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
                 
-                <div className="col-span-full">
-                  <label className="profileheddingcls">Meta Description</label>
-                  <div
-                    className="profiledetailscls"
-                    dangerouslySetInnerHTML={{
+                  </p>
+                </div>
+                
+                <div className="col-span-6 flex items-center mb-4">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[160px]">Meta Description:</label>
+                   <p className="text-[14px] text-black font-medium ms-3"  dangerouslySetInnerHTML={{
                       __html: data?.meta_description || "--",
-                    }}
-                  ></div>
+                    }}>
+                    {/* <GrUserSettings className="text-xl text-[#063688]" /> */}
+                  </p>
+                 
                 </div>
-                <div className="">
-                  <label className="profileheddingcls">Keywords</label>
-                  <div className="profiledetailscls ">
-                    {data?.meta_keyword|| "--"}
-                  </div>
+                <div className="col-span-6 flex items-center mb-4">
+                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[160px]">Keywords:</label>
+                   <p className="text-[14px] text-black font-medium ms-3"  >
+                       {data?.meta_keyword|| "--"}
+                    {/* <GrUserSettings className="text-xl text-[#063688]" /> */}
+                  </p>
+                
                 </div>
+               </div>
               </div>
+             
             </div>
+            
           </div>
         </div>
       </Layout>
