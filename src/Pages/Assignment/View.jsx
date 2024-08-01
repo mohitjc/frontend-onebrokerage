@@ -178,7 +178,7 @@ const View = () => {
            
           </div>
           <div>
-              <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
+              <h3 className="text-lg lg:text-2xl font-semibold text-[#111827] mt-6">
                Staff Details
               </h3>
             </div>

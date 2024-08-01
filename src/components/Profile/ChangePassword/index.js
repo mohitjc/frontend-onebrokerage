@@ -5,6 +5,7 @@ import loader from "../../../methods/loader";
 import methodModel from "../../../methods/methods";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../Pages/actions/user";
+import { toast } from "react-toastify";
 
 const ChangePassword = (p) => {
   const user = useSelector((state) => state.user);
@@ -51,6 +52,7 @@ const ChangePassword = (p) => {
         dispatch(logout());
         localStorage.removeItem("token");
         localStorage.removeItem("persist:admin-app");
+        toast.success(res.message)
         history("/login");
       }
       loader(false);

@@ -109,7 +109,7 @@ export default function FormControl({
           <input
             type="text"
             name={name}
-            className="relative bg-white w-full rounded-lg h-10 flex items-center gap-2 z-9 overflow-hidden px-2"
+            className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-22"
             required={required}
             placeholder={placeholder}
             value={value || ""}

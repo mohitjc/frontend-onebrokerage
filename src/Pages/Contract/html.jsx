@@ -1,29 +1,26 @@
-import React, { useEffect, useState } from "react";
 import Layout from "../../components/global/layout";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import { Tooltip } from "antd";
 import { FiEdit3, FiPlus } from "react-icons/fi";
-import { BsTrash3 } from "react-icons/bs";
 import Table from "../../components/Table";
 import SelectDropdown from "../../components/common/SelectDropdown";
 import statusModel from "../../models/status.model";
-import datepipeModel from "../../models/datepipemodel";
 import shared from "./shared";
-import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
 import { PiEyeLight } from "react-icons/pi";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
-import { LuImport } from "react-icons/lu";
+import moment from "moment";
+import datepipeModel from "../../models/datepipemodel";
+import pipeModel from "../../models/pipeModel";
 const Html = ({
   sorting,
   filter,
   edit,
   view,
-  statusChange,
   pageChange,
   count,
-  deleteItem,
+  statusChange,
   clear,
   filters,
   setFilter,
@@ -33,65 +30,69 @@ const Html = ({
   isAllow,
   total = { total },
   sortClass,
-  uploadFile,
 }) => {
   const user = useSelector((state) => state.user);
   const columns = [
     {
       key: "fullName",
-      name: "Full Name",
-      sort: true,
+      name: "Title",
       render: (row) => {
-        return <span className="capitalize">{row?.fullName}</span>;
+        return <span className="capitalize">{row?.title}</span>;
       },
     },
     {
-      key: "email",
-      name: "Email",
-      sort: true,
+      key: "startDate",
+      name: "Start Date",
       render: (row) => {
-        return <span className="">{row?.email}</span>;
+        return (
+          <span className="">{datepipeModel.date(row?.startDate)}</span>
+        );
       },
     },
-    // {
-    //   key: "mobileNo",
-    //   name: "Mobile No",
-    //   render: (row) => {
-    //     return (
-    //       <>
-    //         <p className="capitalize">
-    //           {row?.mobileNo ? "+" : ""}
-    //           {row?.mobileNo}
-    //         </p>
-    //       </>
-    //     );
-    //   },
-    // },
-    /* {
-      key: "timezone",
-      name: "Timezone",
+    {
+      key: "endDate",
+      name: "End Date",
       render: (row) => {
-        return <>{row?.timezone}</>;
+        return (
+          <span className="">{datepipeModel.date(row?.endDate)}</span>
+        );
       },
-    }, */
+    },
+    {
+      key: "assignment_id",
+      name: "Assignment",
+      render: (row) => {
+        return (
+          <span className="">{row?.assignmentDetail?.title}</span>
+        );
+      },
+    },
+    {
+      key: "total_amount",
+      name: "Total Amount",
+      render: (row) => {
+        return (
+          <span className="">${pipeModel.number(row?.total_amount)}</span>
+        );
+      },
+    },
     {
       key: "status",
       name: "Status",
       render: (row) => {
         return (
-          <>
-            <div className="w-32" onClick={() => statusChange(row)}>
-              <span
-                className={`bg-[#063688] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-                          ${
-                            row.status == "deactive"
-                              ? " bg-gray-200 text-black"
-                              : "bg-[#063688] text-white"
-                          }`}
-              >
-                {row.status == "deactive" ? "inactive" : "active"}
-              </span>
-            </div>
+          <> 
+<span className="capitalize">{row?.status}</span>
+            {/* <SelectDropdown
+              id="statusDropdown"
+              displayValue="name"
+              placeholder="All Status"
+              intialValue={row?.status}
+              result={(e) => {
+                statusChange(e.value,row);
+              }}
+              options={statusModel.status}
+            /> */}
           </>
         );
       },
@@ -115,30 +116,25 @@ const Html = ({
               ) : (
                 <></>
               )}
-              {isAllow(`edit${shared.check}`) ? (
-                <Tooltip placement="top" title="Edit">
+             
+             {itm.status=='pending'?<>
+                <Tooltip placement="top" title="Accept">
+                <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => statusChange('accepted',itm)}
+                  >
+                  <span class="material-symbols-outlined">check</span>
+                  </a>
+                  </Tooltip>
+                  <Tooltip placement="top" title="Reject">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => edit(itm.id)}
+                    onClick={(e) => statusChange('rejected',itm)}
                   >
-                    <LiaEdit />
+                  <span class="material-symbols-outlined">close</span>
                   </a>
-                </Tooltip>
-              ) : (
-                <></>
-              )}
-              {isAllow(`delete${shared.check}`) ? (
-                <Tooltip placement="top" title="Delete">
-                  <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={() => deleteItem(itm.id)}
-                  >
-                    <LiaTrashAlt />
-                  </span>
-                </Tooltip>
-              ) : (
-                <></>
-              )}
+                  </Tooltip>
+              </>:<></>}
             </div>
           </>
         );
@@ -182,7 +178,7 @@ const Html = ({
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
                     </button> */}
 
-          {isAllow(`add${shared.check}`) ? (
+          {/* {isAllow(`add${shared.check}`) ? (
             <Link
               className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
               to={`/${shared.url}/add`}
@@ -191,7 +187,7 @@ const Html = ({
             </Link>
           ) : (
             <></>
-          )}
+          )} */}
         </div>
       </div>
 
@@ -264,18 +260,9 @@ const Html = ({
               result={(e) => {
                 changestatus(e.value);
               }}
-              options={statusModel.list}
+              options={shared.status}
             />
-            {/* <SelectDropdown
-                            id="statusDropdown"
-                            displayValue="name"
-                            placeholder='All Groups'
-                            intialValue={filters.groupId}
-                            theme="search"
-                            result={e => filter({ groupId: e.value })}
-                            options={groups}
-                        /> */}
-            {filters.status || filters.groupId ? (
+            {filters.status ? (
               <>
                 <button
                   className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
