@@ -135,7 +135,7 @@ const Html = ({
                   </Tooltip>
               </>:<></>}
 
-              {itm.status=='accepted' && (itm?.counterOfferStatus=='not_accepted'||itm?.counterOfferStatus=='not_given')?<>
+              {(itm.status=='accepted' && user?.role != "staff")  && (itm?.counterOfferStatus=='not_accepted'||itm?.counterOfferStatus=='not_given')?<>
                 <Tooltip placement="top" title="Counter Offer">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -147,7 +147,7 @@ const Html = ({
                   </Tooltip>
 
               </>:<>
-             {itm.status=='accepted' && <Tooltip placement="top" title="Offer Sent">
+             {(itm.status=='accepted' && user?.role != "staff") && <Tooltip placement="top" title="Offer Sent">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                   >
