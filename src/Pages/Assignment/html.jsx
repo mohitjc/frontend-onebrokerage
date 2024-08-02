@@ -77,7 +77,7 @@ const Html = ({
       render: (row) => {
         return (
           <> 
-<span className="capitalize">{row?.status}</span>
+<span className={`capitalize ${row?.status}`}>{row?.status}</span>
             {/* <SelectDropdown
               id="statusDropdown"
               displayValue="name"
