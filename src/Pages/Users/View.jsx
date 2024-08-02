@@ -39,6 +39,7 @@ const View = () => {
 
   const isAllChecked = () => {
     let value = true;
+    if(!data?.permissions) return
     let permissions = data?.permissions;
     Object.keys(permissions).map((itm) => {
       if (!permissions[itm]) value = false;
