@@ -131,7 +131,7 @@ const Html = ({
                   </Tooltip>
               </>:<></>}
 
-              {itm.status=='accepted'?<>
+              {itm.status=='accepted' && (itm?.counterOfferStatus=='not_accepted'||itm?.counterOfferStatus=='not_given')?<>
                 <Tooltip placement="top" title="Counter Offer">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
