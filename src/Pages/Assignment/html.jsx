@@ -58,7 +58,7 @@ const Html = ({
       name: "Staff",
       render: (row) => {
         return <>
-        {(row.status=='accepted' && user?.role == "admin") ? <>
+        {row.status=='accepted' ? <>
           <SelectDropdown
               id="statusDropdown"
               displayValue="fullName"
