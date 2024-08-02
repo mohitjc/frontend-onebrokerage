@@ -15,6 +15,10 @@ export const rolePermissions = [
     name: "Content",
     key: "Content",
   },
+  {
+    name: "Assignment",
+    key: "Assignment",
+  },
 ];
 
 export const rolePermission = [
