@@ -147,14 +147,14 @@ const Html = ({
                   </Tooltip>
 
               </>:<>
-              <Tooltip placement="top" title="Sent Offer!">
+             {itm.status=='accepted' && <Tooltip placement="top" title="Offer Sent">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                   >
                   <PiMoneyWavyLight />
 
                   </a>
-                  </Tooltip>
+                  </Tooltip>}
               </>}
             </div>
           </>
