@@ -11,6 +11,7 @@ import moment from "moment";
 import datepipeModel from "../../models/datepipemodel";
 import pipeModel from "../../models/pipeModel";
 import methodModel from "../../methods/methods";
+import environment from "../../environment";
 
 const View = () => {
   const user = useSelector((state) => state.user);
@@ -104,7 +105,7 @@ const View = () => {
                    <p className="text-[14px] text-black font-medium ms-3">
                     {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
                     {data?.doc_url?<>
-                    <a href={methodModel.noImg(data?.doc_url)} target="_new">
+                    <a href={`${environment.api}document/${data?.doc_url}`} target="_new">
                     <span class="material-symbols-outlined">draft</span>
                     </a>
                     </>:<></>}
