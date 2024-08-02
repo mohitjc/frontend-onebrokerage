@@ -84,14 +84,13 @@ const Table = ({
                           className={`px-6 py-3   ${
                             itm.sort ? "cursor-pointer" : ""
                           }`}
-                          onClick={() => headclick(itm)}
                           key={itm.key}
                         >
                           <span className="inline-flex items-center gap-1">
                             <span> {itm.name} </span>
                             {itm.sort ? (
                               <>
-                                <span className="">
+                                <span className="" onClick={() => headclick(itm)}>
                                   <HiOutlineArrowDown className=" inline text-sm" />
                                 </span>
                               </>
