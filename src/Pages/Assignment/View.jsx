@@ -77,7 +77,7 @@ const View = () => {
       render: (row) => {
         return (
           <> 
-<span className="capitalize">{row?.status}</span>
+<span className={`capitalize ${row?.status?row.status:''}`}>{row?.status}</span>
             {/* <SelectDropdown
               id="statusDropdown"
               displayValue="name"
@@ -133,7 +133,7 @@ const View = () => {
 
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12">
-              <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-5">
+              <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-5 capitalize">
               <div>
                   <h4 className="p-4 bg-[#0636881a] font-medium">Basic Information</h4>
                 </div>

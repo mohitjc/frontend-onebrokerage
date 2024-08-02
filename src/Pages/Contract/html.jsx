@@ -34,8 +34,9 @@ const Html = ({
   const user = useSelector((state) => state.user);
   const columns = [
     {
-      key: "fullName",
+      key: "title",
       name: "Title",
+      sort: true,
       render: (row) => {
         return <span className="capitalize">{row?.title}</span>;
       },
@@ -43,6 +44,7 @@ const Html = ({
     {
       key: "startDate",
       name: "Start Date",
+      sort: true,
       render: (row) => {
         return (
           <span className="">{datepipeModel.date(row?.startDate)}</span>
@@ -52,6 +54,7 @@ const Html = ({
     {
       key: "endDate",
       name: "End Date",
+      sort: true,
       render: (row) => {
         return (
           <span className="">{datepipeModel.date(row?.endDate)}</span>
@@ -63,7 +66,7 @@ const Html = ({
       name: "Assignment",
       render: (row) => {
         return (
-          <span className="ellipses">{row?.assignmentDetail?.title}</span>
+          <span className="capitalize ellipses">{row?.assignmentDetail?.title}</span>
         );
       },
     },

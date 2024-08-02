@@ -38,13 +38,15 @@ const Html = ({
     {
       key: "fullName",
       name: "Title",
+      sort: true,
       render: (row) => {
         return <span className="capitalize ellipses">{row?.title}</span>;
       },
     },
     {
-      key: "email",
+      key: "dueDate",
       name: "Due date ",
+      sort: true,
       render: (row) => {
         return (
           <span className="">{moment(row?.dueDate).format("DD-MM-YYYY")}</span>
@@ -56,7 +58,7 @@ const Html = ({
       name: "Staff",
       render: (row) => {
         return <>
-        {row.status=='accepted'?<>
+        {row.status=='accepted' ? <>
           <SelectDropdown
               id="statusDropdown"
               displayValue="fullName"
@@ -68,7 +70,7 @@ const Html = ({
               theme="search"
               options={staff}
             />
-        </>:<></>}
+        </>:<> </>}
         
         </>
       },
@@ -133,7 +135,7 @@ const Html = ({
                   </Tooltip>
               </>:<></>}
 
-              {itm.status=='accepted' && (itm?.counterOfferStatus=='not_accepted'||itm?.counterOfferStatus=='not_given')?<>
+              {(itm.status=='accepted' && user?.role != "staff")  && (itm?.counterOfferStatus=='not_accepted'||itm?.counterOfferStatus=='not_given')?<>
                 <Tooltip placement="top" title="Counter Offer">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -144,7 +146,16 @@ const Html = ({
                   </a>
                   </Tooltip>
 
-              </>:<></>}
+              </>:<>
+             {(itm.status=='accepted' && user?.role != "staff") && <Tooltip placement="top" title="Offer Sent">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                  >
+                  <PiMoneyWavyLight />
+
+                  </a>
+                  </Tooltip>}
+              </>}
             </div>
           </>
         );
@@ -275,7 +286,7 @@ const Html = ({
           <Table
               className="mb-3"
               data={data}
-              columns={columns}
+              columns={user?.role == "admin" ? columns : columns?.filter((itm)=>itm?.key != "staff")}
               page={filters.page}
               count={filters.count}
               filters={filters}

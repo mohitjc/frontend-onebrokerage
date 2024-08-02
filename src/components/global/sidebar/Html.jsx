@@ -49,9 +49,9 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
   }, []);
 
   const menus = [
-    {
-      name: "Main Menu",
-    },
+    // {
+    //   name: "Main Menu",
+    // },
     {
       name: "Dashboard",
       icon: <RiHome6Line className="text-inherit shrink-0 text-lg" />,
@@ -71,22 +71,22 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       key: "readCustomers",
     },
     {
-      name: "Content Management",
-      icon: <MdContentPaste className="text-inherit shrink-0 text-lg" />,
-      url: "/content",
-      key: "readContent",
-    },
-    {
       name: "Assignments",
       icon: <MdOutlineAssignment className="text-inherit shrink-0 text-lg" />,
       url: "/assignment",
-      key: "Assignment",
+      key: "readstaff",
     },
     {
       name: "Contract",
       icon: <RiContractLine className="text-inherit shrink-0 text-lg" />,
       url: "/contract",
-      key: "Contract",
+      key: "readstaff",
+    },
+    {
+      name: "Content Management",
+      icon: <MdContentPaste className="text-inherit shrink-0 text-lg" />,
+      url: "/content",
+      key: "readContent",
     },
     // {
     //   name: "Blogs",

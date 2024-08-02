@@ -66,6 +66,9 @@ const Assignment = () => {
   const getData = (p = {}) => {
     setLoader(true);
     let filter = { ...filters, ...p,role:'user' };
+    if(user?.role == "staff"){
+      filter={...filters, ...p ,staff:user?.id || user?._id}
+    }
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
         setData(
@@ -250,6 +253,7 @@ const Assignment = () => {
       loader(false)
       if(res?.success){
         setCounterModal(false)
+        getData()
         setCounterForm({})
       }else{}
     })
