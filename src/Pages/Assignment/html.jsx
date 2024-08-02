@@ -38,13 +38,15 @@ const Html = ({
     {
       key: "fullName",
       name: "Title",
+      sort: true,
       render: (row) => {
         return <span className="capitalize">{row?.title}</span>;
       },
     },
     {
-      key: "email",
+      key: "dueDate",
       name: "Due date ",
+      sort: true,
       render: (row) => {
         return (
           <span className="">{moment(row?.dueDate).format("DD-MM-YYYY")}</span>
@@ -144,7 +146,16 @@ const Html = ({
                   </a>
                   </Tooltip>
 
-              </>:<></>}
+              </>:<>
+              <Tooltip placement="top" title="Sent Offer!">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                  >
+                  <PiMoneyWavyLight />
+
+                  </a>
+                  </Tooltip>
+              </>}
             </div>
           </>
         );

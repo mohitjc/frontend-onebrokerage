@@ -250,6 +250,7 @@ const Assignment = () => {
       loader(false)
       if(res?.success){
         setCounterModal(false)
+        getData()
         setCounterForm({})
       }else{}
     })
