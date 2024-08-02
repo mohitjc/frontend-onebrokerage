@@ -13,6 +13,7 @@ import { LiaUserSolid } from "react-icons/lia";
 import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
 import methodModel from "../../methods/methods";
 import { GrUserSettings } from "react-icons/gr";
+import { rolePermission, rolePermissions } from "../../models/type.model";
 
 const View = () => {
   const user = useSelector((state) => state.user);
@@ -33,7 +34,33 @@ const View = () => {
     });
   };
 
-  const sortedQuestions = questions?.sort((a, b) => a.order - b.order);
+  const permissions = rolePermissions;
+  const permission = rolePermission;
+
+  const isAllChecked = () => {
+    let value = true;
+    let permissions = data?.permissions;
+    Object.keys(permissions).map((itm) => {
+      if (!permissions[itm]) value = false;
+    });
+    return value;
+  };
+
+  const isAllPCheck = (key = "read") => {
+    let value = true;
+    permissions.map((itm) => {
+      if (!data?.permissions[`${key}${itm.key}`]) value = false;
+    });
+    return value;
+  };
+
+  const isCheckAll = (key) => {
+    let value = true;
+    permission.map((itm) => {
+      if (!data?.permissions[`${itm.key}${key}`]) value = false;
+    });
+    return value;
+  };
 
   useEffect(() => {
     getDetail();
@@ -89,53 +116,97 @@ const View = () => {
                     {data?.mobileNo || "--"}
                   </p>
                 </div>
-                  <div className="col-span-6 flex items-center mb-4">
-                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[160px]">Role:</label>
-                   <p className="text-[14px] text-black font-medium ms-3">
-                    {/* <GrUserSettings className="text-xl text-[#063688]" /> */}
-                  </p>
-                  {data?.role?.name || "--"}
-                </div>
                </div>
               </div>
              
             </div>
-            {/* <div className="col-span-12">
-              <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
-                <div>
-                  <h4 className="p-4 bg-[#0636881a] font-medium">Address</h4>
+            <div className="shadow-box w-full bg-white rounded-lg mb-6">
+                <div className="scrollbar w-full overflow-auto">
+                  <div class="table_section tablepadding">
+                    <p className="text-xl font-semibold text-[#111827] px-4 pb-2">
+                      Permissions
+                    </p>
+                    <table class="w-full">
+                      <thead class="table_head roleTable">
+                        <tr class="border-b border-[#EAECF0]">
+                          <th
+                            scope="col"
+                            class="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-4 text-left bg-[#F7FAFF] !py-3 ' onClick={e => sorting('name')}"
+                          ></th>
+                          <th
+                            scope="col"
+                            class="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-4 text-left bg-[#F7FAFF] !py-3 ' onClick={e => sorting('name')}"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={isAllChecked()}
+                              className="h-4 w-4"
+                            />
+                            All
+                          </th>
+                          {permission.map((itm) => {
+                            return (
+                              <>
+                                <th
+                                  scope="col"
+                                  class="cursor-pointer text-[#82838B] !border-l-0 font-normal text-sm !border border-[#EAECF0] px-4 text-left bg-[#F7FAFF] !py-3 ' onClick={e => sorting('name')}"
+                                >
+                                  <input
+                                    type="checkbox"
+                                    className="h-4 w-4"
+                                    checked={isAllPCheck(itm.key)}
+                                  />
+                                  {itm.name}
+                                </th>
+                              </>
+                            );
+                          })}
+                        </tr>
+                      </thead>
+                      <tbody className="roleTable">
+                        {permissions.map((itm) => {
+                          return (
+                            <>
+                              <tr>
+                                <td className="!text-typo !border-l-0 cursor-pointer !px-4 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                                  {itm.name}
+                                </td>
+                                <td className="!text-typo !border-l-0 cursor-pointer !px-4 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                                  <input
+                                    type="checkbox"
+                                    className="h-4 w-4 green_check cursor-pointer shrink-0 rounded-[4px] !border !border-[#3C3E49A3] !text-white"
+                                    name={itm.key}
+                                    checked={isCheckAll(itm.key)}
+                                  />
+                                </td>
+                                {permission.map((pitm) => {
+                                  return (
+                                    <td className="!text-typo !border-l-0 cursor-pointer !px-4 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
+                                      <div Name="checkList">
+                                        <label className="mb-0">
+                                          <input
+                                            type="checkbox"
+                                            className="h-4 w-4 green_check cursor-pointer shrink-0 rounded-[4px] !border !border-[#3C3E49A3] !text-white"
+                                            checked={
+                                              data?.permissions[
+                                                `${pitm.key}${itm.key}`
+                                              ]
+                                            }
+                                          />
+                                        </label>
+                                      </div>
+                                    </td>
+                                  );
+                                })}
+                              </tr>
+                            </>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-               <div className="grid grid-cols-12 p-4">
-               <div className="col-span-6 flex items-center mb-4">
-                  <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">Name:</label>
-                  <p className="text-[14px] text-black font-medium ms-3">
-                    {" "}
-                    {data && data.fullName}
-                  </p>
-                </div>
-                  <div className="col-span-6 flex items-center mb-4">
-                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[160px]">Email:</label>
-                   <p className="text-[14px] text-black font-medium ms-3">
-                    {data && data.email}
-                  </p>
-                </div>
-
-                  <div className="col-span-6 flex items-center mb-4">
-                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[160px]">Mobile Number:</label>
-                   <p className="text-[14px] text-black font-medium ms-3">
-                    {data?.mobileNo || "--"}
-                  </p>
-                </div>
-                  <div className="col-span-6 flex items-center mb-4">
-                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[160px]">Role:</label>
-                   <p className="text-[14px] text-black font-medium ms-3">
-                  </p>
-                  {data?.role?.name || "--"}
-                </div>
-               </div>
               </div>
-             
-            </div> */}
           </div>
         </div>
       </Layout>

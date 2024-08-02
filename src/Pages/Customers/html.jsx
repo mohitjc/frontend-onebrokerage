@@ -53,20 +53,20 @@ const Html = ({
         return <span className="">{row?.email}</span>;
       },
     },
-    {
-      key: "mobileNo",
-      name: "Mobile No",
-      render: (row) => {
-        return (
-          <>
-            <p className="capitalize">
-              {row?.mobileNo ? "+" : ""}
-              {row?.mobileNo}
-            </p>
-          </>
-        );
-      },
-    },
+    // {
+    //   key: "mobileNo",
+    //   name: "Mobile No",
+    //   render: (row) => {
+    //     return (
+    //       <>
+    //         <p className="capitalize">
+    //           {row?.mobileNo ? "+" : ""}
+    //           {row?.mobileNo}
+    //         </p>
+    //       </>
+    //     );
+    //   },
+    // },
     /* {
       key: "timezone",
       name: "Timezone",
@@ -292,7 +292,8 @@ const Html = ({
 
         {!loaging ? (
           <>
-            <Table
+          <div className="px-4">
+          <Table
               className="mb-3"
               data={data}
               columns={columns}
@@ -309,6 +310,7 @@ const Html = ({
                 if (e.event == "count") count(e.value);
               }}
             />
+          </div>
           </>
         ) : (
           <></>

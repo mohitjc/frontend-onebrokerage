@@ -2113,3 +2113,15 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
 .slow-shake {
   animation: slowShake 2s infinite;
 }
+
+.desc-text br {
+  display: none;
+}
+.ql-toolbar.ql-snow {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  padding: 8px;
+  border-top-left-radius: 6px !important;
+  border-top-right-radius: 6px !important;
+}

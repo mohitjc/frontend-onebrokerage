@@ -9,21 +9,13 @@ import axios from "axios";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import Modal from "../../components/common/Modal";
-import FormControl from "../../components/common/FormControl";
-const Assignment = () => {
+const Contract = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
   const [data, setData] = useState([]);
-  const [staff, setStaff] = useState([]);
   const [total, setTotal] = useState(0);
   const [loaging, setLoader] = useState(true);
-  const [counterModal, setCounterModal] = useState(false);
-  const [counterForm, setCounterForm] = useState({
-    counterOffer:''
-  });
-  const[status,setStatus] = useState("pending")
   const history = useNavigate();
 
   const sortClass = (key) => {
@@ -49,23 +41,11 @@ const Assignment = () => {
     getData({ sortBy, key, sorder });
   };
 
-  const getStaff = (p = {}) => {
-    let filter = { page:1,count:50,...p, role:'staff' };
-    ApiClient.get('user/listing', filter).then((res) => {
-      if (res.success) {
-        setStaff(
-          res.data.map((itm) => {
-            itm.id = itm._id;
-            return itm;
-          })
-        );
-      }
-    });
-  };
-
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p,role:'user' };
+    let filter = { ...filters, ...p};
+
+
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
         setData(
@@ -165,22 +145,8 @@ const Assignment = () => {
      
   };
 
-  const edit = (p={}) => {
-    let payload={
-      ...p
-    }
-
-    Object.keys(payload).map(itm=>{
-      if(!payload[itm]) payload[itm]=null
-    })
-
-    loader(true);
-        ApiClient.put(`${shared.editApi}?id=${payload?.id}`, payload).then((res) => {
-          if (res.success) {
-            getData();
-          }
-          loader(false);
-        }); 
+  const edit = (id) => {
+    history(`/${shared.url}/edit/${id}`);
   };
 
   const view = (id) => {
@@ -232,35 +198,13 @@ const Assignment = () => {
     if (user && user.loggedIn) {
       setFilter({ ...filters, search: searchState.data });
       getData({ search: searchState.data, page: 1 });
-      getStaff()
     }
   }, []);
-
-  const counterOffer=(item)=>{
-    console.log("form",item)
-
-    setCounterForm({counterOffer:'',assignment_id:item?.id||item?._id,message:''})
-    setCounterModal(true)
-  }
-
-  const counterSubmit=()=>{
-    let payload={...counterForm}
-    loader(true)
-    ApiClient.post(`counter-offer/create`,payload).then(res=>{
-      loader(false)
-      if(res?.success){
-        setCounterModal(false)
-        setCounterForm({})
-      }else{}
-    })
-  }
 
   return (
     <>
       <Html
-      staff={staff}
         edit={edit}
-        counterOffer={counterOffer}
         view={view}
         clear={clear}
         sortClass={sortClass}
@@ -279,51 +223,9 @@ const Assignment = () => {
         changestatus={changestatus}
         exportfun={exportfun}
         uploadFile={uploadFile}
-        status={status}
       />
-
-      {counterModal?<>
-        <Modal
-      title="Counter Offer"
-      result={e=>{
-        setCounterModal(false)
-      }}
-      body={<>
-        <form onSubmit={e=>{e.preventDefault();counterSubmit()}}>
-          <div>
-          <div className="mb-4">
-          <FormControl
-            type="number"
-            label="Amount"
-            value={counterForm.counterOffer}
-            maxlength="10"
-            onChange={e=>{
-              setCounterForm({...counterForm,counterOffer:Number(e)})
-            }}
-            required={true}
-            />
-          </div>
-            <FormControl
-            type="textarea"
-            label="Message"
-            value={counterForm.message||''}
-            onChange={e=>{
-              setCounterForm({...counterForm,message:e})
-            }}
-            required={true}
-            />
-          </div>
-          <div className="mt-3 text-right">
-            <button className="btn btn-primary">Add</button>
-          </div>
-        </form>
-      </>}
-      />
-      </>:<></>}
-
-     
     </>
   );
 };
 
-export default Assignment;
+export default Contract;

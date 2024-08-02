@@ -80,6 +80,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       url: "/assignment",
       key: "Assignment",
     },
+    {
+      name: "Contract",
+      icon: <MdContentPaste className="text-inherit shrink-0 text-lg" />,
+      url: "/contract",
+      key: "Contract",
+    },
     // {
     //   name: "Blogs",
     //   icon: (

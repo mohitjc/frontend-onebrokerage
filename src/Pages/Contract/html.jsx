@@ -2,26 +2,25 @@ import Layout from "../../components/global/layout";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import { Tooltip } from "antd";
-import {  FiPlus } from "react-icons/fi";
+import { FiEdit3, FiPlus } from "react-icons/fi";
 import Table from "../../components/Table";
 import SelectDropdown from "../../components/common/SelectDropdown";
+import statusModel from "../../models/status.model";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import { PiEyeLight } from "react-icons/pi";
-import { PiMoneyWavyLight } from "react-icons/pi";
-
+import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import moment from "moment";
+import datepipeModel from "../../models/datepipemodel";
+import pipeModel from "../../models/pipeModel";
 const Html = ({
-  staff,
-  counterOffer,
   sorting,
   filter,
   edit,
   view,
-  statusChange,
   pageChange,
   count,
-  deleteItem,
+  statusChange,
   clear,
   filters,
   setFilter,
@@ -29,7 +28,6 @@ const Html = ({
   data,
   changestatus,
   isAllow,
-  status,
   total = { total },
   sortClass,
 }) => {
@@ -43,34 +41,39 @@ const Html = ({
       },
     },
     {
-      key: "email",
-      name: "Due date ",
+      key: "startDate",
+      name: "Start Date",
       render: (row) => {
         return (
-          <span className="">{moment(row?.dueDate).format("DD-MM-YYYY")}</span>
+          <span className="">{datepipeModel.date(row?.startDate)}</span>
         );
       },
     },
     {
-      key: "staff",
-      name: "Staff",
+      key: "endDate",
+      name: "End Date",
       render: (row) => {
-        return <>
-        {row.status=='accepted'?<>
-          <SelectDropdown
-              id="statusDropdown"
-              displayValue="fullName"
-              placeholder="Select Staff"
-              intialValue={row?.staff}
-              result={(e) => {
-                edit({id:row.id,staff:e.value});
-              }}
-              theme="search"
-              options={staff}
-            />
-        </>:<></>}
-        
-        </>
+        return (
+          <span className="">{datepipeModel.date(row?.endDate)}</span>
+        );
+      },
+    },
+    {
+      key: "assignment_id",
+      name: "Assignment",
+      render: (row) => {
+        return (
+          <span className="">{row?.assignmentDetail?.title}</span>
+        );
+      },
+    },
+    {
+      key: "total_amount",
+      name: "Total Amount",
+      render: (row) => {
+        return (
+          <span className="">${pipeModel.number(row?.total_amount)}</span>
+        );
       },
     },
     {
@@ -113,8 +116,8 @@ const Html = ({
               ) : (
                 <></>
               )}
-
-              {itm.status=='pending'?<>
+             
+             {itm.status=='pending'?<>
                 <Tooltip placement="top" title="Accept">
                 <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -132,19 +135,6 @@ const Html = ({
                   </a>
                   </Tooltip>
               </>:<></>}
-
-              {itm.status=='accepted'?<>
-                <Tooltip placement="top" title="Counter Offer">
-                  <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => counterOffer(itm)}
-                  >
-                  <PiMoneyWavyLight />
-
-                  </a>
-                  </Tooltip>
-
-              </>:<></>}
             </div>
           </>
         );
@@ -152,6 +142,21 @@ const Html = ({
     },
   ];
 
+  /*  const getGroups = () => {
+    let f = {
+      page: 1,
+      count: 10,
+    };
+    ApiClient.get("api/group/list", f).then((res) => {
+      if (res.success) {
+        setGroup(res.data);
+      }
+    });
+  };
+ */
+  //   useEffect(() => {
+  //       getGroups()
+  //   }, [])
 
   return (
     <Layout>
@@ -167,10 +172,13 @@ const Html = ({
         </div>
 
         <a id="downloadFile"></a>
-        {/* <div className="flex">
-      
 
-          {isAllow(`add${shared.check}`) ? (
+        <div className="flex">
+          {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
+                        <PiFileCsv className="text-typo text-xl" />  Export CSV
+                    </button> */}
+
+          {/* {isAllow(`add${shared.check}`) ? (
             <Link
               className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
               to={`/${shared.url}/add`}
@@ -179,8 +187,8 @@ const Html = ({
             </Link>
           ) : (
             <></>
-          )}
-        </div> */}
+          )} */}
+        </div>
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">

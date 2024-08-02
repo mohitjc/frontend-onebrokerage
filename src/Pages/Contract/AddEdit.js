@@ -4,59 +4,49 @@ import loader from "../../methods/loader";
 import methodModel from "../../methods/methods";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Layout from "../../components/global/layout";
-import statusModel from "../../models/status.model";
 import { Tooltip } from "antd";
 import FormControl from "../../components/common/FormControl";
-import timezoneModel from "../../models/timezone.model";
 import shared from "./shared";
-import datepipeModel from "../../models/datepipemodel";
-import { useSelector } from "react-redux";
-import PhoneInput from "react-phone-input-2";
+import moment from "moment";
 import ImageUpload from "../../components/common/ImageUpload";
 
 const AddEdit = () => {
-  const { slug } = useParams();
-  const [form, setform] = useState({
-    id: "",
+  const { id } = useParams();
+
+  const [images, setImages] = useState({ image: "" });
+  const [form, setform] = useState({ 
     title: "",
-    slug:'',
-    description: "",
-    meta_keyword: '',
-    meta_title: "",
-    meta_description: "",
+    terms: "", 
+    startDate : "",
+    endDate : "",
+    total_amount:''
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
-  const user = useSelector((state) => state.user);
-  const formValidation = [
-    /*  { key: "status", required: true },
-    { key: "type", required: true, message: "Type is required" },
-    { key: "timezone", required: true },
-    { key: "description", required: true, message: "Description is required" }, */
-    // { key:'groupMemberLimit' , required:true ,message:'Group Member Limit is required'}
+  const [doc, setDoc] = useState('');
+
+  const formValidation = [ 
+    { key: "title", required: true, message: "Title is required", },
   ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-    // let invalid = methodModel.getFormError(formValidation, form);
+    let invalid = methodModel.getFormError(formValidation, form);
 
-    // if (invalid) return;
-
-
-
+    if (invalid) return;
     let method = "post";
     let url = shared.addApi;
     let value = {
-      ...form,
+      ...form, 
+      doc_url:doc,
+      assignment_id:methodModel.getPrams('assignment')
     };
 
-    const slug=value.title.toLowerCase().replaceAll(' ','-')
     if (value.id) {
       method = "put";
-      url = shared.editApi;
+      url = `${shared.editApi}?id=${id}`;
     } else {
-      value.slug=slug
       delete value.id;
     }
 
@@ -70,27 +60,30 @@ const AddEdit = () => {
     });
   };
 
+
+
   useEffect(() => {
-    if (slug) {
+    if (id) {
       loader(true);
-      ApiClient.get(shared.detailApi, { slug }).then((res) => {
+      ApiClient.get(shared.detailApi, { id }).then((res) => {
         if (res.success) {
           let value = res.data;
           let payload = form;
-
           Object.keys(payload).map((itm) => {
             payload[itm] = value[itm];
-          });
-
-          payload.id = value.id;
+          }); 
+          payload.id = id;
           setform({
             ...payload,
           });
+          
+          setDoc(value.doc_url)
         }
         loader(false);
       });
     }
-  }, [slug]);
+  }, [id]);
+
 
   return (
     <>
@@ -108,72 +101,80 @@ const AddEdit = () => {
               </Tooltip>
               <div>
                 <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
-                  Edit {shared.addTitle}
-                </h3>
-                <p class="text-xs lg:text-sm font-normal text-[#75757A]">
-                  Here you can see all about your {shared.addTitle}
-                </p>
+                  {form && form.id ? "Edit" : "Add"} {shared.addTitle}
+                </h3> 
               </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
-                   
-            <div className=" mb-3">
-                <FormControl
-                  type="text"
-                  name="title"
-                  label="Title"
-                  value={form.title}
-                  onChange={(e) => setform({ ...form, title: e })}
-                />
-              </div>
-
-
               <div className=" mb-3">
                 <FormControl
                   type="text"
-                  name="meta_title"
-                  label="Meta Title"
-                  value={form.meta_title}
-                  onChange={(e) => setform({ ...form, meta_title: e })}
+                  label="Title"
+                  value={form.title}
+                  onChange={(e) => setform({ ...form, title: e })}
+                  required
+                />
+              </div> 
+              <div className="mb-3">
+                <FormControl
+                  type="date"
+                  label="Start date"
+                  value={form.startDate}
+                  onChange={(e) => setform({ ...form, startDate: e })}
+                  required
                 />
               </div>
+              <div className="mb-3">
+                <FormControl
+                  type="date"
+                  label="End date"
+                  value={form.endDate}
+                  onChange={(e) => setform({ ...form, endDate: e })}
+                  required
+                />
+              </div>    
 
+              <div className="mb-3">
+                <FormControl
+                  type="number"
+                  label="Total Amount"
+                  value={form.total_amount}
+                  maxlength="10"
+                  onChange={(e) => setform({ ...form, total_amount: e })}
+                  required
+                />
+              </div>   
+              
               <div className="col-span-full mb-3">
                 <FormControl
-                  type="editor"
-                  name="description"
-                  label="Description"
-                  value={form.description}
-                  onChange={(e) => setform({ ...form, description: e })}
-                />
-              </div>
+                      type="editor"
+                      label="terms"
+                      value={form.terms}
+                      
+                      onChange={(e) => setform({ ...form, terms: e })}
+                      required
+                    />
+            
+            </div>
 
-              <div className="col-span-full mb-3">
-                <FormControl
-                  type="textarea"
-                  name="meta_description"
-                  label="Meta Description"
-                  value={form.meta_description}
-                  onChange={(e) => setform({ ...form, meta_description: e })}
+            <div className="mb-3">
+                <label className="text-sm">Document</label>
+                <div>
+                <ImageUpload
+                value={doc}
+                model="document"
+                apiUrl="upload/upload/document"
+                type="doc"
+                accept=""
+                label="Upload Docs"
+                result={e=>{
+                  setDoc(e.value)
+                }}
                 />
-              </div>
-
-              <div className="col-span-full mb-3">
-                <FormControl
-                  type="text"
-                  name="keywords"
-                  label="Keywords"
-                  value={form.meta_keyword}
-                  onChange={(e) =>
-                    setform({
-                      ...form,
-                      meta_keyword:e,
-                    })
-                  }
-                />
-              </div>
+                </div>
+               
+            </div>
             </div>
 
             <div className="text-right">

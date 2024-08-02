@@ -27,7 +27,7 @@ const Html = ({
         </div>
 
         <form name="profileForm" className="" onSubmit={handleSubmit}>
-          <div className="grid grid-cols-12 mb-4 gap-4 shadow p-4 mt-6 gap-4">
+          <div className="grid grid-cols-12 mb-4 gap-4 shadow p-4 mt-6 gap-4 bg-white rounded-[10px]">
             <div className="col-span-12 md:col-span-6">
               <FormControl
                 type="text"
@@ -49,7 +49,7 @@ const Html = ({
             </div> */}
 
             <div className="col-span-12 md:col-span-6">
-              <label>
+              <label className="text-sm mb-2 block">
                 Mobile No<span className="star">*</span>
               </label>
               <PhoneInput
@@ -69,10 +69,10 @@ const Html = ({
               )}
             </div>
             <div className="col-span-12 md:col-span-6">
-              <label>Email</label>
+            <label className="text-sm mb-2 block">Email</label>
               <input
                 type="email"
-                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
+                className="relative border  border-[#00000036] [#bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
                 value={form.email}
                 autoComplete="false"
                 onChange={(e) => {
@@ -84,8 +84,8 @@ const Html = ({
             </div>
 
             <div className="col-span-12 md:col-span-6">
-              <label className="lablefontcls">Image</label>
-              <br></br>
+            <label className="text-sm mb-2 block">Image</label>
+             
               <ImageUpload
                 model="users"
                 result={(e) => imageResult(e, "image")}

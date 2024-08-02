@@ -1,6 +1,7 @@
 import React from "react";
 import methodModel from "../../../methods/methods";
 import { FiPlus } from "react-icons/fi";
+import { LuUpload } from "react-icons/lu";
 
 const Html = ({
   inputElement,
@@ -17,7 +18,7 @@ const Html = ({
   return (
     <>
       <label
-        className={`block cursor-pointer text-gray-500 bg-white border-2 border-dashed border-[#063688] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-8 py-4 text-center ${
+        className={`block cursor-pointer text-gray-500 bg-white border border-dashed border-[#00000078] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-8 py-2 text-center ${
           img && !multiple ? "d-none" : ""
         }`}
       >
@@ -32,9 +33,11 @@ const Html = ({
             uploadImage(e);
           }}
         />
-        <div className="flex flex-col items-center justify-center">
-          <FiPlus className="text-2xl text-[#063688]" />
-          <span>{label || "Please upload images"}</span>
+        <div className="flex  items-center justify-center">
+        <LuUpload className="text-xl text-[#00000078] me-2"/>
+
+       
+          <span>{label || "Please upload image"}</span>
         </div>
       </label>
 
