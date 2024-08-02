@@ -169,21 +169,29 @@ const Login = () => {
           </form>
         ) : (
           <form
-            className="w-11/12 xl:w-7/12 lg:w-8/12 	mx-auto bg-[#00358508] border border-[#00000017] p-[24px] rounded-[30px] shadow-c"
+            className="w-11/12 xl:w-9/12 lg:w-9/12  bg-white border border-[#00000017] p-[24px] rounded-[30px] shadow-c"
             onSubmit={hendleSubmit}
           >
+            <Link to="/" className=" xl:w-[140px] z-[99] mb-6 block mx-auto text-center">
+                  <img
+                    src="/assets/img/logo.png"
+                    className="md:w-[160px] lg:w-[120px] w-[120px]  mx-auto"
+                    alt="logo"
+                  />
+                </Link>
             <div className="">
               <h1 className="text-[30px] font-semibold text-[#333] ">
                 Sign In
               </h1>
               <span className="flex w-10 h-1 bg-[#063688] mt-1"></span>
             </div>
-            <p className="text-[16px] font-normal text-[#333] mt-4">
+            {/* <p className="text-[16px] font-normal text-[#333] mt-4">
               Please enter your valid details
-            </p>
+            </p> */}
             {step == 1 ? (
               <div className="mt-5">
                 <div className="relative">
+                  <label className="mb-2 block">Enter Email Address</label>
                   <div className="absolute  z-[99] p-3 px-4 bg-[#00358512] text-[#0035859c] rounded-tl-[7px] rounded-bl-[7px]">
                     <i className="fa fa-envelope " aria-hidden="true"></i>
                   </div>
@@ -198,7 +206,9 @@ const Login = () => {
                     required
                   />
                 </div>
+                <label className="mb-2 block">Enter Password</label>
                 <div className="relative mb-6">
+               
                   <div className="absolute  z-[99] p-3 px-4 bg-[#00358512] text-[#0035859c] rounded-tl-[7px] rounded-bl-[7px]">
                     <i className="fa fa-lock " aria-hidden="true"></i>
                   </div>

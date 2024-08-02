@@ -8,6 +8,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { LuLogOut, LuUser } from "react-icons/lu";
 import { RxDashboard } from "react-icons/rx";
 import {IoSettingsOutline } from "react-icons/io5";
+import { GoLock } from "react-icons/go";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -94,7 +95,7 @@ const Html = ({
                     </Link>
                   )}
                 </Menu.Item>
-                <Menu.Item>
+                {/* <Menu.Item>
                   {({ active }) => (
                     <Link
                       to="/dashboard"
@@ -106,7 +107,7 @@ const Html = ({
                       <RxDashboard /> Dashboard
                     </Link>
                   )}
-                </Menu.Item>
+                </Menu.Item> */}
                 <Menu.Item>
                   {({ active }) => (
                     <Link
@@ -116,7 +117,8 @@ const Html = ({
                         "block px-4 py-2 text-sm flex items-center gap-2"
                       )}
                     >
-                      <IoSettingsOutline />
+                      <GoLock />
+
                       Change Password
                     </Link>
                   )}
