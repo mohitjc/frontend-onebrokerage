@@ -70,7 +70,7 @@ const Html = ({
               theme="search"
               options={staff}
             />
-        </>:<></>}
+        </>:<> </>}
         
         </>
       },
@@ -286,7 +286,7 @@ const Html = ({
           <Table
               className="mb-3"
               data={data}
-              columns={columns}
+              columns={user?.role == "admin" ? columns : columns?.filter((itm)=>itm?.key != "staff")}
               page={filters.page}
               count={filters.count}
               filters={filters}
