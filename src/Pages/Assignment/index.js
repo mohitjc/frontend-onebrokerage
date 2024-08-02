@@ -143,7 +143,7 @@ const Assignment = () => {
 
     Swal.fire({
       title: "Are you sure?",
-      text: `Do you want to ${status=='accepted'?'Accept':'Reject'} this`,
+      text: `Do you want to ${status=='accepted'?'Accept':'Reject'} this assignment ?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#063688",
