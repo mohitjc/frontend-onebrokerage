@@ -86,7 +86,7 @@ const Contract = () => {
       text: `Do you want to delete this`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#063688",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then((result) => {
@@ -126,7 +126,7 @@ const Contract = () => {
       text: `Do you want to ${status=='accepted'?'Accept':'Reject'} this`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#063688",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then((result) => {

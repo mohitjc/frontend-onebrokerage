@@ -292,7 +292,8 @@ const Html = ({
 
         {!loaging ? (
           <>
-            <Table
+           <div className="px-4 pb-4">
+          <Table
               className="mb-3"
               data={data}
               columns={columns}
@@ -309,6 +310,7 @@ const Html = ({
                 if (e.event == "count") count(e.value);
               }}
             />
+          </div>
           </>
         ) : (
           <></>

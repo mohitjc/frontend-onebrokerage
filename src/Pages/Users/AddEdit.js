@@ -284,10 +284,10 @@ const AddEdit = () => {
               </div>
             </div>
             {form?.role == "staff" ? (
-              <div className="shadow-box w-full bg-white rounded-lg mb-6">
+              <div className="shadow-box w-full bg-white rounded-lg mb-6 mt-4">
                 <div className="scrollbar w-full overflow-auto">
                   <div class="table_section tablepadding">
-                    <p className="text-xl font-semibold text-[#111827] px-4 py-2">
+                    <p className="text-xl font-semibold text-[#111827] px-4 py-3">
                       Permissions
                     </p>
                     <table class="w-full">

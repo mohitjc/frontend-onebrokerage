@@ -133,8 +133,10 @@ const View = () => {
 
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12">
-              <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
-               
+              <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-5">
+              <div>
+                  <h4 className="p-4 bg-[#0636881a] font-medium">Basic Information</h4>
+                </div>
                <div className="grid grid-cols-12 p-4">
                <div className="col-span-6 flex items-center mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Title:</label>
@@ -144,10 +146,7 @@ const View = () => {
                     {data && data.title}
                   </p>
                 </div>
-                  <div className="col-span-6 flex items-center mb-3">
-                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Description:</label>
-                   <p  dangerouslySetInnerHTML={{__html: data?.description}} className="text-[14px] text-black font-medium ms-3"></p>
-                </div>
+                
 
                   <div className="col-span-6 flex items-center mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Due Date :</label>
@@ -163,22 +162,23 @@ const View = () => {
                     {data?.status|| "--"}
                   </p>
                 </div>
-               
+                <div className="col-span-12 flex items-center mb-3">
+                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Description:</label>
+                   <p  dangerouslySetInnerHTML={{__html: data?.description}} className="text-[14px] text-black font-medium ms-3 desc-text"></p>
+                </div>
                </div>
               </div>
              
             </div>
            
           </div>
-          <div>
-              <h3 className="text-lg lg:text-2xl font-semibold text-[#111827] mt-6">
-               Staff Details
-              </h3>
-            </div>
-            <div className="grid grid-cols-12 gap-6">
+         
+            <div className="grid grid-cols-12 gap-6 mb-5">
             <div className="col-span-12">
               <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
-               
+              <div>
+                  <h4 className="p-4 bg-[#0636881a] font-medium">Staff Details</h4>
+                </div>
                <div className="grid grid-cols-12 p-4">
                <div className="col-span-6 flex items-center mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Name:</label>
@@ -201,10 +201,9 @@ const View = () => {
            
           </div>
 
-          <h3 className="text-lg lg:text-2xl font-semibold text-[#111827] mt-6">
-                Counter Offers
-              </h3>
-
+              <div>
+                  <h4 className="p-4 bg-[#0636881a] font-medium">Counter Offers</h4>
+                </div>
               <Table
               className="mb-3"
               data={counterOfferData}

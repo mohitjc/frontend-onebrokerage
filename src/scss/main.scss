@@ -2113,3 +2113,43 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
 .slow-shake {
   animation: slowShake 2s infinite;
 }
+
+.desc-text br {
+  display: none;
+}
+.ql-toolbar.ql-snow {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  padding: 8px;
+  border-top-left-radius: 6px !important;
+  border-top-right-radius: 6px !important;
+}
+
+.rejected {
+  background: #ff090940;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #393939d9;
+  width: 76px;
+  display: block;
+  text-align: center;
+}
+.pending {
+  background: #cfb07e52;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #393939d9;
+  width: 76px;
+  display: block;
+  text-align: center;
+}
+.accepted {
+  background: #0035851f;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #003585;
+  width: 76px;
+  display: block;
+  text-align: center;
+}

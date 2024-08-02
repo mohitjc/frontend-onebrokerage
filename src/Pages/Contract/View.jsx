@@ -57,7 +57,9 @@ const View = () => {
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12">
               <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
-               
+              <div>
+                  <h4 className="p-4 bg-[#0636881a] font-medium">Contract Information</h4>
+                </div>
                <div className="grid grid-cols-12 p-4">
                <div className="col-span-6 flex items-center mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Title:</label>
@@ -89,13 +91,7 @@ const View = () => {
                     {pipeModel.number(data?.total_amount)}
                   </p>
                 </div>
-                <div className="col-span-6 flex items-center mb-3">
-                  <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Total Amount :</label>
-                   <p className="text-[14px] text-black font-medium ms-3">
-                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
-                    {pipeModel.number(data?.total_amount)}
-                  </p>
-                </div>
+              
                 <div className="col-span-6 flex items-center mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Terms :</label>
                    <p className="text-[14px] text-black font-medium ms-3">

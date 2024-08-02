@@ -121,10 +121,11 @@ const View = () => {
               </div>
              
             </div>
-            <div className="shadow-box w-full bg-white rounded-lg mb-6">
+           <div className="col-span-12">
+           <div className="shadow-box w-full bg-white rounded-lg mb-6">
                 <div className="scrollbar w-full overflow-auto">
-                  <div class="table_section tablepadding">
-                    <p className="text-xl font-semibold text-[#111827] px-4 pb-2">
+                  <div class="table_section tablepadding w-full">
+                    <p className="text-xl font-semibold text-[#111827] px-4 pb-3 pt-3">
                       Permissions
                     </p>
                     <table class="w-full">
@@ -143,7 +144,7 @@ const View = () => {
                               checked={isAllChecked()}
                               className="h-4 w-4"
                             />
-                            All
+                              <span className="ms-2"> All</span>
                           </th>
                           {permission.map((itm) => {
                             return (
@@ -157,7 +158,7 @@ const View = () => {
                                     className="h-4 w-4"
                                     checked={isAllPCheck(itm.key)}
                                   />
-                                  {itm.name}
+                                 <span className="ms-2"> {itm.name}</span>
                                 </th>
                               </>
                             );
@@ -208,6 +209,7 @@ const View = () => {
                   </div>
                 </div>
               </div>
+           </div>
           </div>
         </div>
       </Layout>

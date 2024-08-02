@@ -109,7 +109,7 @@ export default function FormControl({
           <input
             type="text"
             name={name}
-            className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-22"
+            className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3"
             required={required}
             placeholder={placeholder}
             value={value || ""}
@@ -124,7 +124,7 @@ export default function FormControl({
             <div className="flex">
               <input
                 type="text"
-                className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
+                className="relative border border-[#00000036] bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-3"
                 placeholder={placeholder}
                 value={text}
                 disabled={disabled}
@@ -160,7 +160,7 @@ export default function FormControl({
                 return (
                   <div className="">
                     {" "}
-                    <label className="border border-gray-300 px-6 py-2 rounded-lg flex cursor-pointer">
+                    <label className="border border-[#00000036] px-6 py-2 rounded-lg flex cursor-pointer">
                       <input
                         type="radio"
                         checked={value == itm.id ? true : false}
@@ -179,7 +179,7 @@ export default function FormControl({
         ) :type=='textarea'?<>
         <textarea
             name={name}
-            className="relative shadow-box bg-white w-full rounded-lg h-[150px] flex items-center gap-2 overflow-hidden px-2"
+            className="relative border border-[#00000036] bg-white w-full rounded-lg h-[150px] flex items-center gap-2 overflow-hidden px-3 pt-2"
             required={required}
             placeholder={placeholder}
             value={value || ""}
@@ -216,7 +216,7 @@ export default function FormControl({
           <input
             type={type}
             name={name}
-            className="relative  bg-white w-full rounded-lg h-11 flex items-center gap-2 overflow-hidden px-2 border border-[#eee]"
+            className="relative  bg-white w-full rounded-lg h-11 flex items-center gap-2 overflow-hidden px-2 border border-[#00000036]"
             required={required}
             placeholder={placeholder}
             value={value || ""}

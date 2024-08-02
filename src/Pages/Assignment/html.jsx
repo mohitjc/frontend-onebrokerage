@@ -8,6 +8,8 @@ import SelectDropdown from "../../components/common/SelectDropdown";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import { PiEyeLight } from "react-icons/pi";
+import { PiMoneyWavyLight } from "react-icons/pi";
+
 import moment from "moment";
 const Html = ({
   staff,
@@ -137,7 +139,8 @@ const Html = ({
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) => counterOffer(itm)}
                   >
-                  <span class="material-symbols-outlined">payments</span>
+                  <PiMoneyWavyLight />
+
                   </a>
                   </Tooltip>
 
@@ -164,10 +167,8 @@ const Html = ({
         </div>
 
         <a id="downloadFile"></a>
-        <div className="flex">
-          {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
-                        <PiFileCsv className="text-typo text-xl" />  Export CSV
-                    </button> */}
+        {/* <div className="flex">
+      
 
           {isAllow(`add${shared.check}`) ? (
             <Link
@@ -179,7 +180,7 @@ const Html = ({
           ) : (
             <></>
           )}
-        </div>
+        </div> */}
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
@@ -270,7 +271,8 @@ const Html = ({
 
         {!loaging ? (
           <>
-            <Table
+           <div className="px-4 pb-4">
+          <Table
               className="mb-3"
               data={data}
               columns={columns}
@@ -287,6 +289,8 @@ const Html = ({
                 if (e.event == "count") count(e.value);
               }}
             />
+          </div>
+          
           </>
         ) : (
           <></>

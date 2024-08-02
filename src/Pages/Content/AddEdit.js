@@ -160,7 +160,7 @@ const AddEdit = () => {
                 />
               </div>
 
-              <div className=" mb-3">
+              <div className="col-span-full mb-3">
                 <FormControl
                   type="text"
                   name="keywords"
