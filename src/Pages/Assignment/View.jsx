@@ -67,7 +67,7 @@ const View = () => {
       name: "Price ",
       render: (row) => {
         return (
-          <span className="">{row?.counterOffer}</span>
+          <span className="">$ {row?.counterOffer||'--'}</span>
         );
       },
     },
