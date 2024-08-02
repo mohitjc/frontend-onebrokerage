@@ -169,19 +169,19 @@ const Login = () => {
           </form>
         ) : (
           <form
-            className="w-11/12 xl:w-9/12 lg:w-9/12  bg-white border border-[#00000017] p-[24px] rounded-[30px] shadow-c"
+            className="xl:w-4/12 lg:w-5/12 md:w-6/12 w-11/12 bg-white border border-[#00000017] p-[24px] rounded-[30px] shadow-c"
             onSubmit={hendleSubmit}
           >
-            <Link to="/" className=" xl:w-[140px] z-[99] mb-6 block mx-auto text-center">
+            <Link to="/" className=" xl:w-[150px] z-[99] mb-10 block mx-auto text-center">
                   <img
                     src="/assets/img/logo.png"
-                    className="md:w-[160px] lg:w-[120px] w-[120px]  mx-auto"
+                    className="md:w-[160px] lg:w-[140px] w-[130px]  mx-auto"
                     alt="logo"
                   />
                 </Link>
             <div className="">
-              <h1 className="text-[30px] font-semibold text-[#333] ">
-                Sign In
+              <h1 className="text-[22px] font-semibold text-[#333] ">
+                Login to your account
               </h1>
               <span className="flex w-10 h-1 bg-[#063688] mt-1"></span>
             </div>

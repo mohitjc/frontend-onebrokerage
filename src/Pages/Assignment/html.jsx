@@ -39,7 +39,7 @@ const Html = ({
       key: "fullName",
       name: "Title",
       render: (row) => {
-        return <span className="capitalize">{row?.title}</span>;
+        return <span className="capitalize ellipses">{row?.title}</span>;
       },
     },
     {

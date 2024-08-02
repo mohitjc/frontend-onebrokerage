@@ -63,7 +63,7 @@ const Html = ({
       name: "Assignment",
       render: (row) => {
         return (
-          <span className="">{row?.assignmentDetail?.title}</span>
+          <span className="ellipses">{row?.assignmentDetail?.title}</span>
         );
       },
     },

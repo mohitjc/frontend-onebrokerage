@@ -39,7 +39,7 @@ const Forgotpassword = () => {
     <>
       <AuthLayout>
         <form
-          className="w-11/12 xl:w-9/12 lg:w-9/12  bg-white border border-[#00000017] p-[24px] rounded-[30px] shadow-c"
+          className="xl:w-4/12 lg:w-5/12 md:w-6/12 w-11/12  bg-white border border-[#00000017] p-[24px] rounded-[30px] shadow-c"
           onSubmit={hendleSubmit}
         >
           <div className="">
