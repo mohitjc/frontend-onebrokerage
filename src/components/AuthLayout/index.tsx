@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { GoLock } from "react-icons/go";
 
 const AuthLayout = ({ children }: any) => {
   return (
@@ -22,7 +23,7 @@ const AuthLayout = ({ children }: any) => {
         </div>
         <div className="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-6 h-screen hidden md:block">
           <div className=" absolute bottom-0 xl:pl-30 lg:pl-0">
-            <img src="/assets/img/b-girls.png" alt="bg-logon" className="  xl:h-[900px] lg:h-[700px] md:h-[600px]" />
+            <img src="/assets/img/b-girls.png" alt="bg-logon" className="  xl:h-[900px] lg:h-[650px] md:h-[600px]" />
           </div>
         </div>
       </div>
