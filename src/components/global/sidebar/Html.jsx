@@ -71,12 +71,6 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       key: "readCustomers",
     },
     {
-      name: "Content Management",
-      icon: <MdContentPaste className="text-inherit shrink-0 text-lg" />,
-      url: "/content",
-      key: "readContent",
-    },
-    {
       name: "Assignments",
       icon: <MdOutlineAssignment className="text-inherit shrink-0 text-lg" />,
       url: "/assignment",
@@ -87,6 +81,12 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       icon: <RiContractLine className="text-inherit shrink-0 text-lg" />,
       url: "/contract",
       key: "Contract",
+    },
+    {
+      name: "Content Management",
+      icon: <MdContentPaste className="text-inherit shrink-0 text-lg" />,
+      url: "/content",
+      key: "readContent",
     },
     // {
     //   name: "Blogs",
