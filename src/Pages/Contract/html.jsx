@@ -66,7 +66,7 @@ const Html = ({
       name: "Assignment",
       render: (row) => {
         return (
-          <span className="">{row?.assignmentDetail?.title}</span>
+          <span className="capitalize">{row?.assignmentDetail?.title}</span>
         );
       },
     },
