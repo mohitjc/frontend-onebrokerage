@@ -112,7 +112,7 @@ const View = () => {
                   </p>
                 </div>
                
-               </div>
+              </div>
               </div>
              
             </div>
