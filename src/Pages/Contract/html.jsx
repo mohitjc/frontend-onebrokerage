@@ -82,7 +82,7 @@ const Html = ({
       render: (row) => {
         return (
           <> 
-<span className="capitalize">{row?.status}</span>
+<span className={`capitalize ${row?.status?row?.status:""}`}>{row?.status}</span>
             {/* <SelectDropdown
               id="statusDropdown"
               displayValue="name"
@@ -279,8 +279,9 @@ const Html = ({
 
         {!loaging ? (
           <>
-            <Table
-              className="mb-3"
+             <div className="px-4 pb-4">
+          <Table
+              className="mb-3 "
               data={data}
               columns={columns}
               page={filters.page}
@@ -296,6 +297,8 @@ const Html = ({
                 if (e.event == "count") count(e.value);
               }}
             />
+          </div>
+         
           </>
         ) : (
           <></>

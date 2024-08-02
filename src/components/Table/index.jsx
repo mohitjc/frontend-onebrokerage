@@ -54,7 +54,7 @@ const Table = ({
           <>
             {/* Table view */}
             {theme === "table" && (
-              <div className="relative overflow-x-auto border border-[#eee] sm:rounded-lg">
+              <div className="relative overflow-x-auto border border-[#eee] sm:rounded-lg ">
                 <table className="xl:w-full lg:w-[1000px] md:w-[1000px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                   <thead className="text-xs text-gray-700 capitalize bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     {/* Top header */}

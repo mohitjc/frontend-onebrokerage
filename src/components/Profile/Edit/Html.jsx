@@ -27,7 +27,7 @@ const Html = ({
         </div>
 
         <form name="profileForm" className="" onSubmit={handleSubmit}>
-          <div className="grid grid-cols-12 mb-4 gap-4 shadow p-4 mt-6 gap-4 bg-white rounded-[10px]">
+          <div className="grid grid-cols-12 mb-4 gap-4 shadow p-6 mt-6 gap-4 bg-white rounded-[10px]">
             <div className="col-span-12 md:col-span-6">
               <FormControl
                 type="text"
@@ -72,7 +72,7 @@ const Html = ({
             <label className="text-sm mb-2 block">Email</label>
               <input
                 type="email"
-                className="relative border  border-[#00000036] [#bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2"
+                className="relative border  border-[#00000036] [#bg-white w-full rounded-lg h-11 flex items-center gap-2 overflow-hidden px-2"
                 value={form.email}
                 autoComplete="false"
                 onChange={(e) => {

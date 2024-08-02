@@ -12,6 +12,8 @@ import { GrUserSettings } from "react-icons/gr";
 import { VscSymbolMisc } from "react-icons/vsc";
 import { GoFileMedia } from "react-icons/go";
 import { TfiLayoutMediaCenterAlt } from "react-icons/tfi";
+import { MdOutlineAssignment } from "react-icons/md";
+import { RiContractLine } from "react-icons/ri";
 
 import {
   MdContentPaste,
@@ -76,13 +78,13 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
     },
     {
       name: "Assignments",
-      icon: <MdContentPaste className="text-inherit shrink-0 text-lg" />,
+      icon: <MdOutlineAssignment className="text-inherit shrink-0 text-lg" />,
       url: "/assignment",
       key: "Assignment",
     },
     {
       name: "Contract",
-      icon: <MdContentPaste className="text-inherit shrink-0 text-lg" />,
+      icon: <RiContractLine className="text-inherit shrink-0 text-lg" />,
       url: "/contract",
       key: "Contract",
     },
