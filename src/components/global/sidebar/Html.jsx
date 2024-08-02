@@ -49,9 +49,9 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
   }, []);
 
   const menus = [
-    {
-      name: "Main Menu",
-    },
+    // {
+    //   name: "Main Menu",
+    // },
     {
       name: "Dashboard",
       icon: <RiHome6Line className="text-inherit shrink-0 text-lg" />,
