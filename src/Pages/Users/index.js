@@ -144,15 +144,6 @@ const Users = () => {
     let status = "active";
     if (itm.status == "active") status = "deactive";
 
-    // if (window.confirm(`Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`)) {
-    //     loader(true)
-    //     ApiClient.put(shared.statusApi, { id: itm.id, status }).then(res => {
-    //         if (res.success) {
-    //             getData()
-    //         }
-    //         loader(false)
-    //     })
-    // }
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to ${
@@ -172,11 +163,6 @@ const Users = () => {
           }
           loader(false);
         });
-        //   Swal.fire({
-
-        //     // text: `Sucessfully ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
-        //     icon: "success"
-        //   });
       }
     });
   };

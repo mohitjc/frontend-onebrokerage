@@ -13,8 +13,8 @@ const AddEdit = () => {
 
   const [images, setImages] = useState({ image: "" });
   const [form, setform] = useState({ 
-    count: "",
-    amount: "",
+    price: "",
+    wordCount: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -107,18 +107,20 @@ const AddEdit = () => {
               <div className=" mb-3">
                 <FormControl
                   type="number"
-                  label="Count"
-                  value={form.count}
-                  onChange={(e) => setform({ ...form, count: e })}
+                  label="Word Count"
+                  value={form.wordCount}
+                  onChange={(e) => setform({ ...form, wordCount: e })}
+                  maxlength="10"
                   required
                 />
               </div> 
               <div className="mb-3">
                 <FormControl
                   type="number"
-                  label="Amount"
-                  value={form.amount}
-                  onChange={(e) => setform({ ...form, amount: e })}
+                  label="Price"
+                  value={form.price}
+                  maxlength="10"
+                  onChange={(e) => setform({ ...form, price: e })}
                   required
                 />
               </div> 

@@ -8,6 +8,7 @@ import SelectDropdown from "../../components/common/SelectDropdown";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import { PiEyeLight } from "react-icons/pi";
+import statusModel from "../../models/status.model";
 const Html = ({
   sorting,
   filter,
@@ -31,44 +32,45 @@ const Html = ({
   const user = useSelector((state) => state.user);
   const columns = [
     {
-      key: "count",
+      key: "wordCount",
       name: "Word Count",
       sort: true,
       render: (row) => {
-        return <span className="capitalize ellipses">{row?.count}</span>;
+        return <span className="capitalize ellipses">{row?.wordCount}</span>;
       },
     },
     {
-      key: "amount",
-      name: "Amount",
+      key: "price",
+      name: "Price",
       sort: true,
       render: (row) => {
         return (
-          <span className="">{row?.amount}</span>
+          <span className="">{row?.price}</span>
         );
       },
     },
-    {
-      key: "status",
-      name: "Status",
-      render: (row) => {
-        return (
-          <> 
-<span className={`capitalize ${row?.status}`}>{row?.status}</span>
-            {/* <SelectDropdown
-              id="statusDropdown"
-              displayValue="name"
-              placeholder="All Status"
-              intialValue={row?.status}
-              result={(e) => {
-                statusChange(e.value,row);
-              }}
-              options={statusModel.status}
-            /> */}
-          </>
-        );
-      },
-    },
+    // {
+    //   key: "status",
+    //   name: "Status",
+    //   render: (row) => {
+    //     return (
+    //       <>
+    //         <div className="w-32" onClick={() => statusChange(row)}>
+    //           <span
+    //             className={`bg-[#063688] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+    //                       ${
+    //                         row.status == "deactive"
+    //                           ? " bg-gray-200 text-black"
+    //                           : "bg-[#063688] text-white"
+    //                       }`}
+    //           >
+    //             {row.status == "deactive" ? "inactive" : "active"}
+    //           </span>
+    //         </div>
+    //       </>
+    //     );
+    //   },
+    // },
     {
       key: "action",
       name: "Action",
@@ -76,7 +78,7 @@ const Html = ({
         return (
           <>
             <div className="flex items-center justify-start gap-1.5">
-              {isAllow(`read${shared.check}`) ? (
+              {/* {isAllow(`read${shared.check}`) ? (
                 <Tooltip placement="top" title="View">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -87,7 +89,7 @@ const Html = ({
                 </Tooltip>
               ) : (
                 <></>
-              )}
+              )} */}
 
             
 
@@ -206,7 +208,7 @@ const Html = ({
               result={(e) => {
                 changestatus(e.value);
               }}
-              options={shared.status}
+              options={statusModel.list}
             />
             {filters.status ? (
               <>

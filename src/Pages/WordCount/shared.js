@@ -11,11 +11,11 @@ const shared = {
   addTitle: "Word Estimate",
   url: "word-estimate",
   status:status,
-  addApi: "assignment/add",
-  editApi: "assignment/update",
-  detailApi: "assignment/detail",
-  listApi: "assignment/listing",
-  statusApi: "user/status/change",
+  addApi: "word-count/add",
+  editApi: "word-count/update",
+  detailApi: "word-count/detail",
+  listApi: "word-count/list",
+  statusApi: "word-count/update",
   deleteApi: "assignment/delete",
   counterListApi: "counter-offer/listing"
 };

@@ -65,10 +65,7 @@ const Assignment = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p,role:'user' };
-    if(user?.role == "staff"){
-      filter={...filters, ...p ,staff:user?.id || user?._id}
-    }
+    let filter = { ...filters, ...p};
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
         setData(
@@ -142,13 +139,17 @@ const Assignment = () => {
     getData({ status: e, page: 1 });
   };
 
-  const statusChange = (status,itm,title='') => { 
-    let t=title
-    if(!t) title=status=='accepted'?'Accept':'Reject'
+  const statusChange = (itm) => { 
+    // if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
+    if (!isAllow(`edit${shared.check}`)) return;
+    let status = "active";
+    if (itm.status == "active") status = "deactive";
 
     Swal.fire({
       title: "Are you sure?",
-      text: `Do you want to ${title} this assignment ?`,
+      text: `Do you want to ${
+        status == "active" ? "Activate" : "Inactivate"
+      } this user?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#063688",
@@ -157,15 +158,14 @@ const Assignment = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         loader(true);
-        ApiClient.put(`${shared.editApi}?id=${itm?.id}`, {  status }).then((res) => {
+        ApiClient.put(shared.statusApi, { id: itm.id, status }).then((res) => {
           if (res.success) {
             getData();
           }
           loader(false);
-        }); 
+        });
       }
     });
-
         
      
   };
