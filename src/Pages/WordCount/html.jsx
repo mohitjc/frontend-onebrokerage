@@ -49,28 +49,28 @@ const Html = ({
         );
       },
     },
-    // {
-    //   key: "status",
-    //   name: "Status",
-    //   render: (row) => {
-    //     return (
-    //       <>
-    //         <div className="w-32" onClick={() => statusChange(row)}>
-    //           <span
-    //             className={`bg-[#063688] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-    //                       ${
-    //                         row.status == "deactive"
-    //                           ? " bg-gray-200 text-black"
-    //                           : "bg-[#063688] text-white"
-    //                       }`}
-    //           >
-    //             {row.status == "deactive" ? "inactive" : "active"}
-    //           </span>
-    //         </div>
-    //       </>
-    //     );
-    //   },
-    // },
+    {
+      key: "status",
+      name: "Status",
+      render: (row) => {
+        return (
+          <>
+            <div className="w-32" onClick={() => statusChange(row)}>
+              <span
+                className={`bg-[#063688] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                          ${
+                            row.status == "deactive"
+                              ? " bg-gray-200 text-black"
+                              : "bg-[#063688] text-white"
+                          }`}
+              >
+                {row.status == "deactive" ? "inactive" : "active"}
+              </span>
+            </div>
+          </>
+        );
+      },
+    },
     {
       key: "action",
       name: "Action",
@@ -93,6 +93,7 @@ const Html = ({
 
             
 
+{isAllow(`edit${shared.check}`)?<>
 <Tooltip placement="top" title="Edit">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -101,6 +102,23 @@ const Html = ({
                   <span class="material-symbols-outlined">edit</span>
                   </a>
                   </Tooltip> 
+</>:<></>}
+
+{isAllow(`delete${shared.check}`)?<>
+<Tooltip placement="top" title="Delete">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => deleteItem(itm.id)}
+                  >
+                  <span class="material-symbols-outlined">delete</span>
+                  </a>
+                  </Tooltip> 
+</>:<></>}
+
+
+               
+
+                  
             </div>
           </>
         );

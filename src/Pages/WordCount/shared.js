@@ -16,7 +16,7 @@ const shared = {
   detailApi: "word-count/detail",
   listApi: "word-count/list",
   statusApi: "word-count/update",
-  deleteApi: "assignment/delete",
+  deleteApi: "word-count/delete",
   counterListApi: "counter-offer/listing"
 };
 

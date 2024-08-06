@@ -77,7 +77,7 @@ const Html = ({ ListItemLink, tabclass, isAllow, route, isOpen, user }) => {
       key: "readAssignment",
     },
     {
-      name: "Word Estimate",
+      name: "Word Estimates",
       icon: <MdOutlineAssignment className="text-inherit shrink-0 text-lg" />,
       url: "/word-estimate",
       key: "readWordCount",
