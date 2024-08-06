@@ -8,12 +8,7 @@ import SelectDropdown from "../../components/common/SelectDropdown";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import { PiEyeLight } from "react-icons/pi";
-import { PiMoneyWavyLight } from "react-icons/pi";
-
-import moment from "moment";
 const Html = ({
-  staff,
-  counterOffer,
   sorting,
   filter,
   edit,
@@ -30,49 +25,27 @@ const Html = ({
   changestatus,
   isAllow,
   status,
-  total = { total },
+  total,
   sortClass,
 }) => {
   const user = useSelector((state) => state.user);
   const columns = [
     {
-      key: "fullName",
-      name: "Title",
+      key: "count",
+      name: "Word Count",
       sort: true,
       render: (row) => {
-        return <span className="capitalize ellipses">{row?.title}</span>;
+        return <span className="capitalize ellipses">{row?.count}</span>;
       },
     },
     {
-      key: "dueDate",
-      name: "Due date ",
+      key: "amount",
+      name: "Amount",
       sort: true,
       render: (row) => {
         return (
-          <span className="">{moment(row?.dueDate).format("DD-MM-YYYY")}</span>
+          <span className="">{row?.amount}</span>
         );
-      },
-    },
-    {
-      key: "staff",
-      name: "Staff",
-      render: (row) => {
-        return <>
-        {row.status=='accepted' ? <>
-          <SelectDropdown
-              id="statusDropdown"
-              displayValue="fullName"
-              placeholder="Select Staff"
-              intialValue={row?.staff}
-              result={(e) => {
-                edit({id:row.id,staff:e.value});
-              }}
-              theme="search"
-              options={staff}
-            />
-        </>:<> </>}
-        
-        </>
       },
     },
     {
@@ -116,59 +89,16 @@ const Html = ({
                 <></>
               )}
 
-              {itm.status=='pending'?<>
-                <Tooltip placement="top" title="Accept">
-                <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => statusChange('accepted',itm)}
-                  >
-                  <span class="material-symbols-outlined">check</span>
-                  </a>
-                  </Tooltip>
-                  <Tooltip placement="top" title="Reject">
+            
+
+<Tooltip placement="top" title="Edit">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => statusChange('rejected',itm)}
+                    onClick={(e) => edit(itm.id)}
                   >
-                  <span class="material-symbols-outlined">close</span>
+                  <span class="material-symbols-outlined">edit</span>
                   </a>
-                  </Tooltip>
-              </>:<></>}
-
-              {((itm.status=='accepted'||itm.status=='completed') && user?.role != "staff")  && (itm?.counterOfferStatus=='not_accepted'||itm?.counterOfferStatus=='not_given')?<>
-                <Tooltip placement="top" title="Counter Offer">
-                  <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => counterOffer(itm)}
-                  >
-                  <PiMoneyWavyLight />
-
-                  </a>
-                  </Tooltip>
-
-              </>:<>
-                  {((itm.status=='accepted'||itm.status=='completed') && user?.role != "staff") && <Tooltip placement="top" title="Offer Sent">
-                    <a
-                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    >
-                      <PiMoneyWavyLight />
-
-                    </a>
-                  </Tooltip>}
-
-                  {user?.role == "staff"&&itm.status != 'completed'?<>
-                    <Tooltip placement="top" title="Complete Assignment">
-                      <a
-                        className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                        onClick={(e) => statusChange('completed', itm,"Complete")}
-                      >
-                        <span class="material-symbols-outlined">check</span>
-                      </a>
-                    </Tooltip>
-                  </>:<></>}
-
-                
-              </>}
+                  </Tooltip> 
             </div>
           </>
         );
@@ -191,7 +121,7 @@ const Html = ({
         </div>
 
         <a id="downloadFile"></a>
-        {/* <div className="flex">
+        <div className="flex">
       
 
           {isAllow(`add${shared.check}`) ? (
@@ -204,7 +134,7 @@ const Html = ({
           ) : (
             <></>
           )}
-        </div> */}
+        </div>
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">

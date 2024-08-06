@@ -6,10 +6,10 @@ const status=[
 ]
 
 const shared = {
-  check: "Assignment",
-  title: "Assignment",
-  addTitle: "Assignment",
-  url: "assignment",
+  check: "WordCount",
+  title: "Word Estimates",
+  addTitle: "Word Estimate",
+  url: "word-estimate",
   status:status,
   addApi: "assignment/add",
   editApi: "assignment/update",

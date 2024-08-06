@@ -19,8 +19,6 @@ const Table = ({
 }) => {
   const [pageSize, setPageSize] = useState(count);
 
-  console.log(columns,"hsgusgdgsud")
-
   const handlePageSizeChange = (e) => {
     setPageSize(parseInt(e.target.value));
     result({ event: "count", value: parseInt(e.target.value) });

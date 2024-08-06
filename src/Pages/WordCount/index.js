@@ -65,7 +65,7 @@ const Assignment = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p};
+    let filter = { ...filters, ...p,role:'user' };
     if(user?.role == "staff"){
       filter={...filters, ...p ,staff:user?.id || user?._id}
     }
@@ -170,22 +170,9 @@ const Assignment = () => {
      
   };
 
-  const edit = (p={}) => {
-    let payload={
-      ...p
-    }
-
-    Object.keys(payload).map(itm=>{
-      if(!payload[itm]) payload[itm]=null
-    })
-
-    loader(true);
-        ApiClient.put(`${shared.editApi}?id=${payload?.id}`, payload).then((res) => {
-          if (res.success) {
-            getData();
-          }
-          loader(false);
-        }); 
+  const edit = (id) => {
+    let url = `/${shared.url}/edit/${id}`;
+    history(url);
   };
 
   const view = (id) => {
