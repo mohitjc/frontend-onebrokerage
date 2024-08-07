@@ -11,6 +11,8 @@ import { PiEyeLight } from "react-icons/pi";
 import { PiMoneyWavyLight } from "react-icons/pi";
 
 import moment from "moment";
+import { useEffect, useState } from "react";
+import ApiClient from "../../methods/api/apiClient";
 const Html = ({
   staff,
   counterOffer,
@@ -32,8 +34,10 @@ const Html = ({
   status,
   total = { total },
   sortClass,
+  getWordPrice
 }) => {
   const user = useSelector((state) => state.user);
+
   const columns = [
     {
       key: "fullName",
@@ -51,6 +55,22 @@ const Html = ({
         return (
           <span className="">{moment(row?.dueDate).format("DD-MM-YYYY")}</span>
         );
+      },
+    },
+    {
+      key: "word_count",
+      name: "Word Count",
+      sort: true,
+      render: (row) => {
+        return <span className="capitalize ellipses">{row?.word_count}</span>;
+      },
+    },
+    {
+      key: "price",
+      name: "Estimate Price",
+      sort: true,
+      render: (row) => {
+        return <span className="capitalize ellipses">${getWordPrice(row?.word_count)}</span>;
       },
     },
     {

@@ -233,23 +233,35 @@ const Assignment = () => {
     return true;
   };
 
+
+  const [estimates, setEstimates] = useState([]);
+  const getWordEstimate=()=>{
+    ApiClient.get('word-count/list',{status:'active',sortBy:'wordCount desc'}).then(res=>{
+      if(res.success){
+        setEstimates(res.data)
+      }
+    })
+  }
+
   useEffect(() => {
     if (user && user.loggedIn) {
       setFilter({ ...filters, search: searchState.data });
       getData({ search: searchState.data, page: 1 });
       getStaff()
+      getWordEstimate()
     }
   }, []);
 
   const counterOffer=(item)=>{
-    console.log("form",item)
-
-    setCounterForm({counterOffer:'',assignment_id:item?.id||item?._id,message:''})
+    console.log("form",item) 
+    let price=getWordPrice(item.word_count)
+    setCounterForm({counterOffer:price,estimate_price:price,assignment_id:item?.id||item?._id,message:''})
     setCounterModal(true)
   }
 
   const counterSubmit=()=>{
     let payload={...counterForm}
+    delete payload.estimate_price
     loader(true)
     ApiClient.post(`counter-offer/create`,payload).then(res=>{
       loader(false)
@@ -261,10 +273,16 @@ const Assignment = () => {
     })
   }
 
+
+  const getWordPrice=(word=0)=>{
+    return shared.getWordPrice(word,estimates)
+  }
+
   return (
     <>
       <Html
       staff={staff}
+      getWordPrice={getWordPrice}
         edit={edit}
         counterOffer={counterOffer}
         view={view}
@@ -297,6 +315,7 @@ const Assignment = () => {
       body={<>
         <form onSubmit={e=>{e.preventDefault();counterSubmit()}}>
           <div>
+            <div>Estimate Price: ${counterForm.estimate_price}</div>
           <div className="mb-4">
           <FormControl
             type="number"

@@ -5,8 +5,19 @@ const status=[
   {id:'pending',name:'Pending'},
 ]
 
+const getWordPrice=(word=0,estimates=[])=>{
+  let price=0
+  estimates.map(itm=>{
+    if(word<=itm.wordCount) price=itm.price
+  })
+
+  return price
+}
+
+
 const shared = {
   check: "Assignment",
+  getWordPrice:getWordPrice,
   title: "Assignment",
   addTitle: "Assignment",
   url: "assignment",
