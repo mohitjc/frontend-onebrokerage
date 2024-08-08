@@ -2,7 +2,7 @@ import Layout from "../../components/global/layout";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import { Tooltip } from "antd";
-import {  FiPlus } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import Table from "../../components/Table";
 import SelectDropdown from "../../components/common/SelectDropdown";
 import shared from "./shared";
@@ -34,7 +34,7 @@ const Html = ({
   status,
   total = { total },
   sortClass,
-  getWordPrice
+  getWordPrice,
 }) => {
   const user = useSelector((state) => state.user);
 
@@ -70,29 +70,38 @@ const Html = ({
       name: "Estimate Price",
       sort: true,
       render: (row) => {
-        return <span className="capitalize ellipses">${getWordPrice(row?.word_count)}</span>;
+        return (
+          <span className="capitalize ellipses">
+            ${getWordPrice(row?.word_count)}
+          </span>
+        );
       },
     },
     {
       key: "staff",
       name: "Staff",
       render: (row) => {
-        return <>
-        {row.status=='accepted' ? <>
-          <SelectDropdown
-              id="statusDropdown"
-              displayValue="fullName"
-              placeholder="Select Staff"
-              intialValue={row?.staff}
-              result={(e) => {
-                edit({id:row.id,staff:e.value});
-              }}
-              theme="search"
-              options={staff}
-            />
-        </>:<> </>}
-        
-        </>
+        return (
+          <>
+            {row.status == "accepted" ? (
+              <>
+                <SelectDropdown
+                  id="statusDropdown"
+                  displayValue="fullName"
+                  placeholder="Select Staff"
+                  intialValue={row?.staff}
+                  result={(e) => {
+                    edit({ id: row.id, staff: e.value });
+                  }}
+                  theme="search"
+                  options={staff}
+                />
+              </>
+            ) : (
+              <> </>
+            )}
+          </>
+        );
       },
     },
     {
@@ -100,8 +109,8 @@ const Html = ({
       name: "Status",
       render: (row) => {
         return (
-          <> 
-<span className={`capitalize ${row?.status}`}>{row?.status}</span>
+          <>
+            <span className={`capitalize ${row?.status}`}>{row?.status}</span>
             {/* <SelectDropdown
               id="statusDropdown"
               displayValue="name"
@@ -136,66 +145,78 @@ const Html = ({
                 <></>
               )}
 
-              {itm.status=='pending'?<>
-                <Tooltip placement="top" title="Accept">
-                <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => statusChange('accepted',itm)}
-                  >
-                  <span class="material-symbols-outlined">check</span>
-                  </a>
-                  </Tooltip>
-                  <Tooltip placement="top" title="Reject">
-                  <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => statusChange('rejected',itm)}
-                  >
-                  <span class="material-symbols-outlined">close</span>
-                  </a>
-                  </Tooltip>
-              </>:<></>}
-
-              {((itm.status=='accepted'||itm.status=='completed') && user?.role != "staff")  && (itm?.counterOfferStatus=='not_accepted'||itm?.counterOfferStatus=='not_given')?<>
-                <Tooltip placement="top" title="Counter Offer">
-                  <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => counterOffer(itm)}
-                  >
-                  <PiMoneyWavyLight />
-
-                  </a>
-                  </Tooltip>
-
-              </>:<>
-                  {((itm.status=='accepted'||itm.status=='completed') && user?.role != "staff") && <Tooltip placement="top" title="Offer Sent">
+              {/* {itm.status == "pending" ? (
+                <>
+                  <Tooltip placement="top" title="Accept">
                     <a
                       className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                      onClick={(e) => statusChange("accepted", itm)}
+                    >
+                      <span class="material-symbols-outlined">check</span>
+                    </a>
+                  </Tooltip>
+                  <Tooltip placement="top" title="Reject">
+                    <a
+                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                      onClick={(e) => statusChange("rejected", itm)}
+                    >
+                      <span class="material-symbols-outlined">close</span>
+                    </a>
+                  </Tooltip>
+                </>
+              ) : (
+                <></>
+              )} */}
+
+              {(itm.status == "accepted" || itm.status == "completed") &&
+              user?.role != "staff" &&
+              (itm?.counterOfferStatus == "not_accepted" ||
+                itm?.counterOfferStatus == "not_given") ? (
+                <>
+                  <Tooltip placement="top" title="Counter Offer">
+                    <a
+                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                      onClick={(e) => counterOffer(itm)}
                     >
                       <PiMoneyWavyLight />
-
                     </a>
-                  </Tooltip>}
+                  </Tooltip>
+                </>
+              ) : (
+                <>
+                  {(itm.status == "accepted" || itm.status == "completed") &&
+                    user?.role != "staff" && (
+                      <Tooltip placement="top" title="Offer Sent">
+                        <a className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg">
+                          <PiMoneyWavyLight />
+                        </a>
+                      </Tooltip>
+                    )}
 
-                  {user?.role == "staff"&&itm.status != 'completed'?<>
-                    <Tooltip placement="top" title="Complete Assignment">
-                      <a
-                        className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                        onClick={(e) => statusChange('completed', itm,"Complete")}
-                      >
-                        <span class="material-symbols-outlined">check</span>
-                      </a>
-                    </Tooltip>
-                  </>:<></>}
-
-                
-              </>}
+                  {user?.role == "staff" && itm.status != "completed" ? (
+                    <>
+                      <Tooltip placement="top" title="Complete Assignment">
+                        <a
+                          className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                          onClick={(e) =>
+                            statusChange("completed", itm, "Complete")
+                          }
+                        >
+                          <span class="material-symbols-outlined">check</span>
+                        </a>
+                      </Tooltip>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              )}
             </div>
           </>
         );
       },
     },
   ];
-
 
   return (
     <Layout>
@@ -315,26 +336,29 @@ const Html = ({
 
         {!loaging ? (
           <>
-           <div className="px-4 pb-4">
-          <Table
-              className="mb-3"
-              data={data}
-              columns={user?.role == "admin" ? columns : columns?.filter((itm)=>itm?.key != "staff")}
-              page={filters.page}
-              count={filters.count}
-              filters={filters}
-              total={total}
-              result={(e) => {
-                if (e.event == "page") pageChange(e.value);
-                if (e.event == "sort") {
-                  sorting(e.value);
-                  sortClass(e.value);
+            <div className="px-4 pb-4">
+              <Table
+                className="mb-3"
+                data={data}
+                columns={
+                  user?.role == "admin"
+                    ? columns
+                    : columns?.filter((itm) => itm?.key != "staff")
                 }
-                if (e.event == "count") count(e.value);
-              }}
-            />
-          </div>
-          
+                page={filters.page}
+                count={filters.count}
+                filters={filters}
+                total={total}
+                result={(e) => {
+                  if (e.event == "page") pageChange(e.value);
+                  if (e.event == "sort") {
+                    sorting(e.value);
+                    sortClass(e.value);
+                  }
+                  if (e.event == "count") count(e.value);
+                }}
+              />
+            </div>
           </>
         ) : (
           <></>
