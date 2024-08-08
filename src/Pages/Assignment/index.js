@@ -252,8 +252,7 @@ const Assignment = () => {
     }
   }, []);
 
-  const counterOffer=(item)=>{
-    console.log("form",item) 
+  const counterOffer=(item)=>{ 
     let price=getWordPrice(item.word_count)
     setCounterForm({counterOffer:price,estimate_price:price,assignment_id:item?.id||item?._id,message:''})
     setCounterModal(true)

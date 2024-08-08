@@ -35,6 +35,7 @@ function App() {
     { url: "/user/add", path:'Users/AddEdit' },
     { url: "/user/detail/:id",path:'Users/View' },
     { url: "/", element: <Navigate to="/login" /> },
+    { url: "/chat", path:'Chat' },
     { url: "/word-estimate", path:'WordCount/AddEdit' },
     { url: "/word-estimate/detail/:id",path:'WordCount/View' },
     { url: "/word-estimate/add",path:'WordCount/AddEdit'},
