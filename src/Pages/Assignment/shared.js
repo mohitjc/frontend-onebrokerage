@@ -5,13 +5,15 @@ const status=[
   {id:'pending',name:'Pending'},
 ]
 
-const getWordPrice=(word=0,estimates=[])=>{
+const getWordPrice=(w=0,estimates=[])=>{
+  let word=Number(w||0)
   let price=0
-  estimates.map(itm=>{
-    if(word<=itm.wordCount) price=itm.price
-  })
+  let word_count=estimates?.wordCount||0
+  let estimatedPrice=estimates?.estimatedPrice||0
 
-  return price
+  let per=(word_count*100)/word
+  price=(estimatedPrice*100)/per
+  return Number(price.toFixed(2))
 }
 
 

@@ -26,12 +26,9 @@ const View = () => {
   });
   const [estimates, setEstimates] = useState([]);
   const getWordEstimate = () => {
-    ApiClient.get("word-count/list", {
-      status: "active",
-      sortBy: "wordCount desc",
-    }).then((res) => {
+    ApiClient.get("word-count/detail").then((res) => {
       if (res.success) {
-        setEstimates(res.data);
+        setEstimates(res);
       }
     });
   };
@@ -165,7 +162,7 @@ const View = () => {
       setCounterForm({
         counterOffer: price,
         estimate_price: price,
-        assignment_id: id || data?._id,
+        assignment_id: id || data?.id,
         message: "",
       });
       setCounterModal(true);
