@@ -13,8 +13,8 @@ const AddEdit = () => {
 
   const [images, setImages] = useState({ image: "" });
   const [form, setform] = useState({ 
-    price: "",
-    wordCount: "",
+    word_count_price: "",
+    word_count: "",
   });
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -29,21 +29,14 @@ const AddEdit = () => {
     let invalid = methodModel.getFormError(formValidation, form);
 
     if (invalid) return;
-    let method = "post";
-    let url = shared.addApi;
+    let method = "put";
     let value = {
       ...form, 
     };
 
-    if (value.id) {
-      method = "put";
-      url = `${shared.editApi}?id=${id}`;
-    } else {
-      delete value.id;
-    }
 
     loader(true);
-    ApiClient.allApi(url, value, method).then((res) => {
+    ApiClient.allApi('word-count/update', value, method).then((res) => {
       if (res.success) {
         // ToastsStore.success(res.message)
         history(`/${shared.url}`);
@@ -55,31 +48,19 @@ const AddEdit = () => {
 
 
   useEffect(() => {
-    if (id) {
-      loader(true);
-      ApiClient.get(shared.detailApi, { id }).then((res) => {
+    loader(true);
+      ApiClient.get("word-count/detail").then((res) => {
         if (res.success) {
-          let value = res.data;
-          let payload = form;
-          Object.keys(payload).map((itm) => {
-            payload[itm] = value[itm];
-          }); 
-          payload.id = id;
+          let value = res;
           setform({
-            ...payload,
+            word_count_price:value.estimatedPrice,
+            word_count: value.wordCount,
           });
-          
-
-          let img = images;
-          Object.keys(img).map((itm) => {
-            img[itm] = value[itm];
-          });
-          setImages({ ...img });
+      
         }
         loader(false);
       });
-    }
-  }, [id]);
+  }, []);
 
 
   return (
@@ -88,17 +69,18 @@ const AddEdit = () => {
         <form onSubmit={handleSubmit}>
           <div className="pprofile1">
             <div className="flex items-center mb-8">
-              <Tooltip placement="top" title="Back">
+              {/* <Tooltip placement="top" title="Back">
                 <Link
                   to={`/${shared.url}`}
                   className="!px-4  py-2 flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3"
                 >
                   <i className="fa fa-angle-left text-lg"></i>
                 </Link>
-              </Tooltip>
+              </Tooltip> */}
               <div>
                 <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
-                  {form && form.id ? "Edit" : "Add"} {shared.addTitle}
+                  {/* {form && form.id ? "Edit" : "Add"} */}
+                   {shared.addTitle}
                 </h3> 
               </div>
             </div>
@@ -108,8 +90,8 @@ const AddEdit = () => {
                 <FormControl
                   type="number"
                   label="Word Count"
-                  value={form.wordCount}
-                  onChange={(e) => setform({ ...form, wordCount: e })}
+                  value={form.word_count}
+                  onChange={(e) => setform({ ...form, word_count: e })}
                   maxlength="10"
                   required
                 />
@@ -118,9 +100,9 @@ const AddEdit = () => {
                 <FormControl
                   type="number"
                   label="Price"
-                  value={form.price}
+                  value={form.word_count_price}
                   maxlength="10"
-                  onChange={(e) => setform({ ...form, price: e })}
+                  onChange={(e) => setform({ ...form, word_count_price: e })}
                   required
                 />
               </div> 

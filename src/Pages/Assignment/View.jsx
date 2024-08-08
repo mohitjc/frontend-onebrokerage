@@ -195,7 +195,8 @@ const View = () => {
            
           </div>
          
-            <div className="grid grid-cols-12 gap-6 mb-5">
+         {data?.staff?<>
+          <div className="grid grid-cols-12 gap-6 mb-5">
             <div className="col-span-12">
               <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
               <div>
@@ -222,8 +223,11 @@ const View = () => {
             </div>
            
           </div>
+         </>:<></>}
+            
 
-              <div>
+          {total?<>
+            <div>
                   <h4 className="p-4 bg-[#0636881a] font-medium">Counter Offers</h4>
                 </div>
               <Table
@@ -242,6 +246,9 @@ const View = () => {
                 // }
               }}
             />
+          </>:<></>}
+
+             
         </div>
       </Layout>
     </>

@@ -35,7 +35,7 @@ function App() {
     { url: "/user/add", path:'Users/AddEdit' },
     { url: "/user/detail/:id",path:'Users/View' },
     { url: "/", element: <Navigate to="/login" /> },
-    { url: "/word-estimate", path:'WordCount' },
+    { url: "/word-estimate", path:'WordCount/AddEdit' },
     { url: "/word-estimate/detail/:id",path:'WordCount/View' },
     { url: "/word-estimate/add",path:'WordCount/AddEdit'},
     { url: "/word-estimate/edit/:id", path:'WordCount/AddEdit'},
