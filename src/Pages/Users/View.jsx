@@ -29,7 +29,9 @@ const View = () => {
     ApiClient.get(shared.detailApi, { id: id }).then((res) => {
       loader(false);
       if (res.success) {
-        setData(res.data);
+        let data=res.data
+        data.permissions=data.permissions?.[0]
+        setData(data);
       }
     });
   };
@@ -96,7 +98,7 @@ const View = () => {
                <div className="grid grid-cols-12 p-4">
                <div className="col-span-6 flex items-center mb-4">
                   <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">Name:</label>
-                  <p className="text-[14px] text-black font-medium ms-3">
+                  <p className="text-[14px] text-black font-medium ms-3 capitalize">
                     {" "}
                     {/* <LiaUserSolid className="text-xl text-[#063688]" /> */}
                     {data && data.fullName}

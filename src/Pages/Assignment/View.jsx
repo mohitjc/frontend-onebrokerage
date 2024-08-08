@@ -9,6 +9,7 @@ import { Tooltip } from "antd";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import Table from "../../components/Table";
+import methodModel from "../../methods/methods";
 
 const View = () => {
   const user = useSelector((state) => state.user);
@@ -166,6 +167,27 @@ const View = () => {
                    <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Description:</label>
                    <p  dangerouslySetInnerHTML={{__html: data?.description}} className="text-[14px] text-black font-medium ms-3 desc-text"></p>
                 </div>
+                {data?.url ? (
+                    <div className="col-span-6 flex flex-col lg:flex-row mb-4">
+                      <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">
+                        Document :
+                      </label>
+
+                      <a
+                        className="relative w-[50px] h-[50px]"
+                        target="_new"
+                        href={methodModel.noImg(data?.url, "document")}
+                      >
+                        <i class="fa fa-download absolute right-0 bottom-0 bg-[#06378b] text-white p-2 text-[9px] rounded-[50px]" aria-hidden="true"></i>
+
+                        <span class="material-symbols-outlined text-[50px]">
+                          draft
+                        </span>
+                      </a>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                </div>
               </div>
              
