@@ -179,7 +179,6 @@ const View = () => {
       if(res?.success){
         setCounterModal(false) 
         getData()
-        setCounterForm({}) 
       }
     })
   }
