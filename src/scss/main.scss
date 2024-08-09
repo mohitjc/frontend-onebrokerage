@@ -2131,7 +2131,7 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
   padding: 4px 6px;
   border-radius: 4px;
   color: #393939d9;
-  width: 76px;
+  width: 84px;
   display: block;
   text-align: center;
 }
@@ -2140,7 +2140,7 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
   padding: 4px 6px;
   border-radius: 4px;
   color: #393939d9;
-  width: 76px;
+  width: 84px;
   display: block;
   text-align: center;
 }
@@ -2149,14 +2149,24 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
   padding: 4px 6px;
   border-radius: 4px;
   color: #003585;
-  width: 76px;
+  width: 84px;
   display: block;
   text-align: center;
 }
-.css-1nmdiq5-menu{
-  height: 200px !important;
-  overflow-y: auto !important;
+.completed {
+  background: #003585;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #fff;
+  width: 84px;
+  display: block;
+  text-align: center;
 }
+
+// .css-1nmdiq5-menu{
+//   height: 200px !important;
+//   overflow-y: auto !important;
+// }
 // .bg-img {
 //   background: linear-gradient(90deg, rgb(75 133 221) 0%, rgb(13 69 153) 85%);
 // }
