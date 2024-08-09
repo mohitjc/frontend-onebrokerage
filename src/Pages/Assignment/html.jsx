@@ -145,55 +145,19 @@ const Html = ({
                 <></>
               )}
 
-              {/* {itm.status == "pending" ? (
-                <>
-                  <Tooltip placement="top" title="Accept">
-                    <a
-                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                      onClick={(e) => statusChange("accepted", itm)}
-                    >
-                      <span class="material-symbols-outlined">check</span>
-                    </a>
-                  </Tooltip>
-                  <Tooltip placement="top" title="Reject">
-                    <a
-                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                      onClick={(e) => statusChange("rejected", itm)}
-                    >
-                      <span class="material-symbols-outlined">close</span>
-                    </a>
-                  </Tooltip>
-                </>
-              ) : (
-                <></>
-              )} */}
-
-              {(itm.status == "accepted" || itm.status == "completed") &&
+              {/* {(itm.status == "accepted" || itm.status == "completed") &&
               user?.role != "staff" &&
               (itm?.counterOfferStatus == "not_accepted" ||
                 itm?.counterOfferStatus == "not_given") ? (
                 <>
-                  <Tooltip placement="top" title="Counter Offer">
-                    <a
-                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                      onClick={(e) => counterOffer(itm)}
-                    >
-                      <PiMoneyWavyLight />
-                    </a>
-                  </Tooltip>
                 </>
               ) : (
                 <>
-                  {(itm.status == "accepted" || itm.status == "completed") &&
-                    user?.role != "staff" && (
-                      <Tooltip placement="top" title="Offer Sent">
-                        <a className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg">
-                          <PiMoneyWavyLight />
-                        </a>
-                      </Tooltip>
-                    )}
 
-                  {user?.role == "staff" && itm.status != "completed" ? (
+                 
+                </>
+              )} */}
+               {user?.role == "staff" && itm.status != "completed" ? (
                     <>
                       <Tooltip placement="top" title="Complete Assignment">
                         <a
@@ -209,8 +173,6 @@ const Html = ({
                   ) : (
                     <></>
                   )}
-                </>
-              )}
             </div>
           </>
         );

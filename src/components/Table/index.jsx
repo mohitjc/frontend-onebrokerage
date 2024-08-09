@@ -109,7 +109,7 @@ const Table = ({
                         key={itm.id}
                       >
                         {columns.map((citm) => (
-                          <td className="px-6 py-4" key={citm.key}>
+                          <td className={`px-6 py-4 ${citm.className}`} key={citm.key}>
                             {citm.render(itm) || "--"}
                           </td>
                         ))}

@@ -44,6 +44,7 @@ const Html = ({
     {
       key: "startDate",
       name: "Start Date",
+      className:'startDate',
       sort: true,
       render: (row) => {
         return (
