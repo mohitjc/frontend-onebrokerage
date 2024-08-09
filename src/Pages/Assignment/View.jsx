@@ -399,7 +399,7 @@ const View = () => {
                     />
                   </div>
                   <div className="mt-3 text-right">
-                    <button className="btn btn-primary">Accept</button>
+                    <button className="btn btn-primary">Sent Quotation</button>
                   </div>
                 </form>
               </>

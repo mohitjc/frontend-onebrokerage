@@ -2,6 +2,7 @@ const status=[
   {id:'accepted',name:'Accepted'},
   {id:'rejected',name:'Rejected'},
   {id:'completed',name:'Completed'},
+  {id:'counteroffered',name:'Counter Offered'},
   {id:'pending',name:'Pending'},
 ]
 
