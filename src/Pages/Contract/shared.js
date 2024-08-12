@@ -17,6 +17,7 @@ const shared = {
   listApi: "contracts/listing",
   statusApi: "contracts/update",
   deleteApi: "contracts/delete",
+  stafflist : "user/listing"
 };
 
 export default shared;

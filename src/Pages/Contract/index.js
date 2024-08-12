@@ -9,6 +9,10 @@ import axios from "axios";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import Modal from "../../components/common/Modal";
+import FormControl from "../../components/common/FormControl";
+import SelectDropdown from "../../components/common/SelectDropdown";
+import { toast } from "react-toastify";
 const Contract = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
@@ -17,6 +21,12 @@ const Contract = () => {
   const [total, setTotal] = useState(0);
   const [loaging, setLoader] = useState(true);
   const history = useNavigate();
+  const [staffId, setStaffId] = useState();
+  const [staffModal, setstaffModal] = useState(false);
+  const [staffData, setStaffData] = useState([]);
+  const [staffForm, setstaffForm] = useState({
+    staff: "",
+  });
 
   const sortClass = (key) => {
     let cls = "fa-sort";
@@ -43,8 +53,7 @@ const Contract = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p};
-
+    let filter = { ...filters, ...p };
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
@@ -118,31 +127,62 @@ const Contract = () => {
     setFilter({ ...filters, status: e, page: 1 });
     getData({ status: e, page: 1 });
   };
+  const changestaffMember = (e, itm) => {
+    let method = "post";
+    let url = shared.addApi;
+    let value = {
+      e,
+    };
+    method = "put";
+    url = `${shared.editApi}?id=${itm?.id}`;
+    loader(true);
+    ApiClient.allApi(url, value, method).then((res) => {
+      if (res.success) {
+        setstaffForm({ ...staffForm, staff: e });
+      }
+      loader(false);
+    });
+  };
 
-  const statusChange = (status,itm) => { 
-
-    Swal.fire({
-      title: "Are you sure?",
-      text: `Do you want to ${status=='accepted'?'Accept':'Reject'} this`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#063688",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        loader(true);
-        ApiClient.put(`${shared.editApi}?id=${itm?.id}`, {  status }).then((res) => {
+  const statusChange = (status, itm) => {
+    if (status == "rejected") {
+      Swal.fire({
+        title: "Are you sure?",
+        text: `Do you want to ${status == "accepted" ? "Accept" : "Reject"} this`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#063688",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          loader(true);
+          ApiClient.put(`${shared.editApi}?id=${itm?.id}`, { status }).then(
+            (res) => {
+              if (res.success) {
+                getData();
+              }
+              loader(false);
+            }
+          );
+        }
+      });
+    }
+     else {
+      loader(true);
+      ApiClient.put(`${shared.editApi}?id=${itm?.id}`, { status }).then(
+        (res) => {
           if (res.success) {
+            setstaffModal(false)
+            setstaffForm({...staffForm,staff:""})
             getData();
+            getStaffmembers()
           }
           loader(false);
-        }); 
-      }
-    });
-
-        
-     
+        }
+      );
+     }
+  
   };
 
   const edit = (id) => {
@@ -198,8 +238,32 @@ const Contract = () => {
     if (user && user.loggedIn) {
       setFilter({ ...filters, search: searchState.data });
       getData({ search: searchState.data, page: 1 });
+      getStaffmembers();
     }
   }, []);
+
+  const getStaffmembers = () => {
+    let filter = { role: "staff" };
+    ApiClient.get(shared.stafflist, filter).then((res) => {
+      if (res.success) {
+        setStaffData(
+          res.data.map((itm) => {
+            itm.id = itm._id;
+            return itm;
+          })
+        );
+      }
+      setLoader(false);
+    });
+  };
+
+  const staffSubmit = () => {
+    if (staffForm?.staff == "") {
+      toast?.error("Please select the staff member");
+    } else {
+      statusChange("accepted", staffId);
+    }
+  };
 
   return (
     <>
@@ -223,7 +287,51 @@ const Contract = () => {
         changestatus={changestatus}
         exportfun={exportfun}
         uploadFile={uploadFile}
+        setstaffModal={setstaffModal}
+        staffModal={staffModal}
+        setStaffId={setStaffId}
       />
+      {staffModal ? (
+        <>
+          <Modal
+            title="Accept Assignment "
+            result={(e) => {
+              setstaffModal(false);
+            }}
+            body={
+              <>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    staffSubmit();
+                  }}
+                >
+                  <div>
+                    <div>Assign a staff Member </div>
+                    <div className="mb-4">
+                      <SelectDropdown
+                        id="statusDropdown"
+                        displayValue="fullName"
+                        placeholder="All Staff members"
+                        intialValue={staffForm?.staff}
+                        result={(e) => {
+                          changestaffMember(e.value, staffId);
+                        }}
+                        options={staffData}
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-3 text-right">
+                    <button className="btn btn-primary">Accept</button>
+                  </div>
+                </form>
+              </>
+            }
+          />
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
