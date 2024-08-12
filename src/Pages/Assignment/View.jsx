@@ -380,7 +380,20 @@ const View = () => {
                   }}
                 >
                   <div>
-                    <div>Estimate Price: ${counterForm.estimate_price}</div>
+                  <div className="bg-[#00358512] rounded-[8px]  max-w-[200px] p-3 mx-auto text-center">
+                      <div className="mx-auto w-14 h-14 bg-white text-[#003585] rounded-[50px] flex items-center justify-center shadow">
+                        <img
+                          src="/assets/img/price.svg"
+                          className="mx-auto w-10 h-10 p-2 	flex items-center justify-center "
+                          alt=""
+                        />
+                      </div>
+                      <h4 className="text-[16px] font-[600] my-3">
+                        Estimated Price{" "}
+                      </h4>
+                      <span>${counterForm.estimate_price}</span>
+                    </div>
+                    {/* <div>Estimate Price: ${counterForm.estimate_price}</div> */}
                     <div className="mb-4">
                       <FormControl
                         type="number"
