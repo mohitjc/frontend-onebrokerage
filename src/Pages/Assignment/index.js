@@ -277,6 +277,11 @@ const Assignment = () => {
     return shared.getWordPrice(word,estimates)
   }
 
+  const viewQuote = (id) => {
+    let url = `/assignment/counter-offer/detail/${id}`;
+    history(url);
+  };
+
   return (
     <>
       <Html
@@ -303,6 +308,7 @@ const Assignment = () => {
         exportfun={exportfun}
         uploadFile={uploadFile}
         status={status}
+        viewQuote={viewQuote}
       />
 
       {counterModal?<>
