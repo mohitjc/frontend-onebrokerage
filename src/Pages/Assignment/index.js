@@ -106,7 +106,7 @@ const Assignment = () => {
   const deleteItem = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: `Do you want to delete this`,
+      text: `Do you want to delete this ?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#063688",
