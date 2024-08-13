@@ -27,7 +27,9 @@ const Html = ({
   loaging,
   data,
   changestatus,
+  setstaffModal, 
   isAllow,
+  setStaffId,
   total = { total },
   sortClass,
 }) => {
@@ -125,7 +127,7 @@ const Html = ({
                 <Tooltip placement="top" title="Accept">
                 <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => statusChange('accepted',itm)}
+                    onClick={(e) => {setstaffModal(true);setStaffId(itm)}}
                   >
                   <span class="material-symbols-outlined">check</span>
                   </a>

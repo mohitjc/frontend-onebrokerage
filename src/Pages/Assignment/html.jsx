@@ -13,6 +13,7 @@ import { PiMoneyWavyLight } from "react-icons/pi";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import ApiClient from "../../methods/api/apiClient";
+import { RxRotateCounterClockwise } from "react-icons/rx";
 const Html = ({
   staff,
   counterOffer,
@@ -31,6 +32,7 @@ const Html = ({
   data,
   changestatus,
   isAllow,
+  viewQuote,
   status,
   total = { total },
   sortClass,
@@ -81,27 +83,7 @@ const Html = ({
       key: "staff",
       name: "Staff",
       render: (row) => {
-        return (
-          <>
-            {row.status == "accepted" ? (
-              <>
-                <SelectDropdown
-                  id="statusDropdown"
-                  displayValue="fullName"
-                  placeholder="Select Staff"
-                  intialValue={row?.staff}
-                  result={(e) => {
-                    edit({ id: row.id, staff: e.value });
-                  }}
-                  theme="search"
-                  options={staff}
-                />
-              </>
-            ) : (
-              <> </>
-            )}
-          </>
-        );
+        return <span className="capitalize ellipses">{row?.staffDetail?.fullName || "N/A"}</span>;
       },
     },
     {
@@ -144,6 +126,16 @@ const Html = ({
               ) : (
                 <></>
               )}
+                   {itm.counterOfferId ? <>
+                <Tooltip placement="top" title="View Quote">
+                  <span
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={() => viewQuote(itm.counterOfferId)}
+                  >
+                    <RxRotateCounterClockwise className="text-inherit shrink-0 text-lg" />
+                  </span>
+                </Tooltip>
+              </> : <></>}
 
               {/* {(itm.status == "accepted" || itm.status == "completed") &&
               user?.role != "staff" &&

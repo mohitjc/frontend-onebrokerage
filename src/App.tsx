@@ -25,6 +25,7 @@ function App() {
     { url: "/dashboard", path:'Dashboard'},
     { url: "/assignment", path:'Assignment'},
     { url: "/assignment/detail/:id", path:'Assignment/View'},
+    { url: "/assignment/counter-offer/detail/:id", path:'Assignment/Counteroffer'},
     { url: "*",path:'NotFoundPage' },
     { url: "/profile",path:'Profile' },
     { url: "/profile/:tab", path:'Settings' },
@@ -50,6 +51,10 @@ function App() {
     { url: "/customers/detail/:id",path:'Customers/View' },
     { url: "/contract",path:'Contract' },
     { url: "/contract/detail/:id",path:'Contract/View' },
+
+
+
+   
   ];
 
   sessionStorage.clear();

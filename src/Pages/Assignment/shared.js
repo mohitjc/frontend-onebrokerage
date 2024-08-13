@@ -28,6 +28,7 @@ const shared = {
   addApi: "assignment/add",
   editApi: "assignment/update",
   detailApi: "assignment/detail",
+  counterdetail :"counter-offer/detail",
   listApi: "assignment/listing",
   statusApi: "user/status/change",
   deleteApi: "assignment/delete",
