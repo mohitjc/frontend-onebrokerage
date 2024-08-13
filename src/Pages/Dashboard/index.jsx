@@ -127,55 +127,71 @@ const Dashboard = () => {
         </h4>
 
         <div className="shadow-box w-full bg-white rounded-lg mt-6 p-6">
-          <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="flex flex-col-reverse  border border-gray-200 shadow-sm px-6 py-2 rounded-lg relative">
-              <dt className="text-base leading-7 text-black/40">Total Staff</dt>
-              <dd className="text-2xl font-bold leading-9  text-black">
-                {data?.totalUsers}
-              </dd>
-              <img
-                src="../assets/img/d1.svg"
-                className="absolute  right-6 top-1/2 -translate-y-1/2 h-7"
-              />
-            </div>
-            <div className="flex flex-col-reverse  border border-gray-200 shadow-sm px-6 py-2 rounded-lg relative">
-              <dt className="text-base leading-7 text-black/40">
-                Total Students
+        <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#0035850a] inner-shadow">
+              <div className="bg-[#fff] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 custom-shadow">
+                <img
+                  src="../assets/img/d1.svg"
+                  className="mx-auto  w-[30px]"
+                  alt=""
+                />
+              </div>
+              <dt className="text-base leading-7 text-black/40 mb-1">
+                Total Staff
               </dt>
-              <dd className="text-2xl font-bold leading-9  text-black">
-                {data?.totalProducts}
+              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
+                {data?.totalUsers} 34
               </dd>
-              <img
-                src="../assets/img/d1.svg"
-                className="absolute  right-6 top-1/2 -translate-y-1/2 h-7"
-              />
             </div>
-            <div className="flex flex-col-reverse  border border-gray-200 shadow-sm px-6 py-2 rounded-lg relative">
-              <dt className="text-base leading-7 text-black/40">
-                Total Categories
+            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#0035850a] inner-shadow">
+              <div className="bg-[#fff] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 custom-shadow">
+                <img
+                  src="../assets/img/d1.svg"
+                  className="mx-auto  w-[30px]"
+                  alt=""
+                />
+              </div>
+              <dt className="text-base leading-7 text-black/40 mb-1">
+              Total Students
               </dt>
-              <dd className="text-2xl font-bold leading-9  text-black">
-                {data?.totalCategory}
+              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
+              {data?.totalProducts} 34
               </dd>
-              <img
-                src="../assets/img/d4.svg"
-                className="absolute  right-6 top-1/2 -translate-y-1/2 h-7"
-              />
             </div>
-            <div className="flex flex-col-reverse  border border-gray-200 shadow-sm px-6 py-2 rounded-lg relative">
-              <dt className="text-base leading-7 text-black/40">
-                Total Assignment
+            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#0035850a] inner-shadow">
+              <div className="bg-[#fff] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 custom-shadow">
+                <img
+                  src="../assets/img/d4.svg"
+                  className="mx-auto  w-[30px]"
+                  alt=""
+                />
+              </div>
+              <dt className="text-base leading-7 text-black/40 mb-1">
+              Total Categories
               </dt>
-              <dd className="text-2xl font-bold leading-9  text-black">
-                {data?.totalReview}
+              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
+              {data?.totalCategory} 34
               </dd>
-              <img
-                src="../assets/img/d2.svg"
-                className="absolute  text-green-500 right-6 top-1/2 -translate-y-1/2 h-7"
-              />
             </div>
-          </div>
 
+            <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#0035850a] inner-shadow">
+              <div className="bg-[#fff] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 custom-shadow">
+                <img
+                  src="../assets/img/d2.svg"
+                  className="mx-auto  w-[30px]"
+                  alt=""
+                />
+              </div>
+              <dt className="text-base leading-7 text-black/40 mb-1">
+              Total Assignment
+              </dt>
+              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
+              {data?.totalReview} 34
+              </dd>
+            </div>
+          
+            
+          </div>
           <div className="grid grid-cols-12 gap-4 mt-6">
             {/* <div className="col-span-12 md:col-span-12">
               <div className="chatr_ones border border-gray-200 p-6 rounded-lg">

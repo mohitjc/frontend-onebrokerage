@@ -62,7 +62,7 @@ const View = () => {
                   <h4 className="p-4 bg-[#0636881a] font-medium">Contract Information</h4>
                 </div>
                <div className="grid grid-cols-12 p-4">
-               <div className="col-span-6 flex items-center mb-3">
+               <div className="col-span-6 flex  mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Title:</label>
                   <p className="text-[14px] text-black font-medium ms-3">
                     {" "}
@@ -71,21 +71,21 @@ const View = () => {
                   </p>
                 </div>
 
-                  <div className="col-span-6 flex items-center mb-3">
+                  <div className="col-span-6 flex  mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Start Date :</label>
                    <p className="text-[14px] text-black font-medium ms-3">
                     {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
                    {datepipeModel.date(data?.startDate)}
                   </p>
                 </div>
-                <div className="col-span-6 flex items-center mb-3">
+                <div className="col-span-6 flex  mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">End Date :</label>
                    <p className="text-[14px] text-black font-medium ms-3">
                     {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
                    {datepipeModel.date(data?.endDate)}
                   </p>
                 </div>
-                <div className="col-span-6 flex items-center mb-3">
+                <div className="col-span-6 flex    mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Total Amount :</label>
                    <p className="text-[14px] text-black font-medium ms-3">
                     {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
@@ -93,20 +93,20 @@ const View = () => {
                   </p>
                 </div>
               
-                <div className="col-span-6 flex items-center mb-3">
+                <div className="col-span-12 flex  mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Terms :</label>
-                   <p className="text-[14px] text-black font-medium ms-3">
-                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
-                    <div dangerouslySetInnerHTML={{__html:data?.terms}}></div>
+                   <p className="text-[14px] text-black font-medium ms-3 w-[85%]" dangerouslySetInnerHTML={{__html:data?.terms}}>
+                   
                   </p>
                 </div>
-                <div className="col-span-6 flex items-center mb-3">
+                <div className="col-span-6 flex  mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Document :</label>
                    <p className="text-[14px] text-black font-medium ms-3">
                     {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
                     {data?.doc_url?<>
-                    <a href={`${environment.api}document/${data?.doc_url}`} target="_new">
-                    <span class="material-symbols-outlined">draft</span>
+                    <a href={`${environment.api}document/${data?.doc_url}`} target="_new" className="relative w-[50px] h-[50px]">
+                      <i className="fa fa-download absolute right-0 bottom-0 bg-[#06378b] text-white p-[7px] text-[7px] rounded-[50px]"></i>
+                    <span class="material-symbols-outlined text-[40px]">draft</span>
                     </a>
                     </>:<></>}
                   </p>

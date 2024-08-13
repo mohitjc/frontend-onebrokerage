@@ -2180,6 +2180,14 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
   display: block;
   text-align: center;
 }
+.custom-shadow{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.inner-shadow{
+  
+    box-shadow: rgb(204, 219, 232) 3px 1px 11px -3px inset, rgba(255, 255, 255, 0.5) 2px -3px 8px 1px inset;
+
+}
 // .css-1nmdiq5-menu{
 //   height: 200px !important;
 //   overflow-y: auto !important;
