@@ -83,27 +83,7 @@ const Html = ({
       key: "staff",
       name: "Staff",
       render: (row) => {
-        return (
-          <>
-            {row.status == "accepted" ? (
-              <>
-                <SelectDropdown
-                  id="statusDropdown"
-                  displayValue="fullName"
-                  placeholder="Select Staff"
-                  intialValue={row?.staff}
-                  result={(e) => {
-                    edit({ id: row.id, staff: e.value });
-                  }}
-                  theme="search"
-                  options={staff}
-                />
-              </>
-            ) : (
-              <> </>
-            )}
-          </>
-        );
+        return <span className="capitalize ellipses">{row?.staffDetail?.fullName || "N/A"}</span>;
       },
     },
     {

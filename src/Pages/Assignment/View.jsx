@@ -263,8 +263,8 @@ const View = () => {
                     <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">
                       Status :
                     </label>
-                    <p className="text-[14px] text-black font-medium ms-3">
-                      {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
+                    <p className={`${data?.status} text-[14px] text-black font-medium ms-3`}>
+                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
                       {data?.status || "--"}
                     </p>
                   </div>
