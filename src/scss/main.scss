@@ -2131,7 +2131,7 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
   padding: 4px 6px;
   border-radius: 4px;
   color: #393939d9;
-  width: 84px;
+   width: 122px;
   display: block;
   text-align: center;
 }
@@ -2140,7 +2140,7 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
   padding: 4px 6px;
   border-radius: 4px;
   color: #393939d9;
-  width: 84px;
+   width: 122px;
   display: block;
   text-align: center;
 }
@@ -2148,8 +2148,17 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
   background: #0035851f;
   padding: 4px 6px;
   border-radius: 4px;
-  color: #003585;
-  width: 84px;
+  color: #003585 !important;
+   width: 122px;
+  display: block;
+  text-align: center;
+}
+.counteroffered {
+  background: rgb(233 233 233);
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #970505 !important;
+   width: 122px;
   display: block;
   text-align: center;
 }
@@ -2158,11 +2167,19 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
   padding: 4px 6px;
   border-radius: 4px;
   color: #fff;
-  width: 84px;
+   width: 122px;
   display: block;
   text-align: center;
 }
-
+.contractcreated {
+  background: #00000017;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #4b4b4b;
+  width: 122px;
+  display: block;
+  text-align: center;
+}
 // .css-1nmdiq5-menu{
 //   height: 200px !important;
 //   overflow-y: auto !important;

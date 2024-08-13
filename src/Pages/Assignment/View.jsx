@@ -13,6 +13,9 @@ import methodModel from "../../methods/methods";
 import Swal from "sweetalert2";
 import FormControl from "../../components/common/FormControl";
 import Modal from "../../components/common/Modal";
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
+import { RxCrossCircled } from "react-icons/rx";
+import { MdCancel } from "react-icons/md";
 
 const View = () => {
   const user = useSelector((state) => state.user);
@@ -201,34 +204,39 @@ const View = () => {
                 {shared.addTitle} Details
               </h3>
             </div>
-            {data?.status == "pending" ? 
-            <div className="flex gap-4">
-              <Tooltip placement="top" title="Accept">
-                <a
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={(e) => counterOffer("accepted",id)}
-                >
-                  <span class="material-symbols-outlined">check</span>
-                </a>
-              </Tooltip>
-              <Tooltip placement="top" title="Reject">
-                <a
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={(e) => statusChange("rejected")}
-                >
-                  <span class="material-symbols-outlined">close</span>
-                </a>
-              </Tooltip>
-            </div>
-             : ""}          </div>
+             </div>
 
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12">
               <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-5 capitalize">
-                <div>
-                  <h4 className="p-4 bg-[#0636881a] font-medium">
+                <div className="p-4 bg-[#0636881a] flex items-center justify-between">
+                  <h4 className=" font-medium">
                     Basic Information
                   </h4>
+                  <div>
+                  {data?.status == "pending" ? 
+            <div className="flex gap-4">
+             <a
+                  className="border border-tranparent cursor-pointer  hover:opacity-70 rounded-lg bg-[#06378b] text-white p-2 !text-primary flex items-center justify-center text-[14px]"
+                  onClick={(e) => counterOffer("accepted",id)}
+                >
+                  <IoIosCheckmarkCircleOutline  className="w-5 h-5"/>
+                  
+                  <p className="ms-1">Accept</p>
+                </a>
+              <a
+                  className="border border-[#06378b] cursor-pointer  hover:opacity-70 rounded-lg bg-transparent  p-2 !text-primary flex items-center justify-center text-[14px] text-[#06378b]"
+                  onClick={(e) => statusChange("rejected")}
+                >
+                  
+                  <RxCrossCircled className="w-5 h-5" />
+
+                 
+                  <p className="ms-1">Reject</p>
+                </a>
+            </div>
+             : ""}      
+                  </div>
                 </div>
                 <div className="grid grid-cols-12 p-4">
                   <div className="col-span-6 flex items-center mb-3">
@@ -266,7 +274,7 @@ const View = () => {
                     </label>
                     <p
                       dangerouslySetInnerHTML={{ __html: data?.description }}
-                      className="text-[14px] text-black font-medium ms-3 desc-text"
+                      className="text-[14px] text-black font-medium ms-3 desc-text w-[85%]"
                     ></p>
                   </div>
                   {data?.url ? (
@@ -281,7 +289,7 @@ const View = () => {
                         href={methodModel.noImg(data?.url, "document")}
                       >
                         <i
-                          class="fa fa-download absolute right-0 bottom-0 bg-[#06378b] text-white p-2 text-[9px] rounded-[50px]"
+                          class="fa fa-download absolute right-0 bottom-0 bg-[#06378b] text-white p-2 text-[8px] rounded-[50px]"
                           aria-hidden="true"
                         ></i>
 
@@ -372,7 +380,20 @@ const View = () => {
                   }}
                 >
                   <div>
-                    <div>Estimate Price: ${counterForm.estimate_price}</div>
+                  <div className="bg-[#00358512] rounded-[8px]  max-w-[200px] p-3 mx-auto text-center">
+                      <div className="mx-auto w-14 h-14 bg-white text-[#003585] rounded-[50px] flex items-center justify-center shadow">
+                        <img
+                          src="/assets/img/price.svg"
+                          className="mx-auto w-10 h-10 p-2 	flex items-center justify-center "
+                          alt=""
+                        />
+                      </div>
+                      <h4 className="text-[16px] font-[600] my-3">
+                        Estimated Price{" "}
+                      </h4>
+                      <span>${counterForm.estimate_price}</span>
+                    </div>
+                    {/* <div>Estimate Price: ${counterForm.estimate_price}</div> */}
                     <div className="mb-4">
                       <FormControl
                         type="number"
