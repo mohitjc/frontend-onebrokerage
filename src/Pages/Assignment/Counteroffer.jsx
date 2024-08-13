@@ -97,9 +97,9 @@ const CounterOfferDetails = () => {
                 <div className="flex justify-between p-4 bg-[#0636881a] font-medium items-center">
                   <h4 className="mb-0">Counter Offer Information</h4>
                   <div className="ml-auto flex gap-2">
-                    {data?.status == "pending" ? (
+                    {data?.status == "counter-offered" ? (
                       <>
-                        <Tooltip placement="top" title="Aceept">
+                        <Tooltip placement="top" title="Accept">
                           <a
                             className="border border-tranparent cursor-pointer  hover:opacity-70 rounded-lg bg-[#06378b] text-white p-2 !text-primary flex items-center justify-center text-[14px]"
                             onClick={(e) => counterSubmit("accept")}
@@ -131,10 +131,10 @@ const CounterOfferDetails = () => {
                       Counter Offer:
                     </label>
                     <p className="text-[14px] text-black font-medium ">
-                      {" "}
-                      {data && data.counterOffer
-                        ? "$ " + data.counterOffer
-                        : ""}
+                      {data?.status == "counter-offered"
+                          ? "$ " + data.student_counteroffer : data && data.counterOffer
+                          ? "$ " + data.counterOffer: "" }
+                     
                     </p>
                   </div>
 
