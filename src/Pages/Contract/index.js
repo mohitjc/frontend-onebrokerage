@@ -148,7 +148,9 @@ const Contract = () => {
     if (status == "rejected") {
       Swal.fire({
         title: "Are you sure?",
-        text: `Do you want to ${status == "accepted" ? "Accept" : "Reject"} this`,
+        text: `Do you want to ${
+          status == "accepted" ? "Accept" : "Reject"
+        } this`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#063688",
@@ -167,22 +169,20 @@ const Contract = () => {
           );
         }
       });
-    }
-     else {
+    } else {
       loader(true);
       ApiClient.put(`${shared.editApi}?id=${itm?.id}`, { status }).then(
         (res) => {
           if (res.success) {
-            setstaffModal(false)
-            setstaffForm({...staffForm,staff:""})
+            setstaffModal(false);
+            setstaffForm({ ...staffForm, staff: "" });
             getData();
-            getStaffmembers()
+            getStaffmembers();
           }
           loader(false);
         }
       );
-     }
-  
+    }
   };
 
   const edit = (id) => {
@@ -306,8 +306,9 @@ const Contract = () => {
                     staffSubmit();
                   }}
                 >
-                  <div>
-                    <div>Assign a staff Member </div>
+                  <div  className="staff-members">
+                    <img src ="assets/img/id.png" alt="staff" className="w-[100px] mx-auto" />
+                   <h4 className="text-center my-3 font-[600] text-[20px]">Assign a staff Member</h4>  
                     <div className="mb-4">
                       <SelectDropdown
                         id="statusDropdown"
