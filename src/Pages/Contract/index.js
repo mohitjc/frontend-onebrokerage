@@ -127,28 +127,17 @@ const Contract = () => {
     setFilter({ ...filters, status: e, page: 1 });
     getData({ status: e, page: 1 });
   };
-  const changestaffMember = (e, itm) => {
-    let method = "post";
-    let url = shared.addApi;
-    let value = {
-      e,
-    };
-    method = "put";
-    url = `${shared.editApi}?id=${itm?.id}`;
-    loader(true);
-    ApiClient.allApi(url, value, method).then((res) => {
-      if (res.success) {
-        setstaffForm({ ...staffForm, staff: e });
-      }
-      loader(false);
-    });
+  const changestaffMember = (e) => {
+    setstaffForm({ ...staffForm, staff: e });
   };
 
   const statusChange = (status, itm) => {
     if (status == "rejected") {
       Swal.fire({
         title: "Are you sure?",
-        text: `Do you want to ${status == "accepted" ? "Accept" : "Reject"} this`,
+        text: `Do you want to ${
+          status == "accepted" ? "Accept" : "Reject"
+        } this`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#063688",
@@ -167,22 +156,28 @@ const Contract = () => {
           );
         }
       });
-    }
-     else {
-      loader(true);
-      ApiClient.put(`${shared.editApi}?id=${itm?.id}`, { status }).then(
-        (res) => {
-          if (res.success) {
-            setstaffModal(false)
-            setstaffForm({...staffForm,staff:""})
-            getData();
-            getStaffmembers()
-          }
-          loader(false);
+    } else {
+      let value = {
+        staff: staffForm.staff,
+      };
+      let method = "put";
+      let url = `assignment/update?id=${itm?.assignment_id}`;
+      ApiClient.allApi(url, value, method).then((res) => {
+        if (res.success) {
+          loader(true);
+          ApiClient.put(`${shared.editApi}?id=${itm?.id}`, { status }).then(
+            (res) => {
+              if (res.success) {
+                setstaffModal(false);
+                setstaffForm({ ...staffForm, staff: "" });
+                getData(); 
+              }
+              loader(false);
+            }
+          );
         }
-      );
-     }
-  
+      });
+    }
   };
 
   const edit = (id) => {
@@ -315,7 +310,7 @@ const Contract = () => {
                         placeholder="All Staff members"
                         intialValue={staffForm?.staff}
                         result={(e) => {
-                          changestaffMember(e.value, staffId);
+                          changestaffMember(e.value);
                         }}
                         options={staffData}
                       />
