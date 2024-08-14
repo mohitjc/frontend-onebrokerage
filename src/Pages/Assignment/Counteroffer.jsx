@@ -54,7 +54,7 @@ const CounterOfferDetails = () => {
       // id:id,
       // message: counterForm.message,
       // student_counteroffer: counterForm.counterOffer,
-      status: status == "accept" ? "offered-counter" : "rejected",
+      status: status == "accept" ? "offer-received" : "rejected",
     };
 
     loader(true);

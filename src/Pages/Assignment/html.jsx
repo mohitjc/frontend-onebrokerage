@@ -83,7 +83,11 @@ const Html = ({
       key: "staff",
       name: "Staff",
       render: (row) => {
-        return <span className="capitalize ellipses">{row?.staffDetail?.fullName || "--"}</span>;
+        return (
+          <span className="capitalize ellipses">
+            {row?.staffDetail?.fullName || "--"}
+          </span>
+        );
       },
     },
     {
@@ -126,16 +130,20 @@ const Html = ({
               ) : (
                 <></>
               )}
-                   {itm.counterOfferId ? <>
-                <Tooltip placement="top" title="View Quote">
-                  <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={() => viewQuote(itm.counterOfferId)}
-                  >
-                    <RxRotateCounterClockwise className="text-inherit shrink-0 text-lg" />
-                  </span>
-                </Tooltip>
-              </> : <></>}
+              {itm.counterOfferId ? (
+                <>
+                  <Tooltip placement="top" title="View Quote">
+                    <span
+                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                      onClick={() => viewQuote(itm.counterOfferId)}
+                    >
+                      <RxRotateCounterClockwise className="text-inherit shrink-0 text-lg" />
+                    </span>
+                  </Tooltip>
+                </>
+              ) : (
+                <></>
+              )}
 
               {/* {(itm.status == "accepted" || itm.status == "completed") &&
               user?.role != "staff" &&
@@ -149,22 +157,22 @@ const Html = ({
                  
                 </>
               )} */}
-               {user?.role == "staff" && itm.status != "completed" ? (
-                    <>
-                      <Tooltip placement="top" title="Complete Assignment">
-                        <a
-                          className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                          onClick={(e) =>
-                            statusChange("completed", itm, "Complete")
-                          }
-                        >
-                          <span class="material-symbols-outlined">check</span>
-                        </a>
-                      </Tooltip>
-                    </>
-                  ) : (
-                    <></>
-                  )}
+              {user?.role == "staff" && itm.status != "completed" ? (
+                <>
+                  <Tooltip placement="top" title="Complete Assignment">
+                    <a
+                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                      onClick={(e) =>
+                        statusChange("completed", itm, "Complete")
+                      }
+                    >
+                      <span class="material-symbols-outlined">check</span>
+                    </a>
+                  </Tooltip>
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           </>
         );
