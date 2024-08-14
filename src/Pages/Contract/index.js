@@ -170,7 +170,7 @@ const Contract = () => {
               if (res.success) {
                 setstaffModal(false);
                 setstaffForm({ ...staffForm, staff: "" });
-                getData(); 
+                getData();
               }
               loader(false);
             }
@@ -301,23 +301,32 @@ const Contract = () => {
                     staffSubmit();
                   }}
                 >
-                  <div>
-                    <div>Assign a staff Member </div>
-                    <div className="mb-4">
-                      <SelectDropdown
-                        id="statusDropdown"
-                        displayValue="fullName"
-                        placeholder="All Staff members"
-                        intialValue={staffForm?.staff}
-                        result={(e) => {
-                          changestaffMember(e.value);
-                        }}
-                        options={staffData}
+                  <div className="staff-members rounded-[5px] border border-[#00000012]">
+                    <div className="flex items-center p-3 border-b border-[#00000012]  bg-[#0035850a] ">
+                      <img
+                        src="assets/img/id.png"
+                        alt="staff"
+                        className="w-[50px] "
                       />
+                      <h4 className="text-center my-3 font-[600] text-[16px] ms-3">
+                        Assign a staff Member
+                      </h4>
                     </div>
-                  </div>
-                  <div className="mt-3 text-right">
-                    <button className="btn btn-primary">Accept</button>
+                    <div className="flex items-center mt-5 mb-2 p-3">
+                      <div className=" w-full  mx-auto c-dropdown  ">
+                        <SelectDropdown
+                          id="statusDropdown"
+                          displayValue="fullName"
+                          placeholder="All Staff members"
+                          intialValue={staffForm?.staff}
+                          result={(e) => {
+                            changestaffMember(e.value);
+                          }}
+                          options={staffData}
+                        />
+                      </div>
+                      <button className="btn btn-primary ms-3">Accept</button>
+                    </div>
                   </div>
                 </form>
               </>
