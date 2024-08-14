@@ -216,7 +216,7 @@ export default function FormControl({
           <input
             type={type}
             name={name}
-            className="relative  bg-white w-full rounded-lg h-11 flex items-center gap-2 overflow-hidden px-2 border border-[#00000036]"
+            className="relative  bg-white w-full rounded-lg h-11  overflow-hidden px-2 border border-[#00000036]"
             required={required}
             placeholder={placeholder}
             value={value || ""}

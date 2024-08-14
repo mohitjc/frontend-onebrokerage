@@ -83,7 +83,7 @@ const Html = ({
       key: "staff",
       name: "Staff",
       render: (row) => {
-        return <span className="capitalize ellipses">{row?.staffDetail?.fullName || "N/A"}</span>;
+        return <span className="capitalize ellipses">{row?.staffDetail?.fullName || "--"}</span>;
       },
     },
     {
