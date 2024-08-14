@@ -3,7 +3,7 @@ import Layout from "../../components/global/layout";
 import { useEffect, useState } from "react";
 import ApiClient from "../../methods/api/apiClient";
 import { useParams } from "react-router-dom";
-import shared from './shared';
+import shared from "./shared";
 import loader from "../../methods/loader";
 import { Tooltip } from "antd";
 import { useSelector } from "react-redux";
@@ -49,26 +49,22 @@ const CounterOfferDetails = () => {
     getWordEstimate();
   }, []);
 
- 
-
   const counterSubmit = (status) => {
     let payload = {
       // id:id,
       // message: counterForm.message,
       // student_counteroffer: counterForm.counterOffer,
-      status: status == "accept" ?  "offered-counter" : "rejected",
+      status: status == "accept" ? "offered-counter" : "rejected",
     };
 
     loader(true);
     ApiClient.put(`counter-offer/update?id=${id}`, payload).then((res) => {
       loader(false);
-      if (res?.success) { 
+      if (res?.success) {
         getDetail();
       }
     });
   };
-
- 
 
   return (
     <>
@@ -85,10 +81,9 @@ const CounterOfferDetails = () => {
             </Tooltip>
             <div className="flex gap-3">
               <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
-               Counter Offer Details
+                Counter Offer Details
               </h3>
             </div>
-   
           </div>
 
           <div className="grid grid-cols-12 gap-6">
@@ -97,15 +92,15 @@ const CounterOfferDetails = () => {
                 <div className="flex justify-between p-4 bg-[#0636881a] font-medium items-center">
                   <h4 className="mb-0">Counter Offer Information</h4>
                   <div className="ml-auto flex gap-2">
-                    {data?.status == "counter-offered" ? (
+                    {data?.status == "counteroffered" ? (
                       <>
                         <Tooltip placement="top" title="Accept">
                           <a
                             className="border border-tranparent cursor-pointer  hover:opacity-70 rounded-lg bg-[#06378b] text-white p-2 !text-primary flex items-center justify-center text-[14px]"
                             onClick={(e) => counterSubmit("accept")}
                           >
-                            <IoCheckmarkDoneOutline className="me-1 w-5 h-5"/>
-                           <p> Accept</p>
+                            <IoCheckmarkDoneOutline className="me-1 w-5 h-5" />
+                            <p> Accept</p>
                           </a>
                         </Tooltip>
 
@@ -126,17 +121,31 @@ const CounterOfferDetails = () => {
                   </div>
                 </div>
                 <div className="grid grid-cols-12 p-4">
+                <div className="col-span-6 flex flex-col lg:flex-row mb-4">
+                    <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">
+                      Estimated Offer:
+                    </label>
+                    <p className="text-[14px] text-black font-medium ">
+                      {data?.status == "counteroffered"
+                        ? "$ " + data.counterOffer
+                        : data && data.counterOffer
+                        ? "$ " + data.counterOffer
+                        : ""}
+                    </p>
+                  </div>
                   <div className="col-span-6 flex flex-col lg:flex-row mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">
                       Counter Offer:
                     </label>
                     <p className="text-[14px] text-black font-medium ">
-                      {data?.status == "counter-offered"
-                          ? "$ " + data.student_counteroffer : data && data.counterOffer
-                          ? "$ " + data.counterOffer: "" }
-                     
+                      {data?.status == "counteroffered"
+                        ? "$ " + data.student_counteroffer
+                        : data && data.counterOffer
+                        ? "$ " + data.counterOffer
+                        : ""}
                     </p>
                   </div>
+             
 
                   <div className="col-span-6 flex flex-col lg:flex-row mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">
@@ -191,8 +200,6 @@ const CounterOfferDetails = () => {
           </div>
         </div>
       </Layout>
-
-  
     </>
   );
 };
