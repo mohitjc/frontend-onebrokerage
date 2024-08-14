@@ -1,4 +1,4 @@
-export default function Modal({result=(e:any)=>{},body=<>test</>,title='Modal title', className='max-w-3xl', footer=''}){
+export default function Modal({result=(e:any)=>{},body=<>test</>,title='Modal title', className='max-w-2xl', footer=''}){
 
     const close=()=>{
         result({event:'close'})
