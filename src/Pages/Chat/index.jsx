@@ -1,6 +1,103 @@
+import { useEffect, useRef, useState } from "react";
 import Layout from "../../components/global/layout";
+import socketModel from "../../models/socketModel";
+import ApiClient from "../../methods/api/apiClient";
+import { useSelector } from "react-redux";
 
 export default function Chat() {
+  const user=useSelector(state=>state.user)
+  const currectChat=useRef()
+  const messages=useRef()
+  const [chatMessages, setChatMessages] = useState([]);
+  const [chatRooms, setChatRooms] = useState([]);
+  const [chatRoomId, setChatRoomId] = useState("");
+  const [search, setSearch] = useState('');
+  const [cloader, setCLoader] = useState('');
+
+  let ar = sessionStorage.getItem("activeRooms");
+  const activeRooms = useRef(ar ? JSON.parse(ar) : []);
+
+  const chatScroll = () => {
+    // Scroll to the bottom after sending a message
+    var chatBox = document.getElementById("chat-box");
+    if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+  };
+
+  const getChatRoomsList = (p = {}) => {
+    let f = { user_id: user?._id, quickChat: false, ...p };
+    if (search) {
+      f = { ...f, search: search, ...p };
+    }
+    if (search) setCLoader(true);
+    ApiClient.get("chat/room-members", f).then((res) => {
+      if (res.success) {
+        setChatRooms(res.data.data);
+      }
+      setCLoader(false);
+    });
+  };
+
+  const getChatMessages = (id) => {
+    // loader(true);
+    ApiClient.get("chat/messages", { room_id: id }).then((res) => {
+      if (res.success) {
+        let data = res.data.data;
+        setChatMessages(data);
+        messages.current = data;
+        setTimeout(() => {
+          chatScroll();
+        }, 100);
+      }
+      // loader(false);
+    });
+  };
+
+
+
+  useEffect(()=>{
+    socketModel.on("receive-message", (data) => {
+      console.log("data", data);
+      if (currectChat.current == data.data.room_id) {
+        messages.current.push({ ...data.data });
+
+        const uniqueMessages = Array.from(
+          new Set(messages.current.map((message) => message._id))
+        ).map((id) => {
+          return messages.current.find((message) => message._id === id);
+        });
+
+        console.log("uniqueMessages", uniqueMessages);
+        setChatMessages([...uniqueMessages]);
+        setTimeout(() => {
+          chatScroll();
+        }, 100);
+      }
+      getChatRoomsList();
+    });
+  })
+
+  useEffect(() => {
+    if (chatRoomId != "") {
+      let value = {
+        room_id: chatRoomId,
+        user_id: user?._id,
+      };
+      if (!activeRooms.current.includes(chatRoomId)) {
+        console.log("activeRooms inner", activeRooms);
+        activeRooms.current.push(chatRoomId);
+        sessionStorage.setItem(
+          "activeRooms",
+          JSON.stringify(activeRooms.current)
+        );
+        socketModel.emit("join-room", value);
+      }
+      socketModel.emit("unread-count", value);
+      socketModel.emit("read-all-message", value);
+
+      getChatMessages(chatRoomId);
+    }
+  }, [chatRoomId]);
+
   return (
     <>
       <Layout>
@@ -75,7 +172,7 @@ export default function Chat() {
                   </div>
                 </div>
               </div>
-              <div className="p-4 flex-1 overflow-y-auto bg-white h-[600px]">
+              <div className="p-4 flex-1 overflow-y-auto bg-white h-[600px]" id="chat-box">
                 <div className="mb-4 flex items-start">
                   <div className="w-10 h-10  rounded-full">
                     <img src="assets/img/skill/team2.png" />
