@@ -24,7 +24,7 @@ const EditProfile = () => {
 
   const gallaryData = () => {
     loader(true);
-    ApiClient.get(`user/profile`, { id: user._id }).then((res) => {
+    ApiClient.get(`admin/profile`, { id: user._id }).then((res) => {
       if (res.success) {
         let payload = form;
         let value = res.data;
@@ -68,7 +68,7 @@ const EditProfile = () => {
     });
 
     loader(true);
-    ApiClient.put("user/profile", value).then((res) => {
+    ApiClient.put("admin/profile", value).then((res) => {
       if (res.success) {
         let uUser = { ...user, ...value };
         dispatch(login_success(uUser));

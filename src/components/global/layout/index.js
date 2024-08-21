@@ -42,12 +42,12 @@ const Layout=memo(function Layout ({ children }) {
   }, []);
 
   const logo = () => {
-    let value = "/assets/img/logo.png";
+    let value = "/assets/img/white-fav.png";
     return value;
   };
 
   const logowhite = () => {
-    let value = "/assets/img/logo.png";
+    let value = "/assets/img/white-fav.png";
     return value;
   };
 
@@ -82,7 +82,7 @@ const Layout=memo(function Layout ({ children }) {
                     src={logowhite()}
                     width="120"
                     height="35"
-                    className=" show-logo"
+                    className=" show-logo "
                   />
                   <img src={logos()} className="hide-logo" />
                 </div>

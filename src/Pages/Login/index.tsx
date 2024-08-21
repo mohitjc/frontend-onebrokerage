@@ -90,16 +90,16 @@ const Login = () => {
     let data: any = {
       email: username,
       password,
-      ip_address: ip,
+      // ip_address: ip,
     };
 
-    let url = "user/admin/login";
+    let url = "admin/login";
     if (step == 2) {
       url = "api/two-factor/auth";
       data = {
         id: resp?._id,
         otp: otp,
-        ip_address: ip,
+        // ip_address: ip,
       };
     }
 
@@ -174,7 +174,7 @@ const Login = () => {
           >
             <Link to="/" className=" xl:w-[150px] z-[99] mb-10 block mx-auto text-center">
                   <img
-                    src="/assets/img/logo.png"
+                    src="./imgpsh_fullsize_anim (1).jpeg"
                     className="md:w-[160px] lg:w-[140px] w-[130px]  mx-auto"
                     alt="logo"
                   />
