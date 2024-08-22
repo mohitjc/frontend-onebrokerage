@@ -29,7 +29,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
   return (
     <>
       <div
-        className={`px-[8px] ${isOpen && styles.sm_sidebar}`}
+        className={`px-[8px] h-[90%] p-4 rounded-lg m-2 bg-[#494f9f17] ${isOpen && styles.sm_sidebar}`}
         component="siderbar"
       >
         <h6
@@ -37,10 +37,10 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
             isOpen ? "py-[12px] text-center" : "p-[12px]"
           } text-xs font-medium text-[#7E8B99] mt-[12px]`}
         >
-          <span className="sidebar_text"> MAIN MENU </span>
+          <span className="sidebar_text text-[#4A545E] "> MAIN MENU </span>
         </h6>
 
-        <ul className="space-y-2 px-2">
+        <ul className="space-y-2 px-2 ">
           <li>
             <Tooltip placement="right" title="Dashboard">
               <NavLink
@@ -50,12 +50,12 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 //   (isActive && " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
                 // }
                 className={(isActive) =>
-                  "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all  " +
+                  "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#fff] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all  " +
                   (location?.pathname == "/dashboard" &&
-                    " !text-[#5577FF] !bg-[#5577FF]/10 !font-medium")
+                    " !text-[#fff] !bg-[#494f9f] !font-medium")
                 }
               >
-                <RiHome6Line className="text-[#5577FF] shrink-0 text-lg" />
+                <RiHome6Line className="text-[#fff] shrink-0 text-lg" />
                 <span className="text-inherit leading-none sidebar_text">
                   Dashboard
                 </span>
@@ -68,7 +68,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               {({ open }) => (
                 <>
                   <Tooltip placement="right" title="Carriers">
-                    <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#4A545E]  hover:!text-[#5577FF] gap-[12px] hover:bg-[#5577FF]/10 transition-all duration-300">
+                    <Disclosure.Button className="w-full p-2.5 rounded-[50px] flex items-center justify-between text-[#4A545E]  hover:!text-[#5577FF] gap-[12px] hover:bg-[#5577FF]/10 transition-all duration-300">
                       <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                         <FiUsers className="text-[#5577FF] shrink-0 text-lg" />
                         <span className=" text-inherit leading-none sidebar_text">

@@ -126,10 +126,10 @@ const Dashboard = () => {
           <span className="">Hi,</span> {user?.fullName}
         </h4>
 
-        <div className="shadow-box w-full bg-white rounded-lg mt-6 p-6">
+        <div className=" w-full bg-white rounded-lg mt-6 ">
         <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#0035850a] inner-shadow">
-              <div className="bg-[#fff] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 custom-shadow">
+            <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
+              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
                 <img
                   src="../assets/img/d1.svg"
                   className="mx-auto  w-[30px]"
@@ -143,8 +143,8 @@ const Dashboard = () => {
                 {data?.totalUsers} 34
               </dd>
             </div>
-            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#0035850a] inner-shadow">
-              <div className="bg-[#fff] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 custom-shadow">
+            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
+              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
                 <img
                   src="../assets/img/d1.svg"
                   className="mx-auto  w-[30px]"
@@ -158,8 +158,8 @@ const Dashboard = () => {
               {data?.totalProducts} 34
               </dd>
             </div>
-            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#0035850a] inner-shadow">
-              <div className="bg-[#fff] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 custom-shadow">
+            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
+              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
                 <img
                   src="../assets/img/d4.svg"
                   className="mx-auto  w-[30px]"
@@ -174,8 +174,8 @@ const Dashboard = () => {
               </dd>
             </div>
 
-            <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#0035850a] inner-shadow">
-              <div className="bg-[#fff] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 custom-shadow">
+            <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
+              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
                 <img
                   src="../assets/img/d2.svg"
                   className="mx-auto  w-[30px]"

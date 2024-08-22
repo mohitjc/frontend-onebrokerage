@@ -42,17 +42,17 @@ const Layout=memo(function Layout ({ children }) {
   }, []);
 
   const logo = () => {
-    let value = "/assets/img/white-fav.png";
+    let value = "/assets/img/logo.jpeg";
     return value;
   };
 
   const logowhite = () => {
-    let value = "/assets/img/white-fav.png";
+    let value = "/assets/img/logo.jpeg";
     return value;
   };
 
   const logos = () => {
-    let value = "/assets/img/logo-small1.png";
+    let value = "/assets/img/logo.jpeg";
     return value;
   };
 
@@ -80,7 +80,7 @@ const Layout=memo(function Layout ({ children }) {
                 <div className="editLogo">
                   <img
                     src={logowhite()}
-                    width="120"
+                    width="60"
                     height="35"
                     className=" show-logo "
                   />

@@ -174,8 +174,8 @@ const Login = () => {
           >
             <Link to="/" className=" xl:w-[150px] z-[99] mb-10 block mx-auto text-center">
                   <img
-                    src="./imgpsh_fullsize_anim (1).jpeg"
-                    className="md:w-[160px] lg:w-[140px] w-[130px]  mx-auto"
+                    src="../../../assets/img/logo.jpeg"
+                    className=" w-[80px]   mx-auto"
                     alt="logo"
                   />
                 </Link>
