@@ -1,86 +1,82 @@
-import React, { useEffect, useState } from "react";
-import "./style.scss";
-import { Link, useNavigate } from "react-router-dom";
-import Html from "./Html";
-import environment from "../../../environment";
-import { useSelector } from "react-redux";
+import React, { memo, useEffect } from 'react';
+import './style.scss';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Html from './Html';
+import permissionModel from '../../../models/permisstion.model';
 
 const Sidebar = ({ isOpen }) => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector(state => state.user);
   const history = useNavigate();
-  const [role, setRole] = useState(user.customerRole);
+  const location = useLocation(); // Use the useLocation hook
+
   const menus = {
-    user: ["roles", "users"],
-    catalogue: ["types", "categories", "category/"],
-    plan: ["features", "plans"],
-    api: ["bookingSystem", "pos", "reviews", "accountingSystem"],
-    geo: ["continents", "countries", "regions", "cities"],
-    dynamicPricing: ["dynamicprice"],
-    skills: ["skills", "skill-roles"],
+    user: ['roles', 'users'],
+    catalogue: ['types', 'categories', 'category/'],
+    plan: ['features', 'plans'],
+    api: ['bookingSystem', 'pos', 'reviews', 'accountingSystem', 'marketing', 'communication'],
+    geo: ['continents', 'countries', 'regions', 'cities'],
+    dynamicPricing: ['dynamicprice'],
+    customer: ['customer'],
+    template: ['/dynamicpricelist', '/crm', '/waiver', '/emailtemplate', 'costing'],
+    settings: ['/department', '/holidays', '/currency', '/continents', '/countries', '/regions', '/cities', '/refund-reason', '/web/settings'],
+    carriers: ['/carriers', '/leads', '/coupon', '/affiliates']
   };
 
-  const ListItemLink = ({ to, type = "link", disabled = false, ...rest }) => {
-    let url = window.location.href;
-    const host = window.location.host;
-    url = url.split(host)[1];
+  const ListItemLink = ({ to, type = 'link', disabled = false, ...rest }) => {
+    const currentPath = location.pathname;
+    const isActive = currentPath.includes(to);
+    
     return (
       <>
-        {type == "link" ? (
-          <li
-            className={`nav-item ${url.includes(to) ? "active" : ""} ${
-              disabled ? "disabled" : ""
-            }`}
-          >
-            {/* {...rest} */}
-            <Link to={to} {...rest} className="" />
+        {type === 'link' ? (
+          <li className={`nav-item ${isActive ? 'active' : ''} ${disabled ? 'disabled' : ''}`}>
+            <Link to={to} {...rest} />
           </li>
         ) : (
-          <li
-            className={`nav-item main ${url.includes(to) ? "active" : ""}`}
-            {...rest}
-          ></li>
+          <li className={`nav-item main ${isActive ? 'active' : ''}`} {...rest}></li>
         )}
       </>
     );
   };
 
   const tabclass = (tab) => {
-    let url = window.location.href;
-    let value = false;
-    menus[tab]?.map((itm) => {
-      if (url.includes(itm)) value = true;
-    });
-    return value;
+    const currentPath = location.pathname;
+    return menus[tab].some(itm => currentPath.includes(itm));
   };
 
-  const isAllow = (url = "") => {
-    let permissions = user?.permissions?.[0];
-    let arr = url.split(",");
-    let value = false;
-    arr.map((itm) => {
-      if (permissions?.[itm]) value = permissions?.[itm];
-    });
-
-    if (!url || user?.role == "admin") value = true;
-    return value;
+  const urlAllow = (url) => {
+    const permissions = user.role?.permissions?.[0];
+    const arr = url.split(',');
+    return arr.some(itm => permissionModel.urlAllow(permissions, itm));
   };
 
   const route = (p) => {
     history(p);
   };
 
+  const scrollToId = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'auto' });
+    } else {
+      console.error(`Element with id '${id}' not found`);
+    }
+  };
+
+  useEffect(() => {
+    scrollToId(location.pathname);
+  }, [location.pathname]); // Use location.pathname instead of window.location.pathname
+
   return (
-    <>
-      <Html
-        user={user}
-        route={route}
-        tabclass={tabclass}
-        isAllow={isAllow}
-        ListItemLink={ListItemLink}
-        isOpen={isOpen}
-      />
-    </>
+    <Html
+      route={route}
+      tabclass={tabclass}
+      urlAllow={urlAllow}
+      ListItemLink={ListItemLink}
+      isOpen={isOpen}
+    />
   );
 };
 
-export default Sidebar;
+export default memo(Sidebar);

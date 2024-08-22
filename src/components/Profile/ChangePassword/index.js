@@ -47,7 +47,7 @@ const ChangePassword = (p) => {
       newPassword: form.newPassword,
       userId: user._id,
     };
-    ApiClient.put("user/change/password", payload).then((res) => {
+    ApiClient.put("change/password", payload).then((res) => {
       if (res.success) {
         dispatch(logout());
         localStorage.removeItem("token");
