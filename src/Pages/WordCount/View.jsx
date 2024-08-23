@@ -135,14 +135,14 @@ const View = () => {
             <div className="col-span-12">
               <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-5 capitalize">
               <div>
-                  <h4 className="p-4 bg-[#0636881a] font-medium">Basic Information</h4>
+                  <h4 className="p-4 bg-[#494f9f1a] font-medium">Basic Information</h4>
                 </div>
                <div className="grid grid-cols-12 p-4">
                <div className="col-span-6 flex items-center mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Title:</label>
                   <p className="text-[14px] text-black font-medium ms-3">
                     {" "}
-                    {/* <LiaUserSolid className="text-xl text-[#063688]" /> */}
+                    {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
                     {data && data.title}
                   </p>
                 </div>
@@ -151,14 +151,14 @@ const View = () => {
                   <div className="col-span-6 flex items-center mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Due Date :</label>
                    <p className="text-[14px] text-black font-medium ms-3">
-                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
+                    {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
                     {moment(data?.dueDate).format("DD-MM-YYYY") || "--"}
                   </p>
                 </div>
                 <div className="col-span-6 flex items-center mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Status :</label>
                    <p className="text-[14px] text-black font-medium ms-3">
-                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
+                    {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
                     {data?.status|| "--"}
                   </p>
                 </div>
@@ -177,7 +177,7 @@ const View = () => {
             <div className="col-span-12">
               <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
               <div>
-                  <h4 className="p-4 bg-[#0636881a] font-medium">Staff Details</h4>
+                  <h4 className="p-4 bg-[#494f9f1a] font-medium">Staff Details</h4>
                 </div>
                <div className="grid grid-cols-12 p-4">
                <div className="col-span-6 flex items-center mb-3">
@@ -202,7 +202,7 @@ const View = () => {
           </div>
 
               <div>
-                  <h4 className="p-4 bg-[#0636881a] font-medium">Counter Offers</h4>
+                  <h4 className="p-4 bg-[#494f9f1a] font-medium">Counter Offers</h4>
                 </div>
               <Table
               className="mb-3"

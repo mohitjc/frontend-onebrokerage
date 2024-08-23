@@ -68,7 +68,7 @@ const ChangePassword = (p) => {
           </h3>
         </div>
 
-        <div className="input_form p-6 shadow-box overflow-hidden rounded-lg bg-white grid grid-cols-12">
+        <div className="input_form p-6 shadow-box overflow-hidden rounded-lg bg-white grid grid-cols-12 border">
           <div className="col-span-12 md:col-span-7">
             <form onSubmit={handleSubmit}>
               <div className="items-center ">
@@ -213,7 +213,7 @@ const ChangePassword = (p) => {
                   <div className="flex items-end justify-end">
                     <button
                       type="submit"
-                      className="text-white bg-[#063688]  focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center  mb-2 cursor-pointer"
+                      className="text-white bg-[#494f9f]  focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center  mb-2 cursor-pointer"
                     >
                       Update
                     </button>

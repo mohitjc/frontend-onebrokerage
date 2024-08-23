@@ -74,16 +74,17 @@ const Layout=memo(function Layout ({ children }) {
         <Header isOpen={isOpen} setIsOpen={setIsopen} />
 
         <div className={`main-wrapper flex ${isOpen ? "active-sidebar" : ""}`}>
-          <div className="main-sidebar scrollbar transition-[width] duration-300 ">
-            <div className="sidebar-brand text-center">
+          <div className="main-sidebar scrollbar transition-[width] duration-300 p-0">
+            <div className="sidebar-brand text-center absolute left-[38%] mb-10 top-5">
               <Link to="/">
                 <div className="editLogo">
                   <img
                     src={logowhite()}
-                    width="60"
+                    width="70"
                     height="35"
-                    className=" show-logo "
+                    className=" show-logo rounded-full"
                   />
+                  
                   <img src={logos()} className="hide-logo" />
                 </div>
               </Link>
@@ -97,6 +98,7 @@ const Layout=memo(function Layout ({ children }) {
                   alignItems: "center",
                 }}
               >
+                
                 <img
                   src={methodModel.userImg(user?.logo || "")}
                   alt="photo"

@@ -29,18 +29,19 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
   return (
     <>
       <div
-        className={`px-[8px] h-[90%] p-4 rounded-lg m-2 bg-[#494f9f17] ${isOpen && styles.sm_sidebar}`}
+        className={` pt-[60px] mx-[10px] h-full pb-4  ${isOpen && styles.sm_sidebar}`}
         component="siderbar"
       >
-        <h6
+       <div className="px-[8px]  p-4 rounded-lg  bg-[#494f9f17] h-full border border-[#474e9c33]">
+       <h6
           className={`${
-            isOpen ? "py-[12px] text-center" : "p-[12px]"
-          } text-xs font-medium text-[#7E8B99] mt-[12px]`}
+            isOpen ? "py-[20px] text-center" : "pb-[20px]"
+          } text-xs font-medium text-[#7E8B99] mt-[40px]`}
         >
           <span className="sidebar_text text-[#4A545E] "> MAIN MENU </span>
         </h6>
 
-        <ul className="space-y-2 px-2 ">
+        <ul className="space-y-2  ">
           <li>
             <Tooltip placement="right" title="Dashboard">
               <NavLink
@@ -50,12 +51,12 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 //   (isActive && " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
                 // }
                 className={(isActive) =>
-                  "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#fff] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all  " +
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-[#494f9f] hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                   (location?.pathname == "/dashboard" &&
-                    " !text-[#fff] !bg-[#494f9f] !font-medium")
+                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 }
               >
-                <RiHome6Line className="text-[#fff] shrink-0 text-lg" />
+                <RiHome6Line className="text-[#494f9f] shrink-0 text-lg group-hover:text-white " />
                 <span className="text-inherit leading-none sidebar_text">
                   Dashboard
                 </span>
@@ -68,9 +69,9 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               {({ open }) => (
                 <>
                   <Tooltip placement="right" title="Carriers">
-                    <Disclosure.Button className="w-full p-2.5 rounded-[50px] flex items-center justify-between text-[#4A545E]  hover:!text-[#5577FF] gap-[12px] hover:bg-[#5577FF]/10 transition-all duration-300">
+                    <Disclosure.Button className="w-full p-2.5 rounded-[50px] flex items-center justify-between text-[#494f9f] hover:!text-[#fff] gap-[12px] hover:bg-[#494f9f] transition-all duration-300  group">
                       <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
-                        <FiUsers className="text-[#5577FF] shrink-0 text-lg" />
+                        <FiUsers className="text-[#494f9f] shrink-0 text-lg group-hover:text-white" />
                         <span className=" text-inherit leading-none sidebar_text">
                           {" "}
                           Carriers
@@ -80,7 +81,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                       <TiArrowSortedDown
                         className={`${
                           open ? "" : "-rotate-90 transform"
-                        } h-4 w-4 transition-all duration-500  text-[#7E8B99]`}
+                        } h-4 w-4 transition-all duration-500  text-[#494f9f] group-hover:text-white`}
                       />
                     </Disclosure.Button>
                   </Tooltip>
@@ -923,6 +924,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
             </li>
           ) : null}
         </ul>
+       </div>
       </div>
     </>
   );

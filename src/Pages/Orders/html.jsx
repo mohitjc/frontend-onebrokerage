@@ -140,11 +140,11 @@ const Html = ({
           <>
             <div className="w-32" onClick={() => statusChange(row)}>
               <span
-                className={`bg-[#063688] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                className={`bg-[#494f9f] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
                           ${
                             row.status == "deactive"
                               ? " bg-gray-200 text-black"
-                              : "bg-[#063688] text-white"
+                              : "bg-[#494f9f] text-white"
                           }`}
               >
                 {row.status == "deactive" ? "inactive" : "active"}
@@ -164,7 +164,7 @@ const Html = ({
               {isAllow(`edit${shared.check}`) ? (
                 <Tooltip placement="top" title="Edit">
                   <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) => edit(itm.id)}
                   >
                     <LiaEdit />
@@ -177,7 +177,7 @@ const Html = ({
                 <Tooltip placement="top" title="Delete">
                   {" "}
                   <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg "
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg "
                     onClick={() => deleteItem(itm.id)}
                   >
                     <LiaTrashAlt />
@@ -191,7 +191,7 @@ const Html = ({
               ) : (
                 <Tooltip placement="top" title="copy link">
                   <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) =>
                       handleCopy(`${environment.api}${itm.video}`, itm?.id)
                     }
@@ -260,7 +260,7 @@ const Html = ({
                 onChange={(e) => {
                   setFilter({ ...filters, search: e.target.value });
                 }}
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#063688]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#494f9f]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                 placeholder="Search"
                 required
               />
@@ -274,7 +274,7 @@ const Html = ({
             </div>
             <button
               type="submit"
-              class="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#063688] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              class="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#494f9f] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               <svg
                 class="w-4 h-4"
@@ -300,11 +300,11 @@ const Html = ({
             <label>Search By</label>
             <div className="flex gap-3 mt-2">
             <div class="flex items-center">
-                  <input id="default-radio-1"   style={{ accentColor: "#063688" }} type="radio" value="user" checked={searchBy=='user'?true:false} onChange={e=>setSearchBy(e.target.value)} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 "/>
+                  <input id="default-radio-1"   style={{ accentColor: "#494f9f" }} type="radio" value="user" checked={searchBy=='user'?true:false} onChange={e=>setSearchBy(e.target.value)} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 "/>
                   <label for="default-radio-1" class="ms-2 cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-300">User</label>
               </div>
               <div class="flex items-center">
-                  <input id="default-radio-2"  style={{ accentColor: "#063688" }} type="radio" checked={searchBy=='date'?true:false} value="date" onChange={e=>setSearchBy(e.target.value)} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 "/>
+                  <input id="default-radio-2"  style={{ accentColor: "#494f9f" }} type="radio" checked={searchBy=='date'?true:false} value="date" onChange={e=>setSearchBy(e.target.value)} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 "/>
                   <label for="default-radio-2" class="ms-2 text-sm cursor-pointer font-medium text-gray-900 dark:text-gray-300">Date</label>
               </div>
             </div>

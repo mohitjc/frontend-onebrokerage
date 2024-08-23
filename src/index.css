@@ -34,7 +34,7 @@ code {
 
 button[type="submit"] {
   -webkit-appearance: button;
-  background-color: #063688 !important;
+  background-color: #494f9f !important;
   background-image: none;
 }
 
@@ -97,4 +97,7 @@ label.profileheddingcls {
   height: 2px;
   border-radius: 2px;
   background: #ee695e !important;
+}
+.active-bg svg {
+  color: #fff;
 }

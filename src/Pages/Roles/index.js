@@ -118,7 +118,7 @@ const Roles = (p) => {
       text: `Do you want to delete this role.`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#063688",
+      confirmButtonColor: "#494f9f",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then((result) => {
@@ -187,7 +187,7 @@ const Roles = (p) => {
       } this role.`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#063688",
+      confirmButtonColor: "#494f9f",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then((result) => {

@@ -136,11 +136,11 @@ const Html = ({
                                 onClick={() => statusChange(itm)}
                               >
                                 <span
-                                  className={`bg-[#063688] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                                  className={`bg-[#494f9f] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
                           ${
                             itm.status == "deactive"
                               ? " bg-gray-200 text-black"
-                              : "bg-[#063688] text-white"
+                              : "bg-[#494f9f] text-white"
                           }`}
                                 >
                                   {itm.status == "deactive"
@@ -156,7 +156,7 @@ const Html = ({
                                 {isAllow(`editRoles`) && itm.name == "Staff" ? (
                                   <Tooltip placement="top" title="Edit">
                                     <a
-                                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                                      className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                                       onClick={(e) => edit(itm.id)}
                                     >
                                       <LiaEdit />
@@ -171,7 +171,7 @@ const Html = ({
                                   <>
                                     <Tooltip placement="top" title="Delete">
                                       <span
-                                        className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#06368814] w-10 h-10 !text-primary flex items-center justify-center text-lg "
+                                        className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg "
                                         onClick={() => deleteItem(itm.id)}
                                       >
                                         <LiaTrashAlt />

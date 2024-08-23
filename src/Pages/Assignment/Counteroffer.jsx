@@ -89,7 +89,7 @@ const CounterOfferDetails = () => {
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12">
               <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
-                <div className="flex justify-between p-4 bg-[#0636881a] font-medium items-center">
+                <div className="flex justify-between p-4 bg-[#494f9f1a] font-medium items-center">
                   <h4 className="mb-0">Counter Offer Information</h4>
                   <div className="ml-auto flex gap-2">
                     {data?.status == "counteroffered" ? (
@@ -190,7 +190,7 @@ const CounterOfferDetails = () => {
                       Message :
                     </label>
                     <p className="text-[14px] text-black font-medium ">
-                      {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
+                      {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
                       {data && data?.message}
                     </p>
                   </div>

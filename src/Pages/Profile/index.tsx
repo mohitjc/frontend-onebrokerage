@@ -40,7 +40,7 @@ const Profile = () => {
           </h3>
           <Link
             to="/profile/edit"
-            className="px-2 lg:!px-4 text-sm font-normal bg-[#063688]  text-white h-10 flex items-center justify-center gap-2 !bg-primary rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"
+            className="px-2 lg:!px-4 text-sm font-normal bg-[#494f9f]  text-white h-10 flex items-center justify-center gap-2 !bg-primary rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"
           >
             <svg
               stroke="currentColor"
@@ -58,7 +58,7 @@ const Profile = () => {
           </Link>
         </div>
 
-        <div className="inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white   ">
+        <div className="inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white  border ">
           <div className="grid items-center grid-cols-12 gap-4 mb-5">
             <div className="col-span-12 md:col-span-7 lg:col-span-7">
               <div className="flex items-center gap-4 shrink-0">
@@ -70,7 +70,7 @@ const Profile = () => {
                 </div>
                 <div className="flex flex-col gap-y-4 ml-4 lg:border-l border-dashed border-gray-400 pl-5">
                   <div className="">
-                    <label className="text-gray-600">Name</label>
+                    <label className="text-black">Name</label>
                     <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
                       {" "}
                       {/* <LiaUserSolid className="text-xl" /> */}
@@ -78,7 +78,7 @@ const Profile = () => {
                     </p>
                   </div>
                   <div className="">
-                    <label className="text-gray-600">Email</label>
+                    <label className="text-black">Email</label>
                     <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
                       {/* <MdOutlineEmail className="text-xl" /> */}
                       {data && data.email}
@@ -86,7 +86,7 @@ const Profile = () => {
                   </div>
 
                   <div className="">
-                    <label className="text-gray-600">Phone Number</label>
+                    <label className="text-black">Phone Number</label>
                     <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
                       {/* <MdOutlinePhone className="text-xl" /> */}
                       {String(data.mobileNo ? "+" + data.mobileNo : "N/A")}

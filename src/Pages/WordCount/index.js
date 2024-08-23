@@ -106,7 +106,7 @@ const Assignment = () => {
       text: `Do you want to delete this`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#063688",
+      confirmButtonColor: "#494f9f",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then((result) => {
@@ -152,7 +152,7 @@ const Assignment = () => {
       } this user?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#063688",
+      confirmButtonColor: "#494f9f",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then((result) => {

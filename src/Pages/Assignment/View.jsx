@@ -143,7 +143,7 @@ const View = () => {
       text: `Do you want to Reject this assignment ?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#063688",
+      confirmButtonColor: "#494f9f",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then((result) => {
@@ -209,7 +209,7 @@ const View = () => {
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12">
               <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-5 capitalize">
-                <div className="p-4 bg-[#0636881a] flex items-center justify-between">
+                <div className="p-4 bg-[#494f9f1a] flex items-center justify-between">
                   <h4 className=" font-medium">
                     Basic Information
                   </h4>
@@ -245,7 +245,7 @@ const View = () => {
                     </label>
                     <p className="text-[14px] text-black font-medium ms-3">
                       {" "}
-                      {/* <LiaUserSolid className="text-xl text-[#063688]" /> */}
+                      {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
                       {data && data.title}
                     </p>
                   </div>
@@ -255,7 +255,7 @@ const View = () => {
                       Due Date :
                     </label>
                     <p className="text-[14px] text-black font-medium ms-3">
-                      {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
+                      {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
                       {moment(data?.dueDate).format("DD-MM-YYYY") || "--"}
                     </p>
                   </div>
@@ -264,7 +264,7 @@ const View = () => {
                       Status :
                     </label>
                     <p className={`${data?.status} text-[14px] text-black font-medium ms-3`}>
-                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
+                    {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
                       {data?.status || "--"}
                     </p>
                   </div>
@@ -311,7 +311,7 @@ const View = () => {
             <div className="col-span-12">
               <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
                 <div>
-                  <h4 className="p-4 bg-[#0636881a] font-medium">
+                  <h4 className="p-4 bg-[#494f9f1a] font-medium">
                     Staff Details
                   </h4>
                 </div>
@@ -341,7 +341,7 @@ const View = () => {
 
           {total?<>
             <div>
-                  <h4 className="p-4 bg-[#0636881a] font-medium">Counter Offers</h4>
+                  <h4 className="p-4 bg-[#494f9f1a] font-medium">Counter Offers</h4>
                 </div>
               <Table
               className="mb-3"

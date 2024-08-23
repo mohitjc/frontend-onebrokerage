@@ -59,14 +59,14 @@ const View = () => {
             <div className="col-span-12">
               <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
               <div>
-                  <h4 className="p-4 bg-[#0636881a] font-medium">Contract Information</h4>
+                  <h4 className="p-4 bg-[#494f9f1a] font-medium">Contract Information</h4>
                 </div>
                <div className="grid grid-cols-12 p-4">
                <div className="col-span-6 flex  mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Title:</label>
                   <p className="text-[14px] text-black font-medium ms-3">
                     {" "}
-                    {/* <LiaUserSolid className="text-xl text-[#063688]" /> */}
+                    {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
                     {data && data.title}
                   </p>
                 </div>
@@ -74,21 +74,21 @@ const View = () => {
                   <div className="col-span-6 flex  mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Start Date :</label>
                    <p className="text-[14px] text-black font-medium ms-3">
-                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
+                    {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
                    {datepipeModel.date(data?.startDate)}
                   </p>
                 </div>
                 <div className="col-span-6 flex  mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">End Date :</label>
                    <p className="text-[14px] text-black font-medium ms-3">
-                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
+                    {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
                    {datepipeModel.date(data?.endDate)}
                   </p>
                 </div>
                 <div className="col-span-6 flex    mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Total Amount :</label>
                    <p className="text-[14px] text-black font-medium ms-3">
-                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
+                    {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
                     {pipeModel.number(data?.total_amount)}
                   </p>
                 </div>
@@ -102,7 +102,7 @@ const View = () => {
                 <div className="col-span-6 flex  mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[130px]">Document :</label>
                    <p className="text-[14px] text-black font-medium ms-3">
-                    {/* <MdOutlinePhone className="text-xl text-[#063688]" />+ */}
+                    {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
                     {data?.doc_url?<>
                     <a href={`${environment.api}document/${data?.doc_url}`} target="_new" className="relative w-[50px] h-[50px]">
                       <i className="fa fa-download absolute right-0 bottom-0 bg-[#06378b] text-white p-[7px] text-[7px] rounded-[50px]"></i>

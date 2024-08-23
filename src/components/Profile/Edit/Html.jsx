@@ -27,7 +27,7 @@ const Html = ({
         </div>
 
         <form name="profileForm" className="" onSubmit={handleSubmit}>
-          <div className="grid grid-cols-12 mb-4 gap-4 shadow p-6 mt-6 gap-4 bg-white rounded-[10px]">
+          <div className="grid grid-cols-12 mb-4 gap-4 shadow p-6 mt-6 gap-4 bg-white rounded-[10px] border">
             <div className="col-span-12 md:col-span-6">
               <FormControl
                 type="text"
@@ -113,7 +113,7 @@ const Html = ({
             <button className="text-white bg-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-3">
               Cancel
             </button>
-            <button className="text-white bg-[#063688] bg-[#063688] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            <button className="text-white bg-[#494f9f] bg-[#494f9f] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
               Save
             </button>
           </div>
