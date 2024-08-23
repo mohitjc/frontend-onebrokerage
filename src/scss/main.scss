@@ -1741,6 +1741,7 @@ input:focus-visible {
 .active-sidebar img.hide-logo {
   display: block !important;
   width: 50px;
+  border-radius: 50%;
 }
 
 .active-sidebar img.show-logo {
@@ -1787,7 +1788,7 @@ img.hide-logo {
   width: 100%;
 }
 
-.active-sidebar .space-y-2 li span {
+.active-sidebar .space-y-2 li  span {
   width: -moz-fit-content;
   width: fit-content;
   display: flex;
@@ -1797,13 +1798,34 @@ img.hide-logo {
   margin: 0 auto;
   display: none;
 }
+.active-sidebar .space-y-2 li .crm  {
+
+display: block !important;
+}
+.active-sidebar .space-y-2 li .crm span{
+  display: none;
+}
+.active-sidebar .space-y-2 li .crm svg{
+  margin: 0 auto !important;
+}
 .active-sidebar h6.py-\[12px\].text-center.text-xs.font-medium.text-\[\#7E8B99\].mt-\[12px\] span{
   display: block;
 }
 .active-sidebar .pl-\[30px\] {
   padding-left: 0px;
 }
-
+.active-sidebar svg.-rotate-90.transform.h-4.w-4.transition-all.duration-500.text-\[\#494f9f\].group-hover\:text-white {
+  width: 13px;
+  position: absolute;
+  right: 15px;
+  font-size: 8px;
+}
+.active-sidebar  svg.h-4.w-4.transition-all.duration-500.text-\[\#494f9f\].group-hover\:text-white{
+  width: 13px;
+  position: absolute;
+  right: 15px;
+  font-size: 8px;
+}
 .active-sidebar .px-\[8px\] {
   padding: 0px;
 }
@@ -1824,20 +1846,24 @@ img.hide-logo {
 }
 
 
+
 .active-sidebar .sidebar_sm_sidebar__KuhlO ul li a {
   width: -moz-fit-content;
   width: fit-content;
-  margin: 0;
-  width: 55px;
+  margin: 0 auto;
+  width: 45px;
+  border-radius: 100%;
+  height: 45px;
 }
-
 .active-sidebar .sidebar_sm_sidebar__KuhlO ul li button {
   padding-right: 0;
   padding-left: 0;
   text-align: center;
-  width: 55px;
+  width: 45px;
+  border-radius: 100%;
+  height: 45px;
 
-  margin: 0;
+  margin: 0 auto;
   gap: 0px !important;
 }
 
@@ -2102,8 +2128,11 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
   margin-top: 15px;
 }
 .sidebar_sm_sidebar__KuhlO {
-  width: 60px;
-  min-width: 60px;
+  width: 60px !important;
+  min-width: 60px !important;
+}
+.active-sidebar .pt-\[60px\].mx-\[10px\].h-full.pb-4.sidebar_sm_sidebar__KuhlO {
+  margin: 0 !important;
 }
 @keyframes slowShake {
   0%, 100% { transform: translateX(0); }
@@ -2216,4 +2245,7 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   max-width: 220px;
+}
+.transform-prop {
+  transform: translateX(-50%);
 }

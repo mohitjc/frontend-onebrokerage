@@ -74,8 +74,8 @@ const Layout=memo(function Layout ({ children }) {
         <Header isOpen={isOpen} setIsOpen={setIsopen} />
 
         <div className={`main-wrapper flex ${isOpen ? "active-sidebar" : ""}`}>
-          <div className="main-sidebar scrollbar transition-[width] duration-300 p-0">
-            <div className="sidebar-brand text-center absolute left-[38%] mb-10 top-5">
+          <div className="main-sidebar scrollbar transition-[width] duration-300 p-0 relative">
+            <div className="sidebar-brand text-center absolute left-[50%] transform-prop mb-10 top-5">
               <Link to="/">
                 <div className="editLogo">
                   <img
