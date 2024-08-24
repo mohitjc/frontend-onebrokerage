@@ -35,7 +35,7 @@ const userImg = (img,modal='img') => {
 const noImg = (img, modal = "img") => {
   let value = "/assets/img/placeholder.png";
   // if (img) value = environment.api + 'img/' + img
-  if (img) value = `${environment.api}img/${img}`;
+  if (img) value = `${environment.api}images/users/${img}`;
   return value;
 };
 

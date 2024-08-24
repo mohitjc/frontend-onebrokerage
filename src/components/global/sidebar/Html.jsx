@@ -63,7 +63,27 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               </NavLink>
             </Tooltip>
           </li>
-
+          <li>
+            <Tooltip placement="right" title="Plans">
+              <NavLink
+                to="/plans"
+                // className={(isActive) =>
+                //   "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                //   (isActive && " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                // }
+                className={(isActive) =>
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-[#494f9f] hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  (location?.pathname == "/plans" &&
+                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                }
+              >
+                <RiHome6Line className="text-[#494f9f] shrink-0 text-lg group-hover:text-white " />
+                <span className="text-inherit leading-none sidebar_text">
+                  Plan
+                </span>
+              </NavLink>
+            </Tooltip>
+          </li>
           <li>
             <Disclosure as="div" defaultOpen={tabclass("carriers")}>
               {({ open }) => (

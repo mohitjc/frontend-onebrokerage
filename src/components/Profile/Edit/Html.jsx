@@ -48,7 +48,7 @@ const Html = ({
               />
             </div> */}
 
-            <div className="col-span-12 md:col-span-6">
+            {/* <div className="col-span-12 md:col-span-6">
               <label className="text-sm mb-2 block">
                 Mobile No<span className="star">*</span>
               </label>
@@ -67,7 +67,7 @@ const Html = ({
               ) : (
                 <></>
               )}
-            </div>
+            </div> */}
             <div className="col-span-12 md:col-span-6">
             <label className="text-sm mb-2 block">Email</label>
               <input
@@ -93,7 +93,20 @@ const Html = ({
                 multiple={false}
               />
             </div>
-
+            <div className="col-span-12 md:col-span-6">
+            <label className="text-sm mb-2 block">Role</label>
+              <input
+                type="text"
+                className="relative border  border-[#00000036] [#bg-white w-full rounded-lg h-11 flex items-center gap-2 overflow-hidden px-2"
+                value={form.role}
+                autoComplete="false"
+                onChange={(e) => {
+                  setForm({ ...form, role: e.target.value });
+                }}
+                required
+                disabled
+              />
+            </div>
             {/* <div className="col-span-12 md:col-span-6">
               <label>Customer Role<span className="star">*</span></label>
               <SelectDropdown
@@ -110,7 +123,7 @@ const Html = ({
             </div> */}
           </div>
           <div className="text-right mt-3">
-            <button className="text-white bg-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-3">
+          <button className="text-white bg-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-3">
               Cancel
             </button>
             <button className="text-white bg-[#494f9f] bg-[#494f9f] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
@@ -118,6 +131,7 @@ const Html = ({
             </button>
           </div>
         </form>
+        
       </div>
     </>
   );

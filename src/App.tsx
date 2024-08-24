@@ -54,7 +54,9 @@ function App() {
     { url: "/customers/detail/:id", path: "Customers/View" },
     { url: "/contract", path: "Contract" },
     { url: "/contract/detail/:id", path: "Contract/View" },
-    // { url: "/carriers", path: "Carrier/Carrier2" }
+    { url: "/plans", path: "Plans" },
+    { url: "/plans/add", path: "Plans/AddEdit" },
+    { url: "/plans/edit/:planid/:copy", path: "Plans/AddEdit" },
   ];
 
   sessionStorage.clear();

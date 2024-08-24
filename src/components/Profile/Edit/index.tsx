@@ -7,16 +7,17 @@ import { useNavigate } from "react-router-dom";
 import formModel from "../../../models/form.model";
 import { useDispatch, useSelector } from "react-redux";
 import { login_success } from "../../../Pages/actions/user";
+import { toast } from "react-toastify";
 
 const EditProfile = () => {
   const user = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
   const [data, setData]: any = useState("");
   const [form, setForm]: any = useState({
-    id: "",
     email: "",
     mobileNo: "",
     fullName: "",
+    role:""
   });
   const [images, setImages]: any = useState({ image: "" });
   const history = useNavigate();
@@ -58,9 +59,7 @@ const EditProfile = () => {
     if (invalid) return;
 
     let value = {
-      ...form,
-      id: user._id,
-      addedBy: user._id,
+      fullName: form.fullName,
       ...images,
     };
     Object.keys(value).map((itm) => {
@@ -73,7 +72,7 @@ const EditProfile = () => {
         let uUser = { ...user, ...value };
         dispatch(login_success(uUser));
         history("/profile");
-        // ToastsStore.success(res.message)
+        toast.success(res.message);
       }
       loader(false);
     });

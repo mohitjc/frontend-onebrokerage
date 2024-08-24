@@ -20,7 +20,8 @@ const Sidebar = ({ isOpen }) => {
     customer: ['customer'],
     template: ['/dynamicpricelist', '/crm', '/waiver', '/emailtemplate', 'costing'],
     settings: ['/department', '/holidays', '/currency', '/continents', '/countries', '/regions', '/cities', '/refund-reason', '/web/settings'],
-    carriers: ['/user', '/leads', '/coupon', '/affiliates']
+    carriers: ['/user', '/leads', '/coupon', '/affiliates'],
+    // plan:["/plans "]
   };
 
   const ListItemLink = ({ to, type = 'link', disabled = false, ...rest }) => {
