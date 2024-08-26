@@ -12,6 +12,7 @@ import axios from 'axios';
 import environment from '../../environment';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import { Toast } from 'react-bootstrap';
 
 const Plans = (p) => {
     let user = useSelector(state => state.user)
@@ -127,9 +128,10 @@ const Plans = (p) => {
           }).then((result) => {
             if (result.isConfirmed) {
                 loader(true)
-                ApiClient.delete('delete?model=plan', {id: id }).then(res => {
+                ApiClient.delete('delete?model=subscriptionplan', {id: id }).then(res => {
                             if (res.success) {
                                 clear()
+                                toast.success(res.message)
                             }
                             loader(false)
                         })
@@ -214,9 +216,10 @@ const Plans = (p) => {
           }).then((result) => {
             if (result.isConfirmed) {
                 loader(true)
-                ApiClient.put(`change/status?model=plan`,{id:itm.id,status}).then(res=>{
+                ApiClient.put(`change/status?model=subscriptionplan`,{id:itm.id,status}).then(res=>{
                             if(res.success){
                                 getData()
+                                toast.success(res.message)
                             }
                             loader(false)
                         })
