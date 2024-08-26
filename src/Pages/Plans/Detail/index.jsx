@@ -5,114 +5,81 @@ import ApiClient from '../../../methods/api/apiClient';
 import loader from '../../../methods/loader';
 import './style.scss';
 import { useSelector } from 'react-redux';
-import methodModel from '../../../methods/methods';
+import moment from 'moment';
 
-const RoleDetail = (p) => {
-    const history = useNavigate()
-    const user = useSelector(state => state.user)
-    const { id, userId } = useParams()
-    const [data, setData] = useState()
-    const getDetail = (did) => {
-        loader(true)
-        ApiClient.get(`api/role`, { id: did }).then(res => {
+const RoleDetail = () => {
+    const navigate = useNavigate();
+    const user = useSelector(state => state.user);
+    const { id, userId } = useParams();
+    const [data, setData] = useState();
+
+    const getDetail = () => {
+        loader(true);
+        ApiClient.get(`plan`, { id: id }).then(res => {
             if (res.success) {
-                setData(res.data)
+                setData(res.data);
             }
-            loader(false)
-        })
+            loader(false);
+        });
     };
 
     const back = () => {
-        history(-1)
-    }
+        navigate(-1);
+    };
 
     useEffect(() => {
-        getDetail(userId ? userId : id)
-    }, [id, userId])
+        getDetail(userId ? userId : id);
+    }, [id, userId]);
 
     return (
         <Layout>
             <div className="text-right">
                 <div>
-                    <a to="/users" onClick={back}>  <i className="fa fa-arrow-left mr-4 mb-3 " title='Back' aria-hidden="true"></i></a>
+                    <a href="#" onClick={back}>
+                        <i className="fa fa-arrow-left mr-4 mb-3" title='Back' aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
-            <div className="row">
-                <div className="sideclass col-md-12">
-                    <h3 className="Profilehedding mt-3 ">
-                    Category Detail
-                    </h3>
-
-                    <div className="form-row">
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Name</label>
-                            <div className='profiledetailscls'>{data && data.name}</div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Type</label>
-                            <div className='profiledetailscls'>{data && data.catType}</div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Order</label>
-                            <div className='profiledetailscls'>{data && data.order}</div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Parent Category</label>
-                            <div className='profiledetailscls'>{data && data.parentCategory?.name}</div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Status</label>
-                            <div className='profiledetailscls'>{data && data.status}</div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Featured</label>
-                            <div className='profiledetailscls'>{data && data.featured}</div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Banner</label>
-                            <div>
-                                <div className="imagethumbWrapper">
-                                    <img src={methodModel.noImg(data && data.banner, 'users')} className="thumbnail" />
+          
+            <div className="grid grid-cols-12 gap-6">
+                <div className="col-span-12">
+                    <div className="shadow-box overflow-hidden rounded-lg bg-white gap-4 shrink-0">
+                        <div className="grid grid-cols-12 p-4">
+                            <div className="col-span-6 flex items-center mb-4">
+                                <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">Name:</label>
+                                <p className="text-[14px] text-black font-medium ms-3">
+                                    {data && data.name}
+                                </p>
+                            </div>
+                            <div className="col-span-6 flex items-center mb-4">
+                                <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">Created At:</label>
+                                <p className="text-[14px] text-black font-medium ms-3">
+                                    {data && moment(data.createdAt).format('DD-MM-YYYY')}
+                                </p>
+                            </div>
+                            <div className="col-span-6 flex items-center mb-4">
+                                <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">Pricing:</label>
+                                <div className="text-[14px] text-black font-medium ms-3">
+                                    {data && data.pricing.map((price, index) => (
+                                        <div key={index} className="mb-2">
+                                            <p>{`${price.interval_count} ${price.interval} - ${price.unit_amount}`}</p>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Icon</label>
-                            <div>
-                                <div className="imagethumbWrapper">
-                                    <img src={methodModel.noImg(data && data.icon, 'users')} className="thumbnail" />
-                                </div>
+                            <div className="col-span-6 flex items-center mb-4">
+                                <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">Features:</label>
+                                <ul className="text-[14px] text-black font-medium ms-3">
+                                    {data && data.featureDetails.map((feature, index) => (
+                                        <li key={index} className="mb-2">{feature?.name}</li>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Alt Image Name</label>
-                            <div className='profiledetailscls'>{data && data.altImageName}</div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Alt Icon Name</label>
-                            <div className='profiledetailscls'>{data && data.altIconName}</div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Banner Overlay Text Heading</label>
-                            <div className='profiledetailscls'>{data && data.bannerOverlayHeading}</div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Banner Overlay Text Body</label>
-                            <div className='profiledetailscls' dangerouslySetInnerHTML={{__html: data && data.bannerOverlayBody}}></div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <label className="profileheddingcls">Category Description</label>
-                            <div className='profiledetailscls' dangerouslySetInnerHTML={{__html: data && data.description}}></div>
-                        </div>
-                        {/* <div className="col-md-12 mb-3">
-                            <label className="profileheddingcls">Description</label>
-                            <div className='profiledetailscls'>{data && data.description}</div>
-                        </div> */}
                     </div>
                 </div>
             </div>
-        </Layout >
-
+        </Layout>
     );
 };
 

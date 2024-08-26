@@ -9,7 +9,7 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Tooltip } from "antd";
-import { PiFileCsv } from "react-icons/pi";
+import { PiEyeLight, PiEyesLight, PiFileCsv } from "react-icons/pi";
 import { HiOutlineArrowDown } from "react-icons/hi";
 import { FiEdit3, FiPlus } from "react-icons/fi";
 import { BsTrash3 } from "react-icons/bs";
@@ -143,16 +143,7 @@ const Html = ({
                       data &&
                       showData().map((itm, index) => {
                         return (
-                          <tr
-                            className={` ${
-                              dargIndex == index ? "dragStart" : ""
-                            } ${dargEnterIndex == index ? "dragEnter" : ""}`}
-                            onDragStart={(e) => dragStart(e, index)}
-                            onDragEnter={(e) => dragEnter(e, index)}
-                            onDragEnd={(e) => drop(e)}
-                            key={index}
-                            draggable
-                          >
+                          <tr>
                             <td
                               className="!text-typo !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]"
                               onClick={(e) => edit(itm.id, "false")}
@@ -191,43 +182,35 @@ const Html = ({
                             {/* dropdown */}
                             <td className="!text-typo !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
                               <div className="flex items-center justify-start gap-1.5">
-                                {isAllow("editPlan") ? (
-                                  <Tooltip placement="top" title="Edit">
-                                    <a
-                                      className="border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-md bg-[#fff] w-9 h-9 text-[#E92531] flex items-center justify-center text-md"
-                                      onClick={(e) => edit(itm.id, "false")}
-                                    >
-                                      <FiEdit3 />
-                                    </a>
-                                  </Tooltip>
-                                ) : (
-                                  <></>
-                                )}
+                                <Tooltip placement="top" title="Edit">
+                                  <a
+                                    className="border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-md bg-[#fff] w-9 h-9 text-[#E92531] flex items-center justify-center text-md"
+                                    onClick={(e) => edit(itm.id, "false")}
+                                  >
+                                    <FiEdit3 />
+                                  </a>
+                                </Tooltip>
 
                                 {!itm.activeSubscription ? (
                                   <>
-                                    {isAllow("deletePlan") ? (
-                                      <Tooltip placement="top" title="Delete">
-                                        <span
-                                          className="border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-md bg-[#fff] w-9 h-9 text-[#E92531] flex items-center justify-center text-md "
-                                          onClick={() => deleteItem(itm.id)}
-                                        >
-                                          <BsTrash3 />
-                                        </span>
-                                      </Tooltip>
-                                    ) : (
-                                      <></>
-                                    )}
+                                    <Tooltip placement="top" title="Delete">
+                                      <span
+                                        className="border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-md bg-[#fff] w-9 h-9 text-[#E92531] flex items-center justify-center text-md "
+                                        onClick={() => deleteItem(itm.id)}
+                                      >
+                                        <BsTrash3 />
+                                      </span>
+                                    </Tooltip>
                                   </>
                                 ) : (
                                   <></>
                                 )}
-                                <Tooltip placement="top" title="Copy">
+                                <Tooltip placement="top" title="View">
                                   <a
-                                    className="border cursor-pointer !border-[#E9253129] hover:opacity-70 rounded-md bg-[#fff] w-9 h-9 text-[#E92531] flex items-center justify-center text-md"
-                                    onClick={(e) => edit(itm.id, "true")}
+                                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                                    onClick={(e) => view(itm.id)}
                                   >
-                                    <FaCopy />
+                                    <PiEyesLight />
                                   </a>
                                 </Tooltip>
                               </div>

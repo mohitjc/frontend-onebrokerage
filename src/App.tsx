@@ -57,6 +57,15 @@ function App() {
     { url: "/plans", path: "Plans" },
     { url: "/plans/add", path: "Plans/AddEdit" },
     { url: "/plans/edit/:planid/:copy", path: "Plans/AddEdit" },
+    { url: "/plans/detail/:id", path: "Plans/Detail" },
+    { url: "/feature", path: "Features" },
+    { url: "/feature/edit/:id", path: "Features/AddEdit" },
+    { url: "/feature/add", path: "Features/AddEdit" },
+    { url: "/feature/detail/:id", path: "Features/View" },
+    { url: "/carriers", path: "Carrier" },
+    { url: "/carriers/edit/:id", path: "Carrier/AddEdit" },
+    { url: "/carriers/add", path: "Carrier/AddEdit" },
+    { url: "/carriers/detail/:id", path: "Carrier/View" },
   ];
 
   sessionStorage.clear();

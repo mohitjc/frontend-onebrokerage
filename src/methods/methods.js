@@ -279,7 +279,10 @@ const msToTime = (milliseconds, ago = true) => {
   }
   return time;
 };
-
+const capitalizeFirstLetter = (str) => {
+  if (!str) return "";
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
 const methodModel = {
   userImg,
   route,
@@ -298,5 +301,6 @@ const methodModel = {
   containsSpaceonly,
   msToTime,
   urlValidation,
+  capitalizeFirstLetter
 };
 export default methodModel;

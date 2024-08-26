@@ -44,7 +44,7 @@ const Plans = (p) => {
         if (user && user.loggedIn) {
             setFilter({ ...filters, search: searchState.data })
             getData({ search: searchState.data, page: 1 })
-            getCurrency()
+            // getCurrency()
         }
     }, [searchState])
 
@@ -83,13 +83,13 @@ const Plans = (p) => {
     const getData = (p = {}) => {
         setLoader(true)
         let filter = { ...filters, ...p }
-        ApiClient.get('api/plan/list', filter).then(res => {
+        ApiClient.get('plan/all', filter).then(res => {
             if (res.success) {
-                setData(res.data.map(itm=>{
+                setData(res.data?.data?.map(itm=>{
                     itm.id=itm._id
                     return itm
                 }))
-                setTotal(res.total)
+                setTotal(res?.data?.total)
             }
             setLoader(false)
         })
@@ -127,7 +127,7 @@ const Plans = (p) => {
           }).then((result) => {
             if (result.isConfirmed) {
                 loader(true)
-                ApiClient.delete('api/plan', {id: id }).then(res => {
+                ApiClient.delete('delete?model=plan', {id: id }).then(res => {
                             if (res.success) {
                                 clear()
                             }
@@ -214,7 +214,7 @@ const Plans = (p) => {
           }).then((result) => {
             if (result.isConfirmed) {
                 loader(true)
-                ApiClient.put(`api/plan`,{id:itm.id,status}).then(res=>{
+                ApiClient.put(`change/status?model=plan`,{id:itm.id,status}).then(res=>{
                             if(res.success){
                                 getData()
                             }
@@ -230,11 +230,11 @@ const Plans = (p) => {
     }
 
     const view=(id)=>{
-        history("/plans/"+id)
+        history("/plans/detail/"+id)
     }
 
     const edit=(id,copy)=>{
-        history(`/plans/edit/${id}}/${copy}`)
+        history(`/plans/edit/${id}/${copy}`)
     }
 
     const tabChange=(tab)=>{
