@@ -4,9 +4,9 @@ import ApiClient from '../../methods/api/apiClient';
 import './style.scss';
 import loader from '../../methods/loader';
 import userTableModel from '../../models/table.model';
-import categoryType from '../../models/categoryType.model';
+// import categoryType from '../../models/categoryType.model';
 import Html from './html';
-import { CategoryType } from '../../models/type.model';
+// import { CategoryType } from '../../models/type.model';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; 
 import environment from '../../environment';
@@ -26,8 +26,8 @@ const Plans = (p) => {
     const [total, setTotal] = useState(0)
     const [loaging, setLoader] = useState(true)
     const [tableCols, setTableCols] = useState([])
-    const [form, setform] = useState(CategoryType)
-    const types=categoryType.list
+    // const [form, setform] = useState(CategoryType)
+    // const types=categoryType.list
     const history=useNavigate()
     const dragItem = useRef();
     const dragItems = useRef();
@@ -45,18 +45,9 @@ const Plans = (p) => {
         if (user && user.loggedIn) {
             setFilter({ ...filters, search: searchState.data })
             getData({ search: searchState.data, page: 1 })
-            // getCurrency()
+           
         }
     }, [searchState])
-
-
-    const getCurrency=()=>{
-        ApiClient.get('api/currency/listing',{page:1,count:100,status:'active'}).then(res=>{
-            if(res.success){
-                setCurrencys(res.data)
-            }
-        })
-    }
 
     const uTableCols = () => {
         let exp = []
@@ -159,7 +150,7 @@ const Plans = (p) => {
 
     const openModal = (itm) => {
         let extra=new Date().getTime()
-        setform({...itm,extra})
+        // setform({...itm,extra})
         document.getElementById("openuserModal").click()
     }
 
@@ -354,7 +345,7 @@ const Plans = (p) => {
         tabChange={tabChange}
         tab={tab}
         reset={reset}
-        types={types}
+        // types={types}
         ChangeRole={ChangeRole}
         ChangeStatus={ChangeStatus}
         openModal={openModal}

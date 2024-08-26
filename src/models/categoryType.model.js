@@ -8,12 +8,12 @@ const list = [
 ]
 
 const find = (key) => {
-    let ext = list.find(itm?.key == key)
+    let ext = list?.find((itm)=>itm?.key == key)
     return ext
 }
 
 const name = (key) => {
-    let ext = list.find(itm?.key == key)
+    let ext = list?.find((itm)=>itm?.key == key)
     return ext?ext.name:key
 }
 

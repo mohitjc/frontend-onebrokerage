@@ -43,7 +43,7 @@ const Html = ({
   tableCols,
   loaging,
   data,
-  types,
+  // types,
   exportfun,
   total,
   dragStart,
