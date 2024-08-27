@@ -156,7 +156,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             </NavLink>
                           </Tooltip>
                         </li>
-                        <li id="/customer">
+                        <li id="/carriers">
                           <Tooltip
                             placement="right"
                             title=" Accepted Carrier"
@@ -177,23 +177,23 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                           </Tooltip>
                         </li>
 
-                        {urlAllow("affiliates") ? (
-                          <li id="/affiliates">
+                        {urlAllow("carriers") ? (
+                          <li id="/carriers">
                             <Tooltip
                               placement="right"
                               title=" Reject Carrier"
                             >
                               <NavLink
-                                to={`/affiliates`}
+                                to={`/rejectedcarriers`}
                                 className={(isActive) =>
                                   "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
-                                  (location?.pathname == "/affiliates" &&
+                                  (location?.pathname == "/rejectedcarriers" &&
                                     " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
                                 }
                               >
                                 {/* <RiPresentationLine className="text-[#7b68ee] shrink-0 text-lg" /> */}
                                 <span className="text-inherit leading-none sidebar_text">
-                                  Reject Carrier
+                                  Rejected Carrier
                                 </span>
                               </NavLink>
                             </Tooltip>
@@ -202,15 +202,15 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                           <></>
                         )}
 
-                        {urlAllow("leads") ? (
+                        {urlAllow("carriers") ? (
                           <>
                             <li>
                               <Tooltip placement="right" title=" Carrier requests">
                                 <NavLink
-                                  to="/leads"
+                                  to="/carriersrequest"
                                   className={(isActive) =>
                                     "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
-                                    (location?.pathname == "/leads" &&
+                                    (location?.pathname == "/carriersrequest" &&
                                       " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
                                   }
                                 >
@@ -227,15 +227,15 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                           <></>
                         )}
 
-                        {urlAllow("leads") ? (
+                        {urlAllow("carriers") ? (
                           <>
                             <li>
                               <Tooltip placement="right" title="Carrier's Staff">
                                 <NavLink
-                                  to="/leads"
+                                  to="/carrierstaff"
                                   className={(isActive) =>
                                     "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
-                                    (location?.pathname == "/leads" &&
+                                    (location?.pathname == "/carrierstaff" &&
                                       " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
                                   }
                                 >
@@ -251,15 +251,15 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                         ) : (
                           <></>
                         )}
-                        {urlAllow("leads") ? (
+                        {urlAllow("carriers") ? (
                           <>
                             <li>
                               <Tooltip placement="right" title="Approved Sub-Carrier">
                                 <NavLink
-                                  to="/leads"
+                                  to="/approvedSubCarrier"
                                   className={(isActive) =>
                                     "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
-                                    (location?.pathname == "/leads" &&
+                                    (location?.pathname == "/approvedSubCarrier" &&
                                       " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
                                   }
                                 >

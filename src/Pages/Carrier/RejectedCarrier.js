@@ -15,7 +15,7 @@ import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import SelectDropdown from "../../components/common/SelectDropdown";
 import statusModel from "../../models/status.model";
-const AcceptedCarrier = () => {
+const RejectedCarrier = () => {
   const [loaging, setLoader] = useState(true);
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
@@ -28,7 +28,7 @@ const AcceptedCarrier = () => {
     role: "carrier",
     isDeleted: "",
     sorder: "",
-    request_status: "accepted",
+    request_status: "rejected",
     board_id: "",
   });
   const getData = (p = {}) => {
@@ -257,7 +257,7 @@ const AcceptedCarrier = () => {
       <div>
         <div className="flex justify-between	">
           <h1 className="text-2xl font-semibold text-[#111827] mb-4">
-            Accepted Carriers
+            Rejected Carriers
           </h1>
           {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
@@ -339,4 +339,4 @@ const AcceptedCarrier = () => {
   );
 };
 
-export default AcceptedCarrier;
+export default RejectedCarrier;

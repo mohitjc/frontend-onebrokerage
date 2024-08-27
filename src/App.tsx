@@ -67,6 +67,10 @@ function App() {
     { url: "/carriers/add", path: "Carrier/AddEdit" },
     { url: "/carriers/detail/:id", path: "Carrier/View" },
     { url: "/acceptedcarriers", path: "Carrier/AcceptedCarrier" },
+    { url: "/rejectedcarriers", path: "Carrier/RejectedCarrier" },
+    { url: "/carriersrequest", path: "Carrier/CarriersRequest" },
+    { url: "/carrierstaff", path: "Carrier/CarrierStaff" },
+    { url: "/approvedSubCarrier", path: "Carrier/ApprovedSubCarrier" },
   ];
 
   sessionStorage.clear();

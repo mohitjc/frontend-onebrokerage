@@ -228,7 +228,7 @@ console.log(data,"datadatadatadatadata")
                   :</label>
                    <p className="text-[14px] text-black font-medium ms-3">
                     {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
-                    {data?.boardDetails.map((board,i) => {
+                    {data?.boardDetails?.map((board,i) => {
                             return (
                               <>
                                 <div className="profiledetailscls  board-name me-2">

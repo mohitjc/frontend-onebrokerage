@@ -193,12 +193,12 @@ const AddEdit = () => {
         <div className="pprofile1">
           <div className="flex items-center mb-8">
             <Tooltip placement="top" title="Back">
-              <Link
-                to={`/${shared.url}`}
+              <div 
+              onClick={()=>history(-1)}
                 className="!px-4 py-2 flex items-center justify-center rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all mr-3"
               >
                 <i className="fa fa-angle-left text-lg"></i>
-              </Link>
+              </div>
             </Tooltip>
             <div>
               <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">

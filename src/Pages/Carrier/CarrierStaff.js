@@ -15,7 +15,7 @@ import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import SelectDropdown from "../../components/common/SelectDropdown";
 import statusModel from "../../models/status.model";
-const AcceptedCarrier = () => {
+const CarrierStaff= () => {
   const [loaging, setLoader] = useState(true);
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
@@ -25,11 +25,13 @@ const AcceptedCarrier = () => {
     page: 1,
     count: 10,
     search: "",
-    role: "carrier",
-    isDeleted: "",
+    role: "user",
+   
     sorder: "",
-    request_status: "accepted",
-    board_id: "",
+    isInvited: false,
+    isDeleted: false,
+    // request_status: "accepted",
+   
   });
   const getData = (p = {}) => {
     setLoader(true);
@@ -127,7 +129,7 @@ const AcceptedCarrier = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         loader(true);
-        ApiClient.put(shared.statusApi, { id: itm.id, status }).then((res) => {
+        ApiClient.put(shared.statusApi, { model:"users" , id: itm.id, status }).then((res) => {
           if (res.success) {
             toast.success(res?.message);
             getData();
@@ -162,19 +164,19 @@ const AcceptedCarrier = () => {
       },
     },
     {
-      key: "company_name",
-      name: "Company Name",
+      key: "addedBy_name",
+      name: "Carrier Name",
       render: (row) => {
-        return <span className="capitalize">{row?.company_name}</span>;
+        return <span className="capitalize">{row?.addedBy_name}</span>;
       },
     },
     {
-      key: "Board",
-      name: "Board",
+      key: "email",
+      name: "email",
       render: (row) => {
         return (
           <span className="capitalize">
-            {row?.board_data?.map((ele) => ele?.board_name)}
+            {row?.email}
           </span>
         );
       },
@@ -257,22 +259,13 @@ const AcceptedCarrier = () => {
       <div>
         <div className="flex justify-between	">
           <h1 className="text-2xl font-semibold text-[#111827] mb-4">
-            Accepted Carriers
+          Carrier's Staff
           </h1>
           {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
                     </button> */}
 
-          {/* {isAllow(`add${shared.check}`) ? ( */}
-          <Link
-            className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-            to={`/${shared.url}/add`}
-          >
-            <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
-          </Link>
-          {/* ) : (
-            <></>
-          )} */}
+         
         </div>
         <div className="flex gap-2 ml-auto justify-end	">
           <SelectDropdown
@@ -339,4 +332,4 @@ const AcceptedCarrier = () => {
   );
 };
 
-export default AcceptedCarrier;
+export default CarrierStaff;

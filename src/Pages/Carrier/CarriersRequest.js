@@ -15,7 +15,7 @@ import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import SelectDropdown from "../../components/common/SelectDropdown";
 import statusModel from "../../models/status.model";
-const AcceptedCarrier = () => {
+const CarriersRequest = () => {
   const [loaging, setLoader] = useState(true);
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
@@ -28,7 +28,7 @@ const AcceptedCarrier = () => {
     role: "carrier",
     isDeleted: "",
     sorder: "",
-    request_status: "accepted",
+    request_status: "pending",
     board_id: "",
   });
   const getData = (p = {}) => {
@@ -127,7 +127,7 @@ const AcceptedCarrier = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         loader(true);
-        ApiClient.put(shared.statusApi, { id: itm.id, status }).then((res) => {
+        ApiClient.put(shared.statusApi, { model:"users", id: itm.id, status }).then((res) => {
           if (res.success) {
             toast.success(res?.message);
             getData();
@@ -169,17 +169,27 @@ const AcceptedCarrier = () => {
       },
     },
     {
-      key: "Board",
-      name: "Board",
+      key: "dot",
+      name: "DOT#",
       render: (row) => {
         return (
           <span className="capitalize">
-            {row?.board_data?.map((ele) => ele?.board_name)}
+            {row?.dot_number}
           </span>
         );
       },
     },
-
+    {
+        key: "position",
+        name: "Position",
+        render: (row) => {
+          return (
+            <span className="capitalize">
+              {row?.position}
+            </span>
+          );
+        },
+      },
     {
       key: "status",
       name: "Status",
@@ -208,44 +218,7 @@ const AcceptedCarrier = () => {
       render: (itm) => {
         return (
           <>
-            <div className="flex items-center justify-start gap-1.5">
-              {/* {isAllow(`read${shared.check}`) ? ( */}
-              <Tooltip placement="top" title="View">
-                <a
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={(e) => view(itm.id)}
-                >
-                  <PiEyeLight />
-                </a>
-              </Tooltip>
-              {/* ) : (
-                  <></>
-                )} */}
-              {/* {isAllow(`edit${shared.check}`) ? ( */}
-              <Tooltip placement="top" title="Edit">
-                <a
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={(e) => edit(itm.id)}
-                >
-                  <LiaEdit />
-                </a>
-              </Tooltip>
-              {/* ) : (
-                  <></>
-                )} */}
-              {/* {isAllow(`delete${shared.check}`) ? ( */}
-              <Tooltip placement="top" title="Delete">
-                <span
-                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                  onClick={() => deleteItem(itm.id)}
-                >
-                  <LiaTrashAlt />
-                </span>
-              </Tooltip>
-              {/* ) : (
-                  <></>
-                )} */}
-            </div>
+           
           </>
         );
       },
@@ -257,19 +230,14 @@ const AcceptedCarrier = () => {
       <div>
         <div className="flex justify-between	">
           <h1 className="text-2xl font-semibold text-[#111827] mb-4">
-            Accepted Carriers
+            Carriers Request
           </h1>
           {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
                     </button> */}
 
           {/* {isAllow(`add${shared.check}`) ? ( */}
-          <Link
-            className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-            to={`/${shared.url}/add`}
-          >
-            <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
-          </Link>
+         
           {/* ) : (
             <></>
           )} */}
@@ -339,4 +307,5 @@ const AcceptedCarrier = () => {
   );
 };
 
-export default AcceptedCarrier;
+export default CarriersRequest;
+
