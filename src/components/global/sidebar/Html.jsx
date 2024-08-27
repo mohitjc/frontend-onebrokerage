@@ -162,10 +162,10 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             title=" Accepted Carrier"
                           >
                             <NavLink
-                              to={`/customer`}
+                              to={`/acceptedcarriers`}
                               className={(isActive) =>
                                 "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
-                                (location?.pathname == "/customer" &&
+                                (location?.pathname == "/acceptedcarriers" &&
                                   " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
                               }
                             >
