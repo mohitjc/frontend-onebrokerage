@@ -256,16 +256,23 @@ const RejectedCarrier = () => {
     <Layout>
       <div>
         <div className="flex justify-between	">
-          <h1 className="text-2xl font-semibold text-[#111827] mb-4">
+          
+          <div>
+        <h3 className="text-2xl font-semibold text-[#111827]">
+            {" "}
             Rejected Carriers
-          </h1>
+          </h3>
+          <p class="text-sm font-normal text-[#75757A]">
+            Here you can see all about your Rejected Carriers
+          </p>
+        </div>
           {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
                     </button> */}
 
           {/* {isAllow(`add${shared.check}`) ? ( */}
           <Link
-            className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+            className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
             to={`/${shared.url}/add`}
           >
             <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
@@ -274,7 +281,9 @@ const RejectedCarrier = () => {
             <></>
           )} */}
         </div>
-        <div className="flex gap-2 ml-auto justify-end	">
+        <div className=" w-full bg-white rounded-lg mt-6 border">
+        <div className="flex p-4 items-center flex-wrap	">
+          <div className="flex gap-2 ml-auto">
           <SelectDropdown
             id="statusDropdown"
             displayValue="name"
@@ -307,10 +316,11 @@ const RejectedCarrier = () => {
             <></>
           )}
         </div>
+        </div>
         {!loaging ? (
           <>
             <Table
-              className="mb-3"
+              className=""
               data={data}
               columns={columns}
               page={filters.page}
@@ -334,6 +344,7 @@ const RejectedCarrier = () => {
         ) : (
           <></>
         )}
+        </div>
       </div>
     </Layout>
   );

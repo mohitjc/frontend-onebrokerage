@@ -256,16 +256,21 @@ const AcceptedCarrier = () => {
     <Layout>
       <div>
         <div className="flex justify-between	">
-          <h1 className="text-2xl font-semibold text-[#111827] mb-4">
-            Accepted Carriers
-          </h1>
           {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
                     </button> */}
-
+        <div>
+        <h3 className="text-2xl font-semibold text-[#111827]">
+            {" "}
+            Accepted Carriers
+          </h3>
+          <p class="text-sm font-normal text-[#75757A]">
+            Here you can see all about your Accepted Carriers
+          </p>
+        </div>
           {/* {isAllow(`add${shared.check}`) ? ( */}
           <Link
-            className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+            className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
             to={`/${shared.url}/add`}
           >
             <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
@@ -274,18 +279,20 @@ const AcceptedCarrier = () => {
             <></>
           )} */}
         </div>
-        <div className="flex gap-2 ml-auto justify-end	">
-          <SelectDropdown
-            id="statusDropdown"
-            displayValue="name"
-            placeholder="All Status"
-            intialValue={filters.status}
-            result={(e) => {
-              changestatus(e.value);
-            }}
-            options={statusModel.list}
-          />
-          {/* <SelectDropdown
+        <div className=" w-full bg-white rounded-lg mt-6 border">
+          <div className="flex p-4 items-center flex-wrap	">
+            <div className="flex gap-2 ml-auto">
+              <SelectDropdown
+                id="statusDropdown"
+                displayValue="name"
+                placeholder="All Status"
+                intialValue={filters.status}
+                result={(e) => {
+                  changestatus(e.value);
+                }}
+                options={statusModel.list}
+              />
+              {/* <SelectDropdown
                             id="statusDropdown"
                             displayValue="name"
                             placeholder='All Groups'
@@ -294,38 +301,40 @@ const AcceptedCarrier = () => {
                             result={e => filter({ groupId: e.value })}
                             options={groups}
                         /> */}
-          {filters.status || filters.groupId ? (
+              {filters.status || filters.groupId ? (
+                <>
+                  <button
+                    className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
+                    onClick={() => clear()}
+                  >
+                    Reset
+                  </button>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
+          {!loaging ? (
             <>
-              <button
-                className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
-                onClick={() => clear()}
-              >
-                Reset
-              </button>
+              <Table
+                className=""
+                data={data}
+                columns={columns}
+                page={filters.page}
+                count={filters.count}
+                total={total}
+                result={(e) => {
+                  if (e.event == "page") pageChange(e.value);
+                  if (e.event == "sort") sorting(e.value);
+                  if (e.event == "count") count(e.value);
+                }}
+              />
             </>
           ) : (
             <></>
           )}
         </div>
-        {!loaging ? (
-          <>
-            <Table
-              className="mb-3"
-              data={data}
-              columns={columns}
-              page={filters.page}
-              count={filters.count}
-              total={total}
-              result={(e) => {
-                if (e.event == "page") pageChange(e.value);
-                if (e.event == "sort") sorting(e.value);
-                if (e.event == "count") count(e.value);
-              }}
-            />
-          </>
-        ) : (
-          <></>
-        )}
 
         {loaging ? (
           <div className="text-center py-4">

@@ -56,7 +56,7 @@ const Html = ({
 }) => {
   return (
     <Layout>
-      <div className="flex justify-between items-center">
+         <div className="flex flex-wrap justify-between items-center gap-y-4">
         <div>
           <h3 className="text-2xl font-semibold text-[#111827]">Plans</h3>
           <p class="text-sm font-normal text-[#75757A]">
@@ -70,7 +70,7 @@ const Html = ({
                     </button> */}
           {/* {isAllow('addPlan') ? */}
           <Link
-            className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+            className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
             to="/plans/add"
           >
             <FiPlus className="text-xl text-white" /> Add Plan
@@ -78,7 +78,18 @@ const Html = ({
           {/* : <></>} */}
 
           <div className="flex justify-end items-center gap-2">
-            <SelectDropdown
+         
+          </div>
+        </div>
+      </div>
+
+      <div className="shadow-box w-full bg-white rounded-lg mt-6">
+
+      <div className="flex p-4 items-center flex-wrap">
+          
+
+          <div className="flex gap-2 ml-auto">
+          <SelectDropdown
               id="statusDropdown"
               displayValue="name"
               placeholder="All Status"
@@ -91,7 +102,7 @@ const Html = ({
             {filters.status ? (
               <>
                 <button
-                  className="bg-primary leading-10 mr-3 h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+                  className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
                   onClick={reset}
                 >
                   Reset
@@ -102,9 +113,6 @@ const Html = ({
             )}
           </div>
         </div>
-      </div>
-
-      <div className="shadow-box w-full bg-white rounded-lg mt-6">
         {tab == "grid" ? (
           <></>
         ) : (

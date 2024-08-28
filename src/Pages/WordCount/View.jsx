@@ -133,7 +133,7 @@ const View = () => {
 
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12">
-              <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-5 capitalize">
+              <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-5 capitalize">
               <div>
                   <h4 className="p-4 bg-[#494f9f1a] font-medium">Basic Information</h4>
                 </div>
@@ -175,7 +175,7 @@ const View = () => {
          
             <div className="grid grid-cols-12 gap-6 mb-5">
             <div className="col-span-12">
-              <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
+              <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
               <div>
                   <h4 className="p-4 bg-[#494f9f1a] font-medium">Staff Details</h4>
                 </div>
@@ -205,7 +205,7 @@ const View = () => {
                   <h4 className="p-4 bg-[#494f9f1a] font-medium">Counter Offers</h4>
                 </div>
               <Table
-              className="mb-3"
+              className=""
               data={counterOfferData}
               columns={columns}
               page={filters.page}

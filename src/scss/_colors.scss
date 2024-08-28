@@ -31,6 +31,7 @@ a.text-primary:hover, a.text-primary:focus{
 .badge{
   display: inline-block;
   padding: 6px 10px;
+  border-radius: 4px;
   &.badge-danger{
     background-color: #a1002724 !important;
     color:#A10027 !important;

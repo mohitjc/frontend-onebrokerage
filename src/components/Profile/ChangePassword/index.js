@@ -61,17 +61,17 @@ const ChangePassword = (p) => {
 
   return (
     <>
-      <div className="wrapper_section">
-        <div className="main-title mb-4 lg:mb-8">
-          <h3 className="text-lg lg:text-2xl font-semibold text-[#111827] mb-6">
-            Change Password
-          </h3>
-        </div>
-
-        <div className="input_form p-6 shadow-box overflow-hidden rounded-lg bg-white grid grid-cols-12 border">
-          <div className="col-span-12 md:col-span-7">
+      <div className="wrapper_section ">
+        
+       
+        <div className="input_form  grid grid-cols-1 mt-10 ">
+       
+          <div className="max-w-3xl  mx-auto border  rounded-lg bg-white">
+          <div className="bg-[#1245940a] p-4 border-b ">
+              <h3 className="text-[20px] font-[500]">Change Password</h3>
+            </div>
             <form onSubmit={handleSubmit}>
-              <div className="items-center ">
+              <div className="items-center p-6 ">
                 <div className="">
                   <div className="flex flex-col md:flex-row  items-center gap-4 mb-6">
                     <label className="text-typo text-base font-medium w-96">
@@ -213,7 +213,7 @@ const ChangePassword = (p) => {
                   <div className="flex items-end justify-end">
                     <button
                       type="submit"
-                      className="text-white bg-[#494f9f]  focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center  mb-2 cursor-pointer"
+                      className="text-white bg-[#494f9f]  focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center   cursor-pointer"
                     >
                       Update
                     </button>

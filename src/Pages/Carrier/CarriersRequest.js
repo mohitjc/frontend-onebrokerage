@@ -228,10 +228,17 @@ const CarriersRequest = () => {
   return (
     <Layout>
       <div>
-        <div className="flex justify-between	">
-          <h1 className="text-2xl font-semibold text-[#111827] mb-4">
-            Carriers Request
-          </h1>
+        <div className="flex justify-between	items-center">
+        
+          <div>
+        <h3 className="text-2xl font-semibold text-[#111827]">
+            {" "}
+           Carriers Request
+          </h3>
+          <p class="text-sm font-normal text-[#75757A]">
+            Here you can see all about your Carriers Request
+          </p>
+        </div>
           {/* <button className="!px-2.5 text-[#3C3E49] text-sm font-normal py-2.5 flex items-center justify-center gap-2 bg-[#fff] rounded-lg shadow-btn hover:bg-[#F3F2F5] border border-[#D0D5DD] transition-all focus:ring-2 ring-[#F1F2F3] disabled:bg-[#F3F2F5] disabled:cursor-not-allowed mr-3" onClick={() => exportfun()}>
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
                     </button> */}
@@ -242,7 +249,9 @@ const CarriersRequest = () => {
             <></>
           )} */}
         </div>
-        <div className="flex gap-2 ml-auto justify-end	">
+        <div className=" w-full bg-white rounded-lg mt-6 border">
+        <div className="flex p-4 items-center flex-wrap	">
+          <div className="flex gap-2 ml-auto">
           <SelectDropdown
             id="statusDropdown"
             displayValue="name"
@@ -275,10 +284,11 @@ const CarriersRequest = () => {
             <></>
           )}
         </div>
+        </div>
         {!loaging ? (
           <>
             <Table
-              className="mb-3"
+              className=""
               data={data}
               columns={columns}
               page={filters.page}
@@ -294,7 +304,7 @@ const CarriersRequest = () => {
         ) : (
           <></>
         )}
-
+</div>
         {loaging ? (
           <div className="text-center py-4">
             <img src="/assets/img/loader.gif" className="pageLoader" />

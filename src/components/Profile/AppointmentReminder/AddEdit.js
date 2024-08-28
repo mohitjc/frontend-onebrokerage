@@ -57,7 +57,7 @@ const AddEdit = ({ form, setForm, modalClosed }) => {
                             <div className="form-row roleForm">
                                 <div className="col-md-12 mb-3">
                                     <label className="lableclss">Hours</label>
-                                    <select className='relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2' value={form && form.hours ? form.hours : ''} onChange={e => setForm({ ...form, hours: e.target.value })} required>
+                                    <select className='relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3' value={form && form.hours ? form.hours : ''} onChange={e => setForm({ ...form, hours: e.target.value })} required>
                                         <option value="" >Select option</option>
                                         {rescheduleTimeModel.list.map(itm => {
                                             return <option value={itm.hr}>{itm.value}</option>

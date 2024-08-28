@@ -9,6 +9,14 @@ import { RiHome6Line } from "react-icons/ri";
 import { FiPackage, FiSettings, FiThumbsUp, FiUsers } from "react-icons/fi";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { PiHandCoins, PiHandbagBold } from "react-icons/pi";
+import { MdOutlineFeaturedPlayList } from "react-icons/md";
+import { LuCircleDot } from "react-icons/lu";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { RxCrossCircled } from "react-icons/rx";
+import { IoGitPullRequestOutline } from "react-icons/io5";
+import { TbUserShield } from "react-icons/tb";
+import { IoCheckmarkDoneSharp } from "react-icons/io5";
+
 import {
   MdOutlineHolidayVillage,
   MdOutlineAttachEmail,
@@ -47,16 +55,16 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <NavLink
                 to="/dashboard"
                 // className={(isActive) =>
-                //   "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
-                //   (isActive && " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                //   "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                //   (isActive && " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 // }
                 className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-[#494f9f] hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                   (location?.pathname == "/dashboard" &&
                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 }
               >
-                <RiHome6Line className="text-[#494f9f] shrink-0 text-lg group-hover:text-white " />
+                <RiHome6Line className="text-black shrink-0 text-lg group-hover:text-white " />
                 <span className="text-inherit leading-none sidebar_text">
                   Dashboard
                 </span>
@@ -69,15 +77,16 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 to="/feature"
                 // className={(isActive) =>
                 //   "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
-                //   (isActive && " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                //   (isActive && " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 // }
                 className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-[#494f9f] hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                   (location?.pathname == "/feature" &&
                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 }
               >
-                <RiHome6Line className="text-[#494f9f] shrink-0 text-lg group-hover:text-white " />
+                <MdOutlineFeaturedPlayList  className="text-black shrink-0 text-lg group-hover:text-white "/>
+
                 <span className="text-inherit leading-none sidebar_text">
                 Features
                 </span>
@@ -90,15 +99,16 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 to="/plans"
                 // className={(isActive) =>
                 //   "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
-                //   (isActive && " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                //   (isActive && " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 // }
                 className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-[#494f9f] hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                   (location?.pathname == "/plans" &&
                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 }
               >
-                <RiHome6Line className="text-[#494f9f] shrink-0 text-lg group-hover:text-white " />
+                <LuCircleDot className="text-black shrink-0 text-lg group-hover:text-white "/>
+              
                 <span className="text-inherit leading-none sidebar_text">
                   Plan
                 </span>
@@ -110,9 +120,9 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               {({ open }) => (
                 <>
                   <Tooltip placement="right" title="Carriers">
-                    <Disclosure.Button className="w-full p-2.5 rounded-[50px] flex items-center justify-between text-[#494f9f] hover:!text-[#fff] gap-[12px] hover:bg-[#494f9f] transition-all duration-300  group">
+                    <Disclosure.Button className="w-full p-2.5 rounded-[50px] flex items-center justify-between text-black hover:!text-[#fff] gap-[12px] hover:bg-[#494f9f] transition-all duration-300  group">
                       <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
-                        <FiUsers className="text-[#494f9f] shrink-0 text-lg group-hover:text-white" />
+                        <FiUsers className="text-black shrink-0 text-lg group-hover:text-white" />
                         <span className=" text-inherit leading-none sidebar_text">
                           {" "}
                           Carriers
@@ -134,8 +144,8 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                     leaveFrom="transform scale-300 opacity-300"
                     leaveTo="transform scale-95 opacity-0"
                   >
-                    <Disclosure.Panel className="pl-[30px] mt-[4px] ">
-                      <ul className="space-y-2">
+                      <Disclosure.Panel className=" mt-[4px] ">
+                      <ul className="space-y-2 ">
                       <li id="/carriers">
                           <Tooltip
                             placement="right"
@@ -144,12 +154,12 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             <NavLink
                               to={`/carriers`}
                               className={(isActive) =>
-                                "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                                "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group" +
                                 (location?.pathname == "/carriers" &&
-                                  " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                                  " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                               }
                             >
-                             
+                              <FiUsers className="text-black shrink-0 text-lg group-hover:text-white " />
                               <span className="text-inherit leading-none sidebar_text">
                                 Carriers
                               </span>
@@ -164,12 +174,14 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             <NavLink
                               to={`/acceptedcarriers`}
                               className={(isActive) =>
-                                "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                                "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                                 (location?.pathname == "/acceptedcarriers" &&
-                                  " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                                  " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                               }
                             >
-                             
+                              <IoMdCheckmarkCircleOutline className="text-black shrink-0 text-lg group-hover:text-white "/>
+
+                              
                               <span className="text-inherit leading-none sidebar_text">
                                 Accepted Carrier
                               </span>
@@ -186,12 +198,13 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                               <NavLink
                                 to={`/rejectedcarriers`}
                                 className={(isActive) =>
-                                  "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                                   (location?.pathname == "/rejectedcarriers" &&
-                                    " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                 }
                               >
-                                {/* <RiPresentationLine className="text-[#7b68ee] shrink-0 text-lg" /> */}
+                                <RxCrossCircled className="text-black shrink-0 text-lg group-hover:text-white" />
+
                                 <span className="text-inherit leading-none sidebar_text">
                                   Rejected Carrier
                                 </span>
@@ -209,12 +222,13 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 <NavLink
                                   to="/carriersrequest"
                                   className={(isActive) =>
-                                    "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                                     (location?.pathname == "/carriersrequest" &&
-                                      " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                                      " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                   }
                                 >
-                                  {/* <RiCoupon3Line className=" text-[#fe7878] shrink-0 text-lg" /> */}
+                                  <IoGitPullRequestOutline className="text-black shrink-0 text-lg group-hover:text-white"/>
+
 
                                   <span className="text-inherit leading-none sidebar_text">
                                     Carrier requests
@@ -234,12 +248,13 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 <NavLink
                                   to="/carrierstaff"
                                   className={(isActive) =>
-                                    "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                                     (location?.pathname == "/carrierstaff" &&
-                                      " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                                      " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                   }
                                 >
-                                  {/* <RiCoupon3Line className=" text-[#fe7878] shrink-0 text-lg" /> */}
+                                 
+                                  <TbUserShield className="text-black shrink-0 text-lg group-hover:text-white"/>
 
                                   <span className="text-inherit leading-none sidebar_text">
                                     Carrier's Staff
@@ -258,12 +273,13 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 <NavLink
                                   to="/approvedSubCarrier"
                                   className={(isActive) =>
-                                    "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                                     (location?.pathname == "/approvedSubCarrier" &&
-                                      " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                                      " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                   }
                                 >
-                                  {/* <RiCoupon3Line className=" text-[#fe7878] shrink-0 text-lg" /> */}
+                                
+                                  <IoCheckmarkDoneSharp className="text-black shrink-0 text-lg group-hover:text-white"/>
 
                                   <span className="text-inherit leading-none sidebar_text">
                                     Approved Sub-Carrier
@@ -288,7 +304,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <NavLink
                 to={`/reseller`}
                 className={(isActive) =>
-                  "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                   (location?.pathname == "/reseller" &&
                     " !text-[#5577FF] !bg-[#5577FF]/10 !font-medium")
                 }
@@ -597,11 +613,11 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                           <NavLink
                             to={`/dynamicpricelist`}
                             className={(isActive) =>
-                              "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                              "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                               (location?.pathname.includes(
                                 "/dynamicpricelist"
                               ) &&
-                                " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                                " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                             }
                           >
                             
@@ -617,9 +633,9 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                           <NavLink
                             to={`/crm`}
                             className={(isActive) =>
-                              "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                              "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                               (location?.pathname.includes("crm") &&
-                                " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                                " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                             }
                           >
                            
@@ -635,9 +651,9 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                           <NavLink
                             to={`/waiver`}
                             className={(isActive) =>
-                              "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                              "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                               (location?.pathname.includes("/waiver") &&
-                                " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                                " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                             }
                           >
 
@@ -657,14 +673,14 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                           <NavLink
                             to={""}
                             className={(isActive) =>
-                              "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                              "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                               (window.location.pathname.includes(
                                 "/costing/template"
                               ) ||
                                 (window.location.pathname.includes(
                                   "/costing/add"
                                 ) &&
-                                  " !text-[#5577FF] !bg-[#EDECF9] !font-medium"))
+                                  " !text-[#fff] !bg-[#494f9f] !font-medium active-bg"))
                             }
                           >
                            
@@ -683,11 +699,11 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                           <NavLink
                             to={""}
                             className={(isActive) =>
-                              "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                              "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                               (window.location.pathname.includes(
                                 "/costingtour"
                               ) &&
-                                " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                                " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                             }
                           >
                             <span className="text-inherit leading-none sidebar_text">
@@ -705,11 +721,11 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                               <NavLink
                                 to={`/emailtemplate`}
                                 className={(isActive) =>
-                                  "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
                                   (location?.pathname.includes(
                                     "emailtemplate"
                                   ) &&
-                                    " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                 }
                               >
                                
@@ -737,8 +753,8 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 <NavLink
                   to="/currency"
                   className={(isActive) =>
-                    "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
-                    (isActive && " !text-[#5577FF] !bg-[#EDECF9] !font-medium")
+                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                    (isActive && " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                   }>
 
                   <i className="material-icons text-[#5577FF] shrink-0 text-lg" title="">currency_exchange</i>

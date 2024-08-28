@@ -77,7 +77,7 @@ const Setting = () => {
           <input
             type="text"
             placeholder="Member Group"
-            className='relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 border border-gray-100'
+            className='relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3 border border-gray-100'
             value={form?.memberGroup}
             onChange={handleChange}
           />

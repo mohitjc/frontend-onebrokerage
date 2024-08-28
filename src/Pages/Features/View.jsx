@@ -48,7 +48,7 @@ const View = () => {
             <Tooltip placement="top" title="Back">
               <span
                 onClick={() => history(-1)}
-                className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3 bg-[#05388fed] text-white"
+                className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3 bg-[#494f9f] text-white hover:text-black"
               >
                 <i className="fa fa-angle-left text-lg"></i>
               </span>
@@ -62,22 +62,22 @@ const View = () => {
 
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12">
-              <div className="  shadow-box overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
-                <div>
-                 
+              <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
+                <div className="bg-[#1245940a] p-4 border-b">
+                  <h3 className="text-[20px] font-[500]">Basic Information</h3>
                 </div>
                <div className="grid grid-cols-12 p-4">
-               <div className="col-span-6 flex items-center mb-4">
-                  <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">Name:</label>
-                  <p className="text-[14px] text-black font-medium ms-3">
+               <div className="col-span-6 flex flex-col mb-4">
+                <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Name:</label>
+                  <p className="text-[14px] text-black font-medium ">
                     {" "}
                     {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
                     {data && data.name}
                   </p>
                 </div>
-                  <div className="col-span-6 flex items-center mb-4">
-                   <label className="text-[14px] text-[#0000009c] tracking-wider  w-[160px]">createdAt:</label>
-                   <p className="text-[14px] text-black font-medium ms-3">
+                  <div className="col-span-6 flex flex-col mb-4">
+                   <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">CreatedAt:</label>
+                   <p className="text-[14px] text-black font-medium ">
                     {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
                     {data &&  moment(data?.createdAt).format('DD-MM-YYYY')}
                   </p>

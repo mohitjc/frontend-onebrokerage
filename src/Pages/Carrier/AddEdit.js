@@ -190,24 +190,30 @@ const AddEdit = () => {
   return (
     <Layout>
       <form onSubmit={handleSubmit}>
-        <div className="pprofile1">
-          <div className="flex items-center mb-8">
-            <Tooltip placement="top" title="Back">
-              <div 
-              onClick={()=>history(-1)}
-                className="!px-4 py-2 flex items-center justify-center rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all mr-3"
-              >
-                <i className="fa fa-angle-left text-lg"></i>
-              </div>
-            </Tooltip>
-            <div>
-              <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
-                {id ? "Edit" : "Add"} {shared.addTitle}
-              </h3>
+        <div className="flex items-center mb-8">
+          <Tooltip placement="top" title="Back">
+            <div
+              onClick={() => history(-1)}
+              className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3 bg-[#494f9f] text-white hover:text-black"
+            >
+              <i className="fa fa-angle-left text-lg"></i>
             </div>
+          </Tooltip>
+          <div>
+            <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
+              {id ? "Edit" : "Add"} {shared.addTitle}
+            </h3>
+            <p className="text-sm font-normal text-[#75757A]">
+              Here you can see all about your Carriers
+            </p>
+          </div>
+        </div>
+        <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-10 ">
+          <div className="bg-[#1245940a] p-4 border-b">
+            <h3 className="text-[20px] font-[500]">Basic information</h3>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
             <div className="mb-3">
               <FormControl
                 type="text"
@@ -328,7 +334,20 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, dot_number: e })}
               />
             </div>
-            <div className="mb-3">
+           
+         
+          </div>
+
+         
+        </div>
+
+        <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-10 ">
+          <div className="bg-[#1245940a] p-4 border-b">
+            <h3 className="text-[20px] font-[500]">Address </h3>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
+          <div className="mb-3">
               <FormControl
                 type="text"
                 label="Address*"
@@ -373,7 +392,18 @@ const AddEdit = () => {
                 required
               />
             </div>
-            <div className="mb-3">
+          </div>
+
+         
+        </div>
+
+        <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-10 ">
+          <div className="bg-[#1245940a] p-4 border-b">
+            <h3 className="text-[20px] font-[500]">Truck Details </h3>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
+          <div className="mb-3">
               <FormControl
                 type="text"
                 label="Team Truck"
@@ -398,7 +428,7 @@ const AddEdit = () => {
               />
             </div>
             <div className="mb-3">
-              <label>Trailer Types</label>
+              <label className="">Trailer Types</label>
               <div>
                 <label>
                   <input
@@ -416,7 +446,7 @@ const AddEdit = () => {
                     checked={form.trailer_type.includes("reefer")}
                     onChange={(e) => handleCheckboxChange(e, "trailer_type")}
                   />
-                  Reefer
+   Reefer               
                 </label>
               </div>
             </div>
@@ -424,8 +454,9 @@ const AddEdit = () => {
               <label>Boards</label>
               <div>
                 {Boards.map((board) => (
-                  <label key={board.id}>
+                  <label key={board.id} className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3">
                     <input
+                    className=""
                       type="checkbox"
                       checked={form.board_id.includes(board.id)}
                       onChange={(e) => handleCheckboxChangee(e, board.id)}
@@ -437,12 +468,14 @@ const AddEdit = () => {
             </div>
           </div>
 
-          <div className="flex justify-end mt-4">
+         
+        </div>
+
+        <div className="flex justify-end mt-4">
             <button type="submit" className="btn btn-primary">
               {id ? "Update" : "Add"} {shared.addTitle}
             </button>
           </div>
-        </div>
       </form>
     </Layout>
   );

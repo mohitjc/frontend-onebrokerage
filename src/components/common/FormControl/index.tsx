@@ -200,7 +200,7 @@ export default function FormControl({
           <>
             {options.map((itm: any) => {
               return (
-                <label className="flex">
+                <label className="flex ">
                   <input
                     type="checkbox"
                     checked={value?.includes(itm.id) ? true : false}
@@ -216,7 +216,7 @@ export default function FormControl({
           <input
             type={type}
             name={name}
-            className="relative  bg-white w-full rounded-lg h-11  overflow-hidden px-2 border border-[#00000036]"
+            className=" bg-white w-full rounded-lg h-10 flex items-center gap-2  border border-[#00000036] px-3"
             required={required}
             placeholder={placeholder}
             value={value || ""}

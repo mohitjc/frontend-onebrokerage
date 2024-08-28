@@ -679,11 +679,7 @@ i.fa.fa-pencil-alt.edit {
   font-weight: 700;
 }
 
-i.fa.fa-trash {
-  color: #c02e2e;
-  font-size: 18px;
-  font-weight: 700;
-}
+
 
 
 
@@ -704,10 +700,12 @@ a.btn.btn-primary.mr-2 {
 }
 
 .form-control {
-  padding: 21px 10px;
+  padding: 8px 10px;
   border: 1px solid #DCDCDC;
   border-radius: 8px;
   width: 100%;
+  background: transparent;
+  height: 44px;
 }
 
 select.form-control.types {
@@ -1700,9 +1698,9 @@ html {
 
 
 .shadow-box {
-  --tw-shadow: 0px 0px 0px 1px rgba(218, 186, 48, 0.08), 0px 1px 2px 0px rgba(164, 172, 185, 0.24) !important;
-  --tw-shadow-colored: 0px 0px 0px 1px var(--tw-shadow-color), 0px 1px 2px 0px var(--tw-shadow-color) !important;
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  --tw-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px !important;
+  --tw-shadow-colored: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px !important;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px !important;
 }
 
 
@@ -2192,11 +2190,11 @@ box-shadow: -6px 4px 13.2px 0px rgba(0, 0, 0, 0.11);
   text-align: center;
 }
 .completed {
-  background: #003585;
+  background: #082a5c57;
   padding: 4px 6px;
   border-radius: 4px;
-  color: #fff;
-   width: 122px;
+  color: #ffffff !important;
+  width: 167px;
   display: block;
   text-align: center;
 }

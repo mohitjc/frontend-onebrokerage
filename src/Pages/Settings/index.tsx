@@ -119,7 +119,7 @@ const Settings = () => {
                   </p>
                   <input
                     type="number"
-                    className="relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden px-2 mt-2"
+                    className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3 mt-2"
                     value={form && form.rescheduleTime}
                     maxLength={2}
                     onChange={(e) => {
