@@ -402,16 +402,17 @@ const AddEdit = () => {
             <h3 className="text-[20px] font-[500]">Truck Details </h3>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
-          <div className="mb-3">
-              <FormControl
+          <div className="grid grid-cols-12  gap-4 p-4">
+            <div className="lg:col-span-6 col-span-12 mb-3">
+            <FormControl
                 type="text"
                 label="Team Truck"
                 value={form.team_truck}
                 onChange={(e) => setForm({ ...form, team_truck: e })}
               />
             </div>
-            <div className="mb-3">
+        
+           <div className="lg:col-span-6 col-span-12 mb-3">
               <FormControl
                 type="text"
                 label="Solo Truck"
@@ -419,7 +420,7 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, solo_truck: e })}
               />
             </div>
-            <div className="mb-3">
+           <div className="lg:col-span-6 col-span-12 mb-3">
               <FormControl
                 type="text"
                 label="Trailers Number"
@@ -427,10 +428,11 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, trailers_number: e })}
               />
             </div>
-            <div className="mb-3">
-              <label className="">Trailer Types</label>
-              <div>
-                <label>
+           <div className="lg:col-span-6 col-span-12 mb-3">
+           <label className="mb-2 block">Trailer Types</label>
+              <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-6">
+                <label className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3">
                   <input
                     type="checkbox"
                     value="dry_van"
@@ -439,7 +441,9 @@ const AddEdit = () => {
                   />
                   Dry Van
                 </label>
-                <label>
+                </div>
+                <div className="col-span-6">
+                <label className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3">
                   <input
                     type="checkbox"
                     value="reefer"
@@ -448,13 +452,17 @@ const AddEdit = () => {
                   />
    Reefer               
                 </label>
+                </div>
+               
               </div>
             </div>
-            <div className="mb-3">
-              <label>Boards</label>
-              <div>
+            <div className="lg:col-span-12 col-span-12 mb-3">
+              <label className="mb-2 block">Boards</label>
+              <div className="grid grid-cols-12  gap-4 ">
+             
                 {Boards.map((board) => (
-                  <label key={board.id} className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3">
+                 <div className="col-span-6">
+                   <label key={board.id} className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3">
                     <input
                     className=""
                       type="checkbox"
@@ -463,7 +471,9 @@ const AddEdit = () => {
                     />
                     {board.name}
                   </label>
+                 </div>
                 ))}
+             
               </div>
             </div>
           </div>
