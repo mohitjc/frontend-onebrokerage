@@ -159,7 +159,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                   " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                               }
                             >
-                              <FiUsers className="text-black shrink-0 text-lg group-hover:text-white " />
+                              <FiUsers className="text-black shrink-0 text-lg group-hover:text-white" />
                               <span className="text-inherit leading-none sidebar_text">
                                 Carriers
                               </span>
