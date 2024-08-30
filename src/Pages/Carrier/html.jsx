@@ -142,7 +142,7 @@ const Html = ({
     },
     {
       key: "action",
-      name: "Action",
+      name: "Actions",
       render: (itm) => {
         return (
           <>

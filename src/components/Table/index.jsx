@@ -94,7 +94,9 @@ const Table = ({
                                   <HiOutlineArrowDown className=" inline text-sm" />
                                 </span>
                               </>
-                            ) : null}
+                            ) :  <span className="" onClick={() => headclick(itm)}>
+                            <HiOutlineArrowUp className=" inline text-sm" />
+                          </span>}
                           </span>
                         </th>
                       ))}
