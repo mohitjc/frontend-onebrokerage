@@ -62,7 +62,7 @@ const Html = ({
                 />
               </div>
             
-              <div className="col-span-12 md:col-span-6">
+              {/* <div className="col-span-12 md:col-span-6">
                 <label className="text-sm mb-2 block">Role</label>
                 <input
                   type="text"
@@ -75,7 +75,7 @@ const Html = ({
                   required
                   disabled
                 />
-              </div>
+              </div> */}
               <div className="col-span-12 md:col-span-6">
                 <label className="text-sm mb-2 block">Image</label>
 

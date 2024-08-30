@@ -74,7 +74,7 @@ const Profile = () => {
                     <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
                       {" "}
                       {/* <LiaUserSolid className="text-xl" /> */}
-                      {data && data.fullName}
+                      {data && methodModel.capitalizeFirstLetter(data.fullName)}
                     </p>
                   </div>
                   <div className="">
@@ -85,13 +85,13 @@ const Profile = () => {
                     </p>
                   </div>
 
-                  <div className="">
+                  {/* <div className="">
                     <label className="text-black">Phone Number</label>
                     <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
-                      {/* <MdOutlinePhone className="text-xl" /> */}
+              
                       {String(data.mobileNo ? "+" + data.mobileNo : "N/A")}
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

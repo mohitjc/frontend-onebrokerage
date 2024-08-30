@@ -41,13 +41,13 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
         component="siderbar"
       >
        <div className="px-[8px]  p-4 rounded-lg  bg-[#494f9f17] h-full border border-[#474e9c33]">
-       <h6
+       {/* <h6
           className={`${
             isOpen ? "py-[20px] text-center" : "pb-[20px]"
           } text-xs font-medium text-[#7E8B99] mt-[40px]`}
         >
           <span className="sidebar_text text-[#4A545E] "> MAIN MENU </span>
-        </h6>
+        </h6> */}
 
         <ul className="space-y-2  ">
           <li>
