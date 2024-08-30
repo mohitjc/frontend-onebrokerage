@@ -154,7 +154,7 @@ const Html = ({
                           <tr>
                             <td
                               className="!text-typo !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]"
-                              onClick={(e) => edit(itm.id, "false")}
+                              onClick={(e) => view(itm.id)}
                             >
                               {itm.name}
                             </td>
