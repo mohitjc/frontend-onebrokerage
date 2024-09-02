@@ -72,7 +72,7 @@ const Html = ({
       key: "transaction_status",
       name: "Status",
       render: (row) => {
-        return <span className="capitalize">{row?.transaction_status}</span>;
+        return <span className="capitalize badge badge-primary">{row?.transaction_status}</span>;
       },
     },
     {

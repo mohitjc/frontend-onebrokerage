@@ -59,7 +59,7 @@ const RoleDetail = () => {
               <div className="shadow-box overflow-hidden rounded-lg bg-white gap-4 shrink-0">
                 <div className="grid grid-cols-12 p-4">
                 <div className="col-span-6 flex flex-col mb-4">
-                    <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">
+                    <label className="text-[14px] text-[#0000009c] tracking-wider mb-1">
                       Transaction Id:
                     </label>
                     <p className="text-[14px] text-black font-medium ">
@@ -67,7 +67,7 @@ const RoleDetail = () => {
                     </p>
                   </div>
                   <div className="col-span-6 flex flex-col mb-4">
-                    <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">
+                    <label className="text-[14px] text-[#0000009c] tracking-wider mb-1">
                       Plan Name:
                     </label>
                     <p className="text-[14px] text-black font-medium ">
@@ -75,7 +75,7 @@ const RoleDetail = () => {
                     </p>
                   </div>
                   <div className="col-span-6 flex flex-col mb-4">
-                    <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">
+                    <label className="text-[14px] text-[#0000009c] tracking-wider mb-1">
                       Carrier Name:
                     </label>
                     <p className="text-[14px] text-black font-medium ">
@@ -83,7 +83,7 @@ const RoleDetail = () => {
                     </p>
                   </div>
                   <div className="col-span-6 flex flex-col mb-4">
-                    <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">
+                    <label className="text-[14px] text-[#0000009c] tracking-wider mb-1">
                       Amount :
                     </label>
                     <p className="text-[14px] text-black font-medium ">
@@ -91,7 +91,7 @@ const RoleDetail = () => {
                     </p>
                   </div>
                   <div className="col-span-6 flex flex-col mb-4">
-                    <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">
+                    <label className="text-[14px] text-[#0000009c] tracking-wider mb-1">
                       Created At:
                     </label>
                     <p className="text-[14px] text-black font-medium ">
@@ -99,7 +99,7 @@ const RoleDetail = () => {
                     </p>
                   </div>
                   <div className="col-span-6 flex flex-col mb-4">
-                    <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">
+                    <label className="text-[14px] text-[#0000009c] tracking-wider mb-1">
                       Status :
                     </label>
                     <p className="text-[14px] text-black font-medium ">
