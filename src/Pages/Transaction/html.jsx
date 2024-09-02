@@ -106,9 +106,9 @@ const Html = ({
 
       </div>
 
-      <div className="shadow-box w-full bg-white rounded-lg mt-6">
-
-      <div className="flex gap-2 ml-auto">
+      <div className=" w-full bg-white rounded-lg mt-6 border">
+<div className="flex p-4 items-center flex-wrap">
+<div className="flex gap-2 ml-auto">
       <Select className="rounded-lg" options={statusOptions} value={filters?.transaction_status} onChange={e => handleFilters (e, 'transaction_status')} isClearable placeholder='Select Status' />
             {filters.transaction_status ? (
               <>
@@ -123,6 +123,8 @@ const Html = ({
               <></>
             )}
           </div>
+</div>
+     
           {!loaging ? (
           <>
            <div className="">
