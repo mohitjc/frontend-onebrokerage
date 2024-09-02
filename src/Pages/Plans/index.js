@@ -8,7 +8,7 @@ import userTableModel from '../../models/table.model';
 import Html from './html';
 // import { CategoryType } from '../../models/type.model';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; 
+import axios from 'axios';
 import environment from '../../environment';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
@@ -18,18 +18,18 @@ import shared from './shared';
 const Plans = (p) => {
     let user = useSelector(state => state.user)
     const searchState = useSelector((state) => state.search);
-    const [filters, setFilter] = useState({ page: 1, count: 50, search: '', catType: '',interval:'',currencyId:'' })
+    const [filters, setFilter] = useState({ page: 1, count: 50, search: '', catType: '', interval: '', currencyId: '' })
     const [dargIndex, setDragIndex] = useState(-1)
     const [dargEnterIndex, setDargEnterIndex] = useState(-1)
     const [data, setData] = useState([])
     const [currencys, setCurrencys] = useState([])
-    const [tab,setTab]=useState('list')
+    const [tab, setTab] = useState('list')
     const [total, setTotal] = useState(0)
     const [loaging, setLoader] = useState(true)
     const [tableCols, setTableCols] = useState([])
     // const [form, setform] = useState(CategoryType)
     // const types=categoryType.list
-    const history=useNavigate()
+    const history = useNavigate()
     const dragItem = useRef();
     const dragItems = useRef();
     const dragOverItem = useRef();
@@ -46,7 +46,7 @@ const Plans = (p) => {
         if (user && user.loggedIn) {
             setFilter({ ...filters, search: searchState.data })
             getData({ search: searchState.data, page: 1 })
-           
+
         }
     }, [searchState])
 
@@ -78,8 +78,8 @@ const Plans = (p) => {
         let filter = { ...filters, ...p }
         ApiClient.get(shared?.listApi, filter).then(res => {
             if (res.success) {
-                setData(res.data?.data?.map(itm=>{
-                    itm.id=itm._id
+                setData(res.data?.data?.map(itm => {
+                    itm.id = itm._id
                     return itm
                 }))
                 setTotal(res?.data?.total_count)
@@ -94,44 +94,44 @@ const Plans = (p) => {
         getData({ search: '', page: 1 })
     }
 
-    const filter = (p={}) => {
-        setFilter({ ...filters, page: 1,...p })
-        getData({ page: 1,...p })
+    const filter = (p = {}) => {
+        setFilter({ ...filters, page: 1, ...p })
+        getData({ page: 1, ...p })
     }
 
     const reset = () => {
-        let p={
-            status:'',
+        let p = {
+            status: '',
         }
-        setFilter({ ...filters, page: 1,...p })
-        getData({ page: 1,...p })
+        setFilter({ ...filters, page: 1, ...p })
+        getData({ page: 1, ...p })
     }
-    
+
 
     const deleteItem = (id) => {
         Swal.fire({
             title: "Are you sure?",
-            text:`Do you want to delete this`,
+            text: `Do you want to delete this`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 loader(true)
-                ApiClient.delete(shared?.deleteApi, {id: id ,model:"subscriptionplan"}).then(res => {
-                            if (res.success) {
-                                clear()
-                                toast.success(res.message)
-                            }
-                            loader(false)
-                        })
-            //   Swal.fire({
-            //     icon: "success"
-            //   });
+                ApiClient.delete(shared?.deleteApi, { id: id, model: "subscriptionplan" }).then(res => {
+                    if (res.success) {
+                        clear()
+                        toast.success(res.message)
+                    }
+                    loader(false)
+                })
+                //   Swal.fire({
+                //     icon: "success"
+                //   });
             }
-          });
+        });
     }
 
     const pageChange = (e) => {
@@ -144,13 +144,13 @@ const Plans = (p) => {
         getData({ page: 1 })
     }
 
-    const modalResult=(e)=>{
-        console.log("modalResult",e)
+    const modalResult = (e) => {
+        console.log("modalResult", e)
         modalClosed()
     }
 
     const openModal = (itm) => {
-        let extra=new Date().getTime()
+        let extra = new Date().getTime()
         // setform({...itm,extra})
         document.getElementById("openuserModal").click()
     }
@@ -163,31 +163,31 @@ const Plans = (p) => {
         setFilter({ ...filters, status: e, page: 1 })
         getData({ status: e, page: 1 })
     }
-    
-    const exportCsv = () => {
-        loader(true)
-        ApiClient.get('user/csv').then(res => {
-            if (res.success) {
-                let url = res.path
-                let downloadAnchor = document.getElementById("downloadJS")
-                downloadAnchor.href = url
-                downloadAnchor.click()
-            }
-            loader(false)
-        })
-    }
+
+    // const exportCsv = () => {
+    //     loader(true)
+    //     ApiClient.get('user/csv').then(res => {
+    //         if (res.success) {
+    //             let url = res.path
+    //             let downloadAnchor = document.getElementById("downloadJS")
+    //             downloadAnchor.href = url
+    //             downloadAnchor.click()
+    //         }
+    //         loader(false)
+    //     })
+    // }
 
     const colClick = (col, itm) => {
         if (col.key == 'healthClinicId') {
         }
     }
 
-    const statusChange=(itm)=>{
-        let modal='category'
-        
-        let status='active'
-        if(itm.activeSubscription) return
-        if(itm.status=='active') status='deactive'
+    const statusChange = (itm) => {
+        let modal = 'category'
+
+        let status = 'active'
+        if (itm.activeSubscription) return
+        if (itm.status == 'active') status = 'deactive'
 
         // if(window.confirm(`Do you want to ${status=='active'?'Activate':'Deactivate'} this`)){
         //     loader(true)
@@ -200,108 +200,107 @@ const Plans = (p) => {
         // }
         Swal.fire({
             title: "Are you sure?",
-            text:`Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
+            text: `Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 loader(true)
-                ApiClient.put(shared?.statusApi,{id:itm.id,status,model:"subscriptionplan"}).then(res=>{
-                            if(res.success){
-                                getData()
-                                toast.success(res.message)
-                            }
-                            loader(false)
-                        })
-            //   Swal.fire({
-            
-            //     // text: `Sucessfully ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
-            //     icon: "success"
-            //   });
+                ApiClient.put(shared?.statusApi, { id: itm.id, status, model: "subscriptionplan" }).then(res => {
+                    if (res.success) {
+                        getData()
+                        toast.success(res.message)
+                    }
+                    loader(false)
+                })
+                //   Swal.fire({
+
+                //     // text: `Sucessfully ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
+                //     icon: "success"
+                //   });
             }
-          });
+        });
     }
 
     const view = (id) => {
         let url = `/${shared.url}/detail/${id}`;
         history(url);
-      };
+    };
 
-      const edit = (id,copy) => {
+    const edit = (id, copy) => {
         history(`/${shared.url}/edit/${id}/${copy}`);
-      };
+    };
 
-    const tabChange=(tab)=>{
+    const tabChange = (tab) => {
         setTab(tab)
     }
 
-    const exportfun=async()=>{
-        const token=await localStorage.getItem("token");
-        const req = await axios({
-            method: "get",
-            url: `${environment.api}api/export/plan`,
-            responseType: "blob",
-            body:{token:token}
-          });
-          var blob = new Blob([req.data], {
-            type: req.headers["content-type"],
-          });
-          const link = document.createElement("a");
-          link.href = window.URL.createObjectURL(blob);
-          link.download = `${shared.title}.xlsx`;
-          link.click();
-    }
+    // const exportfun=async()=>{
+    //     const token=await localStorage.getItem("token");
+    //     const req = await axios({
+    //         method: "get",
+    //         url: `${environment.api}api/export/plan`,
+    //         responseType: "blob",
+    //         body:{token:token}
+    //       });
+    //       var blob = new Blob([req.data], {
+    //         type: req.headers["content-type"],
+    //       });
+    //       const link = document.createElement("a");
+    //       link.href = window.URL.createObjectURL(blob);
+    //       link.download = `${shared.title}.xlsx`;
+    //       link.click();
+    // }
 
-    const dragStart = (e, position) => {
-        dragItem.current = position;
-        setDragIndex(position)
-        console.log("dragStart",position)
-    };
+    // const dragStart = (e, position) => {
+    //     dragItem.current = position;
+    //     setDragIndex(position)
+    //     console.log("dragStart",position)
+    // };
 
-    const dragEnter = (e, position) => {
-        dragOverItem.current = position;
-        // setDragIndex(position)
-        setDargEnterIndex(position)
+    // const dragEnter = (e, position) => {
+    //     dragOverItem.current = position;
+    //     setDargEnterIndex(position)
 
-        const copyListItems = [...data];
-        const dragItemContent = copyListItems[dragItem.current];
-        copyListItems.splice(dragItem.current, 1);
-        copyListItems.splice(dragOverItem.current, 0, dragItemContent);
-        dragItems.current=copyListItems
-    };
+    //     const copyListItems = [...data];
+    //     const dragItemContent = copyListItems[dragItem.current];
+    //     copyListItems.splice(dragItem.current, 1);
+    //     copyListItems.splice(dragOverItem.current, 0, dragItemContent);
+    //     dragItems.current=copyListItems
+    // };
 
-    const drop = (e) => {
-        setDargEnterIndex(-1)
-        setDragIndex(-1)
-        const copyListItems = [...data];
-        const dragItemContent = copyListItems[dragItem.current];
-        copyListItems.splice(dragItem.current, 1);
-        copyListItems.splice(dragOverItem.current, 0, dragItemContent);
-        dragItem.current = null;
-        dragOverItem.current = null;
-        setData([...copyListItems]);
-      
-        let odata=copyListItems.map((item,i)=>{
-            return {
-                id:item.id,
-                order:i
-            }
-        })
-        loader(true)
-        ApiClient.put('api/plan/drag/drop',{data:odata}).then(res=>{
-            if(res.success){
-                // toast.success(res.message)
-            }
-            loader(false)
-        })
-    };
+    // const drop = (e) => {
+    //     setDargEnterIndex(-1)
+    //     setDragIndex(-1)
+    //     const copyListItems = [...data];
+    //     const dragItemContent = copyListItems[dragItem.current];
+    //     copyListItems.splice(dragItem.current, 1);
+    //     copyListItems.splice(dragOverItem.current, 0, dragItemContent);
+    //     dragItem.current = null;
+    //     dragOverItem.current = null;
+    //     setData([...copyListItems]);
 
-    const showData=()=>{
-        let value=data
-        if(dragItems && dragItems.current) value=dragItems.current
+    //     let odata=copyListItems.map((item,i)=>{
+    //         return {
+    //             id:item.id,
+    //             order:i
+    //         }
+    //     })
+    //     loader(true)
+    //     ApiClient.put('api/plan/drag/drop',{data:odata}).then(res=>{
+    //         if(res.success){
+    //             // toast.success(res.message)
+    //         }
+    //         loader(false)
+    //     })
+    // };
+
+    const showData = () => {
+        let value = data
+        if (dragItems && dragItems.current) value = dragItems.current
         return value
     }
 
@@ -311,39 +310,39 @@ const Plans = (p) => {
         if (user?.roleDetail?._id == environment.adminRoleId) value = true
         return value
     }
-    
-    const sortClass=(key)=>{
-        let cls='fa-sort'
-        if(filters.key==key && filters.sorder=='asc') cls='fa-sort-up'
-        else  if(filters.key==key && filters.sorder=='desc') cls='fa-sort-down'
-        return 'fa '+cls
-      }
 
-      const sorting=(key)=>{
-        let sorder='asc'
-        if(filters.key==key){
-          if(filters.sorder=='asc'){
-            sorder='desc'
-          }else{
-            sorder='asc'
-          }
+    const sortClass = (key) => {
+        let cls = 'fa-sort'
+        if (filters.key == key && filters.sorder == 'asc') cls = 'fa-sort-up'
+        else if (filters.key == key && filters.sorder == 'desc') cls = 'fa-sort-down'
+        return 'fa ' + cls
+    }
+
+    const sorting = (key) => {
+        let sorder = 'asc'
+        if (filters.key == key) {
+            if (filters.sorder == 'asc') {
+                sorder = 'desc'
+            } else {
+                sorder = 'asc'
+            }
         }
-        
-        let sortBy=`${key} ${sorder}`;
-        setFilter({...filters,sortBy,key,sorder})
-        getData({sortBy,key,sorder})
-      }
+
+        let sortBy = `${key} ${sorder}`;
+        setFilter({ ...filters, sortBy, key, sorder })
+        getData({ sortBy, key, sorder })
+    }
 
 
     return <><Html
-    view={view}
-  
-     sortClass={sortClass}
-     sorting={sorting}
-     currencys={currencys}
-     edit={edit}
-     isAllow={isAllow}
-     filter={filter}
+        view={view}
+
+        sortClass={sortClass}
+        sorting={sorting}
+        currencys={currencys}
+        edit={edit}
+        isAllow={isAllow}
+        filter={filter}
         colClick={colClick}
         tabChange={tabChange}
         tab={tab}
