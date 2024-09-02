@@ -13,6 +13,7 @@ import environment from '../../environment';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { Toast } from 'react-bootstrap';
+import shared from './shared';
 
 const Plans = (p) => {
     let user = useSelector(state => state.user)
@@ -75,13 +76,13 @@ const Plans = (p) => {
     const getData = (p = {}) => {
         setLoader(true)
         let filter = { ...filters, ...p }
-        ApiClient.get('plan/all', filter).then(res => {
+        ApiClient.get(shared?.listApi, filter).then(res => {
             if (res.success) {
                 setData(res.data?.data?.map(itm=>{
                     itm.id=itm._id
                     return itm
                 }))
-                setTotal(res?.data?.total)
+                setTotal(res?.data?.total_count)
             }
             setLoader(false)
         })
@@ -119,7 +120,7 @@ const Plans = (p) => {
           }).then((result) => {
             if (result.isConfirmed) {
                 loader(true)
-                ApiClient.delete('delete?model=subscriptionplan', {id: id }).then(res => {
+                ApiClient.delete(shared?.deleteApi, {id: id ,model:"subscriptionplan"}).then(res => {
                             if (res.success) {
                                 clear()
                                 toast.success(res.message)
@@ -183,6 +184,7 @@ const Plans = (p) => {
 
     const statusChange=(itm)=>{
         let modal='category'
+        
         let status='active'
         if(itm.activeSubscription) return
         if(itm.status=='active') status='deactive'
@@ -207,7 +209,7 @@ const Plans = (p) => {
           }).then((result) => {
             if (result.isConfirmed) {
                 loader(true)
-                ApiClient.put(`change/status?model=subscriptionplan`,{id:itm.id,status}).then(res=>{
+                ApiClient.put(shared?.statusApi,{id:itm.id,status,model:"subscriptionplan"}).then(res=>{
                             if(res.success){
                                 getData()
                                 toast.success(res.message)
@@ -223,13 +225,14 @@ const Plans = (p) => {
           });
     }
 
-    const view=(id)=>{
-        history("/plans/detail/"+id)
-    }
+    const view = (id) => {
+        let url = `/${shared.url}/detail/${id}`;
+        history(url);
+      };
 
-    const edit=(id,copy)=>{
-        history(`/plans/edit/${id}/${copy}`)
-    }
+      const edit = (id,copy) => {
+        history(`/${shared.url}/edit/${id}/${copy}`);
+      };
 
     const tabChange=(tab)=>{
         setTab(tab)
@@ -248,7 +251,7 @@ const Plans = (p) => {
           });
           const link = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);
-          link.download = `Plans.xlsx`;
+          link.download = `${shared.title}.xlsx`;
           link.click();
     }
 
@@ -335,12 +338,12 @@ const Plans = (p) => {
     return <><Html
     view={view}
   
-    sortClass={sortClass}
-    sorting={sorting}
-    currencys={currencys}
-    edit={edit}
-    isAllow={isAllow}
-    filter={filter}
+     sortClass={sortClass}
+     sorting={sorting}
+     currencys={currencys}
+     edit={edit}
+     isAllow={isAllow}
+     filter={filter}
         colClick={colClick}
         tabChange={tabChange}
         tab={tab}
@@ -368,6 +371,8 @@ const Plans = (p) => {
         showData={showData}
         dragEnter={dragEnter}
         drop={drop}
+        setFilter={setFilter}
+        clear={clear}
     />
     </>;
 };

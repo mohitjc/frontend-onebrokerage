@@ -6,6 +6,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import Layout from "../../components/global/layout";
 import { Tooltip } from "antd";
 import { toast } from "react-toastify";
+import shared from "./shared";
 
 const AddEditPlan = () => {
   const [features, setFeatures] = useState([]);
@@ -43,7 +44,7 @@ const AddEditPlan = () => {
     if (id) {
       setIsEditMode(true); // Set edit mode if id exists
       loader(true);
-      ApiClient.get("plan", { id }).then((res) => {
+      ApiClient.get(shared?.detailApi, { id }).then((res) => {
         if (res.success) {
           const value = res.data;
 
@@ -51,23 +52,21 @@ const AddEditPlan = () => {
           setForm({
             name: value.name || "",
             monthlyPrice:
-              value.pricing.find((p) => p.interval_count === 1)?.unit_amount ||
+              value?.pricing?.find((p) => p.interval_count === 1)?.unit_amount ||
               "",
             threeMonthPrice:
-              value.pricing.find((p) => p.interval_count === 3)?.unit_amount ||
+              value?.pricing?.find((p) => p.interval_count === 3)?.unit_amount ||
               "",
             sixMonthPrice:
-              value.pricing.find((p) => p.interval_count === 6)?.unit_amount ||
+              value?.pricing?.find((p) => p.interval_count === 6)?.unit_amount ||
               "",
             yearlyPrice:
-              value.pricing.find((p) => p.interval_count === 12)?.unit_amount ||
+              value?.pricing?.find((p) => p.interval_count === 12)?.unit_amount ||
               "",
           });
 
           // Set selected features
-          const selectedFeatureIds = value.features
-            .filter((feature) => feature.isChecked)
-            .map((feature) => feature.id);
+          const selectedFeatureIds = value?.features?.filter((feature) => feature?.isChecked)?.map((feature) => feature?.id);
 
           setSelectedFeatures(selectedFeatureIds);
         }
@@ -78,7 +77,7 @@ const AddEditPlan = () => {
 
   const handleFeatureChange = (id) => {
     setSelectedFeatures((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+      prev?.includes(id) ? prev?.filter((item) => item !== id) : [...prev, id]
     );
   };
 
@@ -257,8 +256,8 @@ const AddEditPlan = () => {
                     <input
                       className="form-check-input "
                       type="checkbox"
-                      checked={selectedFeatures.includes(category.id)}
-                      onChange={() => handleFeatureChange(category.id)}
+                      checked={selectedFeatures?.includes(category?.id)}
+                      onChange={() => handleFeatureChange(category?.id)}
                     />
                     {category.name}
                   </label>

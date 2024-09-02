@@ -7,6 +7,7 @@ import "./style.scss";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { Tooltip } from "antd";
+import shared from "../shared";
 const RoleDetail = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
@@ -15,7 +16,7 @@ const RoleDetail = () => {
 
   const getDetail = () => {
     loader(true);
-    ApiClient.get(`plan`, { id: id }).then((res) => {
+    ApiClient.get(shared?.detailApi, { id: id }).then((res) => {
       if (res.success) {
         setData(res.data);
       }
