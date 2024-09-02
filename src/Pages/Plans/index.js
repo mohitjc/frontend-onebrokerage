@@ -354,7 +354,7 @@ const Plans = (p) => {
         pageChange={pageChange}
         addCol={addCol}
         deleteItem={deleteItem}
-        exportCsv={exportCsv}
+        // exportCsv={exportCsv}
         uTableCols={uTableCols}
         removeCol={removeCol}
         filters={filters}
@@ -362,14 +362,14 @@ const Plans = (p) => {
         loaging={loaging}
         data={data}
         total={total}
-        dargIndex={dargIndex}
-        dargEnterIndex={dargEnterIndex}
+        // dargIndex={dargIndex}
+        // dargEnterIndex={dargEnterIndex}
         statusChange={statusChange}
-        exportfun={exportfun}
-        dragStart={dragStart}
+        // exportfun={exportfun}
+        // dragStart={dragStart}
         showData={showData}
-        dragEnter={dragEnter}
-        drop={drop}
+        // dragEnter={dragEnter}
+        // drop={drop}
         setFilter={setFilter}
         clear={clear}
     />
