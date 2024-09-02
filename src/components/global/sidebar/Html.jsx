@@ -40,7 +40,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
         className={` pt-[60px] mx-[10px] h-full pb-4  ${isOpen && styles.sm_sidebar}`}
         component="siderbar"
       >
-       <div className="px-[8px]  p-4 rounded-lg  bg-[#494f9f17] h-full border border-[#474e9c33]">
+       <div className="px-[8px] pt-12  p-4 rounded-lg  bg-[#494f9f17] h-full border border-[#474e9c33]">
        {/* <h6
           className={`${
             isOpen ? "py-[20px] text-center" : "pb-[20px]"
