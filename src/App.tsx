@@ -75,7 +75,7 @@ function App() {
     { url: "/transaction/detail/:id", path: "Transaction/Detail" },
     { url: "/trucks", path: "Truck" },
     // { url: "/trucks/edit/:id", path: "Truck/AddEdit" },
-    { url: "/trucks/add", path: "Truck/AddTruck/html" },
+    { url: "/trucks/add", path: "Truck/AddTruck" },
     { url: "/trucks/detail/:id", path: "Truck/View" },
   ];
 

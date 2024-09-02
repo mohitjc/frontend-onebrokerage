@@ -14,6 +14,7 @@ const Html = ({
   back,
   detail,
 }) => {
+  console.log(setform,"setform")
 //   const user = useSelector((state) => state.user);
   const [boards, setBoards] = useState([]);
   const [data, setdata] = useState([]);
@@ -21,7 +22,7 @@ const Html = ({
   let [Truck, setTrucks] = useState([{ truck_number: '', vin_number: '' }]);
   const [num, setnum] = useState(1);
   const AddTag = () => {
-    
+
     Truck.push({
       truck_number: '',
       vin_number: '',

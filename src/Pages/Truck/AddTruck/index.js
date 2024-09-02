@@ -1,14 +1,14 @@
-import React, { useState, useEffect,useParams } from "react";
+import React, { useState, useEffect } from "react";
 import ApiClient from "../../../methods/api/apiClient";
 import loader from "../../../methods/loader";
 import methodModel from "../../../methods/methods";
-import Html from "../html";
+import Html from "./html";
 import environment from "../../../environment";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom"; 
 
 const AddTruck = () => {
-  const { role, id } = useParams();
+  // const { role, id } = useParams();
   const [images, setImages] = useState({ image: "", logo: "" });
 //   const defaultvalue = userType;
   const [form, setform] = useState({
@@ -57,11 +57,11 @@ const AddTruck = () => {
         toast.success(res.message);
 
         if (localStorage.getItem("newuser", true) && !value?.id) {
-          history.push("/drivers/add");
+          history("/drivers/add");
 
         } else {
 
-          history.push("/trucks");
+          history("/trucks");
         }
 
       }
@@ -78,21 +78,21 @@ const AddTruck = () => {
   const back = () => {
     history.goBack();
   };
-  const GetLoadDetails = () => {
-    ApiClient.get("load", { id }).then((res) => {
-      if (res.success) {
-        setform(res?.data);
-      }
-    });
-  };
-  useEffect(() => {
-    setSubmitted(false);
-    // setState()
-    if (id) {
-      GetLoadDetails();
-    }
+  // const GetLoadDetails = () => {
+  //   ApiClient.get("load", { id }).then((res) => {
+  //     if (res.success) {
+  //       setform(res?.data);
+  //     }
+  //   });
+  // };
+  // useEffect(() => {
+  //   setSubmitted(false);
+  //   // setState()
+  //   if (id) {
+  //     GetLoadDetails();
+  //   }
 
-  }, [id]);
+  // }, [id]);
 
   return (
     <>

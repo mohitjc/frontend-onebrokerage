@@ -42,7 +42,7 @@ const Html = ({
       name: "Truck Number",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.name}</span>;
+        return <span className="capitalize">{row?.truck_number}</span>;
       },
     },
     // {
@@ -80,7 +80,7 @@ const Html = ({
       render: (row) => {
         return (
           <>
-       
+          <span className="">{row?.vin_number}</span>
           </>
         );
       },
@@ -88,29 +88,15 @@ const Html = ({
     {
       key: "created_At",
       name: "Date Created",
-      render: (itm) => {
+      render: (row) => {
         return (
-       <></>
+       <> <span className="">{row?.createdAt}</span></>
         );
       },
     },
   ];
 
-  /*  const getGroups = () => {
-    let f = {
-      page: 1,
-      count: 10,
-    };
-    ApiClient.get("api/group/list", f).then((res) => {
-      if (res.success) {
-        setGroup(res.data);
-      }
-    });
-  };
- */
-  //   useEffect(() => {
-  //       getGroups()
-  //   }, [])
+ 
 
   return (
     <Layout>
@@ -205,39 +191,6 @@ const Html = ({
             </button>
           </form>
 
-          <div className="flex gap-2 ml-auto">
-            <SelectDropdown
-              id="statusDropdown"
-              displayValue="name"
-              placeholder="All Status"
-              intialValue={filters?.status}
-              result={(e) => {
-                changestatus(e.value);
-              }}
-              options={statusModel?.list}
-            />
-            {/* <SelectDropdown
-                            id="statusDropdown"
-                            displayValue="name"
-                            placeholder='All Groups'
-                            intialValue={filters.groupId}
-                            theme="search"
-                            result={e => filter({ groupId: e.value })}
-                            options={groups}
-                        /> */}
-            {filters?.status || filters?.groupId ? (
-              <>
-                <button
-                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
-                  onClick={() => clear()}
-                >
-                  Reset
-                </button>
-              </>
-            ) : (
-              <></>
-            )}
-          </div>
         </div>
 
         {!loaging ? (
