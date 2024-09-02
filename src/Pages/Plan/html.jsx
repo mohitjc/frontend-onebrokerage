@@ -61,15 +61,7 @@ const Html = ({
                     </span>
                   );
                 })}
-              {/* <SelectDropdown
-                isSingle={true}
-                id="statusDropdown"
-                displayValue="currency"
-                placeholder="Select Currency"
-                intialValue={currencyiso}
-                result={e => setcurrencyiso(e.value)}
-                options={appliedcurrency}
-              /> */}
+
             </span>
           )}
         </p>

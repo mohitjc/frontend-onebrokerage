@@ -2,17 +2,15 @@ import React from "react";
 import Layout from "../../components/global/layout";
 import Pagination from "react-pagination-js";
 // import "./style.scss";
-import statusModel from "../../models/status.model";
-import methodModel from "../../methods/methods";
-import { Tooltip } from "antd";
-import { PiEyeLight, PiEyesLight, PiFileCsv } from "react-icons/pi";
+import Table from "../../components/Table";
 import Select from "react-select";
-
+import shared from "./shared";
+import { Tooltip } from "antd";
+import { PiEyeLight } from "react-icons/pi";
 const Html = ({
   sortClass,
   sorting,
-  tab,
-  edit,
+  isAllow,
   reset,
   view,
   ChangeStatus,
@@ -25,8 +23,76 @@ const Html = ({
   data,
   total,
   statusOptions,
-  showData,
+  count
 }) => {
+  const columns = [
+    {
+      key: "transaction_id",
+      name: "Transaction Id",
+      // sort: true,
+      render: (row) => {
+        return <span className="capitalize" onClick={(e) => view(row.id)}>{row?.payment_intent_id}</span>;
+      },
+    },
+    {
+      key: "paln name",
+      name: "Plan Name",
+      sort: true,
+      render: (row) => {
+        return <span className="capitalize">{row?.subscription_plan_name}</span>;
+      },
+    },
+    {
+      key: "user name",
+      name: "Carrier Name",
+      sort: true,
+      render: (row) => {
+        return <span className="capitalize">{row?.user_id_name}</span>;
+      },
+    },
+    {
+      key: "amount",
+      name: "Amount",
+      sort: true,
+      render: (row) => {
+        return <span className="capitalize" >{row?.amount}</span>;
+      },
+    },
+   
+    {
+      key: "transaction_status",
+      name: "Status",
+      render: (row) => {
+        return <span className="capitalize">{row?.transaction_status}</span>;
+      },
+    },
+    {
+      key: "action",
+      name: "Actions",
+      render: (itm) => {
+        return (
+          <>
+            <div className="flex items-center justify-start gap-1.5">
+              {isAllow(`read${shared.check}`) ? (
+                <Tooltip placement="top" title="View">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => view(itm.id)}
+                  >
+                    <PiEyeLight />
+                  </a>
+                </Tooltip>
+              ) : (
+                <></>
+              )}
+             
+          
+            </div>
+          </>
+        );
+      },
+    },
+  ];
 
   return (
     <Layout>
@@ -57,7 +123,32 @@ const Html = ({
               <></>
             )}
           </div>
-        {tab == "grid" ? (
+          {!loaging ? (
+          <>
+           <div className="">
+          <Table
+              className=""
+              data={data}
+              columns={columns}
+              page={filters.page}
+              count={filters.count}
+              filters={filters}
+              total={total}
+              result={(e) => {
+                if (e.event == "page") pageChange(e.value);
+                if (e.event == "sort") {
+                  sorting(e.value);
+                  sortClass(e.value);
+                }
+                if (e.event == "count") count(e.value);
+              }}
+            />
+          </div>
+          </>
+        ) : (
+          <></>
+        )}
+        {/* {tab == "grid" ? (
           <></>
         ) : (
           <>
@@ -69,12 +160,10 @@ const Html = ({
                       <th
                         scope="col"
                         className="!px-3.5 py-3 capitalize cursor-pointer text-left"
-                        // onClick={(e) => sorting("name")}
+                      
                       >
                         Transaction_id{" "}
-                        {/* <span className="ml-2">
-                          <HiOutlineArrowDown className="shrink-0 inline text-sm" />
-                        </span> */}
+                      
                       </th>
                       <th
                         scope="col"
@@ -94,12 +183,7 @@ const Html = ({
                       >
                         Amount
                       </th>
-                      {/* <th
-                        scope="col"
-                        className="!px-3.5 py-3 capitalize cursor-pointer text-left"
-                      >
-                        Created At
-                      </th> */}
+                    
                       <th
                         scope="col"
                         className="!px-3.5 py-3 capitalize cursor-pointer text-left"
@@ -153,7 +237,7 @@ const Html = ({
                               </div>
                             </td>
 
-                            {/* dropdown */}
+                         
                             <td className="!text-typo !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
                               <div className="flex items-center justify-start gap-1.5">
                              
@@ -167,7 +251,7 @@ const Html = ({
                                 </Tooltip>
                               </div>
                             </td>
-                            {/* end */}
+                            
                           </tr>
                         );
                       })}
@@ -178,7 +262,7 @@ const Html = ({
 
             </div>
           </>
-        )}
+        )} */}
         {!loaging && total == 0 ? (
           <div className="py-3 text-center">No Data</div>
         ) : (
