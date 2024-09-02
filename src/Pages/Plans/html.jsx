@@ -110,7 +110,9 @@ const Html = ({
             )}
           </div>
         </div>
-        {tab == "grid" ? (
+        
+
+        {/* {tab == "grid" ? (
           <></>
         ) : (
           <>
@@ -183,7 +185,7 @@ const Html = ({
                               </div>
                             </td>
 
-                            {/* dropdown */}
+                 
                             <td className="!text-typo !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
                               <div className="flex items-center justify-start gap-1.5">
                                 <Tooltip placement="top" title="Edit">
@@ -219,7 +221,7 @@ const Html = ({
                                 </Tooltip>
                               </div>
                             </td>
-                            {/* end */}
+                   
                           </tr>
                         );
                       })}
@@ -230,7 +232,8 @@ const Html = ({
 
             </div>
           </>
-        )}
+        )} */}
+
         {!loaging && total == 0 ? (
           <div className="py-3 text-center">No Data</div>
         ) : (
