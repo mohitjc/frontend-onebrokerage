@@ -299,6 +299,29 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
             </Disclosure>
           </li>
 
+          <li>
+            <Tooltip placement="right" title="Features">
+              <NavLink
+                to="/transaction"
+                // className={(isActive) =>
+                //   "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                //   (isActive && " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                // }
+                className={(isActive) =>
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  (location?.pathname == "/transaction" &&
+                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                }
+              >
+                <MdOutlineFeaturedPlayList  className="text-black shrink-0 text-lg group-hover:text-white "/>
+
+                <span className="text-inherit leading-none sidebar_text">
+                Transactions
+                </span>
+              </NavLink>
+            </Tooltip>
+          </li>
+
           {/* <li id="/reseller">
             <Tooltip placement="right" title="Resellers / Agents">
               <NavLink

@@ -71,6 +71,8 @@ function App() {
     { url: "/carriersrequest", path: "Carrier/CarriersRequest" },
     { url: "/carrierstaff", path: "Carrier/CarrierStaff" },
     { url: "/approvedSubCarrier", path: "Carrier/ApprovedSubCarrier" },
+    { url: "/transaction", path: "Transaction" },
+    { url: "/transaction/detail/:id", path: "Transaction/Detail" },
   ];
 
   sessionStorage.clear();

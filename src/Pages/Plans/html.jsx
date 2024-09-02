@@ -4,10 +4,7 @@ import Pagination from "react-pagination-js";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import SelectDropdown from "../../components/common/SelectDropdown";
-import planTypeModel from "../../models/planType.model";
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import methodModel from "../../methods/methods";
 import { Tooltip } from "antd";
 import { PiEyeLight, PiEyesLight, PiFileCsv } from "react-icons/pi";
 import { HiOutlineArrowDown } from "react-icons/hi";
@@ -56,7 +53,7 @@ const Html = ({
 }) => {
   return (
     <Layout>
-         <div className="flex flex-wrap justify-between items-center gap-y-4">
+      <div className="flex flex-wrap justify-between items-center gap-y-4">
         <div>
           <h3 className="text-2xl font-semibold text-[#111827]">Plans</h3>
           <p class="text-sm font-normal text-[#75757A]">
@@ -78,22 +75,22 @@ const Html = ({
           {/* : <></>} */}
 
           <div className="flex justify-end items-center gap-2">
-         
+
           </div>
         </div>
       </div>
 
       <div className="shadow-box w-full bg-white rounded-lg mt-6">
 
-      <div className="flex p-4 items-center flex-wrap">
-          
+        <div className="flex p-4 items-center flex-wrap">
+
 
           <div className="flex gap-2 ml-auto">
-          <SelectDropdown
+            <SelectDropdown
               id="statusDropdown"
               displayValue="name"
               placeholder="All Status"
-              intialValue={filters.status}
+              intialValue={filters?.status}
               result={(e) => {
                 ChangeStatus(e.value);
               }}
@@ -156,7 +153,7 @@ const Html = ({
                               className="!text-typo !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]"
                               onClick={(e) => view(itm.id)}
                             >
-                              {itm.name}
+                              {methodModel.capitalizeFirstLetter(itm.name)}
                             </td>
                             <td className="!text-typo !border-l-0 cursor-pointer !px-3.5 text-sm font-normal !py-4 !border text-left border-[#EAECF0]">
                               {" "}
@@ -173,11 +170,10 @@ const Html = ({
                                   }
                                 >
                                   <span
-                                    className={`text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] w-32  text-white !rounded capitalize ${
-                                      itm.status === "active"
+                                    className={`text-sm !px-3 h-[30px] flex items-center justify-center border border-[#EBEBEB] w-32  text-white !rounded capitalize ${itm.status === "active"
                                         ? "bg-green-400"
                                         : "bg-red-400 "
-                                    }`}
+                                      }`}
                                   >
                                     {itm.status == "deactive"
                                       ? "Inactive"
@@ -230,6 +226,8 @@ const Html = ({
                   </tbody>
                 </table>
               </div>
+         
+
             </div>
           </>
         )}

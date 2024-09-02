@@ -44,8 +44,7 @@ const Features = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters };
-
+    let filter = { ...filters,...p};
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
@@ -127,6 +126,7 @@ const Features = () => {
     getData({ ...filters, count: e });
   };
   const changestatus = (e) => {
+    // console.log(e,"==============")
     setFilter({ ...filters, status: e, page: 1 });
     getData({ status: e, page: 1 });
   };
@@ -149,7 +149,7 @@ const Features = () => {
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to ${
-        status == "active" ? "Activate" : "Deactivate"
+        status == "active" ? "active" : "inactive"
       } this user?`,
       icon: "warning",
       showCancelButton: true,
