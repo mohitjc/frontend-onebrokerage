@@ -73,6 +73,10 @@ function App() {
     { url: "/approvedSubCarrier", path: "Carrier/ApprovedSubCarrier" },
     { url: "/transaction", path: "Transaction" },
     { url: "/transaction/detail/:id", path: "Transaction/Detail" },
+    { url: "/trucks", path: "Truck" },
+    // { url: "/trucks/edit/:id", path: "Truck/AddEdit" },
+    { url: "/trucks/add", path: "Truck/AddTruck/html" },
+    { url: "/trucks/detail/:id", path: "Truck/View" },
   ];
 
   sessionStorage.clear();

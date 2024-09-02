@@ -10,7 +10,7 @@ import shared from "./shared";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-const Features = () => {
+const Transaction = () => {
   const user = useSelector((state) => state.user);
   const searchState = { data: "" };
   const [filters, setFilter] = useState({ page: 1, count: 10, search: "" });
@@ -193,4 +193,4 @@ const Features = () => {
   );
 };
 
-export default Features;
+export default Transaction;
