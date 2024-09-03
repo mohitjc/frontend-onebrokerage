@@ -34,7 +34,7 @@ const Profile = () => {
   return (
     <Layout>
       <div className="wrapper_section">
-        <div className="flex items-center  justify-between">
+        <div className="flex md:items-center items-start  justify-between md:flex-row flex-col">
           <h3 className=" text-lg lg:text-2xl font-semibold text-[#111827]">
             Profile Information
           </h3>
@@ -58,17 +58,17 @@ const Profile = () => {
           </Link>
         </div>
 
-        <div className="inner_part sm:mt-3 md:mt-8 p-6 shadow-box overflow-hidden rounded-lg bg-white  border ">
+        <div className=" sm:mt-3 md:mt-8 mt-8">
           <div className="grid items-center grid-cols-12 gap-4 mb-5">
-            <div className="col-span-12 md:col-span-7 lg:col-span-7">
-              <div className="flex items-center gap-4 shrink-0">
+            <div className="col-span-12  p-6 shadow-box overflow-hidden rounded-lg bg-white  border inner_part">
+              <div className="flex md:items-center items-start gap-4 shrink-0 flex-col md:flex-row">
                 <div className="">
                   <img
                     src={methodModel.userImg(data && data.image)}
                     className="h-36 w-36 rounded-full object-cover mx-auto"
                   />
                 </div>
-                <div className="flex flex-col gap-y-4 ml-4 lg:border-l border-dashed border-gray-400 pl-5">
+                <div className="flex flex-col gap-y-4 md:ml-4 ml-0 lg:border-l border-dashed border-gray-400 md:pl-5 pl-0">
                   <div className="">
                     <label className="text-black">Name</label>
                     <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">

@@ -59,7 +59,7 @@ const RoleDetail = () => {
             <div className="col-span-12">
               <div className="shadow-box overflow-hidden rounded-lg bg-white gap-4 shrink-0">
                 <div className="grid grid-cols-12 p-4">
-                  <div className="col-span-6 flex flex-col mb-4">
+                  <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">
                       Name:
                     </label>
@@ -67,7 +67,7 @@ const RoleDetail = () => {
                       {data && data.name}
                     </p>
                   </div>
-                  <div className="col-span-6 flex flex-col mb-4">
+                  <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">
                       Created At:
                     </label>
@@ -76,7 +76,7 @@ const RoleDetail = () => {
                     </p>
                   </div>
 
-                  <div className="col-span-6 flex flex-col mb-4">
+                  <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">
                       Features:
                     </label>

@@ -58,7 +58,7 @@ const RoleDetail = () => {
             <div className="col-span-12">
               <div className="shadow-box overflow-hidden rounded-lg bg-white gap-4 shrink-0">
                 <div className="grid grid-cols-12 p-4">
-                <div className="col-span-6 flex flex-col mb-4">
+                <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider mb-1">
                       Transaction Id:
                     </label>
@@ -66,7 +66,7 @@ const RoleDetail = () => {
                       {data && data.payment_intent_id}
                     </p>
                   </div>
-                  <div className="col-span-6 flex flex-col mb-4">
+                  <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider mb-1">
                       Plan Name:
                     </label>
@@ -74,7 +74,7 @@ const RoleDetail = () => {
                       {data && data.plan_id?.name}
                     </p>
                   </div>
-                  <div className="col-span-6 flex flex-col mb-4">
+                  <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider mb-1">
                       Carrier Name:
                     </label>
@@ -82,7 +82,7 @@ const RoleDetail = () => {
                       {data && data.user_id?.fullName}
                     </p>
                   </div>
-                  <div className="col-span-6 flex flex-col mb-4">
+                  <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider mb-1">
                       Amount :
                     </label>
@@ -90,7 +90,7 @@ const RoleDetail = () => {
                       {data && data.amount}
                     </p>
                   </div>
-                  <div className="col-span-6 flex flex-col mb-4">
+                  <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider mb-1">
                       Created At:
                     </label>
@@ -98,7 +98,7 @@ const RoleDetail = () => {
                       {data && moment(data.createdAt).format("DD-MM-YYYY")}
                     </p>
                   </div>
-                  <div className="col-span-6 flex flex-col mb-4">
+                  <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider mb-1">
                       Status :
                     </label>
