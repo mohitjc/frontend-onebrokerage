@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import Layout from '../../../components/global/layout';
+import React, { useEffect, useState } from "react";
+import Layout from "../../../components/global/layout";
 import { Link } from "react-router-dom";
 import { Tooltip } from "antd";
-
 
 const Html = ({
   role,
@@ -14,85 +13,99 @@ const Html = ({
   back,
   detail,
 }) => {
-  console.log(setform,"setform")
-//   const user = useSelector((state) => state.user);
+  console.log(setform, "setform");
+  //   const user = useSelector((state) => state.user);
   const [boards, setBoards] = useState([]);
   const [data, setdata] = useState([]);
 
-  let [Truck, setTrucks] = useState([{ truck_number: '', vin_number: '' }]);
+  let [Truck, setTrucks] = useState([{ truck_number: "", vin_number: "" }]);
   const [num, setnum] = useState(1);
   const AddTag = () => {
-
     Truck.push({
-      truck_number: '',
-      vin_number: '',
+      truck_number: "",
+      vin_number: "",
     });
     setTrucks([...Truck]);
   };
 
   const removetag = (index) => {
     setTrucks([...Truck.filter((itm, i) => i != index)]);
-    setform({  ...form,
-      truck_data: [...Truck.filter((itm, i) => i != index)]})
-     setnum(num - 1);
+    setform({ ...form, truck_data: [...Truck.filter((itm, i) => i != index)] });
+    setnum(num - 1);
   };
 
   const updatetag = (index, key, value) => {
     let arr = Truck;
     arr[index][key] = value;
     setTrucks([...arr]);
-   setform({ ...form,
-   truck_data: [...arr]})
-  setnum(arr.length);
+    setform({ ...form, truck_data: [...arr] });
+    setnum(arr.length);
   };
-
 
   return (
     <>
       <Layout title2={` Trucks`}>
+        <div className="flex items-center mb-8">
+          <Tooltip placement="top" title="Back">
+            <Link
+              to="/trucks"
+              className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3 bg-[#494f9f] text-white hover:text-black"
+            >
+              <i className="fa fa-angle-left text-lg"></i>
+            </Link>
+          </Tooltip>
+          <div>
+            <h3 className="text-lg lg:text-2xl font-semibold text-[#111827]">
+              {form && form.id ? "Edit" : "Add"} Truck
+            </h3>
+            <p className="text-sm font-normal text-[#75757A]">
+              Here you can see all about your Plan
+            </p>
+          </div>
+        </div>
+        <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-10 ">
+          <div className="bg-[#1245940a] p-4 border-b flex md:items-center justify-between flex-col md:flex-row items-start">
+            <h3 className="text-[20px] font-[500]">Truck Details</h3>
+            <button
+              type="button"
+              className="btn btn-primary light_white "
+              onClick={AddTag}
+            >
+              <i class="fa fa-plus me-2" aria-hidden="true"></i>Add Truck
+            </button>
+          </div>
+
+            {/* <div className="grid grid-cols-12 gap-4 p-4">
+              <div className="col-span-6">
+                <label className="text-[14px] text-[#0000009c] tracking-wider mb-1 block">
+                Truck Number<span className="star">*</span>
+                </label>
+                <input
+                  type="text"
+                  className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3"
+              
+                  required
+                />
+              </div>
+            
+            
+            </div> */}
+
+        </div>
         <div className="mainareas">
           <form onSubmit={handleSubmit}>
             <div className="pprofile1 add-truck-sect  new-edit">
               <div className="row">
-                <div className="col-lg-12 mx-auto">
-                  <div className=" title-head px-0 mx-0">
-                    <div className="heddings d-flex justify-content-between align-items-center">
-                      <h4 className="viewUsers mb-0 user-back ">
-                        {' '}
-                        <Link to="/trucks" className="">
-                          <i
-                            className="fa fa-arrow-left text-black me-2"
-                            title="Back"
-                            aria-hidden="true"
-                          ></i>
-                        </Link>
-                        {form && form.id ? 'Edit' : 'Add'} Truck
-                      </h4>
-                    </div>
-                    <div className="">
-                      <button
-                        type="button"
-                        className="btn btn-primary light_white "
-                        onClick={AddTag}
-                      >
-                        <i class="fa fa-plus me-2" aria-hidden="true"></i>Add
-                        Truck
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                {/* <div className="col-lg-12 mx-auto">
-                  <div class=" white-head mb-3">
-                    <h5 class="profilelist">Basic Information</h5>
-                  </div>
-                </div> */}
-              
-                    {Truck.map((itm, i) => {
-                      return (
-                        <div className={`${Truck.length==1?"col-lg-12":"col-lg-6"} `}>
-                        <div class=" white-bg-main mb-4">
+               
+
+                {Truck.map((itm, i) => {
+                  return (
+                    <div
+                      className={`${
+                        Truck.length == 1 ? "col-lg-12" : "col-lg-6"
+                      } `}
+                    >
+                      <div class=" white-bg-main mb-4">
                         <div
                           className="row"
                           onChange={(e) => {
@@ -107,12 +120,11 @@ const Html = ({
                               <span className="text-danger">*</span>
                             </label>
                             <div className="input-new-design">
-                          
                               <input
                                 type="text"
                                 pattern="^[a-zA-Z0-9]+$"
                                 onKeyPress={(e) => {
-                                  var regex = new RegExp('^[a-zA-Z0-9]+$');
+                                  var regex = new RegExp("^[a-zA-Z0-9]+$");
                                   var key = String.fromCharCode(
                                     !e.charCode ? e.which : e.charCode
                                   );
@@ -125,7 +137,7 @@ const Html = ({
                                 value={itm?.truck_number}
                                 required
                                 onChange={(e) =>
-                                  updatetag(i, 'truck_number', e.target.value)
+                                  updatetag(i, "truck_number", e.target.value)
                                 }
                               />
                             </div>
@@ -143,13 +155,12 @@ const Html = ({
                                 <label>VIN Number</label>
                                 <span className="text-danger">*</span>
                                 <div className="input-new-design">
-                          
                                   <input
                                     type="text"
                                     className="form-control"
                                     pattern="^[a-zA-Z0-9]+$"
                                     onKeyPress={(e) => {
-                                      var regex = new RegExp('^[a-zA-Z0-9]+$');
+                                      var regex = new RegExp("^[a-zA-Z0-9]+$");
                                       var key = String.fromCharCode(
                                         !e.charCode ? e.which : e.charCode
                                       );
@@ -161,7 +172,7 @@ const Html = ({
                                     required
                                     value={itm?.vin_number}
                                     onChange={(e) =>
-                                      updatetag(i, 'vin_number', e.target.value)
+                                      updatetag(i, "vin_number", e.target.value)
                                     }
                                   />
                                 </div>
@@ -190,16 +201,17 @@ const Html = ({
                             )}
                           </div>
                         </div>
-                        </div>
-                </div>
-                      );
-                    })}
-                  
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-
             </div>
             <div className="text-right  mt-2 d-flex justify-content-end">
-              <button type="submit" className="btn btn-primary text-end d-block btn-end-save">
+              <button
+                type="submit"
+                className="btn btn-primary text-end d-block btn-end-save"
+              >
                 Save
               </button>
             </div>

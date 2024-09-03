@@ -224,11 +224,11 @@ input.Searchbar:focus {
     }
   }
 
-  ~div>main.main {
-    width: calc(100% - 66px);
-  }
+  
 }
-
+.min-sidebar ~ div > main.main {
+  width: calc(100% - 68px);
+}
 
 // .headerSearch {
 //   left: 240px;

@@ -55,7 +55,7 @@ const Table = ({
             {/* Table view */}
             {theme === "table" && (
               <div className="relative overflow-x-auto   ">
-                <table className="2xl:w-full xl:w-[1600px] lg:w-[1400px] md:w-[1000px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <table className="2xl:w-full xl:w-[1600px] lg:w-[1600px] md:w-[1400px] w-[1400px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                   <thead className="text-xs text-gray-700 capitalize bg-[#494f9f17] dark:bg-gray-700 dark:text-gray-400">
                     {/* Top header */}
                     {topHead?.length ? (
@@ -63,7 +63,7 @@ const Table = ({
                         {topHead.map((itm, i) => (
                           <th
                             scope="col"
-                            className={`px-6 py-3 text-center ${
+                            className={`px-2 py-3 text-center ${
                               topHead.length - 1 === i
                                 ? ""
                                 : "border-r border-black"
@@ -81,7 +81,7 @@ const Table = ({
                       {columns.map((itm) => (
                         <th
                           scope="col"
-                          className={`px-6 py-3   ${
+                          className={`px-2 py-3   ${
                             itm.sort ? "cursor-pointer" : ""
                           }`}
                           key={itm.key}
@@ -111,7 +111,7 @@ const Table = ({
                         key={itm.id}
                       >
                         {columns.map((citm) => (
-                          <td className={`px-6 py-4 ${citm.className}`} key={citm.key}>
+                          <td className={`px-2 py-4 ${citm.className}`} key={citm.key}>
                             {citm.render(itm) || "--"}
                           </td>
                         ))}

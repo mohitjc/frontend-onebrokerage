@@ -16,6 +16,7 @@ import { RxCrossCircled } from "react-icons/rx";
 import { IoGitPullRequestOutline } from "react-icons/io5";
 import { TbUserShield } from "react-icons/tb";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
+import { LiaTruckSolid } from "react-icons/lia";
 
 import {
   MdOutlineHolidayVillage,
@@ -300,7 +301,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
           </li>
 
           <li>
-            <Tooltip placement="right" title="Transaction">
+            <Tooltip placement="right" title="Trucks">
               <NavLink
                 to="/trucks"
                 // className={(isActive) =>
@@ -313,8 +314,8 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 }
               >
-                <MdOutlineFeaturedPlayList  className="text-black shrink-0 text-lg group-hover:text-white "/>
 
+                <LiaTruckSolid className="text-black shrink-0 text-lg group-hover:text-white " />
                 <span className="text-inherit leading-none sidebar_text">
                 Trucks
                 </span>
@@ -323,7 +324,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
           </li>
 
           <li>
-            <Tooltip placement="right" title="Trucks">
+            <Tooltip placement="right" title="Transaction">
               <NavLink
                 to="/transaction"
                 // className={(isActive) =>
@@ -337,7 +338,6 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 }
               >
                 <MdOutlineFeaturedPlayList  className="text-black shrink-0 text-lg group-hover:text-white "/>
-
                 <span className="text-inherit leading-none sidebar_text">
                 Transactions
                 </span>

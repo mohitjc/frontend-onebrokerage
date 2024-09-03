@@ -30,7 +30,7 @@ const Html = ({
     <nav
       component="header"
       className={`${
-        isOpen ? "min-sidebar w-[calc(100%-80px)]" : "w-[calc(100%-280px)] "
+        isOpen ? "min-sidebar w-[calc(100%-68px)]" : "w-[calc(100%-280px)] "
       } shadow-btn py-1.5 bg-white border-b  fixed transition-[width] duration-300 ml-auto right-0 z-10 flex items-center !px-5
       `}
     >

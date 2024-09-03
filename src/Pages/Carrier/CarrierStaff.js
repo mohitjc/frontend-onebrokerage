@@ -257,7 +257,7 @@ const CarrierStaff= () => {
   return (
     <Layout>
       <div>
-        <div className="flex justify-between	">
+        <div className="flex justify-between lg:flex-row flex-col">
           
           <div>
         <h3 className="text-2xl font-semibold text-[#111827]">

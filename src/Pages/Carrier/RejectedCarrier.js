@@ -255,7 +255,7 @@ const RejectedCarrier = () => {
   return (
     <Layout>
       <div>
-        <div className="flex justify-between	">
+        <div className="flex justify-between lg:flex-row flex-col">
           
           <div>
         <h3 className="text-2xl font-semibold text-[#111827]">
@@ -272,7 +272,7 @@ const RejectedCarrier = () => {
 
           {/* {isAllow(`add${shared.check}`) ? ( */}
           <Link
-            className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+            className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2  w-fit mt-2 lg:mt-0"
             to={`/${shared.url}/add`}
           >
             <FiPlus className="text-xl text-white" /> Add {shared.addTitle}

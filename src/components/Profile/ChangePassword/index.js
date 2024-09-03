@@ -52,7 +52,7 @@ const ChangePassword = (p) => {
         dispatch(logout());
         localStorage.removeItem("token");
         localStorage.removeItem("persist:admin-app");
-        toast.success(res.message)
+        toast.success(res.message);
         history("/login");
       }
       loader(false);
@@ -62,19 +62,16 @@ const ChangePassword = (p) => {
   return (
     <>
       <div className="wrapper_section ">
-        
-       
         <div className="input_form  grid grid-cols-1 mt-10 ">
-       
-          <div className="max-w-3xl  mx-auto border  rounded-lg bg-white">
-          <div className="bg-[#1245940a] p-4 border-b ">
+          <div className="md:max-w-3xl max-w-full mx-auto border  rounded-lg bg-white">
+            <div className="bg-[#1245940a] p-4 border-b ">
               <h3 className="text-[20px] font-[500]">Change Password</h3>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className="items-center p-6 ">
-                <div className="">
-                  <div className="flex flex-col md:flex-row  items-center gap-4 mb-6">
-                    <label className="text-typo text-base font-medium w-96">
+              <div className="">
+                <div className="m-6">
+                  <div className="flex flex-col md:flex-row md:items-center items-start gap-4 mb-6">
+                    <label className="text-typo text-base font-medium md:w-96 w-full">
                       Current Password<span className="start">*</span>
                     </label>
                     <div className="w-full">
@@ -119,8 +116,8 @@ const ChangePassword = (p) => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col md:flex-row  items-center gap-4 mb-6 ">
-                    <label className="text-typo text-base font-medium w-96">
+                  <div className="flex flex-col md:flex-row md:items-center items-start gap-4 mb-6 ">
+                    <label className="text-typo text-base font-medium md:w-96 w-full">
                       New Password<span className="start">*</span>
                     </label>
 
@@ -161,8 +158,8 @@ const ChangePassword = (p) => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col md:flex-row  items-center gap-4 mb-6">
-                    <label className="text-typo text-base font-medium w-96">
+                  <div className="flex flex-col md:flex-row md:items-center items-start gap-4 mb-6">
+                    <label className="text-typo text-base font-medium md:w-96 w-full">
                       Confirm Password<span className="start">*</span>
                     </label>
 
