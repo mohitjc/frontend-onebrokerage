@@ -13,6 +13,7 @@ import loader from "../../methods/loader";
 import { toast } from "react-toastify";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { Link } from "react-router-dom";
+import { IoIosRefresh } from "react-icons/io";
 import SelectDropdown from "../../components/common/SelectDropdown";
 import statusModel from "../../models/status.model";
 const RejectedCarrier = () => {
@@ -306,9 +307,10 @@ const RejectedCarrier = () => {
           {filters.status || filters.groupId ? (
             <>
               <button
-                className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
+                className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit"
                 onClick={() => clear()}
               >
+                        <IoIosRefresh class="me-2"/>
                 Reset
               </button>
             </>

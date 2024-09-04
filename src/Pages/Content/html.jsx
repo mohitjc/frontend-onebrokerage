@@ -8,6 +8,7 @@ import statusModel from "../../models/status.model";
 import shared from "./shared";
 import { useSelector } from "react-redux";
 import { PiEyeLight } from "react-icons/pi";
+import { IoIosRefresh } from "react-icons/io";
 import { LiaEdit } from "react-icons/lia";
 const Html = ({
   sorting,
@@ -233,11 +234,15 @@ const Html = ({
                             options={groups}
                         /> */}
             {filters.status || filters.groupId ? (
-              <>
+                <>
                 <button
-                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
+                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
                   onClick={() => clear()}
                 >
+
+            <IoIosRefresh class="me-2"/>
+
+
                   Reset
                 </button>
               </>

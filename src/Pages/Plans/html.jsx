@@ -11,6 +11,7 @@ import { HiOutlineArrowDown } from "react-icons/hi";
 import { FiEdit3, FiPlus } from "react-icons/fi";
 import Table from "../../components/Table";
 import statusModel from "../../models/status.model";
+import { IoIosRefresh } from "react-icons/io";
 import shared from "./shared";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 const Html = ({
@@ -232,14 +233,18 @@ const Html = ({
               options={statusModel.list}
             />
             {filters.status ? (
-              <>
-                <button
-                  className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-                  onClick={reset}
-                >
-                  Reset
-                </button>
-              </>
+             <>
+             <button
+               className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
+               onClick={() => clear()}
+             >
+
+         <IoIosRefresh class="me-2"/>
+
+
+               Reset
+             </button>
+           </>
             ) : (
               <></>
             )}

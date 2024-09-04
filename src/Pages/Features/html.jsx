@@ -11,6 +11,7 @@ import statusModel from "../../models/status.model";
 import datepipeModel from "../../models/datepipemodel";
 import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
+import { IoIosRefresh } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { PiEyeLight } from "react-icons/pi";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
@@ -277,13 +278,17 @@ const Html = ({
                         /> */}
             {filters.status || filters.groupId ? (
               <>
-                <button
-                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
-                  onClick={() => clear()}
-                >
-                  Reset
-                </button>
-              </>
+              <button
+                className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
+                onClick={() => clear()}
+              >
+
+          <IoIosRefresh class="me-2"/>
+
+
+                Reset
+              </button>
+            </>
             ) : (
               <></>
             )}

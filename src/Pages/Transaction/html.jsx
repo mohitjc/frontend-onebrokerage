@@ -5,6 +5,7 @@ import Pagination from "react-pagination-js";
 import Table from "../../components/Table";
 import Select from "react-select";
 import shared from "./shared";
+import { IoIosRefresh } from "react-icons/io";
 import { Tooltip } from "antd";
 import { PiEyeLight } from "react-icons/pi";
 const Html = ({
@@ -184,11 +185,12 @@ const Html = ({
             {filters.transaction_status ? (
               <>
                 <button
-                  className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+                  className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2 flex items-center w-fit"
                   onClick={(e) => {
                     reset("transaction_status");
                   }}
                 >
+                  <IoIosRefresh class="me-2"/>
                   Reset
                 </button>
               </>

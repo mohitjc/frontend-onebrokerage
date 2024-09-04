@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { PiEyeLight } from "react-icons/pi";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import moment from "moment";
+import { IoIosRefresh } from "react-icons/io";
 import datepipeModel from "../../models/datepipemodel";
 import pipeModel from "../../models/pipeModel";
 const Html = ({
@@ -269,14 +270,18 @@ const Html = ({
               options={shared.status}
             />
             {filters.status ? (
-              <>
-                <button
-                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
-                  onClick={() => clear()}
-                >
-                  Reset
-                </button>
-              </>
+               <>
+               <button
+                 className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
+                 onClick={() => clear()}
+               >
+
+           <IoIosRefresh class="me-2"/>
+
+
+                 Reset
+               </button>
+             </>
             ) : (
               <></>
             )}

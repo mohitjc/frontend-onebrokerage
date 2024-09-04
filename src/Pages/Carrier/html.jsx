@@ -13,6 +13,7 @@ import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
 import { PiEyeLight } from "react-icons/pi";
+import { IoIosRefresh } from "react-icons/io";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { LuImport } from "react-icons/lu";
 import methodModel from "../../methods/methods";
@@ -320,14 +321,18 @@ const Html = ({
                             options={groups}
                         /> */}
             {filters.status || filters.groupId ? (
-              <>
-                <button
-                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
-                  onClick={() => clear()}
-                >
-                  Reset
-                </button>
-              </>
+               <>
+               <button
+                 className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
+                 onClick={() => clear()}
+               >
+
+           <IoIosRefresh class="me-2"/>
+
+
+                 Reset
+               </button>
+             </>
             ) : (
               <></>
             )}

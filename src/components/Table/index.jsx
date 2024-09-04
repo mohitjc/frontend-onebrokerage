@@ -160,7 +160,10 @@ const Table = ({
             )}
           </>
         ) : (
-          <div className="p-4 text-center">{nodata}</div>
+          <div className="p-4 text-center ">
+            <img src = "assets/img/no-data.jpg" alt="" className="w-[150px] mx-auto" />
+            {nodata}
+            </div>
         )}
       </div>
     </>

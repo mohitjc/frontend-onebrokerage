@@ -9,6 +9,7 @@ import Table from "../../components/Table";
 import SelectDropdown from "../../components/common/SelectDropdown";
 import statusModel from "../../models/status.model";
 import datepipeModel from "../../models/datepipemodel";
+import { IoIosRefresh } from "react-icons/io";
 import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
 import { useSelector } from "react-redux";
@@ -263,15 +264,18 @@ const Html = ({
                             result={e => filter({ groupId: e.value })}
                             options={groups}
                         /> */}
-            {filters.status || filters.groupId ? (
-              <>
-                <button
-                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
-                  onClick={() => clear()}
-                >
-                  Reset
-                </button>
-              </>
+             <>
+               <button
+                 className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
+                 onClick={() => clear()}
+               >
+
+           <IoIosRefresh class="me-2"/>
+
+
+                 Reset
+               </button>
+             </>
             ) : (
               <></>
             )}

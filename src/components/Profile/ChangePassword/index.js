@@ -63,7 +63,7 @@ const ChangePassword = (p) => {
     <>
       <div className="wrapper_section ">
         <div className="input_form  grid grid-cols-1 mt-10 ">
-          <div className="md:max-w-3xl max-w-full mx-auto border  rounded-lg bg-white">
+          <div className="md:max-w-3xl max-w-full w-full mx-auto border  rounded-lg bg-white">
             <div className="bg-[#1245940a] p-4 border-b ">
               <h3 className="text-[20px] font-[500]">Change Password</h3>
             </div>

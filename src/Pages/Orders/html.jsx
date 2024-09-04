@@ -351,9 +351,8 @@ const Html = ({
               </>
             )}
             {/* {filters.search || filters.customerId ? (
-              <>
-                <button
-                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg"
+               <button
+                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
                   onClick={() => clear()}
                 >
                   Reset
