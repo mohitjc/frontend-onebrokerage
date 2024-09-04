@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/global/layout";
-import "./style.scss";
+// import "./style.scss";
 import { Link } from "react-router-dom";
 import { Tooltip } from "antd";
 import { FiEdit3, FiPlus } from "react-icons/fi";
@@ -11,12 +11,10 @@ import statusModel from "../../models/status.model";
 import datepipeModel from "../../models/datepipemodel";
 import shared from "./shared";
 import ApiClient from "../../methods/api/apiClient";
-import { IoIosRefresh } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { PiEyeLight } from "react-icons/pi";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { LuImport } from "react-icons/lu";
-import moment from "moment";
 const Html = ({
   sorting,
   filter,
@@ -33,7 +31,7 @@ const Html = ({
   data,
   changestatus,
   isAllow,
-  total = { total },
+  total,
   sortClass,
   uploadFile,
 }) => {
@@ -46,7 +44,6 @@ const Html = ({
       render: (row) => {
         return <span className="capitalize">{row?.truck_number}</span>;
       },
-    
     },
     // {
     //   key: "email",
@@ -78,110 +75,28 @@ const Html = ({
       },
     }, */
     {
-      key: "vin_number",
-      name: "vin Number",
-      sort: true,
-      render: (row) => {
-        return <span className="capitalize">{row?.vin_number}</span>;
-      },
-    },
-    {
-      key: "",
-      name: " createdAt",
-      sort: true,
+      key: "vin_Number",
+      name: "VIN Number",
       render: (row) => {
         return (
-          <span className="">{moment(row?.createdAt).format("DD-MM-YYYY")}</span>
+          <>
+          <span className="">{row?.vin_number}</span>
+          </>
         );
       },
     },
-    // {
-    //   key: "status",
-    //   name: "Status",
-    //   render: (row) => {
-    //     return (
-    //       <>
-    //         <div className="w-32" onClick={() => statusChange(row)}>
-    //           <span
-    //             className={`bg-[#494f9f] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-    //                       ${
-    //                         row.status == "deactive"
-    //                           ? " bg-gray-200 text-black"
-    //                           : "bg-[#494f9f] text-white"
-    //                       }`}
-    //           >
-    //             {row.status == "deactive" ? "inactive" : "active"}
-    //           </span>
-    //         </div>
-    //       </>
-    //     );
-    //   },
-    // },
-    // {
-    //   key: "action",
-    //   name: "Actions",
-    //   render: (itm) => {
-    //     return (
-    //       <>
-    //         <div className="flex items-center justify-start gap-1.5">
-    //           {isAllow(`read${shared.check}`) ? (
-    //             <Tooltip placement="top" title="View">
-    //               <a
-    //                 className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-    //                 onClick={(e) => view(itm.id)}
-    //               >
-    //                 <PiEyeLight />
-    //               </a>
-    //             </Tooltip>
-    //           ) : (
-    //             <></>
-    //           )}
-    //           {isAllow(`edit${shared.check}`) ? (
-    //             <Tooltip placement="top" title="Edit">
-    //               <a
-    //                 className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-    //                 onClick={(e) => edit(itm.id)}
-    //               >
-    //                 <LiaEdit />
-    //               </a>
-    //             </Tooltip>
-    //           ) : (
-    //             <></>
-    //           )}
-    //           {isAllow(`delete${shared.check}`) ? (
-    //             <Tooltip placement="top" title="Delete">
-    //               <span
-    //                 className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-    //                 onClick={() => deleteItem(itm.id)}
-    //               >
-    //                 <LiaTrashAlt />
-    //               </span>
-    //             </Tooltip>
-    //           ) : (
-    //             <></>
-    //           )}
-    //         </div>
-    //       </>
-    //     );
-    //   },
-    // },
+    {
+      key: "created_At",
+      name: "Date Created",
+      render: (row) => {
+        return (
+       <> <span className="">{row?.createdAt}</span></>
+        );
+      },
+    },
   ];
 
-  /*  const getGroups = () => {
-    let f = {
-      page: 1,
-      count: 10,
-    };
-    ApiClient.get("api/group/list", f).then((res) => {
-      if (res.success) {
-        setGroup(res.data);
-      }
-    });
-  };
- */
-  //   useEffect(() => {
-  //       getGroups()
-  //   }, [])
+ 
 
   return (
     <Layout>
@@ -237,7 +152,7 @@ const Html = ({
               <input
                 type="text"
                 id="simple-search"
-                value={filters.search}
+                value={filters?.search}
                 onChange={(e) => {
                   setFilter({ ...filters, search: e.target.value });
                 }}
@@ -276,35 +191,6 @@ const Html = ({
             </button>
           </form>
 
-          {/* <div className="flex gap-2 ml-auto">
-            <SelectDropdown
-              id="statusDropdown"
-              displayValue="name"
-              placeholder="All Status"
-              intialValue={filters.status}
-              result={(e) => {
-                changestatus(e.value);
-              }}
-              options={statusModel.list}
-            />
-           
-            {filters.status || filters.groupId ? (
-              <>
-              <button
-                className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
-                onClick={() => clear()}
-              >
-
-          <IoIosRefresh class="me-2"/>
-
-
-                Reset
-              </button>
-            </>
-            ) : (
-              <></>
-            )}
-          </div> */}
         </div>
 
         {!loaging ? (
@@ -314,8 +200,8 @@ const Html = ({
               className=""
               data={data}
               columns={columns}
-              page={filters.page}
-              count={filters.count}
+              page={filters?.page}
+              count={filters?.count}
               filters={filters}
               total={total}
               result={(e) => {

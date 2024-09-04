@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ApiClient from "../../methods/api/apiClient";
-import "./style.scss";
+// import "./style.scss";
 import loader from "../../methods/loader";
 import Html from "./html";
 import { useNavigate } from "react-router-dom";
