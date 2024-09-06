@@ -2054,6 +2054,9 @@ td.\!text-typo.\!border-l-0.\!px-3\.5.text-sm.font-normal.\!py-4.\!border.text-c
 div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm){
   background: #494f9f !important;
 }
+th span, td span{
+  white-space: nowrap;
+}
 @media screen and (max-width: 767px) {
   .w-\[calc\(100\%-280px\)\] {
     width: 100%;
