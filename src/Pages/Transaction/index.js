@@ -120,36 +120,36 @@ const Transaction = () => {
     history(url);
   };
 
-//   const exportfun = async () => {
-//     const token = await localStorage.getItem("token");
-//     const req = await axios({
-//       method: "get",
-//       url: `${environment.api}api/export/excel`,
-//       responseType: "blob",
-//       body: { token: token },
-//     });
-//     var blob = new Blob([req.data], {
-//       type: req.headers["content-type"],
-//     });
-//     const link = document.createElement("a");
-//     link.href = window.URL.createObjectURL(blob);
-//     link.download = `${shared.title}.xlsx`;
-//     link.click();
-//   };
+  const exportfun = async () => {
+    const token = await localStorage.getItem("token");
+    const req = await axios({
+      method: "get",
+      url: `${environment.api}transaction/all?export_to_xls=yes`,
+      responseType: "blob",
+      body: { token: token },
+    });
+    var blob = new Blob([req.data], {
+      type: req.headers["content-type"],
+    });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = `${shared.title}.xlsx`;
+    link.click();
+  };
 
-//   const uploadFile = (e) => {
-//     let files = e.target.files;
-//     let file = files?.item(0);
-//     let url = "user/import-users";
-//     if (!file) return;
-//     loader(true);
-//     ApiClient.postFormFileData(url, { file }).then((res) => {
-//       if (res.success) {
-//         console.log("res", res);
-//       }
-//       loader(false);
-//     });
-//   };
+  const uploadFile = (e) => {
+    let files = e.target.files;
+    let file = files?.item(0);
+    let url = "user/import-users";
+    if (!file) return;
+    loader(true);
+    ApiClient.postFormFileData(url, { file }).then((res) => {
+      if (res.success) {
+        console.log("res", res);
+      }
+      loader(false);
+    });
+  };
  
   const isAllow = (key = "") => {
     let permissions = user?.permissions?.[0];
@@ -183,7 +183,7 @@ const Transaction = () => {
         data={data}
         total={total}
         // changestatus={changestatus}
-        // exportfun={exportfun}
+        exportfun={exportfun}
         // uploadFile={uploadFile}
         handleFilters={handleFilters}
         statusOptions={statusOptions}

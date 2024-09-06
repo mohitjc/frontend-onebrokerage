@@ -27,7 +27,7 @@ const Html = ({
   data,
   total,
   statusOptions,
-  count,
+  count,exportfun
 }) => {
   const columns = [
     {
@@ -182,6 +182,7 @@ const Html = ({
               isClearable
               placeholder="Select Status"
             />
+            <button onClick={()=>exportfun()}>Export</button>
             {filters.transaction_status ? (
               <>
                 <button

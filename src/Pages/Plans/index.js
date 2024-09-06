@@ -200,7 +200,7 @@ const Plans = (p) => {
         // }
         Swal.fire({
             title: "Are you sure?",
-            text: `Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
+            text: `Do you want to ${status == 'active' ? 'active' : 'inactive'} this`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",

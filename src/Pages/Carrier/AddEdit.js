@@ -10,7 +10,8 @@ import shared from "./shared";
 import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import { toast } from "react-toastify";
-
+import GooglePlaceAutoComplete from "../../components/common/GooglePlaceAutoComplete";
+import addressModel from "../../models/address.model"; 
 const AddEdit = () => {
   const { id } = useParams();
 // new
@@ -31,14 +32,15 @@ const AddEdit = () => {
     city: "",
     state: "",
     country: "",
+    trailers_number :"",
     pincode: "",
     team_truck: "",
     solo_truck: "",
-    trailers_number: "",
+    // trailers_number: "",
     trailer_type: [], // For multiple checkbox options
     board_id: [], // For multiple checkbox options
   });
-
+  const [addressSellected,setAddressSellected]=useState(false);
   const history = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector((state) => state.user);
@@ -47,16 +49,17 @@ const AddEdit = () => {
 
   // Form validation rules
   const formValidation = [
-    { key: "firstName", required: true },
+    { key: "firstName",  message: "Name is required" , required: true },
     { key: "email", required: true, message: "Email is required", email: true },
-    { key: "company_name", required: true },
-    { key: "tax_number", required: true },
+    { key: "company_name", required: true ,message: "Company Name is required" },
+    { key: "tax_number", required: true  , message: "Tax Number is required"},
 
-    { key: "address", required: true },
-    { key: "city", required: true },
-    { key: "state", required: true },
-    { key: "country", required: true },
-    { key: "pincode", required: true },
+    { key: "address", required: true ,message: "Address is required"},
+    { key: "city", required: true ,message: "City is required"},
+    { key: "state", required: true ,message: "State is required"},
+    { key: "country", required: true , message: "Country is required" },
+    { key: "pincode", required: true ,message: "Pin Code is required" },
+    { key: "solo_truck", required: true ,message: "Solo Truck is required" }
   ];
 
   // const handleSubmit = (e) => {
@@ -126,7 +129,40 @@ const AddEdit = () => {
       loader(false);
     });
   };
-
+  const addressResult = async (e) => {
+    let address = {};
+    if (e.place) {
+      address = addressModel.getAddress(e.place);
+      setAddressSellected(true);
+    } else {
+      setAddressSellected(false);
+    }
+    setForm({
+      ...form,
+      address: e.value,
+      country: address.country || "",
+      city: address.city || "",
+      state: address.state || "",
+      pincode: address.pincode || "",
+      // lat: address.lat || "",
+      // lng: address.lng || "",
+    });
+    if (e.place) {
+      // setTimezoneLoader(true)
+      const apires = await addressModel.gettimeZone(e.place);
+      // setTimezoneLoader(false)
+      setForm({
+        ...form,
+        address: e.value,
+        country: address.country || "",
+        city: address.city || "",
+        state: address.state || "",
+        pincode: address.pincode || "",
+        // lat: address.lat || "",
+        // lng: address.lng || "",
+      });
+    }
+  };
   // i want this role is goes only in  add case not in edit case
   useEffect(() => {
     if (id) {
@@ -233,7 +269,7 @@ const AddEdit = () => {
             </div>
             <div className="mb-3">
               <label>
-                Position <span className="text-danger">*</span>
+                Position <span className="star">*</span>
               </label>
               <select
                 className="form-control"
@@ -257,7 +293,7 @@ const AddEdit = () => {
             <div className="mb-3">
               <div className="w-100 d-inline-flex">
                 <label className="d-block">
-                  Mobile No<span className="star">*</span>
+                  Mobile No
                 </label>
                 <PhoneInput
                   value={form.telephoneExt + form.telephoneNo}
@@ -300,6 +336,11 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, company_name: e })}
                 required
               />
+               {form.company_name && submitted  && (
+                <div className="invalid-feedback d-block">
+                  Please enter a Company Name
+                </div>
+              )}
             </div>
             <div className="mb-3">
               <FormControl
@@ -317,21 +358,25 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, tax_number: e })}
                 required
               />
+              
             </div>
             <div className="mb-3">
               <FormControl
                 type="text"
-                label="MC Number"
+                label="MC#"
                 value={form.mc_number}
                 onChange={(e) => setForm({ ...form, mc_number: e })}
+                required
               />
+              
             </div>
             <div className="mb-3">
               <FormControl
                 type="text"
-                label="DOT Number"
+                label="DOT#"
                 value={form.dot_number}
                 onChange={(e) => setForm({ ...form, dot_number: e })}
+                required
               />
             </div>
            
@@ -347,7 +392,7 @@ const AddEdit = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
-          <div className="mb-3">
+          {/* <div className="mb-3">
               <FormControl
                 type="text"
                 label="Address*"
@@ -355,7 +400,27 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, address: e })}
                 required
               />
-            </div>
+            </div> */}
+            <div className="mb-3">
+                          <label className="label_profile">
+                            Address<span className="star">*</span>
+                          </label>
+                          <div>
+                            <GooglePlaceAutoComplete
+                              value={form.address}
+                              result={addressResult}
+                              id="address"
+                              placeholder=""
+                            />
+                            {form.address == "" && submitted ? (
+                              <div className="invalid-feedback d-block">
+                                Please Select Location Suggestion
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                          </div>
+                        </div>
             <div className="mb-3">
               <FormControl
                 type="text"
@@ -377,7 +442,7 @@ const AddEdit = () => {
             <div className="mb-3">
               <FormControl
                 type="text"
-                label="Country*"
+                label="Country"
                 value={form.country}
                 onChange={(e) => setForm({ ...form, country: e })}
                 required
@@ -386,7 +451,7 @@ const AddEdit = () => {
             <div className="mb-3">
               <FormControl
                 type="text"
-                label="Pincode"
+                label="ZipCode"
                 value={form.pincode}
                 onChange={(e) => setForm({ ...form, pincode: e })}
                 required
@@ -408,6 +473,7 @@ const AddEdit = () => {
                 type="text"
                 label="Team Truck"
                 value={form.team_truck}
+                required
                 onChange={(e) => setForm({ ...form, team_truck: e })}
               />
             </div>
@@ -417,19 +483,21 @@ const AddEdit = () => {
                 type="text"
                 label="Solo Truck"
                 value={form.solo_truck}
+                required
                 onChange={(e) => setForm({ ...form, solo_truck: e })}
               />
             </div>
            <div className="lg:col-span-6 col-span-12 mb-3">
               <FormControl
                 type="text"
-                label="Trailers Number"
+                label="Total Truck "
                 value={form.trailers_number}
                 onChange={(e) => setForm({ ...form, trailers_number: e })}
+                required
               />
             </div>
            <div className="lg:col-span-6 col-span-12 mb-3">
-           <label className="mb-2 block">Trailer Types</label>
+           <label className="mb-2 block">Trailer Types<span className="star">*</span></label>
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-6">
                 <label className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3">
@@ -438,6 +506,7 @@ const AddEdit = () => {
                     value="dry_van"
                     checked={form.trailer_type.includes("dry_van")}
                     onChange={(e) => handleCheckboxChange(e, "trailer_type")}
+                    required
                   />
                   Dry Van
                 </label>
@@ -483,7 +552,8 @@ const AddEdit = () => {
 
         <div className="flex justify-end mt-4">
             <button type="submit" className="btn btn-primary">
-              {id ? "Update" : "Add"} {shared.addTitle}
+              {/* {id ? "Update" : "Add"} {shared.addTitle} */}
+              Save
             </button>
           </div>
       </form>

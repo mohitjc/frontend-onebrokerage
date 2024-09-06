@@ -70,7 +70,7 @@ const View = () => {
                 <div className="grid grid-cols-12 p-4">
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1 ">
-                      Name:
+                      Name
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {" "}
@@ -80,7 +80,7 @@ const View = () => {
                   </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Position:
+                      Position
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
@@ -90,7 +90,7 @@ const View = () => {
 
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Company Name :
+                      Company Name 
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
@@ -100,7 +100,7 @@ const View = () => {
 
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Mc# :
+                      Mc# 
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
@@ -109,7 +109,7 @@ const View = () => {
                   </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Email :
+                      Email 
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
@@ -118,7 +118,7 @@ const View = () => {
                   </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Latest Login IP :
+                      Latest Login IP 
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
@@ -127,7 +127,7 @@ const View = () => {
                   </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Tax Number :
+                      Tax Number 
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
@@ -137,7 +137,7 @@ const View = () => {
                   </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Dot#:
+                      Dot#
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <GrUserSettings className="text-xl text-[#494f9f]" /> */}
@@ -155,7 +155,7 @@ const View = () => {
                 <div className="grid grid-cols-12 p-4">
                   <div className="col-span-12  lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1 ">
-                      Address :
+                      Address
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {" "}
@@ -166,7 +166,7 @@ const View = () => {
 
                   <div className="col-span-12  lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      State :
+                      State 
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
@@ -176,7 +176,7 @@ const View = () => {
 
                   <div className="col-span-12  lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Country:
+                      Country
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
@@ -185,7 +185,7 @@ const View = () => {
                   </div>
                   <div className="col-span-12  lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      City:
+                      City
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
@@ -205,7 +205,7 @@ const View = () => {
                 <div className="grid grid-cols-12 p-4">
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1 ">
-                      Team Truck :
+                      Team Truck 
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {" "}
@@ -216,7 +216,7 @@ const View = () => {
 
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Total Truck :
+                      Total Truck 
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
@@ -228,7 +228,7 @@ const View = () => {
                  
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Solo Truck :
+                      Solo Truck 
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
@@ -237,7 +237,7 @@ const View = () => {
                   </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Total Trailer :
+                      Total Trailer 
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
@@ -246,7 +246,7 @@ const View = () => {
                   </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Trailer Type :
+                      Trailer Type 
                     </label>
                     <p className="text-[14px] text-black font-medium">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}
@@ -263,7 +263,7 @@ const View = () => {
                   </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider block mb-1  ">
-                      Board Name :
+                      Board Name 
                     </label>
                     <p className="text-[14px] text-black font-medium flex">
                       {/* <MdOutlinePhone className="text-xl text-[#494f9f]" />+ */}

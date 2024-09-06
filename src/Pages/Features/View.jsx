@@ -68,7 +68,7 @@ const View = () => {
                 </div>
                <div className="grid grid-cols-12 p-4">
                <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Name:</label>
+                <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Name</label>
                   <p className="text-[14px] text-black font-medium ">
                     {" "}
                     {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
@@ -76,7 +76,7 @@ const View = () => {
                   </p>
                 </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                   <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">CreatedAt:</label>
+                   <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">CreatedAt</label>
                    <p className="text-[14px] text-black font-medium ">
                     {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
                     {data &&  moment(data?.createdAt).format('DD-MM-YYYY')}

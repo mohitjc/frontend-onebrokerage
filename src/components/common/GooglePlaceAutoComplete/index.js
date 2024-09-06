@@ -1,65 +1,81 @@
-import React, { useEffect, useState } from "react";
-import Html from "./Html";
+import React, { useState, useRef, useEffect } from "react";
+import { LoadScript, Autocomplete } from "@react-google-maps/api";
+import environment from "../../../environment";
 import "./style.scss";
+const GooglePlacesAutocomplete = ({ placeholder, result, id, value }) => {
+  const [searchText, setSearchText] = useState("");
+  const [loading, setLoader] = useState(true);
+  const autocompleteRef = useRef(null);
+  const debounceTimeout = useRef(null);
+  useEffect(()=>{
+    setSearchText(value)
+  },[value])
+  const handlePlaceSelect = (place) => {
+    // onSelect(place);
+    placeChange(place);
+  };
 
-const GooglePlaceAutoComplete = ({ placeholder, result, id, value }) => {
+  const handleInputChange = (e) => {
+    const inputText = e.target.value;
+    setSearchText(inputText);
+    clearTimeout(debounceTimeout.current);
+    debounceTimeout.current = setTimeout(() => {
+      if (inputText.trim() !== "") {
+        // handleAutocompleteRequest(inputText);
+      }
+    }, 1500); // Adjust debounce delay as needed
+  };
 
-    const [searchText, setSeatchText] = useState('')
+  const handleAutocompleteRequest = (inputText) => {
+    if (!autocompleteRef.current) return;
+    autocompleteRef.current.setOptions({ input: inputText });
+  };
+  const placeChange = (place) => {
+    setSearchText(place.formatted_address);
+    result({
+      event: "placeChange",
+      value: place.formatted_address,
+      place,
+    });
+  };
 
-    const search = async (text) => {
-        setSeatchText(text)
-        result({
-            event: 'value',
-            value: text
-        })
-    }
+  useEffect(()=>{
+    setTimeout(()=>{
+      setLoader(false)
+    },100)
+  })
 
-    const placeChange = (place) => {
-        setSeatchText(place.formatted_address)
-        result({
-            event: 'placeChange',
-            value: place.formatted_address,
-            place
-        })
-    }
-
-    useEffect(() => {
-        let isinitMap=localStorage.getItem('initMap')
-        if(isinitMap) initMap()
-    })
-
-    const initMap=()=>{
-        const input = document.getElementById("pac_input_" + id);
-        const options = {
-            // componentRestrictions: { country: "us" },
-            fields: ["address_components", "geometry", "formatted_address"],
-            strictBounds: false,
-            // types: [],
-        };
-        
-        const autocomplete = new (google).maps.places.Autocomplete(input, options);
-
-        autocomplete.addListener("place_changed", () => {
-            const place = autocomplete.getPlace();
-            placeChange(place)
-        });
-    }
-
-    useEffect(() => {
-        setSeatchText(value)
-    }, [value])
-
-
-
-    return <>
-    <div id="initMap" onClick={e=>initMap()}></div>
-    <Html
-        id={id}
-        result={result}
-        placeholder={placeholder}
-        searchText={searchText}
-        search={search}
-    />
+  return (
+    <>
+    
+      {loading?<></>:<>
+        <LoadScript
+      googleMapsApiKey={environment.googleAPIKey}
+      libraries={["places"]}
+    >
+        <Autocomplete
+        options={{ types: "establishment", debounce: 1000 }}
+        onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+        onPlaceChanged={() =>
+          handlePlaceSelect(autocompleteRef.current.getPlace())
+        }
+      >
+        <input
+          type="text"
+          placeholder="Enter a location"
+          value={searchText}
+          className="form-control"
+          style={{ zIndex: 1000 }}
+          onChange={handleInputChange}
+        />
+      </Autocomplete>
+      </LoadScript>
+      </>}
+      
+   
     </>
-}
-export default GooglePlaceAutoComplete
+   
+  );
+};
+
+export default GooglePlacesAutocomplete;

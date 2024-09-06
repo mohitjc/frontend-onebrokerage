@@ -20,6 +20,12 @@ const AddEditPlan = () => {
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false); // Track if in edit mode
+  const [isChecked, setIsChecked] = useState({
+    monthly: false,
+    threeMonth: false,
+    sixMonth: false,
+    yearly: false,
+  }); // State for checkboxes
   const history = useNavigate();
   const { planid, copy } = useParams();
   const id = planid;
@@ -71,6 +77,14 @@ const AddEditPlan = () => {
             ?.map((feature) => feature?.id);
 
           setSelectedFeatures(selectedFeatureIds);
+
+          // Set checkbox states based on pricing
+          setIsChecked({
+            monthly: !!value?.pricing?.find((p) => p.interval_count === 1),
+            threeMonth: !!value?.pricing?.find((p) => p.interval_count === 3),
+            sixMonth: !!value?.pricing?.find((p) => p.interval_count === 6),
+            yearly: !!value?.pricing?.find((p) => p.interval_count === 12),
+          });
         }
         loader(false);
       });
@@ -83,77 +97,102 @@ const AddEditPlan = () => {
     );
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
+  const handleCheckboxChange = (term) => {
+    setIsChecked((prev) => {
+      const updated = { ...prev, [term]: !prev[term] };
 
-    if (
-      !form.name ||
-      (!isEditMode &&
-        (!form.monthlyPrice ||
-          !form.threeMonthPrice ||
-          !form.sixMonthPrice ||
-          !form.yearlyPrice))
-    ) {
-      return;
-    }
-
-    const method = id && copy === "false" ? "put" : "post";
-    const url = "plan";
-
-    // Prepare the pricing array if not in edit mode
-    const pricing = !isEditMode
-      ? [
-          {
-            interval: "month",
-            interval_count: 1,
-            currency: "usd",
-            unit_amount: form.monthlyPrice,
-          },
-          {
-            interval: "month",
-            interval_count: 3,
-            currency: "usd",
-            unit_amount: form.threeMonthPrice,
-          },
-          {
-            interval: "month",
-            interval_count: 6,
-            currency: "usd",
-            unit_amount: form.sixMonthPrice,
-          },
-          {
-            interval: "month",
-            interval_count: 12,
-            currency: "usd",
-            unit_amount: form.yearlyPrice,
-          },
-        ]
-      : [];
-
-    // Prepare the features array
-    const featuresPayload = features.map((feature) => ({
-      id: feature.id,
-      isChecked: selectedFeatures.includes(feature.id),
-    }));
-
-    const value = {
-      name: form.name,
-      pricing: !isEditMode ? pricing : undefined, // Include pricing only in add mode
-      features: featuresPayload,
-      addedBy: user._id,
-      id: id,
-    };
-
-    loader(true);
-    ApiClient.allApi(url, value, method).then((res) => {
-      if (res.success) {
-        history("/plans");
-        toast.success(res.message);
+      // Clear price field if checkbox is unchecked
+      if (!updated[term]) {
+        setForm((prevForm) => ({
+          ...prevForm,
+          [`${term}Price`]: "",
+        }));
       }
-      loader(false);
+
+      return updated;
     });
   };
+
+  const handlePriceChange = (e, key) => {
+    const value = e.target.value;
+    // Prevent negative values
+    if (value < 0) return;
+    setForm((prevForm) => ({
+      ...prevForm,
+      [key]: value,
+    }));
+  };
+
+ const handleSubmit = (e) => {
+  e.preventDefault();
+  setSubmitted(true);
+
+  // Validate form data
+  if (!form.name ) {
+    return;
+  }
+
+  const method = id && copy === "false" ? "put" : "post";
+  const url = "plan";
+
+  // Prepare the pricing array if in add mode
+  const pricing = !isEditMode
+    ? [
+        isChecked.monthly && {
+          interval: "month",
+          interval_count: 1,
+          currency: "usd",
+          unit_amount: form.monthlyPrice,
+        },
+        isChecked.threeMonth && {
+          interval: "month",
+          interval_count: 3,
+          currency: "usd",
+          unit_amount: form.threeMonthPrice,
+        },
+        isChecked.sixMonth && {
+          interval: "month",
+          interval_count: 6,
+          currency: "usd",
+          unit_amount: form.sixMonthPrice,
+        },
+        isChecked.yearly && {
+          interval: "month",
+          interval_count: 12,
+          currency: "usd",
+          unit_amount: form.yearlyPrice,
+        },
+      ].filter(Boolean)
+    : undefined;
+
+  // Prepare the features array
+  const featuresPayload = features.map((feature) => ({
+    id: feature.id,
+    isChecked: selectedFeatures.includes(feature.id),
+  }));
+
+  // Prepare the payload
+  const value = {
+    name: form.name,
+    pricing: !isEditMode ? pricing : undefined, // Include pricing only in add mode
+    features: featuresPayload,
+    addedBy: user._id,
+    id: isEditMode ? id : undefined, // Include id only in edit mode
+  };
+
+  // Remove undefined fields from the payload
+  const cleanValue = Object.fromEntries(Object.entries(value).filter(([_, v]) => v !== undefined));
+
+  loader(true);
+  ApiClient.allApi(url, cleanValue, method).then((res) => {
+    if (res.success) {
+      history("/plans");
+      toast.success(res.message);
+    }
+    loader(false);
+  });
+};
+
 
   return (
     <Layout>
@@ -162,7 +201,7 @@ const AddEditPlan = () => {
           <Tooltip placement="top" title="Back">
             <Link
               to="/plans"
-              className="!px-4  py-2 cursor-pointer flex items-center justify-center  rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all  mr-3 bg-[#494f9f] text-white hover:text-black"
+              className="!px-4 py-2 cursor-pointer flex items-center justify-center rounded-lg shadow-btn hover:bg-[#F3F2F5] border transition-all mr-3 bg-[#494f9f] text-white hover:text-black"
             >
               <i className="fa fa-angle-left text-lg"></i>
             </Link>
@@ -176,7 +215,7 @@ const AddEditPlan = () => {
             </p>
           </div>
         </div>
-        <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-10 ">
+        <div className="border overflow-hidden rounded-lg bg-white gap-4 shrink-0 mb-10 ">
           <div className="bg-[#1245940a] p-4 border-b">
             <h3 className="text-[20px] font-[500]">Plan Details</h3>
           </div>
@@ -188,7 +227,7 @@ const AddEditPlan = () => {
               </label>
               <input
                 type="text"
-                className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3"
+                className="relative bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 required
@@ -201,41 +240,41 @@ const AddEditPlan = () => {
               <label className="text-[14px] text-[#0000009c] tracking-wider mb-1 block">
                 Plans<span className="star">*</span>
               </label>
-              <div className="grid grid-cols-12 gap-4">
+              <div className="grid grid-cols-12 gap-4 mb-4">
                 {[
-                  "monthlyPrice",
-                  "threeMonthPrice",
-                  "sixMonthPrice",
-                  "yearlyPrice",
-                ].map((key, index) => (
+                  { key: "monthly", label: "1 Month" },
+                  { key: "threeMonth", label: "3 Months" },
+                  { key: "sixMonth", label: "6 Months" },
+                  { key: "yearly", label: "12 Months" },
+                ].map((term) => (
                   <div
-                    className="lg:col-span-3 md:col-span-6 col-span-12  border bg-[#f5f5f5] rounded-[6px] "
-                    key={index}
+                    className="col-span-12 lg:col-span-3 md:col-span-6 border bg-[#f5f5f5] rounded-[6px]"
+                    key={term.key}
                   >
-                    <h5 className=" mb-3 p-3 bg-[#494f9f]  text-white rounded-tl-[6px] rounded-tr-[6px]">
-                      Term:{" "}
-                      {key === "monthlyPrice"
-                        ? "1 Month"
-                        : key === "threeMonthPrice"
-                        ? "3 Months"
-                        : key === "sixMonthPrice"
-                        ? "6 Months"
-                        : "12 Months"}
-                    </h5>
                     <div className="p-3">
-                      <label className="text-sm mb-2 block">
-                        Price<span className="star">*</span>
+                      <label className="text-sm mb-2 block flex items-center">
+                        <input
+                          type="checkbox"
+                          className="mr-2"
+                          checked={isChecked[term.key]}
+                          onChange={() => handleCheckboxChange(term.key)}
+                          disabled={isEditMode}
+                        />
+                        {term.label}
                       </label>
-                      <input
-                        type="number"
-                        className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3"
-                        value={form[key]}
-                        onChange={(e) =>
-                          setForm({ ...form, [key]: e.target.value })
-                        }
-                        required
-                        disabled={isEditMode} // Disable inputs in edit mode
-                      />
+                      <div>
+                        <label className="text-sm mb-2 block">
+                          Price<span className="star">*</span>
+                        </label>
+                        <input
+                          type="number"
+                          className="relative bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3"
+                          value={form[`${term.key}Price`]}
+                          onChange={(e) => handlePriceChange(e, `${term.key}Price`)}
+                          required
+                          disabled={!isChecked[term.key]|| isEditMode} 
+                        />
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -286,3 +325,4 @@ const AddEditPlan = () => {
 };
 
 export default AddEditPlan;
+// in edit case its send wrong payload send the  same payload are going in the update case

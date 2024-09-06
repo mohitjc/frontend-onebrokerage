@@ -64,7 +64,7 @@ const RoleDetail = () => {
                 <div className="grid grid-cols-12 p-4">
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">
-                      Name:
+                      Name
                     </label>
                     <p className="text-[14px] text-black font-medium ">
                       {data && data.name}
@@ -72,7 +72,7 @@ const RoleDetail = () => {
                   </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">
-                      Created At:
+                      Created At
                     </label>
                     <p className="text-[14px] text-black font-medium ">
                       {data && moment(data.createdAt).format("DD-MM-YYYY")}
@@ -81,7 +81,7 @@ const RoleDetail = () => {
 
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                     <label className="text-[14px] text-[#0000009c] tracking-wider w-[160px]">
-                      Features:
+                      Features
                     </label>
                     <ul className="text-[14px] text-black font-medium flex">
                       {data &&
