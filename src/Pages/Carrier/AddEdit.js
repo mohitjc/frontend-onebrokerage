@@ -470,29 +470,34 @@ const AddEdit = () => {
           <div className="grid grid-cols-12  gap-4 p-4">
             <div className="lg:col-span-6 col-span-12 mb-3">
             <FormControl
-                type="text"
+                type="number"
                 label="Team Truck"
                 value={form.team_truck}
                 required
-                onChange={(e) => setForm({ ...form, team_truck: e })}
+                maxlength={10}
+                onChange={(e) => setForm({ ...form, team_truck:e})}
+               
               />
             </div>
         
            <div className="lg:col-span-6 col-span-12 mb-3">
               <FormControl
-                type="text"
+                type="number"
                 label="Solo Truck"
                 value={form.solo_truck}
                 required
-                onChange={(e) => setForm({ ...form, solo_truck: e })}
+                maxlength={10}
+                onChange={(e) => setForm({ ...form, solo_truck:e})}
+             
               />
             </div>
            <div className="lg:col-span-6 col-span-12 mb-3">
               <FormControl
-                type="text"
-                label="Total Truck "
+                type="number"
+                label="Total Trailers "
                 value={form.trailers_number}
-                onChange={(e) => setForm({ ...form, trailers_number: e })}
+                maxlength={10}
+                onChange={(e) => setForm({ ...form, trailers_number:e})}         
                 required
               />
             </div>

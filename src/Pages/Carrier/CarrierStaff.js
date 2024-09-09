@@ -161,14 +161,14 @@ const CarrierStaff= () => {
       name: "Name",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.fullName}</span>;
+        return <span className="capitalize cursor-pointer" onClick={(e)=>{view(row.id)}}>{row?.fullName}</span>;
       },
     },
     {
       key: "addedBy_name",
       name: "Carrier Name",
       render: (row) => {
-        return <span className="capitalize">{row?.addedBy_name}</span>;
+        return <span className="capitalize" >{row?.addedBy_name||"--"}</span>;
       },
     },
     {

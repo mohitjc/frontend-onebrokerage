@@ -44,7 +44,7 @@ const Html = ({
       name: "Full Name",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.fullName}</span>;
+        return <span className="capitalize cursor-pointer" onClick={(e)=>{view(row.id)}}>{row?.fullName}</span>;
       },
     },
     {
@@ -52,7 +52,7 @@ const Html = ({
       name: "Company Name",
       sort: true,
       render: (row) => {
-        return <span className="">{row?.company_name}</span>;
+        return <span className="cursor-pointer" onClick={(e)=>{view(row.id)}}>{methodModel.capitalizeFirstLetter(row?.company_name)}</span>;
       },
     },
     {
@@ -60,7 +60,7 @@ const Html = ({
       name: "Board",
       // sort: true,
       render: (row) => {
-        return <span className="">{row?.board_data?.map((ele)=>ele?.board_name)}</span>;
+        return <span className="">{row?.board_data?.length>0?row?.board_data?.map((ele)=>ele?.board_name):"--"}</span>;
       },
     },
     {
