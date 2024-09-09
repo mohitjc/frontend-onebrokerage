@@ -277,6 +277,30 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               </NavLink>
             </Tooltip>
           </li>
+          {/* Group */}
+          <li>
+            <Tooltip placement="right" title="Groups">
+              <NavLink
+                to="/groups"
+                // className={(isActive) =>
+                //   "p-2.5 rounded-md flex items-center gap-[12px] text-sm font-normal text-[#4A545E] hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
+                //   (isActive && " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                // }
+                className={(isActive) =>
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  (location?.pathname == "/groups" &&
+                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                }
+              >
+                <MdOutlineFeaturedPlayList  className="text-black shrink-0 text-lg group-hover:text-white "/>
+
+                <span className="text-inherit leading-none sidebar_text">
+                Groups
+                </span>
+              </NavLink>
+            </Tooltip>
+          </li>
+          {/*  */}
           <li>
             <Tooltip placement="right" title="Plans">
               <NavLink
