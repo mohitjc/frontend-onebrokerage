@@ -59,7 +59,7 @@ const Login = () => {
   }, []);
   let attendance = methodModel.getPrams("attendance");
   const setLogin = async (data: any) => {
-    let url = "/profile";
+    let url = "/dashboard";
     let eventId = methodModel.getPrams("eventId");
 
     if (eventId) {

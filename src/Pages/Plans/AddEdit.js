@@ -316,7 +316,7 @@ const AddEditPlan = () => {
             className="py-2 px-4 bg-blue-500 text-white rounded-lg"
             disabled={submitted}
           >
-            {id ? "Update Plan" : "Add Plan"}
+            {id ? "Update" : "Save"}
           </button>
         </div>
       </form>

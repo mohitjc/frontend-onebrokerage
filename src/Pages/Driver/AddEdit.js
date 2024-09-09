@@ -25,19 +25,19 @@ const AddEdit = () => {
   const [submitted, setSubmitted] = useState(false);
   const history = useNavigate();
   const [filter, setfilter] = useState({});
-  const [Vin,setVin]=useState('')
+  const [Vin, setVin] = useState('')
   const user = useSelector((state) => state.user);
-  const [addressSellected,setAddressSellected]=useState(false);
+  const [addressSellected, setAddressSellected] = useState(false);
   const formValidation = [
-    { key: "firstName",  message: "Name is required" , required: true },
+    { key: "firstName", message: "Name is required", required: true },
     { key: "email", required: true, message: "Email is required", email: true },
-    { key: "license_image",  message: "License Image is required" },
-    { key: "license_number", required: true, message: "License Number is required"},
-    { key: "address", required: true ,message: "Address is required"},
-    { key: "city", required: true ,message: "City is required"},
-    { key: "state", required: true ,message: "State is required"},
-    { key: "country", required: true , message: "Country is required" },
-    { key: "pincode", required: true ,message: "Pin Code is required" },
+    { key: "license_image", message: "License Image is required" },
+    { key: "license_number", required: true, message: "License Number is required" },
+    { key: "address", required: true, message: "Address is required" },
+    { key: "city", required: true, message: "City is required" },
+    { key: "state", required: true, message: "State is required" },
+    { key: "country", required: true, message: "Country is required" },
+    { key: "pincode", required: true, message: "Pin Code is required" },
     // { key: "truck_id", required: true ,message: "Truck is required" },
   ];
 
@@ -57,44 +57,59 @@ const AddEdit = () => {
       }
     });
   };
-  const emailvalidation=()=>
-    { 
-      if(form?.email)
-      {
-       let splitEmail=form?.email?.split("@")[1]
-       if(splitEmail && (splitEmail.includes("yahoo.com")||splitEmail.includes("gmail.com")||splitEmail.includes("outlook.com")||splitEmail.includes("hotmail.com")))
-        {
-          return false
-        }
-        else
-        {
-          return true
-        }
+  const emailvalidation = () => {
+    if (form?.email) {
+      let splitEmail = form?.email?.split("@")[1]
+      if (splitEmail && (splitEmail.includes("yahoo.com") || splitEmail.includes("gmail.com") || splitEmail.includes("outlook.com") || splitEmail.includes("hotmail.com"))) {
+        return false
       }
-      
+      else {
+        return true
+      }
     }
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      setSubmitted(true);
-      if (
-        !emailvalidation()||
-        !form?.firstName ||
-        !form?.licence_number ||
-        !form?.city ||
-        !form?.address ||
-        !form?.pincode ||
-        !form?.state ||
-        !form?.country ||
-        !form?.truck_id||
-        !form?.license_image
-      ) {
-        return false;
-      }
-  
-      let method = id ? "put" : "post";
-      let url = id ? shared.editApi : shared.addApi;
-      let value = {
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    if (
+      !emailvalidation() ||
+      !form?.firstName ||
+      !form?.licence_number ||
+      !form?.city ||
+      !form?.address ||
+      !form?.pincode ||
+      !form?.state ||
+      !form?.country ||
+      !form?.truck_id ||
+      !form?.license_image
+    ) {
+      return false;
+    }
+
+    let method = id ? "put" : "post";
+    let url = id ? shared.editApi : shared.addApi;
+    let value = {
+      address: form?.address,
+      city: form?.city,
+      state: form?.state,
+      country: form?.country,
+      dialCode: form?.dialCode,
+      mobileNo: form?.mobileNo,
+      firstName: form?.firstName,
+      lastName: form?.lastName,
+      pincode: form?.pincode,
+      email: form?.email,
+      licence_number: form?.licence_number,
+      license_image: form?.license_image,
+      truck_id: form?.truck_id,
+    };
+    if (form.id) {
+
+      value = {
+        id: form?.id,
+        pincode: form?.pincode,
         address: form?.address,
         city: form?.city,
         state: form?.state,
@@ -103,52 +118,47 @@ const AddEdit = () => {
         mobileNo: form?.mobileNo,
         firstName: form?.firstName,
         lastName: form?.lastName,
-        pincode: form?.pincode,
-        email: form?.email,
         licence_number: form?.licence_number,
-        license_image:form?.license_image,
+        license_image: form?.license_image,
         truck_id: form?.truck_id,
       };
-      if (form.id) {
-       
-        value = {
-          id: form?.id,
-          pincode: form?.pincode,
-          address: form?.address,
-          city: form?.city,
-          state: form?.state,
-          country: form?.country,
-          dialCode: form?.dialCode,
-          mobileNo: form?.mobileNo,
-          firstName: form?.firstName,
-          lastName: form?.lastName,
-          licence_number: form?.licence_number,
-          license_image:form?.license_image,
-          truck_id: form?.truck_id,
-        };
-      } else {
-        delete value.id;
+    } else {
+      delete value.id;
+    }
+
+    loader(true);
+    ApiClient.allApi(url, value, method).then((res) => {
+      if (res.success) {
+        history(`/${shared.url}`);
+        toast.success(res?.message);
       }
-  
-      loader(true);
-      ApiClient.allApi(url, value, method).then((res) => {
-        if (res.success) {
-          history(`/${shared.url}`);
-          toast.success(res?.message);
-        }
-        loader(false);
-      });
-    };
+      loader(false);
+    });
+  };
 
 
-    const addressResult = async (e) => {
-      let address = {};
-      if (e.place) {
-        address = addressModel.getAddress(e.place);
-        setAddressSellected(true);
-      } else {
-        setAddressSellected(false);
-      }
+  const addressResult = async (e) => {
+    let address = {};
+    if (e.place) {
+      address = addressModel.getAddress(e.place);
+      setAddressSellected(true);
+    } else {
+      setAddressSellected(false);
+    }
+    setForm({
+      ...form,
+      address: e.value,
+      country: address.country || "",
+      city: address.city || "",
+      state: address.state || "",
+      pincode: address.pincode || "",
+      // lat: address.lat || "",
+      // lng: address.lng || "",
+    });
+    if (e.place) {
+      // setTimezoneLoader(true)
+      const apires = await addressModel.gettimeZone(e.place);
+      // setTimezoneLoader(false)
       setForm({
         ...form,
         address: e.value,
@@ -159,28 +169,14 @@ const AddEdit = () => {
         // lat: address.lat || "",
         // lng: address.lng || "",
       });
-      if (e.place) {
-        // setTimezoneLoader(true)
-        const apires = await addressModel.gettimeZone(e.place);
-        // setTimezoneLoader(false)
-        setForm({
-          ...form,
-          address: e.value,
-          country: address.country || "",
-          city: address.city || "",
-          state: address.state || "",
-          pincode: address.pincode || "",
-          // lat: address.lat || "",
-          // lng: address.lng || "",
-        });
-      }
-    };
+    }
+  };
 
   const back = () => {
     history.push("/drivers");
   };
 
- 
+
 
 
   const GetLoadDetails = () => {
@@ -204,21 +200,21 @@ const AddEdit = () => {
 
   const [licence, setLicence] = useState([]);
   const [licenceLoader, setLicenceLoader] = useState(false);
-  const getLicence=(p)=>{
+  const getLicence = (p) => {
     setLicenceLoader(true)
-    ApiClient.get('driver-by-license',{licence_number:p}).then(res=>{
+    ApiClient.get('driver-by-license', { licence_number: p }).then(res => {
       setLicenceLoader(false)
-      if(res.success){
+      if (res.success) {
         setLicence(res.data)
       }
     })
   }
 
-  useEffect(()=>{
-    if(form.licence_number){
+  useEffect(() => {
+    if (form.licence_number) {
       getLicence(form.licence_number)
     }
-  },[form.licence_number])
+  }, [form.licence_number])
   return (
     <Layout>
       <form onSubmit={handleSubmit}>
@@ -272,7 +268,7 @@ const AddEdit = () => {
                 required
                 disabled={id ? true : false}
               />
-              {form.email && submitted &&  (
+              {form.email && submitted && (
                 <div className="invalid-feedback d-block">
                   Please enter a valid email
                 </div>
@@ -280,37 +276,37 @@ const AddEdit = () => {
             </div>
 
             <div className="col-md-6 mb-3">
-                                  <label className="">Mobile No</label>
-                                  <div className="phoneInput_cls d-flex form-control p-0">
-                                    <PhoneInput
-                                      country={'us'}
-                                      value={form?.dialCode}
-                                      countryCodeEditable={false}
-                                      enableSearch={true}
-                                      placeholder=""
-                                      onChange={(phone, country) => {
-                                        setForm({
-                                          ...form,
-                                          dialCode: country.dialCode,
-                                        });
-                                      }}
-                                    />
+              <label className="">Mobile No</label>
+              <div className="phoneInput_cls d-flex form-control p-0">
+                <PhoneInput
+                  country={'us'}
+                  value={form?.dialCode}
+                  countryCodeEditable={false}
+                  enableSearch={true}
+                  placeholder=""
+                  onChange={(phone, country) => {
+                    setForm({
+                      ...form,
+                      dialCode: country.dialCode,
+                    });
+                  }}
+                />
 
-                                    <input
-                                      type="text"
-                                      className="form-control phph"
-                                      placeholder="Mobile No."
-                                      value={(form && form.mobileNo) || ''}
-                                      maxLength={12}
-                                      onChange={(e) =>
-                                        setForm({
-                                          ...form,
-                                          mobileNo: methodModel.isNumber(e),
-                                        })
-                                      }
-                                    />
-                                  </div>
-                                </div>
+                <input
+                  type="text"
+                  className="form-control phph"
+                  placeholder="Mobile No."
+                  value={(form && form.mobileNo) || ''}
+                  maxLength={12}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      mobileNo: methodModel.isNumber(e),
+                    })
+                  }
+                />
+              </div>
+            </div>
             <div className="col-md-6 mb-3">
               <label> License Number <span className="text-danger">*</span></label>
 
@@ -454,128 +450,115 @@ const AddEdit = () => {
 
         </div>
 
-        <div className="col-xl-3 height-set">
-          <div class=" white-head mb-3">
-            <h5 class="profilelist">Truck Details</h5>
+
+        <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-10 ">
+          <div className="bg-[#1245940a] p-4 border-b">
+            <h3 className="text-[20px] font-[500]">Truck Details </h3>
           </div>
-          <div class=" white-bg-main mb-4">
-            <div className="row search-truck">
-              <div className="col-md-12 ">
-                <img src="/assets/img/fast.svg" className='mb-3' />
 
-                <div className="input-new-design position-relative">
-                  <div className="input-icon">
-                    <i className='fa fa-search'></i>
-                  </div>
-                  {' '}
-
-
-                  <input
-                    placeholder="Search Trucks"
-                    value={filter?.search}
-                    className="form-control"
-                    type="text"
-                    onChange={(e) => {
-                      GetTruck({ search: e.target.value });
-                      setfilter({
-                        ...filter,
-                        search: e.target.value,
-                      });
-                    }}
-                  />
-                  {isSearch && (
-                    <>
-                      {Trucks &&
-                        Trucks?.map((itm) => {
-                          if (itm)
-                            return (<div className="dropspdiv dropsdivTwo">
-                              <span
-                                className="dropspans"
-                                onClick={() => {
-                                  setForm({
-                                    ...form,
-                                    truck_id: itm?.id,
-                                    vin_number: itm?.vin_number,
-                                  });
-                                  setVin(itm?.vin_number);
-                                  setisSearch(false);
-                                  setfilter({ search: '' });
-                                }}
-                              >
-                                {itm?.truck_number}
-                              </span>
-
-
-                            </div>);
-                          else
-                            return <></>
-                        })}
-                    </>
-
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12 mb-3">
-                <label>
-                  Truck
-                  <span className="text-danger">*</span>
-                </label>
-                <div className="input-new-design">
-                  <select
-                    required
-                    className="form-control"
-                    onChange={(e) => {
-                      setForm({
-                        ...form,
-                        truck_id: e.target.value,
-                        vin_number: e.target.id,
-                      });
-                      let fltr = Trucks?.filter(
-                        (itm) => itm?.id == e.target.value
-                      );
-                      setVin(e.target.value == "" ? "" : fltr[0]?.vin_number);
-                    }}
-                    value={form?.truck_id}
-                  >
-                    <option value="" id="">Select Truck</option>
-                    {Trucks?.map((itm) => {
-                      return (
-                        <option value={itm.id} id={itm?.vin_number}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
+            <img src="/assets/img/fast.svg" className='mb-3' />
+            <i className='fa fa-search'></i>
+            <input
+              placeholder="Search Trucks"
+              value={filter?.search}
+              className="form-control"
+              type="text"
+              onChange={(e) => {
+                GetTruck({ search: e.target.value });
+                setfilter({
+                  ...filter,
+                  search: e.target.value,
+                });
+              }}
+            />
+            {isSearch && (
+              <>
+                {Trucks &&
+                  Trucks?.map((itm) => {
+                    if (itm)
+                      return (<div className="dropspdiv dropsdivTwo">
+                        <span
+                          className="dropspans"
+                          onClick={() => {
+                            setForm({
+                              ...form,
+                              truck_id: itm?.id,
+                              vin_number: itm?.vin_number,
+                            });
+                            setVin(itm?.vin_number);
+                            setisSearch(false);
+                            setfilter({ search: '' });
+                          }}
+                        >
                           {itm?.truck_number}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-                {submitted && !form.firstName ? (
-                  <div className="invalid-feedback d-block">
-                    Truck is Required
-                  </div>
-                ) : (
-                  <></>
-                )}
-              </div>
-              <div className="col-md-12 mb-3">
-                <label>VIN Number</label>
+                        </span>
 
-                <div className="input-new-design">
-                  <div className="input-icon">
-                    <i className="fa fa-user"></i>
-                  </div>
-                  <input
-                    type="text"
-                    required
-                    disabled
-                    className="form-control"
-                    value={Vin}
-                  />
-                </div>
+
+                      </div>);
+                    else
+                      return <></>
+                  })}
+              </>
+
+            )}
+           
+            <div className="mb-3">
+         
+              <label>
+                Truck
+                <span className="text-danger">*</span>
+              </label>
+          
+              <select
+                required
+                className="form-control"
+                onChange={(e) => {
+                  setForm({
+                    ...form,
+                    truck_id: e.target.value,
+                    vin_number: e.target.id,
+                  });
+                  let fltr = Trucks?.filter(
+                    (itm) => itm?.id == e.target.value
+                  );
+                  setVin(e.target.value == "" ? "" : fltr[0]?.vin_number);
+                }}
+                value={form?.truck_id}
+              >
+                <option value="" id="">Select Truck</option>
+                {Trucks?.map((itm) => {
+                  return (
+                    <option value={itm.id} id={itm?.vin_number}>
+                      {itm?.truck_number}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            {submitted && !form.firstName ? (
+              <div className="invalid-feedback d-block">
+                Truck is Required
               </div>
+            ) : (
+              <></>
+            )}
+            <div className="mb-3">
+              <label>VIN Number</label>
+              <input
+                type="text"
+                required
+                disabled
+                className="form-control"
+                value={Vin}
+              />
             </div>
           </div>
+
+
         </div>
+
+
         <div className="flex justify-end mt-4">
           <button type="submit" className="btn btn-primary">
             {/* {id ? "Update" : "Add"} {shared.addTitle} */}

@@ -118,7 +118,7 @@ const CarriersRequest = () => {
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to ${
-        status == "active" ? "Activate" : "Deactivate"
+        status == "active" ? "active" : "inactive"
       } this user?`,
       icon: "warning",
       showCancelButton: true,
@@ -159,14 +159,14 @@ const CarriersRequest = () => {
       name: "Name",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.fullName}</span>;
+        return <span className="capitalize cursor-pointer" onClick={(e)=>{view(row.id)}}>{row?.fullName}</span>;
       },
     },
     {
       key: "company_name",
       name: "Company Name",
       render: (row) => {
-        return <span className="capitalize">{row?.company_name}</span>;
+        return <span className="capitalize cursor-pointer" onClick={(e)=>{view(row.id)}}>{row?.company_name}</span>;
       },
     },
     {

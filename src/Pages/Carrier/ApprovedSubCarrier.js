@@ -121,7 +121,7 @@ const ApprovedSubCarrier = () => {
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to ${
-        status == "active" ? "Activate" : "Deactivate"
+        status == "active" ? "active" : "inactive"
       } this user?`,
       icon: "warning",
       showCancelButton: true,
@@ -166,7 +166,7 @@ const ApprovedSubCarrier = () => {
       name: "Name",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.fullName}</span>;
+        return <span className="capitalize cursor-pointer" onClick={(e)=>{view(row.id)}}>{row?.fullName}</span>;
       },
     },
     {

@@ -72,7 +72,7 @@ const View = () => {
                   <p className="text-[14px] text-black font-medium ">
                     {" "}
                     {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
-                    {data && data.name}
+                    {methodModel.capitalizeFirstLetter(data && data.name)}
                   </p>
                 </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
