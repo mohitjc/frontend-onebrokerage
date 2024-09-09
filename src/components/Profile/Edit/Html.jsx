@@ -80,6 +80,7 @@ const Html = ({
                 <label className="text-sm mb-2 block">Image</label>
 
                 <ImageUpload
+                  idd="profile_image"
                   model="users"
                   result={(e) => imageResult(e, "image")}
                   value={images.image || form.image}

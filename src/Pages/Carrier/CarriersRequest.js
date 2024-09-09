@@ -118,7 +118,7 @@ const CarriersRequest = () => {
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to ${
-        status == "active" ? "Activate" : "Deactivate"
+        status == "active" ? "active" : "inactive"
       } this user?`,
       icon: "warning",
       showCancelButton: true,

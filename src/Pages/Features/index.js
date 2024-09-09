@@ -150,7 +150,7 @@ const Features = () => {
       title: "Are you sure?",
       text: `Do you want to ${
         status == "active" ? "active" : "inactive"
-      } this user?`,
+      } this feature?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#494f9f",
