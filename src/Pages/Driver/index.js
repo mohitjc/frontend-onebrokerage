@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ApiClient from "../../methods/api/apiClient";
-import "./style.scss";
+// import "./style.scss";
 import loader from "../../methods/loader";
 import Html from "./html";
 import { useNavigate } from "react-router-dom";
@@ -44,7 +44,7 @@ const Features = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters,...p};
+    let filter = { ...filters,...p,addedBy:user?.id||user?._d};
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
@@ -102,7 +102,7 @@ const Features = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         loader(true);
-        ApiClient.delete(shared.deleteApi, { id: id , model:"features" }).then((res) => {
+        ApiClient.delete(shared.deleteApi, { id: id ,model:"driver"}).then((res) => {
           if (res.success) {
             // ToastsStore.success(res.message)
             toast.success(res.message)
@@ -114,6 +114,49 @@ const Features = () => {
         //     icon: "success"
         //   });
       }
+    });
+  };
+
+  const sampledownload = async () => {
+    try {
+      const res = await axios({
+        method: 'get',
+        url: `${environment.api}sample-excel-driver`,
+        responseType: 'blob',
+      });
+      var blob = new Blob([res.data], {
+        type: res.headers['content-type'],
+      });
+      let downloadAnchor = document.createElement('a');
+      downloadAnchor.href = window.URL.createObjectURL(blob);
+      downloadAnchor.download = `SampleDriverFile.xlsx`;
+      downloadAnchor.click();
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const ImportFile = (e) => {
+    loader(true);
+    let files = e.target.files;
+    // console.log(files,"filesfiles")
+    // let file = files?.item(0);
+    // console.log(file,"filefile")
+    let url = 'import/driver';
+    if (!files) return;
+    loader(true);
+    ApiClient.multiImageUpload(url,files).then((res) => {
+      if (res.success) {
+        // console.log("res", res);
+        // toast.success(res.message);
+        Swal.fire({
+          // title: "Good job!",
+          text: res.message,
+          icon: 'success',
+        });
+        getData();
+      }
+      loader(false);
     });
   };
 
@@ -159,7 +202,7 @@ const Features = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         loader(true);
-        ApiClient.put(shared.statusApi, { id: itm.id, status , model:"features" }).then((res) => {
+        ApiClient.put(shared.statusApi, { id: itm.id, status , model:"driver" }).then((res) => {
           if (res.success) {
             getData();
             toast.success(res.message)
@@ -184,24 +227,21 @@ const Features = () => {
     history(url);
   };
 
-  const ImportFile = (e) => {
-    loader(true);
-    let files = e.target.files;
-    let file = files?.item(0);
-    let url = 'import/truck';
-    if (!file) return;
-    ApiClient.postFormData(url, { file }).then((res) => {
-      if (res.success) {
-        // toast.success(res.message);
-        Swal.fire({
-          // title: "Good job!",
-          text: res.message,
-          icon: 'success',
-        });
-        getData();
-      }
-      loader(false);
+  const exportfun = async () => {
+    const token = await localStorage.getItem("token");
+    const req = await axios({
+      method: "get",
+      url: `${environment.api}api/export/excel`,
+      responseType: "blob",
+      body: { token: token },
     });
+    var blob = new Blob([req.data], {
+      type: req.headers["content-type"],
+    });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = `${shared.title}.xlsx`;
+    link.click();
   };
 
   const uploadFile = (e) => {
@@ -216,24 +256,6 @@ const Features = () => {
       }
       loader(false);
     });
-  };
-  const sampledownload = async () => {
-    try {
-      const res = await axios({
-        method: 'get',
-        url: `${environment.api}sample-excel-truck`,
-        responseType: 'blob',
-      });
-      var blob = new Blob([res.data], {
-        type: res.headers['content-type'],
-      });
-      let downloadAnchor = document.createElement('a');
-      downloadAnchor.href = window.URL.createObjectURL(blob);
-      downloadAnchor.download = `SampleTruckFile.xlsx`;
-      downloadAnchor.click();
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
   };
 
   const isAllow = (key = "") => {
@@ -273,7 +295,7 @@ const Features = () => {
         ImportFile={ImportFile}
         statusChange={statusChange}
         changestatus={changestatus}
-        // exportfun={exportfun}
+        exportfun={exportfun}
         uploadFile={uploadFile}
       />
     </>

@@ -77,6 +77,10 @@ function App() {
     // { url: "/trucks/edit/:id", path: "Truck/AddEdit" },
     { url: "/trucks/add", path: "Truck/AddTruck" },
     { url: "/trucks/detail/:id", path: "Truck/View" },
+    { url: "/drivers", path: "Driver" },
+    { url: "/drivers/edit/:id", path: "Driver/AddEdit" },
+    { url: "/drivers/add", path: "Driver/AddEdit" },
+    { url: "/drivers/detail/:id", path: "Driver/View" },
   ];
 
   sessionStorage.clear();

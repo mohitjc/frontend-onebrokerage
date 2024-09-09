@@ -16,7 +16,7 @@ var config = {
   headers: { "Content-Type": "application/json" },
 };
 
-var baseUrl = environment.api;
+var baseUrl = environment?.api;
 
 const handleError = (err, hideError) => {
   let message = "";

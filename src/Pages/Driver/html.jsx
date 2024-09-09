@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/global/layout";
-import "./style.scss";
+// import "./style.scss";
 import { Link } from "react-router-dom";
 import { Tooltip } from "antd";
 import { FiEdit3, FiPlus } from "react-icons/fi";
@@ -30,9 +30,9 @@ const Html = ({
   filters,
   setFilter,
   loaging,
+  data,
   sampledownload,
   ImportFile,
-  data,
   changestatus,
   isAllow,
   total = { total },
@@ -42,131 +42,113 @@ const Html = ({
   const user = useSelector((state) => state.user);
   const columns = [
     {
-      key: "truck_number",
-      name: "Truck Number",
+      key: "fullName",
+      name: "Driver Name",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.truck_number}</span>;
+        return <span className="capitalize">{row?.fullName}</span>;
       },
     
     },
-    // {
-    //   key: "email",
-    //   name: "Email",
-    //   sort: true,
-    //   render: (row) => {
-    //     return <span className="">{row?.email}</span>;
-    //   },
-    // },
-    // {
-    //   key: "mobileNo",
-    //   name: "Mobile No",
-    //   render: (row) => {
-    //     return (
-    //       <>
-    //         <p className="capitalize">
-    //           {row?.mobileNo ? "+" : ""}
-    //           {row?.mobileNo}
-    //         </p>
-    //       </>
-    //     );
-    //   },
-    // },
-    /* {
-      key: "timezone",
-      name: "Timezone",
-      render: (row) => {
-        return <>{row?.timezone}</>;
-      },
-    }, */
     {
-      key: "vin_number",
-      name: "vin Number",
+      key: "email",
+      name: "Email",
       sort: true,
       render: (row) => {
-        return <span className="capitalize">{row?.vin_number}</span>;
+        return <span className="">{row?.email}</span>;
       },
     },
     {
-      key: "",
-      name: " createdAt",
-      sort: true,
+      key: "licence_number",
+      name: "License Number",
       render: (row) => {
         return (
-          <span className="">{moment(row?.createdAt).format("DD-MM-YYYY")}</span>
+          <>
+          <span className="">{row?.licence_number}</span>
+           </>
         );
       },
     },
-    // {
-    //   key: "status",
-    //   name: "Status",
-    //   render: (row) => {
-    //     return (
-    //       <>
-    //         <div className="w-32" onClick={() => statusChange(row)}>
-    //           <span
-    //             className={`bg-[#494f9f] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-    //                       ${
-    //                         row.status == "deactive"
-    //                           ? " bg-gray-200 text-black"
-    //                           : "bg-[#494f9f] text-white"
-    //                       }`}
-    //           >
-    //             {row.status == "deactive" ? "inactive" : "active"}
-    //           </span>
-    //         </div>
-    //       </>
-    //     );
-    //   },
-    // },
-    // {
-    //   key: "action",
-    //   name: "Actions",
-    //   render: (itm) => {
-    //     return (
-    //       <>
-    //         <div className="flex items-center justify-start gap-1.5">
-    //           {isAllow(`read${shared.check}`) ? (
-    //             <Tooltip placement="top" title="View">
-    //               <a
-    //                 className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-    //                 onClick={(e) => view(itm.id)}
-    //               >
-    //                 <PiEyeLight />
-    //               </a>
-    //             </Tooltip>
-    //           ) : (
-    //             <></>
-    //           )}
-    //           {isAllow(`edit${shared.check}`) ? (
-    //             <Tooltip placement="top" title="Edit">
-    //               <a
-    //                 className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-    //                 onClick={(e) => edit(itm.id)}
-    //               >
-    //                 <LiaEdit />
-    //               </a>
-    //             </Tooltip>
-    //           ) : (
-    //             <></>
-    //           )}
-    //           {isAllow(`delete${shared.check}`) ? (
-    //             <Tooltip placement="top" title="Delete">
-    //               <span
-    //                 className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-    //                 onClick={() => deleteItem(itm.id)}
-    //               >
-    //                 <LiaTrashAlt />
-    //               </span>
-    //             </Tooltip>
-    //           ) : (
-    //             <></>
-    //           )}
-    //         </div>
-    //       </>
-    //     );
-    //   },
-    // },
+
+    {
+      key: "createdAt",
+      name: "Date Created",
+      sort: true,
+      render: (row) => {
+        return <span className="">{moment(row?.createdAt).format("DD-MM-YYYY")}</span>
+      },
+    },
+
+    {
+      key: "status",
+      name: "Status",
+      render: (row) => {
+        return (
+          <>
+            <div className="w-32" onClick={() => statusChange(row)}>
+              <span
+                className={`bg-[#494f9f] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                          ${
+                            row.status == "deactive"
+                              ? " bg-gray-200 text-black"
+                              : "bg-[#494f9f] text-white"
+                          }`}
+              >
+                {row.status == "deactive" ? "inactive" : "active"}
+              </span>
+            </div>
+          </>
+        );
+      },
+    },
+    {
+      key: "action",
+      name: "Actions",
+      render: (itm) => {
+        return (
+          <>
+            <div className="flex items-center justify-start gap-1.5">
+              {/* {isAllow(`read${shared.check}`) ? ( */}
+                <Tooltip placement="top" title="View">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => view(itm.id)}
+                  >
+                    <PiEyeLight />
+                  </a>
+                </Tooltip>
+              {/* ) : (
+                <></>
+              )} */}
+              {/* {isAllow(`edit${shared.check}`) ? ( */}
+                <Tooltip placement="top" title="Edit">
+                  <a
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={(e) => edit(itm.id)}
+                  >
+                    <LiaEdit />
+                  </a>
+                </Tooltip>
+            {/* //   ) : (
+            //     <></>
+            //   )} */}
+              {/* {isAllow(`delete${shared.check}`) ? ( */}
+                <Tooltip placement="top" title="Delete">
+                  <span
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={() => deleteItem(itm.id)}
+                  >
+                    <LiaTrashAlt />
+                  </span>
+                </Tooltip>
+              {/* ) : (
+                <></>
+              )} */}
+            </div>
+          </>
+        );
+      },
+    },
   ];
 
   /*  const getGroups = () => {
@@ -277,13 +259,16 @@ const Html = ({
               <span class="sr-only">Search</span>
             </button>
           </form>
-          <button
+          <div>
+                <button
                   onClick={(e) => sampledownload()}
                   className="btn dark-btn  btn-set"
-                >
+                 >
                   <i className="fa fa-download me-2"></i>Download
                 </button>
-                <div className="result-set">
+              </div>
+
+              <div className="result-set">
                 <div className="relative text-center">
                   <label className="cursor-pointer  dark-btn btn">
                     <i className="fa fa-download me-2"></i>
@@ -293,7 +278,6 @@ const Html = ({
                       type="file"
                       className="hidden"
                       accept=".xlsx,.csv"
-                      // value={form.baseImg ? form.baseImg : ""}
                       onChange={(e) => {
                         ImportFile(e);
                       }}

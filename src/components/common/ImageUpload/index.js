@@ -5,6 +5,7 @@ import "./style.scss";
 import loader from "../../../methods/loader";
 
 const ImageUpload = ({
+  idd,
   model,
   result,
   value,
@@ -17,31 +18,31 @@ const ImageUpload = ({
   const [img, setImg] = useState("");
   const [loading, setLoader] = useState(false);
 
-  const uploadImage = async (e) => {
-    let url = "user/uploadImage";
+  const uploadImage = async (e,id) => {
+    let url = "upload/document/multiple";
     let files = e.target.files;
     if (files?.length > 1) {
-      url = "user/uploadImage";
+      url = "upload/document/multiple";
     }
 
     let images = [];
     if (img) images = img;
     setLoader(true);
-    ApiClient.multiImageUpload(url, files, {}, "file").then((res) => {
-      console.log("res", res);
-      if (res.image) {
-        // let image = res.files.map((itm) => itm.fileName);
-        let image = [res.image]
+    ApiClient.multiImageUpload(url, files,{modelName:'users'}, "file").then((res) => {
+      if (res?.data?.imagePath?.length) {
+        let image = res.data?.imagePath;
         if (!multiple) {
           setImg(image[0]);
-          result({ event: "value", value: image[0] });
+          result({ event: "value", value: image[0], id: id });
         } else {
-          images = [...images, ...image];
-          setImg(images);
-          result({ event: "value", value: images });
+          images=[...images,...image]
+          result({ event: "value", value: images, id: id });
         }
+        //  e.target.setValue('')
       }
+      document.getElementById(idd).value=""
       setLoader(false);
+      loader(false)
     });
   };
 
@@ -63,6 +64,7 @@ const ImageUpload = ({
   return (
     <>
       <Html
+        idd={idd}
         label={label}
         multiple={multiple}
         inputElement={inputElement}

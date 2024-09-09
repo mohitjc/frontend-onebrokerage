@@ -4,6 +4,7 @@ import { FiPlus } from "react-icons/fi";
 import { LuUpload } from "react-icons/lu";
 
 const Html = ({
+  idd,
   inputElement,
   uploadImage,
   img,
@@ -23,6 +24,7 @@ const Html = ({
         }`}
       >
         <input
+         id={idd?idd:"Image"}
           type="file"
           className="hidden"
           ref={inputElement}
