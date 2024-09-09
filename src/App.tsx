@@ -81,6 +81,11 @@ function App() {
     { url: "/drivers/edit/:id", path: "Driver/AddEdit" },
     { url: "/drivers/add", path: "Driver/AddEdit" },
     { url: "/drivers/detail/:id", path: "Driver/View" },
+
+    { url: "/groups", path: "Group" },
+    { url: "/groups/edit/:id", path: "Group/AddEdit" },
+    { url: "/groups/add", path: "Group/AddEdit" },
+    { url: "/groups/detail/:id", path: "Group/View" },
   ];
 
   sessionStorage.clear();
