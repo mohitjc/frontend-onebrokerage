@@ -326,7 +326,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
 
 
           <li>
-            <Tooltip placement="right" title="Trucks">
+            <Tooltip placement="right" title="Drivers">
               <NavLink
                 to="/drivers"
                 // className={(isActive) =>

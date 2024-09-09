@@ -33,6 +33,7 @@ function App() {
     { url: "/profile", path: "Profile" },
     { url: "/profile/:tab", path: "Settings" },
     { url: "/forgotpassword", path: "Forgotpassword" },
+    { url: "/otp-verify", path: "Forgotpassword/OTPverify/html" },
     { url: "/resetpassword", path: "Resetpassword" },
     { url: "/user", path: "Users" },
     { url: "/user/edit/:id", path: "Users/AddEdit" },

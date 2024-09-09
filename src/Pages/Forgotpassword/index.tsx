@@ -26,7 +26,7 @@ const Forgotpassword = () => {
 
     ApiClient.post("admin/forgot/password", form).then((res) => {
       if (res.success) {
-        history("/login");
+        history("/otp-verify");
         setTimeout(() => {
           toast.success(res.message);
         }, 100);
