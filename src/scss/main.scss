@@ -157,9 +157,26 @@ button:focus:not(:focus-visible) {
 }
 
 body {
-  font-family: $font1 !important;
-  font-family: "Inter", sans-serif !important;
+  font-family: $font2 !important;
+
 }
+
+.pop{
+  font-family: $font1 !important;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font1 !important;
+}
+
+
+p{
+  font-family: $font2 !important;
+}
+
+
 
 a {
   color: #494f9f;
