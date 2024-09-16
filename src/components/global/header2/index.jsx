@@ -10,8 +10,7 @@ import {
 } from '@heroicons/react/16/solid'
 
 const navigation = [
-  { name: 'Demos', href: '#', current: true },
-  { name: 'About', href: '#', current: false },
+  { name: 'About', href: '#', current: true },
   { name: 'Blog', href: '#', current: false },
   { name: 'Chat', href: '#', current: false },
   { name: 'Contact', href: '#', current: false },
@@ -35,12 +34,12 @@ const Header = () => {
               <XMarkIcon aria-hidden="true" className="hidden h-6 w-6 group-data-[open]:block" />
             </DisclosureButton>
           </div>
-          <div className="flex flex-1 items-center justify-center sm:items-center sm:justify-start">
+          <div className="flex flex-1 items-center justify-start ml-16 sm:ml-0 sm:items-center sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <img
                 alt="logo"
                 src="./assets/img/logo.png"
-                className="h-12 w-auto"
+                className="h-8 lg:h-12 w-auto"
               />
             </div>
             <div className="hidden sm:ml-6 sm:block w-full">
@@ -62,16 +61,17 @@ const Header = () => {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button
+
+            {/* <button
               type="button"
               className="relative rounded-full bg-[#3E549D] p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
             >
               <span className="absolute -inset-1.5" />
               <span className="sr-only">View notifications</span>
               <BellIcon aria-hidden="true" className="h-6 w-6" />
-            </button>
+            </button> */}
 
-            <div className='login_showing px-6'>
+            <div className='login_showing lg:px-6'>
                
                 <div className='flex items-center gap-6'>
                      <p className='text-sm font-medium'>Login</p>
@@ -80,7 +80,7 @@ const Header = () => {
             </div>
 
             {/* Profile dropdown */}
-            <Menu as="div" className="relative ">
+            {/* <Menu as="div" className="relative ">
               <div>
                 <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span className="absolute -inset-1.5" />
@@ -100,27 +100,27 @@ const Header = () => {
                     <MenuItem>
                         <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white">
                         <PencilIcon className="size-4 stroke-black/30 hover:stroke-white" />
-                        Edit
+                        Profile
                         </button>
                     </MenuItem>
                     <MenuItem>
                         <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white">
                         <Square2StackIcon className="size-4 stroke-black/30 hover:stroke-white" />
-                        Duplicate
+                        Change Password
                         </button>
                     </MenuItem>
                     <div className="my-1 h-px bg-gray-200" />
                     <MenuItem>
                         <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white">
                         <TrashIcon className="size-4 stroke-black/30 hover:stroke-white" />
-                        Delete
+                        Logout
                         </button>
                     </MenuItem>
                 </MenuItems>
 
 
 
-            </Menu>
+            </Menu> */}
           </div>
         </div>
       </div>

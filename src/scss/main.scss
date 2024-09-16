@@ -1279,10 +1279,7 @@ input.searchbar.mr-2 {
     font-size: 14px;
   }
 
-  article.d-flex a,
-  button {
-    margin-bottom: 1rem !important;
-  }
+ 
 
   button.btn.btn-primary.dropdown-toggle.removeBg {
     margin-bottom: 0px !important;
@@ -2082,4 +2079,11 @@ th span, td span{
     width: 40px;
     height: 40px;
   }
+}
+
+
+
+.shadow_new{
+
+  box-shadow: 0px 30px 60px 0px rgba(74, 114, 255, 0.25);
 }
