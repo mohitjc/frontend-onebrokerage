@@ -23,7 +23,10 @@ function App() {
   const routes = [
       { url: "/", path: "Home" },
       { url: "/", element: <Navigate to="/home" /> },
-    // { url: "/login", path: "Login" },
+      { url: "/login", path: "Login" },
+      { url: "/signup", path: "Signup" },
+      { url: "/chat", path: "Chat2" },
+      { url: "/chat", path: "Chat" },
     // { url: "/dashboard", path: "Dashboard" },
     // { url: "/assignment", path: "Assignment" },
     // { url: "/assignment/detail/:id", path: "Assignment/View" },
@@ -42,7 +45,7 @@ function App() {
     // { url: "/user/add", path: "Users/AddEdit" },
     // { url: "/user/detail/:id", path: "Users/View" },
     // { url: "/", element: <Navigate to="/login" /> },
-    // { url: "/chat", path: "Chat" },
+  
     // { url: "/word-estimate", path: "WordCount/AddEdit" },
     // { url: "/word-estimate/detail/:id", path: "WordCount/View" },
     // { url: "/word-estimate/add", path: "WordCount/AddEdit" },

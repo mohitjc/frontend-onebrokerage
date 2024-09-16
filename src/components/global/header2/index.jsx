@@ -1,6 +1,7 @@
 import React from 'react';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom';
 import {
   ArchiveBoxXMarkIcon,
   ChevronDownIcon,
@@ -74,7 +75,8 @@ const Header = () => {
             <div className='login_showing lg:px-6'>
                
                 <div className='flex items-center gap-6'>
-                     <p className='text-sm font-medium'>Login</p>
+                  <Link to="/login"><p className='text-sm font-medium'>Login</p></Link>
+                   
                      <button className='bg-primary px-4 text-sm py-2 rounded-lg text-white'>Get Started Free</button>
                 </div>
             </div>
