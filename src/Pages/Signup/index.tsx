@@ -147,7 +147,7 @@ const Signup = () => {
     <>
       <AuthLayout>
         <form
-          className="w-11/12 md:w-7/12	mx-auto"
+          className=""
           onSubmit={hendleSubmit}
           autoComplete="off"
         >
@@ -225,7 +225,7 @@ const Signup = () => {
                 onChange={(e) => setRemember(e.target.checked)}
                 className="mr-2 h-4 w-4"
               />{" "}
-              <span className="text-xs text-gray-600">
+              <span className="text-xs text-gray-200">
                 By clicking Create account, I agree that I have read and
                 accepted the Terms of Use and Privacy Policy.
               </span>
@@ -246,15 +246,15 @@ const Signup = () => {
           <div className="mt-8">
             <button
               type="submit"
-              className="px-4 w-full text-sm font-normal text-white h-12 flex items-center justify-center gap-2 !bg-[#494f9f] rounded-lg shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"
+              className="px-4 w-full text-sm font-normal text-white h-12 flex items-center justify-center gap-2 !bg-[#494f9f] rounded-xl shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"
             >
               Sign Up
             </button>
           </div>
 
-          <p className="text-sm mt-3 text-center">
+          <p className="text-sm mt-3 text-center text-gray-200">
             Already have an account?{" "}
-            <Link to="/login" className="text-[#494f9f] text-sm">
+            <Link to="/login" className="text-[#fff] font-bold text-sm">
               Sign In
             </Link>
           </p>

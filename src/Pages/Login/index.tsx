@@ -171,59 +171,44 @@ const Login = () => {
       <AuthLayout>
  
           <form
-            className="xl:w-4/12 lg:w-5/12 md:w-6/12 w-11/12 bg-white border border-[#00000017] p-[24px] rounded-[30px] shadow-c"
+            className="w-full"
             onSubmit={hendleSubmit}
           >
-            <Link to="/" className=" xl:w-[150px] z-[99] mb-10 block mx-auto text-center">
-                  <img
-                    src="../../../assets/img/logo.jpeg"
-                    className=" w-[80px]   mx-auto"
-                    alt="logo"
-                  />
-                </Link>
-            <div className="">
-              <p className="text-[#333] ">
-                Don’t have an account?{" "}
-                    <Link className="sign_up" to="/signup">
-                      {" "}
-                      Sign Up
-                    </Link>
-              </p>
-              <span className="flex w-10 h-1 bg-[#494f9f] mt-1"></span>
-            </div>
+           
+            
             {/* <p className="text-[16px] font-normal text-[#333] mt-4">
               Please enter your valid details
             </p> */}
             {/* {step == 1 ? ( */}
               <div className="mt-5">
                 <div className="relative">
-                  <label className="mb-2 block">Enter Email Address</label>
-                  <div className="absolute  z-[99] p-3 px-4 bg-[#00358512] text-[#0035859c] rounded-tl-[7px] rounded-bl-[7px]">
+                  {/* <label className="mb-2 block text-white">Enter Email </label> */}
+                  {/* <div className="absolute  z-[99] p-3 px-4 bg-[#00358512] text-[#0035859c] rounded-tl-[7px] rounded-bl-[7px]">
                     <i className="fa fa-envelope " aria-hidden="true"></i>
-                  </div>
+                  </div> */}
 
                   <input
                     type="text"
-                    className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  mb-0 bginput w-full pl-[55px]"
-                    placeholder="Email"
+                    className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  mb-0 bginput w-full px-4"
+                    placeholder="Enter Email "
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     // disabled={methodModel.getPrams('attended')?true:false}
                     required
                   />
                 </div>
-                <label className="mb-2 block">Enter Password</label>
+                {/* <label className="mb-2 block text-white">Enter Password</label> */}
                 <div className="relative mb-6">
                
-                  <div className="absolute  z-[99] p-3 px-4 bg-[#00358512] text-[#0035859c] rounded-tl-[7px] rounded-bl-[7px]">
+                  {/* <div className="absolute  z-[99] p-3 px-4 bg-[#00358512] text-[#0035859c] rounded-tl-[7px] rounded-bl-[7px]">
                     <i className="fa fa-lock " aria-hidden="true"></i>
-                  </div>
+                  </div> */}
                   <input
                     type={eyes.password ? "text" : "password"}
-                    className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  mb-0 bginput w-full pl-[55px]"
+                    className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  mb-0 bginput w-full px-4"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
+                    placeholder="Enter Password"
                     required
                   />
                   {eyes.password ? (
@@ -268,12 +253,12 @@ const Login = () => {
                   className="mr-2 h-4 w-4 cursor-pointer"
                   style={{ accentColor: "#494f9f" }}
                 />{" "}
-                <span className="text-[14px] font-normal text-[#333]">
+                <span className="text-[14px] font-normal text-[#fff]">
                   Remember Me
                 </span>
               </label>
               <Link
-                className="font-semibold  text-[14px] ml-auto text-[#494f9f]"
+                className="font-semibold  text-[14px] ml-auto text-[#fff]"
                 to="/forgotpassword"
               >
                 {" "}
@@ -283,12 +268,15 @@ const Login = () => {
             <div className="mt-8 flex items-center justify-center">
               <button
                 type="submit"
-                className="h-11 rounded-full w-52 font-semibold text-center text-white   hover:opacity-80 transition-all "
+                className="h-11 rounded-xl w-full font-semibold text-center text-white   hover:opacity-80 transition-all "
               >
                 Sign in
               </button>
             </div>
-            {/* <p className='text-sm mt-3 text-center'>Don't have an account? <Link to="/signup" className='text-[#494f9f] text-sm'>Sign Up</Link></p> */}
+           
+
+
+            <p className='text-sm mt-3 text-center text-gray-200'>Don't have an account? <Link to="/signup" className='text-white font-semibold text-sm'>Sign Up</Link></p>
           </form>
        
       </AuthLayout>
