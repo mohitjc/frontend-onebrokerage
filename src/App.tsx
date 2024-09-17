@@ -25,7 +25,7 @@ function App() {
       { url: "/", element: <Navigate to="/home" /> },
       { url: "/login", path: "Login" },
       { url: "/signup", path: "Signup" },
-      { url: "/chat", path: "Chat2" },
+      // { url: "/chat", path: "Chat2" },
       { url: "/chat", path: "Chat" },
     // { url: "/dashboard", path: "Dashboard" },
     // { url: "/assignment", path: "Assignment" },
