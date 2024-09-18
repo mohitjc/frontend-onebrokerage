@@ -1,11 +1,377 @@
+import React, { useState, useEffect } from 'react';
+import { FaMoon } from "react-icons/fa";
+import { GoSearch } from "react-icons/go";
+import { HiMiniBars3 } from "react-icons/hi2";
+import { TbRosetteDiscountCheckFilled } from "react-icons/tb";
+import { WiDaySunny } from "react-icons/wi";
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { PencilIcon,TrashIcon,} from '@heroicons/react/16/solid'
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import { IoSend } from 'react-icons/io5';
+import { LuSmile } from 'react-icons/lu';
+import { ImAttachment } from "react-icons/im";
+import { IoMdClose } from 'react-icons/io';
+
 
 
 export default function Chat() {
 
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+  
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+  
+
+
+    // State to control the visibility of the sidebar
+    const [isOpen, setIsOpen] = useState(false);
+
+    // Function to toggle the sidebar
+    const toggleSidebar = () => {
+      setIsOpen(!isOpen);
+    };
+
+ // Function to close the sidebar
+ const closeSidebar = () => {
+  setIsOpen(false);
+};
 
   return (
     <>
-    Chat page
+      <div className="main_chats h-screen overflow-hidden">
+          <div className="flex">
+              <div className="block lg:hidden">
+                <div  className={`chatslefts w-[400px] border-r border-gray-200 shrink-0 py-4 h-screen bg-white fixed top-0 z-50 left-0 transition-transform duration-300 ease-in-out
+                  ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                        <div className="hdes_sech flex items-center gap-6 px-4 ">
+                            <HiMiniBars3 className="text-xl xl:text-3xl ml-2 text-[#707991] hidden lg:block" />
+                            <IoMdClose onClick={closeSidebar} className="text-2xl block lg:hidden xl:text-3xl ml-2 text-[#707991]" />
+                            <div className="bg-gray-100 items-center flex gap-2 py-2 px-4 rounded-full w-full">
+                                <GoSearch className="text-xl" />
+                                <input type="search" className="bg-transparent" />
+                            </div>
+                        </div>
+
+                        <div className="mt-4 flex flex-col gap-2 h-[calc(100vh-80px)] tailwind-scrollbar overflow-y-auto">
+                            <div className="flex justify-between gap-4 bg-white px-4 py-2 ">
+                                <div className="flex gap-2 xl:gap-4 ">
+                                    <img src="assets/img/logo.jpeg" className="h-8 w-8 xl:h-12 xl:w-12 object-contain" />
+                                    <div className="">
+                                        <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">One Brokerage Support   <TbRosetteDiscountCheckFilled className="text-blue-500" />  </h4>
+                                        <p className="line-clamp-1 text-[12px] xl:text-[15px] text-[#707991]">All data has been updated</p>
+                                    </div>
+                                </div>
+                                <div className=" ">
+                                        <h4 className="flex items-center gap-2 text-[13px] text-[#707991]">19:48    </h4>
+                                        <p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">2</p>
+                                    
+                                </div>
+                            </div>
+                            
+
+
+                            <div className="flex justify-between gap-4 bg-white px-4 py-2">
+                                <div className="flex gap-2 xl:gap-4 ">
+                                    <img src="assets/img/d1.png" className="h-8 w-8 xl:h-12 xl:w-12 object-contain" />
+                                    <div className="">
+                                        <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">Jessica Drew     </h4>
+                                        <p className="line-clamp-1 text-[12px] xl:text-[15px] text-[#707991]">All data has been updated</p>
+                                    </div>
+                                </div>
+                                <div className=" ">
+                                        <h4 className="flex items-center gap-2 text-[13px] text-[#707991]">19:48    </h4>
+                                        <p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">2</p>
+                                    
+                                </div>
+                            </div>
+
+
+                            <div className="flex justify-between gap-4 bg-[#F5F5F5] px-4 py-2">
+                                <div className="flex gap-2 xl:gap-4 ">
+                                    <img src="assets/img/d2.png" className="h-8 w-8 xl:h-12 xl:w-12 object-contain" />
+                                    <div className="">
+                                        <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">David Moore     </h4>
+                                        <p className="line-clamp-1 text-[12px] xl:text-[15px] text-[#707991]">All data has been updated</p>
+                                    </div>
+                                </div>
+                                <div className=" ">
+                                        <h4 className="flex items-center gap-2 text-[13px] text-[#707991]">19:48    </h4>
+                                        <p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">2</p>
+                                    
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                  </div>
+              </div>
+
+
+              <div className="hidden lg:block">
+                    <div className="chatslefts lg:w-[300px] xl:w-[400px] border-r border-gray-200 shrink-0 py-4 h-screen ">
+
+                        <div className="hdes_sech flex items-center gap-6 px-4 ">
+                            <HiMiniBars3 className="text-xl xl:text-3xl ml-2 text-[#707991] hidden md:block" />
+                            <IoMdClose onClick={closeSidebar} className="text-xl block md:hidden xl:text-3xl ml-2 text-[#707991]" />
+                            <div className="bg-gray-100 items-center flex gap-2 py-2 px-4 rounded-full w-full">
+                                <GoSearch className="text-xl" />
+                                <input type="search" className="bg-transparent" />
+                            </div>
+                        </div>
+
+                        <div className="mt-4 flex flex-col gap-2 h-[calc(100vh-80px)] tailwind-scrollbar overflow-y-auto">
+                            <div className="flex justify-between gap-4 bg-white px-4 py-2 ">
+                                <div className="flex gap-2 xl:gap-4 ">
+                                    <img src="assets/img/logo.jpeg" className="h-8 w-8 xl:h-12 xl:w-12 object-contain" />
+                                    <div className="">
+                                        <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">One Brokerage Support   <TbRosetteDiscountCheckFilled className="text-blue-500" />  </h4>
+                                        <p className="line-clamp-1 text-[12px] xl:text-[15px] text-[#707991]">All data has been updated</p>
+                                    </div>
+                                </div>
+                                <div className=" ">
+                                        <h4 className="flex items-center gap-2 text-[13px] text-[#707991]">19:48    </h4>
+                                        <p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">2</p>
+                                    
+                                </div>
+                            </div>
+
+
+                            <div className="flex justify-between gap-4 bg-white px-4 py-2">
+                                <div className="flex gap-2 xl:gap-4 ">
+                                    <img src="assets/img/d1.png" className="h-8 w-8 xl:h-12 xl:w-12 object-contain" />
+                                    <div className="">
+                                        <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">Jessica Drew     </h4>
+                                        <p className="line-clamp-1 text-[12px] xl:text-[15px] text-[#707991]">All data has been updated</p>
+                                    </div>
+                                </div>
+                                <div className=" ">
+                                        <h4 className="flex items-center gap-2 text-[13px] text-[#707991]">19:48    </h4>
+                                        <p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">2</p>
+                                    
+                                </div>
+                            </div>
+
+
+                            <div className="flex justify-between gap-4 bg-[#F5F5F5] px-4 py-2">
+                                <div className="flex gap-2 xl:gap-4 ">
+                                    <img src="assets/img/d2.png" className="h-8 w-8 xl:h-12 xl:w-12 object-contain" />
+                                    <div className="">
+                                        <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">David Moore     </h4>
+                                        <p className="line-clamp-1 text-[12px] xl:text-[15px] text-[#707991]">All data has been updated</p>
+                                    </div>
+                                </div>
+                                <div className=" ">
+                                        <h4 className="flex items-center gap-2 text-[13px] text-[#707991]">19:48    </h4>
+                                        <p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">2</p>
+                                    
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                  </div>
+              </div>
+
+
+
+              <div className="rigtsie_inners h-screen w-full">
+                    <div className="headres_names flex items-center justify-between p-4 bg-white dark:bg-black ">
+                  
+
+                          <div className="flex items-center gap-4">
+                          <HiMiniBars3 onClick={toggleSidebar} className="text-xl xl:text-3xl ml-2 text-[#707991] block lg:hidden" />
+                            <div className="flex gap-2 xl:gap-4 ">
+                                  <img src="assets/img/d1.png" className="h-12 w-12 xl:h-12 xl:w-12 object-contain" />
+                                  <div className="">
+                                      <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">David Moore  </h4>
+                                      <p className=" text-[12px] xl:text-[15px] text-[#707991]">last seen 5 mins ago</p>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div className="flex items-center gap-4 ">
+                                <div className="darkmode">
+
+                                    <div className="flex items-center gap-4">
+                                      <p className="text-sm">Turn On Dark Mode</p>
+                                      <label htmlFor="switch" className="toggle">
+                                          <input
+                                            type="checkbox"
+                                            className="input"
+                                            id="switch"
+                                            checked={darkMode}
+                                            onChange={toggleDarkMode}
+                                          />
+                                          <div className="icon icon--moon">
+                                            <FaMoon />
+                                          </div>
+                                          <div className="icon icon--sun">
+                                            <WiDaySunny className="text-2xl" />
+                                          </div>
+                                        </label>
+                                    </div>
+
+                                </div>
+
+
+                              <div className="mt-1">
+                                  <Menu>
+                                    <MenuButton className="">
+                                    <HiOutlineDotsVertical className="text-xl" />
+                                    
+                                    </MenuButton>
+
+                                    <MenuItems
+                                      transition
+                                      anchor="bottom end"
+                                      className="w-52 origin-top-right mt-4 rounded-xl border border-white/5 bg-primary p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+                                    >
+                                      <MenuItem>
+                                        <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                                          <PencilIcon className="size-4 fill-white/30" />
+                                          Edit
+                                       
+                                        </button>
+                                      </MenuItem>
+                                   
+                                      <div className="my-1 h-px bg-white/5" />
+                                     
+                                      <MenuItem>
+                                        <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                                          <TrashIcon className="size-4 fill-white/30" />
+                                          Delete
+                                          
+                                        </button>
+                                      </MenuItem>
+                                    </MenuItems>
+                                  </Menu>
+                              </div>
+
+                          </div>
+
+                    </div>
+
+                    <div className="bg-[#E4EBFF]  w-full relative  text-gray-800  overflow-hidden">
+                        <div className='flex flex-col items-center justify-center h-[calc(100vh-80px)] py-4 lg:py-8 w-[100%] lg:w-[80%] mx-auto px-4  '>
+                              <div class="flex flex-col flex-grow w-full   overflow-hidden">
+                                  <div class="flex flex-col flex-grow h-0 p-4 tailwind-scrollbar overflow-auto">
+                                    <div class="flex w-full mt-2 space-x-3 max-w-xs">
+                                      <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+                                      <div>
+                                        <div class="bg-white p-3 rounded-r-lg rounded-bl-lg">
+                                          <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
+                                      </div>
+                                    </div>
+                                    <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+                                      <div>
+                                        <div class="bg-primary text-white p-3 rounded-l-lg rounded-br-lg">
+                                          <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+                                        </div>
+                                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
+                                      </div>
+                                      <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+                                    </div>
+                                    <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+                                      <div>
+                                        <div class="bg-primary text-white p-3 rounded-l-lg rounded-br-lg">
+                                          <p class="text-sm">Lorem ipsum dolor sit amet.</p>
+                                        </div>
+                                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
+                                      </div>
+                                      <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+                                    </div>
+                                    <div class="flex w-full mt-2 space-x-3 max-w-xs">
+                                      <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+                                      <div>
+                                        <div class="bg-white p-3 rounded-r-lg rounded-bl-lg">
+                                          <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                        </div>
+                                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
+                                      </div>
+                                    </div>
+                                    <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+                                      <div>
+                                        <div class="bg-primary text-white p-3 rounded-l-lg rounded-br-lg">
+                                          <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                        </div>
+                                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
+                                      </div>
+                                      <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+                                    </div>
+                                    <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+                                      <div>
+                                        <div class="bg-primary text-white p-3 rounded-l-lg rounded-br-lg">
+                                          <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                                        </div>
+                                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
+                                      </div>
+                                      <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+                                    </div>
+                                    <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+                                      <div>
+                                        <div class="bg-primary text-white p-3 rounded-l-lg rounded-br-lg">
+                                          <p class="text-sm">Lorem ipsum dolor sit amet.</p>
+                                        </div>
+                                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
+                                      </div>
+                                      <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+                                    </div>
+                                    <div class="flex w-full mt-2 space-x-3 max-w-xs">
+                                      <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+                                      <div>
+                                        <div class="bg-white p-3 rounded-r-lg rounded-bl-lg">
+                                          <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                        </div>
+                                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
+                                      </div>
+                                    </div>
+                                    <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+                                      <div>
+                                        <div class="bg-primary text-white p-3 rounded-l-lg rounded-br-lg">
+                                          <p class="text-sm">Lorem ipsum dolor sit.</p>
+                                        </div>
+                                        <span class="text-xs text-gray-500 leading-none">2 min ago</span>
+                                      </div>
+                                      <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="bg-white p-4 rounded-xl flex items-center gap-4 mt-4">
+                                    <div className='flex gap-4 items-center'>
+                                    <LuSmile className='text-xl text-gray-600' />
+                                    <ImAttachment className='text-xl text-gray-600' />
+                                    </div>
+
+                                    <div className='w-full'>
+                                    <input class="flex items-center h-10 w-full rounded px-3 text-sm" type="text" placeholder="Type your message…"/>
+                                    </div>
+                                    <IoSend className='text-2xl text-primary' />
+                                  </div>
+                              </div>
+                                  
+                        </div>
+                    </div>
+
+              </div>
+          </div>
+      </div>
+
+
+
+      
   
     </>
   );
