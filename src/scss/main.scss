@@ -2087,3 +2087,68 @@ th span, td span{
 
   box-shadow: 0px 30px 60px 0px rgba(74, 114, 255, 0.25);
 }
+
+.toggle {
+  background-color: #e3e4e7;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.1);
+  line-height: 1;
+}
+
+.input {
+  display: none;
+}
+
+.icon {
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+  transition: transform 500ms;
+}
+
+.icon--moon {
+  transition-delay: 200ms;
+  color: #494f9f;
+}
+
+.icon--sun {
+  transform: scale(0);
+  color: #494f9f;
+}
+
+#switch:checked + .icon--moon {
+  transform: rotate(360deg) scale(0);
+}
+
+#switch:checked ~ .icon--sun {
+  transition-delay: 200ms;
+  transform: scale(1) rotate(360deg);
+}
+
+
+
+
+/* Firefox */
+.tailwind-scrollbar {
+  scrollbar-width: thin; /* auto, thin, none */
+  scrollbar-color: #494f9f #f0f0f0; /* thumb color, track color */
+}
+
+/* Chrome, Edge, Safari */
+.tailwind-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tailwind-scrollbar::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.tailwind-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #494f9f; /* gray-500 */
+  border-radius: 10px;
+  border: 2px solid #f0f0f0;
+}
