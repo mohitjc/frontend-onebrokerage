@@ -174,7 +174,7 @@ const Signup = () => {
             required
           />
 
-          <div className="relative mb-6">
+          <div className="relative mb-3">
             <input
               type={eyes.password ? "text" : "password"}
               className="shadow-box border-1 border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
@@ -194,7 +194,7 @@ const Signup = () => {
             </div>
           </div>
 
-          <div className="relative mb-6">
+          <div className="relative ">
             <input
               type={eyes.confirmPassword ? "text" : "confirmPassword"}
               className="shadow-box border-1 border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
