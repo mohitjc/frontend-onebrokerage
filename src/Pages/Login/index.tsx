@@ -112,6 +112,7 @@ const Login = () => {
       .then((res1) => {
 
         if (res1?.data?.success) {
+     
           if (remember) {
             localStorage.setItem("remember", JSON.stringify(data));
           } else {
@@ -120,7 +121,8 @@ const Login = () => {
           localStorage.setItem("token", res1?.data?.data?.access_token);
           dispatch(login_success(res1?.data?.data));
           const newdata = res1.data?.data;
-          history("/dashboard");
+          toast.success(res1?.data?.message)
+          history("/chat");
           // if(newdata?.request_status=="rejected")
           // {
           //   history("/profile");
@@ -137,7 +139,7 @@ const Login = () => {
           //   });
            
           // }
-          // toast.success(res1.message);
+   
       
         
         }

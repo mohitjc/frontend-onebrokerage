@@ -99,11 +99,11 @@ const OTPverify = () => {
         <>
             <AuthLayout>
                 <form
-                    className="xl:w-4/12 lg:w-5/12 md:w-6/12 w-11/12  bg-white border border-[#00000017] p-[24px] rounded-[30px] shadow-c"
+                    className="w-full"
                     onSubmit={hendleSubmit}
                 >
                     <div className="">
-                        <h1 className="text-[30px] font-semibold text-[#333] ">
+                        <h1 className="text-[30px] font-semibold text-[#fff] ">
                             New Password
                         </h1>
                         <span className="flex w-10 h-1 bg-[#494f9f] mt-1"></span>
