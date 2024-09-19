@@ -33,6 +33,8 @@ function App() {
       { url: "/chat", path: "Chat" },
       { url: "/dashboard", path: "Dashboard" },
      { url: "/profile", path: "Profile" },
+     { url: "/forgotpassword", path: "Forgotpassword" },
+     { url: "/otp-verify", path: "Forgotpassword/OTPverify/html" },
     // { url: "/assignment", path: "Assignment" },
     // { url: "/assignment/detail/:id", path: "Assignment/View" },
     // {
@@ -42,8 +44,7 @@ function App() {
     // { url: "*", path: "NotFoundPage" },
  
     // { url: "/profile/:tab", path: "Settings" },
-    // { url: "/forgotpassword", path: "Forgotpassword" },
-    // { url: "/otp-verify", path: "Forgotpassword/OTPverify/html" },
+ 
     // { url: "/resetpassword", path: "Resetpassword" },
     // { url: "/user", path: "Users" },
     // { url: "/user/edit/:id", path: "Users/AddEdit" },

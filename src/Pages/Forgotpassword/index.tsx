@@ -24,7 +24,7 @@ const Forgotpassword = () => {
     e.preventDefault();
     loader(true);
 
-    ApiClient.post("admin/forgot/password", form).then((res) => {
+    ApiClient.post("user/forgot-password", form).then((res) => {
       if (res.success) {
         history("/otp-verify");
         setTimeout(() => {
@@ -39,16 +39,16 @@ const Forgotpassword = () => {
     <>
       <AuthLayout>
         <form
-          className="xl:w-4/12 lg:w-5/12 md:w-6/12 w-11/12  bg-white border border-[#00000017] p-[24px] rounded-[30px] shadow-c"
+          className="w-full"
           onSubmit={hendleSubmit}
         >
           <div className="">
-            <h1 className="text-[30px] font-semibold text-[#333] ">
+            <h1 className="text-[30px] font-semibold text-[#fff] ">
               Forgot Password
             </h1>
             <span className="flex w-10 h-1 bg-[#494f9f] mt-1"></span>
           </div>
-          <p className="text-[16px] font-normal text-[#333] mt-4">
+          <p className="text-[16px] font-normal text-[#fff] mt-4">
             {" "}
             No worries! Just enter your email and we’ll send you a reset
             password link.
@@ -78,7 +78,7 @@ const Forgotpassword = () => {
             </button>
           </div>
 
-          <p className="text-[#333] text-center font-normal text-[14px] mt-4">
+          <p className="text-[#fff] text-center font-normal text-[14px] mt-4">
             {" "}
             Just Remember?
             <Link
