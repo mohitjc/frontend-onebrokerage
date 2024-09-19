@@ -25,10 +25,14 @@ function App() {
       { url: "/", element: <Navigate to="/home" /> },
       { url: "/login", path: "Login" },
       { url: "/signup", path: "Signup" },
+      { url: "/signup-step-1", path: "Signup/AddressStep" },
+      { url: "/signup-step-2", path: "Signup/Step2" },
+      { url: "/signup-step-3", path: "Signup/Step3" },
+      
       // { url: "/chat", path: "Chat2" },
       { url: "/chat", path: "Chat" },
-    { url: "/dashboard", path: "Dashboard" },
-       { url: "/profile", path: "Profile" },
+      { url: "/dashboard", path: "Dashboard" },
+     { url: "/profile", path: "Profile" },
     // { url: "/assignment", path: "Assignment" },
     // { url: "/assignment/detail/:id", path: "Assignment/View" },
     // {
