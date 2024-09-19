@@ -155,35 +155,14 @@ useEffect(() => {
   }, []);
   return (
     <AuthLayout>
-    <div className="bg_img main_signup signup-page">
-      <div className="center-img ">
-        <div className="container">
-          <div className="row justifiit">
-            <div className="col-lg-6">
-              <div className="right_side ">
-                <Link to="/">
-                  <div className="logo_image mb-3">
-                    <img src="assets/img/logo-m.png" className="logo_name" />
-                  </div>
-                </Link>
-
-                <form className="centerLogin" onSubmit={handleSubmit}>
-                  <div className="text-center mb-4">
-                    <h3 className="text-center lgtext">Create your account.</h3>
-                    <p className="accopunt text-center p-0 mb-3">
-                      Already have an account?{" "}
-                      <Link className="sign_up" to="/login">
-                        {" "}
-                        Sign In
-                      </Link>
-                    </p>
-                  </div>
-                  <div className="row ">
-                    <div className="col-md-12">
+    <div className="">
+    <form className="" onSubmit={handleSubmit}>
+                  <div className=" ">
+                    <div className="">
                       <div className="progressbar-num">
                         <ProgressBar
                           percent={percent}
-                          filledBackground="linear-gradient(to right,rgb(63 85 158), rgb(150 162 201))"
+                          filledBackground="linear-gradient(to right,rgb(74 81 155), rgb(24 81 155))"
                         >
                           <Step transition="scale">
                             {({ accomplished }) => (
@@ -238,54 +217,19 @@ useEffect(() => {
                       aria-labelledby="home-tab"
                     >
                       <>
-                        <div className="scrollbar-height">
-                          <div className="row  justleft">
-                            <div className="col-md-12">
-                              <h4 className="mt-4 mb-3">
+                        <div className="">
+                          <div className="">
+                            <div className="">
+                              <h4 className="mt-4 mb-3 text-white">
                                 {" "}
                                 Vehicle Information
                               </h4>
                             </div>
-                            {/* <div className="col-md-6 mb-3">
-                              <label className="form-label ml-2">
-                                Truck Number
-                                <span className="text-danger">*</span>
-                              </label>
+                            
+                            <div className="">
+                              
                               <input
-                                className="form-control mb-0 bginput chnages"
-                                type="text"
-                                required
-                                pattern="[a-zA-Z0-9\s]+"
-                                onKeyPress={(e) => {
-                                  var regex = new RegExp("[a-zA-Z0-9]+");
-                                  var key = String.fromCharCode(
-                                    !event.charCode
-                                      ? event.which
-                                      : event.charCode
-                                  );
-                                  if (!regex.test(key)) {
-                                    event.preventDefault();
-                                    return false;
-                                  }
-                                }}
-                                value={form?.truck_number}
-                                name="documentNumber"
-                                onChange={(e) => {
-                                  setForm({
-                                    ...form,
-                                    truck_number: e.target.value,
-                                  });
-                                }}
-                                placeholder="Truck Number"
-                              />
-                            </div> */}
-                            <div className="col-md-6 mb-3">
-                              <label className="form-label ml-2">
-                                Total Trailers
-                                <span className="text-danger">*</span>
-                              </label>
-                              <input
-                                className="form-control mb-0 bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                                 type="number"
                                 required
                                 min={0}
@@ -314,14 +258,11 @@ useEffect(() => {
                               />
                             </div>
 
-                            <div className="col-md-6 mb-3">
-                              <label className="form-label ml-2">
-                                Solo Truck
-                                <span className="text-danger">*</span>
-                              </label>
+                            <div className="">
+                             
                               <input
                                 min={0}
-                                className="form-control mb-0 bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                                 type="number"
                                 required
                                 pattern="\d+"
@@ -338,14 +279,11 @@ useEffect(() => {
                                 //   onBlur={handleBlur}
                               />
                             </div>
-                            <div className="col-md-6 mb-3">
-                              <label className="form-label ml-2">
-                                Team Truck
-                                <span className="text-danger">*</span>
-                              </label>
+                            <div className="">
+                             
                               <input
                                 min={0}
-                                className="form-control mb-0 bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                                 type="number"
                                 required
                                 value={form?.team_truck}
@@ -362,14 +300,14 @@ useEffect(() => {
                               />
                             </div>
 
-                            {/* <div className="col-md-6 mb-3">
+                            {/* <div className="">
                               <label className="form-label ml-2">
                                 Total Truck
                                 <span className="text-danger">*</span>
                               </label>
                               <input
                                 min={0}
-                                className="form-control mb-0 bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                                 type="number"
                                 required
                                 name="documentNumber"
@@ -391,13 +329,10 @@ useEffect(() => {
                                 //   onBlur={handleBlur}
                               />
                             </div> */}
-                            <div className="col-md-12 mb-3">
-                              <label className="form-label ml-2">
-                                Trailer Type
-                                <span className="text-danger">*</span>
-                              </label>
-                              <div className="row">
-                                <div className="col-md-6 ">
+                            <div className="">
+                            
+                              <div className="">
+                                <div className=" ">
                                   <div className="input_div input_div1">
                                     {" "}
                                     <input
@@ -417,14 +352,9 @@ useEffect(() => {
                                           updatedTypes.push("dry_van");
                                         } else {
                                           <div className="col-md-12 mb-3">
-                                            <label className="form-label ml-2">
-                                              Trailer Type
-                                              <span className="text-danger">
-                                                *
-                                              </span>
-                                            </label>
+                                           
                                             <div className="row">
-                                              <div className="col-md-6">
+                                              <div className="">
                                                 <input
                                                   id="dry_van"
                                                   type="checkbox"
@@ -459,12 +389,12 @@ useEffect(() => {
                                                 />
                                                 <label
                                                   for="dry_van"
-                                                  className="ms-2"
+                                                  className="ms-2 text-white"
                                                 >
                                                   Dry-Van
                                                 </label>
                                               </div>
-                                              <div className="col-md-6">
+                                              <div className="">
                                                 <input
                                                   id="dry_van"
                                                   type="checkbox"
@@ -499,7 +429,7 @@ useEffect(() => {
                                                 />
                                                 <label
                                                   for="reefer"
-                                                  className="ms-2"
+                                                  className="ms-2 text-white cursor-pointer"
                                                 >
                                                   Reefer
                                                 </label>
@@ -516,12 +446,12 @@ useEffect(() => {
                                         });
                                       }}
                                     />
-                                    <label for="dry_van" className="ms-2">
+                                    <label for="dry_van" className="ms-2 text-white cursor-pointer">
                                       Dry Van
                                     </label>
                                   </div>
                                 </div>
-                                <div className="col-md-6 ">
+                                <div className=" ">
                                   <div className="input_div">
                                     {" "}
                                     <input
@@ -550,7 +480,7 @@ useEffect(() => {
                                         });
                                       }}
                                     />
-                                    <label for="reefer" className="ms-2">
+                                    <label for="reefer" className="ms-2 text-white cursor-pointer" >
                                       Reefer
                                     </label>
                                   </div>
@@ -574,7 +504,7 @@ useEffect(() => {
                               />
                               <label
                                 for="checkbox1"
-                                className="clickBox ms-1 mb-0"
+                                className="clickBox ms-1 mb-0 text-white cursor-pointer"
                               >
                                 By clicking create account, I agree that I have
                                 read and accepted the terms of use and privacy
@@ -583,18 +513,18 @@ useEffect(() => {
                             </div>
                           </div>
                         </div>
-                        <div className="d-flex justify-content-end gap-3 mt-4">
+                        <div className="flex items-center justify-end gap-2 mt-4">
                           <button
                             onClick={() => {
                               history("/signup-step-2");
                             }}
-                            className="btn-save width-set"
+                          className="bg-white px-4 py-2 rounded-lg text-black border border-gray text-sm "
                           >
                             Back
                           </button>
                           <button
                             type="submit"
-                            className="btn dark-btn width-set"
+                            className="bg-primary px-4 py-2 rounded-lg text-white text-sm"
                           >
                             Sign Up
                           </button>
@@ -605,67 +535,11 @@ useEffect(() => {
 
                   {/* end tab */}
                 </form>
-              </div>
-            </div>
-            <button
-              style={{ display: "none" }}
-              type="button"
-              id="OpenBidModel"
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-            >
-              Launch demo modal
-            </button>
+           
+        
 
-            <div
-              class="modal fade"
-              id="exampleModal"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  {/* <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Registration Complete</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div> */}
-                  <div class="modal-body">
-                    <div className="verification-modal-inner p-3">
-                      <img src="assets/img/tick-grey.png" />
-                      <h5>Thank you for Your Registration .</h5>
-                      <h5>
-                        Please wait until your profile verification is completed
-                        .
-                      </h5>
-
-                      <div className="mx-auto mt-4 d-block text-center">
-                        <button
-                          type="button"
-                          class="btn btn-secondary d-none"
-                          id="CloseBidModel"
-                          data-bs-dismiss="modal"
-                        ></button>
-                        <button
-                          onClick={() => {
-                            history("/");
-                            document.getElementById("CloseBidModel").click();
-                          }}
-                          type="submit"
-                          class="btn dark-btn width-set mx-auto"
-                        >
-                          Ok
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+       
+          
     </div>
     </AuthLayout>
   );

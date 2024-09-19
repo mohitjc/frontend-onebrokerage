@@ -144,39 +144,19 @@ export default function AddressStep() {
 
   return (
     <AuthLayout>
-    <div className="bg_img main_signup signup-page">
-      <div className="center-img  ">
-        <div className="container">
-          <div className="row ">
-            <div className="col-lg-6">
-              <div className="right_side ">
-                <Link to="/">
-                  <div className="logo_image mb-3">
-                    <img src="assets/img/logo-m.png" className="logo_name" />
-                  </div>
-                </Link>
-
-                <form
+    <div className="">
+    <form
                   autoComplete="off"
-                  className="centerLogin"
+                  className=""
                   onSubmit={handleSubmit}
                 >
-                  <div className="text-center mb-4">
-                    <h3 className="text-center lgtext">Create your account.</h3>
-                    <p className="accopunt text-center p-0 mb-3">
-                      Already have an account?{" "}
-                      <Link className="sign_up" to="/login">
-                        {" "}
-                        Sign In
-                      </Link>
-                    </p>
-                  </div>
+                 
                   <div className="row">
                     <div className="col-md-12">
                       <div className="progressbar-num">
                         <ProgressBar
                           percent={percent}
-                          filledBackground="linear-gradient(to right,rgb(63 85 158), rgb(150 162 201))"
+                        filledBackground="linear-gradient(to right,rgb(74 81 155), rgb(24 81 155))"
                         >
                           <Step transition="scale">
                             {({ accomplished }) => (
@@ -228,25 +208,19 @@ export default function AddressStep() {
                       aria-labelledby="home-tab"
                     >
                       <>
-                        <div className="scrollbar-height">
-                          <h4 className="mb-2">Address </h4>
-                          <div className="row ">
-                            <div className="col-md-12 mb-3">
-                              <label className="form-label ml-2 ">
-                                Address
-                                <span className="text-danger">*</span>
-                              </label>
+                        <div className="">
+                          <h4 className="mb-2 text-white">Address </h4>
+                          <div className=" ">
+                            <div className="">
+                             
                               <GooglePlaceAutoComplete
                                 value={form?.address}
                                 result={DestinationAddress}
                                 placeholder="Address"
                               />
                             </div>
-                            <div className="col-md-6 mb-3">
-                              <label className="form-label ml-2">
-                                State
-                                <span className="text-danger">*</span>
-                              </label>
+                            <div className="">
+                             
                               <input
                                 type="text"
                                 value={form?.state}
@@ -257,14 +231,11 @@ export default function AddressStep() {
                                   setForm({ ...form, state: e.target.value });
                                 }}
                                 // onBlur={handleBlur}
-                                className="form-control bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                               />
                             </div>
-                            <div className="col-md-6 mb-3">
-                              <label className="form-label ml-2">
-                                City
-                                <span className="text-danger">*</span>
-                              </label>
+                            <div className="">
+                            
                               <input
                                 type="text"
                                 value={form?.city}
@@ -275,14 +246,11 @@ export default function AddressStep() {
                                   setForm({ ...form, city: e.target.value });
                                 }}
                                 // onBlur={handleBlur}
-                                className="form-control bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                               />
                             </div>
-                            <div className="col-md-6 mb-3">
-                              <label className="form-label ml-2">
-                                Zipcode
-                                <span className="text-danger">*</span>
-                              </label>
+                            <div className="">
+                             
                               <input
                                 type="number"
                                 pattern="^[a-zA-Z0-9]+$"
@@ -305,14 +273,11 @@ export default function AddressStep() {
                                   setForm({ ...form, pincode: e.target.value });
                                 }}
                                 // onBlur={handleBlur}
-                                className="form-control bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                               />
                             </div>
-                            <div className="col-md-6 mb-3">
-                              <label className="form-label ml-2">
-                                Country
-                                <span className="text-danger">*</span>
-                              </label>
+                            <div className="">
+                              
                               <input
                                 type="text"
                                 value={form?.country}
@@ -323,24 +288,24 @@ export default function AddressStep() {
                                   setForm({ ...form, country: e.target.value });
                                 }}
                                 // onBlur={handleBlur}
-                                className="form-control bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                               />
                             </div>
                           </div>
                         </div>
 
-                        <div className="col-md-12 d-flex justify-content-end gap-2 mt-3">
+                        <div className="flex items-center justify-end gap-2 mt-4">
                           <a
                             onClick={() => {
                               history("/signup");
                             }}
-                            className=" btn-save width-set"
+                            className="bg-white px-4 py-2 rounded-lg text-black border border-gray text-sm "
                           >
                             Back
                           </a>
                           <button
                             type="submit"
-                            className="btn dark-btn width-set"
+                            className="bg-primary px-4 py-2 rounded-lg text-white text-sm"
                           >
                             Next
                           </button>
@@ -351,11 +316,6 @@ export default function AddressStep() {
 
                   {/* end tab */}
                 </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     </AuthLayout>
   );

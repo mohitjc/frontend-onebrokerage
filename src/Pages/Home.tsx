@@ -135,11 +135,9 @@ const Html = ({
           </div>
       </div>
 
-      <div className="bg-[#F4F7FF] px-4 lg:px-8 py-10 lg:py-20">
+      <div className="bg-[#F4F7FF] px-4 lg:px-8 py-10 lg:py-20 ">
           <div className="container mx-auto">
-              <div className="text-center mb-6 lg:mb-12 xl:mb-20">
-                  <h4 className="font-bold text-[24px] lg:text-[28px] xl:text-[36px]">Features for a better experience</h4>
-              </div>
+             
               <div className="grid grid-cols-12 gap-4 xl:gap-6 items-center">
                   <div className="col-span-12 md:col-span-6 2xl:col-span-5  ">
                         <div className="relative">
@@ -151,11 +149,11 @@ const Html = ({
 
                   <div className="col-span-12 md:col-span-6 pl-4 xl:pl-0 2xl:col-span-5">
                         
-                        <div className="flex flex-col gap-4  text-center  md:text-left xl:gap-6 2xl:max-w-[500px]">
-                            <h6 className="font-bold text-[24px] lg:text-[40px] xl:text-[48px] ">Meet your team
+                        <div className="flex flex-col gap-4  text-center  md:text-left xl:gap-4 2xl:max-w-[500px]">
+                            <h6 className="font-bold text-[24px] lg:text-[40px] leading-[30px] lg:leading-[50px] xl:text-[48px] xl:leading-[60px]">Meet your team
                             with live video chat</h6>
-                            <p className="text-[16px] mt-3">Proin faucibus nibh et sagittis a. Lacinia purus ac amet superexcellent aliquam enim.</p>
-                            <p className="text-[16px] mt-3">Get paychecks up to two days early. Get a $20 bonus when you receive qualifying direct deposits</p>
+                            <p className="text-[16px] ">Proin faucibus nibh et sagittis a. Lacinia purus ac amet superexcellent aliquam enim.</p>
+                            <p className="text-[16px] ">Get paychecks up to two days early. Get a $20 bonus when you receive qualifying direct deposits</p>
                         </div>
                   </div>
 
@@ -175,8 +173,8 @@ const Html = ({
                   <div className="col-span-12 md:col-span-6 pl-4 xl:pl-0 2xl:col-span-5">
                         
                         <div className="flex flex-col gap-4  items-center lg:items-start   xl:gap-6 ">
-                            <h6 className="font-bold text-[24px] lg:text-[40px] xl:text-[48px] ">Start sharing directly inside conversations</h6>
-                            <p className="text-[16px] mt-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            <h6 className="font-bold text-[24px] lg:text-[40px] leading-[30px] lg:leading-[50px] xl:text-[48px] xl:leading-[60px] ">Start sharing directly inside conversations</h6>
+                            <p className="text-[16px]">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                             <div className="">
                             <button className="px-4 py-4 bg-primary text-white rounded-lg">
                                 Start Chatting Now
@@ -216,8 +214,8 @@ const Html = ({
                   <div className="col-span-12 md:col-span-6 pl-4 xl:pl-0 2xl:col-span-6">
                         
                         <div className="flex flex-col gap-4  text-center  md:text-left xl:gap-6 2xl:max-w-[500px]">
-                            <h6 className="text-[24px] lg:text-[40px] xl:text-[48px] ">Get tasks updates <span className="font-bold text-[24px] lg:text-[40px] xl:text-[48px]"> from your drivers & carriers.</span></h6>
-                            <p className="text-[16px] mt-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <h6 className=" text-[24px] lg:text-[40px] leading-[30px] lg:leading-[50px] xl:text-[48px] xl:leading-[60px]  ">Get tasks updates <span className="font-bold text-[24px] lg:text-[40px] leading-[30px] lg:leading-[50px] xl:text-[48px] xl:leading-[60px] "> from your drivers & carriers.</span></h6>
+                            <p className="text-[16px]">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 
                         </div>
                   </div>
@@ -308,10 +306,10 @@ const Html = ({
                               <h6 className="text-[20px] lg:text-[24px] xl:text-[31px] ">Lorem Ipsum is a dummy paragraph
                                 to fill a content of the website.
                                 </h6>
-                              <p className="text-[16px] mt-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into el</p>
+                              <p className="text-[16px]">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into el</p>
                               
                               <div className="flex flex-col gap-4 xl:gap-6 py-6">
-                                <div className="one_row flex flex-col md:flex-row gap-2   ">
+                                <div className="one_row flex flex-col md:flex-row gap-4   ">
                                       <div className="relative">
                                           <img src="assets/img/homeimg/4.1.png" className="mx-auto" />
                                       </div>
@@ -320,7 +318,7 @@ const Html = ({
                                           <p className="text-[14px] xl:text-[16px] mt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                                       </div>
                                 </div>
-                                <div className="one_row flex flex-col md:flex-row gap-2   ">
+                                <div className="one_row flex flex-col md:flex-row gap-4   ">
                                       <div className="relative">
                                           <img src="assets/img/homeimg/4.2.png" className="mx-auto" />
                                       </div>
@@ -330,7 +328,7 @@ const Html = ({
                                       </div>
                                 </div>
 
-                                <div className="one_row flex flex-col md:flex-row gap-2   ">
+                                <div className="one_row flex flex-col md:flex-row gap-4   ">
                                       <div className="relative">
                                           <img src="assets/img/homeimg/4.3.png" className="mx-auto" />
                                       </div>

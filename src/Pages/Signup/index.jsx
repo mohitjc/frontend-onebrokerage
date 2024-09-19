@@ -99,10 +99,10 @@ const Signup = () => {
           onSubmit={handleSubmit}
           autoComplete="off"
         >
-          <h4 className="text-typo mb-6 text-2xl font-bold">Sign Up</h4>
+          <h4 className="text-white mb-6 text-2xl font-bold">Sign Up</h4>
           <ProgressBar
             percent={percent}
-            filledBackground="linear-gradient(to right,rgb(63 85 158), rgb(150 162 201))"
+            filledBackground="linear-gradient(to right,rgb(74 81 155), rgb(24 81 155))"
           >
             <Step transition="scale">
               {({ accomplished }) => (
@@ -174,7 +174,7 @@ const Signup = () => {
             required
           />
 
-          <div className="relative mb-6">
+          <div className="relative mb-3">
             <input
               type={eyes.password ? "text" : "password"}
               className="shadow-box border-1 border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
@@ -194,7 +194,7 @@ const Signup = () => {
             </div>
           </div>
 
-          <div className="relative mb-6">
+          <div className="relative ">
             <input
               type={eyes.confirmPassword ? "text" : "confirmPassword"}
               className="shadow-box border-1 border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
