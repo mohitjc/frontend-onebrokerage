@@ -2152,3 +2152,33 @@ th span, td span{
   border-radius: 10px;
   border: 2px solid #f0f0f0;
 }
+
+
+
+.non-activebar  {
+  background: #fff;
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #494f9f;
+  font-size: 12px;
+}
+
+.activebar{
+  background: #494f9f;
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 12px;
+}
+
+.RSPBprogressBar {
+  margin-bottom: 30px;
+}

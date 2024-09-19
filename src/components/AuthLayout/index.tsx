@@ -6,7 +6,7 @@ const AuthLayout = ({ children }: any) => {
     <>
       <div className="bg-img">
         <div className="flex justify-between gap-2 h-screen">
-               <div className="absolute right-0 h-full xl:w-[600px] flex items-center justify-center px-10 bg-black/80 border-l-8 border-primary ">
+               <div className="absolute right-0 h-full xl:w-[600px] flex md:items-center md:justify-center px-10 py-4 bg-black/80 border-l-8 border-primary  overflow-auto ">
                <div className="w-full xl:w-3/4 ">
                   <Link to="/" className="  mb-10 block mx-auto text-center">
                       <img

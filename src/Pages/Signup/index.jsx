@@ -99,10 +99,10 @@ const Signup = () => {
           onSubmit={handleSubmit}
           autoComplete="off"
         >
-          <h4 className="text-typo mb-6 text-2xl font-bold">Sign Up</h4>
+          <h4 className="text-white mb-6 text-2xl font-bold">Sign Up</h4>
           <ProgressBar
             percent={percent}
-            filledBackground="linear-gradient(to right,rgb(63 85 158), rgb(150 162 201))"
+            filledBackground="linear-gradient(to right,rgb(74 81 155), rgb(24 81 155))"
           >
             <Step transition="scale">
               {({ accomplished }) => (

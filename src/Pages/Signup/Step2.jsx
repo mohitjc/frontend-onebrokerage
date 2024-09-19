@@ -120,35 +120,15 @@ export default function Step2() {
   }
   return (
     <AuthLayout>
-    <div className="bg_img main_signup signup-page">
-      <div className="center-img ">
-        <div className="container">
-          <div className="row ">
-            <div className="col-lg-6">
-              <div className="right_side ">
-                <Link to="/">
-                  <div className="logo_image mb-3">
-                    <img src="assets/img/logo-m.png" className="logo_name" />
-                  </div>
-                </Link>
-
-                <form className="centerLogin" onSubmit={handleSubmit}>
-                  <div className="text-center mb-4">
-                    <h3 className="text-center lgtext">Create your account.</h3>
-                    <p className="accopunt text-center p-0 mb-3">
-                      Already have an account?{" "}
-                      <Link className="sign_up" to="/login">
-                        {" "}
-                        Sign In
-                      </Link>
-                    </p>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-12">
+    <div className="">
+    <form className="" onSubmit={handleSubmit}>
+                  
+                  <div className="">
+                    <div className="">
                       <div className="progressbar-num">
                         <ProgressBar
                           percent={percent}
-                          filledBackground="linear-gradient(to right,rgb(63 85 158), rgb(150 162 201))"
+                           filledBackground="linear-gradient(to right,rgb(74 81 155), rgb(24 81 155))"
                         >
                           <Step transition="scale">
                             {({ accomplished }) => (
@@ -200,21 +180,18 @@ export default function Step2() {
                       aria-labelledby="home-tab"
                     >
                       <>
-                        <div className="scrollbar-height">
-                          <div className="row   justify-content-start">
-                            <div className="col-md-12">
-                              <h4 className="mt-4 mb-3">
+                        <div className="">
+                          <div className="">
+                            <div className="">
+                              <h4 className="mt-4 mb-3 text-white">
                                 {" "}
                                 Company Information
                               </h4>
                             </div>
                             <div className="col-md-6 mb-3">
-                              <label className="form-label ml-2">
-                                Company Name
-                                <span className="text-danger">*</span>
-                              </label>
+                              
                               <input
-                                className="form-control mb-0 bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                                 type="text"
                                 value={form.company_name}
                                 // pattern="^[a-zA-Z0-9\\s]*$"
@@ -231,25 +208,13 @@ export default function Step2() {
                               />
                             </div>
                             <div className="col-md-6 mb-3">
-                              <label className="label_profile">Telephone</label>
+                            
                               <div className="phoneInput_cls d-flex form-control p-0">
-                                <PhoneInput
-                                  value={form?.telephoneExt}
-                                  countryCodeEditable={false}
-                                  enableSearch={true}
-                                  placeholder=""
-                                  onChange={(phone, country) => {
-                                    setForm({
-                                      ...form,
-                                      telephoneExt: country.telephoneExt,
-                                    });
-                                  }}
-                                  // required
-                                />
+                                
 
                                 <input
                                   type="text"
-                                  className="form-control phph"
+                                  className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                                   placeholder="Telephone No."
                                   value={(form && form.telephoneNo) || ""}
                                   maxLength={10}
@@ -264,11 +229,9 @@ export default function Step2() {
                               </div>
                             </div>
                             <div className="col-md-6 mb-3">
-                              <label className="form-label ml-2">
-                                Fax Number
-                              </label>
+                             
                               <input
-                                className="form-control mb-0 bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                                 type="text"
                                 value={form?.fax_number}
                                 name="fax"
@@ -294,12 +257,10 @@ export default function Step2() {
                               />
                             </div>
                             <div className="col-md-6 mb-3">
-                              <label className="form-label ml-2">
-                                Tax Number<span className="text-danger">*</span>
-                              </label>
+                            
                               <input
                                 type="text"
-                                className="form-control mb-0 bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                                 placeholder="Tax Number"
                                 value={form?.tax_number}
                                 required
@@ -323,12 +284,10 @@ export default function Step2() {
                               />
                             </div>
                             <div className="col-md-6 mb-3 ">
-                              <label className="form-label ml-2">
-                                MC#<span className="text-danger">*</span>
-                              </label>
+                           
                               <input
                                 cols={50}
-                                className="form-control mb-0 bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                                 type="number"
                                 min={0}
                                 required
@@ -357,14 +316,12 @@ export default function Step2() {
                               />
                             </div>
                             <div className="col-md-6 mb-3">
-                              <label className="form-label ml-2">
-                                DOT#<span className="text-danger">*</span>
-                              </label>
+                             
                               <input
                                 // cols={10}
                                 required
                                 min={0}
-                                className="form-control mb-0 bginput chnages"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                                 type="number"
                                 pattern="^[a-zA-Z0-9]+$"
                                 onKeyPress={(e) => {
@@ -392,18 +349,18 @@ export default function Step2() {
                             </div>
                           </div>
                         </div>
-                        <div className="col-md-12 d-flex justify-content-end gap-2 mt-3">
+                        <div className="flex items-center justify-end gap-2 mt-4">
                           <a
                             onClick={() => {
                               history("/signup-step-1");
                             }}
-                            className=" btn-save width-set"
+                            className="bg-white px-4 py-2 rounded-lg text-black border border-gray text-sm "
                           >
                             Back
                           </a>
                           <button
                             type="submit"
-                            className=" btn dark-btn width-set "
+                            className="bg-primary px-4 py-2 rounded-lg text-white text-sm"
                           >
                             Next
                           </button>
@@ -414,11 +371,6 @@ export default function Step2() {
 
                   {/* end tab */}
                 </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     </AuthLayout>
   );
