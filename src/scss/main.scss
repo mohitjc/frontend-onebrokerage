@@ -2182,3 +2182,16 @@ th span, td span{
 .RSPBprogressBar {
   margin-bottom: 30px;
 }
+
+
+.RSPBprogressBar {
+  height: 10px;
+  line-height: 1;
+  border-radius: 10px;
+  position: relative;
+  background-color: rgb(255, 255, 255) !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 0;
+}
