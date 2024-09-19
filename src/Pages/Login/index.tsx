@@ -22,7 +22,7 @@ const Login = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (user && user?.loggedIn) {
-      history("/dashboard");
+      history("/chat");
     }
   }, []);
 
