@@ -21,6 +21,7 @@ const Signup = () => {
     confirmPassword: false,
     currentPassword: false,
   });
+
   const [form, setForm] = useState({
     address: "",
     firstName: "",
@@ -28,6 +29,7 @@ const Signup = () => {
     gender: "",
     email: "",
     password: "",
+    confirmPassword:"",
     business_name: "",
   });
 
@@ -38,8 +40,6 @@ const Signup = () => {
   }, []);
 
   const handleSubmit = (e) => {
-    console.log("hii")
-  
     e.preventDefault();
     setSubmitted(true);   
     if (form?.password != form?.confirmPassword) {
@@ -157,7 +157,7 @@ const Signup = () => {
            <input
             type="text"
             onChange={(e) => setForm({ ...form, lastName: e.target.value })}
-            value={form.lastName}
+            value={form?.lastName}
             className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
             placeholder="Enter Last Name"
             autoComplete="off"
@@ -250,12 +250,12 @@ const Signup = () => {
             </button>
           </div>
 
-          {/* <p className="text-sm mt-3 text-center text-gray-200">
+          <p className="text-sm mt-3 text-center text-gray-200">
             Already have an account?{" "}
             <Link to="/login" className="text-[#fff] font-bold text-sm">
               Sign In
             </Link>
-          </p> */}
+          </p>
         </form>
       </AuthLayout>
     </>

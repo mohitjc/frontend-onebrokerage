@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import loader from "../../methods/loader";
+import AuthLayout from "../../components/AuthLayout";
 import ApiClient from "../../methods/api/apiClient";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -140,47 +141,9 @@ export default function AddressStep() {
     //   }
     // })
   };
-  useEffect(() => {
-    // Add the LinkedIn tracking script
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.innerHTML = `
-      _linkedin_partner_id = "6323372";
-      window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
-      window._linkedin_data_partner_ids.push(_linkedin_partner_id);
 
-      (function(l) {
-        if (!l){
-          window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
-          window.lintrk.q=[];
-        }
-        var s = document.getElementsByTagName("script")[0];
-        var b = document.createElement("script");
-        b.type = "text/javascript";
-        b.async = true;
-        b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
-        s.parentNode.insertBefore(b, s);
-      })(window.lintrk);
-    `;
-    document.head.appendChild(script);
-
-    // Add the noscript image
-    const noscriptImg = document.createElement("img");
-    noscriptImg.height = 1;
-    noscriptImg.width = 1;
-    noscriptImg.style.display = "none";
-    noscriptImg.alt = "";
-    noscriptImg.src =
-      "https://px.ads.linkedin.com/collect/?pid=6323372&fmt=gif";
-    document.body.appendChild(noscriptImg);
-
-    // Clean up the script and image when the component unmounts
-    return () => {
-      document.head.removeChild(script);
-      document.body.removeChild(noscriptImg);
-    };
-  }, []);
   return (
+    <AuthLayout>
     <div className="bg_img main_signup signup-page">
       <div className="center-img  ">
         <div className="container">
@@ -394,5 +357,6 @@ export default function AddressStep() {
         </div>
       </div>
     </div>
+    </AuthLayout>
   );
 }

@@ -9,6 +9,7 @@ import "./style.scss";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import axios, { Axios } from "axios";
+import AuthLayout from "../../components/AuthLayout";
 // import { requestForToken } from "../../firebase/configuration";
 export default function Step3() {
   const [percent, setPercent] = useState(100);
@@ -153,6 +154,7 @@ useEffect(() => {
     };
   }, []);
   return (
+    <AuthLayout>
     <div className="bg_img main_signup signup-page">
       <div className="center-img ">
         <div className="container">
@@ -665,5 +667,6 @@ useEffect(() => {
         </div>
       </div>
     </div>
+    </AuthLayout>
   );
 }

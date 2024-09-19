@@ -11,10 +11,12 @@ import { login_success } from "../actions/user";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import socketModel from "../../models/socketModel";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import environment from "../../environment";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 const Login = () => {
+  const { id } = useParams();
   const history = useNavigate();
   const user = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
@@ -151,6 +153,30 @@ const Login = () => {
       
   };
 
+  useEffect(() => {
+    if (id) {
+      loader(true);
+      localStorage.clear();
+      ApiClient.post("user/auto-login", { id: id }).then((response) => {
+        if (response.success) {
+          dispatch(login_success(response.data));
+          localStorage.setItem("token", response.data.access_token);
+          toast.success(response.message);
+          // const newdata = response.data;
+          // ApiClient.get("trucks").then((res) => {
+          //   if (res?.data?.data?.length == 0) {
+          //     // history("/trucks/add");
+          //   } else {
+          //     history("/profile");
+          //   }
+          // });
+        }
+        loader(true);
+      });
+    }
+    localStorage.removeItem("Step1");
+    localStorage.removeItem("Step2");
+  }, []);
 
   return (
     <>

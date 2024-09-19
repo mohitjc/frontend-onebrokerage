@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import loader from "../../methods/loader";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import AuthLayout from "../../components/AuthLayout";
 import "./style.scss";
 import methodModel from "../../methods/methods";
 import "react-step-progress-bar/styles.css";
@@ -118,6 +119,7 @@ export default function Step2() {
           }
   }
   return (
+    <AuthLayout>
     <div className="bg_img main_signup signup-page">
       <div className="center-img ">
         <div className="container">
@@ -418,5 +420,6 @@ export default function Step2() {
         </div>
       </div>
     </div>
+    </AuthLayout>
   );
 }
