@@ -35,6 +35,7 @@ function App() {
      { url: "/profile", path: "Profile" },
      { url: "/forgotpassword", path: "Forgotpassword" },
      { url: "/otp-verify", path: "Forgotpassword/OTPverify/html" },
+      //  { url: "/profile/:tab", path: "Settings" },
     // { url: "/assignment", path: "Assignment" },
     // { url: "/assignment/detail/:id", path: "Assignment/View" },
     // {
@@ -43,7 +44,7 @@ function App() {
     // },
     // { url: "*", path: "NotFoundPage" },
  
-    // { url: "/profile/:tab", path: "Settings" },
+  
  
     // { url: "/resetpassword", path: "Resetpassword" },
     // { url: "/user", path: "Users" },
