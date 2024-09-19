@@ -118,6 +118,7 @@ const Login = () => {
           localStorage.setItem("token", res1?.data?.data?.access_token);
           dispatch(login_success(res1?.data?.data));
           const newdata = res1.data?.data;
+          history("/dashboard");
           // if(newdata?.request_status=="rejected")
           // {
           //   history("/profile");
@@ -140,26 +141,11 @@ const Login = () => {
         }
         loader(false);
       })
-      // .catch((err) => {
-     
-      //   if (
-      //     err?.response?.data?.error?.message ==
-      //     "You have not verified your account. Please verify"
-      //   ) {
-      //     Swal.fire({
-      //       icon: "Warn",
-      //       imageUrl: "assets/img/blue-tick.png",
-      //       title: "Great !",
-      //       text: "Your account is Under Verification Process. Once, it's verified, you can log in.",
-      //       customClass: {
-      //         modal: "my-custom-modal-class",
-      //       },
-      //     });
-      //   } else {
-      //     toast.error(err?.response?.data?.error?.message);
-      //   }
-      //   loader(false);
-      // });
+      .catch((err) => {
+          toast.error(err?.response?.data?.error?.message);
+        
+        loader(false);
+      });
 
    
       

@@ -64,62 +64,62 @@ const Signup = () => {
       }
     });
   };
-
-  const hendleSubmit = (e: any) => {
+  const hendleSubmit = (e:any) => {
     e.preventDefault();
-    setSubmitted(true);
 
-    let url = "api/user/register";
-    let eventId = methodModel.getPrams("eventId");
-    let groupId = methodModel.getPrams("groupId");
-
-    if (!remember) return;
-
-    let data: any = {
-      role: environment.userRoleId,
-      ...form,
-    };
-
-    if (groupId) data.groupId = groupId;
-
+    // if (!tick) {
+    //   return toast.error(
+    //     "Please fill the check box to accept terms and confitions."
+    //   );
+    // }
     loader(true);
+    let value = {
+      firstName: form?.firstName,
+      // lastName: form?.lastName,
+      email: form?.email,
+      // address: AddressStep?.address,
+      // city: AddressStep?.city,
+      password: form?.password,
+      // state: AddressStep?.state,
+      role: "carrier",
+      // team_truck: parseInt(form?.team_truck),
+      // solo_truck: parseInt(form?.solo_truck),
+      // company_name: Step2?.company_name,
+      // pincode: AddressStep?.pincode,
+      // country: AddressStep?.country,
+      // tax_number: Step2?.tax_number,
+      // fax_number: Step2?.fax_number,
+      // device_token: DeviceToken,
+      // position: form?.position,
 
-    ApiClient.post(url, data).then(async (res) => {
+      // total_trucks:
+      //   Number(form.team_truck) +
+      //   Number(form?.solo_truck) +
+      //   Number(form?.trailers_number),
+      // trailers_number: form?.trailers_number,
+      // ip_address: IP?.ip,
+      // lat: AddressStep?.lat,
+      // lng: AddressStep?.lng,
+      // mc_number: Step2?.mc_number,
+      // dot_number: Step2?.dot_number,
+      // telephoneExt: Step2?.telephoneExt,
+      // telephoneNo: Step2?.telephoneNo,
+      // trailer_type: form?.trailers_type,
+      // position: Step1?.position,
+      // identification_number: Step1?.identification_number,
+    };
+    ApiClient.post("register", value).then((res) => {
       if (res.success) {
-        if (eventId || groupId) {
-          await ApiClient.post("api/auto/login", { id: res.data._id }).then(
-            async (res) => {
-              setLogin(res.data);
-            }
-          );
-        } else {
-          let url = "/login";
-          setTimeout(() => {
-            toast.success("Please verify your email");
-          }, 400);
-          history(url);
-        }
+        // toast.success(res?.message)
+        localStorage.removeItem("Step1");
+        localStorage.removeItem("Step2");
+        // document.getElementById("OpenBidModel").click();
       }
-      loader(false);
     });
+    loader(false);
   };
 
-  useEffect(() => {
-    let email = methodModel.getPrams("email");
-    if (user && user?.loggedIn) {
-      history("/dashboard");
-    }
 
-    if (email) {
-      setForm({
-        ...form,
-        email: email,
-        fullName: methodModel.getPrams("name"),
-      });
-    }
-
-    getGroups();
-  }, []);
 
   const [loginIdExists, setLoginIdExists] = useState(true);
 
@@ -160,7 +160,8 @@ const Signup = () => {
             autoComplete='off'
             disabled={methodModel.getPrams('attended')?true:false}
             required /> */}
-          <input
+            
+          {/* <input
             type="text"
             onChange={handleLoginIdChange}
             value={form.loginId}
@@ -175,7 +176,7 @@ const Signup = () => {
           />
           {loginIdExists ? null : (
             <p className="text-red-500">Login ID already exists.</p>
-          )}
+          )} */}
 
           <input
             type="email"
@@ -215,6 +216,25 @@ const Signup = () => {
               ></i>
             </div>
           </div>
+          {/* <div className="relative mb-6">
+            <input
+              type={eyes.confirmpassword ? "text" : "confirmpassword"}
+              className="shadow-box border-1 border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
+              placeholder="Password"
+              onChange={(e) => setForm({ ...form, confirmpassword: e.target.value })}
+              value={form.confirmpassword}
+              minLength={8}
+              autoComplete="off"
+              required
+            />
+
+            <div className="absolute right-2 inset-y-0 flex items-center text-gray-500 text-sm">
+              <i
+                className={eyes.confirmpassword ? "fa fa-eye" : "fa fa-eye-slash"}
+                onClick={() => setEyes({ ...eyes, confirmpassword: !eyes.confirmpassword })}
+              ></i>
+            </div>
+          </div> */}
 
 
           <div className="flex">

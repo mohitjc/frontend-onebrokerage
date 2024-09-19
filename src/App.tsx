@@ -27,7 +27,8 @@ function App() {
       { url: "/signup", path: "Signup" },
       // { url: "/chat", path: "Chat2" },
       { url: "/chat", path: "Chat" },
-    // { url: "/dashboard", path: "Dashboard" },
+    { url: "/dashboard", path: "Dashboard" },
+       { url: "/profile", path: "Profile" },
     // { url: "/assignment", path: "Assignment" },
     // { url: "/assignment/detail/:id", path: "Assignment/View" },
     // {
@@ -35,7 +36,7 @@ function App() {
     //   path: "Assignment/Counteroffer",
     // },
     // { url: "*", path: "NotFoundPage" },
-    // { url: "/profile", path: "Profile" },
+ 
     // { url: "/profile/:tab", path: "Settings" },
     // { url: "/forgotpassword", path: "Forgotpassword" },
     // { url: "/otp-verify", path: "Forgotpassword/OTPverify/html" },
