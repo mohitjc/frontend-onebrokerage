@@ -302,7 +302,6 @@ const Plan = () => {
 
   const getPrice = (p) => {
     let value = p?.pricing.find((itm)=>itm?.interval_count==interval)
-
     return Number(value?.unit_amount ||0)
   }
 

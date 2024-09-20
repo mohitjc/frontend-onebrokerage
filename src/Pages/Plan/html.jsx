@@ -100,11 +100,11 @@ const Html = ({
                   {/* <p class="mt-2 text-base text-slate-700 leading-tight">For new makers who want to fine-tune and test an
                         idea.</p> */}
                   <p class="mt-8">
-                    <span class="text-4xl font-bold text-slate-900 tracking-tighter">{getPrice(itm)}</span>
+                    <span class="text-4xl font-bold text-slate-900 tracking-tighter">${getPrice(itm)}</span>
 
-                    <span class="text-base font-medium text-slate-500">usd</span>
+                    <span class="text-base font-medium text-slate-500">{interval==1?"/month":interval==3?"/3 month":interval==6?"/6 month":"/year"}</span>
                   </p>
-                  <button className="mt-8 block w-full bg-primary rounded-md py-2 text-sm font-semibold text-white text-center" onClick={(e)=>payment(itm,getPrice(itm))}>Join
+                  <button className="mt-8 block w-full bg-primary rounded-md py-2 text-sm font-semibold text-white text-center" disabled={getPrice(itm)==0} onClick={(e)=>payment(itm,getPrice(itm))}>Join
                   as a Starter</button>
                   
                 </div>
