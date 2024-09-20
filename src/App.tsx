@@ -36,6 +36,10 @@ function App() {
      { url: "/forgotpassword", path: "Forgotpassword" },
      { url: "/otp-verify", path: "Forgotpassword/OTPverify/html" },
       { url: "/plan", path: "Plan/html" },
+       { url: "/drivers", path: "Driver" },
+    { url: "/drivers/edit/:id", path: "Driver/AddEdit" },
+    { url: "/drivers/add", path: "Driver/AddEdit" },
+    { url: "/drivers/detail/:id", path: "Driver/View" },
       //  { url: "/profile/:tab", path: "Settings" },
     // { url: "/assignment", path: "Assignment" },
     // { url: "/assignment/detail/:id", path: "Assignment/View" },
@@ -91,10 +95,7 @@ function App() {
     // // { url: "/trucks/edit/:id", path: "Truck/AddEdit" },
     // { url: "/trucks/add", path: "Truck/AddTruck" },
     // { url: "/trucks/detail/:id", path: "Truck/View" },
-    // { url: "/drivers", path: "Driver" },
-    // { url: "/drivers/edit/:id", path: "Driver/AddEdit" },
-    // { url: "/drivers/add", path: "Driver/AddEdit" },
-    // { url: "/drivers/detail/:id", path: "Driver/View" },
+   
 
     // { url: "/groups", path: "Group" },
     // { url: "/groups/edit/:id", path: "Group/AddEdit" },

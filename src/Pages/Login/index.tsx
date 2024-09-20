@@ -22,7 +22,7 @@ const Login = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (user && user?.loggedIn) {
-      history("/profile");
+      history("/plan");
     }
   }, []);
 
@@ -122,7 +122,7 @@ const Login = () => {
           dispatch(login_success(res1?.data?.data));
           const newdata = res1.data?.data;
           toast.success(res1?.data?.message)
-          history("/profile");
+          history("/plan");
           // if(newdata?.request_status=="rejected")
           // {
           //   history("/profile");
