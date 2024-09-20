@@ -104,8 +104,7 @@ const Html = ({
 
                     <span class="text-base font-medium text-slate-500">{interval==1?"/month":interval==3?"/3 month":interval==6?"/6 month":"/year"}</span>
                   </p>
-                  <button className="mt-8 block w-full bg-primary rounded-md py-2 text-sm font-semibold text-white text-center" disabled={getPrice(itm)==0} onClick={(e)=>payment(itm,getPrice(itm))}>Join
-                  as a Starter</button>
+                  <button className="mt-8 block w-full bg-primary rounded-md py-2 text-sm font-semibold text-white text-center" disabled={getPrice(itm)==0} onClick={(e)=>payment(itm,getPrice(itm))}>Buy Now</button>
                   
                 </div>
                 <div class="pt-6 pb-8 px-6">

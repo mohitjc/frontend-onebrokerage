@@ -1,7 +1,7 @@
 import React from 'react';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
   ArchiveBoxXMarkIcon,
@@ -10,6 +10,8 @@ import {
   Square2StackIcon,
   TrashIcon,
 } from '@heroicons/react/16/solid'
+import { logout } from '../../../Pages/actions/user';
+import { useDispatch } from 'react-redux';
 
 const navigation = [
   { name: 'About', href: '#', current: true },
@@ -23,6 +25,16 @@ function classNames(...classes) {
 }
 const Header = () => {
   const user = useSelector((state) => state.user);
+  const history=useNavigate()
+  const dispatch=useDispatch()
+
+  const Logout = () => {
+    dispatch(logout())
+    localStorage.removeItem("persist:admin-app")
+    localStorage.removeItem("token")
+    history('/login');
+  };
+
   return (
     <header className="">
       <Disclosure as="nav" className="bg-[#EAEFFF]">
@@ -106,7 +118,8 @@ const Header = () => {
                       <MenuItem>
                         <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white">
                           <TrashIcon className="size-4 stroke-black/30 hover:stroke-white" />
-                          Logout
+                          <a  onClick={() => Logout()}>  Logout</a>
+                        
                         </button>
                       </MenuItem>
                     </MenuItems>
