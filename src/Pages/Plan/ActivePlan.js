@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import PageLayout from "../../components/global/PageLayout";
 import ApiClient from "../../methods/api/apiClient";
 import loader from "../../methods/loader";
+import { CheckIcon } from "@heroicons/react/24/outline";
 // import "./style.scss";
 
 const ActivePlan = () => {
@@ -33,97 +34,61 @@ const ActivePlan = () => {
     // });
   }, []);
 
+  const includedFeatures = [
+    'Private forum access',
+    'Member resources',
+    'Entry to annual conference',
+    'Official member t-shirt',
+  ]
   return (
     <PageLayout>
-      <div className="container-fluid">
-        <h2 className="border-bottom pb-3">Plan</h2>
-        <p>
-          <b>Plan details</b>
-        </p>
-
-        <div className="card">
-          <div className="card-header bg-white">
-            <b> Basic</b>
-            <div className="d-flex justify-content-between w-100">
-              <p className="w-75">
-                All the basics for starting a new business, including online
-                store, sales channels, gift cards, and the Shopify POS app for
-                in-person selling.
-              </p>
-              <span className="ml-1 usdPrice">
-                <span className="text-uppercase">
-                  {activeplan?.subscription?.plan?.currency}
-                </span>
-                <b className="dollarPrice">
-                  {activeplan?.subscription?.plan?.amount}
-                </b>
-                /{activeplan?.subscription?.plan?.interval_count} mo
-              </span>
+     <div className="mb-4">
+                <h1 class="text-[25px] font-semibold leading-[28px]">Active plan</h1>
+                </div>
+        <div className="rounded-lg bg-card flex justify-between items-center p-3 w-full">
+        <div className="mx-auto max-w-2xl rounded-3xl bg-white ring-1 ring-gray-200  lg:mx-0 lg:flex lg:max-w-none">
+          <div className="p-8 sm:p-10 lg:flex-auto">
+            <h3 className="text-2xl font-bold tracking-tight text-gray-900">{activeplan?.name}</h3>
+            
+            <div className="mt-10 flex items-center gap-x-4">
+              <h4 className="flex-none text-sm font-semibold leading-6 text-primary">What’s included</h4>
+              <div className="h-px flex-auto bg-gray-100" />
             </div>
+            <ul
+              role="list"
+              className="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 sm:grid-cols-2 sm:gap-6"
+            >
+              {includedFeatures.map((feature) => (
+                <li key={feature} className="flex gap-x-3">
+                  <CheckIcon aria-hidden="true" className="h-6 w-5 flex-none text-primary" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="card-body bgGrayPlan">
-            <p className="card-title mb-3 font-weight-bold">
-              Your plan includes
-            </p>
-
-            <div className="row">
-              {activeplan?.planId &&
-                Object.keys(activeplan?.planId?.feature).map((oitm) => {
-                  return (
-                    <div className="col-md-3 mb-3">
-                      <h6>{oitm}</h6>
-                      <ul className="listStyle">
-                        {activeplan?.planId?.feature[oitm].map((itm) => {
-                          if (itm.checked)
-                            return (
-                              <>
-                                <li>
-                                  <i
-                                    className={
-                                      "fa fa-check-circle text-success mr-2"
-                                    }
-                                  ></i>{" "}
-                                  {itm.name}
-                                </li>
-                              </>
-                            );
-                        })}
-                      </ul>
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
-          {/* <div  className="card-body borderCard">
-            <div className='d-flex justify-content-between w-100'>
-                <div className='leftBilling'>
-            <h5  className="card-title">Billing cycle</h5>
-             <p>Monthly for $39.00 USD.</p>
-             </div>
-                <a>Change billing cycle</a>
-             </div>
-        </div> */}
-          <div className="card-body borderCard">
-            <div className="d-flex justify-content-between w-100">
-              <div className="leftBilling">
-                <h5 className="card-title">Payment method</h5>
-                <p>
-                  <img src="/assets/img/visa.png" className="masterCard" />
-                  {card?.brand} ending in {card?.last4}
+          <div className="-mt-2 p-2 lg:mt-0  lg:max-w-md lg:flex-shrink-0">
+            <div className="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
+              <div className="mx-auto max-w-xs px-8">
+                <p className="text-base font-semibold text-gray-600">Active Plan</p>
+                <p className="mt-6 flex items-baseline justify-center gap-x-2">
+                  <span className="text-5xl font-bold tracking-tight text-gray-900">${activeplan?.amount/100}</span>
+                  <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
+                </p>
+                <a
+                  href="/plan"
+                  className="mt-10 block w-full rounded-md bg-red-500 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Change Plan
+                </a>
+                <p className="mt-6 text-xs leading-5 text-gray-600">
+                 
                 </p>
               </div>
-              <Link to="/card">Change payment method</Link>
             </div>
           </div>
-
-          <div className="card-body borderCard text-right">
-            {/* <button className='btn btn-secondary mr-2 discard'>Deactive store</button> */}
-            <Link className="btn btn-primary" to="/plans">
-              Change Plan
-            </Link>
-          </div>
         </div>
-      </div>
+        </div>
+
     </PageLayout>
   );
 };
