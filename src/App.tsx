@@ -36,6 +36,7 @@ function App() {
      { url: "/forgotpassword", path: "Forgotpassword" },
      { url: "/otp-verify", path: "Forgotpassword/OTPverify/html" },
     { url: "/plan", path: "Plan" },
+    { url: "/activeplan", path: "Plan/ActivePlan" },
     { url: "/drivers", path: "Driver" },
     { url: "/drivers/edit/:id", path: "Driver/AddEdit" },
     { url: "/drivers/add", path: "Driver/AddEdit" },
