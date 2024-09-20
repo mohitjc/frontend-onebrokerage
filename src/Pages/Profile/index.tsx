@@ -6,14 +6,16 @@ import loader from "../../methods/loader";
 import "./profile.scss";
 import methodModel from "../../methods/methods";
 import { useSelector } from "react-redux";
+import PageLayout from "../../components/global/PageLayout";
 
 const Profile = () => {
   const user = useSelector((state: any) => state.user);
   const [data, setData]: any = useState("");
   const [questions, setQuestions]: any = useState([]);
+
   const gallaryData = () => {
     loader(true);
-    ApiClient.get(`admin/profile`, { id: user._id }).then((res) => {
+    ApiClient.get(`user/detail`, { id: user._id||user?.id }).then((res) => {
       if (res.success) {
         setData(res.data);
       }
@@ -32,7 +34,7 @@ const Profile = () => {
   );
 
   return (
-    <Layout>
+    <PageLayout>
       <div className="wrapper_section">
         <div className="flex md:items-center items-start  justify-between md:flex-row flex-col">
           <h3 className=" text-lg lg:text-2xl font-semibold text-[#111827]">
@@ -106,7 +108,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </PageLayout>
   );
 };
 

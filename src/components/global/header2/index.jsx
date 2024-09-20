@@ -102,11 +102,13 @@ const Header = () => {
                       className="w-52 origin-top-right mt-4 rounded-xl border border-white/5 bg-white shadow p-1 text-sm/6 text-black transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
                     >
                       <MenuItem>
+                      <Link to="/profile">
                         <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white">
                           <PencilIcon className="size-4 stroke-black/30 hover:stroke-white" />
-                          <Link to="/profile">Profile</Link>
+                         Profile
                        
                         </button>
+                        </Link>
                       </MenuItem>
                       <MenuItem>
                         <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white">
@@ -116,9 +118,9 @@ const Header = () => {
                       </MenuItem>
                       <div className="my-1 h-px bg-gray-200" />
                       <MenuItem>
-                        <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white">
+                        <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white" onClick={() =>Logout()}>
                           <TrashIcon className="size-4 stroke-black/30 hover:stroke-white" />
-                          <a  onClick={() =>Logout()}>  Logout</a>
+                            Logout
                         
                         </button>
                       </MenuItem>

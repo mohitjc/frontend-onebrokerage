@@ -18,8 +18,8 @@ import { TbLogout, TbUserShield } from "react-icons/tb";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { LiaTruckSolid } from "react-icons/lia";
 import { CgLogOut } from "react-icons/cg";
-
-
+import { logout } from '../../../Pages/actions/user';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   MdOutlineHolidayVillage,
   MdOutlineAttachEmail,
@@ -31,12 +31,23 @@ import {
 } from "react-icons/io5";
 import { RiCoupon3Line, RiPresentationLine } from "react-icons/ri";
 import { GrCatalogOption } from "react-icons/gr";
+import { useSelector ,useDispatch} from "react-redux";
 // import { CostingURL } from '../../../pages/CostingTemplate/Api';
 // import { CostingTourURL } from '../../../pages/CostPerTourTemplate/Api';
 
 const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
+
   const location = useLocation();
+  const user=useSelector(state=>state.user)
   const path = window.location.pathname;
+  const history=useNavigate()
+  const dispatch=useDispatch()
+  const Logout = () => {
+    dispatch(logout())
+    localStorage.removeItem("persist:admin-app")
+    localStorage.removeItem("token")
+    history('/login');
+  };
   return (
     <>
 
@@ -53,13 +64,13 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 </div>
                  
                   <div className="">
-                      <h2 className="text-xl font-semibold">Upakshi</h2>
-                      <p className="text-sm font-normal">upakshi@yopmail.com </p>
+                      <h2 className="text-xl font-semibold">{user?.fullName}</h2>
+                      <p className="text-sm font-normal">{user?.email}</p>
                   </div>
               </div>
               <div className="flex  items-center">
-                    <button className="bg-primary px-4 py-2 text-white flex-grow text-xs flex items-center gap-1 justify-center font-medium"><LuEye />   View profile</button>
-                    <button className="bg-red-500 px-4 py-2 text-white flex-grow text-xs flex items-center gap-1 justify-center font-medium"> <CgLogOut /> Logout</button>
+                    <button className="bg-primary px-4 py-2 text-white flex-grow text-xs flex items-center gap-1 justify-center font-medium"><LuEye /><Link to="/profile">View profile</Link></button>
+                    <button className="bg-red-500 px-4 py-2 text-white flex-grow text-xs flex items-center gap-1 justify-center font-medium"  onClick={() =>Logout()}> <CgLogOut /> Logout</button>
               </div>
           </div>
 
@@ -81,6 +92,42 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                     <RiHome6Line className="text-black shrink-0 text-lg group-hover:text-white " />
                     <span className="text-inherit leading-none sidebar_text">
                       Dashboard
+                    </span>
+                  </NavLink>
+                </tooltip>
+              </li>
+              <li>
+                <tooltip placement="right" title="Dashboard">
+                  <NavLink
+                    to="/trucks"
+                
+                    className={(isActive) =>
+                      "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
+                      (location?.pathname == "/trucks" &&
+                        " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                    }
+                  >
+                    <RiHome6Line className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <span className="text-inherit leading-none sidebar_text">
+                      Trucks
+                    </span>
+                  </NavLink>
+                </tooltip>
+              </li>
+              <li>
+                <tooltip placement="right" title="Dashboard">
+                  <NavLink
+                    to="/drivers"
+                
+                    className={(isActive) =>
+                      "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
+                      (location?.pathname == "/drivers" &&
+                        " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                    }
+                  >
+                    <RiHome6Line className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <span className="text-inherit leading-none sidebar_text">
+                      Drivers
                     </span>
                   </NavLink>
                 </tooltip>

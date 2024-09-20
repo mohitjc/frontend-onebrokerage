@@ -9,6 +9,7 @@ import SelectDropdown from "../../components/common/SelectDropdown";
 import loader from "../../methods/loader";
 import LineChart from "../../components/common/LineChart";
 import { useSelector } from "react-redux";
+import PageLayout from "../../components/global/PageLayout";
 
 const Dashboard = () => {
   const user=useSelector(state=>state.user)
@@ -120,7 +121,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Layout>
+      <PageLayout>
         <h4 className="text-2xl font-bold mb-3 flex items-center gap-2">
           <IoHandRightOutline className="text-3xl slow-shake text-[#494f9f]" />
           <span className="">Hi,</span> {user?.fullName}
@@ -280,7 +281,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </Layout>
+      </PageLayout>
     </>
   );
 };
