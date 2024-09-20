@@ -10,13 +10,15 @@ import { FiPackage, FiSettings, FiThumbsUp, FiUsers } from "react-icons/fi";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { PiHandCoins, PiHandbagBold } from "react-icons/pi";
 import { MdOutlineFeaturedPlayList } from "react-icons/md";
-import { LuCircleDot } from "react-icons/lu";
+import { LuCircleDot, LuEye } from "react-icons/lu";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { RxCrossCircled } from "react-icons/rx";
 import { IoGitPullRequestOutline } from "react-icons/io5";
-import { TbUserShield } from "react-icons/tb";
+import { TbLogout, TbUserShield } from "react-icons/tb";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { LiaTruckSolid } from "react-icons/lia";
+import { CgLogOut } from "react-icons/cg";
+
 
 import {
   MdOutlineHolidayVillage,
@@ -39,21 +41,25 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
     <>
 
       <div className="sidebar_new">
-          <div className=" rounded-t-lg bg-gray-50 px-2 py-6">
-              <div className="flex  items-center gap-4 flex-wrap relative">
+          <div className=" rounded-t-lg bg-gray-50 ">
+              <div className="flex  items-center gap-4 flex-wrap relative px-4 pt-4 pb-4">
 
                 <div className="">
                   {/* <img
                     src={methodModel.userImg(data && data.image)}
                     className="h-36 w-36 rounded-full object-cover mx-auto"
                   /> */}
-                   <img src="assets/img/d1.png" className=" " alt=""/>
+                   <img src="/assets/img/d1.png" className=" " alt=""/>
                 </div>
                  
                   <div className="">
                       <h2 className="text-xl font-semibold">Upakshi</h2>
                       <p className="text-sm font-normal">upakshi@yopmail.com </p>
                   </div>
+              </div>
+              <div className="flex  items-center">
+                    <button className="bg-primary px-4 py-2 text-white flex-grow text-xs flex items-center gap-1 justify-center font-medium"><LuEye />   View profile</button>
+                    <button className="bg-red-500 px-4 py-2 text-white flex-grow text-xs flex items-center gap-1 justify-center font-medium"> <CgLogOut /> Logout</button>
               </div>
           </div>
 
