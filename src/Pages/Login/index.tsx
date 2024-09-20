@@ -204,7 +204,7 @@ const Login = () => {
                   <input
                     type="text"
                     className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  mb-0 bginput w-full px-4"
-                    placeholder="Enter Email "
+                    placeholder="Enter Email *"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     // disabled={methodModel.getPrams('attended')?true:false}
@@ -222,7 +222,7 @@ const Login = () => {
                     className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  mb-0 bginput w-full px-4"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter Password"
+                    placeholder="Enter Password *"
                     required
                   />
                   {eyes.password ? (

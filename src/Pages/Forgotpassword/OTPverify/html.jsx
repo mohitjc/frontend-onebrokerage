@@ -103,10 +103,10 @@ const OTPverify = () => {
                     onSubmit={hendleSubmit}
                 >
                     <div className="">
-                        <h1 className="text-[30px] font-semibold text-[#fff] ">
+                        <h1 className="text-md font-semibold text-[#fff] ">
                             New Password
                         </h1>
-                        <span className="flex w-10 h-1 bg-[#494f9f] mt-1"></span>
+                        
                     </div>
 
                     <div className="mt-5">
@@ -122,7 +122,7 @@ const OTPverify = () => {
                             </label> */}
                             <input
                                 type="text"
-                                className="form-control mb-0 bginput changes"
+                                className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  mb-0 bginput w-full px-4"
                                 placeholder="Verification Code  "
                                 value={otp}
                                 onChange={(e) => setotp(e.target.value)}
@@ -141,14 +141,17 @@ const OTPverify = () => {
                                 {" "}
                                 Password <span className="text-danger">*</span>
                             </label> */}
+
+                        <div className="relative">
                             <input
                                 type={eyes.password ? "text" : "password"}
-                                className="form-control mb-0 bginput changes"
+                                className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  mb-0 bginput w-full px-4"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Password"
                             // required
                             />
+                               <div className="absolute top-1/2 -translate-y-1/2 right-4 ">
                             <i
                                 className={
                                     eyes.password ? "fa fa-eye" : "fa fa-eye-slash"
@@ -157,6 +160,8 @@ const OTPverify = () => {
                                     setEyes({ ...eyes, password: !eyes.password })
                                 }
                             ></i>
+                            </div>
+                             </div>
                             {submitted && password?.length < 8 ? (
                                 <div className="invalid-feedback d-block">
                                     Password should be atleast of 8 character
@@ -171,14 +176,16 @@ const OTPverify = () => {
                             Confirm Password <span className="text-danger">*</span>
                         </label> */}
 
+                        <div className="relative">
                         <input
                             type={eyes.confirmPassword ? "text" : "password"}
-                            className="form-control mb-0 bginput changes"
+                            className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  mb-0 bginput w-full px-4"
                             value={Confirmpassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder="Password"
                         // required
                         />
+                        <div className="absolute top-1/2 -translate-y-1/2 right-4 ">
                         <i
                             className={
                                 eyes.confirmPassword
@@ -192,6 +199,8 @@ const OTPverify = () => {
                                 })
                             }
                         ></i>
+                        </div>
+                        </div>
                         {submitted && Confirmpassword != password ? (
                             <div className="invalid-feedback d-block">
                                 Password should be matched
@@ -203,13 +212,14 @@ const OTPverify = () => {
                     <button
                         onClick={() => setSubmitted(true)}
                         type="submit"
-                        className="btn dark-btn my-4 mb-1"
+                        className="h-11 rounded-xl w-full font-semibold text-center text-white   hover:opacity-80 transition-all "
                     >
                         Save Password
                     </button>
-                    <div className="forget text-center  ">
-                        <Link to="/login" className="">
-                            Remember Password? Login
+                    <div className="text-sm mt-3 text-center text-gray-200  ">
+                        Remember Password? 
+                        <Link to="/login" className="text-white font-semibold text-sm">
+                           Login
                         </Link>
                     </div>
 

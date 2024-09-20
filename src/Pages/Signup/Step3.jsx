@@ -12,7 +12,7 @@ import axios, { Axios } from "axios";
 import AuthLayout from "../../components/AuthLayout";
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-
+import { MdCheck } from "react-icons/md";
 
 // import { requestForToken } from "../../firebase/configuration";
 export default function Step3() {
@@ -191,7 +191,7 @@ useEffect(() => {
                               //     width="30"
                               //     src="https://cdn-icons-png.flaticon.com/512/4335/4335542.png"
                               // />
-                              <div className="non-activebar">1</div>
+                              <div className="non-activebar"><MdCheck /></div>
                             )}
                           </Step>
                           <Step transition="scale">
@@ -202,7 +202,7 @@ useEffect(() => {
                               //     width="30"
                               //     src="https://cdn-icons-png.flaticon.com/512/2554/2554978.png"
                               // />
-                              <div className="non-activebar">2</div>
+                              <div className="non-activebar"><MdCheck /></div>
                             )}
                           </Step>
                           <Step transition="scale">
@@ -216,7 +216,7 @@ useEffect(() => {
                               //     width="30"
                               //     src="https://cdn.icon-icons.com/icons2/2387/PNG/512/card_document_documents_driving_license_car_data_sheet_icon_144605.png"
                               // />
-                              <div className="non-activebar">3</div>
+                              <div className="non-activebar"><MdCheck /></div>
                             )}
                           </Step>
                           <Step transition="scale">
@@ -273,7 +273,7 @@ useEffect(() => {
                                     trailers_number: e.target.value,
                                   });
                                 }}
-                                placeholder="Number of Trailers"
+                                placeholder="Number of Trailers *"
                               />
                             </div>
 
@@ -294,7 +294,7 @@ useEffect(() => {
                                     solo_truck: e.target.value,
                                   });
                                 }}
-                                placeholder="  Solo Truck"
+                                placeholder="  Solo Truck *"
                                 //   onBlur={handleBlur}
                               />
                             </div>
@@ -314,7 +314,7 @@ useEffect(() => {
                                     team_truck: e.target.value,
                                   });
                                 }}
-                                placeholder="  Team Truck"
+                                placeholder="  Team Truck *"
                                 //   onBlur={handleBlur}
                               />
                             </div>

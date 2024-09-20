@@ -9,7 +9,7 @@ import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import PhoneInput from "react-phone-input-2";
 import ApiClient from "../../methods/api/apiClient";
-
+import { MdCheck } from "react-icons/md";
 export default function Step2() {
   const params = new URLSearchParams(window.location.search);
   let Step1 = JSON.parse(localStorage.getItem("Step1"));
@@ -138,7 +138,7 @@ export default function Step2() {
                               //   width="30"
                               //   src="https://cdn-icons-png.flaticon.com/512/4335/4335542.png"
                               // />
-                              <div className="non-activebar">1</div>
+                              <div className="non-activebar"><MdCheck /></div>
                             )}
                           </Step>
                           <Step transition="scale">
@@ -149,7 +149,7 @@ export default function Step2() {
                               //   width="30"
                               //   src="https://cdn-icons-png.flaticon.com/512/2554/2554978.png"
                               // />
-                              <div className="non-activebar">2</div>
+                              <div className="non-activebar"><MdCheck /></div>
                             )}
                           </Step>
                           <Step transition="scale">
@@ -204,7 +204,7 @@ export default function Step2() {
                                 //   }
                                 // }}
                                 onChange={(e) =>setvalue(e)}
-                                placeholder=" Company Name"
+                                placeholder=" Company Name *"
                               />
                             </div>
                             <div className="col-md-6 mb-3">
@@ -261,7 +261,7 @@ export default function Step2() {
                               <input
                                 type="text"
                                 className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
-                                placeholder="Tax Number"
+                                placeholder="Tax Number *"
                                 value={form?.tax_number}
                                 required
                                 pattern="^[a-zA-Z0-9]+$"
@@ -312,7 +312,7 @@ export default function Step2() {
                                     mc_number: e.target.value,
                                   });
                                 }}
-                                placeholder="MC Number"
+                                placeholder="MC Number *"
                               />
                             </div>
                             <div className="col-md-6 mb-3">
@@ -344,7 +344,7 @@ export default function Step2() {
                                     dot_number: e.target.value,
                                   });
                                 }}
-                                placeholder="DOT Number"
+                                placeholder="DOT Number *"
                               />
                             </div>
                           </div>

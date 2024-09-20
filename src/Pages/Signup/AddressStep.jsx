@@ -12,6 +12,7 @@ import GooglePlaceAutoComplete from "../../components/common/GooglePlaceAutoComp
 import addressModel from "../../models/address.model";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
+import { MdCheck } from "react-icons/md";
 export default function AddressStep() {
   const user = useSelector((state) => state.user);
   const websiteDetails = useSelector((state) => state.website);
@@ -166,7 +167,7 @@ export default function AddressStep() {
                               //   width=""
                               //   src="https://cdn-icons-png.flaticon.com/512/4335/4335542.png"
                               // />
-                              <div className="non-activebar">1</div>
+                              <div className="non-activebar"><MdCheck /></div>
                             )}
                           </Step>
                           <Step transition="scale">
@@ -216,7 +217,7 @@ export default function AddressStep() {
                               <GooglePlaceAutoComplete
                                 value={form?.address}
                                 result={DestinationAddress}
-                                placeholder="Address"
+                                placeholder="Address *"
                               />
                             </div>
                             <div className="">
@@ -226,7 +227,7 @@ export default function AddressStep() {
                                 value={form?.state}
                                 required
                                 name="state"
-                                placeholder="State"
+                                placeholder="State *"
                                 onChange={(e) => {
                                   setForm({ ...form, state: e.target.value });
                                 }}
@@ -241,7 +242,7 @@ export default function AddressStep() {
                                 value={form?.city}
                                 required
                                 name="state"
-                                placeholder="City"
+                                placeholder="City *"
                                 onChange={(e) => {
                                   setForm({ ...form, city: e.target.value });
                                 }}
@@ -268,7 +269,7 @@ export default function AddressStep() {
                                 value={form?.pincode}
                                 required
                                 name="pincode"
-                                placeholder="Zipcode"
+                                placeholder="Zipcode *"
                                 onChange={(e) => {
                                   setForm({ ...form, pincode: e.target.value });
                                 }}
@@ -283,7 +284,7 @@ export default function AddressStep() {
                                 value={form?.country}
                                 required
                                 name="pincode"
-                                placeholder="Country"
+                                placeholder="Country *"
                                 onChange={(e) => {
                                   setForm({ ...form, country: e.target.value });
                                 }}
