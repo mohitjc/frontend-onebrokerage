@@ -41,7 +41,7 @@ const Header = () => {
               <div className="flex flex-shrink-0 items-center">
                 <img
                   alt="logo"
-                  src="./assets/img/logo.png"
+                  src="/assets/img/logo.png"
                   className="h-8 lg:h-12 w-auto"
                 />
               </div>
