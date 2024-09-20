@@ -13,6 +13,7 @@ import AuthLayout from "../../components/AuthLayout";
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { MdCheck } from "react-icons/md";
+import { GoCheckCircle } from "react-icons/go";
 
 // import { requestForToken } from "../../firebase/configuration";
 export default function Step3() {
@@ -599,37 +600,45 @@ useEffect(() => {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
+
                   
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <img src="assets/img/tick-grey.png" />
-                      <h5>Thank you for Your Registration .</h5>
-                      <h5>
-                        Please wait until your profile verification is completed
-                        .
+                  <div className="mt-2 text-center">
+
+                  <img src="assets/img/check.gif" alt="" className="mx-auto mb-4 h-12" />
+                   
+                      <h5 className="text-lg font-semibold">Thank you for Your Registration .</h5>
+                      <h5 className="text-sm font-regular mt-2">
+                        Please wait until your profile verification is completed.
+                        
                       </h5>
 
                   </div>
 
-                  <div className="mt-4">
+                  <div className="mt-5">
+               
+
+
                     <button
                       type="button"
                       id="CloseBidModel"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 hidden"
+                      className=" justify-center bg-primary text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 hidden"
                       onClick={closeModal}
                     >
                       Got it, thanks!
                     </button>
-                    <button
-                          onClick={() => {
-                            history("/");
-                            document.getElementById("CloseBidModel").click();
-                          }}
-                          type="submit"
-                          class="btn dark-btn width-set mx-auto"
-                        >
-                          Ok
+                    <div className="flex items-center justify-center">
+                        <button
+                              onClick={() => {
+                                history("/");
+                                document.getElementById("CloseBidModel").click();
+                              }}
+                              type="submit"
+                              class="bg-primary text-white px-4 py-2 text-sm rounded-lg"
+                            >
+                              Ok
                         </button>
+                    </div>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

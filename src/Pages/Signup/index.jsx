@@ -29,7 +29,7 @@ const Signup = () => {
     gender: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword:"",
     business_name: "",
   });
 
@@ -41,17 +41,17 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitted(true);   
     if (form?.password != form?.confirmPassword) {
       return toast.error("Password and comfirm password did not match");
     }
     if (
-      !emailvalidation() ||
+      !emailvalidation()||
       !form?.firstName ||
       !form?.password ||
       !form?.email ||
-      form?.password != form?.confirmPassword||
-      !form?.position
+      form?.password != form?.confirmPassword 
+      // !form?.position
     ) {
       return false;
     }
@@ -72,20 +72,24 @@ const Signup = () => {
     history("/signup-step-1");
   };
 
+  
 
-
-  const emailvalidation = () => {
-    if (form?.email) {
-      let splitEmail = form?.email?.split("@")[1]
-      if (splitEmail && (splitEmail.includes("yahoo.com") || splitEmail.includes("gmail.com") || splitEmail.includes("outlook.com") || splitEmail.includes("hotmail.com"))) {
-        return false
+  const emailvalidation=()=>
+    { 
+      if(form?.email)
+      {
+       let splitEmail=form?.email?.split("@")[1]
+       if(splitEmail && (splitEmail.includes("yahoo.com")||splitEmail.includes("gmail.com")||splitEmail.includes("outlook.com")||splitEmail.includes("hotmail.com")))
+        {
+          return false
+        }
+        else
+        {
+          return true
+        }
       }
-      else {
-        return true
-      }
+      
     }
-
-  }
 
   return (
     <>
@@ -146,54 +150,35 @@ const Signup = () => {
             onChange={(e) => setForm({ ...form, firstName: e.target.value })}
             value={form.firstName}
             className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
-            placeholder="Enter First Name *"
+            placeholder="Enter First Name"
             autoComplete="off"
             required
           />
-          <input
+           <input
             type="text"
             onChange={(e) => setForm({ ...form, lastName: e.target.value })}
             value={form?.lastName}
             className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
             placeholder="Enter Last Name"
             autoComplete="off"
-          // requiredemail
+            required
           />
           <input
             type="email"
             onChange={(e) => setForm({ ...form, email: e.target.value })}
             value={form.email}
             className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
-            placeholder="Email address *"
+            placeholder="Email address"
             autoComplete="off"
             disabled={methodModel.getPrams("attended") ? true : false}
             required
           />
 
-          <select
-            className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
-            onChange={(e) => {
-              setForm({
-                ...form,
-                position: e.target.value,
-              });
-            }}
-            required
-          >
-            <option value="">Select Position *</option>
-            <option value="owner">Owner</option>
-            <option value="manager">Manager</option>
-            <option value="accounting_manager">
-              Account Manager
-            </option>
-            <option value="dispatcher">Dispatcher</option>
-          </select>
-
           <div className="relative mb-3">
             <input
               type={eyes.password ? "text" : "password"}
               className="shadow-box border-1 border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
-              placeholder="Password *"
+              placeholder="Password"
               onChange={(e) => setForm({ ...form, password: e.target.value })}
               value={form.password}
               minLength={8}
@@ -213,7 +198,7 @@ const Signup = () => {
             <input
               type={eyes.confirmPassword ? "text" : "confirmPassword"}
               className="shadow-box border-1 border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
-              placeholder="ConfirmPassword *"
+              placeholder="ConfirmPassword"
               onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
               value={form.confirmPassword}
               minLength={8}
@@ -261,7 +246,7 @@ const Signup = () => {
               type="submit"
               className="px-4 w-full text-sm font-normal text-white h-12 flex items-center justify-center gap-2 !bg-[#494f9f] rounded-xl shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"
             >
-              Next
+             Next
             </button>
           </div>
 
