@@ -17,6 +17,7 @@ import { PiEyeLight } from "react-icons/pi";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { LuImport } from "react-icons/lu";
 import moment from "moment";
+import PageLayout from "../../components/global/PageLayout";
 const Html = ({
   sorting,
   filter,
@@ -168,7 +169,7 @@ const Html = ({
   //   }, [])
 
   return (
-    <Layout>
+    <PageLayout>
       <div className="flex flex-wrap justify-between items-center gap-y-4">
         <div>
           <h3 className="text-2xl font-semibold text-[#111827]">
@@ -351,7 +352,7 @@ const Html = ({
           <></>
         )}
       </div>
-    </Layout>
+    </PageLayout>
   );
 };
 

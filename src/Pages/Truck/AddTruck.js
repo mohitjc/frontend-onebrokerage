@@ -11,6 +11,7 @@ import shared from "./shared";
 import { useSelector } from "react-redux";
 import environment from "../../environment";
 import { toast } from "react-toastify";
+import PageLayout from "../../components/global/PageLayout";
 
 const AddEdit = () => {
   const { id } = useParams();
@@ -92,7 +93,7 @@ const AddEdit = () => {
 
   return (
     <>
-      <Layout>
+      <PageLayout>
         <form onSubmit={handleSubmit}>
           <div className="flex items-center mb-8">
             <Tooltip placement="top" title="Back">
@@ -179,7 +180,7 @@ const AddEdit = () => {
             </button>
           </div>
         </form>
-      </Layout>
+      </PageLayout>
     </>
   );
 };
