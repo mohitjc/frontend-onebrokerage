@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login_success, logout } from "../../../Pages/actions/user";
 import Header from "../header2";
 import Footers from "../footer";
+import Sidebar from "../sidebar";
 
 const PageLayout = ({ children }) => {
   const user = useSelector((state) => state.user);
@@ -59,8 +60,18 @@ const PageLayout = ({ children }) => {
     <>
       <div component="page-layout">
        <Header/>
+       <div component="page-layout" className="xl:container mx-auto">
+       <div className="flex gap-4 xl:gap-8 px-6 py-4 lg:py-16 lg:px-16">
+          <div className="sidebars_data lg:w-[300px] xl:w-[400px] border border-gray-200 rounded-xl shadow-md">
+              <div className="w-full">
+                  <Sidebar  />
+              </div>
+          </div>
+          <div className="w-full">
+            {children}</div>
+       </div>
 
-        <main className="pageContent">{children}</main>
+       </div>
 
       <Footers/>
       </div>
