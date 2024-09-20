@@ -118,7 +118,7 @@ const Header = () => {
                       <MenuItem>
                         <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white">
                           <TrashIcon className="size-4 stroke-black/30 hover:stroke-white" />
-                          <a  onClick={() => Logout()}>  Logout</a>
+                          <a  onClick={() =>Logout()}>  Logout</a>
                         
                         </button>
                       </MenuItem>

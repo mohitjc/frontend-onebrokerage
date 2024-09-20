@@ -104,7 +104,7 @@ const Html = ({
 
                     <span class="text-base font-medium text-slate-500">{interval==1?"/month":interval==3?"/3 month":interval==6?"/6 month":"/year"}</span>
                   </p>
-                  <button className="mt-8 block w-full bg-primary rounded-md py-2 text-sm font-semibold text-white text-center" disabled={getPrice(itm)==0} onClick={(e)=>payment(itm,getPrice(itm))}>Buy Now</button>
+                  <button className={`mt-8 block w-full  rounded-md py-2 text-sm font-semibold text-white text-center ${getPrice(itm)==0?'cursor-not-allowed bg-gray-300 text-black':'bg-primary'}`} disabled={getPrice(itm)==0} onClick={(e)=>payment(itm,getPrice(itm))}>Buy Now</button>
                   
                 </div>
                 <div class="pt-6 pb-8 px-6">

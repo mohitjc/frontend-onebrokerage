@@ -19,6 +19,7 @@ const AddEdit = () => {
     id: "",
     truck_data: [{ truck_number: "", vin_number: "" }], // Initialize with one set of fields
   });
+  console.log()
   const [submitted, setSubmitted] = useState(false);
   const history = useNavigate();
   const user = useSelector((state) => state.user);
@@ -132,8 +133,9 @@ const AddEdit = () => {
             </div>
             <div className="grid grid-cols-12 gap-4 p-4">
               {form.truck_data.map((truck, index) => (
-                <div className="col-span-6" key={index}>
-                  <div className="flex flex-col mb-3">
+                <div className={`${form?.truck_data.length==1?'col-span-12':'col-span-6'}`} key={index}>
+                  <div className={`${form?.truck_data.length==1?'flex gap-4 flex-row mb-3 w-full':'flex flex-col gap-4 w-full'}`}>
+                    <div className="w-full">
                     <label className="text-sm mb-2 block">Truck Number</label>
                     <input
                       type="text"
@@ -142,7 +144,9 @@ const AddEdit = () => {
                       onChange={(e) => handleFieldChange(index, e, "truck_number")}
                       required
                     />
-                    <label className="text-sm mb-2 block mt-2">VIN Number</label>
+                      </div>
+                   <div className="w-full">
+                   <label className="text-sm mb-2 block">VIN Number</label>
                     <input
                       type="text"
                       className="relative bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3"
@@ -150,14 +154,16 @@ const AddEdit = () => {
                       onChange={(e) => handleFieldChange(index, e, "vin_number")}
                       required
                     />
+                    </div>
                     {/* Show remove button only if there are more than one set of fields */}
                     {form.truck_data.length > 1 && !form.id && (
                       <button
                         type="button"
-                        className="ml-2 text-white border bg-[#eeeff6] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2"
+                        className=" text-white border flex items-center gap-2 justify-center bg-[#eeeff6] focus:ring-4  focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2"
                         onClick={() => handleRemoveField(index)}
                       >
                         <i className="fa fa-trash text-sm text-[#c02e2e]"></i>
+                        <span className="text-black">Delete</span>
                       </button>
                     )}
                   </div>
