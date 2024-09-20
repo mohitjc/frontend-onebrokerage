@@ -8,13 +8,15 @@ import { MdOutlineWifiLock } from "react-icons/md";
 import { BsTwitterX } from "react-icons/bs";
 import { FaFacebookF, FaGithub } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
+import { useParams } from "react-router-dom";
 
 
 const Html = ({
 
 }) => {
  
-
+  const {page}=useParams()
+  console.log(page,"pagepage")
   return (
     <>
       <div className="hader_tops">

@@ -11,27 +11,27 @@ const ActivePlan = () => {
   const [card, setCard] = useState();
   const history = useNavigate();
 
-//   useEffect(() => {
-//     loader(true);
-//     ApiClient.get("api/my/plan").then((res) => {
-//       if (res.success) {
-//         setActivePlan(res.data);
-//         if (!res.data.id) {
-//           history("/plans");
-//         }
-//       }
-//       loader(false);
-//     });
+  useEffect(() => {
+    loader(true);
+    ApiClient.get("active-plan").then((res) => {
+      if (res.success) {
+        setActivePlan(res.data);
+        if (!res.data.id) {
+          history("/plans");
+        }
+      }
+      loader(false);
+    });
 
-//     ApiClient.get("api/cards/listing", { isDefault: true }).then((res) => {
-//       if (res.success) {
-//         if (res.data.length) {
-//           setCard(res.data[0]);
-//         }
-//       }
-//       loader(false);
-//     });
-//   }, []);
+    // ApiClient.get("api/cards/listing", { isDefault: true }).then((res) => {
+    //   if (res.success) {
+    //     if (res.data.length) {
+    //       setCard(res.data[0]);
+    //     }
+    //   }
+    //   loader(false);
+    // });
+  }, []);
 
   return (
     <PageLayout>

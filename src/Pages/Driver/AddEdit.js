@@ -243,7 +243,7 @@ const AddEdit = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
-            <div className="mb-3">
+            <div className="">
               <FormControl
                 type="text"
                 label="First Name"
@@ -252,7 +252,7 @@ const AddEdit = () => {
                 required
               />
             </div>
-            <div className="mb-3">
+            <div className="">
               <FormControl
                 type="text"
                 label="Last Name"
@@ -260,7 +260,7 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, lastName: e })}
               />
             </div>
-            <div className="mb-3">
+            <div className="">
               <FormControl
                 type="text"
                 label="Email"
@@ -276,10 +276,10 @@ const AddEdit = () => {
               )}
             </div>
 
-            <div className="col-md-6 mb-3">
+            <div className="col-md-6 ">
               <label className="">Mobile No</label>
               <div className="phoneInput_cls d-flex form-control p-0">
-                <PhoneInput
+                {/* <PhoneInput
                   country={'us'}
                   value={form?.dialCode}
                   countryCodeEditable={false}
@@ -291,7 +291,7 @@ const AddEdit = () => {
                       dialCode: country.dialCode,
                     });
                   }}
-                />
+                /> */}
 
                 <input
                   type="text"
@@ -308,7 +308,7 @@ const AddEdit = () => {
                 />
               </div>
             </div>
-            <div className="col-md-6 mb-3">
+            <div className="col-md-6 ">
               <label> License Number <span className="text-danger">*</span></label>
 
               <div className="input-new-design">
@@ -347,7 +347,7 @@ const AddEdit = () => {
                 <></>
               )}
             </div>
-            <div className="col-md-12 mb-3">
+            <div className="col-md-12 ">
               <label> License Upload <span className="text-danger">*</span></label>
 
               <div className='d-block license-upload'>
@@ -381,7 +381,7 @@ const AddEdit = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
-            {/* <div className="mb-3">
+            {/* <div className="">
               <FormControl
                 type="text"
                 label="Address*"
@@ -390,7 +390,7 @@ const AddEdit = () => {
                 required
               />
             </div> */}
-            <div className="mb-3">
+            <div className="">
               <label className="label_profile">
                 Address<span className="star">*</span>
               </label>
@@ -410,7 +410,7 @@ const AddEdit = () => {
                 )}
               </div>
             </div>
-            <div className="mb-3">
+            <div className="">
               <FormControl
                 type="text"
                 label="City"
@@ -419,7 +419,7 @@ const AddEdit = () => {
                 required
               />
             </div>
-            <div className="mb-3">
+            <div className="">
               <FormControl
                 type="text"
                 label="State"
@@ -428,7 +428,7 @@ const AddEdit = () => {
                 required
               />
             </div>
-            <div className="mb-3">
+            <div className="">
               <FormControl
                 type="text"
                 label="Country"
@@ -437,7 +437,7 @@ const AddEdit = () => {
                 required
               />
             </div>
-            <div className="mb-3">
+            <div className="">
               <FormControl
                 type="text"
                 label="ZipCode"
@@ -453,58 +453,64 @@ const AddEdit = () => {
 
 
         <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-10 ">
-          <div className="bg-[#1245940a] p-4 border-b">
+          <div className="bg-[#1245940a] p-4 border-b flex justify-between">
             <h3 className="text-[20px] font-[500]">Truck Details </h3>
+
+            {/* <div className="relative">
+
+         
+<i className='fa fa-search absolute right-4 top-1/2 -translate-y-1/2'></i>
+<input
+  placeholder="Search Trucks"
+  value={filter?.search}
+  className="form-control"
+  type="text"
+  onChange={(e) => {
+    GetTruck({ search: e.target.value });
+    setfilter({
+      ...filter,
+      search: e.target.value,
+    });
+  }}
+/>
+</div>
+{isSearch && (
+<>
+{Trucks &&
+  Trucks?.map((itm) => {
+    if (itm)
+      return (<div className="dropspdiv dropsdivTwo">
+        <span
+          className="dropspans"
+          onClick={() => {
+            setForm({
+              ...form,
+              truck_id: itm?.id,
+              vin_number: itm?.vin_number,
+            });
+            setVin(itm?.vin_number);
+            setisSearch(false);
+            setfilter({ search: '' });
+          }}
+        >
+          {itm?.truck_number}
+        </span>
+
+
+      </div>);
+    else
+      return <></>
+  })}
+</>
+
+)} */}
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
-            <img src="/assets/img/fast.svg" className='mb-3' />
-            <i className='fa fa-search'></i>
-            <input
-              placeholder="Search Trucks"
-              value={filter?.search}
-              className="form-control"
-              type="text"
-              onChange={(e) => {
-                GetTruck({ search: e.target.value });
-                setfilter({
-                  ...filter,
-                  search: e.target.value,
-                });
-              }}
-            />
-            {isSearch && (
-              <>
-                {Trucks &&
-                  Trucks?.map((itm) => {
-                    if (itm)
-                      return (<div className="dropspdiv dropsdivTwo">
-                        <span
-                          className="dropspans"
-                          onClick={() => {
-                            setForm({
-                              ...form,
-                              truck_id: itm?.id,
-                              vin_number: itm?.vin_number,
-                            });
-                            setVin(itm?.vin_number);
-                            setisSearch(false);
-                            setfilter({ search: '' });
-                          }}
-                        >
-                          {itm?.truck_number}
-                        </span>
-
-
-                      </div>);
-                    else
-                      return <></>
-                  })}
-              </>
-
-            )}
+            {/* <img src="/assets/img/fast.svg" className='' /> */}
            
-            <div className="mb-3">
+           
+            <div className="">
          
               <label>
                 Truck
@@ -544,7 +550,7 @@ const AddEdit = () => {
             ) : (
               <></>
             )}
-            <div className="mb-3">
+            <div className="">
               <label>VIN Number</label>
               <input
                 type="text"

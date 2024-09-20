@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 const Plan = () => {
   const user = useSelector((state) => state.user);
+  const [activeplan, setActivePlan] = useState()
 
   const searchState = { data: "" };
   const [filters, setFilter] = useState({ page: 1, count: 10});
@@ -293,6 +294,7 @@ const Plan = () => {
     if (user && user.loggedIn) {
       setFilter({ ...filters, search: searchState.data });
       getData({ search: searchState.data, page: 1 });
+      activeplans()
     }
   }, []);
 
@@ -304,6 +306,23 @@ const Plan = () => {
     let value = p?.pricing.find((itm)=>itm?.interval_count==interval)
     return Number(value?.unit_amount ||0)
   }
+
+
+const activeplans=()=>
+{
+  loader(true);
+  ApiClient.get("active-plan").then((res) => {
+    if (res.success) {
+      setActivePlan(res.data);
+      if (!res.data.id) {
+        history("/plans");
+      }
+    }
+    loader(false);
+  });
+}
+   
+
 
   return (
     <>
@@ -321,6 +340,7 @@ const Plan = () => {
         setFilter={setFilter}
         filter={filter}
         loaging={loaging}
+        activeplan={activeplan}
         changeInterval={changeInterval}
         interval={interval}
         getPrice={getPrice}

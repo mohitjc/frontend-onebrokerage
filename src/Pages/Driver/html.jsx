@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/global/layout";
 // import "./style.scss";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
+import loader from "../../methods/loader";
 import { Tooltip } from "antd";
 import { FiEdit3, FiPlus } from "react-icons/fi";
 import { BsTrash3 } from "react-icons/bs";
@@ -17,6 +18,7 @@ import { PiEyeLight } from "react-icons/pi";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { LuImport } from "react-icons/lu";
 import moment from "moment";
+import { toast } from "react-toastify";
 import PageLayout from "../../components/global/PageLayout";
 const Html = ({
   sorting,
@@ -41,6 +43,33 @@ const Html = ({
   uploadFile,
 }) => {
   const user = useSelector((state) => state.user);
+  const [activeplan, setActivePlan] = useState();
+  const history = useNavigate();
+  useEffect(() => {
+    loader(true);
+    ApiClient.get("active-plan").then((res) => {   
+      if (res.success) {
+        setActivePlan(res.data);
+        if (!res.data.id) {
+          history("/plans");
+        }
+      }
+      loader(false);
+    });
+
+  }, []);
+  const adddriver=()=>
+    {
+      if(activeplan?.subscription_plan_id?.number_of_drivers>total)
+      {
+        history(`/${shared.url}/add`)
+      }
+      else{
+     
+        toast.error(`You can add only ${activeplan?.subscription_plan_id?.number_of_drivers} drivers`)
+      }
+      
+    }
   const columns = [
     {
       key: "fullName",
@@ -189,12 +218,13 @@ const Html = ({
                     </button> */}
 
           {/* {isAllow(`add${shared.check}`) ? ( */}
-            <Link
+            <button
               className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-              to={`/${shared.url}/add`}
+              onClick={adddriver}
+         
             >
               <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
-            </Link>
+            </button>
           {/* ) : (
             <></>
           )} */}

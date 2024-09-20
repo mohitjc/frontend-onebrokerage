@@ -30,8 +30,9 @@ import {
   IoChatboxEllipsesOutline,
 } from "react-icons/io5";
 import { RiCoupon3Line, RiPresentationLine } from "react-icons/ri";
-import { GrCatalogOption } from "react-icons/gr";
+import { GrCar, GrCatalogOption } from "react-icons/gr";
 import { useSelector ,useDispatch} from "react-redux";
+import { HiOutlineTruck } from "react-icons/hi";
 // import { CostingURL } from '../../../pages/CostingTemplate/Api';
 // import { CostingTourURL } from '../../../pages/CostPerTourTemplate/Api';
 
@@ -107,7 +108,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                         " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                     }
                   >
-                    <RiHome6Line className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <HiOutlineTruck className="text-black shrink-0 text-lg group-hover:text-white " />
                     <span className="text-inherit leading-none sidebar_text">
                       Trucks
                     </span>
@@ -125,7 +126,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                         " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                     }
                   >
-                    <RiHome6Line className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <GrCar className="text-black shrink-0 text-lg group-hover:text-white " />
                     <span className="text-inherit leading-none sidebar_text">
                       Drivers
                     </span>

@@ -18,8 +18,9 @@ const Html = ({
   data,
   getPrice,
   payment,
+  activeplan,
 }) => {
-  console.log(data, "==================")
+
   return (
     <>
       <div className="hader_tops">
@@ -104,7 +105,7 @@ const Html = ({
 
                     <span class="text-base font-medium text-slate-500">{interval==1?"/month":interval==3?"/3 month":interval==6?"/6 month":"/year"}</span>
                   </p>
-                  <button className={`mt-8 block w-full  rounded-md py-2 text-sm font-semibold text-white text-center ${getPrice(itm)==0?'cursor-not-allowed bg-gray-300 text-black':'bg-primary'}`} disabled={getPrice(itm)==0} onClick={(e)=>payment(itm,getPrice(itm))}>Buy Now</button>
+                  <button className={`mt-8 block w-full  rounded-md py-2 text-sm font-semibold text-white text-center ${getPrice(itm)==0?'cursor-not-allowed bg-gray-300 text-black':'bg-primary'}`} disabled={getPrice(itm)==0||activeplan?.subscription_plan_id?.id==itm?.id} onClick={(e)=>payment(itm,getPrice(itm))}>{activeplan?.subscription_plan_id?.id==itm?.id?"Active Plan":"Buy Now"}</button>
                   
                 </div>
                 <div class="pt-6 pb-8 px-6">

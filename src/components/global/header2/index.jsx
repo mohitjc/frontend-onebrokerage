@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 const navigation = [
   { name: 'About', href: '#', current: true },
   { name: 'Blog', href: '#', current: false },
+  {name:'Plan',href:"/plan", current: false},
   { name: 'Chat', href: '/chat', current: false },
   { name: 'Contact', href: '#', current: false },
 ]

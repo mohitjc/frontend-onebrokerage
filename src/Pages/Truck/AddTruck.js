@@ -15,6 +15,7 @@ import PageLayout from "../../components/global/PageLayout";
 
 const AddEdit = () => {
   const { id } = useParams();
+
   const [form, setForm] = useState({
     id: "",
     truck_data: [{ truck_number: "", vin_number: "" }], // Initialize with one set of fields
@@ -28,28 +29,47 @@ const AddEdit = () => {
     { key: "truck_data", required: true, message: "At least one truck record is required" },
   ];
 
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
+    if (form?.truck_data?.length < 1) {
+      return false;
+    }
 
-    // Validate the form
-    let invalid = methodModel.getFormError(formValidation, {
-      truck_data: form.truck_data,
-    });
-    if (invalid) return;
-
-    let method = form.id ? "put" : "post";
-    let url = form.id ? shared.editApi : shared.addApi;
-
-    let value = form.id
-      ? { id: form.id, truck_data: form.truck_data }
-      : { truck_data: form.truck_data };
+    const LoadID = Math.floor(Math.random() * 1000000000);
+    let method = "post";
+    let url = "truck";
+    let value = {
+      ...form,
+      truck_data: form?.truck_data,
+    };
+    // value.fullName=value.firstName+" "+value.lastName
+    if (value.id) {
+      method = "put";
+      url = "truck";
+      value = {
+        truck_data: form?.truck_data,
+      };
+    } else {
+      delete value.id;
+    }
 
     loader(true);
     ApiClient.allApi(url, value, method).then((res) => {
       if (res.success) {
         toast.success(res.message);
-        history(`/${shared.url}`);
+
+        if (localStorage.getItem("newuser", true) && !value?.id) {
+          history("/drivers/add");
+
+        } else {
+
+          history("/trucks");
+        }
+
       }
       loader(false);
     });
