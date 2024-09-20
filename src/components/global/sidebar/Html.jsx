@@ -37,6 +37,55 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
   const path = window.location.pathname;
   return (
     <>
+
+      <div className="sidebar_new">
+          <div className=" rounded-t-lg bg-gray-50 px-2 py-6">
+              <div className="flex  items-center gap-4 flex-wrap relative">
+
+                <div className="">
+                  {/* <img
+                    src={methodModel.userImg(data && data.image)}
+                    className="h-36 w-36 rounded-full object-cover mx-auto"
+                  /> */}
+                   <img src="assets/img/d1.png" className=" " alt=""/>
+                </div>
+                 
+                  <div className="">
+                      <h2 className="text-xl font-semibold">Upakshi</h2>
+                      <p className="text-sm font-normal">upakshi@yopmail.com </p>
+                  </div>
+              </div>
+          </div>
+
+          <div className="border-t  px-2 py-4">
+
+
+          <ul className="space-y-2  ">
+              <li>
+                <tooltip placement="right" title="Dashboard">
+                  <NavLink
+                    to="/dashboard"
+                
+                    className={(isActive) =>
+                      "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
+                      (location?.pathname == "/dashboard" &&
+                        " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                    }
+                  >
+                    <RiHome6Line className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <span className="text-inherit leading-none sidebar_text">
+                      Dashboard
+                    </span>
+                  </NavLink>
+                </tooltip>
+              </li>
+          </ul>
+
+          </div>
+      </div>
+
+
+     
       {/* <div
         className={` pt-[60px] mx-[10px] h-full pb-4  ${isOpen && styles.sm_sidebar}`}
         component="siderbar"

@@ -58,6 +58,14 @@ const Profile = () => {
           </Link>
         </div>
 
+
+
+        <div className="profile_inners">
+              <div className="">
+
+              </div>
+        </div>
+
         <div className=" sm:mt-3 md:mt-8 mt-8">
           <div className="grid items-center grid-cols-12 gap-4 mb-5">
             <div className="col-span-12  p-6 shadow-box overflow-hidden rounded-lg bg-white  border inner_part">
