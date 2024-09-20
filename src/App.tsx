@@ -40,6 +40,11 @@ function App() {
     { url: "/drivers/edit/:id", path: "Driver/AddEdit" },
     { url: "/drivers/add", path: "Driver/AddEdit" },
     { url: "/drivers/detail/:id", path: "Driver/View" },
+     { url: "/trucks", path: "Truck" },
+    // { url: "/trucks/edit/:id", path: "Truck/AddEdit" },
+    { url: "/trucks/add", path: "Truck/AddTruck" },
+    { url: "/trucks/detail/:id", path: "Truck/View" },
+   
       //  { url: "/profile/:tab", path: "Settings" },
     // { url: "/assignment", path: "Assignment" },
     // { url: "/assignment/detail/:id", path: "Assignment/View" },
@@ -91,10 +96,6 @@ function App() {
     // { url: "/approvedSubCarrier", path: "Carrier/ApprovedSubCarrier" },
     // { url: "/transaction", path: "Transaction" },
     // { url: "/transaction/detail/:id", path: "Transaction/Detail" },
-    // { url: "/trucks", path: "Truck" },
-    // // { url: "/trucks/edit/:id", path: "Truck/AddEdit" },
-    // { url: "/trucks/add", path: "Truck/AddTruck" },
-    // { url: "/trucks/detail/:id", path: "Truck/View" },
    
 
     // { url: "/groups", path: "Group" },

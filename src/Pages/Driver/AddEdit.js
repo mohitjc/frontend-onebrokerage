@@ -14,6 +14,7 @@ import GooglePlaceAutoComplete from "../../components/common/GooglePlaceAutoComp
 import addressModel from "../../models/address.model";
 import ImageUpload from "../../components/common/ImageUpload";
 import { useNavigate } from "react-router-dom";
+import PageLayout from "../../components/global/PageLayout";
 
 const AddEdit = () => {
   const { role, id } = useParams();
@@ -216,7 +217,7 @@ const AddEdit = () => {
     }
   }, [form.licence_number])
   return (
-    <Layout>
+    <PageLayout>
       <form onSubmit={handleSubmit}>
         <div className="flex items-center mb-8">
           <Tooltip placement="top" title="Back">
@@ -566,7 +567,7 @@ const AddEdit = () => {
           </button>
         </div>
       </form>
-    </Layout>
+    </PageLayout>
   );
 };
 
