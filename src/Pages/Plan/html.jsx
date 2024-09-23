@@ -29,18 +29,18 @@ const Html = ({
         (itm) => activeplan?.interval_count === itm?.interval_count
       );
       if (plann?.interval_count === interval && itemPrice == activePlanAmount) {
-        return "Active Now";
+        return "Active Plan";
       } else {
         if(itemPrice > activePlanAmount)
-        return "Upgrade";
+        return "Upgrade Plan";
         else
-       return "Buy Now"
+       return "Buy Plan"
       }
     } else {
       if (itemPrice > activePlanAmount) {
-        return "Upgrade";
+        return "Upgrade Plan";
       } else {
-        return "Buy Now";
+        return "Buy Plan";
       }
     }
   };
@@ -129,7 +129,7 @@ const Html = ({
 
                     <span class="text-base font-medium text-slate-500">{interval==1?"/month":interval==3?"/3 month":interval==6?"/6 month":"/year"}</span>
                   </p>
-                  <button className={`mt-8 block w-full  rounded-md py-2 text-sm font-semibold text-white text-center ${getPrice(itm)==0?'cursor-not-allowed bg-gray-300 text-black':'bg-primary'} ${checkActiveplan(itm)=="Active Now"?"cursor-not-allowed":""}`} disabled={getPrice(itm)==0||checkActiveplan(itm)=="Active Now" } onClick={(e)=>payment(itm,getPrice(itm))}>{checkActiveplan(itm)}</button>              
+                  <button className={`mt-8 block w-full  rounded-md py-2 text-sm font-semibold text-white text-center ${getPrice(itm)==0?'cursor-not-allowed bg-gray-300 text-black':'bg-primary'} ${checkActiveplan(itm)=="Active Plan"?"cursor-not-allowed":""}`} disabled={getPrice(itm)==0||checkActiveplan(itm)=="Active Plan" } onClick={(e)=>payment(itm,getPrice(itm))}>{checkActiveplan(itm)}</button>              
                 </div>
                 <div class="pt-6 pb-8 px-6">
                   <h3 class="text-sm font-bold text-slate-900 tracking-wide uppercase">What's included</h3>
