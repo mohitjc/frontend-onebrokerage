@@ -18,6 +18,7 @@ const Features = () => {
   const [total, setTotal] = useState(0);
   const [loaging, setLoader] = useState(true);
   const history = useNavigate();
+  const [ShowActiveModal, setShowActiveModal] = useState("none");
 
   const sortClass = (key) => {
     let cls = "fa-sort";
@@ -175,46 +176,22 @@ const Features = () => {
   };
 
   const statusChange = (itm) => {
-    // if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
-    if (!isAllow(`edit${shared.check}`)) return;
+    let modal = "loadmanagement";
     let status = "active";
     if (itm.status == "active") status = "deactive";
 
-    // if (window.confirm(`Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`)) {
-    //     loader(true)
-    //     ApiClient.put(shared.statusApi, { id: itm.id, status }).then(res => {
-    //         if (res.success) {
-    //             getData()
-    //         }
-    //         loader(false)
-    //     })
-    // }
-    Swal.fire({
-      title: "Are you sure?",
-      text: `Do you want to ${
-        status == "active" ? "active" : "inactive"
-      } this user?`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#494f9f",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        loader(true);
-        ApiClient.put(shared.statusApi, { id: itm.id, status , model:"driver" }).then((res) => {
-          if (res.success) {
-            getData();
-            toast.success(res.message)
-          }
-          loader(false);
-        });
-        //   Swal.fire({
-
-        //     // text: `Sucessfully ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
-        //     icon: "success"
-        //   });
+    loader(true);
+    ApiClient.put(
+      shared?.statusApi,{ id: itm?.id, status:status , model:"driver" }
+    ).then((res) => {
+      if (res.success) { 
+        getData();
+        toast.success(
+          ` Driver ${status == "active" ? "Enabled" : "Disabled"} Successfully`
+        );
+        setShowActiveModal("none");
       }
+      loader(false);
     });
   };
 
@@ -294,6 +271,8 @@ const Features = () => {
         sampledownload={sampledownload}
         ImportFile={ImportFile}
         statusChange={statusChange}
+        ShowActiveModal={ShowActiveModal}
+        setShowActiveModal={setShowActiveModal}
         changestatus={changestatus}
         exportfun={exportfun}
         uploadFile={uploadFile}

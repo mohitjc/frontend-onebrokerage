@@ -12,6 +12,7 @@ import axios from "axios";
 import environment from "../../environment";
 import { toast } from "react-toastify";
 import addressModel from "../../models/address.model";
+import shared from "./shared";
 
 const Carrier = (p) => {
   const user = useSelector((state) => state.user);
@@ -111,8 +112,7 @@ const Carrier = (p) => {
   const getData = (p = {}) => {
     setLoader(true);
     let filter = { ...filters, ...p, addedBy: user?.id };
-    let url = "users/list";
-
+    let url =shared?.listApi;
     ApiClient.get(url, filter).then((res) => {
       if (res.success) {
         const data = res?.data?.data;
@@ -206,12 +206,12 @@ const Carrier = (p) => {
 
     loader(true);
     ApiClient.put(
-      `change/status?model=users&id=${itm?.id}&status=${status}`
+      shared?.statusApi,{ id: itm?.id, status:status , model:"users" }
     ).then((res) => {
-      if (res.success) {
+      if (res.success) { 
         getData();
         toast.success(
-          ` Load ${status == "active" ? "Enabled" : "Disabled"} Successfully`
+          ` Carrier ${status == "active" ? "Enabled" : "Disabled"} Successfully`
         );
         setShowActiveModal("none");
       }
@@ -250,7 +250,7 @@ const Carrier = (p) => {
     }
   };
   const view = (id) => {
-    history.push("user1/view/" + id);
+    history("/carriers/detail/" + id);
   };
 
   const edit = (id) => {
@@ -320,7 +320,7 @@ const Carrier = (p) => {
     // getData({sortBy})
     filter({ sortBy: key, sorder: i });
   };
-  
+
   return (
     <>
       <Html

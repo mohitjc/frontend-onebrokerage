@@ -153,8 +153,8 @@ export default function Chat() {
 
   return (
     <>
-    Chat page
-      {/* <Layout>
+  
+     {/* <Layout>
         <div className="">
           <div className="bg-gray-100 h-[600px] flex border border-gray-200"> */}
             {/* <div className="w-80 bg-white border-r border-gray-200  flex flex-col">
@@ -183,7 +183,7 @@ export default function Chat() {
                   <div className="flex items-center">
                     <div className="w-10 h-10  rounded-full">
                       <img src="assets/img/skill/team2.png" />
-                    </div>
+                    </div> 
                     <p className="ms-3 text-[14px] font-medium leading-[20px]">
                       Henry
                       <span className="block text-[12px] text-[#00000094] tracking-wider	">

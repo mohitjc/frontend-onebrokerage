@@ -27,6 +27,7 @@ const Html = ({
   view,
   statusChange,
   pageChange,
+  setShowActiveModal,
   count,
   deleteItem,
   clear,
@@ -58,7 +59,7 @@ const Html = ({
     });
 
   }, []);
-  
+
   const adddriver=()=>
     {
       if(activeplan?.subscription_plan_id?.number_of_drivers>total)
@@ -291,16 +292,16 @@ const Html = ({
               <span class="sr-only">Search</span>
             </button>
           </form>
-          <div>
+          {/* <div>
                 <button
                   onClick={(e) => sampledownload()}
                   className="btn dark-btn  btn-set"
                  >
                   <i className="fa fa-download me-2"></i>Download
                 </button>
-              </div>
+              </div> */}
 
-              <div className="result-set">
+              {/* <div className="result-set">
                 <div className="relative text-center">
                   <label className="cursor-pointer  dark-btn btn">
                     <i className="fa fa-download me-2"></i>
@@ -316,7 +317,7 @@ const Html = ({
                     />
                   </label>
                 </div>
-              </div>
+              </div> */}
 
           {/* <div className="flex gap-2 ml-auto">
             <SelectDropdown

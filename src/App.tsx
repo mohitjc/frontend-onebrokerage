@@ -46,6 +46,7 @@ function App() {
     { url: "/trucks/add", path: "Truck/AddTruck" },
     { url: "/trucks/detail/:id", path: "Truck/View" },
     { url: "/carriers", path: "Carrier" },
+    { url: "/carriers/detail/:id", path: "Carrier/View" },
    
       //  { url: "/profile/:tab", path: "Settings" },
     // { url: "/assignment", path: "Assignment" },

@@ -66,19 +66,19 @@ const Html = ({
   const latestSliderValue = React.useRef([0, 0]);
   const [activeplan, setActivePlan] = useState();
 
-  useEffect(() => {
-    loader(true);
-    ApiClient.get("active-plan").then((res) => {   
-      if (res.success) {
-        setActivePlan(res.data);
-        if (!res.data.id) {
-            Navigate("/plans");
-        }
-      }
-      loader(false);
-    });
+//   useEffect(() => {
+//     loader(true);
+//     ApiClient.get("active-plan").then((res) => {   
+//       if (res.success) {
+//         setActivePlan(res.data);
+//         if (!res.data.id) {
+//             Navigate("/plans");
+//         }
+//       }
+//       loader(false);
+//     });
 
-  }, []);
+//   }, []);
 
   const debouncedHandleSliderChange = debounce((newValues) => {
     const [min, max] = newValues;
@@ -219,14 +219,14 @@ const Html = ({
                 <></>
               )} */}
               {/* {isAllow(`edit${shared.check}`) ? ( */}
-                <Tooltip placement="top" title="Edit">
+                {/* <Tooltip placement="top" title="Edit">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) => edit(itm.id)}
                   >
                     <LiaEdit />
                   </a>
-                </Tooltip>
+                </Tooltip> */}
             {/* //   ) : (
             //     <></>
             //   )} */}
@@ -237,18 +237,18 @@ const Html = ({
       },
     },
   ];
-  const addCarrier=()=>
-    {
-      if(activeplan?.subscription_plan_id?.number_of_drivers>total)
-      {
-        Navigate(`/${shared.url}/add`)
-      }
-      else{
+//   const addCarrier=()=>
+//     {
+//       if(activeplan?.subscription_plan_id?.number_of_drivers>total)
+//       {
+//         Navigate(`/${shared.url}/add`)
+//       }
+//       else{
      
-        toast.error(`You can add only ${activeplan?.subscription_plan_id?.number_of_carrier} carrier`)
-      }
+//         toast.error(`You can add only ${activeplan?.subscription_plan_id?.number_of_carrier} carrier`)
+//       }
       
-    }
+//     }
   return (
     <PageLayout title="Carriers" title2="Carriers">
        <div className="flex flex-wrap justify-between items-center gap-y-4">
@@ -270,12 +270,12 @@ const Html = ({
                     </button> */}
 
           {/* {isAllow(`add${shared.check}`) ? ( */}
-            <button
+            {/* <button
               className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
               onClick={addCarrier}        
             >
               <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
-            </button>
+            </button> */}
           {/* ) : (
             <></>
           )} */}

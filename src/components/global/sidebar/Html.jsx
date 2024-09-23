@@ -133,11 +133,10 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                   </NavLink>
                 </tooltip>
               </li>
-              {/* <li>
+              <li>
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
                     to="/carriers"
-                
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
                       (location?.pathname == "/carriers" &&
@@ -146,11 +145,11 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                   >
                     <GrCar className="text-black shrink-0 text-lg group-hover:text-white " />
                     <span className="text-inherit leading-none sidebar_text">
-                   Carriers
+                    Carriers
                     </span>
                   </NavLink>
                 </tooltip>
-              </li> */}
+              </li>
               <li>
                 <tooltip placement="right" title="Dashboard">
                   <NavLink

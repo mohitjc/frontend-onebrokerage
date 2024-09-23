@@ -5,8 +5,8 @@ const shared = {
     url: "carriers",
     addApi: "driver",
     editApi: "driver",
-    detailApi: "driver",
-    listApi: "drivers",
+    detailApi: "user/detail",
+    listApi: "users/list",
     statusApi: "change/status",
     deleteApi: "delete",
   };
