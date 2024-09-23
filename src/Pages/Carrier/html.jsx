@@ -35,11 +35,8 @@ const Html = ({
   openModal,
   statusChange,
   pageChange,
-  addCol,
-  deleteItem,
-  exportCsv,
-  uTableCols,
-  removeCol,
+
+  
   filters,
   ChangeDocumentStatus,
   tableCols,
@@ -48,23 +45,15 @@ const Html = ({
   loaging,
   getData,
   data,
-  ChangeRequestStatus,
-  exportfun,
-  roles,
-  role,
-  ShowActiveModal,
-  setShowActiveModal,
-  ShowDeleteModal,
-  setShowDeleteModal,
-  isAllow,
+
+  
   total = { total },
 }) => {
   const Navigate = useNavigate();
   const [Min_rate, setMin_rate] = useState('');
   const [Max_rate, setMax_rate] = useState('');
-  const [DeleteId, setDeleteId] = useState('');
-  const latestSliderValue = React.useRef([0, 0]);
-  const [activeplan, setActivePlan] = useState();
+
+  
 
 //   useEffect(() => {
 //     loader(true);
@@ -80,37 +69,7 @@ const Html = ({
 
 //   }, []);
 
-  const debouncedHandleSliderChange = debounce((newValues) => {
-    const [min, max] = newValues;
-    setMin_rate(min);
-    setMax_rate(max);
-    // console.log("Filter changed. Calling GetAllprojects...");
-    getData({ min_rate: min, max_rate: max });
-  }, 500);
 
-  const handleSliderChange = (newValues) => {
-    if (
-      JSON.stringify(newValues) === JSON.stringify(latestSliderValue.current)
-    ) {
-      return;
-    }
-    latestSliderValue.current = newValues;
-    debouncedHandleSliderChange(newValues);
-  };
-
-  const Delete = () => {
-    deleteItem(DeleteId);
-  };
-
-  const [StatusData, setStatusData] = useState({});
-  const StatusCh = () => {
-    statusChange(StatusData);
-  };
-
-  const setPriceFilter = () => {
-    setFilter({ ...filters, min_rate: Min_rate, max_rate: Max_rate });
-    getData({ min_rate: Min_rate, max_rate: Max_rate });
-  };
 
   useEffect(() => {
     setMin_rate(0);
@@ -118,27 +77,16 @@ const Html = ({
   }, []);
 
   const Permission = JSON.parse(localStorage.getItem('permission'));
-  const Role = [
-    {
-      key: 'staff',
-      name: 'Staff',
-    },
-    {
-      key: 'carrier',
-      name: 'Carrier',
-    },
-  ];
+
+  
   let ListingData = [];
   if (user?.role == 'staff') {
     ListingData = data?.filter((itm) => itm?.id != user?.id);
   } else {
     ListingData = data;
   }
-  const Handlefilter = (e) => {
-    const value = e.target.value;
-    setFilter({ ...filters, [e.target.name]: value });
-    getData({ [e.target.name]: value });
-  };
+
+  
   const columns = [
     {
       key: "fullName",

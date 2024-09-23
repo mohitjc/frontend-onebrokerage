@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import ApiClient from "../../methods/api/apiClient";
+import ApiClient from "../../../methods/api/apiClient";
 // import "./style.scss";
-
-import loader from "../../methods/loader";
-import userTableModel from "../../models/table.model";
+import loader from "../../../methods/loader";
+import userTableModel from "../../../models/table.model";
 import Html from "./html";
-import { userType } from "../../models/type.model";
+import { userType } from "../../../models/type.model";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import environment from "../../environment";
+import environment from "../../../environment";
 import { toast } from "react-toastify";
-import addressModel from "../../models/address.model";
-import shared from "./shared";
+import addressModel from "../../../models/address.model";
 
-const Carrier = (p) => {
+const ApprovedCarrier = (p) => {
   const user = useSelector((state) => state.user);
   const [DataLength, setDataLength] = useState(0);
   const [ShowDeleteModal, setShowDeleteModal] = useState("none");
@@ -28,6 +26,7 @@ const Carrier = (p) => {
     role: role || "",
     isDeleted: false,
     isInvited: true,
+    request_status:"accepted",
     addedBy: user?.id,
   });
 
@@ -65,23 +64,8 @@ const Carrier = (p) => {
     return value;
   };
 
-  const count = (e) => {
-    setFilter({ ...filters, count: e });
-    getData({ ...filters, count: e });
-  };
-
   const addCol = (itm) => {
     setTableCols([...tableCols, itm]);
-  };
-
-  const ChangeRequestStatus = (e) => {
-    setFilter({
-      ...filters,
-      request_status: e,
-      page: 1,
-      isDeleted: filters?.isDeleted,
-    });
-    getData({ request_status: e, page: 1 });
   };
 
   const addressResult = async (e) => {
@@ -112,7 +96,8 @@ const Carrier = (p) => {
   const getData = (p = {}) => {
     setLoader(true);
     let filter = { ...filters, ...p, addedBy: user?.id };
-    let url =shared?.listApi;
+    let url = "users/list";
+
     ApiClient.get(url, filter).then((res) => {
       if (res.success) {
         const data = res?.data?.data;
@@ -206,12 +191,12 @@ const Carrier = (p) => {
 
     loader(true);
     ApiClient.put(
-      shared?.statusApi,{ id: itm?.id, status:status , model:"users" }
+      `change/status?model=users&id=${itm?.id}&status=${status}`
     ).then((res) => {
-      if (res.success) { 
+      if (res.success) {
         getData();
         toast.success(
-          ` Carrier ${status == "active" ? "Enabled" : "Disabled"} Successfully`
+          ` Load ${status == "active" ? "Enabled" : "Disabled"} Successfully`
         );
         setShowActiveModal("none");
       }
@@ -305,23 +290,14 @@ const Carrier = (p) => {
 
     return value;
   };
-  
   const filter = (p = {}) => {
     setFilter({ ...filters, ...p });
     getData({ ...p, page: filters?.page });
-  };
-  const sortClass = (key) => {
-    let cls = "fa-sort";
-    if (filters.key == key && filters.sorder == "asc") cls = "fa-sort-up";
-    else if (filters.key == key && filters.sorder == "desc")
-      cls = "fa-sort-down";
-    return "fa " + cls;
   };
   const sorting = (key, i) => {
     // getData({sortBy})
     filter({ sortBy: key, sorder: i });
   };
-
   return (
     <>
       <Html
@@ -331,7 +307,6 @@ const Carrier = (p) => {
         isAllow={isAllow}
         tabChange={tabChange}
         tab={tab}
-        filter={filter}
         reset={reset}
         add={add}
         roles={roles}
@@ -348,14 +323,12 @@ const Carrier = (p) => {
         uTableCols={uTableCols}
         removeCol={removeCol}
         filters={filters}
-        sortClass={sortClass}
         ChangeDocumentStatus={ChangeDocumentStatus}
         setShowActiveModal={setShowActiveModal}
         ShowActiveModal={ShowActiveModal}
         tableCols={tableCols}
         loaging={loaging}
         data={data}
-        ChangeRequestStatus={ChangeRequestStatus}
         ShowDeleteModal={ShowDeleteModal}
         setShowDeleteModal={setShowDeleteModal}
         total={total}
@@ -367,11 +340,9 @@ const Carrier = (p) => {
         getData={getData}
         ChangeFilter={ChangeFilter}
         deleteLoad={deleteLoad}
-        clear={clear}
-        count={count}
       />
     </>
   );
 };
 
-export default Carrier;
+export default ApprovedCarrier;
