@@ -170,6 +170,40 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
+                    to="/rejectedcarrier"
+                    className={(isActive) =>
+                      "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
+                      (location?.pathname == "/rejectedcarrier" &&
+                        " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                    }
+                  >
+                    <GrCar className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <span className="text-inherit leading-none sidebar_text">
+                    Rejected Carriers
+                    </span>
+                  </NavLink>
+                </tooltip>
+              </li>
+              <li>
+                <tooltip placement="right" title="Dashboard">
+                  <NavLink
+                    to="/pendingcarrier"
+                    className={(isActive) =>
+                      "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
+                      (location?.pathname == "/pendingcarrier" &&
+                        " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                    }
+                  >
+                    <GrCar className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <span className="text-inherit leading-none sidebar_text">
+                    Pending Carriers
+                    </span>
+                  </NavLink>
+                </tooltip>
+              </li>
+              <li>
+                <tooltip placement="right" title="Dashboard">
+                  <NavLink
                     to="/activeplan"
                 
                     className={(isActive) =>

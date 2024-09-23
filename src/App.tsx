@@ -48,8 +48,8 @@ function App() {
     { url: "/carriers", path: "Carrier" },
     { url: "/carriers/detail/:id", path: "Carrier/View" },
     { url: "/approvedcarriers", path: "Carrier/ApprovedCarrier" },
-
-   
+    { url: "/rejectedcarrier", path: "Carrier/RejectedCarrier" },
+    { url: "/pendingcarrier", path: "Carrier/PendingCarrier" },
       //  { url: "/profile/:tab", path: "Settings" },
     // { url: "/assignment", path: "Assignment" },
     // { url: "/assignment/detail/:id", path: "Assignment/View" },

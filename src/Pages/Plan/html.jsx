@@ -25,10 +25,9 @@ const Html = ({
     const activePlanAmount = activeplan?.amount / 100; // Convert to correct currency
     const itemPrice = getPrice(item); // Assuming getPrice returns the item's price
     if (activeplan?.subscription_plan_id?.id === item?.id) {
-      const plann = activeplan?.subscription_plan_id?.pricing?.find(
+      if (activeplan?.subscription_plan_id?.pricing?.find(
         (itm) => activeplan?.interval_count === itm?.interval_count
-      );
-      if (plann?.interval_count === interval && itemPrice == activePlanAmount) {
+      )?.interval_count == interval && itemPrice == activePlanAmount) {
         return "Active Plan";
       } else {
         if(itemPrice > activePlanAmount)
@@ -127,7 +126,7 @@ const Html = ({
                   <p class="mt-8">
                     <span class="text-4xl font-bold text-slate-900 tracking-tighter">${getPrice(itm)}</span>
 
-                    <span class="text-base font-medium text-slate-500">{interval==1?"/month":interval==3?"/3 month":interval==6?"/6 month":"/year"}</span>
+                    <span class="text-base font-medium text-slate-500">{interval==12?"/year":`/${interval} month`}</span>
                   </p>
                   <button className={`mt-8 block w-full  rounded-md py-2 text-sm font-semibold text-white text-center ${getPrice(itm)==0?'cursor-not-allowed bg-gray-300 text-black':'bg-primary'} ${checkActiveplan(itm)=="Active Plan"?"cursor-not-allowed":""}`} disabled={getPrice(itm)==0||checkActiveplan(itm)=="Active Plan" } onClick={(e)=>payment(itm,getPrice(itm))}>{checkActiveplan(itm)}</button>              
                 </div>

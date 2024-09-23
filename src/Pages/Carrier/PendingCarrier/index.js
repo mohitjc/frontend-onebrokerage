@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ApiClient from "../../../methods/api/apiClient";
 // import "./style.scss";
-import loader from "../../../methods/loader";
 import userTableModel from "../../../models/table.model";
+import loader from "../../../methods/loader";
 import Html from "./html";
 import { userType } from "../../../models/type.model";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,11 +11,12 @@ import axios from "axios";
 import environment from "../../../environment";
 import { toast } from "react-toastify";
 import addressModel from "../../../models/address.model";
-import shared from "../shared";
 
-const ApprovedCarrier = (p) => {
+const PendingCarrier = (p) => {
   const user = useSelector((state) => state.user);
   const [DataLength, setDataLength] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
+  const [Reason, setReason] = useState('');
   const [ShowDeleteModal, setShowDeleteModal] = useState("none");
   const [ShowActiveModal, setShowActiveModal] = useState("none");
   const { role } = useParams();
@@ -27,7 +28,6 @@ const ApprovedCarrier = (p) => {
     role: role || "",
     isDeleted: false,
     isInvited: true,
-    request_status:"accepted",
     addedBy: user?.id,
   });
 
@@ -43,6 +43,7 @@ const ApprovedCarrier = (p) => {
   const history = useNavigate();
 
   useEffect(() => {
+    setSubmitted(false);
     // getRoles()
   }, []);
 
@@ -74,7 +75,7 @@ const ApprovedCarrier = (p) => {
     if (e.place) {
       address = await addressModel.getAddress(e.place);
     }
-
+   
     setFilter({
       ...filters,
       origin_location_street: e.value,
@@ -86,7 +87,7 @@ const ApprovedCarrier = (p) => {
       // lng: `${address.lng}` || ''
     });
     getData({ origin_location_city: address.city });
-
+    
   };
   const removeCol = (index) => {
     let exp = tableCols;
@@ -96,8 +97,14 @@ const ApprovedCarrier = (p) => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p, addedBy: user?.id };
-    let url =shared?.listApi;
+    let filter = {
+      ...filters,
+      ...p,
+      addedBy: user?.id,
+      request_status: "pending",
+      role: "user",
+    };
+    let url = "users/list";
 
     ApiClient.get(url, filter).then((res) => {
       if (res.success) {
@@ -299,10 +306,51 @@ const ApprovedCarrier = (p) => {
     // getData({sortBy})
     filter({ sortBy: key, sorder: i });
   };
+
+  const AcceptUser = (id) => {
+    loader(true);
+    ApiClient.put("carrier-request", { id: id, status: "accepted",board_id: user.board_id, }).then(
+      (res) => {
+        if (res.success) {
+          toast.success("Carrier Accepted Successfully");
+          loader(false);
+          getData();
+        }
+        loader(false);
+      }
+    );
+
+    ApiClient.put("admin/edit-user", { id: id,board_id: user.board_id, }).then(
+      (res) => {
+     
+        loader(false);
+      }
+    );
+
+  };
+  const RejectUser = (id,reason) => { 
+    loader(true);
+    ApiClient.put("carrier-request", { id: id, status: "rejected",reason:reason }).then(
+      (res) => {
+        if (res.success) {
+          
+          document.getElementById('CloseReasonModel').click()
+          toast.success("Carrier Rejected Successfully");
+          getData();
+          setSubmitted(false);
+          setReason("")
+          loader(false);
+        }    
+        // loader(false);
+      }
+    );
+  };
   return (
     <>
       <Html
         user={user}
+        RejectUser={RejectUser}
+        AcceptUser={AcceptUser}
         colClick={colClick}
         exportfun={exportfun}
         isAllow={isAllow}
@@ -337,6 +385,10 @@ const ApprovedCarrier = (p) => {
         blockunblock={blockunblock}
         setFilter={setFilter}
         sorting={sorting}
+        setReason={setReason}
+        Reason={Reason}
+        submitted={submitted}
+        setSubmitted={setSubmitted}
         addressResult={addressResult}
         getData={getData}
         ChangeFilter={ChangeFilter}
@@ -346,4 +398,4 @@ const ApprovedCarrier = (p) => {
   );
 };
 
-export default ApprovedCarrier;
+export default PendingCarrier;

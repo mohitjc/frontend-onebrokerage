@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ApiClient from "../../../methods/api/apiClient";
-// import "./style.scss";
+// import "./style.scss"
 import loader from "../../../methods/loader";
-import userTableModel from "../../../models/table.model";
 import Html from "./html";
 import { userType } from "../../../models/type.model";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,14 +10,16 @@ import axios from "axios";
 import environment from "../../../environment";
 import { toast } from "react-toastify";
 import addressModel from "../../../models/address.model";
+import userTableModel from "../../../models/table.model";
 import shared from "../shared";
 
-const ApprovedCarrier = (p) => {
+const RejectedCarrier = (p) => {
   const user = useSelector((state) => state.user);
   const [DataLength, setDataLength] = useState(0);
   const [ShowDeleteModal, setShowDeleteModal] = useState("none");
   const [ShowActiveModal, setShowActiveModal] = useState("none");
   const { role } = useParams();
+
   const searchState = useSelector((state) => state.search);
   const [filters, setFilter] = useState({
     page: 1,
@@ -27,7 +28,7 @@ const ApprovedCarrier = (p) => {
     role: role || "",
     isDeleted: false,
     isInvited: true,
-    request_status:"accepted",
+    request_status:"rejected",
     addedBy: user?.id,
   });
 
@@ -97,7 +98,7 @@ const ApprovedCarrier = (p) => {
   const getData = (p = {}) => {
     setLoader(true);
     let filter = { ...filters, ...p, addedBy: user?.id };
-    let url =shared?.listApi;
+    let url = shared?.listApi;
 
     ApiClient.get(url, filter).then((res) => {
       if (res.success) {
@@ -144,10 +145,6 @@ const ApprovedCarrier = (p) => {
     getData({ page: e });
   };
 
-  const modalClosed = () => {
-    setFilter({ ...filters, page: 1 });
-    getData({ page: 1 });
-  };
 
   const openModal = (itm) => {
     let extra = new Date().getTime();
@@ -240,7 +237,7 @@ const ApprovedCarrier = (p) => {
   };
 
   const edit = (id) => {
-    let url = `/user1/edit/${id}`;
+    let url = `/use1r/edit/${id}`;
     if (role) url = `/users1/${role}/edit/${id}`;
     history(url);
   };
@@ -346,4 +343,4 @@ const ApprovedCarrier = (p) => {
   );
 };
 
-export default ApprovedCarrier;
+export default RejectedCarrier;
