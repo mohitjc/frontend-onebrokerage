@@ -1,200 +1,279 @@
 import React, { useEffect, useState } from "react";
-import ApiClient from "../../methods/api/apiClient";
-import "./style.scss";
-import loader from "../../methods/loader";
-import Html from "./html";
-import { useNavigate } from "react-router-dom";
-import environment from "../../environment";
-import axios from "axios";
-import shared from "./shared";
 import { useSelector } from "react-redux";
-import Swal from "sweetalert2";
+import ApiClient from "../../methods/api/apiClient";
+// import "./style.scss";
+
+import loader from "../../methods/loader";
+import userTableModel from "../../models/table.model";
+import Html from "./html";
+import { userType } from "../../models/type.model";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import environment from "../../environment";
 import { toast } from "react-toastify";
-const Carrier = () => {
+import addressModel from "../../models/address.model";
+
+const Carrier = (p) => {
   const user = useSelector((state) => state.user);
-  const searchState = { data: "" };
+  const [DataLength, setDataLength] = useState(0);
+  const [ShowDeleteModal, setShowDeleteModal] = useState("none");
+  const [ShowActiveModal, setShowActiveModal] = useState("none");
+  const { role } = useParams();
+  const searchState = useSelector((state) => state.search);
   const [filters, setFilter] = useState({
     page: 1,
     count: 10,
     search: "",
-    role: "carrier",
+    role: role || "",
     isDeleted: false,
-    sorder: "",
+    isInvited: true,
+    addedBy: user?.id,
   });
+
   const [data, setData] = useState([]);
+  const [tab, setTab] = useState("list");
   const [total, setTotal] = useState(0);
+
   const [loaging, setLoader] = useState(true);
+  const [tableCols, setTableCols] = useState([]);
+  const [form, setform] = useState(userType);
+  const [roles, setRoles] = useState([]);
+
   const history = useNavigate();
 
-  const sortClass = (key) => {
-    let cls = "fa-sort";
-    if (filters.key == key && filters.sorder == "asc") cls = "fa-sort-up";
-    else if (filters.key == key && filters.sorder == "desc")
-      cls = "fa-sort-down";
-    return "fa " + cls;
+  useEffect(() => {
+    // getRoles()
+  }, []);
+
+  useEffect(() => {
+    if (user && user.loggedIn) {
+      setFilter({ ...filters, search: searchState.data, role });
+      getData({ search: searchState.data, role, page: 1 });
+    }
+  }, [searchState, role]);
+
+  const uTableCols = () => {
+    let exp = [];
+    if (tableCols) exp = tableCols;
+    let value = [];
+    userTableModel.list.map((itm) => {
+      if (itm != exp.find((it) => it.key == itm.key)) {
+        value.push(itm);
+      }
+    });
+    return value;
   };
 
-  const sorting = (key) => {
-    let sorder = "asc";
-    if (filters.key == key) {
-      if (filters.sorder == "asc") {
-        sorder = "desc";
-      } else {
-        sorder = "asc";
-      }
+  const count = (e) => {
+    setFilter({ ...filters, count: e });
+    getData({ ...filters, count: e });
+  };
+
+  const addCol = (itm) => {
+    setTableCols([...tableCols, itm]);
+  };
+
+  const ChangeRequestStatus = (e) => {
+    setFilter({
+      ...filters,
+      request_status: e,
+      page: 1,
+      isDeleted: filters?.isDeleted,
+    });
+    getData({ request_status: e, page: 1 });
+  };
+
+  const addressResult = async (e) => {
+    let address = {};
+    if (e.place) {
+      address = await addressModel.getAddress(e.place);
     }
 
-    let sortBy = `${key} ${sorder}`;
-    setFilter({ ...filters, sortBy, key, sorder });
-    getData({ sortBy, key, sorder });
+    setFilter({
+      ...filters,
+      origin_location_street: e.value,
+      origin_location_country: address.country || "",
+      origin_location_city: address.city || "",
+      origin_location_state: address.state || "",
+      origin_location_postal_code: address.zipcode || "",
+      // lat: `${address.lat}` || '',
+      // lng: `${address.lng}` || ''
+    });
+    getData({ origin_location_city: address.city });
+
+  };
+  const removeCol = (index) => {
+    let exp = tableCols;
+    exp.splice(index, 1);
+    setTableCols([...exp]);
   };
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p, role: "carrier" ,board_id:""};
+    let filter = { ...filters, ...p, addedBy: user?.id };
+    let url = "users/list";
 
-    ApiClient.get(shared.listApi, filter).then((res) => {
+    ApiClient.get(url, filter).then((res) => {
       if (res.success) {
-        setData(
-          res?.data?.data?.map((itm) => {
-            itm.id = itm._id;
-            return itm;
-          })
-        );
+        const data = res?.data?.data;
+        setData(data);
+        setDataLength(data.length);
         setTotal(res?.data?.total);
       }
       setLoader(false);
     });
   };
 
-  const clear = () => {
-    let f = {
-      groupId: "",
-      search: "",
-      status: "",
-      page: 1,
-    };
-    setFilter({ ...filters, ...f });
-    getData({ ...f });
+  const ChangeFilter = (e) => {
+    setFilter(e);
+    getData(e);
   };
 
-  const filter = (p = {}) => {
-    let f = {
-      page: 1,
-      ...p,
-    };
-    setFilter({ ...filters, ...f });
-    getData({ ...f });
+  const clear = () => {
+    setFilter({ ...filters, search: "" });
+    getData({ search: "" });
   };
 
   const deleteItem = (id) => {
     // if (window.confirm("Do you want to delete this")) {
-    //     loader(true)
-    //     ApiClient.delete(shared.deleteApi, { id: id }).then(res => {
-    //         if (res.success) {
-    //             // ToastsStore.success(res.message)
-    //             clear()
-    //         }
-    //         loader(false)
-    //     })
-    // }
-    Swal.fire({
-      title: "Are you sure?",
-      text: `Do you want to delete this`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#494f9f",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        loader(true);
-        ApiClient.delete(shared.deleteApi, { id: id }).then((res) => {
-          if (res.success) {
-            // ToastsStore.success(res.message)
-            toast.success(res?.message)
-            clear();
-          }
-          loader(false);
-        });
-        //   Swal.fire({
-        //     icon: "success"
-        //   });
+    loader(true);
+    ApiClient.delete(`delete?model=loadmanagement&id=${id}`).then((res) => {
+      if (res.success) {
+        toast.success(res.message);
+        setShowDeleteModal("none");
+        if (DataLength == 0) {
+          setFilter({ ...filters, search: "", page: 1 });
+          getData({ search: "", page: 1 });
+        } else {
+          clear();
+        }
       }
+      loader(false);
     });
+    // }
   };
 
   const pageChange = (e) => {
     setFilter({ ...filters, page: e });
     getData({ page: e });
   };
-  const count = (e) => {
-    setFilter({ ...filters, count: e });
-    getData({ ...filters, count: e });
+
+  const modalClosed = () => {
+    setFilter({ ...filters, page: 1 });
+    getData({ page: 1 });
   };
-  const changestatus = (e) => {
+
+  const openModal = (itm) => {
+    let extra = new Date().getTime();
+    setform({ ...itm, extra, role });
+    document.getElementById("openuserModal").click();
+  };
+
+  const ChangeRole = (e) => {
+    setFilter({ ...filters, role: e, page: 1 });
+    getData({ role: e, page: 1 });
+  };
+  const ChangeStatus = (e) => {
     setFilter({ ...filters, status: e, page: 1 });
     getData({ status: e, page: 1 });
   };
-
-  const statusChange = (itm) => {
-    // if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
-    if (!isAllow(`edit${shared.check}`)) return;
-    let status = "active";
-    if (itm.status == "active") status = "deactive";
-
-    // if (window.confirm(`Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`)) {
-    //     loader(true)
-    //     ApiClient.put(shared.statusApi, { id: itm.id, status }).then(res => {
-    //         if (res.success) {
-    //             getData()
-    //         }
-    //         loader(false)
-    //     })
-    // }
-    Swal.fire({
-      title: "Are you sure?",
-      text: `Do you want to ${
-        status == "active" ? "active" : "inactive"
-      } this user?`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#494f9f",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        loader(true);
-        ApiClient.put(shared.statusApi, { id: itm.id, status }).then((res) => {
-          if (res.success) {
-          toast.success(res?.message)
-            getData();
-          }
-          loader(false);
-        });
-        //   Swal.fire({
-
-        //     // text: `Sucessfully ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
-        //     icon: "success"
-        //   });
+  const ChangeDocumentStatus = (e) => {
+    setFilter({ ...filters, isVerifiedDocument: e, page: 1 });
+    getData({ isVerifiedDocument: e, page: 1 });
+  };
+  const exportCsv = () => {
+    loader(true);
+    ApiClient.get("user/csv").then((res) => {
+      if (res.success) {
+        let url = res.path;
+        let downloadAnchor = document.getElementById("downloadJS");
+        downloadAnchor.href = url;
+        downloadAnchor.click();
       }
+      loader(false);
     });
   };
 
-  const edit = (id) => {
-    history(`/${shared.url}/edit/${id}`);
+  const colClick = (col, itm) => {
+    if (col.key == "healthClinicId") {
+    }
   };
 
+  const statusChange = (itm) => {
+    let modal = "loadmanagement";
+    let status = "active";
+    if (itm.status == "active") status = "deactive";
+
+    loader(true);
+    ApiClient.put(
+      `change/status?model=users&id=${itm?.id}&status=${status}`
+    ).then((res) => {
+      if (res.success) {
+        getData();
+        toast.success(
+          ` Load ${status == "active" ? "Enabled" : "Disabled"} Successfully`
+        );
+        setShowActiveModal("none");
+      }
+      loader(false);
+    });
+  };
+
+  const blockunblock = (itm) => {
+    if (
+      window.confirm(
+        `Do you want to ${!itm.isBlock ? "Block" : "Un-block"} this user`
+      )
+    ) {
+      loader(true);
+      ApiClient.put(`edit-profile`, {
+        id: itm.id,
+        isBlock: itm.isBlock ? false : true,
+      }).then((res) => {
+        if (res.success) {
+          getData();
+        }
+        loader(false);
+      });
+    }
+  };
+  const deleteLoad = (id) => {
+    if (window.confirm("Do you want to delete this ?")) {
+      loader(true);
+      ApiClient.delete(`delete?model=loadmanagement&id=${id}`).then((res) => {
+        if (res.success) {
+          toast.success(res?.message);
+          getData();
+        }
+        loader(false);
+      });
+    }
+  };
   const view = (id) => {
-    let url = `/${shared.url}/detail/${id}`;
+    history.push("user1/view/" + id);
+  };
+
+  const edit = (id) => {
+    let url = `/user1/edit/${id}`;
+    if (role) url = `/users1/${role}/edit/${id}`;
     history(url);
+  };
+
+  const add = () => {
+    let url = `/user1/add`;
+    if (role) url = `/users1/${role}/add`;
+    history(url);
+  };
+
+  const tabChange = (tab) => {
+    setTab(tab);
   };
 
   const exportfun = async () => {
     const token = await localStorage.getItem("token");
     const req = await axios({
       method: "get",
-      url: `${environment.api}api/export/excel`,
+      url: `${environment.api}api/export/user`,
       responseType: "blob",
       body: { token: token },
     });
@@ -203,61 +282,92 @@ const Carrier = () => {
     });
     const link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
-    link.download = `${shared.title}.xlsx`;
+    link.download = `Users.xlsx`;
     link.click();
   };
 
-  const uploadFile = (e) => {
-    let files = e.target.files;
-    let file = files?.item(0);
-    let url = "user/import-users";
-    if (!file) return;
-    loader(true);
-    ApiClient.postFormFileData(url, { file }).then((res) => {
-      if (res.success) {
-        console.log("res", res);
-      }
-      loader(false);
-    });
+  const reset = () => {
+    let filter = {
+      status: "",
+      role: "",
+      page: 1,
+    };
+    setFilter({ ...filters, ...filter });
+    getData({ ...filter });
+    // dispatch(search_success(''))
   };
 
   const isAllow = (key = "") => {
-    let permissions = user?.permissions?.[0];
+    return true;
+    let permissions = user.role?.permissions;
     let value = permissions?.[key];
-    if (user.role == "admin") value = true;
-    // return true;
+    if (user?.role?.id == environment.adminRoleId) value = true;
+
     return value;
   };
-
-  useEffect(() => {
-    if (user && user.loggedIn) {
-      setFilter({ ...filters, search: searchState.data });
-      getData({ search: searchState.data, page: 1 });
-    }
-  }, []);
-
+  const filter = (p = {}) => {
+    setFilter({ ...filters, ...p });
+    getData({ ...p, page: filters?.page });
+  };
+  const sortClass = (key) => {
+    let cls = "fa-sort";
+    if (filters.key == key && filters.sorder == "asc") cls = "fa-sort-up";
+    else if (filters.key == key && filters.sorder == "desc")
+      cls = "fa-sort-down";
+    return "fa " + cls;
+  };
+  const sorting = (key, i) => {
+    // getData({sortBy})
+    filter({ sortBy: key, sorder: i });
+  };
+  
   return (
     <>
       <Html
-        edit={edit}
-        view={view}
-        clear={clear}
-        sortClass={sortClass}
-        sorting={sorting}
+        user={user}
+        colClick={colClick}
+        exportfun={exportfun}
         isAllow={isAllow}
-        count={count}
-        pageChange={pageChange}
-        deleteItem={deleteItem}
-        filters={filters}
-        setFilter={setFilter}
+        tabChange={tabChange}
+        tab={tab}
         filter={filter}
+        reset={reset}
+        add={add}
+        roles={roles}
+        view={view}
+        edit={edit}
+        role={role}
+        ChangeRole={ChangeRole}
+        ChangeStatus={ChangeStatus}
+        openModal={openModal}
+        pageChange={pageChange}
+        addCol={addCol}
+        deleteItem={deleteItem}
+        exportCsv={exportCsv}
+        uTableCols={uTableCols}
+        removeCol={removeCol}
+        filters={filters}
+        sortClass={sortClass}
+        ChangeDocumentStatus={ChangeDocumentStatus}
+        setShowActiveModal={setShowActiveModal}
+        ShowActiveModal={ShowActiveModal}
+        tableCols={tableCols}
         loaging={loaging}
         data={data}
+        ChangeRequestStatus={ChangeRequestStatus}
+        ShowDeleteModal={ShowDeleteModal}
+        setShowDeleteModal={setShowDeleteModal}
         total={total}
         statusChange={statusChange}
-        changestatus={changestatus}
-        exportfun={exportfun}
-        uploadFile={uploadFile}
+        blockunblock={blockunblock}
+        setFilter={setFilter}
+        sorting={sorting}
+        addressResult={addressResult}
+        getData={getData}
+        ChangeFilter={ChangeFilter}
+        deleteLoad={deleteLoad}
+        clear={clear}
+        count={count}
       />
     </>
   );

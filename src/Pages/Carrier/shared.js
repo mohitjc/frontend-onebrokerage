@@ -1,15 +1,14 @@
 const shared = {
-  check: "Customers",
-  title: "Carrier",
-  addTitle: "Carrier",
-  url: "carriers",
-  addApi: "admin/add-user",
-  editApi: "admin/edit-user",
-  detailApi: "user/detail",
-  listApi: "users/list",
-  statusApi: "carrier/change-status",
-  deleteApi: "admin/delete-user",
-  acceptedList:"users/list"
-};
-
-export default shared;
+    check: "Carrier",
+    title: "Carrier",
+    addTitle: "Carrier",
+    url: "carriers",
+    addApi: "driver",
+    editApi: "driver",
+    detailApi: "driver",
+    listApi: "drivers",
+    statusApi: "change/status",
+    deleteApi: "delete",
+  };
+  
+  export default shared;

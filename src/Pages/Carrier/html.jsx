@@ -1,124 +1,182 @@
-import React, { useEffect, useState } from "react";
-import Layout from "../../components/global/layout";
-import "./style.scss";
-import { Link } from "react-router-dom";
-import { Tooltip } from "antd";
-import { FiEdit3, FiPlus } from "react-icons/fi";
-import { BsTrash3 } from "react-icons/bs";
-import Table from "../../components/Table";
-import SelectDropdown from "../../components/common/SelectDropdown";
-import statusModel from "../../models/status.model";
-import datepipeModel from "../../models/datepipemodel";
-import shared from "./shared";
-import ApiClient from "../../methods/api/apiClient";
-import { useSelector } from "react-redux";
-import { PiEyeLight } from "react-icons/pi";
-import { IoIosRefresh } from "react-icons/io";
-import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
-import { LuImport } from "react-icons/lu";
-import methodModel from "../../methods/methods";
+import React, { useEffect, useState } from 'react';
+import PageLayout from '../../components/global/PageLayout';
+import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import debounce from 'lodash.debounce';
+import { PiEyeLight } from 'react-icons/pi';
+import { LiaEdit } from 'react-icons/lia';
+import shared from './shared';
+import { FiPlus } from 'react-icons/fi';
+import Table from '../../components/Table';
+import { Tooltip } from 'antd';
+import { toast } from "react-toastify";
+import ApiClient from '../../methods/api/apiClient';
+import loader from '../../methods/loader';
+
 const Html = ({
-  sorting,
-  filter,
-  edit,
   view,
+  addressResult,
+  edit,
+  user,
+  filter,
+  clear,
+  sortClass,
+  sorting,
+  count,
+  ChangeFilter,
+  deleteLoad,
+  reset,
+  add,
+  colClick,
+  tab,
+  tabChange,
+  ChangeRole,
+  ChangeStatus,
+  openModal,
   statusChange,
   pageChange,
-  count,
+  addCol,
   deleteItem,
-  clear,
+  exportCsv,
+  uTableCols,
+  removeCol,
   filters,
+  ChangeDocumentStatus,
+  tableCols,
   setFilter,
+  blockunblock,
   loaging,
+  getData,
   data,
-  changestatus,
+  ChangeRequestStatus,
+  exportfun,
+  roles,
+  role,
+  ShowActiveModal,
+  setShowActiveModal,
+  ShowDeleteModal,
+  setShowDeleteModal,
   isAllow,
   total = { total },
-  sortClass,
-  uploadFile,
 }) => {
-  const user = useSelector((state) => state.user);
+  const Navigate = useNavigate();
+  const [Min_rate, setMin_rate] = useState('');
+  const [Max_rate, setMax_rate] = useState('');
+  const [DeleteId, setDeleteId] = useState('');
+  const latestSliderValue = React.useRef([0, 0]);
+  const [activeplan, setActivePlan] = useState();
+
+  useEffect(() => {
+    loader(true);
+    ApiClient.get("active-plan").then((res) => {   
+      if (res.success) {
+        setActivePlan(res.data);
+        if (!res.data.id) {
+            Navigate("/plans");
+        }
+      }
+      loader(false);
+    });
+
+  }, []);
+
+  const debouncedHandleSliderChange = debounce((newValues) => {
+    const [min, max] = newValues;
+    setMin_rate(min);
+    setMax_rate(max);
+    // console.log("Filter changed. Calling GetAllprojects...");
+    getData({ min_rate: min, max_rate: max });
+  }, 500);
+
+  const handleSliderChange = (newValues) => {
+    if (
+      JSON.stringify(newValues) === JSON.stringify(latestSliderValue.current)
+    ) {
+      return;
+    }
+    latestSliderValue.current = newValues;
+    debouncedHandleSliderChange(newValues);
+  };
+
+  const Delete = () => {
+    deleteItem(DeleteId);
+  };
+
+  const [StatusData, setStatusData] = useState({});
+  const StatusCh = () => {
+    statusChange(StatusData);
+  };
+
+  const setPriceFilter = () => {
+    setFilter({ ...filters, min_rate: Min_rate, max_rate: Max_rate });
+    getData({ min_rate: Min_rate, max_rate: Max_rate });
+  };
+
+  useEffect(() => {
+    setMin_rate(0);
+    setMax_rate(4000);
+  }, []);
+
+  const Permission = JSON.parse(localStorage.getItem('permission'));
+  const Role = [
+    {
+      key: 'staff',
+      name: 'Staff',
+    },
+    {
+      key: 'carrier',
+      name: 'Carrier',
+    },
+  ];
+  let ListingData = [];
+  if (user?.role == 'staff') {
+    ListingData = data?.filter((itm) => itm?.id != user?.id);
+  } else {
+    ListingData = data;
+  }
+  const Handlefilter = (e) => {
+    const value = e.target.value;
+    setFilter({ ...filters, [e.target.name]: value });
+    getData({ [e.target.name]: value });
+  };
   const columns = [
     {
       key: "fullName",
-      name: "Full Name",
+      name: "User Name",
       sort: true,
       render: (row) => {
-        return <span className="capitalize cursor-pointer" onClick={(e)=>{view(row.id)}}>{row?.fullName}</span>;
+        return <span className="capitalize">{row?.fullName}</span>;
       },
+    
     },
     {
-      key: "companyName",
-      name: "Company Name",
-      sort: true,
+      key: "email",
+      name: "Email",
+    //   sort: true,
       render: (row) => {
-        return <span className="cursor-pointer" onClick={(e)=>{view(row.id)}}>{methodModel.capitalizeFirstLetter(row?.company_name)}</span>;
+        return <span className="">{row?.email}</span>;
       },
     },
+
+
     {
-      key: "board",
-      name: "Board",
-      // sort: true,
+      key: "createdAt",
+      name: "Date Created",
+    //   sort: true,
       render: (row) => {
-        return <span className="">{row?.board_data?.length>0?row?.board_data?.map((ele)=>ele?.board_name):"--"}</span>;
+        return <span className="">{moment(row?.createdAt).format("DD-MM-YYYY")}</span>
       },
     },
+
     {
-      key: "applicationStatus	",
-      name: "Application Status	",
-      // sort: true,
-      render: (row) => {
-        return <span className="">{row?.is_reapplied ? "Reapplied" : "--"}</span>;
+        key: "request_status",
+        name: "Request Status",
+        // sort: true,
+        render: (row) => {
+          return <span className="">{row?.request_status}</span>
+        },
       },
-    },
-    {
-      key: "reapplyCount	",
-      name: "Reapply Count	",
-      // sort: true,
-      render: (row) => {
-        return <span className="">{row?.reapply_count || 0}</span>;
-      },
-    },
-    {
-      key: "requestStatus		",
-      name: "Request Status		",
-      // sort: true,
-      render: (row) => {
-        return  <span
-        className={`${row?.request_status == "accepted"
-          ? "badge spaceBadge badge-primary"
-          : row?.request_status == "rejected"
-            ? "badge spaceBadge badge-danger"
-            : "badge"
-          }`}
-      >
-        {methodModel.capitalizeFirstLetter(
-          row?.request_status
-        ) || "--"}
-      </span>
-      },
-    },
-    // {
-    //   key: "mobileNo",
-    //   name: "Mobile No",
-    //   render: (row) => {
-    //     return (
-    //       <>
-    //         <p className="capitalize">
-    //           {row?.mobileNo ? "+" : ""}
-    //           {row?.mobileNo}
-    //         </p>
-    //       </>
-    //     );
-    //   },
-    // },
-    /* {
-      key: "timezone",
-      name: "Timezone",
-      render: (row) => {
-        return <>{row?.timezone}</>;
-      },
-    }, */
+
     {
       key: "status",
       name: "Status",
@@ -148,7 +206,7 @@ const Html = ({
         return (
           <>
             <div className="flex items-center justify-start gap-1.5">
-              {isAllow(`read${shared.check}`) ? (
+              {/* {isAllow(`read${shared.check}`) ? ( */}
                 <Tooltip placement="top" title="View">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -157,10 +215,10 @@ const Html = ({
                     <PiEyeLight />
                   </a>
                 </Tooltip>
-              ) : (
+              {/* ) : (
                 <></>
-              )}
-              {isAllow(`edit${shared.check}`) ? (
+              )} */}
+              {/* {isAllow(`edit${shared.check}`) ? ( */}
                 <Tooltip placement="top" title="Edit">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -169,47 +227,31 @@ const Html = ({
                     <LiaEdit />
                   </a>
                 </Tooltip>
-              ) : (
-                <></>
-              )}
-              {isAllow(`delete${shared.check}`) ? (
-                <Tooltip placement="top" title="Delete">
-                  <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={() => deleteItem(itm.id)}
-                  >
-                    <LiaTrashAlt />
-                  </span>
-                </Tooltip>
-              ) : (
-                <></>
-              )}
+            {/* //   ) : (
+            //     <></>
+            //   )} */}
+           
             </div>
           </>
         );
       },
     },
   ];
-
-  /*  const getGroups = () => {
-    let f = {
-      page: 1,
-      count: 10,
-    };
-    ApiClient.get("api/group/list", f).then((res) => {
-      if (res.success) {
-        setGroup(res.data);
+  const addCarrier=()=>
+    {
+      if(activeplan?.subscription_plan_id?.number_of_drivers>total)
+      {
+        Navigate(`/${shared.url}/add`)
       }
-    });
-  };
- */
-  //   useEffect(() => {
-  //       getGroups()
-  //   }, [])
-
+      else{
+     
+        toast.error(`You can add only ${activeplan?.subscription_plan_id?.number_of_carrier} carrier`)
+      }
+      
+    }
   return (
-    <Layout>
-      <div className="flex flex-wrap justify-between items-center gap-y-4">
+    <PageLayout title="Carriers" title2="Carriers">
+       <div className="flex flex-wrap justify-between items-center gap-y-4">
         <div>
           <h3 className="text-2xl font-semibold text-[#111827]">
             {" "}
@@ -227,20 +269,20 @@ const Html = ({
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
                     </button> */}
 
-          {isAllow(`add${shared.check}`) ? (
-            <Link
+          {/* {isAllow(`add${shared.check}`) ? ( */}
+            <button
               className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-              to={`/${shared.url}/add`}
+              onClick={addCarrier}        
             >
               <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
-            </Link>
-          ) : (
+            </button>
+          {/* ) : (
             <></>
-          )}
+          )} */}
         </div>
       </div>
 
-      <div className="border w-full bg-white rounded-lg mt-6">
+      <div className=" w-full bg-white rounded-lg mt-6 border">
         <div className="flex p-4 items-center flex-wrap">
           <form
             class="flex items-center max-w-sm"
@@ -299,8 +341,34 @@ const Html = ({
               <span class="sr-only">Search</span>
             </button>
           </form>
+          {/* <div>
+                <button
+                  onClick={(e) => sampledownload()}
+                  className="btn dark-btn  btn-set"
+                 >
+                  <i className="fa fa-download me-2"></i>Download
+                </button>
+              </div> */}
 
-          <div className="flex gap-2 ml-auto">
+              {/* <div className="result-set">
+                <div className="relative text-center">
+                  <label className="cursor-pointer  dark-btn btn">
+                    <i className="fa fa-download me-2"></i>
+                    <span>Import</span>
+                    <input
+                      id="bannerImage"
+                      type="file"
+                      className="hidden"
+                      accept=".xlsx,.csv"
+                      onChange={(e) => {
+                        ImportFile(e);
+                      }}
+                    />
+                  </label>
+                </div>
+              </div> */}
+
+          {/* <div className="flex gap-2 ml-auto">
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"
@@ -311,37 +379,29 @@ const Html = ({
               }}
               options={statusModel.list}
             />
-            {/* <SelectDropdown
-                            id="statusDropdown"
-                            displayValue="name"
-                            placeholder='All Groups'
-                            intialValue={filters.groupId}
-                            theme="search"
-                            result={e => filter({ groupId: e.value })}
-                            options={groups}
-                        /> */}
+           
             {filters.status || filters.groupId ? (
-               <>
-               <button
-                 className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
-                 onClick={() => clear()}
-               >
+              <>
+              <button
+                className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
+                onClick={() => clear()}
+              >
 
-           <IoIosRefresh class="me-2"/>
+          <IoIosRefresh class="me-2"/>
 
 
-                 Reset
-               </button>
-             </>
+                Reset
+              </button>
+            </>
             ) : (
               <></>
             )}
-          </div>
+          </div> */}
         </div>
 
         {!loaging ? (
           <>
-           <div className=" ">
+           <div className="">
           <Table
               className=""
               data={data}
@@ -373,7 +433,7 @@ const Html = ({
           <></>
         )}
       </div>
-    </Layout>
+    </PageLayout>
   );
 };
 
