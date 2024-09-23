@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import Layout from "../../components/global/layout";
+import PageLayout from "../../components/global/PageLayout";
 import { useEffect, useState } from "react";
 import datepipeModel from "../../models/datepipemodel";
 import ApiClient from "../../methods/api/apiClient";
@@ -38,7 +38,7 @@ const View = () => {
 
     return (
         <>
-            <Layout>
+            <PageLayout>
                 <div className="wrapper_section">
                     <div className="flex items-center mb-8">
                         <Tooltip placement="top" title="Back">
@@ -166,7 +166,7 @@ const View = () => {
                         </div>
                     </div>
                 </div>
-            </Layout>
+            </PageLayout>
         </>
     );
 };
