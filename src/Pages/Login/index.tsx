@@ -122,7 +122,14 @@ const Login = () => {
           dispatch(login_success(res1?.data?.data));
           const newdata = res1.data?.data;
           toast.success(res1?.data?.message)
-          history("/plan");
+          if(res1?.data?.data?.plan_id)
+          {
+            history("/dashboard");
+          }else
+          {
+            history("/plan");
+          }
+        
           // if(newdata?.request_status=="rejected")
           // {
           //   history("/profile");

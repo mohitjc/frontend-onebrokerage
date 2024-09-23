@@ -20,6 +20,30 @@ const Html = ({
   payment,
   activeplan,
 }) => {
+  const checkActiveplan=(item)=>
+  {
+    // console.log(item,"itemitemitem")
+    if(activeplan?.subscription_plan_id?.id==item?.id)
+    {
+      const plann=activeplan?.subscription_plan_id?.pricing?.find((itm)=>
+        activeplan?.interval_count==itm?.interval_count
+      )
+      if(plann.interval_count==interval)
+      {
+        return "Active Now"
+      }
+      else 
+      {
+        return "Buy Now"
+      }
+      // const planamount=item?.pricing?.filter((item)=>{return (item?.unit_amount>activeplan?.amount/100)})  
+      // console.log(planamount,"planamount")
+    }
+    else
+    {
+      return "Buy Now"
+    }
+  }
 
   return (
     <>
@@ -105,8 +129,7 @@ const Html = ({
 
                     <span class="text-base font-medium text-slate-500">{interval==1?"/month":interval==3?"/3 month":interval==6?"/6 month":"/year"}</span>
                   </p>
-                  <button className={`mt-8 block w-full  rounded-md py-2 text-sm font-semibold text-white text-center ${getPrice(itm)==0?'cursor-not-allowed bg-gray-300 text-black':'bg-primary'}`} disabled={getPrice(itm)==0||activeplan?.subscription_plan_id?.id==itm?.id} onClick={(e)=>payment(itm,getPrice(itm))}>{activeplan?.subscription_plan_id?.id==itm?.id?"Active Plan":"Buy Now"}</button>
-                  
+                  <button className={`mt-8 block w-full  rounded-md py-2 text-sm font-semibold text-white text-center ${getPrice(itm)==0?'cursor-not-allowed bg-gray-300 text-black':'bg-primary'}`} disabled={getPrice(itm)==0||activeplan?.subscription_plan_id?.id==itm?.id} onClick={(e)=>payment(itm,getPrice(itm))}>{checkActiveplan(itm)}</button>              
                 </div>
                 <div class="pt-6 pb-8 px-6">
                   <h3 class="text-sm font-bold text-slate-900 tracking-wide uppercase">What's included</h3>

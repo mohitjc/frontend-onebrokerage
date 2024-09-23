@@ -217,7 +217,7 @@ export default function AddressStep() {
                               <GooglePlaceAutoComplete
                                 value={form?.address}
                                 result={DestinationAddress}
-                                placeholder="Address *"
+                                placeholder="Address"
                               />
                             </div>
                             <div className="">
@@ -227,7 +227,7 @@ export default function AddressStep() {
                                 value={form?.state}
                                 required
                                 name="state"
-                                placeholder="State *"
+                                placeholder="State"
                                 onChange={(e) => {
                                   setForm({ ...form, state: e.target.value });
                                 }}
@@ -242,7 +242,7 @@ export default function AddressStep() {
                                 value={form?.city}
                                 required
                                 name="state"
-                                placeholder="City *"
+                                placeholder="City"
                                 onChange={(e) => {
                                   setForm({ ...form, city: e.target.value });
                                 }}
@@ -269,7 +269,7 @@ export default function AddressStep() {
                                 value={form?.pincode}
                                 required
                                 name="pincode"
-                                placeholder="Zipcode *"
+                                placeholder="Zipcode"
                                 onChange={(e) => {
                                   setForm({ ...form, pincode: e.target.value });
                                 }}
@@ -284,7 +284,7 @@ export default function AddressStep() {
                                 value={form?.country}
                                 required
                                 name="pincode"
-                                placeholder="Country *"
+                                placeholder="Country"
                                 onChange={(e) => {
                                   setForm({ ...form, country: e.target.value });
                                 }}

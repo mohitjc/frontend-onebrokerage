@@ -274,7 +274,7 @@ useEffect(() => {
                                     trailers_number: e.target.value,
                                   });
                                 }}
-                                placeholder="Number of Trailers *"
+                                placeholder="Number of Trailers"
                               />
                             </div>
 
@@ -295,7 +295,7 @@ useEffect(() => {
                                     solo_truck: e.target.value,
                                   });
                                 }}
-                                placeholder="  Solo Truck *"
+                                placeholder="  Solo Truck"
                                 //   onBlur={handleBlur}
                               />
                             </div>
@@ -315,7 +315,7 @@ useEffect(() => {
                                     team_truck: e.target.value,
                                   });
                                 }}
-                                placeholder="  Team Truck *"
+                                placeholder="  Team Truck"
                                 //   onBlur={handleBlur}
                               />
                             </div>
@@ -630,7 +630,7 @@ useEffect(() => {
                     <div className="flex items-center justify-center">
                         <button
                               onClick={() => {
-                                history("/");
+                                history("/login");
                                 document.getElementById("CloseBidModel").click();
                               }}
                               type="submit"

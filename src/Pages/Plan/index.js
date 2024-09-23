@@ -65,23 +65,28 @@ const Plan = () => {
   };
 
   const payment=(p,planamount)=>
-
   {
    setLoader(true);
-   let payload={
-    plan_id:p?.id,
-    interval_count:interval,
-    amount:planamount
+   if(user?.loggedIn)
+   {
+    let payload={
+      plan_id:p?.id,
+      interval_count:interval,
+      amount:planamount
+     }
+  
+      ApiClient.post('session/create',payload).then((res) => {
+          if (res.success) {
+              window.location.assign(res.data.url)
+            }else{
+              toast.error(res.message)
+            }
+        setLoader(false);
+      });
+   }else{
+    history("/login")
    }
-
-    ApiClient.post('session/create',payload).then((res) => {
-        if (res.success) {
-            window.location.assign(res.data.url)
-          }else{
-            toast.error(res.message)
-          }
-      setLoader(false);
-    });
+  
   }
 
   const clear = () => {
@@ -293,9 +298,10 @@ const Plan = () => {
   useEffect(() => {
     if (user && user.loggedIn) {
       setFilter({ ...filters, search: searchState.data });
-      getData({ search: searchState.data, page: 1 });
       activeplans()
     }
+    getData({ search: searchState.data, page: 1 });
+
   }, []);
 
   const changeInterval = (p) => {
@@ -314,9 +320,9 @@ const activeplans=()=>
   ApiClient.get("active-plan").then((res) => {
     if (res.success) {
       setActivePlan(res.data);
-      if (!res.data.id) {
-        history("/plans");
-      }
+      // if (res?.success && !res.data.id) {
+      //   history("/plans");
+      // }
     }
     loader(false);
   });

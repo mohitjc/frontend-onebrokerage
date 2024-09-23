@@ -62,7 +62,7 @@ const GooglePlacesAutocomplete = ({ placeholder, result, id, value }) => {
       >
         <input
           type="text"
-          placeholder="Enter a location"
+          placeholder="Location"
           value={searchText}
           className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
           style={{ zIndex: 1000 }}

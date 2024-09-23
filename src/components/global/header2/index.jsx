@@ -135,7 +135,7 @@ const Header = () => {
                     <div className='flex items-center gap-6'>
                       <Link to="/login"><p className='text-sm font-medium'>Login</p></Link>
 
-                      <button className='bg-primary px-4 text-sm py-2 rounded-lg text-white'>Get Started Free</button>
+                      <button className='bg-primary px-4 text-sm py-2 rounded-lg text-white' onClick={(e)=>history("/signup")}>Get Started Free</button>
                     </div>
                   </div>
               }
