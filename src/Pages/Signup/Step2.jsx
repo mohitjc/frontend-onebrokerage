@@ -212,20 +212,33 @@ export default function Step2() {
                               <div className="phoneInput_cls d-flex form-control p-0">
                                 
 
-                                <input
-                                  type="text"
-                                  className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
-                                  placeholder="Telephone No."
-                                  value={(form && form.telephoneNo) || ""}
-                                  maxLength={10}
-                                  onChange={(e) =>
-                                    setForm({
-                                      ...form,
-                                      telephoneNo: methodModel.isNumber(e),
-                                    })
-                                  }
-                                  // required
-                                />
+                              <PhoneInput
+                                      country={'us'}
+                                      value={form?.dialCode}
+                                      countryCodeEditable={false}
+                                      enableSearch={true}
+                                      placeholder=""
+                                      onChange={(phone, country) => {
+                                        setForm({
+                                          ...form,
+                                          dialCode: country.dialCode,
+                                        });
+                                      }}
+                                    />
+
+                                    <input
+                                      type="text"
+                                      className="form-control phph"
+                                      placeholder="Mobile No."
+                                      value={(form && form.mobileNo) || ''}
+                                      maxLength={12}
+                                      onChange={(e) =>
+                                        setForm({
+                                          ...form,
+                                          mobileNo: methodModel.isNumber(e),
+                                        })
+                                      }
+                                    />
                               </div>
                             </div>
                             <div className="col-md-6 mb-3">
