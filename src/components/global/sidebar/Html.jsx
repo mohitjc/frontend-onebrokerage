@@ -40,6 +40,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
 
   const location = useLocation();
   const user=useSelector(state=>state.user)
+  console.log(user,"user")
   const path = window.location.pathname;
   const history=useNavigate()
   const dispatch=useDispatch()
@@ -82,8 +83,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
-                    to="/dashboard"
-                
+                    to={`${user?.plan_id?"/dashboard":""}`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
                       (location?.pathname == "/dashboard" &&
@@ -100,7 +100,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
-                    to="/trucks"
+                    to={`${user?.plan_id?"/trucks":""}`}
                 
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
@@ -118,7 +118,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
-                    to="/drivers"
+                    to={`${user?.plan_id?"/drivers":""}`}
                 
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
@@ -136,7 +136,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
-                    to="/carriers"
+                    to={`${user?.plan_id?"/carriers":""}`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
                       (location?.pathname == "/carriers" &&
@@ -153,7 +153,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
-                    to="/approvedcarriers"
+                    to={`${user?.plan_id?"/approvedcarriers":""}`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
                       (location?.pathname == "/approvedcarriers" &&
@@ -170,7 +170,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
-                    to="/rejectedcarrier"
+                    to={`${user?.plan_id?"/rejectedcarrier":""}`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
                       (location?.pathname == "/rejectedcarrier" &&
@@ -187,7 +187,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
-                    to="/pendingcarrier"
+                    to={`${user?.plan_id?"/pendingcarrier":""}`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
                       (location?.pathname == "/pendingcarrier" &&
@@ -204,7 +204,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
-                    to="/activeplan"
+                    to={`${user?.plan_id?"/activeplan":""}`}
                 
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +

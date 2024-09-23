@@ -68,7 +68,7 @@ const Html = ({
       }
       else{
      
-        toast.error(`You can add only ${activeplan?.subscription_plan_id?.number_of_drivers} drivers`)
+        toast.error(`If you want to add more drivers , you need to upgrade the plan`)
       }
       
     }
