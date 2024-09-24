@@ -34,12 +34,7 @@ const ActivePlan = () => {
     // });
   }, []);
 
-  const includedFeatures = [
-    'Private forum access',
-    'Member resources',
-    'Entry to annual conference',
-    'Official member t-shirt',
-  ]
+ 
   return (
     <PageLayout>
      <div className="mb-4">
@@ -58,10 +53,10 @@ const ActivePlan = () => {
               role="list"
               className="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 sm:grid-cols-2 sm:gap-6"
             >
-              {includedFeatures.map((feature) => (
+              {activeplan?.subscription_plan_id?.features.map((feature) => (
                 <li key={feature} className="flex gap-x-3">
                   <CheckIcon aria-hidden="true" className="h-6 w-5 flex-none text-primary" />
-                  {feature}
+                  {feature?.name}
                 </li>
               ))}
             </ul>

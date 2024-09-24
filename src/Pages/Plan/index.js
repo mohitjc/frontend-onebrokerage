@@ -298,6 +298,10 @@ const Plan = () => {
   useEffect(() => {
     if (user && user.loggedIn) {
       setFilter({ ...filters, search: searchState.data });
+      
+    }
+    if(user && user.plan_id)
+    {
       activeplans()
     }
     getData({ search: searchState.data, page: 1 });
