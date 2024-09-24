@@ -62,7 +62,7 @@ const PageLayout = ({ children }) => {
        <Header/>
        <div component="page-layout" className="xl:container mx-auto">
        <div className="flex flex-col lg:flex-row gap-4 xl:gap-8 px-6 py-4 lg:py-16 lg:px-16">
-          <div className="sidebars_data lg:w-[300px] xl:w-[400px] border border-gray-200 rounded-xl shadow-md">
+          <div className="sidebars_data shrink-0 lg:w-[300px] xl:w-[280px] border border-gray-200 rounded-xl shadow-md">
               <div className="w-full">
                   <Sidebar  />
               </div>

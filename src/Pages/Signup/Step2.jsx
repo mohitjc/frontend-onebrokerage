@@ -209,7 +209,7 @@ export default function Step2() {
                             </div>
                             <div className="col-md-6 mb-3">
                             
-                              <div className="phoneInput_cls d-flex form-control p-0">
+                              <div className="bg-white h-[45px] rounded-lg flex p-0">
                                 
 
                               <PhoneInput
@@ -217,6 +217,7 @@ export default function Step2() {
                                       value={form?.dialCode}
                                       countryCodeEditable={false}
                                       enableSearch={true}
+                                      className="namephones"
                                       placeholder=""
                                       onChange={(phone, country) => {
                                         setForm({
@@ -228,7 +229,7 @@ export default function Step2() {
 
                                     <input
                                       type="text"
-                                      className="form-control phph"
+                                      className="bg-white text-black phph"
                                       placeholder="Mobile No."
                                       value={(form && form.mobileNo) || ''}
                                       maxLength={12}

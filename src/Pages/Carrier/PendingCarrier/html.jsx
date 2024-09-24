@@ -398,8 +398,7 @@ const Html = ({
                       <textarea
                         value={Reason}
                         onChange={(e) => {
-                          setReason(e.target.value);
-                        }}
+                          setReason(e.target.value);}}
                         class="form-control"
                         id="message-text"
                       ></textarea>
@@ -412,10 +411,13 @@ const Html = ({
                       <></>
                     )}
                   </div>
+                  <div className='flex items-center justify-end gap-2'>
+
+                 
                   <button
                         type="button"
                         id="CloseReasonModel"
-                        className=" justify-center bg-primary text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
+                        className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
                         onClick={closeModal}
                       >
                        Close
@@ -423,6 +425,7 @@ const Html = ({
                       <button type="submit" class="btn btn-primary">
                       Submit
                     </button>
+                    </div>
                
                 </form>
 

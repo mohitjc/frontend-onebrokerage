@@ -356,7 +356,7 @@ export default function Step3() {
                             </div> */}
                     <div className="">
 
-                      <div className="">
+                      <div className="border-white border mb-4 rounded-lg p-2">
                         <div className=" ">
                           <div className="input_div input_div1">
                             {" "}

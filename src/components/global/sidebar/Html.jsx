@@ -4,8 +4,8 @@ import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
 import styles from "./index.module.css";
 import { NavLink, useLocation } from "react-router-dom";
-import { Tooltip } from "antd";
-import { RiHome6Line } from "react-icons/ri";
+import { tooltip } from "antd";
+import { RiHome6Line, RiMoneyDollarCircleLine } from "react-icons/ri";
 import { FiPackage, FiSettings, FiThumbsUp, FiUsers } from "react-icons/fi";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { PiHandCoins, PiHandbagBold } from "react-icons/pi";
@@ -138,7 +138,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
             <Disclosure as="div" defaultOpen={tabclass("carriers")}>
               {({ open }) => (
                 <>
-                  <Tooltip placement="right" title="Carriers">
+                  <tooltip placement="right" title="Carriers">
                     <Disclosure.Button className="w-full p-2.5 rounded-[50px] flex items-center justify-between text-black hover:!text-[#fff] gap-[12px] hover:bg-[#494f9f] transition-all duration-300  group">
                       <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                         <FiUsers className="text-black shrink-0 text-lg group-hover:text-white" />
@@ -154,7 +154,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                         } h-4 w-4 transition-all duration-500  text-[#494f9f] group-hover:text-white`}
                       />
                     </Disclosure.Button>
-                  </Tooltip>
+                  </tooltip>
                   <Transition
                     enter="transition duration-300 ease-in-out"
                     enterFrom="transform scale-95 opacity-0"
@@ -166,7 +166,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                       <Disclosure.Panel className=" mt-[4px] ">
                       <ul className="space-y-2 ">
                       <li id="/carriers">
-                          <Tooltip
+                          <tooltip
                             placement="right"
                             title="Carrier"
                           >
@@ -183,10 +183,10 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 All Carriers
                               </span>
                             </NavLink>
-                          </Tooltip>
+                          </tooltip>
                         </li>
                         <li id="/carriers">
-                          <Tooltip
+                          <tooltip
                             placement="right"
                             title=" Accepted Carrier"
                           >
@@ -205,12 +205,12 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 Approved Carrier
                               </span>
                             </NavLink>
-                          </Tooltip>
+                          </tooltip>
                         </li>
 
                         {/* {urlAllow("carriers") ? ( */}
                           <li id="/carriers">
-                            <Tooltip
+                            <tooltip
                               placement="right"
                               title=" Reject Carrier"
                             >
@@ -228,7 +228,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                   Rejected Carriers
                                 </span>
                               </NavLink>
-                            </Tooltip>
+                            </tooltip>
                           </li>
                         {/* ) : (
                           <></>
@@ -237,7 +237,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                         {/* {urlAllow("carriers") ? (
                           <> */}
                             <li id="carriers">
-                              <Tooltip placement="right" title=" Carrier requests">
+                              <tooltip placement="right" title=" Carrier requests">
                                 <NavLink
                                   to="/pendingcarrier"
                                   className={(isActive) =>
@@ -253,7 +253,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                  Pending Carriers
                                   </span>
                                 </NavLink>
-                              </Tooltip>
+                              </tooltip>
                             </li>
                           {/* </>
                         ) : (
@@ -283,7 +283,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                         " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                     }
                   >
-                    <GrCar className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <RiMoneyDollarCircleLine className="text-black shrink-0 text-lg group-hover:text-white " />
                     <span className="text-inherit leading-none sidebar_text">
                       Active Plan
                     </span>
@@ -306,7 +306,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
 
         <ul className="space-y-2  ">
           <li>
-            <Tooltip placement="right" title="Dashboard">
+            <tooltip placement="right" title="Dashboard">
               <NavLink
                 to="/dashboard"
              
@@ -321,13 +321,13 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                   Dashboard
                 </span>
               </NavLink>
-            </Tooltip>
+            </tooltip>
           </li>
           <li>
             <Disclosure as="div" defaultOpen={tabclass("carriers")}>
               {({ open }) => (
                 <>
-                  <Tooltip placement="right" title="Carriers">
+                  <tooltip placement="right" title="Carriers">
                     <Disclosure.Button className="w-full p-2.5 rounded-[50px] flex items-center justify-between text-black hover:!text-[#fff] gap-[12px] hover:bg-[#494f9f] transition-all duration-300  group">
                       <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                         <FiUsers className="text-black shrink-0 text-lg group-hover:text-white" />
@@ -343,7 +343,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                         } h-4 w-4 transition-all duration-500  text-[#494f9f] group-hover:text-white`}
                       />
                     </Disclosure.Button>
-                  </Tooltip>
+                  </tooltip>
                   <Transition
                     enter="transition duration-300 ease-in-out"
                     enterFrom="transform scale-95 opacity-0"
@@ -355,7 +355,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                       <Disclosure.Panel className=" mt-[4px] ">
                       <ul className="space-y-2 ">
                       <li id="/carriers">
-                          <Tooltip
+                          <tooltip
                             placement="right"
                             title="Carrier"
                           >
@@ -372,10 +372,10 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 Carriers
                               </span>
                             </NavLink>
-                          </Tooltip>
+                          </tooltip>
                         </li>
                         <li id="/carriers">
-                          <Tooltip
+                          <tooltip
                             placement="right"
                             title=" Accepted Carrier"
                           >
@@ -394,12 +394,12 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 Accepted Carrier
                               </span>
                             </NavLink>
-                          </Tooltip>
+                          </tooltip>
                         </li>
 
                         {urlAllow("carriers") ? (
                           <li id="/carriers">
-                            <Tooltip
+                            <tooltip
                               placement="right"
                               title=" Reject Carrier"
                             >
@@ -417,7 +417,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                   Rejected Carrier
                                 </span>
                               </NavLink>
-                            </Tooltip>
+                            </tooltip>
                           </li>
                         ) : (
                           <></>
@@ -426,7 +426,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                         {urlAllow("carriers") ? (
                           <>
                             <li>
-                              <Tooltip placement="right" title=" Carrier requests">
+                              <tooltip placement="right" title=" Carrier requests">
                                 <NavLink
                                   to="/carriersrequest"
                                   className={(isActive) =>
@@ -442,7 +442,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                     Carrier requests
                                   </span>
                                 </NavLink>
-                              </Tooltip>
+                              </tooltip>
                             </li>
                           </>
                         ) : (
@@ -452,7 +452,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                         {urlAllow("carriers") ? (
                           <>
                             <li>
-                              <Tooltip placement="right" title="Carrier's Staff">
+                              <tooltip placement="right" title="Carrier's Staff">
                                 <NavLink
                                   to="/carrierstaff"
                                   className={(isActive) =>
@@ -468,7 +468,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                     Carrier's Staff
                                   </span>
                                 </NavLink>
-                              </Tooltip>
+                              </tooltip>
                             </li>
                           </>
                         ) : (
@@ -477,7 +477,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                         {urlAllow("carriers") ? (
                           <>
                             <li>
-                              <Tooltip placement="right" title="Approved Sub-Carrier">
+                              <tooltip placement="right" title="Approved Sub-Carrier">
                                 <NavLink
                                   to="/approvedSubCarrier"
                                   className={(isActive) =>
@@ -493,7 +493,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                     Approved Sub-Carrier
                                   </span>
                                 </NavLink>
-                              </Tooltip>
+                              </tooltip>
                             </li>
                           </>
                         ) : (
@@ -507,7 +507,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
             </Disclosure>
           </li>
           <li>
-            <Tooltip placement="right" title="Features">
+            <tooltip placement="right" title="Features">
               <NavLink
                 to="/feature"
               
@@ -523,11 +523,11 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 Features
                 </span>
               </NavLink>
-            </Tooltip>
+            </tooltip>
           </li>
         
           <li>
-            <Tooltip placement="right" title="Groups">
+            <tooltip placement="right" title="Groups">
               <NavLink
                 to="/groups"
             
@@ -543,11 +543,11 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 Groups
                 </span>
               </NavLink>
-            </Tooltip>
+            </tooltip>
           </li>
     
           <li>
-            <Tooltip placement="right" title="Plans">
+            <tooltip placement="right" title="Plans">
               <NavLink
                 to="/plans"
           
@@ -563,12 +563,12 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                   Plan
                 </span>
               </NavLink>
-            </Tooltip>
+            </tooltip>
           </li>
           
 
           <li>
-            <Tooltip placement="right" title="Trucks">
+            <tooltip placement="right" title="Trucks">
               <NavLink
                 to="/trucks"
            
@@ -584,12 +584,12 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 Trucks
                 </span>
               </NavLink>
-            </Tooltip>
+            </tooltip>
           </li>
 
 
           <li>
-            <Tooltip placement="right" title="Drivers">
+            <tooltip placement="right" title="Drivers">
               <NavLink
                 to="/drivers"
              
@@ -605,11 +605,11 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 Driver
                 </span>
               </NavLink>
-            </Tooltip>
+            </tooltip>
           </li>
 
           <li>
-            <Tooltip placement="right" title="Transaction">
+            <tooltip placement="right" title="Transaction">
               <NavLink
                 to="/transaction"
                 
@@ -624,7 +624,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 Transactions
                 </span>
               </NavLink>
-            </Tooltip>
+            </tooltip>
           </li>
 
       
@@ -634,7 +634,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <Disclosure as="div" defaultOpen={tabclass("user")}>
                 {({ open }) => (
                   <>
-                    <Tooltip placement="right" title="Internal Users">
+                    <tooltip placement="right" title="Internal Users">
                       <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#4A545E]  hover:!text-[#5577FF] gap-[12px] hover:bg-[#5577FF]/10 transition-all duration-300">
                         <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                           <FiUsers className="text-[#5577FF] shrink-0 text-lg" />
@@ -650,7 +650,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                           } h-4 w-4 transition-all duration-500  text-[#7E8B99]`}
                         />
                       </Disclosure.Button>
-                    </Tooltip>
+                    </tooltip>
                     <Transition
                       enter="transition duration-300 ease-in-out"
                       enterFrom="transform scale-95 opacity-0"

@@ -170,7 +170,8 @@ const Signup = () => {
             required
           />
           <select
-            className=""
+            className="shadow-box mb-3 border-1 focus:outline-none border-gray-300 relative bg-gray-100 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
+
             onChange={(e) => {
               setForm({
                 ...form,
