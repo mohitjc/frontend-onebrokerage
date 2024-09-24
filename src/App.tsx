@@ -42,7 +42,6 @@ function App() {
     { url: "/drivers/add", path: "Driver/AddEdit" },
     { url: "/drivers/detail/:id", path: "Driver/View" },
      { url: "/trucks", path: "Truck" },
-    // { url: "/trucks/edit/:id", path: "Truck/AddEdit" },
     { url: "/trucks/add", path: "Truck/AddTruck" },
     { url: "/trucks/detail/:id", path: "Truck/View" },
     { url: "/carriers", path: "Carrier" },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import environment from "../../../environment";
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
@@ -18,7 +18,7 @@ import { TbLogout, TbUserShield } from "react-icons/tb";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { LiaTruckSolid } from "react-icons/lia";
 import { CgLogOut } from "react-icons/cg";
-import { logout } from '../../../Pages/actions/user';
+import {login_success, logout } from '../../../Pages/actions/user';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   MdOutlineHolidayVillage,
@@ -31,6 +31,8 @@ import {
 } from "react-icons/io5";
 import { RiCoupon3Line, RiPresentationLine } from "react-icons/ri";
 import { GrCar, GrCatalogOption } from "react-icons/gr";
+import loader from "../../../methods/loader";
+import ApiClient from "../../../methods/api/apiClient";
 import { useSelector ,useDispatch} from "react-redux";
 import { HiOutlineTruck } from "react-icons/hi";
 // import { CostingURL } from '../../../pages/CostingTemplate/Api';
@@ -40,7 +42,6 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
 
   const location = useLocation();
   const user=useSelector(state=>state.user)
-  console.log(user,"user")
   const path = window.location.pathname;
   const history=useNavigate()
   const dispatch=useDispatch()
@@ -50,9 +51,27 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
     localStorage.removeItem("token")
     history('/login');
   };
+  
+  const gallaryData = () => {
+    loader(true);
+    ApiClient.get(`user/detail`, { id: user.id }).then((res) => {
+      if (res.success) {
+        const data = res.data;
+        const newdata = { ...user, ...data };
+        dispatch(login_success(newdata));
+      }
+      loader(false);
+    });
+  };
+  useEffect(() => {
+    if (user && user.id) {
+      gallaryData();
+    }
+  }, [user.id]);
+  
+
   return (
     <>
-
       <div className="sidebar_new">
           <div className=" rounded-t-lg bg-gray-50 ">
               <div className="flex  items-center gap-4 flex-wrap relative px-4 pt-4 pb-4">
@@ -84,6 +103,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
                     to={`${user?.plan_id?"/dashboard":""}`}
+                    // to={`/dashboard`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
                       (location?.pathname == "/dashboard" &&
@@ -101,7 +121,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 <tooltip placement="right" title="Trucks">
                   <NavLink
                     to={`${user?.plan_id?"/trucks":""}`}
-                
+                    // to={`trucks`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
                       (location?.pathname == "/trucks" &&
@@ -119,7 +139,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 <tooltip placement="right" title="Drivers">
                   <NavLink
                     to={`${user?.plan_id?"/drivers":""}`}
-                
+                    // to={`/drivers`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
                       (location?.pathname == "/drivers" &&
@@ -276,7 +296,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
                     to={`${user?.plan_id?"/activeplan":""}`}
-                
+                    // to={`/activeplan`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
                       (location?.pathname == "/activeplan" &&
@@ -294,7 +314,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 <tooltip placement="right" title="Transaction">
                   <NavLink
                     to={`${user?.plan_id?"/transaction":""}`}
-                
+                    // to={`/transaction`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
                       (location?.pathname == "/transaction" &&
