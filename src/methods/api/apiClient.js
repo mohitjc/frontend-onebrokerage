@@ -13,7 +13,7 @@ import methodModel from "../methods";
 import { BlockBlobClient, AnonymousCredential } from "@azure/storage-blob";
 
 var config = {
-  headers: { "Content-Type": "application/json" },
+  headers: { "Content-Type": "multipart/form-data" },
 };
 
 var baseUrl = environment?.api;
@@ -147,6 +147,10 @@ class ApiClient {
 
   /*************** Form-Data Method ***********/
   static postFormData(url, params) {
+    let configupdate = {
+      headers: { "Content-Type": "multipart/form-data" },
+      params: params,
+    };
     url = baseUrl + url;
     setAuthorizationToken(axios);
     return new Promise(function (fulfill, reject) {
