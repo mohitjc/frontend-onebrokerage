@@ -203,36 +203,48 @@ const Profile = () => {
           <h3 className=" text-lg lg:text-2xl font-semibold text-[#111827]">
             Profile Information
           </h3>
+
+          <div className="flex gap-4 items-center">
+
+          
           <div onClick={() => {
-                                          SetEdit(true);
-                                          setChangePassword(false)
-                                        }}> <Link
-                                        to="/profile"
-                                        title="Edit Profile"
-                                        className="btn btn-primary ms-2"
-                                      >
-                                        <i
-                                          className="fa fa-edit me-2"
-                                          title="Edit Profile"
-                                          
-                                        />
-                                        Edit
-                                      </Link></div>
-                                      <div
-                        onClick={() => {
-                          setChangePassword(true);
-                          SetEdit(false)
-                        }}
-                          >
-                            <i class="fa fa-lock me-2" aria-hidden="true"></i>
-                            Change Password
-                                                               </div >
+                      SetEdit(true);
+                      setChangePassword(false)
+                    }}> <Link
+                    to="/profile"
+                    title="Edit Profile"
+                    className="bg-primary text-white px-2 py-2 rounded-lg "
+                  >
+                    <i
+                      className="fa fa-edit me-2"
+                      title="Edit Profile"
+                      
+                    />
+                    Edit Profile
+                  </Link>
+            </div>
+            <div className=""
+                onClick={() => {
+                  setChangePassword(true);
+                  SetEdit(false)
+                }}
+                  >
+                <i class="fa fa-lock me-2" aria-hidden="true"></i>
+                Change Password
+            </div>
+        </div>
+
+          
+       
+      
+        </div>
 
 
-          {!edit && !changepassword?  
-           <div className=" sm:mt-3 md:mt-8 mt-8">
+
+        {!edit && !changepassword?  
+           <div className=" p-6 shadow-box overflow-hidden rounded-lg bg-white  border mt-6">
           <div className="grid items-center grid-cols-12 gap-4 mb-5">
-            <div className="col-span-12  p-6 shadow-box overflow-hidden rounded-lg bg-white  border inner_part">
+            <div className="col-span-12   inner_part">
               <div className="flex md:items-center items-start gap-4 shrink-0 flex-col md:flex-row">
                 <div className="">
                   <img
@@ -269,7 +281,7 @@ const Profile = () => {
             </div>
           </div>
         </div>:changepassword?
-          <div>
+          <div className="p-6 shadow-box overflow-hidden rounded-lg bg-white  border mt-6">
                               <form className="pprofile" onSubmit={handleSubmit}>
                                 <div className="col-md-12 mb-3">
                                   <h5 className="lgtext mb-4">Change Password</h5>
@@ -282,7 +294,7 @@ const Profile = () => {
                                       type={
                                         eyes.currentPassword ? 'text' : 'password'
                                       }
-                                      className="form-control"
+                                      className="pl-2"
                                       value={form.currentPassword}
                                       maxLength="20"
                                       onChange={(e) =>
@@ -325,7 +337,7 @@ const Profile = () => {
                                   <div className="inputWrapper">
                                     <input
                                       type={eyes.password ? 'text' : 'password'}
-                                      className="form-control"
+                                      className="pl-2"
                                       value={form.newPassword}
                                       maxLength="20"
                                       onChange={(e) =>
@@ -371,7 +383,7 @@ const Profile = () => {
                                       type={
                                         eyes.confirmPassword ? 'text' : 'password'
                                       }
-                                      className="form-control"
+                                      className="pl-2"
                                       value={form.confirmPassword}
                                       maxLength="20"
                                       onChange={(e) =>
@@ -418,7 +430,7 @@ const Profile = () => {
                                 <div className="col-md-12 text-right mt-3">
                                   <button
                                     type="submit"
-                                    className="btn dark-btn mt-4"
+                                    className="bg-primary text-white px-4 rounded-xl py-2 mt-4"
                                   >
                                     Update
                                   </button>
@@ -426,7 +438,7 @@ const Profile = () => {
                               </form>
   
          </div>:  
-           <div className="edit-section-img">
+           <div className="p-6 shadow-box overflow-hidden rounded-lg bg-white  border mt-6">
                                 <div className="d-flex justify-content-between align-items-center mb-3">
                                   <h5>Basic Information</h5>
                                 </div>
@@ -502,7 +514,7 @@ const Profile = () => {
                                               </div>
                                               <input
                                                 type="text"
-                                                className="form-control"
+                                                className="pl-2"
                                                 placeholder="Enter Name"
                                                 value={
                                                   form.fullName
@@ -534,7 +546,7 @@ const Profile = () => {
                                                 </div>
                                                 <input
                                                   type="email"
-                                                  className="form-control"
+                                                  className="pl-2"
                                                   placeholder="Enter Name"
                                                   value={
                                                     form.email ? form.email : ''
@@ -582,7 +594,7 @@ const Profile = () => {
                                         <div>
                                           <input
                                             type="text"
-                                            className="form-control"
+                                            className="pl-2"
                                             placeholder="Enter Carrier ID"
                                             value={form.identification_number}
                                             disabled
@@ -594,7 +606,7 @@ const Profile = () => {
                                               Telephone{' '}
                                               
                                             </label>
-                                            <div className="phoneInput_cls d-flex form-control p-0">
+                                            <div className="phoneInput_cls d-flex pl-2 p-0">
                                               <PhoneInput
                                                 country={'us'}
                                                 value={form.telephoneExt}
@@ -613,7 +625,7 @@ const Profile = () => {
 
                                               <input
                                                 type="text"
-                                                className="form-control phph"
+                                                className="pl-2 phph"
                                                 placeholder="Telephone No."
                                                 value={
                                                   (form && form.telephoneNo) || (form && form.mobileNo) ||
@@ -636,7 +648,7 @@ const Profile = () => {
                                         <div>
                                           <input
                                             type="text"
-                                            className="form-control"
+                                            className="pl-2"
                                             placeholder="Enter Name"
                                             value={methodModel.capitalizeFirstLetter(
                                               form?.role
@@ -673,7 +685,7 @@ const Profile = () => {
                                                     return false;
                                                   }
                                                 }}
-                                                className="form-control"
+                                                className="pl-2"
                                                 placeholder="Enter Fax"
                                                 value={form.fax_number}
                                                 onChange={(e) =>
@@ -711,7 +723,7 @@ const Profile = () => {
                                                     return false;
                                                   }
                                                 }}
-                                                className="form-control"
+                                                className="pl-2"
                                                 placeholder="Enter Tax ID"
                                                 value={
                                                   form.tax_number
@@ -761,7 +773,7 @@ const Profile = () => {
                                                 return false;
                                               }
                                             }}
-                                            className="form-control"
+                                            className="pl-2"
                                             placeholder="Enter Number"
                                             value={form?.truck_number}
                                             onChange={(e) =>
@@ -793,7 +805,7 @@ const Profile = () => {
                                                       return false;
                                                     }
                                                   }}
-                                                  className="form-control"
+                                                  className="pl-2"
                                                   placeholder="Enter Number"
                                                   value={form?.trailers_number}
                                                   onChange={(e) =>
@@ -814,7 +826,7 @@ const Profile = () => {
                                                 <input
                                                   min={0}
                                                   type="number"
-                                                  className="form-control"
+                                                  className="pl-2"
                                                   placeholder="Enter Number"
                                                   value={form?.team_truck}
                                                   onChange={(e) =>
@@ -835,7 +847,7 @@ const Profile = () => {
                                                 <input
                                                   min={0}
                                                   type="number"
-                                                  className="form-control"
+                                                  className="pl-2"
                                                   placeholder="Enter Number"
                                                   value={form?.solo_truck}
                                                   onChange={(e) =>
@@ -1079,9 +1091,6 @@ const Profile = () => {
                                   </div>
                                 </form>
            </div>}
-       
-      
-        </div>
 
 
 

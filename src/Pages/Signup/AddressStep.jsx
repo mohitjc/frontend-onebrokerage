@@ -212,12 +212,13 @@ export default function AddressStep() {
                         <div className="">
                           <h4 className="mb-2 text-white">Address </h4>
                           <div className=" ">
-                            <div className="">
+                            <div className="w-full">
                              
                               <GooglePlaceAutoComplete
                                 value={form?.address}
                                 result={DestinationAddress}
                                 placeholder="Address"
+                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                               />
                             </div>
                             <div className="">

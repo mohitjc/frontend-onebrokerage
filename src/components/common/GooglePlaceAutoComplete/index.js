@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import environment from "../../../environment";
 import "./style.scss";
-const GooglePlacesAutocomplete = ({ placeholder, result, id, value }) => {
+const GooglePlacesAutocomplete = ({ placeholder, result, id, className=" ", value }) => {
   const [searchText, setSearchText] = useState("");
   const [loading, setLoader] = useState(true);
   const autocompleteRef = useRef(null);
@@ -64,7 +64,7 @@ const GooglePlacesAutocomplete = ({ placeholder, result, id, value }) => {
           type="text"
           placeholder="Location"
           value={searchText}
-          className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
+          className={className}
           style={{ zIndex: 1000 }}
           onChange={handleInputChange}
         />

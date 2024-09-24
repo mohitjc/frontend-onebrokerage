@@ -101,3 +101,50 @@ label.profileheddingcls {
 .active-bg svg {
   color: #fff;
 }
+
+
+.input-new-design {
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  display: flex;
+  height: 45px;
+}
+
+.input-icon {
+  align-items: center;
+  background: #474e9c12;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  color: #474e9c;
+  display: flex;
+  font-size: 14px;
+  justify-content: center;
+  padding: 4px 16px;
+}
+
+
+.namephones input.form-control {
+  border: none!important;
+  border-left: 1px solid #e5e7eb!important;
+  border-radius: 0!important;
+  height: 42px;
+}
+
+
+.namephones {
+  font-size: 15px;
+  position: relative;
+  width: 85px !important;
+}
+
+
+
+.namephones .flag-dropdown {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  background-color: transparent;
+  border-right: 1px solid #e5e7eb;
+  border-radius: 3px 0 0 3px;
+}

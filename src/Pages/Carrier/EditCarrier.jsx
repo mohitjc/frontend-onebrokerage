@@ -209,36 +209,12 @@ const EditCarrier = () => {
   return (
     <>
       <PageLayout>
-        <div className="mainareas">
+        <div className=" bg-white shadow-md rounded-lg p-4 border border-gray-100">
           <form onSubmit={handleSubmit}>
-            <div className="pprofile1 edit-page-common new-edit">
-              <div className="row">
-                <div className="col-lg-12">
-                  <div class=" title-head">
-                    <h3
-                      className="ViewUseraa mb-0 user-back"
-                      onClick={() => {
-                        history(-1);
-                      }}
-                    >
-                      <i
-                        className="fa fa-arrow-left me-2 "
-                        title="Back"
-                        aria-hidden="true"
-                      ></i>
-                      {id ? 'Edit' : 'Add'} {Name?Name:"Carrier"}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xl-3">
-                  {/* <div class=" white-head mb-3">
-                    <h5 class="profilelist">Profile</h5>
-                  </div> */}
-                  <div class=" white-bg-main mb-4 profile-sect-n">
-                    {/* <div className="imagesRow  mb-3">
-                      <div className="imagethumbWrapper">
+            <div className='grid grid-cols-12 gap-6'>
+                <div className='col-span-12 '>
+                    <div className='images_datas flex items-center justify-center'>
+                    <div className="imagethumbWrapper">
                         <img
                           src={
                             // form?.image
@@ -246,9 +222,9 @@ const EditCarrier = () => {
                             //   : '/assets/img/person.jpg'
                             methodModel.userImg(form?.image)
                           }
-                          className="thumbnail"
+                          className="h-32 w-32 rounded-full object-contain"
                         />
-                        <div className="upload-img-icon">
+                        <div className="mt-4">
                           {form?.image ? (
                             <>
                               <label
@@ -261,7 +237,7 @@ const EditCarrier = () => {
                               </label>{' '}
                             </>
                           ) : (
-                            <label className={`btn  `}>
+                            <label className={`bg-primary cursor-pointer hover:shadow-md text-white px-2 rounded-lg gap-2 py-2 flex items-center justify-center   `}>
                               <input
                                 type="file"
                                 className="d-none"
@@ -271,47 +247,22 @@ const EditCarrier = () => {
                                 }}
                               />
                               <IoIosCamera />
+                              Upload image
                             </label>
                           )}
                         </div>
                       </div>
-                    </div> */}
-                    <div className="row">
-                      <div className="col-md-12 mb-3">
-                        <div className='disable-input'>
-                        <label>
-                          Carrier Name
-                          <span className="text-danger">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={methodModel.capitalizeFirstLetter(
-                              user?.fullName
-                            )}
-                            disabled
-                            // required
-                          />
-                        </div>
-
-                        {/* {submitted && !form.firstName ? (
-                        <div className="invalid-feedback d-block">
-                          First Name is Required
-                        </div>
-                      ) : (
-                        <></>
-                      )} */}
-                      </div>
                     </div>
-                  </div>
                 </div>
-                <div className="col-xl-9">
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <div class=" white-head mb-3">
-                        <h5 class="profilelist">Basic Information</h5>
+
+                <div className='col-span-12 '>
+                    <div className='ineers_dats'>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="border border-gray-200">
+                      <div className=" bg-gray-100 rounded-b-lg p-4 ">
+                        <h5 className="profilelist">Basic Information</h5>
                       </div>
-                      <div class=" white-bg-main mb-4">
+                      <div className="p-4">
                         <div className="row">
                           <div className="col-md-6 mb-3">
                             <label>
@@ -324,7 +275,7 @@ const EditCarrier = () => {
                               </div>
                               <input
                                 type="text"
-                                className="form-control"
+                                className="pl-2"
                                 value={form.firstName}
                                 onChange={(e) =>
                                   setform({
@@ -352,7 +303,7 @@ const EditCarrier = () => {
                               </div>
                               <input
                                 type="text"
-                                className="form-control"
+                                className="pl-2"
                                 value={form.lastName}
                                 onChange={(e) =>
                                   setform({
@@ -364,18 +315,18 @@ const EditCarrier = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-lg-12">
+                          <div className="col-lg-12">
                             <div className="row">
                               <div className="col-md-12 mb-3">
                                 <label> Position</label>
 
                                 <div className="input-new-design">
                                   <div className="input-icon">
-                                    <i class="fas fa-hand-point-down"></i>
+                                    <i className="fas fa-hand-point-down"></i>
                                   </div>
                                   <select
                                     name=""
-                                    className="form-control"
+                                    className="pl-2 w-full bg-white"
                                     id=""
                                     value={form?.position}
                                     onChange={(e) => {
@@ -407,67 +358,77 @@ const EditCarrier = () => {
                               </div>
                               {form?.isInvited?  <div className="col-md-12 mb-3">
                                 <label className="">Telephone No</label>
-                                <div className="phoneInput_cls d-flex form-control p-0">
-                                  <PhoneInput
-                                    country={'us'}
-                                    value={form?.telephoneExt}
-                                    countryCodeEditable={false}
-                                    enableSearch={true}
-                                    placeholder=""
-                                    onChange={(phone, country) => {
-                                      setform({
-                                        ...form,
-                                        telephoneExt: country.telephoneExt,
-                                      });
-                                    }}
-                                  />
+                                
+                                <div className="bg-white border border-gray-200 h-[45px] rounded-lg flex p-0">
+                                
 
-                                  <input
-                                    type="text"
-                                    className="form-control phph"
-                                    placeholder="Telephone No."
-                                    value={(form && form.telephoneNo) || ''}
-                                    maxLength={12}
-                                    onChange={(e) =>
-                                      setform({
-                                        ...form,
-                                        telephoneNo: methodModel.isNumber(e),
-                                      })
-                                    }
-                                  />
+                                <PhoneInput
+                                        country={'us'}
+                                        value={form?.telephoneExt}
+                                        countryCodeEditable={false}
+                                        enableSearch={true}
+                                        className="namephones"
+                                        placeholder=""
+                                        onChange={(phone, country) => {
+                                          setform({
+                                            ...form,
+                                            telephoneExt: country.telephoneExt,
+                                          });
+                                        }}
+                                      />
+  
+                                      <input
+                                        type="text"
+                                        className="bg-white text-black  phph"
+                                        placeholder="Mobile No."
+                                        value={(form && form.telephoneNo) || ''}
+                                        maxLength={12}
+                                        onChange={(e) =>
+                                          setform({
+                                            ...form,
+                                            telephoneNo: methodModel.isNumber(e),
+                                          })
+                                        }
+                                      />
                                 </div>
-                              </div>:  <div className="col-md-12 mb-3">
-                                <label className="">Mobile No</label>
-                                <div className="phoneInput_cls d-flex form-control p-0">
-                                  <PhoneInput
-                                    country={'us'}
-                                    value={form?.dialCode}
-                                    countryCodeEditable={false}
-                                    enableSearch={true}
-                                    placeholder=""
-                                    onChange={(phone, country) => {
-                                      setform({
-                                        ...form,
-                                        dialCode: country.dialCode,
-                                      });
-                                    }}
-                                  />
 
-                                  <input
-                                    type="text"
-                                    className="form-control phph"
-                                    placeholder="Mobile No."
-                                    value={(form && form.mobileNo) || ''}
-                                    maxLength={12}
-                                    onChange={(e) =>
-                                      setform({
-                                        ...form,
-                                        mobileNo: methodModel.isNumber(e),
-                                      })
-                                    }
-                                  />
-                                </div>
-                              </div>}
+                                
+                              
+                              </div>: 
+                             
+                              <div className="bg-white h-[45px] rounded-lg flex p-0">
+                                
+
+                              <PhoneInput
+                                      country={'us'}
+                                      value={form?.dialCode}
+                                      countryCodeEditable={false}
+                                      enableSearch={true}
+                                      className="namephones"
+                                      placeholder=""
+                                      onChange={(phone, country) => {
+                                        setform({
+                                          ...form,
+                                          dialCode: country.dialCode,
+                                        });
+                                      }}
+                                    />
+
+                                    <input
+                                      type="text"
+                                      className="bg-white text-black phph"
+                                      placeholder="Mobile No."
+                                      value={(form && form.mobileNo) || ''}
+                                      maxLength={12}
+                                      onChange={(e) =>
+                                        setform({
+                                          ...form,
+                                          mobileNo: methodModel.isNumber(e),
+                                        })
+                                      }
+                                    />
+                              </div>
+                              }
                              
 
                               <div className="col-md-12 mb-3">
@@ -476,11 +437,11 @@ const EditCarrier = () => {
                                 </label>
                                 <div className="input-new-design">
                                   <div className="input-icon">
-                                    <i class="fas fa-envelope"></i>
+                                    <i className="fas fa-envelope"></i>
                                   </div>
                                   <input
                                     type="email"
-                                    className="form-control"
+                                    className="pl-2"
                                     value={form.email}
                                     disabled={id}
                                     onChange={(e) => {
@@ -510,26 +471,29 @@ const EditCarrier = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-lg-6">
-                      <div class=" white-head mb-3">
-                        <h5 class="profilelist">Address</h5>
+                    <div className="border border-gray-200">
+                      <div className=" bg-gray-100 rounded-b-lg p-4 ">
+                        <h5 className="profilelist">Address</h5>
                       </div>
-                      <div class=" white-bg-main mb-4">
-                        <div className="row">
+                      <div className="p-4">
+                        <div className="">
                           <div className="col-md-12 mb-3">
                             <label>
                               Address<span className="text-danger">*</span>
                             </label>
                             <div className="input-new-design">
                               <div className="input-icon">
-                                <i class="fas fa-address-book"></i>
+                                <i className="fas fa-address-book"></i>
                               </div>
+                              <div className='w-full flex items-center pl-2'>
                               <GooglePlacesAutocomplete
                                 value={form.address}
                                 result={addressResult}
                                 id="address"
                                 placeholder=""
+                                className='  w-full  relative   text-sm placeholder:text-gray-500 h-full flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500'
                               />
+                              </div>
                             </div>
 
                             {submitted && !form.address ? (
@@ -546,11 +510,11 @@ const EditCarrier = () => {
                             </label>
                             <div className="input-new-design">
                               <div className="input-icon">
-                                <i class="fas fa-building"></i>
+                                <i className="fas fa-building"></i>
                               </div>
                               <input
                                 type="text"
-                                className="form-control"
+                                className="pl-2"
                                 value={form.city}
                                 onChange={(e) =>
                                   setform({ ...form, city: e.target.value })
@@ -573,11 +537,11 @@ const EditCarrier = () => {
                             </label>
                             <div className="input-new-design">
                               <div className="input-icon">
-                                <i class="fas fa-building"></i>
+                                <i className="fas fa-building"></i>
                               </div>
                               <input
                                 type="text"
-                                className="form-control"
+                                className="pl-2"
                                 value={form.state}
                                 onChange={(e) =>
                                   setform({ ...form, state: e.target.value })
@@ -601,11 +565,11 @@ const EditCarrier = () => {
                             </label>
                             <div className="input-new-design">
                               <div className="input-icon">
-                                <i class="fas fa-globe-asia"></i>
+                                <i className="fas fa-globe-asia"></i>
                               </div>
                               <input
                                 type="text"
-                                className="form-control"
+                                className="pl-2"
                                 value={form.country}
                                 onChange={(e) =>
                                   setform({ ...form, country: e.target.value })
@@ -629,7 +593,7 @@ const EditCarrier = () => {
                             </label>
                             <div className="input-new-design">
                               <div className="input-icon">
-                                <i class="fas fa-map-pin"></i>
+                                <i className="fas fa-map-pin"></i>
                               </div>
                               <input
                                 type="numeric"
@@ -644,7 +608,7 @@ const EditCarrier = () => {
                                     return false;
                                   }
                                 }}
-                                className="form-control"
+                                className="pl-2"
                                 value={form.pincode}
                                 onChange={(e) =>
                                   setform({ ...form, pincode: e.target.value })
@@ -665,10 +629,12 @@ const EditCarrier = () => {
                       </div>
                     </div>
                   </div>
+                    </div>
                 </div>
-              </div>
+            </div>
 
-              <div className="text-right">
+           
+            <div className="text-right mt-4">
                 {
                   <button
                     type="submit"
@@ -681,7 +647,6 @@ const EditCarrier = () => {
                   </button>
                 }
               </div>
-            </div>
           </form>
         </div>
       </PageLayout>

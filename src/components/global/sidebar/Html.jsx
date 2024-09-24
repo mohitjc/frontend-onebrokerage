@@ -14,7 +14,7 @@ import { LuCircleDot, LuEye } from "react-icons/lu";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { RxCrossCircled } from "react-icons/rx";
 import { IoGitPullRequestOutline } from "react-icons/io5";
-import { TbLogout, TbUserShield } from "react-icons/tb";
+import { TbLogout, TbReportMoney, TbUserShield } from "react-icons/tb";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { LiaTruckSolid } from "react-icons/lia";
 import { CgLogOut } from "react-icons/cg";
@@ -321,7 +321,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                         " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                     }
                   >
-                    <GrCar className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <TbReportMoney className="text-black shrink-0 text-lg group-hover:text-white " />
                     <span className="text-inherit leading-none sidebar_text">
                      Transactions
                     </span>
