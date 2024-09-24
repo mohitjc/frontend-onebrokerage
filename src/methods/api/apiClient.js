@@ -24,6 +24,7 @@ const handleError = (err, hideError) => {
     if (err && err.error && err.error.code == 401) {
       localStorage.removeItem("persist:admin-app");
       localStorage.removeItem("token");
+      // document.getElementById("handleLogout")?.click();
       hideError = true;
       methodModel.route("/");
     }

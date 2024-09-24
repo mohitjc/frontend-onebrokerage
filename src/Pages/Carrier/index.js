@@ -254,8 +254,8 @@ const Carrier = (p) => {
   };
 
   const edit = (id) => {
-    let url = `/user1/edit/${id}`;
-    if (role) url = `/users1/${role}/edit/${id}`;
+    let url = `/carriers/edit/${id}`;
+    // if (role) url = `/users1/${role}/edit/${id}`;
     history(url);
   };
 

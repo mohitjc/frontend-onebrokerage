@@ -50,6 +50,7 @@ function App() {
     { url: "/approvedcarriers", path: "Carrier/ApprovedCarrier" },
     { url: "/rejectedcarrier", path: "Carrier/RejectedCarrier" },
     { url: "/pendingcarrier", path: "Carrier/PendingCarrier" },
+    { url: "/carriers/edit/:id", path: "Carrier/EditCarrier" },
       //  { url: "/profile/:tab", path: "Settings" },
     // { url: "/assignment", path: "Assignment" },
     // { url: "/assignment/detail/:id", path: "Assignment/View" },

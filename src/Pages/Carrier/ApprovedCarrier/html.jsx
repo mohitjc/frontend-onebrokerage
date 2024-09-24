@@ -13,6 +13,7 @@ import { PiEyeLight } from 'react-icons/pi';
 import { Tooltip } from 'antd';
 import moment from 'moment';
 import Table from '../../../components/Table';
+import { LiaEdit } from 'react-icons/lia';
 const Html = ({
   view,
   addressResult,
@@ -132,14 +133,14 @@ const Html = ({
                 <></>
               )} */}
               {/* {isAllow(`edit${shared.check}`) ? ( */}
-                {/* <Tooltip placement="top" title="Edit">
+                <Tooltip placement="top" title="Edit">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={(e) => edit(itm.id)}
                   >
                     <LiaEdit />
                   </a>
-                </Tooltip> */}
+                </Tooltip>
             {/* //   ) : (
             //     <></>
             //   )} */}
