@@ -6,6 +6,7 @@ import loader from "../../../methods/loader";
 // import "./style.scss";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import methodModel from "../../../methods/methods";
 import { Tooltip } from "antd";
 const RoleDetail = () => {
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ const RoleDetail = () => {
                       Plan Name
                     </label>
                     <p className="text-[14px] text-black font-medium ">
-                      {data && data.plan_id?.name}
+                      {data && methodModel.capitalizeFirstLetter(data.plan_id?.name)}
                     </p>
                   </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
@@ -79,7 +80,7 @@ const RoleDetail = () => {
                       Carrier Name
                     </label>
                     <p className="text-[14px] text-black font-medium ">
-                      {data && data.user_id?.fullName}
+                      {data && methodModel.capitalizeFirstLetter(data.user_id?.fullName)}
                     </p>
                   </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
@@ -87,7 +88,7 @@ const RoleDetail = () => {
                       Amount 
                     </label>
                     <p className="text-[14px] text-black font-medium ">
-                      {data && data.amount}
+                      ${data && data.amount}
                     </p>
                   </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
@@ -103,7 +104,7 @@ const RoleDetail = () => {
                       Status 
                     </label>
                     <p className="text-[14px] text-black font-medium ">
-                      {data && data.transaction_status}
+                      {data && methodModel.capitalizeFirstLetter(data.transaction_status)}
                     </p>
                   </div>
 

@@ -309,7 +309,7 @@ const PendingCarrier = (p) => {
 
   const AcceptUser = (id) => {
     loader(true);
-    ApiClient.put("carrier-request", { id: id, status: "accepted",board_id: user.board_id, }).then(
+    ApiClient.put(`carrier-request?id=${id}&status=accepted`).then(
       (res) => {
         if (res.success) {
           toast.success("Carrier Accepted Successfully");
@@ -320,7 +320,7 @@ const PendingCarrier = (p) => {
       }
     );
 
-    ApiClient.put("admin/edit-user", { id: id,board_id: user.board_id, }).then(
+    ApiClient.put(`admin/edit-user?id=${id}`).then(
       (res) => {
      
         loader(false);

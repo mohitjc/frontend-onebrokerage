@@ -54,11 +54,12 @@ const Header = () => {
             {/* <div id="handleLogout" onClick={Logout()}></div> */}
             <div className="flex flex-1 items-center justify-start ml-16 sm:ml-0 sm:items-center sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-                <img
+                <Link to="/">  <img
                   alt="logo"
                   src="/assets/img/logo.png"
                   className="h-8 lg:h-12 w-auto"
-                />
+                /></Link>
+              
               </div>
               <div className="hidden sm:ml-6 sm:block w-full">
                 <div className="flex space-x-4 justify-center">

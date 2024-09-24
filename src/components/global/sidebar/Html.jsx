@@ -86,7 +86,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 </div>
                  
                   <div className="">
-                      <h2 className="text-xl font-semibold">{user?.fullName}</h2>
+                      <h2 className="text-xl font-semibold">{methodModel.capitalizeFirstLetter(user?.fullName)}</h2>
                       <p className="text-sm font-normal">{user?.email}</p>
                   </div>
               </div>
