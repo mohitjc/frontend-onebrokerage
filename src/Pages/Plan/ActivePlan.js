@@ -5,6 +5,7 @@ import PageLayout from "../../components/global/PageLayout";
 import ApiClient from "../../methods/api/apiClient";
 import loader from "../../methods/loader";
 import { CheckIcon } from "@heroicons/react/24/outline";
+import methodModel from "../../methods/methods";
 // import "./style.scss";
 
 const ActivePlan = () => {
@@ -56,7 +57,7 @@ const ActivePlan = () => {
               {activeplan?.subscription_plan_id?.features.map((feature) => (
                 <li key={feature} className="flex gap-x-3">
                   <CheckIcon aria-hidden="true" className="h-6 w-5 flex-none text-primary" />
-                  {feature?.name}
+                  {methodModel.capitalizeFirstLetter(feature?.name)}
                 </li>
               ))}
             </ul>

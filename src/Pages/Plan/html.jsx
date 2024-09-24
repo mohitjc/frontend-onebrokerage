@@ -138,7 +138,7 @@ const Html = ({
                         <li class="flex space-x-3">
                           <FaCheck className="text-md text-primary shrink-0" />
 
-                          <span class="text-base text-slate-700">{item?.feature_name}</span>
+                          <span class="text-base text-slate-700">{methodModel.capitalizeFirstLetter(item?.feature_name)}</span>
                         </li>
                       )
                     })}
