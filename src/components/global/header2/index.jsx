@@ -3,6 +3,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import methodModel from '../../../methods/methods';
 import {
   ArchiveBoxXMarkIcon,
   ChevronDownIcon,
@@ -93,7 +94,7 @@ const Header = () => {
                         <span className="sr-only">Open user menu</span>
                         <img
                           alt=""
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          src={methodModel.userImg(user && user.image)}
                           className="h-10 w-10 object-contain rounded-full border-1 border-primary"
                         />
                       </MenuButton>

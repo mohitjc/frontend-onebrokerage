@@ -20,6 +20,7 @@ import { LiaTruckSolid } from "react-icons/lia";
 import { CgLogOut } from "react-icons/cg";
 import {login_success, logout } from '../../../Pages/actions/user';
 import { Link, useNavigate } from 'react-router-dom';
+import methodModel from "../../../methods/methods";
 import {
   MdOutlineHolidayVillage,
   MdOutlineAttachEmail,
@@ -77,11 +78,11 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <div className="flex  items-center gap-4 flex-wrap relative px-4 pt-4 pb-4">
 
                 <div className="">
-                  {/* <img
-                    src={methodModel.userImg(data && data.image)}
-                    className="h-36 w-36 rounded-full object-cover mx-auto"
-                  /> */}
-                   <img src="/assets/img/d1.png" className=" " alt=""/>
+                 
+                   <img
+                        src={methodModel.userImg(user && user.image)}
+                        className="h-26 w-16 rounded-full object-cover mx-auto"
+                      />
                 </div>
                  
                   <div className="">
