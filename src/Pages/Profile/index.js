@@ -134,6 +134,7 @@ const Profile = () => {
   };
 
   const uploadImage = (e) => {
+    console.log(e,"images")
     setForm({ ...form, baseImg: e.target.value });
     let files = e.target.files;
     let file = files.item(0);
