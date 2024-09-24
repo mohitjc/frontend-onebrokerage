@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import Layout from "../../../components/global/layout";
+import PageLayout from "../../../components/global/PageLayout";
 import ApiClient from "../../../methods/api/apiClient";
 import loader from "../../../methods/loader";
 // import "./style.scss";
@@ -32,7 +32,7 @@ const RoleDetail = () => {
   }, [id, userId]);
 
   return (
-    <Layout>
+    <PageLayout>
       <div className="flex items-center mb-8">
         <Tooltip placement="top" title="Back">
           <span
@@ -115,7 +115,7 @@ const RoleDetail = () => {
 
         </div>
       </div>
-    </Layout>
+    </PageLayout>
   );
 };
 
