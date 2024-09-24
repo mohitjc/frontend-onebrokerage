@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../../components/global/layout";
+import PageLayout from "../../components/global/PageLayout";
 import Pagination from "react-pagination-js";
 // import "./style.scss";
 import Table from "../../components/Table";
@@ -83,7 +83,7 @@ const Html = ({
         return (
           <>
             <div className="flex items-center justify-start gap-1.5">
-              {isAllow(`read${shared.check}`) ? (
+              {/* {isAllow(`read${shared.check}`) ? ( */}
                 <Tooltip placement="top" title="View">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -92,9 +92,9 @@ const Html = ({
                     <PiEyeLight />
                   </a>
                 </Tooltip>
-              ) : (
+              {/* ) : (
                 <></>
-              )}
+              )} */}
             </div>
           </>
         );
@@ -103,7 +103,7 @@ const Html = ({
   ];
 
   return (
-    <Layout>
+    <PageLayout>
       <div className="flex flex-wrap justify-between items-center gap-y-4">
         <div>
           <h3 className="text-2xl font-semibold text-[#111827]">Transaction</h3>
@@ -182,7 +182,9 @@ const Html = ({
               isClearable
               placeholder="Select Status"
             />
-            <button onClick={()=>exportfun()}>Export</button>
+            
+            {/* <button onClick={()=>exportfun()}>Export</button> */}
+
             {filters.transaction_status ? (
               <>
                 <button
@@ -236,7 +238,7 @@ const Html = ({
           <></>
         )}
       </div>
-    </Layout>
+    </PageLayout>
   );
 };
 

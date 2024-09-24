@@ -44,7 +44,7 @@ const Transaction = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters,...p};
+    let filter = { ...filters,...p,user_id:user?.id};
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
