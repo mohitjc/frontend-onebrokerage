@@ -279,7 +279,7 @@ const Login = () => {
                 </span>
               </label>
               <Link
-                className="font-semibold  text-[14px] ml-auto text-[#fff]"
+                className="font-normal  text-[14px] ml-auto text-[#fff]"
                 to="/forgotpassword"
               >
                 {" "}

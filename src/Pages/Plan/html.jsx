@@ -136,7 +136,7 @@ const Html = ({
                     {itm?.features.map((item) => {
                       return (
                         <li class="flex space-x-3">
-                          <FaCheck className="text-md text-primary shrink-0" />
+                          <FaCheck className="text-md text-primary shrink-0 mt-1" />
 
                           <span class="text-base text-slate-700">{methodModel.capitalizeFirstLetter(item?.feature_name)}</span>
                         </li>

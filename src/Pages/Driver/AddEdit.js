@@ -311,7 +311,7 @@ const AddEdit = () => {
             <div className="col-md-6 ">
               <label> License Number <span className="text-danger">*</span></label>
 
-              <div className="input-new-design">
+              <div className="">
                 <input
                   type="text"
                   pattern="^[a-zA-Z0-9]+$"
@@ -327,7 +327,7 @@ const AddEdit = () => {
                       return false;
                     }
                   }}
-                  className="form-control"
+                  className=" bg-white w-full rounded-lg h-10 flex items-center gap-2  border border-[#00000036] px-3"
                   required
                   value={form.licence_number}
                   onChange={(e) =>
@@ -400,6 +400,7 @@ const AddEdit = () => {
                   result={addressResult}
                   id="address"
                   placeholder=""
+                  className=" bg-white w-full rounded-lg h-10 flex items-center gap-2  border border-[#00000036] px-3"
                 />
                 {form.address == "" && submitted ? (
                   <div className="invalid-feedback d-block">

@@ -10,7 +10,7 @@ import { FiPackage, FiSettings, FiThumbsUp, FiUsers } from "react-icons/fi";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { PiHandCoins, PiHandbagBold } from "react-icons/pi";
 import { MdOutlineFeaturedPlayList } from "react-icons/md";
-import { LuCircleDot, LuEye } from "react-icons/lu";
+import { LuCircleDot, LuEye, LuUser } from "react-icons/lu";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { RxCrossCircled } from "react-icons/rx";
 import { IoGitPullRequestOutline } from "react-icons/io5";
@@ -162,7 +162,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                   <tooltip placement="right" title="Carriers">
                     <Disclosure.Button className="w-full p-2.5 rounded-[50px] flex items-center justify-between text-black hover:!text-[#fff] gap-[12px] hover:bg-[#494f9f] transition-all duration-300  group">
                       <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
-                        <FiUsers className="text-black shrink-0 text-lg group-hover:text-white" />
+                        <LuUser className="text-black shrink-0 text-lg group-hover:text-white" />
                         <span className=" text-inherit leading-none sidebar_text">
                           {" "}
                           Carriers

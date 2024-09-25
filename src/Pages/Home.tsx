@@ -39,7 +39,7 @@ const Html = ({
 
 
                     <div className="">
-                      <button className="px-6 py-4 text-white bg-primary inline-flex items-center gap-3">
+                      <button className="px-6 py-4 text-white bg-primary inline-flex rounded-lg items-center gap-3">
                           Start Chatting Now <TiArrowRightThick className="text-xl" />
                       </button>
                     </div>
@@ -377,7 +377,24 @@ const Html = ({
             </div>
         </div>
       </div>
-                                
+
+<div className="bg-[#F4F7FF]">
+
+
+      <div className='bg-primary h-20'>  </div>
+      <div className="container mx-auto">
+      <div className=' px-4 lg:px-8 py-10 lg:py-16'>
+            <div className="  text-center max-w-4xl mx-auto">
+              <h6 className=" text-[24px] lg:text-[40px] leading-[30px] lg:leading-[50px] xl:text-[48px] xl:leading-[60px]  ">Ready to grow your business?  <span className="font-bold text-[24px] lg:text-[40px] leading-[30px] lg:leading-[50px] xl:text-[48px] xl:leading-[60px] ">Start with us, become faster every second</span></h6>
+              <div className="mt-6">
+                <button className="px-6 py-4 bg-primary text-white rounded-lg">
+                  Start Chatting Now
+                </button>
+              </div>
+            </div>
+      </div>
+      </div>
+      </div>                    
        <Footers/>     
     
     </>

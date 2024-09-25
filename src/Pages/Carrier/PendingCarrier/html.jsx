@@ -399,7 +399,7 @@ const Html = ({
                         value={Reason}
                         onChange={(e) => {
                           setReason(e.target.value);}}
-                        class="form-control"
+                        class="bg-white rounded-lg h-32 text-gray-800 border border-gray-100"
                         id="message-text"
                       ></textarea>
                     </div>

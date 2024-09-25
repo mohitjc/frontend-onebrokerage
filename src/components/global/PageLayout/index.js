@@ -68,7 +68,8 @@ const PageLayout = ({ children }) => {
               </div>
           </div>
           <div className="w-full">
-            {children}</div>
+            {children}
+            </div>
        </div>
 
        </div>

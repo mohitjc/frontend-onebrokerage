@@ -148,3 +148,8 @@ label.profileheddingcls {
   border-right: 1px solid #e5e7eb;
   border-radius: 3px 0 0 3px;
 }
+
+.start, .text-danger ,.invalid-feedback{
+  color: #ee695e;
+  padding-left: 2px;
+}
