@@ -122,13 +122,32 @@ const Login = () => {
           dispatch(login_success(res1?.data?.data));
           const newdata = res1.data?.data;
           toast.success(res1?.data?.message)
-          if(res1?.data?.data?.plan_id)
+          if(res1?.data?.data?.role=="driver")
           {
             history("/dashboard");
-          }else
-          {
-            history("/plan");
           }
+          else if(res1?.data?.data?.plan_id)
+            {
+              history("/dashboard");
+            }else
+            {
+              history("/plan");
+            }
+
+          // if(res1?.data?.data?.addedBy?.role=="carrier" && res1?.data?.data?.addedBy?.plan_id)
+          // {
+          //   history("/dashboard");
+          // }else if(res1?.data?.data?.addedBy?.role=="admin" && !res1?.data?.data?.addedBy?.plan_id)
+          // {
+          //   history("/plan");
+          // }
+          // else if(res1?.data?.data?.plan_id)
+          // {
+          //   history("/dashboard");
+          // }else
+          // {
+          //   history("/plan");
+          // }
         
           // if(newdata?.request_status=="rejected")
           // {

@@ -52,6 +52,10 @@ function App() {
     { url: "/carriers/edit/:id", path: "Carrier/EditCarrier" },
     { url: "/transaction", path: "Transaction" },
     { url: "/transaction/detail/:id", path: "Transaction/Detail" },
+    { url: "/carrierstaff", path: "CarrierStaff" },
+    // { url: "/drivers/edit/:id", path: "Driver/AddEdit" },
+    // { url: "/drivers/add", path: "Driver/AddEdit" },
+    // { url: "/drivers/detail/:id", path: "Driver/View" },
 
 
       //  { url: "/profile/:tab", path: "Settings" },
