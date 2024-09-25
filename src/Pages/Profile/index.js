@@ -696,45 +696,38 @@ const Profile = () => {
 
                           </label>
 
-                          
-                          <div className="phoneInput_cls d-flex pl-2 p-0">
+                          <div className="bg-white border border-gray-200 h-[45px] rounded-lg flex p-0">
+                                
 
-
-                            <PhoneInput
-                              country={'us'}
-                              value={form.telephoneExt}
-                              countryCodeEditable={false}
-                              enableSearch={true}
-                              placeholder=""
-                              onChange={(phone, country) => {
-                                setForm({
-                                  ...form,
-                                  telephoneExt:
-                                    country.dialCode,
-                                });
-                              }}
-                              required
-                            />
-
-                            <input
-                              type="text"
-                              className="pl-2 phph"
-                              placeholder="Telephone No."
-                              value={
-                                (form && form.telephoneNo) || (form && form.mobileNo) ||
-                                ''
-                              }
-                              maxLength={12}
-                              onChange={(e) =>
-                                setForm({
-                                  ...form,
-                                  telephoneNo:
-                                    methodModel.isNumber(e),
-                                })
-                              }
-                              required
-                            />
-                          </div>
+                                <PhoneInput
+                                        country={'us'}
+                                        value={form?.telephoneExt}
+                                        countryCodeEditable={false}
+                                        enableSearch={true}
+                                        className="namephones"
+                                        placeholder=""
+                                        onChange={(phone, country) => {
+                                          setForm({
+                                            ...form,
+                                            telephoneExt: country.telephoneExt,
+                                          });
+                                        }}
+                                      />
+  
+                                      <input
+                                        type="text"
+                                        className="bg-white text-black  phph"
+                                        placeholder="Telephone No."
+                                        value={(form && form.telephoneNo) ||(form && form.mobileNo)  }
+                                        maxLength={12}
+                                        onChange={(e) =>
+                                          setForm({
+                                            ...form,
+                                            telephoneNo: methodModel.isNumber(e),
+                                          })
+                                        }
+                                      />
+                                </div>
                         </div>
                         {/* <div className="">
                                         <label className="label_profile">Role</label>
