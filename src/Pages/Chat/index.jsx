@@ -12,153 +12,162 @@ import { LuSmile } from 'react-icons/lu';
 import { ImAttachment } from "react-icons/im";
 import { IoMdClose } from 'react-icons/io';
 import loader from '../../methods/loader';
+import { useSelector } from 'react-redux';
+import { useRef } from 'react';
+import ApiClient from '../../methods/api/apiClient';
+import environment from '../../environment';
+import socketModel from '../../models/socketModel';
+import methodModel from '../../methods/methods';
 
 
 export default function Chat() {
 
   const [darkMode, setDarkMode] = useState(false);
 
-  // const user=useSelector(state=>state.user)
-  // const currectChat=useRef()
-  // const messages=useRef()
-  // const [chatMessages, setChatMessages] = useState([]);
-  // const [chatRooms, setChatRooms] = useState([]);
-  // const [chatRoomId, setChatRoomId] = useState("");
-  // const [search, setSearch] = useState('');
-  // const [text, setText] = useState('');
-  // const [cloader, setCLoader] = useState('');
-  // const [assignment, setAssignment] = useState();
+  const user=useSelector(state=>state.user)
+  const currectChat=useRef()
+  const messages=useRef()
+  const [chatMessages, setChatMessages] = useState([]);
+  const [chatRooms, setChatRooms] = useState([]);
+  const [chatRoomId, setChatRoomId] = useState("");
+  const [search, setSearch] = useState('');
+  const [text, setText] = useState('');
+  const [cloader, setCLoader] = useState('');
+  const [assignment, setAssignment] = useState();
 
-  // let ar = sessionStorage.getItem("activeRooms");
-  // const activeRooms = useRef(ar ? JSON.parse(ar) : []);
+  let ar = sessionStorage.getItem("activeRooms");
+  const activeRooms = useRef(ar ? JSON.parse(ar) : []);
 
-  // const chatScroll = () => {
-  //   // Scroll to the bottom after sending a message
-  //   var chatBox = document.getElementById("chat-box");
-  //   if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
-  // };
+  const chatScroll = () => {
+    // Scroll to the bottom after sending a message
+    var chatBox = document.getElementById("chat-box");
+    if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+  };
 
-  // const getChatMessages = (id) => {
-  //   // loader(true);
-  //   ApiClient.get("chat/user/message/all", { room_id: id },environment.chat_api).then((res) => {
-  //     if (res.success) {
-  //       let data = res.data.data;
-  //       setChatMessages(data);
-  //       messages.current = data;
-  //       setTimeout(() => {
-  //         chatScroll();
-  //       }, 100);
-  //     }
-  //     // loader(false);
-  //   });
-  // };
-
-
-  // const joinChat=(assignment_id)=>{
-  //   let payload={
-  //     chat_by:user._id,
-  //     chat_with:assignment_id
-  //   }
-  //   loader(true)
-  //   ApiClient.post('chat/user/join-group',payload,{},environment.chat_api).then(res=>{
-  //     loader(false)
-  //     if(res.success){
-  //       let room_id=res.data.room_id
-  //       setChatRoomId(room_id)
-  //       currectChat.current=room_id
-  //     }
-  //   })
-  // }
-
-  // const assignmentDetail=(id)=>{
-  //   ApiClient.get('assignment/detail',{id:id}).then(res=>{
-  //     if(res.success){
-  //       setAssignment(res.data)
-  //     }
-  //   })
-  // }
+  const getChatMessages = (id) => {
+    // loader(true);
+    ApiClient.get("chat/user/message/all", { room_id: id },environment.chat_api).then((res) => {
+      if (res.success) {
+        let data = res.data.data;
+        setChatMessages(data);
+        messages.current = data;
+        setTimeout(() => {
+          chatScroll();
+        }, 100);
+      }
+      // loader(false);
+    });
+  };
 
 
-  // useEffect(()=>{
-  //   socketModel.on("receive-message", (data) => {
-  //     console.log("data", data);
-  //     if (currectChat.current == data.data.room_id) {
-  //       messages.current.push({ ...data.data });
+  const joinChat=(assignment_id)=>{
+    let payload={
+      chat_by:user._id,
+      chat_with:assignment_id
+    }
+    loader(true)
+    ApiClient.post('chat/user/join-group',payload,{},environment.chat_api).then(res=>{
+      loader(false)
+      if(res.success){
+        let room_id=res.data.room_id
+        setChatRoomId(room_id)
+        currectChat.current=room_id
+      }
+    })
+  }
 
-  //       const uniqueMessages = Array.from(
-  //         new Set(messages.current.map((message) => message._id))
-  //       ).map((id) => {
-  //         return messages.current.find((message) => message._id === id);
-  //       });
+  const assignmentDetail=(id)=>{
+    ApiClient.get('assignment/detail',{id:id}).then(res=>{
+      if(res.success){
+        setAssignment(res.data)
+      }
+    })
+  }
 
-  //       console.log("uniqueMessages", uniqueMessages);
-  //       setChatMessages([...uniqueMessages]);
-  //       setTimeout(() => {
-  //         chatScroll();
-  //       }, 100);
-  //     }
-  //   });
-  //   let assignment_id = methodModel.getPrams('assignment_id')
-  //   if (assignment_id) {
-  //     assignmentDetail(assignment_id)
-  //     joinChat(assignment_id)
-  //   }
+
+  useEffect(()=>{
+    socketModel.on("receive-message", (data) => {
+      console.log("data", data);
+      if (currectChat.current == data.data.room_id) {
+        messages.current.push({ ...data.data });
+
+        const uniqueMessages = Array.from(
+          new Set(messages.current.map((message) => message._id))
+        ).map((id) => {
+          return messages.current.find((message) => message._id === id);
+        });
+
+        console.log("uniqueMessages", uniqueMessages);
+        setChatMessages([...uniqueMessages]);
+        setTimeout(() => {
+          chatScroll();
+        }, 100);
+      }
+    });
+    let assignment_id = methodModel.getPrams('assignment_id')
+    if (assignment_id) {
+      assignmentDetail(assignment_id)
+      joinChat(assignment_id)
+    }
     
-  // },[])
+  },[])
 
-  // useEffect(() => {
-  //   if (chatRoomId != "") {
-  //     let value = {
-  //       room_id: chatRoomId,
-  //       user_id: user?._id,
-  //     };
-  //     if (!activeRooms.current.includes(chatRoomId)) {
-  //       console.log("activeRooms inner", activeRooms);
-  //       activeRooms.current.push(chatRoomId);
-  //       sessionStorage.setItem(
-  //         "activeRooms",
-  //         JSON.stringify(activeRooms.current)
-  //       );
-  //       socketModel.emit("join-room", value);
-  //     }
-  //     // socketModel.emit("unread-count", value);
-  //     // socketModel.emit("read-all-message", value);
 
-  //     getChatMessages(chatRoomId);
-  //   }
-  // }, [chatRoomId]);
 
-  // const handleSubmit=()=>{
-  //   if(!text) return 
-  //   let value={
-  //     room_id:chatRoomId,
-  //     type:'TEXT',
-  //     content:text
-  //   }
-  //   console.log("value",value)
-  //   socketModel.emit("send-message", value);
-  //   setText('')
-  // }
+  useEffect(() => {
+    if (chatRoomId != "") {
+      let value = {
+        room_id: chatRoomId,
+        user_id: user?._id,
+      };
+      if (!activeRooms.current.includes(chatRoomId)) {
+        console.log("activeRooms inner", activeRooms);
+        activeRooms.current.push(chatRoomId);
+        sessionStorage.setItem(
+          "activeRooms",
+          JSON.stringify(activeRooms.current)
+        );
+        socketModel.emit("join-room", value);
+      }
+      // socketModel.emit("unread-count", value);
+      // socketModel.emit("read-all-message", value);
 
-  // const uploadImage=(e)=>{
-  //   let files=e.target.files
-  //   console.log("files",files)
-  //   loader(true)
-  //   ApiClient.multiImageUpload('user/uploadImage',files).then(res=>{
-  //      e.target.value=''
-  //      loader(false)
-  //     if(res.success){
-  //       let value={
-  //         room_id:chatRoomId,
-  //         type:'IMAGE',
-  //         content:res.image
-  //       }
-  //       console.log("value",value)
-  //       socketModel.emit("send-message", value);
-  //     }
-  //   })
+      getChatMessages(chatRoomId);
+    }
+  }, [chatRoomId]);
+  
+
+  const handleSubmit=()=>{
+    if(!text) return 
+    let value={
+      room_id:chatRoomId,
+      type:'TEXT',
+      content:text
+    }
+    console.log("value",value)
+    socketModel.emit("send-message", value);
+    setText('')
+  }
+
+  const uploadImage=(e)=>{
+    let files=e.target.files
+    console.log("files",files)
+    loader(true)
+    ApiClient.multiImageUpload('user/uploadImage',files).then(res=>{
+       e.target.value=''
+       loader(false)
+      if(res.success){
+        let value={
+          room_id:chatRoomId,
+          type:'IMAGE',
+          content:res.image
+        }
+        console.log("value",value)
+        socketModel.emit("send-message", value);
+      }
+    })
    
-  // }
+  }
 
 
 

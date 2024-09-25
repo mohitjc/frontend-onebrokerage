@@ -73,7 +73,7 @@ const PageLayout = ({ children }) => {
 
        </div>
 
-      <Footers/>
+      {/* <Footers/> */}
       </div>
     </>
   );
