@@ -214,7 +214,7 @@ export default function Step2() {
 
                               <PhoneInput
                                       country={'us'}
-                                      value={form?.dialCode}
+                                      value={form?.telephoneExt}
                                       countryCodeEditable={false}
                                       enableSearch={true}
                                       className="namephones"
@@ -222,7 +222,7 @@ export default function Step2() {
                                       onChange={(phone, country) => {
                                         setForm({
                                           ...form,
-                                          dialCode: country.dialCode,
+                                          telephoneExt: country.telephoneExt,
                                         });
                                       }}
                                     />
@@ -230,13 +230,13 @@ export default function Step2() {
                                     <input
                                       type="text"
                                       className="bg-white text-black phph"
-                                      placeholder="Mobile No."
-                                      value={(form && form.mobileNo) || ''}
+                                      placeholder="Telephone No."
+                                      value={(form && form.telephoneNo) || ''}
                                       maxLength={12}
                                       onChange={(e) =>
                                         setForm({
                                           ...form,
-                                          mobileNo: methodModel.isNumber(e),
+                                          telephoneNo: methodModel.isNumber(e),
                                         })
                                       }
                                     />

@@ -9,7 +9,7 @@ import loader from "../../methods/loader";
 import { Tooltip } from "antd";
 import questionsKeys from "../Profile/questions";
 import { useSelector } from "react-redux";
-
+import methodModel from "../../methods/methods";
 
 const View = () => {
     const user = useSelector((state) => state.user);
@@ -68,7 +68,7 @@ const View = () => {
                                         <p className="text-[14px] text-black font-medium ">
                                             {" "}
                                             {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
-                                            {data && data.fullName}
+                                            {data && methodModel.capitalizeFirstLetter(data.fullName)}
                                         </p>
                                     </div>
                                     <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
@@ -76,7 +76,7 @@ const View = () => {
                                         <p className="text-[14px] text-black font-medium ">
                                             {" "}
                                             {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
-                                            {data && data.company_name}
+                                            {data && methodModel.capitalizeFirstLetter(data.company_name)}
                                         </p>
                                     </div>
                                     {data && data?.fax_number ?<div className="col-span-12 lg:col-span-6 flex flex-col mb-4">

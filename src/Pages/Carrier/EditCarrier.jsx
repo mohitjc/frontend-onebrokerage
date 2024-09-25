@@ -380,7 +380,7 @@ const EditCarrier = () => {
                                       <input
                                         type="text"
                                         className="bg-white text-black  phph"
-                                        placeholder="Mobile No."
+                                        placeholder="Telephone No."
                                         value={(form && form.telephoneNo) || ''}
                                         maxLength={12}
                                         onChange={(e) =>

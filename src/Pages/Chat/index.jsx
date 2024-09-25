@@ -104,6 +104,7 @@ export default function Chat() {
         }, 100);
       }
     });
+    
     let assignment_id = methodModel.getPrams('assignment_id')
     if (assignment_id) {
       assignmentDetail(assignment_id)
@@ -135,7 +136,7 @@ export default function Chat() {
       getChatMessages(chatRoomId);
     }
   }, [chatRoomId]);
-  
+
 
   const handleSubmit=()=>{
     if(!text) return 
