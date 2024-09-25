@@ -8,17 +8,10 @@ const Footers = () => {
   return (
     <>
         <footer className="bg-[#F4F7FF]">
-        <div className='bg-primary h-20'>  </div>
+       
         <div className="container mx-auto">
-          <div className=' px-4 lg:px-8 py-10 lg:py-20'>
-            <div className="  text-center max-w-4xl mx-auto">
-              <h6 className=" text-[24px] lg:text-[40px] leading-[30px] lg:leading-[50px] xl:text-[48px] xl:leading-[60px]  ">Ready to grow your business?  <span className="font-bold text-[24px] lg:text-[40px] leading-[30px] lg:leading-[50px] xl:text-[48px] xl:leading-[60px] ">Start with us, become faster every second</span></h6>
-              <div className="mt-6">
-                <button className="px-6 py-4 bg-primary text-white rounded-lg">
-                  Start Chatting Now
-                </button>
-              </div>
-            </div>
+          <div className=' px-4  py-4 '>
+            
 
 
             <div className="flex justify-between flex-wrap border-b border-gray-200 pb-4 mt-10 xl:mt-16">

@@ -356,6 +356,10 @@ const Profile = () => {
           </div> : changepassword ?
             <div className="p-6 shadow-box overflow-hidden rounded-lg bg-white  border sm:mt-3 md:mt-8 mt-8">
               <form className="pprofile" onSubmit={handleSubmit}>
+
+                <div className="flex flex-col gap-4">
+
+                
                 <div className="">
 
                   <label className="mb-2">
@@ -367,7 +371,7 @@ const Profile = () => {
                       type={
                         eyes.currentPassword ? 'text' : 'password'
                       }
-                      className="pl-2 relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden focus-visible:outline-0 px-2 focus:ring-0 border-0 focus:ring-0 border-0"
+                      className="bg-white w-full rounded-lg h-10 flex items-center gap-2  border border-[#00000036] px-3"
                       value={form.currentPassword}
                       maxLength="20"
                       onChange={(e) =>
@@ -410,7 +414,7 @@ const Profile = () => {
                   <div className="inputWrapper">
                     <input
                       type={eyes.password ? 'text' : 'password'}
-                      className="pl-2 relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden focus-visible:outline-0 px-2 focus:ring-0 border-0 focus:ring-0 border-0"
+                      className="bg-white w-full rounded-lg h-10 flex items-center gap-2  border border-[#00000036] px-3"
                       value={form.newPassword}
                       maxLength="20"
                       onChange={(e) =>
@@ -456,7 +460,7 @@ const Profile = () => {
                       type={
                         eyes.confirmPassword ? 'text' : 'password'
                       }
-                      className="pl-2 relative shadow-box bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden focus-visible:outline-0 px-2 focus:ring-0 border-0 focus:ring-0 border-0"
+                      className="bg-white w-full rounded-lg h-10 flex items-center gap-2  border border-[#00000036] px-3"
                       value={form.confirmPassword}
                       maxLength="20"
                       onChange={(e) =>
@@ -499,7 +503,7 @@ const Profile = () => {
                     <></>
                   )}
                 </div>
-
+                </div>
                 <div className="flex gap-2 justify-end mt-3">
 
                   <Link

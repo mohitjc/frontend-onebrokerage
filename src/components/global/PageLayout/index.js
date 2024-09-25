@@ -68,7 +68,8 @@ const PageLayout = ({ children }) => {
               </div>
           </div>
           <div className="col-span-12 lg:col-span-9 2xl:col-span-10">
-            {children}</div>
+            {children}
+            </div>
        </div>
 
        </div>

@@ -11,7 +11,7 @@ const AuthLayout = ({ children }: any) => {
                   <Link to="/" className="  mb-10 block mx-auto text-center">
                       <img
                         src="../../../assets/img/logo-white.png"
-                        className=" h-12 xl:h-24 object-contain  mx-auto"
+                        className=" h-12 xl:h-20 object-contain  mx-auto"
                         alt="logo"
                       />
                     </Link>
