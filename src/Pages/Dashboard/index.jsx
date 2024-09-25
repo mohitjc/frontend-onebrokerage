@@ -10,7 +10,7 @@ import loader from "../../methods/loader";
 import LineChart from "../../components/common/LineChart";
 import { useSelector } from "react-redux";
 import PageLayout from "../../components/global/PageLayout";
-
+import methodModel from "../../methods/methods";
 const Dashboard = () => {
   const user=useSelector(state=>state.user)
   const [data, setData] = useState();
@@ -124,7 +124,7 @@ const Dashboard = () => {
       <PageLayout>
         <h4 className="text-2xl font-bold mb-3 flex items-center gap-2">
           <IoHandRightOutline className="text-3xl slow-shake text-[#494f9f]" />
-          <span className="">Hi,</span> {user?.fullName}
+          <span className="">Hi,</span> {methodModel.capitalizeFirstLetter(user?.fullName)}
         </h4>
 
         <div className=" w-full bg-white rounded-lg mt-6 ">

@@ -142,6 +142,7 @@ const Profile = () => {
     ApiClient.postFormData('upload/image?modelName=users', { file: file }).then(
       (res) => {
         if (res.success) {
+          
           let image = res?.data?.fullpath;
           setForm({ ...form, image: image, baseImg: '' });
         } else {

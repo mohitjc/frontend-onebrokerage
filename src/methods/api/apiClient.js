@@ -13,7 +13,7 @@ import methodModel from "../methods";
 import { BlockBlobClient, AnonymousCredential } from "@azure/storage-blob";
 
 var config = {
-  headers: { "Content-Type": "multipart/form-data" },
+  headers: { "Content-Type": "application/json" },
 };
 
 var baseUrl = environment?.api;
@@ -34,6 +34,7 @@ const handleError = (err, hideError) => {
   }
   if (!hideError) toast.error(message);
 };
+
 
 class ApiClient {
   static post(url1, payload,params={},base = "", hideError = false) {
@@ -149,7 +150,6 @@ class ApiClient {
   static postFormData(url, params) {
     let configupdate = {
       headers: { "Content-Type": "multipart/form-data" },
-      params: params,
     };
     url = baseUrl + url;
     setAuthorizationToken(axios);
@@ -161,7 +161,7 @@ class ApiClient {
       });
 
       axios
-        .post(url, body, config)
+        .post(url, body, configupdate)
 
         .then(function (response) {
           fulfill(response && response.data);
