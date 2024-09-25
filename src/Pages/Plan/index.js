@@ -66,7 +66,7 @@ const Plan = () => {
 
   const payment=(p,planamount)=>
   {
-   setLoader(true);
+   loader(true);
    if(user?.loggedIn)
    {
     let payload={
@@ -76,13 +76,13 @@ const Plan = () => {
      }
   
       ApiClient.post('session/create',payload).then((res) => {
-        console.log(res,"res")
+        
           if (res.success) {
               window.location.assign(res.data.url)
             }else{
               toast.error(res.message)
             }
-        setLoader(false);
+        loader(false);
       });
    }else{
     history("/login")

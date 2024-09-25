@@ -254,7 +254,7 @@ export default function AddressStep() {
                             <div className="">
                              
                               <input
-                                type="number"
+                                type="text"
                                 pattern="^[a-zA-Z0-9]+$"
                                 onKeyPress={(e) => {
                                   var regex = new RegExp("^[a-zA-Z0-9]+$");
