@@ -79,20 +79,15 @@ const View = () => {
                                             {data && data.company_name}
                                         </p>
                                     </div>
-                                    <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
+                                    {data && data?.fax_number ?<div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                                         <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Fax Number:</label>
                                         <p className="text-[14px] text-black font-medium ">
                                             {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
                                             {data && data?.fax_number}
                                         </p>
-                                    </div>
-                                    <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Fax Number:</label>
-                                        <p className="text-[14px] text-black font-medium ">
-                                            {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
-                                            {data && data?.fax_number}
-                                        </p>
-                                    </div>
+                                    </div>:<></>}
+                                    
+                                 
                                     <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                                         <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Tax Number:</label>
                                         <p className="text-[14px] text-black font-medium ">
@@ -108,7 +103,7 @@ const View = () => {
                                                 return (
                                                     <>
                                                         <span className="">
-                                                            {itm == "dry_van" ? "dry van" : itm}
+                                                            {itm == "dry_van" ? "dry van" : itm} {" "}
                                                         </span>
                                                     </>
                                                 );

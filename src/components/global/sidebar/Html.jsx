@@ -54,14 +54,14 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
   };
   
   const gallaryData = () => {
-    loader(true);
+    // loader(true);
     ApiClient.get(`user/detail`, { id: user.id }).then((res) => {
       if (res.success) {
         const data = res.data;
         const newdata = { ...user, ...data };
         dispatch(login_success(newdata));
       }
-      loader(false);
+      // loader(false);
     });
   };
   useEffect(() => {

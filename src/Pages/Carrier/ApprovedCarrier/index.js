@@ -98,7 +98,6 @@ const ApprovedCarrier = (p) => {
     setLoader(true);
     let filter = { ...filters, ...p, addedBy: user?.id };
     let url =shared?.listApi;
-
     ApiClient.get(url, filter).then((res) => {
       if (res.success) {
         const data = res?.data?.data;
