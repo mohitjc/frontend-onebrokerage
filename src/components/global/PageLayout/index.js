@@ -62,12 +62,12 @@ const PageLayout = ({ children }) => {
        <Header/>
        <div component="page-layout" className="xl:container mx-auto">
        <div className="grid grid-cols-12 gap-4 xl:gap-8 px-6 py-4 lg:py-16 lg:px-16">
-          <div className="sidebars_data shrink-0 col-span-12 lg:col-span-3 2xl:col-span-2 border border-gray-200 rounded-xl shadow-md">
+          <div className="sidebars_data shrink-0 col-span-12 md:col-span-4 lg:col-span-3 2xl:col-span-3 border border-gray-200 rounded-xl shadow-md">
               <div className="w-full">
                   <Sidebar  />
               </div>
           </div>
-          <div className="col-span-12 lg:col-span-9 2xl:col-span-10">
+          <div className="col-span-12 md:col-span-8 lg:col-span-9 2xl:col-span-9">
             {children}
             </div>
        </div>
