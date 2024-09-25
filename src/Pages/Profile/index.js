@@ -14,6 +14,7 @@ import PhoneInput from "react-phone-input-2";
 import { useNavigate } from "react-router-dom";
 import { login_success, logout } from "../actions/user";
 import { toast } from "react-toastify";
+import { IoCameraSharp } from "react-icons/io5";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -227,7 +228,7 @@ const Profile = () => {
 
             </div>
             <div
-              className="bg-gray-200 px-4 py-2 text-black rounded-xl"
+              className="bg-gray-200 px-4 cursor-pointer py-2 text-black rounded-xl"
               onClick={() => {
                 setChangePassword(true);
                 SetEdit(false)
@@ -247,107 +248,115 @@ const Profile = () => {
 
         {!edit && !changepassword ?
           <div className=" sm:mt-3 md:mt-8 mt-8">
-            <div className="grid items-center grid-cols-12 gap-4 mb-5">
-              <div className="col-span-12  p-6 shadow-box overflow-hidden rounded-lg bg-white  border inner_part">
-                <div className="flex md:items-center items-start gap-4 shrink-0 flex-col md:flex-row">
+            <div className="grid  grid-cols-12 gap-4 mb-5 p-6 shadow-box overflow-hidden rounded-lg bg-white  border ">
+              <div className="col-span-12 lg:col-span-3 xl:col-span-2 inner_part">
+                <div className="flex md:items-center items-start gap-4  flex-col md:flex-row">
                   <div className="">
                     <img
                       src={methodModel.userImg(data && data.image)}
                       className="h-36 w-36 rounded-full object-cover mx-auto"
                     />
                   </div>
+                
+                </div>
+              </div>
+
+
+              <div className="col-span-12 lg:col-span-9 xl:col-span-10">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                   
+
                   <div className="flex flex-col gap-y-4 md:ml-4 ml-0 lg:border-l border-dashed border-gray-400 md:pl-5 pl-0">
                     <div className="">
-                      <label className="text-black">Name</label>
-                      <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
+                      <label className="text-gray-500 font-normal ">Name</label>
+                      <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
                         {" "}
                         {/* <LiaUserSolid className="text-xl" /> */}
                         {data && methodModel.capitalizeFirstLetter(data.fullName)}
                       </p>
                     </div>
                     <div className="">
-                      <label className="text-black">Email</label>
-                      <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
+                      <label className="text-gray-500 font-normal ">Email</label>
+                      <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
                         {/* <MdOutlineEmail className="text-xl" /> */}
                         {data && data.email}
                       </p>
                     </div>
                     <div className="">
-                      <label className="text-black">Address</label>
-                      <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
+                      <label className="text-gray-500 font-normal ">Address</label>
+                      <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
                         {/* <MdOutlineEmail className="text-xl" /> */}
                         {data && data.address}
                       </p>
                     </div>
 
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="grid items-center grid-cols-12 gap-4 mb-5">
-              <div className="col-span-12  p-6 shadow-box overflow-hidden rounded-lg bg-white  border inner_part">
-                <div className="flex md:items-center items-start gap-4 shrink-0 flex-col md:flex-row">
 
-                  <div className="flex flex-col gap-y-4 md:ml-4 ml-0 lg:border-l border-dashed border-gray-400 md:pl-5 pl-0">
-                    <div className="">
-                      <label className="text-black">Fax Number</label>
-                      <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
-                        {" "}
-                        {/* <LiaUserSolid className="text-xl" /> */}
-                        {data && data?.fax_number || "--"}
-                      </p>
-                    </div>
-                    <div className="">
-                      <label className="text-black">Tax Number</label>
-                      <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
-                        {/* <MdOutlineEmail className="text-xl" /> */}
-                        {data && data.tax_number}
-                      </p>
-                    </div>
-                    <div className="">
-                      <label className="text-black">Total Truck</label>
-                      <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
-                        {/* <MdOutlineEmail className="text-xl" /> */}
-                        {data && data.total_trucks}
-                      </p>
-                    </div>
-                    <div className="">
-                      <label className="text-black">Team Trucks</label>
-                      <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
-                        {/* <MdOutlineEmail className="text-xl" /> */}
-                        {data && data.team_truck}
-                      </p>
-                    </div>
-                    <div className="">
-                      <label className="text-black">Solo Trucks</label>
-                      <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
-                        {/* <MdOutlineEmail className="text-xl" /> */}
-                        {data && data.solo_truck}
-                      </p>
-                    </div>
-                    <div className="">
-                      <label className="text-black">Trailer Type</label>
-                      <p className="text-sm text-gray-700 flex items-center gap-2 text-lg">
-                        {data?.trailer_type?.map(
-                          (itm) => {
-                            return (
-                              <p className="mb-0 me-2">
-                                {itm == "dry_van" ? "dry van" : itm}{" "}
-                              </p>
-                            );
-                          }
-                        )}
-                      </p>
-                    </div>
+                  <div className="">
 
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:ml-4 ml-0 lg:border-l border-dashed border-gray-400 md:pl-5 pl-0">
+                        <div className="">
+                          <label className="text-gray-500 font-normal ">Fax Number</label>
+                          <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
+                            {" "}
+                            {/* <LiaUserSolid className="text-xl" /> */}
+                            {data && data?.fax_number || "--"}
+                          </p>
+                        </div>
+                        <div className="">
+                          <label className="text-gray-500 font-normal ">Tax Number</label>
+                          <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
+                            {/* <MdOutlineEmail className="text-xl" /> */}
+                            {data && data.tax_number}
+                          </p>
+                        </div>
+                        <div className="">
+                          <label className="text-gray-500 font-normal ">Total Truck</label>
+                          <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
+                            {/* <MdOutlineEmail className="text-xl" /> */}
+                            {data && data.total_trucks}
+                          </p>
+                        </div>
+                        <div className="">
+                          <label className="text-gray-500 font-normal ">Team Trucks</label>
+                          <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
+                            {/* <MdOutlineEmail className="text-xl" /> */}
+                            {data && data.team_truck}
+                          </p>
+                        </div>
+                        <div className="">
+                          <label className="text-gray-500 font-normal ">Solo Trucks</label>
+                          <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
+                            {/* <MdOutlineEmail className="text-xl" /> */}
+                            {data && data.solo_truck}
+                          </p>
+                        </div>
+                        <div className="">
+                          <label className="text-gray-500 font-normal ">Trailer Type</label>
+                          <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
+                            {data?.trailer_type?.map(
+                              (itm) => {
+                                return (
+                                  <p className="mb-0 me-2">
+                                    {itm == "dry_van" ? "dry van" : itm}{" "}
+                                  </p>
+                                );
+                              }
+                            )}
+                          </p>
+                        </div>
+
+                      </div>
                   </div>
-                </div>
+                  </div>
               </div>
+            
             </div>
+         
           </div> : changepassword ?
             <div className="p-6 shadow-box overflow-hidden rounded-lg bg-white  border sm:mt-3 md:mt-8 mt-8">
               <form className="pprofile" onSubmit={handleSubmit}>
-                <div className="col-md-12 mb-3">
+                <div className="">
 
                   <label className="mb-2">
                     Current Password
@@ -393,7 +402,7 @@ const Profile = () => {
                   )}
                 </div>
 
-                <div className="col-md-12 mb-3">
+                <div className="">
                   <label className="mb-2">
                     New Password<span className="start">*</span>
                   </label>
@@ -436,7 +445,7 @@ const Profile = () => {
                   )}
                 </div>
 
-                <div className="col-md-12 mb-3">
+                <div className="">
                   <label className="mb-2">
                     Confirm Password
                     <span className="start">*</span>
@@ -524,16 +533,16 @@ const Profile = () => {
               >
                 <div className="row">
                   <div className="col-md-12">
-                    <div className="profile_img_side">
+                    <div className="flex flex-col items-center justify-center">
                       <img
                         src={methodModel.userImg(
                           form && form.image
                         )}
-                        className="profileImage"
+                        className="h-32 w-32 rounded-full mb-4 object-contain "
                       />
 
                       <div>
-                        <label className="new_images edit">
+                        <label className="new_images bg-primary bg-white px-6 py-2 rounded-lg inline-flex items-center gap-2 text-white edit">
                           <input
                             id="bannerImage"
                             type="file"
@@ -547,13 +556,16 @@ const Profile = () => {
                             }}
                           />
                           <span className="uploader">
-                            <i className="material-icons">
-                              camera_alt
-                            </i>
+                          <IoCameraSharp className="text-2xl" />
+
                           </span>
+                          Change Profile
                         </label>
                       </div>
-                      <div className="changes_image">
+                     
+                    </div>
+
+                    <div className="changes_image">
                         <div>
                           {form.image ? (
                             <label
@@ -570,12 +582,12 @@ const Profile = () => {
                           )}
                         </div>
                       </div>
-                    </div>
                   </div>
                   <div className="col-md-12 mt-4">
                     {!nextForm && (
-                      <div className="row">
-                        <div className="col-md-6 mb-3">
+                      <>
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div className="">
                           <label className="label_profile">
                             Name
                             <span className="text-danger">
@@ -607,7 +619,7 @@ const Profile = () => {
                           </div>
                         </div>
 
-                        <div className="col-md-6 mb-3">
+                        <div className="">
                           <label className="label_profile">
                             Email
                             <span className="text-danger">
@@ -631,7 +643,7 @@ const Profile = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="col-md-12 mb-3">
+                        <div className="">
                           <label className="label_profile">
                             Address
                             <span className="text-danger">
@@ -643,12 +655,14 @@ const Profile = () => {
                               <div className="input-icon">
                                 <i className="fas fa-address-book"></i>
                               </div>
-                              <div className='w-100'>
+                              <div className='w-full h-full flex items-center'>
                                 <GooglePlacesAutocomplete
                                   value={form.address}
                                   result={addressResult}
                                   id="address"
                                   placeholder=""
+                                  className='  w-full  relative break-all  text-sm placeholder:text-gray-500 h-full flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500'
+
                                 />
                               </div>
                             </div>
@@ -664,7 +678,7 @@ const Profile = () => {
 
                           </div>
                         </div>
-                        {/* <div className="col-md-6 mb-3">
+                        {/* <div className="">
                                         <label className="label_profile">Identification Number</label>
                                         <div>
                                           <input
@@ -676,12 +690,16 @@ const Profile = () => {
                                           />
                                         </div>
                                       </div> */}
-                        <div className="col-md-6 mb-3">
+                        <div className="">
                           <label className="label_profile">
                             Telephone{' '}
 
                           </label>
+
+                          
                           <div className="phoneInput_cls d-flex pl-2 p-0">
+
+
                             <PhoneInput
                               country={'us'}
                               value={form.telephoneExt}
@@ -718,7 +736,7 @@ const Profile = () => {
                             />
                           </div>
                         </div>
-                        {/* <div className="col-md-6 mb-3">
+                        {/* <div className="">
                                         <label className="label_profile">Role</label>
                                         <div>
                                           <input
@@ -733,7 +751,7 @@ const Profile = () => {
                                         </div>
                                       </div> */}
 
-                        <div className="col-md-6 mb-3">
+                        <div className="">
                           <label className="label_profile">
                             Fax
                           </label>
@@ -772,7 +790,7 @@ const Profile = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-md-6 mb-3">
+                        <div className="">
                           <label className="label_profile">
                             Tax ID
                           </label>
@@ -815,21 +833,23 @@ const Profile = () => {
                           </div>
                         </div>
 
-                        <div className="col-md-12 d-flex justify-content-end gap-2">
-                          <a
-                            onClick={() => SetEdit(false)}
-                            className=" btn-save width-set"
-                          >
-                            Back
-                          </a>
-                          <a
-                            onClick={() => SetNextForm(true)}
-                            className=" btn dark-btn width-set"
-                          >
-                            Next
-                          </a>
-                        </div>
+                      
                       </div>
+                        <div className="flex justify-end gap-2">
+                        <a
+                          onClick={() => SetEdit(false)}
+                          className=" bg-gray-200 px-4 py-2 text-black rounded-lg mt-4"
+                        >
+                          Back
+                        </a>
+                        <a
+                          onClick={() => SetNextForm(true)}
+                          className=" bg-primary px-4 py-2 text-white rounded-lg mt-4"
+                        >
+                          Next
+                        </a>
+                      </div>
+                      </>
                     )}
                     {nextForm && (
                       <>
@@ -936,7 +956,7 @@ const Profile = () => {
                             </div>
                           </div>
 
-                          <div className="col-md-12 mb-3">
+                          <div className="">
                             <label className="form-label ml-2">
                               Trailer Type
                               <span className="text-danger">
@@ -965,7 +985,7 @@ const Profile = () => {
                                           'dry_van'
                                         );
                                       } else {
-                                        <div className="col-md-12 mb-3">
+                                        <div className="">
                                           <label className="form-label ml-2">
                                             Trailer Type
                                             <span className="text-danger">
