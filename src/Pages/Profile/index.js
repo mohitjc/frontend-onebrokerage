@@ -494,12 +494,14 @@ const Profile = () => {
                 <div className="flex gap-2 justify-end mt-3">
 
                   <Link
-                    onClick={() => SetEdit(false)}
+                    onClick={() => {
+                      SetEdit(false)
+                      setChangePassword(false)
+                    }}
                     className="bg-gray-200 px-4 py-2 text-black rounded-lg mt-4"
                   >
                     Back
                   </Link>
-
 
                   <button
                     type="submit"
