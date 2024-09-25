@@ -287,7 +287,7 @@ export default function Step3() {
 
                       <input
                         min={0}
-                        className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden  hover:ring-orange-500 focus:border-orange-500"
+                        className="shadow-box border px-2 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden  hover:ring-orange-500 focus:border-orange-500"
                         type="number"
                         required
                         pattern="\d+"
@@ -300,7 +300,7 @@ export default function Step3() {
                             solo_truck: e.target.value,
                           });
                         }}
-                        placeholder="  Solo Truck"
+                        placeholder="Solo Truck"
                       //   onBlur={handleBlur}
                       />
                     </div>
@@ -308,7 +308,7 @@ export default function Step3() {
 
                       <input
                         min={0}
-                        className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden  hover:ring-orange-500 focus:border-orange-500"
+                        className="shadow-box border px-2 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden  hover:ring-orange-500 focus:border-orange-500"
                         type="number"
                         required
                         value={form?.team_truck}
@@ -320,7 +320,7 @@ export default function Step3() {
                             team_truck: e.target.value,
                           });
                         }}
-                        placeholder="  Team Truck"
+                        placeholder="Team Truck"
                       //   onBlur={handleBlur}
                       />
                     </div>
