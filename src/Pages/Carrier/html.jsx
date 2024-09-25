@@ -16,6 +16,8 @@ import methodModel from '../../methods/methods';
 import SelectDropdown from '../../components/common/SelectDropdown';
 import statusModel from '../../models/status.model';
 import { IoIosRefresh } from 'react-icons/io';
+import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { Link } from 'react-router-dom';
 
 const Html = ({
   view,
@@ -28,6 +30,7 @@ const Html = ({
   sorting,
   count,
   ChangeStatus,
+  ChangeRequestStatus,
   ChangeFilter,
   deleteLoad,
   reset,
@@ -39,8 +42,6 @@ const Html = ({
   openModal,
   statusChange,
   pageChange,
-
-  
   filters,
   ChangeDocumentStatus,
   tableCols,
@@ -50,28 +51,28 @@ const Html = ({
   getData,
   data,
 
-  
+
   total = { total },
 }) => {
   const Navigate = useNavigate();
   const [Min_rate, setMin_rate] = useState('');
   const [Max_rate, setMax_rate] = useState('');
 
-  
 
-//   useEffect(() => {
-//     loader(true);
-//     ApiClient.get("active-plan").then((res) => {   
-//       if (res.success) {
-//         setActivePlan(res.data);
-//         if (!res.data.id) {
-//             Navigate("/plans");
-//         }
-//       }
-//       loader(false);
-//     });
 
-//   }, []);
+  //   useEffect(() => {
+  //     loader(true);
+  //     ApiClient.get("active-plan").then((res) => {   
+  //       if (res.success) {
+  //         setActivePlan(res.data);
+  //         if (!res.data.id) {
+  //             Navigate("/plans");
+  //         }
+  //       }
+  //       loader(false);
+  //     });
+
+  //   }, []);
 
 
 
@@ -82,7 +83,7 @@ const Html = ({
 
   const Permission = JSON.parse(localStorage.getItem('permission'));
 
-  
+
   let ListingData = [];
   if (user?.role == 'staff') {
     ListingData = data?.filter((itm) => itm?.id != user?.id);
@@ -90,7 +91,7 @@ const Html = ({
     ListingData = data;
   }
 
-  
+
   const columns = [
     {
       key: "fullName",
@@ -99,12 +100,12 @@ const Html = ({
       render: (row) => {
         return <span className="capitalize">{row?.fullName}</span>;
       },
-    
+
     },
     {
       key: "email",
       name: "Email",
-    //   sort: true,
+      //   sort: true,
       render: (row) => {
         return <span className="">{row?.email}</span>;
       },
@@ -114,20 +115,20 @@ const Html = ({
     {
       key: "createdAt",
       name: "Date Created",
-    //   sort: true,
+      //   sort: true,
       render: (row) => {
         return <span className="">{moment(row?.createdAt).format("DD-MM-YYYY")}</span>
       },
     },
 
     {
-        key: "request_status",
-        name: "Request Status",
-        // sort: true,
-        render: (row) => {
-          return <span className={`${row?.request_status}`}>{methodModel.capitalizeFirstLetter(row?.request_status)}</span>
-        },
+      key: "request_status",
+      name: "Request Status",
+      // sort: true,
+      render: (row) => {
+        return <span className={`${row?.request_status}`}>{methodModel.capitalizeFirstLetter(row?.request_status)}</span>
       },
+    },
 
     {
       key: "status",
@@ -138,11 +139,10 @@ const Html = ({
             <div className="w-32" onClick={() => statusChange(row)}>
               <span
                 className={`bg-[#494f9f] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-                          ${
-                            row.status == "deactive"
-                              ? " bg-gray-200 text-black"
-                              : "bg-[#494f9f] text-white"
-                          }`}
+                          ${row.status == "deactive"
+                    ? " bg-gray-200 text-black"
+                    : "bg-[#494f9f] text-white"
+                  }`}
               >
                 {row.status == "deactive" ? "inactive" : "active"}
               </span>
@@ -159,51 +159,51 @@ const Html = ({
           <>
             <div className="flex items-center justify-start gap-1.5">
               {/* {isAllow(`read${shared.check}`) ? ( */}
-                <Tooltip placement="top" title="View">
-                  <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => view(itm.id)}
-                  >
-                    <PiEyeLight />
-                  </a>
-                </Tooltip>
+              <Tooltip placement="top" title="View">
+                <a
+                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                  onClick={(e) => view(itm.id)}
+                >
+                  <PiEyeLight />
+                </a>
+              </Tooltip>
               {/* ) : (
                 <></>
               )} */}
               {/* {isAllow(`edit${shared.check}`) ? ( */}
-                <Tooltip placement="top" title="Edit">
-                  <a
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={(e) => edit(itm.id)}
-                  >
-                    <LiaEdit />
-                  </a>
-                </Tooltip>
-            {/* //   ) : (
+              <Tooltip placement="top" title="Edit">
+                <a
+                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                  onClick={(e) => edit(itm.id)}
+                >
+                  <LiaEdit />
+                </a>
+              </Tooltip>
+              {/* //   ) : (
             //     <></>
             //   )} */}
-           
+
             </div>
           </>
         );
       },
     },
   ];
-//   const addCarrier=()=>
-//     {
-//       if(activeplan?.subscription_plan_id?.number_of_drivers>total)
-//       {
-//         Navigate(`/${shared.url}/add`)
-//       }
-//       else{
-     
-//         toast.error(`You can add only ${activeplan?.subscription_plan_id?.number_of_carrier} carrier`)
-//       }
-      
-//     }
+  //   const addCarrier=()=>
+  //     {
+  //       if(activeplan?.subscription_plan_id?.number_of_drivers>total)
+  //       {
+  //         Navigate(`/${shared.url}/add`)
+  //       }
+  //       else{
+
+  //         toast.error(`You can add only ${activeplan?.subscription_plan_id?.number_of_carrier} carrier`)
+  //       }
+
+  //     }
   return (
     <PageLayout title="Carriers" title2="Carriers">
-       <div className="flex flex-wrap justify-between items-center gap-y-4">
+      <div className="flex flex-wrap justify-between items-center gap-y-4">
         <div>
           <h3 className="text-2xl font-semibold text-[#111827]">
             {" "}
@@ -222,7 +222,7 @@ const Html = ({
                     </button> */}
 
           {/* {isAllow(`add${shared.check}`) ? ( */}
-            {/* <button
+          {/* <button
               className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
               onClick={addCarrier}        
             >
@@ -261,7 +261,7 @@ const Html = ({
                 }}
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#494f9f]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                 placeholder="Search"
-                // required
+              // required
               />
               {filters?.search && (
                 <i
@@ -302,7 +302,7 @@ const Html = ({
                 </button>
               </div> */}
 
-              {/* <div className="result-set">
+          {/* <div className="result-set">
                 <div className="relative text-center">
                   <label className="cursor-pointer  dark-btn btn">
                     <i className="fa fa-download me-2"></i>
@@ -319,6 +319,58 @@ const Html = ({
                   </label>
                 </div>
               </div> */}
+        
+          <Menu as="div" className="relative ">
+            <div>
+              <MenuButton className="relative flex rounded-full bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <span className="absolute -inset-1.5" />
+                <span className="sr-only">Open user menu</span>
+                {filters?.request_status
+                  ? filters?.request_status == "accepted" ? "Accepted" : filters?.request_status == "rejected" ? "Rejected" : "Pending"
+                  : "All Request Status"}
+              </MenuButton>
+            </div>
+            <MenuItems
+              transition
+              anchor="bottom end"
+              className="w-52 origin-top-right mt-4 rounded-xl border border-white/5 bg-white shadow p-1 text-sm/6 text-black transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+            >
+              <MenuItem>
+            
+                  <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"  onClick={() => ChangeRequestStatus("")}>
+                    {/* <PencilIcon className="size-4 stroke-black/30 hover:stroke-white" /> */}
+                    All
+                  </button>
+         
+              </MenuItem>
+              <MenuItem>
+         
+                  <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"   onClick={() => ChangeRequestStatus("accepted")}>
+                    {/* <PencilIcon className="size-4 stroke-black/30 hover:stroke-white" /> */}
+                    Accepted
+                  </button>
+      
+              </MenuItem>
+              <MenuItem>
+                <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"  onClick={() => ChangeRequestStatus("pending")}>
+                  {/* <Square2StackIcon className="size-4 stroke-black/30 hover:stroke-white" /> */}
+                  Pending
+                </button>
+              </MenuItem>
+              <div className="my-1 h-px bg-gray-200" />
+              <MenuItem>
+                <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"
+                 onClick={() => ChangeRequestStatus("rejected")}>
+                  {/* <TrashIcon className="size-4 stroke-black/30 hover:stroke-white" /> */}
+                  Rejected
+
+                </button>
+              </MenuItem>
+            </MenuItems>
+
+
+
+          </Menu>
 
           <div className="flex gap-2 ml-auto">
             <SelectDropdown
@@ -331,20 +383,20 @@ const Html = ({
               }}
               options={statusModel.list}
             />
-           
+
             {filters.status || filters.groupId ? (
               <>
-              <button
-                className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
-                onClick={() => reset()}
-              >
+                <button
+                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
+                  onClick={() => reset()}
+                >
 
-          <IoIosRefresh class="me-2"/>
+                  <IoIosRefresh class="me-2" />
 
 
-                Reset
-              </button>
-            </>
+                  Reset
+                </button>
+              </>
             ) : (
               <></>
             )}
@@ -353,25 +405,25 @@ const Html = ({
 
         {!loaging ? (
           <>
-           <div className="">
-          <Table
-              className=""
-              data={data}
-              columns={columns}
-              page={filters.page}
-              count={filters.count}
-              filters={filters}
-              total={total}
-              result={(e) => {
-                if (e.event == "page") pageChange(e.value);
-                if (e.event == "sort") {
-                  sorting(e.value);
-                  sortClass(e.value);
-                }
-                if (e.event == "count") count(e.value);
-              }}
-            />
-          </div>
+            <div className="">
+              <Table
+                className=""
+                data={data}
+                columns={columns}
+                page={filters.page}
+                count={filters.count}
+                filters={filters}
+                total={total}
+                result={(e) => {
+                  if (e.event == "page") pageChange(e.value);
+                  if (e.event == "sort") {
+                    sorting(e.value);
+                    sortClass(e.value);
+                  }
+                  if (e.event == "count") count(e.value);
+                }}
+              />
+            </div>
           </>
         ) : (
           <></>
