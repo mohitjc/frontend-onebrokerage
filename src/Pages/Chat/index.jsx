@@ -62,7 +62,7 @@ export default function Chat() {
 
   const joinChat=(assignment_id)=>{
     let payload={
-      chat_by:user._id,
+      chat_by:user._id||user?.id,
       chat_with:assignment_id
     }
     loader(true)
@@ -104,7 +104,7 @@ export default function Chat() {
         }, 100);
       }
     });
-    
+
     let assignment_id = methodModel.getPrams('assignment_id')
     if (assignment_id) {
       assignmentDetail(assignment_id)
@@ -119,7 +119,7 @@ export default function Chat() {
     if (chatRoomId != "") {
       let value = {
         room_id: chatRoomId,
-        user_id: user?._id,
+        user_id: user?._id||user?.id,
       };
       if (!activeRooms.current.includes(chatRoomId)) {
         console.log("activeRooms inner", activeRooms);
@@ -169,12 +169,6 @@ export default function Chat() {
     })
    
   }
-
-
-
-
-
-
 
   useEffect(() => {
     if (darkMode) {

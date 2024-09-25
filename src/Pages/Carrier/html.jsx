@@ -13,6 +13,9 @@ import { toast } from "react-toastify";
 import ApiClient from '../../methods/api/apiClient';
 import loader from '../../methods/loader';
 import methodModel from '../../methods/methods';
+import SelectDropdown from '../../components/common/SelectDropdown';
+import statusModel from '../../models/status.model';
+import { IoIosRefresh } from 'react-icons/io';
 
 const Html = ({
   view,
@@ -24,6 +27,7 @@ const Html = ({
   sortClass,
   sorting,
   count,
+  ChangeStatus,
   ChangeFilter,
   deleteLoad,
   reset,
@@ -32,7 +36,6 @@ const Html = ({
   tab,
   tabChange,
   ChangeRole,
-  ChangeStatus,
   openModal,
   statusChange,
   pageChange,
@@ -317,14 +320,14 @@ const Html = ({
                 </div>
               </div> */}
 
-          {/* <div className="flex gap-2 ml-auto">
+          <div className="flex gap-2 ml-auto">
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"
               placeholder="All Status"
               intialValue={filters.status}
               result={(e) => {
-                changestatus(e.value);
+                ChangeStatus(e.value);
               }}
               options={statusModel.list}
             />
@@ -333,7 +336,7 @@ const Html = ({
               <>
               <button
                 className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
-                onClick={() => clear()}
+                onClick={() => reset()}
               >
 
           <IoIosRefresh class="me-2"/>
@@ -345,7 +348,7 @@ const Html = ({
             ) : (
               <></>
             )}
-          </div> */}
+          </div>
         </div>
 
         {!loaging ? (

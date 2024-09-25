@@ -76,6 +76,7 @@ const Plan = () => {
      }
   
       ApiClient.post('session/create',payload).then((res) => {
+        console.log(res,"res")
           if (res.success) {
               window.location.assign(res.data.url)
             }else{
