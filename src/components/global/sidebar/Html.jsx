@@ -294,7 +294,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
             
        
               <li>
-                <tooltip placement="right" title="Dashboard">
+                <tooltip placement="right" title="Active Plan">
                   <NavLink
                     to={`${user?.plan_id?"/activeplan":""}`}
                     // to={`/activeplan`}
@@ -312,7 +312,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 </tooltip>
               </li>
               {/* <li>
-                <tooltip placement="right" title="Transaction">
+                <tooltip placement="right" title="Carrier Staff">
                   <NavLink
                     to={`${user?.plan_id?"/carrierstaff":""}`}
                     // to={`/transaction`}

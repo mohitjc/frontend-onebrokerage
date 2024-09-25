@@ -53,8 +53,8 @@ function App() {
     { url: "/transaction", path: "Transaction" },
     { url: "/transaction/detail/:id", path: "Transaction/Detail" },
     { url: "/carrierstaff", path: "CarrierStaff" },
-    // { url: "/drivers/edit/:id", path: "Driver/AddEdit" },
-    // { url: "/drivers/add", path: "Driver/AddEdit" },
+    { url: "/carrierstaff/edit/:id", path: "CarrierStaff/AddEdit" },
+    { url: "/carrierstaff/add", path: "CarrierStaff/AddEdit" },
     // { url: "/drivers/detail/:id", path: "Driver/View" },
 
 
