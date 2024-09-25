@@ -12,6 +12,7 @@ import { Tooltip } from 'antd';
 import { toast } from "react-toastify";
 import ApiClient from '../../methods/api/apiClient';
 import loader from '../../methods/loader';
+import methodModel from '../../methods/methods';
 
 const Html = ({
   view,
@@ -121,7 +122,7 @@ const Html = ({
         name: "Request Status",
         // sort: true,
         render: (row) => {
-          return <span className="">{row?.request_status}</span>
+          return <span className={`${row?.request_status}`}>{methodModel.capitalizeFirstLetter(row?.request_status)}</span>
         },
       },
 
