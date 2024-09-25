@@ -13,6 +13,9 @@ import { PiEyeLight } from 'react-icons/pi';
 import { Tooltip } from 'antd';
 import moment from 'moment';
 import Table from '../../../components/Table';
+import SelectDropdown from '../../../components/common/SelectDropdown';
+import statusModel from '../../../models/status.model';
+import { IoIosRefresh } from 'react-icons/io';
 const Html = ({
   view,
   addressResult,
@@ -25,6 +28,8 @@ const Html = ({
   sorting,
   statusChange,
   pageChange,
+  ChangeStatus,
+  reset,
   filters,
   ChangeDocumentStatus,
   tableCols,
@@ -243,6 +248,35 @@ const Html = ({
            <span class="sr-only">Search</span>
          </button>
        </form>
+       <div className="flex gap-2 ml-auto">
+            <SelectDropdown
+              id="statusDropdown"
+              displayValue="name"
+              placeholder="All Status"
+              intialValue={filters.status}
+              result={(e) => {
+                ChangeStatus(e.value);
+              }}
+              options={statusModel.list}
+            />
+           
+            {filters.status || filters.groupId ? (
+              <>
+              <button
+                className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
+                onClick={() => reset()}
+              >
+
+          <IoIosRefresh class="me-2"/>
+
+
+                Reset
+              </button>
+            </>
+            ) : (
+              <></>
+            )}
+          </div>
     
      </div>
 
