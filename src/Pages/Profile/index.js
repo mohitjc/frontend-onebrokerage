@@ -655,13 +655,13 @@ const Profile = () => {
                               <div className="input-icon">
                                 <i className="fas fa-address-book"></i>
                               </div>
-                              <div className='w-100'>
+                              <div className='w-full h-full flex items-center'>
                                 <GooglePlacesAutocomplete
                                   value={form.address}
                                   result={addressResult}
                                   id="address"
                                   placeholder=""
-                                  className='  w-full  relative   text-sm placeholder:text-gray-500 h-full flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500'
+                                  className='  w-full  relative break-all  text-sm placeholder:text-gray-500 h-full flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500'
 
                                 />
                               </div>
