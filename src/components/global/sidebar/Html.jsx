@@ -160,7 +160,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               {({ open }) => (
                 <>
                   <tooltip placement="right" title="Carriers">
-                    <Disclosure.Button className="w-full p-2.5 rounded-[50px] flex items-center justify-between text-black hover:!text-[#fff] gap-[12px] hover:bg-[#494f9f] transition-all duration-300  group">
+                    <Disclosure.Button className="w-full p-2.5 rounded-lg bg-gray-50 flex items-center justify-between text-black hover:!text-[#fff] gap-[12px] hover:bg-[#494f9f] transition-all duration-300  group">
                       <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                         <LuUser className="text-black shrink-0 text-lg group-hover:text-white" />
                         <span className=" text-inherit leading-none sidebar_text">
@@ -194,7 +194,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             <NavLink
                               to={`/carriers`}
                               className={(isActive) =>
-                                "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group" +
+                                "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group" +
                                 (location?.pathname == "/carriers" &&
                                   " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                               }
@@ -214,7 +214,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             <NavLink
                               to={`/approvedcarriers`}
                               className={(isActive) =>
-                                "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                                "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                 (location?.pathname == "/approvedcarriers" &&
                                   " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                               }
@@ -238,7 +238,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                               <NavLink
                                 to={`/rejectedcarrier`}
                                 className={(isActive) =>
-                                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                   (location?.pathname == "/rejectedcarrier" &&
                                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                 }
@@ -262,7 +262,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 <NavLink
                                   to="/pendingcarrier"
                                   className={(isActive) =>
-                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                     (location?.pathname == "/pendingcarrier" &&
                                       " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                   }
@@ -350,7 +350,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 to="/dashboard"
              
                 className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                   (location?.pathname == "/dashboard" &&
                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 }
@@ -367,7 +367,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               {({ open }) => (
                 <>
                   <tooltip placement="right" title="Carriers">
-                    <Disclosure.Button className="w-full p-2.5 rounded-[50px] flex items-center justify-between text-black hover:!text-[#fff] gap-[12px] hover:bg-[#494f9f] transition-all duration-300  group">
+                    <Disclosure.Button className="w-full p-2.5 rounded-lg bg-gray-50 flex items-center justify-between text-black hover:!text-[#fff] gap-[12px] hover:bg-[#494f9f] transition-all duration-300  group">
                       <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
                         <FiUsers className="text-black shrink-0 text-lg group-hover:text-white" />
                         <span className=" text-inherit leading-none sidebar_text">
@@ -401,7 +401,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             <NavLink
                               to={`/carriers`}
                               className={(isActive) =>
-                                "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group" +
+                                "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group" +
                                 (location?.pathname == "/carriers" &&
                                   " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                               }
@@ -421,7 +421,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             <NavLink
                               to={`/acceptedcarriers`}
                               className={(isActive) =>
-                                "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                                "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                 (location?.pathname == "/acceptedcarriers" &&
                                   " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                               }
@@ -445,7 +445,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                               <NavLink
                                 to={`/rejectedcarriers`}
                                 className={(isActive) =>
-                                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                   (location?.pathname == "/rejectedcarriers" &&
                                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                 }
@@ -469,7 +469,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 <NavLink
                                   to="/carriersrequest"
                                   className={(isActive) =>
-                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                     (location?.pathname == "/carriersrequest" &&
                                       " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                   }
@@ -495,7 +495,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 <NavLink
                                   to="/carrierstaff"
                                   className={(isActive) =>
-                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                     (location?.pathname == "/carrierstaff" &&
                                       " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                   }
@@ -520,7 +520,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 <NavLink
                                   to="/approvedSubCarrier"
                                   className={(isActive) =>
-                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                     (location?.pathname == "/approvedSubCarrier" &&
                                       " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                   }
@@ -551,7 +551,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 to="/feature"
               
                 className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                   (location?.pathname == "/feature" &&
                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 }
@@ -571,7 +571,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 to="/groups"
             
                 className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                   (location?.pathname == "/groups" &&
                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 }
@@ -591,7 +591,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 to="/plans"
           
                 className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                   (location?.pathname == "/plans" &&
                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 }
@@ -612,7 +612,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 to="/trucks"
            
                 className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                   (location?.pathname == "/trucks" &&
                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 }
@@ -633,7 +633,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 to="/drivers"
              
                 className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                   (location?.pathname == "/drivers" &&
                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 }
@@ -653,7 +653,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 to="/transaction"
                 
                 className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-[50px] group " +
+                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                   (location?.pathname == "/transaction" &&
                     " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                 }
