@@ -18,6 +18,7 @@ import { Fragment } from 'react'
 import SelectDropdown from '../../../components/common/SelectDropdown';
 import statusModel from '../../../models/status.model';
 import { IoIosRefresh } from 'react-icons/io';
+import { MdClose } from 'react-icons/md';
 const Html = ({
   view,
   addressResult,
@@ -161,32 +162,36 @@ const Html = ({
               {/* ) : (
                 <></>
               )} */}
-              <a
-                class="accept-user  me-2"
-                onClick={() => {
-                  AcceptUser(itm?.id);
-                }}
-              >
-                <span className="">
-                  <i
-                    color="green"
-                    className="fa fa-check"
-                  ></i>
-                </span>{' '}
-              </a>
-              <a
-                class="reject-user  me-2"
-                onClick={() => {
-                  document
-                    .getElementById('OpenReasonModel')
-                    .click();
-                  setRejectID(itm?.id);
-                }}
-              >
-                <span className="">
-                  <i color="red" className="fa fa-times"></i>
-                </span>{' '}
-              </a>
+               <Tooltip placement="top" title="Accept">
+                <a
+                  class="accept-user  "
+                  onClick={() => {
+                    AcceptUser(itm?.id);
+                  }}
+                >
+                  <span className="border cursor-pointer  hover:opacity-70 rounded-lg bg-green-400 w-10 h-10 !text-white flex items-center justify-center text-lg">
+                    <i
+                      color="green"
+                      className="fa fa-check"
+                    ></i>
+                  </span>{' '}
+                </a>
+              </Tooltip>
+              <Tooltip placement="top" title="Reject">
+                  <a
+                    class="reject-user  "
+                    onClick={() => {
+                      document
+                        .getElementById('OpenReasonModel')
+                        .click();
+                      setRejectID(itm?.id);
+                    }}
+                  >
+                    <span className="border cursor-pointer  hover:opacity-70 rounded-lg bg-red-400 w-10 h-10 !text-white flex items-center justify-center text-lg">
+                      <i color="red" className="fa fa-times"></i>
+                    </span>{' '}
+                  </a>
+              </Tooltip>
               {/* //   ) : (
             //     <></>
             //   )} */}
@@ -305,7 +310,7 @@ const Html = ({
             {filters.status || filters.groupId ? (
               <>
               <button
-                className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
+                className="bg-primary leading-10 h-10 inline-flex shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg  items-center w-fit "
                 onClick={() => reset()}
               >
 
@@ -358,7 +363,7 @@ const Html = ({
       </div>
 
 
-      <div className="fixed inset-0 hidden flex items-center justify-center">
+      <div className="fixed inset-0 hidden  items-center justify-center">
         <button
           type="button"
           id="OpenReasonModel"
@@ -396,7 +401,7 @@ const Html = ({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full relative max-w-md transform  rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
@@ -404,11 +409,14 @@ const Html = ({
 
 
                   </Dialog.Title>
-                  <div className="mt-2 text-center">
+                  <div className=" flex items-center justify-center relative">
 
-                    {/* <img src="assets/img/check.gif" alt="" className="mx-auto mb-4 h-12" /> */}
+                    <div className='h-16 w-16 rounded-full absolute -top-16 right-1/2 left-1/2  -translate-x-1/2 text-white flex items-center justify-center bg-red-500 shadow-md mx-auto border-2 border-red-800 p-4'>
+                    <MdClose className='text-4xl font-bold' />
 
-                    <h5 className="text-lg font-semibold">Reason to Reject</h5>
+                    </div>
+
+                 
 
 
                   </div>
@@ -422,9 +430,9 @@ const Html = ({
                       }}
                     >
                       <div class="modal-body">
-                        <label class="profileheddingcls">
+                        <label class="mb-2 block">
                           {' '}
-                          Reason <span className="text-danger">*</span>
+                          Reason to Reject <span className="text-danger">*</span>
                         </label>
 
                         <div class="mb-3">
@@ -434,7 +442,7 @@ const Html = ({
                             onChange={(e) => {
                               setReason(e.target.value);
                             }}
-                            class="bg-white rounded-lg h-32 text-gray-800 border border-gray-100"
+                            class="bg-white w-full p-2 focus:outline-0 rounded-lg h-32 text-gray-800 border border-gray-200"
                             id="message-text"
                           ></textarea>
                         </div>

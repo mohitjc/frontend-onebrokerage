@@ -6,7 +6,7 @@ import debounce from 'lodash.debounce';
 import { PiEyeLight } from 'react-icons/pi';
 import { LiaEdit } from 'react-icons/lia';
 import shared from './shared';
-import { FiPlus } from 'react-icons/fi';
+import { FiPlus, FiUsers } from 'react-icons/fi';
 import Table from '../../components/Table';
 import { Tooltip } from 'antd';
 import { toast } from "react-toastify";
@@ -15,9 +15,11 @@ import loader from '../../methods/loader';
 import methodModel from '../../methods/methods';
 import SelectDropdown from '../../components/common/SelectDropdown';
 import statusModel from '../../models/status.model';
-import { IoIosRefresh } from 'react-icons/io';
+import { IoIosRefresh, IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Link } from 'react-router-dom';
+import { IoChevronDownSharp, IoGitPullRequestOutline } from 'react-icons/io5';
+import { RxCrossCircled } from 'react-icons/rx';
 
 const Html = ({
   view,
@@ -320,14 +322,20 @@ const Html = ({
                 </div>
               </div> */}
         
-          <Menu as="div" className="relative ">
+         
+
+          <div className="flex gap-2 ml-auto">
+
+            <div className=''>
+            <Menu as="div" className="relative ">
             <div>
-              <MenuButton className="relative flex rounded-full bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              <MenuButton className="border-primary border leading-10 h-10 gap-2 inline-flex shadow-btn px-6 hover:opacity-80 text-sm text-primary hover:bg-primary rounded-lg  items-center w-fit">
                 <span className="absolute -inset-1.5" />
                 <span className="sr-only">Open user menu</span>
                 {filters?.request_status
                   ? filters?.request_status == "accepted" ? "Accepted" : filters?.request_status == "rejected" ? "Rejected" : "Pending"
                   : "All Request Status"}
+                  <span><IoChevronDownSharp />                  </span>
               </MenuButton>
             </div>
             <MenuItems
@@ -338,31 +346,31 @@ const Html = ({
               <MenuItem>
             
                   <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"  onClick={() => ChangeRequestStatus("")}>
-                    {/* <PencilIcon className="size-4 stroke-black/30 hover:stroke-white" /> */}
-                    All
+                    <FiUsers className="size-4 stroke-black/30 hover:stroke-white" />
+                    All Carriers
                   </button>
          
               </MenuItem>
               <MenuItem>
          
                   <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"   onClick={() => ChangeRequestStatus("accepted")}>
-                    {/* <PencilIcon className="size-4 stroke-black/30 hover:stroke-white" /> */}
-                    Accepted
+                    <IoMdCheckmarkCircleOutline className="size-4 stroke-black/30 hover:stroke-white" />
+                    Accepted Carriers
                   </button>
       
               </MenuItem>
               <MenuItem>
                 <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"  onClick={() => ChangeRequestStatus("pending")}>
-                  {/* <Square2StackIcon className="size-4 stroke-black/30 hover:stroke-white" /> */}
-                  Pending
+                  <IoGitPullRequestOutline className="size-4 stroke-black/30 hover:stroke-white" />
+                  Pending Carriers
                 </button>
               </MenuItem>
               <div className="my-1 h-px bg-gray-200" />
               <MenuItem>
-                <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"
+                <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 text-red-500 hover:bg-[#3E549D] hover:text-white"
                  onClick={() => ChangeRequestStatus("rejected")}>
-                  {/* <TrashIcon className="size-4 stroke-black/30 hover:stroke-white" /> */}
-                  Rejected
+                  <RxCrossCircled className="size-4 stroke-black/30 hover:stroke-white" />
+                  Rejected Carriers
 
                 </button>
               </MenuItem>
@@ -371,8 +379,8 @@ const Html = ({
 
 
           </Menu>
+            </div>
 
-          <div className="flex gap-2 ml-auto">
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"
@@ -387,7 +395,7 @@ const Html = ({
             {filters.status || filters.groupId ? (
               <>
                 <button
-                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
+                  className="bg-primary leading-10 h-10 inline-flex shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg  items-center w-fit "
                   onClick={() => reset()}
                 >
 
