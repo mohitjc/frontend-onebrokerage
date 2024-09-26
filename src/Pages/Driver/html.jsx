@@ -47,7 +47,7 @@ const Html = ({
   const [activeplan, setActivePlan] = useState();
   const history = useNavigate();
   useEffect(() => {
-    loader(true);
+    // loader(true);
     ApiClient.get("active-plan").then((res) => {   
       if (res.success) {
         setActivePlan(res.data);
@@ -55,7 +55,7 @@ const Html = ({
           history("/plans");
         }
       }
-      loader(false);
+      // loader(false);
     });
 
   }, []);
@@ -85,7 +85,7 @@ const Html = ({
     {
       key: "email",
       name: "Email",
-      sort: true,
+      // sort: true,
       render: (row) => {
         return <span className="">{row?.email}</span>;
       },
@@ -105,7 +105,7 @@ const Html = ({
     {
       key: "createdAt",
       name: "Date Created",
-      sort: true,
+      // sort: true,
       render: (row) => {
         return <span className="">{moment(row?.createdAt).format("DD-MM-YYYY")}</span>
       },
@@ -356,6 +356,9 @@ const Html = ({
           <Table
               className=""
               data={data}
+              sort_key={filters?.key}
+              sorter={filters?.sorder}
+              modelName={shared?.title}
               columns={columns}
               page={filters.page}
               count={filters.count}

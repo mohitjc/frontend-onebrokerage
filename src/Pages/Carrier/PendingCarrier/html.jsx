@@ -328,6 +328,9 @@ const Html = ({
               <Table
                 className=""
                 data={data}
+                sort_key={filters?.key}
+                sorter={filters?.sorder}
+                modelName={shared?.title}
                 columns={columns}
                 page={filters.page}
                 count={filters.count}

@@ -44,9 +44,9 @@ const Html = ({
 }) => {
   const [activeplan, setActivePlan] = useState();
   const history = useNavigate();
-  console.log(activeplan,"activeplan")
+  console.log(activeplan, "activeplan")
   useEffect(() => {
-    loader(true);
+    // loader(true);
     ApiClient.get("active-plan").then((res) => {
       if (res.success) {
         setActivePlan(res.data);
@@ -54,7 +54,7 @@ const Html = ({
           history("/plans");
         }
       }
-      loader(false);
+      // loader(false);
     });
 
   }, []);
@@ -67,7 +67,7 @@ const Html = ({
       render: (row) => {
         return <span className="capitalize">{row?.truck_number}</span>;
       },
-    
+
     },
     // {
     //   key: "email",
@@ -109,7 +109,7 @@ const Html = ({
     {
       key: "",
       name: " createdAt",
-      sort: true,
+      // sort: true,
       render: (row) => {
         return (
           <span className="">{moment(row?.createdAt).format("DD-MM-YYYY")}</span>
@@ -203,17 +203,16 @@ const Html = ({
   //   useEffect(() => {
   //       getGroups()
   //   }, [])
-  const addtruck=()=>
-  {
+  const addtruck = () => {
     // if(activeplan?.subscription_plan_id?.number_of_drivers>total)
     //   {
     //     history(`/${shared.url}/add`)
     //   }
     //   else{
-     
+
     //     toast.error(`You can add only ${activeplan?.subscription_plan_id?.number_of_drivers} drivers`)
     //   }
-     history(`/${shared.url}/add`)
+    history(`/${shared.url}/add`)
   }
 
   return (
@@ -237,13 +236,13 @@ const Html = ({
                     </button> */}
 
           {/* {isAllow(`add${shared.check}`) ? ( */}
-            <button
-              className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-              onClick={addtruck}
-           
-            >
-              <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
-            </button>
+          <button
+            className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+            onClick={addtruck}
+
+          >
+            <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
+          </button>
           {/* ) : (
             <></>
           )} */}
@@ -277,7 +276,7 @@ const Html = ({
                 }}
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#494f9f]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                 placeholder="Search"
-                // required
+              // required
               />
               {filters?.search && (
                 <i
@@ -309,8 +308,8 @@ const Html = ({
               <span class="sr-only">Search</span>
             </button>
           </form>
-              
-                
+
+
 
           {/* <div className="flex gap-2 ml-auto">
             <SelectDropdown
@@ -345,25 +344,28 @@ const Html = ({
 
         {!loaging ? (
           <>
-           <div className="">
-          <Table
-              className=""
-              data={data}
-              columns={columns}
-              page={filters.page}
-              count={filters.count}
-              filters={filters}
-              total={total}
-              result={(e) => {
-                if (e.event == "page") pageChange(e.value);
-                if (e.event == "sort") {
-                  sorting(e.value);
-                  sortClass(e.value);
-                }
-                if (e.event == "count") count(e.value);
-              }}
-            />
-          </div>
+            <div className="">
+              <Table
+                className=""
+                data={data}
+                modelName={shared?.title}
+                sort_key={filters?.key}
+                sorter={filters?.sorder}
+                columns={columns}
+                page={filters.page}
+                count={filters.count}
+                filters={filters}
+                total={total}
+                result={(e) => {
+                  if (e.event == "page") pageChange(e.value);
+                  if (e.event == "sort") {
+                    sorting(e.value);
+                    sortClass(e.value);
+                  }
+                  if (e.event == "count") count(e.value);
+                }}
+              />
+            </div>
           </>
         ) : (
           <></>

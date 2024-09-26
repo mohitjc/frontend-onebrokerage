@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { HiOutlineArrowDown } from "react-icons/hi";
+import { HiOutlineArrowDown,HiOutlineArrowUp } from "react-icons/hi";
 import Pagination from "react-pagination-js";
+import { FaArrowsAltV } from 'react-icons/fa';
 
-const Table = ({ className = '', data = [], theme = 'table', ListHtml = (e) => { }, rowClass = '', columns = [], topHead = [], count = 50, total = 0, page = 1, result = (e) => { }, nodata = 'No Responses Yet' }) => {
+const Table = ({ className = '', data = [], sort_key,sorter='desc', theme = 'table', ListHtml = (e) => { }, rowClass = '', columns = [], topHead = [], count = 50, total = 0, page = 1, result = (e) => { }, nodata = 'No Responses Yet' }) => {
     const [pageSize, setPageSize] = useState(count);
 
     const handlePageSizeChange = (e) => {
@@ -68,7 +69,7 @@ const generateOptions = () => {
                                             {columns.map(itm => (
                                                 <th scope="col" className={`px-6 py-3 ${itm.sort ? 'cursor-pointer' : ''}`} onClick={() => headclick(itm)} key={itm.key}>
                                                     {itm.name} {itm.sort ? (
-                                                        <span className='ml-2'><HiOutlineArrowDown className="shrink-0 inline text-sm" /></span>
+                                                        <span className='ml-2  inline-block' onClick={() => headclick(itm)} >{sorter=='asc' && sort_key==itm.key ?<HiOutlineArrowUp className="shrink-0 inline text-sm" />:sorter=='desc' && sort_key==itm.key ?<HiOutlineArrowDown className="shrink-0 inline text-sm"/>:<FaArrowsAltV />}</span>
                                                     ) : null}
                                                 </th>
                                             ))}
