@@ -55,7 +55,7 @@ function App() {
     { url: "/carrierstaff", path: "CarrierStaff" },
     { url: "/carrierstaff/edit/:id", path: "CarrierStaff/AddEdit" },
     { url: "/carrierstaff/add", path: "CarrierStaff/AddEdit" },
-    // { url: "/drivers/detail/:id", path: "Driver/View" },
+    { url: "/carrierstaff/detail/:id", path: "CarrierStaff/View" },
 
 
       //  { url: "/profile/:tab", path: "Settings" },

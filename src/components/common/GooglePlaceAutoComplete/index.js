@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import environment from "../../../environment";
 import "./style.scss";
-const GooglePlacesAutocomplete = ({ placeholder, result, id, className=" ", value }) => {
+const GooglePlacesAutocomplete = ({ placeholder, result, id, className="", value }) => {
   const [searchText, setSearchText] = useState("");
   const [loading, setLoader] = useState(true);
   const autocompleteRef = useRef(null);

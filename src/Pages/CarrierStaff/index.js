@@ -45,7 +45,7 @@ const CarrierStaff = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters,...p,addedBy:user?.id||user?._d};
+    let filter = { ...filters,...p,role:"staff",addedBy:user?.id||user?._d};
 
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import methodModel from "../../methods/methods";
 import { roleType } from "../../models/type.model";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import Layout from "../../components/global/layout";
+import PageLayout from "../../components/global/PageLayout";
 import { toast } from "react-toastify";
 import environment from "../../environment";
 import PhoneInput from "react-phone-input-2";
@@ -98,7 +98,7 @@ const AddEdit = () => {
     }
 
     let method = "post";
-    let url = "admin/add-user";
+    let url = shared?.addApi;
     let value = {
       firstName: form?.firstName,
       lastName: form?.lastName,
@@ -148,7 +148,7 @@ const AddEdit = () => {
 
     if (id) {
       method = "put";
-      url = "admin/edit-user";
+      url = shared?.editApi;
       if (form?.role == "staff") {
         value = {
           firstName: form?.firstName,
@@ -194,7 +194,7 @@ const AddEdit = () => {
     ApiClient.allApi(url, value, method).then((res) => {
       if (res.success) {
         toast.success(res.message);
-        history("/staff");
+        history("/carrierstaff");
       }
       loader(false);
     });
@@ -933,7 +933,7 @@ const AddEdit = () => {
   }, [form]);
 
   return (
-    <Layout>
+    <PageLayout>
       <form onSubmit={handleSubmit}>
         <div className="flex items-center mb-8">
           <Tooltip placement="top" title="Back">
@@ -1076,6 +1076,7 @@ const AddEdit = () => {
               </label>
               <div>
                 <GooglePlaceAutoComplete
+                  className='bg-white w-full rounded-lg h-10 flex items-center gap-2 border border-[#00000036] px-3 pac-target-input'
                   value={form.address}
                   result={addressResult}
                   id="address"
@@ -1330,11 +1331,11 @@ const AddEdit = () => {
                 </tr>
                 <tr>
                   <td className="border border-gray px-2 py-2 ">
-                    <span className="font-semibold text-sm">Plan</span>
+                    <span className="font-semibold text-sm">Active Plan</span>
                   </td>
 
                   <td className="border border-gray px-4 py-2 text-left">
-                    <input
+                    {/* <input
                       type="checkbox"
                       onChange={(e) => {
                         handleAdminPlan(e.target.checked);
@@ -1343,7 +1344,7 @@ const AddEdit = () => {
                         // }else
                       }}
                       checked={handlecompleteAccessPlan()}
-                    />
+                    /> */}
                   </td>
 
                   <td className="border border-gray px-4 py-2 text-left">
@@ -1356,12 +1357,12 @@ const AddEdit = () => {
                           e.target.checked
                         )
                       }
-                      disabled={form?.permissions?.plan_add || form?.permissions?.plan_edit || form?.permissions?.plan_delete}
+                     
                     />
                   </td>
 
                   <td className="border border-gray px-4 py-2 text-left">
-                    <input
+                    {/* <input
                       type="checkbox"
                       checked={form?.permissions?.plan_add}
                       onChange={(e) =>
@@ -1370,11 +1371,11 @@ const AddEdit = () => {
                           e.target.checked
                         )
                       }
-                    />{" "}
+                    />{" "} */}
                   </td>
 
                   <td className="border border-gray px-4 py-2 text-left">
-                    <input
+                    {/* <input
                       type="checkbox"
                       checked={form?.permissions?.plan_edit}
                       onChange={(e) =>
@@ -1383,11 +1384,11 @@ const AddEdit = () => {
                           e.target.checked
                         )
                       }
-                    />{" "}
+                    />{" "} */}
                   </td>
 
                   <td className="border border-gray px-4 py-2 text-left">
-                    <input
+                    {/* <input
                       type="checkbox"
                       checked={form?.permissions?.plan_delete}
                       onChange={(e) =>
@@ -1396,12 +1397,12 @@ const AddEdit = () => {
                           e.target.checked
                         )
                       }
-                    />{" "}
+                    />{" "} */}
                   </td>
                 </tr>
                 <tr>
                   <td className="border border-gray px-2 py-2 ">
-                    <span className="font-semibold text-sm">Group</span>
+                    <span className="font-semibold text-sm">Carrier's Staff</span>
                   </td>
 
                   <td className="border border-gray px-4 py-2 text-left">
@@ -1646,7 +1647,7 @@ const AddEdit = () => {
           </button>
         </div>
       </form>
-    </Layout>
+    </PageLayout>
   );
 };
 

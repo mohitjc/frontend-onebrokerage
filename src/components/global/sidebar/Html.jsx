@@ -21,6 +21,7 @@ import { CgLogOut } from "react-icons/cg";
 import {login_success, logout } from '../../../Pages/actions/user';
 import { Link, useNavigate } from 'react-router-dom';
 import methodModel from "../../../methods/methods";
+import { HiOutlineUserGroup } from "react-icons/hi2";
 import {
   MdOutlineHolidayVillage,
   MdOutlineAttachEmail,
@@ -311,7 +312,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                   </NavLink>
                 </tooltip>
               </li>
-              {/* <li>
+              <li>
                 <tooltip placement="right" title="Carrier Staff">
                   <NavLink
                     to={`${user?.plan_id?"/carrierstaff":""}`}
@@ -322,13 +323,13 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                         " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                     }
                   >
-                    <TbReportMoney className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <HiOutlineUserGroup className="text-black shrink-0 text-lg group-hover:text-white " />
                     <span className="text-inherit leading-none sidebar_text">
                      Carrier's Staff
                     </span>
                   </NavLink>
                 </tooltip>
-              </li> */}
+              </li>
               <li>
                 <tooltip placement="right" title="Transaction">
                   <NavLink
