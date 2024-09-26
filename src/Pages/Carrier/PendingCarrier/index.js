@@ -328,6 +328,7 @@ const PendingCarrier = (p) => {
     );
 
   };
+
   const RejectUser = (id,reason) => { 
     loader(true);
     ApiClient.put("carrier-request", { id: id, status: "rejected",reason:reason }).then(
@@ -345,6 +346,7 @@ const PendingCarrier = (p) => {
       }
     );
   };
+  
   return (
     <>
       <Html

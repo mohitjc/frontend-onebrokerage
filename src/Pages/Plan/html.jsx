@@ -121,6 +121,8 @@ const Html = ({
               
                 <div class="p-6">
                   <h2 class="text-xl leading-6 font-bold text-slate-900 capitalize">{itm?.name}</h2>
+                  <h4 class="text-xl leading-6  text-slate-900 capitalize">Number Of Carrier:{itm?.number_of_carriers}</h4>
+                  <h4 class="text-xl leading-6 text-slate-900 capitalize">Number Of Driver:{itm?.number_of_drivers}</h4>
                   {/* <p class="mt-2 text-base text-slate-700 leading-tight">For new makers who want to fine-tune and test an
                         idea.</p> */}
                   <p class="mt-8">
