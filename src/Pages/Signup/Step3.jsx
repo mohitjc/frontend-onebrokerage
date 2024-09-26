@@ -610,7 +610,7 @@ export default function Step3() {
                     </Dialog.Title>
                     <div className="mt-2 text-center">
 
-                      <img src="assets/img/check.gif" alt="" className="mx-auto mb-4 h-12" />
+                      <img src="assets/img/ticks.png" alt="" className="mx-auto mb-4 h-12" />
 
                       <h5 className="text-lg font-semibold">Thank you for Your Registration .</h5>
                       <h5 className="text-sm font-regular mt-2">

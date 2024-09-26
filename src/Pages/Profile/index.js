@@ -294,7 +294,7 @@ const Profile = () => {
 
                   <div className="">
 
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:ml-4 ml-0 lg:border-l border-dashed border-gray-400 md:pl-5 pl-0">
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:ml-4 ml-0 lg:border-l h-full border-dashed border-gray-400 md:pl-5 pl-0">
                         {data?.fax_number?<div className="">
                           <label className="text-gray-500 font-normal ">Fax Number</label>
                           <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
