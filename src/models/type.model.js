@@ -82,6 +82,13 @@ export const roleType = {
     carrier_get: false,
     carrier_edit: false,
     carrier_add: false,
+
+
+    carrier_staff_delete: false,
+    carrier_staff_get: false,
+    carrier_staff_edit: false,
+    carrier_staff_add: false,
+
     faq_add: false,
     faq_delete: false,
     faq_edit: false,
@@ -105,6 +112,17 @@ export const roleType = {
     dashboard_get:false,
     statistics_get:false,
     performance_matrix_get:false,
+
+    driver_add: false,
+    driver_delete:false,
+    driver_edit:false,
+    driver_get: false,
+
+    truck_get:false,
+    truck_add:false,
+     
+    transaction_get:false,
+
     // shipment_note_get: false,
     notes_get: false,
     query_get: false,
@@ -112,6 +130,7 @@ export const roleType = {
     news_letter_get:false,
     notifications_get:false,
     shipment_notes_get:false,
+    active_plan_get:false,
     content_management_get:false,
     // content_management_add:false,
     content_management_edit:false,

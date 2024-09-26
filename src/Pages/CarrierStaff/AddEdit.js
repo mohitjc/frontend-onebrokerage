@@ -277,6 +277,10 @@ const AddEdit = () => {
           carrier_delete: res?.data?.carrier_delete,
           carrier_edit: res?.data?.carrier_edit,
           carrier_get: res?.data?.carrier_get,
+          carrier_staff_add: res?.data?.carrier_staff_add,
+          carrier_staff_edit: res?.data?.carrier_staff_edit,
+          carrier_staff_delete: res?.data?.carrier_staff_delete,
+          carrier_staff_get: res?.data?.carrier_staff_get,
           faq_add: res?.data?.faq_add,
           faq_delete: res?.data?.faq_delete,
           faq_edit: res?.data?.faq_edit,
@@ -286,6 +290,8 @@ const AddEdit = () => {
           plan_delete: res?.data?.plan_delete,
           plan_edit: res?.data?.plan_edit,
           plan_get: res?.data?.plan_get,
+
+          active_plan_get:res?.data?.active_plan_get,
 
           driver_add: res?.data?.driver_add,
           driver_delete: res?.data?.driver_delete,
@@ -391,6 +397,12 @@ const AddEdit = () => {
               carrier_edit: false,
               carrier_add: false,
 
+              carrier_staff_add: false,
+              carrier_staff_edit: false,
+              carrier_staff_delete: false,
+              carrier_staff_get: false,
+              carrier_staff_complete_access: false,
+
               faq_add: false,
               faq_delete: false,
               faq_edit: false,
@@ -400,6 +412,8 @@ const AddEdit = () => {
               plan_delete: false,
               plan_edit: false,
               plan_get: false,
+
+              active_plan_get:false,
 
               driver_add: false,
               driver_delete: false,
@@ -523,17 +537,17 @@ const AddEdit = () => {
     // setpermission('carrier_complete_access',value)
   };
 
-  const handleAdminGroup = (check) => {
+  const handleCarrierStaff = (check) => {
     let value = check ? true : false;
     setForm({
       ...form,
       permissions: {
         ...form.permissions,
-        group_add: value,
-        group_get: value,
-        group_edit: value,
-        group_delete: value,
-        group_complete_access: value,
+        carrier_staff_add: value,
+        carrier_staff_edit: value,
+        carrier_staff_get: value,
+        carrier_staff_delete: value,
+        carrier_staff_complete_access: value,
       },
     });
     // setpermission('carrier_complete_access',value)
@@ -588,67 +602,30 @@ const AddEdit = () => {
       carrier_edit: form?.permissions?.carrier_edit,
       carrier_get: form?.permissions?.carrier_get,
 
-      plan_add: form.permissions?.plan_add,
-      plan_delete: form?.permissions?.plan_delete,
-      plan_edit: form?.permissions?.plan_edit,
-      plan_get: form?.permissions?.plan_get,
+      carrier_staff_add: form.permissions?.carrier_staff_add,
+      carrier_staff_edit:  form.permissions?.carrier_staff_edit,
+      carrier_staff_delete: form.permissions?.carrier_staff_delete,
+      carrier_staff_get:  form.permissions?.carrier_staff_get,
+
+
+      active_plan_get:form?.permissions?.active_plan_get,
 
       driver_add: form.permissions?.driver_add,
       driver_delete: form?.permissions?.driver_delete,
       driver_edit: form?.permissions?.driver_edit,
       driver_get: form?.permissions?.driver_get,
 
-      group_add: form.permissions?.group_add,
-      group_delete: form?.permissions?.group_delete,
-      group_edit: form?.permissions?.group_edit,
-      group_get: form?.permissions?.group_get,
 
       truck_add: form.permissions?.truck_add,
       truck_get: form?.permissions?.truck_get,
 
       transaction_get: form?.permissions?.transaction_get,
 
-      faq_add: form.permissions?.faq_add,
-      faq_delete: form?.permissions?.faq_delete,
-      faq_edit: form?.permissions?.faq_edit,
-      faq_get: form?.permissions?.faq_get,
-
-      load_add: form.permissions?.load_add,
-      load_delete: form?.permissions?.load_delete,
-      load_edit: form?.permissions?.load_edit,
-      load_get: form?.permissions?.load_get,
-
-      bid_add: form.permissions?.bid_add,
-      bid_delete: form?.permissions?.bid_delete,
-      bid_edit: form?.permissions?.bid_edit,
-      bid_get: form?.permissions?.bid_get,
-
-      board_add: form.permissions?.board_add,
-      board_delete: form?.permissions?.board_delete,
-      board_edit: form?.permissions?.board_edit,
-      board_get: form?.permissions?.board_get,
-
-      settings_get: form?.permissions?.settings_get,
-      settings_edit: form?.permissions?.settings_edit,
-
-      // content_management_add:form?.permissions?.content_management_add,
-      content_management_edit: form?.permissions?.content_management_edit,
-      content_management_get: form?.permissions?.content_management_get,
-      // content_management_delete:form?.permissions?.content_management_delete,
-
-      invite_user_get: form?.permissions?.invite_user_get,
       dashboard_get: form?.permissions?.dashboard_get,
-      statistics_get: form?.permissions?.statistics_get,
-      performance_matrix_get: form?.permissions?.performance_matrix_get,
-      notes_get: form?.permissions?.notes_get,
-      query_get: form?.permissions?.query_get,
-      carrier_request_get: form?.permissions?.carrier_request_get,
-      news_letter_get: form?.permissions?.news_letter_get,
-      notifications_get: form?.permissions?.notifications_get,
-      shipment_notes_get: form?.permissions?.shipment_notes_get,
+     
     };
     Object.keys(permissions).map((itm) => {
-      if (!permissions[itm]) value = false;
+      if (!permissions[itm]) value = false
     });
     return value;
   };
@@ -695,13 +672,13 @@ const AddEdit = () => {
     return result;
   };
 
-  const handlecompleteAccessGroup = () => {
+  const handlecompleteAccessCarrierStaff = () => {
     let result = false;
     if (
-      form?.permissions?.group_add &&
-      form?.permissions?.group_delete &&
-      form?.permissions?.group_edit &&
-      form?.permissions?.group_get
+      form?.permissions?.carrier_staff_add &&
+      form?.permissions?.carrier_staff_delete &&
+      form?.permissions?.carrier_staff_edit &&
+      form?.permissions?.carrier_staff_get
     ) {
       result = true;
     }
@@ -749,7 +726,9 @@ const AddEdit = () => {
       permissions: {
         ...form.permissions,
         carrier_get: value,
+        carrier_staff_get:value,
         plan_get: value,
+        active_plan_get:value,
         driver_get: value,
         group_get: value,
         truck_get: value,
@@ -782,6 +761,7 @@ const AddEdit = () => {
       permissions: {
         ...form.permissions,
         carrier_add: value,
+        carrier_staff_add:value,
         plan_add: value,
         driver_add: value,
         truck_add: value,
@@ -791,15 +771,17 @@ const AddEdit = () => {
         bid_add: value,
         board_add: value,
         carrier_get: value,
+        carrier_staff_get:value,
         faq_get: value,
         load_get: value,
         bid_get: value,
         board_get: value,
         plan_get: value,
+
         driver_get: value,
         truck_get: value,
         group_get: value,
-        transaction_get: value,
+
         // content_management_add:value,
       },
     });
@@ -813,6 +795,8 @@ const AddEdit = () => {
       permissions: {
         ...form.permissions,
         carrier_edit: value,
+        carrier_staff_get:value,
+        carrier_staff_edit:value,
         plan_edit: value,
         driver_edit: value,
         group_edit: value,
@@ -826,8 +810,6 @@ const AddEdit = () => {
         plan_get: value,
         driver_get: value,
         group_get: value,
-        truck_get: value,
-        transaction_get: value,
         faq_get: value,
         load_get: value,
         bid_get: value,
@@ -857,12 +839,12 @@ const AddEdit = () => {
         plan_get: value,
         driver_get: value,
         group_get: value,
-        truck_get: value,
-        transaction_get: value,
         board_get: value,
         bid_get: value,
         load_get: value,
         faq_get: value,
+        carrier_staff_delete:value,
+        carrier_staff_get:value
       },
     });
     setAllDelete(value);
@@ -1350,14 +1332,14 @@ const AddEdit = () => {
                   <td className="border border-gray px-4 py-2 text-left">
                     <input
                       type="checkbox"
-                      checked={form?.permissions?.plan_get}
+                      checked={form?.permissions?.active_plan_get}
                       onChange={(e) =>
                         setpermission(
-                          "plan_get",
+                          "active_plan_get",
                           e.target.checked
                         )
                       }
-                     
+
                     />
                   </td>
 
@@ -1409,36 +1391,36 @@ const AddEdit = () => {
                     <input
                       type="checkbox"
                       onChange={(e) => {
-                        handleAdminGroup(e.target.checked);
+                        handleCarrierStaff(e.target.checked);
                         // if(e.target?.checked){
                         // setform({...form,permissions:{...form?.permissions,carrier_complete_access:true}})
                         // }else
                       }}
-                      checked={handlecompleteAccessGroup()}
+                      checked={handlecompleteAccessCarrierStaff()}
                     />
                   </td>
 
                   <td className="border border-gray px-4 py-2 text-left">
                     <input
                       type="checkbox"
-                      checked={form?.permissions?.group_get}
+                      checked={form?.permissions?.carrier_staff_get}
                       onChange={(e) =>
                         setpermission(
-                          "group_get",
+                          "carrier_staff_get",
                           e.target.checked
                         )
                       }
-                      disabled={form?.permissions?.group_add || form?.permissions?.group_edit || form?.permissions?.group_delete}
+                      disabled={form?.permissions?.carrier_staff_add || form?.permissions?.carrier_staff_edit || form?.permissions?.carrier_staff_delete}
                     />
                   </td>
 
                   <td className="border border-gray px-4 py-2 text-left">
                     <input
                       type="checkbox"
-                      checked={form?.permissions?.group_add}
+                      checked={form?.permissions?.carrier_staff_add}
                       onChange={(e) =>
                         setpermission(
-                          "group_add",
+                          "carrier_staff_add",
                           e.target.checked
                         )
                       }
@@ -1448,10 +1430,10 @@ const AddEdit = () => {
                   <td className="border border-gray px-4 py-2 text-left">
                     <input
                       type="checkbox"
-                      checked={form?.permissions?.group_edit}
+                      checked={form?.permissions?.carrier_staff_edit}
                       onChange={(e) =>
                         setpermission(
-                          "group_edit",
+                          "carrier_staff_edit",
                           e.target.checked
                         )
                       }
@@ -1461,10 +1443,10 @@ const AddEdit = () => {
                   <td className="border border-gray px-4 py-2 text-left">
                     <input
                       type="checkbox"
-                      checked={form?.permissions?.group_delete}
+                      checked={form?.permissions?.carrier_staff_delete}
                       onChange={(e) =>
                         setpermission(
-                          "group_delete",
+                          "carrier_staff_delete",
                           e.target.checked
                         )
                       }
