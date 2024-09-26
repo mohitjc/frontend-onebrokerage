@@ -104,7 +104,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Dashboard">
                   <NavLink
-                    to={`${user?.plan_id?"/dashboard":""}`}
+                    to={`${user?.plan_id || user?.role=="driver"?"/dashboard":""}`}
                     // to={`/dashboard`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
@@ -194,7 +194,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             title="Carrier"
                           >
                             <NavLink
-                              to={`/carriers`}
+                              to={`${user?.plan_id || user?.role=="driver"?"/carriers":""}`}
                               className={(isActive) =>
                                 "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group" +
                                 (location?.pathname == "/carriers" &&
@@ -214,7 +214,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             title=" Accepted Carrier"
                           >
                             <NavLink
-                              to={`/approvedcarriers`}
+                              to={`${user?.plan_id || user?.role=="driver"?"/approvedcarriers":""}`}
                               className={(isActive) =>
                                 "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                 (location?.pathname == "/approvedcarriers" &&
@@ -238,7 +238,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                               title=" Reject Carrier"
                             >
                               <NavLink
-                                to={`/rejectedcarrier`}
+                                to={`${user?.plan_id || user?.role=="driver"?"/rejectedcarrier":""}`}
                                 className={(isActive) =>
                                   "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                   (location?.pathname == "/rejectedcarrier" &&
@@ -262,7 +262,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             <li id="carriers">
                               <tooltip placement="right" title=" Carrier requests">
                                 <NavLink
-                                  to="/pendingcarrier"
+                                  to={`${user?.plan_id || user?.role=="driver"?"/pendingcarrier":""}`}
                                   className={(isActive) =>
                                     "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                     (location?.pathname == "/pendingcarrier" &&
@@ -297,7 +297,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Carrier Staff">
                   <NavLink
-                    to={`${user?.plan_id?"/carrierstaff":""}`}
+                    to={`${user?.plan_id || user?.role=="driver"?"/carrierstaff":""}`}
                     // to={`/transaction`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +

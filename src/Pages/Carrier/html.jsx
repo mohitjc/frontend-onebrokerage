@@ -173,17 +173,16 @@ const Html = ({
                 <></>
               )} */}
               {/* {isAllow(`edit${shared.check}`) ? ( */}
-              <Tooltip placement="top" title="Edit">
+              {user?.role=="driver"?<></>:<> <Tooltip placement="top" title="Edit">
                 <a
                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                   onClick={(e) => edit(itm.id)}
                 >
                   <LiaEdit />
                 </a>
-              </Tooltip>
-              {/* //   ) : (
-            //     <></>
-            //   )} */}
+              </Tooltip></>}
+             
+     
 
             </div>
           </>

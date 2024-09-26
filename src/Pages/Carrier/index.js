@@ -111,7 +111,15 @@ const Carrier = (p) => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p, addedBy: user?.id };
+    let newaddedBy
+    if(user?.role=="driver")
+      {
+       newaddedBy=user?.addedBy?.id
+      }else
+      {
+        newaddedBy=user?.id||user?._id
+      }
+    let filter = { ...filters, ...p, addedBy:newaddedBy };
     let url =shared?.listApi;
     ApiClient.get(url, filter).then((res) => {
       if (res.success) {

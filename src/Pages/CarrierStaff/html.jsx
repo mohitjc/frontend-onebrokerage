@@ -48,15 +48,19 @@ const Html = ({
   const history = useNavigate();
   useEffect(() => {
     // loader(true);
-    ApiClient.get("active-plan").then((res) => {
-      if (res.success) {
-        setActivePlan(res.data);
-        if (!res.data.id) {
-          history("/plans");
+    if(!user?.role=="driver")
+    {
+      ApiClient.get("active-plan").then((res) => {
+        if (res.success) {
+          setActivePlan(res.data);
+          if (!res.data.id) {
+            history("/plans");
+          }
         }
-      }
-      // loader(false);
-    });
+        // loader(false);
+      });
+    }
+
 
   }, []);
 
@@ -64,6 +68,7 @@ const Html = ({
     if (activeplan?.subscription_plan_id?.number_of_carriers > total) {
       history(`/${shared.url}/add`)
     }
+
     else {
 
       toast.error(`If you want to add more Carrier Staff, you need to upgrade the plan`)
@@ -120,6 +125,7 @@ const Html = ({
         );
       },
     },
+    
     {
       key: "action",
       name: "Actions",
@@ -140,29 +146,23 @@ const Html = ({
                 <></>
               )} */}
               {/* {isAllow(`edit${shared.check}`) ? ( */}
-              <Tooltip placement="top" title="Edit">
+              {user?.role=="driver"?<></>:<> <Tooltip placement="top" title="Edit">
                 <a
                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                   onClick={(e) => edit(itm.id)}
                 >
                   <LiaEdit />
                 </a>
-              </Tooltip>
-              {/* //   ) : (
-            //     <></>
-            //   )} */}
-              {/* {isAllow(`delete${shared.check}`) ? ( */}
-              <Tooltip placement="top" title="Delete">
+              </Tooltip>  <Tooltip placement="top" title="Delete">
                 <span
                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                   onClick={() => deleteItem(itm.id)}
                 >
                   <LiaTrashAlt />
                 </span>
-              </Tooltip>
-              {/* ) : (
-                <></>
-              )} */}
+              </Tooltip></>}
+             
+
             </div>
           </>
         );
@@ -207,13 +207,14 @@ const Html = ({
                     </button> */}
 
           {/* {isAllow(`add${shared.check}`) ? ( */}
-          <button
+          {user?.role=="driver"?<></>: <button
             className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
             onClick={addstaff}
 
           >
             <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
-          </button>
+          </button>}
+         
           {/* ) : (
             <></>
           )} */}
