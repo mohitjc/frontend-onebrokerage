@@ -119,7 +119,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                   </NavLink>
                 </tooltip>
               </li>
-              <li>
+              {user?.role=="driver"?<></>:<>  <li>
                 <tooltip placement="right" title="Trucks">
                   <NavLink
                     to={`${user?.plan_id?"/trucks":""}`}
@@ -154,7 +154,8 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                     </span>
                   </NavLink>
                 </tooltip>
-              </li>
+              </li></>}
+            
 
               <li>
             <Disclosure as="div" defaultOpen={tabclass("carriers")}>
@@ -290,28 +291,9 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               )}
             </Disclosure>
           </li>
-          
-           
-            
+               
        
-              <li>
-                <tooltip placement="right" title="Active Plan">
-                  <NavLink
-                    to={`${user?.plan_id?"/activeplan":""}`}
-                    // to={`/activeplan`}
-                    className={(isActive) =>
-                      "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
-                      (location?.pathname == "/activeplan" &&
-                        " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                    }
-                  >
-                    <RiMoneyDollarCircleLine className="text-black shrink-0 text-lg group-hover:text-white " />
-                    <span className="text-inherit leading-none sidebar_text">
-                      Active Plan
-                    </span>
-                  </NavLink>
-                </tooltip>
-              </li>
+            
               <li>
                 <tooltip placement="right" title="Carrier Staff">
                   <NavLink
@@ -326,6 +308,24 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                     <HiOutlineUserGroup className="text-black shrink-0 text-lg group-hover:text-white " />
                     <span className="text-inherit leading-none sidebar_text">
                      Carrier's Staff
+                    </span>
+                  </NavLink>
+                </tooltip>
+              </li>
+              {user?.role=="driver"?<></>:<>  <li>
+                <tooltip placement="right" title="Active Plan">
+                  <NavLink
+                    to={`${user?.plan_id?"/activeplan":""}`}
+                    // to={`/activeplan`}
+                    className={(isActive) =>
+                      "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
+                      (location?.pathname == "/activeplan" &&
+                        " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                    }
+                  >
+                    <RiMoneyDollarCircleLine className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <span className="text-inherit leading-none sidebar_text">
+                      Active Plan
                     </span>
                   </NavLink>
                 </tooltip>
@@ -347,7 +347,8 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                     </span>
                   </NavLink>
                 </tooltip>
-              </li>
+              </li></>}
+            
           </ul>
 
           </div>
