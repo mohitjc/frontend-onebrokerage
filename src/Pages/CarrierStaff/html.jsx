@@ -48,7 +48,7 @@ const Html = ({
   const history = useNavigate();
   useEffect(() => {
     // loader(true);
-    if(!user?.role=="driver")
+    if(!(user?.role=="driver"))
     {
       ApiClient.get("active-plan").then((res) => {
         if (res.success) {

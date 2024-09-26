@@ -278,34 +278,31 @@ const AddEdit = () => {
 
             <div className="col-md-6 ">
               <label className="">Mobile No</label>
-              <div className="phoneInput_cls d-flex form-control p-0">
-                {/* <PhoneInput
-                  country={'us'}
-                  value={form?.dialCode}
-                  countryCodeEditable={false}
+              <div className="">
+                <PhoneInput
+                  value={form.dialCode + "" + form.mobileNo}
+                  countryCodeEditable={true}
                   enableSearch={true}
                   placeholder=""
+                  country="us"
                   onChange={(phone, country) => {
+                    let phonenumber = phone.replace(
+                      country.dialCode,
+                      ""
+                    );
+                    // if(phonenumber!=form.mobileNo){
+                    // setform({ ...form, mobileNo: phonenumber })
+                    // }
                     setForm({
                       ...form,
                       dialCode: country.dialCode,
+                      mobileNo: phonenumber,
                     });
                   }}
-                /> */}
-
-                <input
-                  type="text"
-                  className="form-control phph"
-                  placeholder="Mobile No."
-                  value={(form && form.mobileNo) || ''}
-                  maxLength={12}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      mobileNo: methodModel.isNumber(e),
-                    })
-                  }
+                  required
                 />
+
+
               </div>
             </div>
             <div className="col-md-6 ">

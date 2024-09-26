@@ -42,9 +42,7 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-    if (form?.password != form?.confirmPassword) {
-      return toast.error("Password and comfirm password did not match");
-    }
+ 
     if (
       !emailvalidation() ||
       !form?.firstName ||
@@ -145,6 +143,17 @@ const Signup = () => {
             type="text"
             onChange={(e) => setForm({ ...form, firstName: e.target.value })}
             value={form.firstName}
+            pattern="^[a-zA-Z]+$"
+            onKeyPress={(e) => {
+              var regex = new RegExp("^[a-zA-Z]+$");
+              var key = String.fromCharCode(
+                !e.charCode ? e.which : e.charCode
+              );
+              if (!regex.test(key)) {
+                e.preventDefault();
+                return false;
+              }
+            }}
             className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
             placeholder="First Name"
             autoComplete="off"
@@ -153,6 +162,17 @@ const Signup = () => {
           <input
             type="text"
             onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+            pattern="^[a-zA-Z']+$"
+            onKeyPress={(e) => {
+              var regex = new RegExp("^[a-zA-Z']+$");
+              var key = String.fromCharCode(
+                !e.charCode ? e.which : e.charCode
+              );
+              if (!regex.test(key)) {
+                e.preventDefault();
+                return false;
+              }
+            }}
             value={form?.lastName}
             className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
             placeholder="Last Name"
@@ -228,7 +248,13 @@ const Signup = () => {
               ></i>
             </div>
           </div>
-
+          {submitted && form?.confirmPassword != form?.password ? (
+                                <div className="invalid-feedback block star text-[12px]">
+                                    Password and  ConfirmPassword did not matched
+                                </div>
+                            ) : (
+                                <></>
+                            )}
 
           <div className="flex">
             {/* <label className="flex items-center pointer">

@@ -60,7 +60,7 @@ const Forgotpassword = () => {
               <input
                 type="email"
                 className="mb-5 relative  bg-white w-full  rounded-lg h-12 flex items-center gap-2 overflow-hidden  bginput px-4  "
-                placeholder="Email*"
+                placeholder="Email"
                 value={form.email}
                 required
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
