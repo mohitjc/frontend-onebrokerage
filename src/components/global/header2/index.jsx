@@ -15,10 +15,10 @@ import { logout } from '../../../Pages/actions/user';
 import { useDispatch } from 'react-redux';
 
 const navigation = [
-  { name: 'About', href: '#', current: true },
+  { name: 'About', href: '#', current: window.location.pathname=="/"?true:false },
   { name: 'Blog', href: '#', current: false },
-  {name:'Plan',href:"/plan", current: false},
-  { name: 'Chat', href: '/chat', current: false },
+  {name:'Plan',href:"/plan", current:window.location.pathname=="/plan"?true:false},
+  { name: 'Chat', href: '/chat', current: window.location.pathname=="/chat"?true:false },
   { name: 'Contact', href: '#', current: false },
 ]
 
@@ -64,6 +64,7 @@ const Header = () => {
               <div className="hidden sm:ml-6 sm:block w-full">
                 <div className="flex space-x-4 justify-center">
                   {navigation.map((item) => (
+                  
                     <a
                       key={item.name}
                       href={item.href}
@@ -72,7 +73,7 @@ const Header = () => {
                         item.current ? 'bg-[#3E549D] text-white' : 'text-gray-600 hover:bg-[#3E549D] hover:text-white',
                         'rounded-md px-3 py-2 text-sm font-medium',
                       )}
-                    >
+                    >   
                       {item.name}
                     </a>
                   ))}
