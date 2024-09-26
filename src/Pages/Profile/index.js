@@ -295,43 +295,48 @@ const Profile = () => {
                   <div className="">
 
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:ml-4 ml-0 lg:border-l border-dashed border-gray-400 md:pl-5 pl-0">
-                        <div className="">
+                        {data?.fax_number?<div className="">
                           <label className="text-gray-500 font-normal ">Fax Number</label>
                           <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
                             {" "}
                             {/* <LiaUserSolid className="text-xl" /> */}
                             {data && data?.fax_number || "--"}
                           </p>
-                        </div>
-                        <div className="">
+                        </div>:<></>}
+                        
+                        {data.tax_number?    <div className="">
                           <label className="text-gray-500 font-normal ">Tax Number</label>
                           <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
                             {/* <MdOutlineEmail className="text-xl" /> */}
                             {data && data.tax_number}
                           </p>
-                        </div>
-                        <div className="">
+                        </div>:<></>}
+                    
+                       {data.total_trucks?<div className="">
                           <label className="text-gray-500 font-normal ">Total Truck</label>
                           <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
                             {/* <MdOutlineEmail className="text-xl" /> */}
                             {data && data.total_trucks}
                           </p>
-                        </div>
-                        <div className="">
+                        </div>:<></>}
+                        
+                        {data.team_truck? <div className="">
                           <label className="text-gray-500 font-normal ">Team Trucks</label>
                           <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
                             {/* <MdOutlineEmail className="text-xl" /> */}
                             {data && data.team_truck}
                           </p>
-                        </div>
-                        <div className="">
+                        </div>:<></>}
+                       
+                       {data.solo_truck? <div className="">
                           <label className="text-gray-500 font-normal ">Solo Trucks</label>
                           <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
                             {/* <MdOutlineEmail className="text-xl" /> */}
                             {data && data.solo_truck}
                           </p>
-                        </div>
-                        <div className="">
+                        </div>:<></>}
+                       
+                       {data?.trailer_type?.length>0? <div className="">
                           <label className="text-gray-500 font-normal ">Trailer Type</label>
                           <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
                             {data?.trailer_type?.map(
@@ -344,7 +349,8 @@ const Profile = () => {
                               }
                             )}
                           </p>
-                        </div>
+                        </div>:<></>}
+                       
 
                       </div>
                   </div>
