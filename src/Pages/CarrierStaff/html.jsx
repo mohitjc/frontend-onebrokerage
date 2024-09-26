@@ -47,7 +47,7 @@ const Html = ({
   const [activeplan, setActivePlan] = useState();
   const history = useNavigate();
   useEffect(() => {
-    loader(true);
+    // loader(true);
     ApiClient.get("active-plan").then((res) => {
       if (res.success) {
         setActivePlan(res.data);
@@ -55,7 +55,7 @@ const Html = ({
           history("/plans");
         }
       }
-      loader(false);
+      // loader(false);
     });
 
   }, []);
