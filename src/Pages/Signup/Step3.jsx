@@ -181,7 +181,7 @@ export default function Step3() {
   return (
     <AuthLayout>
       <div className="">
-        <form className="" onSubmit={handleSubmit}>
+        <form  className="w-full px-6" onSubmit={handleSubmit}>
           <div className=" ">
             <div className="">
               <div className="progressbar-num">
@@ -454,7 +454,7 @@ export default function Step3() {
                                         />
                                         <label
                                           for="reefer"
-                                          className="ms-2 text-white cursor-pointer"
+                                          className="ms-2 text-[14px] text-white cursor-pointer"
                                         >
                                           Reefer
                                         </label>
@@ -471,7 +471,7 @@ export default function Step3() {
                                 });
                               }}
                             />
-                            <label for="dry_van" className="ms-2 text-white cursor-pointer">
+                            <label for="dry_van" className="ms-2 text-[14px] text-white cursor-pointer">
                               Dry Van
                             </label>
                           </div>
@@ -505,18 +505,18 @@ export default function Step3() {
                                 });
                               }}
                             />
-                            <label for="reefer" className="ms-2 text-white cursor-pointer" >
+                            <label for="reefer" className="ms-2 text-[14px] text-white cursor-pointer" >
                               Reefer
                             </label>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className=" d-flex align-items-baseline">
+                    <div className=" flex items-start">
                       <input
                         type="checkbox"
                         id="checkbox1"
-                        className="checkBox"
+                        className="checkBox mt-1"
                         name="check"
                         checked={tick}
                         onChange={(e) => {
