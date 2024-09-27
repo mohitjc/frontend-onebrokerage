@@ -167,7 +167,7 @@ export default function Chat() {
     let files = e.target.files
     console.log("files", files)
     loader(true)
-    ApiClient.multiImageUpload('upload/document/multiple', files).then(res => {
+    ApiClient.multiImageUpload('upload/image?modelName=users', files).then(res => {
       e.target.value = ''
       loader(false)
       if (res.success) {
@@ -175,7 +175,7 @@ export default function Chat() {
         let value = {
           room_id: chatRoomId,
           type: 'IMAGE',
-          media:res?.data?.imagePath
+          content:res?.data?.fullpath
         }
         console.log("value", value)
         socketModel.emit("send-message", value);
@@ -477,7 +477,7 @@ export default function Chat() {
                       <div className='flex gap-4 items-center relative'>
                         <label className="absolute left-[10px] top-1/2 cursor-pointer">
                           <ImAttachment className='text-xl text-gray-600' />
-                          <input type="file" onChange={uploadImage} accept="image/*" className="d-none" />
+                          <input type="file" model="document" onChange={uploadImage} accept="image/*" className="d-none" />
                         </label>
                         {/* <LuSmile className='text-xl text-gray-600' />
                       <ImAttachment className='text-xl text-gray-600' /> */}

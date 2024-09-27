@@ -161,7 +161,7 @@ const AddEdit = () => {
             <div className="mb-3">
                 <label className="text-sm">Document</label>
                 <div>
-                <ImageUpload
+              <ImageUpload
                 value={doc}
                 model="document"
                 apiUrl="upload/upload/document"
