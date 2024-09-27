@@ -148,7 +148,7 @@ export default function AddressStep() {
     <div className="">
     <form
                   autoComplete="off"
-                  className=""
+                 className="w-full px-6"
                   onSubmit={handleSubmit}
                 >
                  

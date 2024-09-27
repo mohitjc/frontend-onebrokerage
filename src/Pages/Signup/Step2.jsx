@@ -121,7 +121,7 @@ export default function Step2() {
   return (
     <AuthLayout>
     <div className="">
-    <form className="" onSubmit={handleSubmit}>
+    <form  className="w-full px-6" onSubmit={handleSubmit}>
                   
                   <div className="">
                     <div className="">
