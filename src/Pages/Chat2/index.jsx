@@ -135,7 +135,7 @@ export default function Chat() {
     let files=e.target.files
     console.log("files",files)
     loader(true)
-    ApiClient.multiImageUpload('user/uploadImage',files).then(res=>{
+    ApiClient.multiImageUpload('upload/image?modelName=users',files).then(res=>{
        e.target.value=''
        loader(false)
       if(res.success){
