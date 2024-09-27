@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaMoon } from "react-icons/fa";
-import { GoSearch } from "react-icons/go";
+import { GoHome, GoSearch } from "react-icons/go";
 import { HiMiniBars3 } from "react-icons/hi2";
 import { TbRosetteDiscountCheckFilled } from "react-icons/tb";
 import { WiDaySunny } from "react-icons/wi";
@@ -19,16 +19,18 @@ import environment from '../../environment';
 import socketModel from '../../models/socketModel';
 import methodModel from '../../methods/methods';
 import moment from 'moment';
-
+import { CiHome } from "react-icons/ci";
+import { useNavigate } from 'react-router-dom';
 
 export default function Chat() {
 
   const [darkMode, setDarkMode] = useState(false);
-
+  const history=useNavigate()
   const user = useSelector(state => state.user)
   const currectChat = useRef()
   const messages = useRef()
   const [chatMessages, setChatMessages] = useState([]);
+  console.log(chatMessages,"chatMessageschatMessages")
   const [chatRooms, setChatRooms] = useState([]);
   const [chatRoomId, setChatRoomId] = useState("");
   const [search, setSearch] = useState('');
@@ -220,16 +222,17 @@ export default function Chat() {
                   ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
               <div className="hdes_sech flex items-center gap-6 px-4 ">
                 <HiMiniBars3 className="text-xl xl:text-3xl ml-2 text-[#707991] hidden lg:block" />
-                <IoMdClose onClick={closeSidebar} className="text-2xl block lg:hidden xl:text-3xl ml-2 text-[#707991]" />
+                <HiMiniBars3 onClick={closeSidebar} className="text-2xl block lg:hidden xl:text-3xl ml-2 text-[#707991]" />
                 <div className="bg-gray-100 items-center flex gap-2 py-2 px-4 rounded-full w-full">
                   <GoSearch className="text-xl" />
                   <input type="search" className="bg-transparent" />
                 </div>
+                {/* <div onClick={(e)=>history("/")}><CiHome/></div> */}
               </div>
 
               <div className="mt-4 flex flex-col gap-2 h-[calc(100vh-80px)] tailwind-scrollbar overflow-y-auto">
                 <div className="flex justify-between gap-4 bg-white px-4 py-2 ">
-                  <div className="flex gap-2 xl:gap-4 ">
+                  <div className="flex gap-2 xl:gap-4 " onClick={(e)=>history("/")}>
                     <img src="assets/img/logo.jpeg" className="h-8 w-8 xl:h-12 xl:w-12 object-contain" />
                     <div className="">
                       <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">One Brokerage Support   <TbRosetteDiscountCheckFilled className="text-blue-500" />  </h4>
@@ -287,7 +290,7 @@ export default function Chat() {
             <div className="chatslefts lg:w-[300px] xl:w-[400px] border-r border-gray-200 shrink-0 py-4 h-screen ">
 
               <div className="hdes_sech flex items-center gap-6 px-4 ">
-                <HiMiniBars3 className="text-xl xl:text-3xl ml-2 text-[#707991] hidden md:block" />
+                <GoHome onClick={(e)=>history("/")} className="text-xl cursor-pointer xl:text-3xl ml-2 text-[#707991] hidden md:block" />
                 <IoMdClose onClick={closeSidebar} className="text-xl block md:hidden xl:text-3xl ml-2 text-[#707991]" />
                 <div className="bg-gray-100 items-center flex gap-2 py-2 px-4 rounded-full w-full">
                   <GoSearch className="text-xl" />
@@ -462,7 +465,12 @@ export default function Chat() {
                           </div>
                         </> :
                           <div class="flex w-full mt-2 space-x-3 max-w-xs">
-                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"><img
+                                  src={methodModel.userImg(
+                                    itm?.sender_image
+                                  )}
+                                  className="h-32 w-32 rounded-full mb-4 object-contain "
+                                /></div>
                             <div>
                               <div class="bg-white p-3 rounded-r-lg rounded-bl-lg">
                                 <p class="text-sm">{itm?.content}</p>

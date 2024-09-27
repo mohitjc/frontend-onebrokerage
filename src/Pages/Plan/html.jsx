@@ -120,7 +120,7 @@ const Html = ({
               <div class={`border border-slate-200 rounded-lg shadow-sm divide-y divide-slate-200 transform transition-transform duration-300 hover:border-[#604cc3] hover:scale-105 ${checkActiveplan(itm)=="Active Plan"?"border-primary shadow-lg transform transition-transform duration-300  scale-105":""}`}>
               
                 <div class="p-6">
-                  <h2 class="text-xl leading-6 font-bold text-slate-900 capitalize">{itm?.name}</h2>
+                  <h2 class="text-xl leading-6 font-bold text-slate-900 capitalize">{methodModel.capitalizeFirstLetter(itm?.name)}</h2>
                 
                   {/* <p class="mt-2 text-base text-slate-700 leading-tight">For new makers who want to fine-tune and test an
                         idea.</p> */}

@@ -178,7 +178,7 @@ const Html = ({
                 <Tooltip placement="top" title="Chat">
                   <span
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={() => ChatUser(itm.id)}
+                    onClick={() => ChatUser(itm.driver_user_id)}
                   >
                   <IoChatbubbleEllipsesOutline />
                   </span>

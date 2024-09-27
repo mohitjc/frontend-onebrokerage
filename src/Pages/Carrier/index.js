@@ -116,6 +116,7 @@ const Carrier = (p) => {
     }
 
   const getData = (p = {}) => {
+    console.log(user,"=============")
     setLoader(true);
     let newaddedBy
     if(user?.role=="driver")
