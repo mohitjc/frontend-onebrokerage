@@ -61,7 +61,6 @@ const AddEdit = () => {
     ApiClient.allApi(url, value, method).then((res) => {
       if (res.success) {
         toast.success(res.message);
-
         if (localStorage.getItem("newuser", true) && !value?.id) {
           history("/drivers/add");
 

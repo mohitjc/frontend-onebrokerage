@@ -81,6 +81,12 @@ const Features = () => {
     getData({ ...f });
   };
 
+
+  const ChatUser=(id)=>
+  {
+      history(`/chat?assignment_id=${id}`)
+  }
+
   const deleteItem = (id) => {
     // if (window.confirm("Do you want to delete this")) {
     //     loader(true)
@@ -262,6 +268,7 @@ const Features = () => {
         count={count}
         pageChange={pageChange}
         deleteItem={deleteItem}
+        ChatUser={ChatUser}
         filters={filters}
         setFilter={setFilter}
         filter={filter}

@@ -109,6 +109,12 @@ const Carrier = (p) => {
     setTableCols([...exp]);
   };
 
+
+  const ChatUser=(id)=>
+    {
+        history(`/chat?assignment_id=${id}`)
+    }
+
   const getData = (p = {}) => {
     setLoader(true);
     let newaddedBy
@@ -377,6 +383,7 @@ const Carrier = (p) => {
         deleteLoad={deleteLoad}
         clear={clear}
         count={count}
+        ChatUser={ChatUser}
       />
     </>
   );

@@ -31,6 +31,7 @@ function App() {
       
       // { url: "/chat", path: "Chat2" },
       { url: "/chat", path: "Chat" },
+      { url: "/chat1", path: "Chat2" },
       { url: "/dashboard", path: "Dashboard" },
      { url: "/profile", path: "Profile" },
      { url: "/forgotpassword", path: "Forgotpassword" },

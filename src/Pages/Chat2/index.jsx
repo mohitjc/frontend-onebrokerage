@@ -20,144 +20,144 @@ export default function Chat() {
   const [cloader, setCLoader] = useState('');
   const [assignment, setAssignment] = useState();
 
-  // let ar = sessionStorage.getItem("activeRooms");
-  // const activeRooms = useRef(ar ? JSON.parse(ar) : []);
+  let ar = sessionStorage.getItem("activeRooms");
+  const activeRooms = useRef(ar ? JSON.parse(ar) : []);
 
-  // const chatScroll = () => {
-  //   // Scroll to the bottom after sending a message
-  //   var chatBox = document.getElementById("chat-box");
-  //   if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
-  // };
+  const chatScroll = () => {
+    // Scroll to the bottom after sending a message
+    var chatBox = document.getElementById("chat-box");
+    if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+  };
 
-  // const getChatMessages = (id) => {
-  //   // loader(true);
-  //   ApiClient.get("chat/user/message/all", { room_id: id },environment.chat_api).then((res) => {
-  //     if (res.success) {
-  //       let data = res.data.data;
-  //       setChatMessages(data);
-  //       messages.current = data;
-  //       setTimeout(() => {
-  //         chatScroll();
-  //       }, 100);
-  //     }
-  //     // loader(false);
-  //   });
-  // };
-
-
-  // const joinChat=(assignment_id)=>{
-  //   let payload={
-  //     chat_by:user._id,
-  //     chat_with:assignment_id
-  //   }
-  //   loader(true)
-  //   ApiClient.post('chat/user/join-group',payload,{},environment.chat_api).then(res=>{
-  //     loader(false)
-  //     if(res.success){
-  //       let room_id=res.data.room_id
-  //       setChatRoomId(room_id)
-  //       currectChat.current=room_id
-  //     }
-  //   })
-  // }
-
-  // const assignmentDetail=(id)=>{
-  //   ApiClient.get('assignment/detail',{id:id}).then(res=>{
-  //     if(res.success){
-  //       setAssignment(res.data)
-  //     }
-  //   })
-  // }
+  const getChatMessages = (id) => {
+    // loader(true);
+    ApiClient.get("chat/user/message/all", { room_id: id },environment.chat_api).then((res) => {
+      if (res.success) {
+        let data = res.data.data;
+        setChatMessages(data);
+        messages.current = data;
+        setTimeout(() => {
+          chatScroll();
+        }, 100);
+      }
+      // loader(false);
+    });
+  };
 
 
-  // useEffect(()=>{
-  //   socketModel.on("receive-message", (data) => {
-  //     console.log("data", data);
-  //     if (currectChat.current == data.data.room_id) {
-  //       messages.current.push({ ...data.data });
+  const joinChat=(assignment_id)=>{
+    let payload={
+      chat_by:user._id,
+      chat_with:assignment_id
+    }
+    loader(true)
+    ApiClient.post('chat/user/join-group',payload,{},environment.chat_api).then(res=>{
+      loader(false)
+      if(res.success){
+        let room_id=res.data.room_id
+        setChatRoomId(room_id)
+        currectChat.current=room_id
+      }
+    })
+  }
 
-  //       const uniqueMessages = Array.from(
-  //         new Set(messages.current.map((message) => message._id))
-  //       ).map((id) => {
-  //         return messages.current.find((message) => message._id === id);
-  //       });
+  const assignmentDetail=(id)=>{
+    ApiClient.get('assignment/detail',{id:id}).then(res=>{
+      if(res.success){
+        setAssignment(res.data)
+      }
+    })
+  }
 
-  //       console.log("uniqueMessages", uniqueMessages);
-  //       setChatMessages([...uniqueMessages]);
-  //       setTimeout(() => {
-  //         chatScroll();
-  //       }, 100);
-  //     }
-  //   });
-  //   let assignment_id = methodModel.getPrams('assignment_id')
-  //   if (assignment_id) {
-  //     assignmentDetail(assignment_id)
-  //     joinChat(assignment_id)
-  //   }
+
+  useEffect(()=>{
+    socketModel.on("receive-message", (data) => {
+      console.log("data", data);
+      if (currectChat.current == data.data.room_id) {
+        messages.current.push({ ...data.data });
+
+        const uniqueMessages = Array.from(
+          new Set(messages.current.map((message) => message._id))
+        ).map((id) => {
+          return messages.current.find((message) => message._id === id);
+        });
+
+        console.log("uniqueMessages", uniqueMessages);
+        setChatMessages([...uniqueMessages]);
+        setTimeout(() => {
+          chatScroll();
+        }, 100);
+      }
+    });
+    let assignment_id = methodModel.getPrams('assignment_id')
+    if (assignment_id) {
+      assignmentDetail(assignment_id)
+      joinChat(assignment_id)
+    }
     
-  // },[])
+  },[])
 
-  // useEffect(() => {
-  //   if (chatRoomId != "") {
-  //     let value = {
-  //       room_id: chatRoomId,
-  //       user_id: user?._id,
-  //     };
-  //     if (!activeRooms.current.includes(chatRoomId)) {
-  //       console.log("activeRooms inner", activeRooms);
-  //       activeRooms.current.push(chatRoomId);
-  //       sessionStorage.setItem(
-  //         "activeRooms",
-  //         JSON.stringify(activeRooms.current)
-  //       );
-  //       socketModel.emit("join-room", value);
-  //     }
-  //     // socketModel.emit("unread-count", value);
-  //     // socketModel.emit("read-all-message", value);
+  useEffect(() => {
+    if (chatRoomId != "") {
+      let value = {
+        room_id: chatRoomId,
+        user_id: user?._id,
+      };
+      if (!activeRooms.current.includes(chatRoomId)) {
+        console.log("activeRooms inner", activeRooms);
+        activeRooms.current.push(chatRoomId);
+        sessionStorage.setItem(
+          "activeRooms",
+          JSON.stringify(activeRooms.current)
+        );
+        socketModel.emit("join-room", value);
+      }
+      // socketModel.emit("unread-count", value);
+      // socketModel.emit("read-all-message", value);
 
-  //     getChatMessages(chatRoomId);
-  //   }
-  // }, [chatRoomId]);
+      getChatMessages(chatRoomId);
+    }
+  }, [chatRoomId]);
 
-  // const handleSubmit=()=>{
-  //   if(!text) return 
-  //   let value={
-  //     room_id:chatRoomId,
-  //     type:'TEXT',
-  //     content:text
-  //   }
-  //   console.log("value",value)
-  //   socketModel.emit("send-message", value);
-  //   setText('')
-  // }
+  const handleSubmit=()=>{
+    if(!text) return 
+    let value={
+      room_id:chatRoomId,
+      type:'TEXT',
+      content:text
+    }
+    console.log("value",value)
+    socketModel.emit("send-message", value);
+    setText('')
+  }
 
-  // const uploadImage=(e)=>{
-  //   let files=e.target.files
-  //   console.log("files",files)
-  //   loader(true)
-  //   ApiClient.multiImageUpload('user/uploadImage',files).then(res=>{
-  //      e.target.value=''
-  //      loader(false)
-  //     if(res.success){
-  //       let value={
-  //         room_id:chatRoomId,
-  //         type:'IMAGE',
-  //         content:res.image
-  //       }
-  //       console.log("value",value)
-  //       socketModel.emit("send-message", value);
-  //     }
-  //   })
+  const uploadImage=(e)=>{
+    let files=e.target.files
+    console.log("files",files)
+    loader(true)
+    ApiClient.multiImageUpload('user/uploadImage',files).then(res=>{
+       e.target.value=''
+       loader(false)
+      if(res.success){
+        let value={
+          room_id:chatRoomId,
+          type:'IMAGE',
+          content:res.image
+        }
+        console.log("value",value)
+        socketModel.emit("send-message", value);
+      }
+    })
    
-  // }
+  }
 
   return (
     <>
   
-     {/* <Layout>
+     <Layout>
         <div className="">
-          <div className="bg-gray-100 h-[600px] flex border border-gray-200"> */}
-            {/* <div className="w-80 bg-white border-r border-gray-200  flex flex-col">
+          <div className="bg-gray-100 h-[600px] flex border border-gray-200">
+            <div className="w-80 bg-white border-r border-gray-200  flex flex-col">
              <div className="py-4 px-4 border-b border-gray-200 bg-[#00358503]">
                 <div className="relative">
                 <i className="fa fa-search absolute top-4 left-3 text-[#00000096] text-[13px]"></i>
@@ -208,9 +208,9 @@ export default function Chat() {
                   <p className="text-[12px] text-[#000000c2]">12.45pm</p>
                 </li>
               </ul>
-            </div> */}
+            </div> 
 
-            {/* <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col">
               <div className="p-3 px-4 border-b border-gray-200 bg-[#00358503]">
                 <div className="flex items-center">
         
@@ -280,10 +280,10 @@ export default function Chat() {
                   </button>
                 </form>
               </div>
-            </div>*/}
-          {/* </div> 
+            </div>
+          </div> 
         </div>
-      </Layout> */}
+      </Layout>
     </>
   );
 }

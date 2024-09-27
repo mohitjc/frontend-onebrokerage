@@ -138,7 +138,7 @@ const Dashboard = () => {
                 />
               </div>
               <dt className="text-base leading-7 text-black/40 mb-1">
-                Total Staff
+                Total Trucks
               </dt>
               <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
                 {data?.totalUsers} 34
@@ -153,7 +153,7 @@ const Dashboard = () => {
                 />
               </div>
               <dt className="text-base leading-7 text-black/40 mb-1">
-              Total Students
+              Total Drivers
               </dt>
               <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
               {data?.totalProducts} 34
@@ -168,7 +168,7 @@ const Dashboard = () => {
                 />
               </div>
               <dt className="text-base leading-7 text-black/40 mb-1">
-              Total Categories
+              Total Carrier's Staff
               </dt>
               <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
               {data?.totalCategory} 34
@@ -184,7 +184,7 @@ const Dashboard = () => {
                 />
               </div>
               <dt className="text-base leading-7 text-black/40 mb-1">
-              Total Assignment
+              Total Transaction
               </dt>
               <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
               {data?.totalReview} 34
