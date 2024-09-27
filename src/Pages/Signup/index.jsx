@@ -9,6 +9,9 @@ import { toast } from "react-toastify";
 import methodModel from "../../methods/methods"
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
+import { Description, Field, Label, Select } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import clsx from 'clsx'
 
 const Signup = () => {
   const [EmailError, setEmailError] = useState(false);
@@ -89,7 +92,7 @@ const Signup = () => {
     <>
       <AuthLayout>
         <form
-          className=""
+           className="w-full px-6"
           onSubmit={handleSubmit}
           autoComplete="off"
         >
@@ -189,8 +192,45 @@ const Signup = () => {
             disabled={methodModel.getPrams("attended") ? true : false}
             required
           />
-          <select
-            className="shadow-box mb-3 border-1 focus:outline-none border-gray-300 relative bg-gray-100 w-full text-sm  rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 "
+
+
+<Field className="mb-3">
+        
+        <div className="relative">
+          <Select
+            className={clsx(
+              'mt-3 block w-full h-11 appearance-none rounded-lg border-none bg-gray-50 py-1.5 px-3 text-sm/6 text-gray-500 ',
+              'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
+              '*:text-black'
+            )}
+
+
+            onChange={(e) => {
+              setForm({
+                ...form,
+                position: e.target.value,
+              });
+            }}
+            required
+          >
+            <option value="">Select Option</option>
+                <option value="owner">Owner</option>
+                <option value="manager">Manager</option>
+                <option value="accounting_manager">
+                  Account Manager
+                </option>
+                <option value="dispatcher">Dispatcher</option>
+          </Select>
+          <ChevronDownIcon
+            className="group pointer-events-none absolute top-1/2 -translate-y-1/2 right-1 size-6 fill-[#6b7280]"
+            aria-hidden="true"
+          />
+        </div>
+      </Field>
+
+
+          {/* <select
+            className="shadow-box mb-3 border-1 focus:outline-none border-gray-300 relative bg-gray-100 w-full text-sm  rounded-lg h-12 flex items-center gap-2 overflow-hidden px- "
 
             onChange={(e) => {
               setForm({
@@ -207,7 +247,7 @@ const Signup = () => {
               Account Manager
             </option>
             <option value="dispatcher">Dispatcher</option>
-          </select>
+          </select> */}
 
           <div className="relative mb-3">
             <input

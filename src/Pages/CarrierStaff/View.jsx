@@ -75,11 +75,9 @@ const View = () => {
 
             <div className="col-span-12">
               <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
-                <div className=" p-3 border-b flex items-center border-[#474e9c3b] border-dashed">
-                  <div className="bg-[#eeeff6] p-3 me-3 rounded-md">
-                    <FaUserAlt className="text-[#494f9f]" />
-                  </div>
-                  <h3 className="text-[16px] font-[500] text-[#494f9f]">
+                <div className="bg-[#1245940a] p-4 border-b">
+                
+                  <h3 className="text-[20px] font-[500]">
                     Basic Information
                   </h3>
                 </div>
@@ -120,11 +118,9 @@ const View = () => {
             </div>
             <div className="col-span-12">
               <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
-                <div className=" p-3 border-b flex items-center border-[#474e9c3b] border-dashed">
-                  <div className="bg-[#eeeff6] p-3 me-3 rounded-md">
-                    <FaLocationDot className="text-[#494f9f]" />
-                  </div>
-                  <h3 className="text-[16px] font-[500] text-[#494f9f]">
+                <div className="bg-[#1245940a] p-4 border-b">
+                  
+                  <h3 className="text-[20px] font-[500]">
                     Address
                   </h3>
                 </div>
@@ -180,11 +176,9 @@ const View = () => {
             </div>
             <div className="col-span-12">
               <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
-                <div className=" p-3 border-b flex items-center border-[#474e9c3b] border-dashed">
-                  <div className="bg-[#eeeff6] p-3 me-3 rounded-md">
-                    <FaFileZipper className="text-[#494f9f]" />
-                  </div>
-                  <h3 className="text-[16px] font-[500] text-[#494f9f]">
+                <div className="bg-[#1245940a] p-4 border-b">
+                 
+                  <h3 className="text-[20px] font-[500]">
                     Permissions
                   </h3>
                 </div>

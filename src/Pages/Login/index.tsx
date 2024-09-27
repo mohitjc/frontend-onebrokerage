@@ -211,7 +211,7 @@ const Login = () => {
       <AuthLayout>
  
           <form
-            className="w-full"
+            className="w-full px-6"
             onSubmit={hendleSubmit}
           >
            
