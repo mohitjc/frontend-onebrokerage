@@ -167,7 +167,7 @@ export default function Chat() {
     let files = e.target.files
     console.log("files", files)
     loader(true)
-    ApiClient.multiImageUpload('upload/image?modelName=users', files).then(res => {
+    ApiClient.multiImageUpload('upload/document/multiple', files).then(res => {
       e.target.value = ''
       loader(false)
       if (res.success) {
@@ -175,7 +175,7 @@ export default function Chat() {
         let value = {
           room_id: chatRoomId,
           type: 'IMAGE',
-          content:res?.data?.fullpath
+          media:res?.data?.imagePath
         }
         console.log("value", value)
         socketModel.emit("send-message", value);
@@ -442,12 +442,16 @@ export default function Chat() {
                           <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
                             <div>
                               <div class="bg-primary text-white p-3 rounded-l-lg rounded-br-lg">
-                                {itm?.type == "IMAGE" ? <> <img
+                                {itm?.type == "IMAGE" ? <> 
+                                {itm?.media?.map((item)=>{
+                                  return  <img
                                   src={methodModel.userImg(
-                                    itm && itm.content
+                                    item,"chat"
                                   )}
                                   className="h-32 w-32 rounded-full mb-4 object-contain "
                                 />
+                                })}
+                               
                                 </> : <p class="text-sm">{itm?.content}</p>}
 
                               </div>
@@ -477,7 +481,7 @@ export default function Chat() {
                       <div className='flex gap-4 items-center relative'>
                         <label className="absolute left-[10px] top-1/2 cursor-pointer">
                           <ImAttachment className='text-xl text-gray-600' />
-                          <input type="file" model="document" onChange={uploadImage} accept="image/*" className="d-none" />
+                          <input type="file" multiple onChange={uploadImage} accept="image/*" className="d-none" />
                         </label>
                         {/* <LuSmile className='text-xl text-gray-600' />
                       <ImAttachment className='text-xl text-gray-600' /> */}
