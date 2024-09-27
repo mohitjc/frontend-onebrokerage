@@ -117,19 +117,28 @@ const Html = ({
              
           {data && data.map((itm) => {
             return (
-              <div class="border border-slate-200 rounded-lg shadow-sm divide-y divide-slate-200">
+              <div class={`border border-slate-200 rounded-lg shadow-sm divide-y divide-slate-200 transform transition-transform duration-300 hover:border-[#604cc3] hover:scale-105 ${checkActiveplan(itm)=="Active Plan"?"border-primary shadow-lg transform transition-transform duration-300  scale-105":""}`}>
               
                 <div class="p-6">
                   <h2 class="text-xl leading-6 font-bold text-slate-900 capitalize">{itm?.name}</h2>
-                  <h4 class="text-xl leading-6  text-slate-900 capitalize">Number Of Carrier:{itm?.number_of_carriers}</h4>
-                  <h4 class="text-xl leading-6 text-slate-900 capitalize">Number Of Driver:{itm?.number_of_drivers}</h4>
+                
                   {/* <p class="mt-2 text-base text-slate-700 leading-tight">For new makers who want to fine-tune and test an
                         idea.</p> */}
+
+                        <div className="mt-4">
+                        
+                        <h4 class="mt-2 text-base text-slate-700 leading-tight flex justify-between items-center ">Number Of Carrier: <span className="ext-xl leading-6 font-bold text-slate-900 bg-gray-100 px-2 py-1 ">{itm?.number_of_carriers}</span></h4>
+                        <h4 class="mt-2 text-base text-slate-700 leading-tight flex justify-between items-center ">Number Of Driver: <span className="ext-xl leading-6 font-bold text-slate-900 bg-gray-100 px-2 py-1 ">{itm?.number_of_drivers}</span></h4>
+                        </div>
+
                   <p class="mt-8">
                     <span class="text-4xl font-bold text-slate-900 tracking-tighter">${getPrice(itm)}</span>
 
                     <span class="text-base font-medium text-slate-500">{interval==12?"/year":`/${interval} month`}</span>
                   </p>
+
+
+
                   <button className={`mt-8 block w-full  rounded-md py-2 text-sm font-semibold text-white text-center ${getPrice(itm)==0?'cursor-not-allowed bg-gray-300 text-black':'bg-primary'} ${checkActiveplan(itm)=="Active Plan"?"cursor-not-allowed":""}`} disabled={getPrice(itm)==0||checkActiveplan(itm)=="Active Plan" } onClick={(e)=>payment(itm,getPrice(itm))}>{checkActiveplan(itm)}</button>              
                 </div>
                 <div class="pt-6 pb-8 px-6">
