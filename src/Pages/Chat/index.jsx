@@ -461,16 +461,21 @@ export default function Chat() {
                               <span class="text-xs text-gray-500 leading-none">2 min ago</span>
                               {/* <span class="text-xs text-gray-500 leading-none">{MintTime(itm?.createdAt)}</span> */}
                             </div>
-                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-                          </div>
-                        </> :
-                          <div class="flex w-full mt-2 space-x-3 max-w-xs">
-                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"><img
+                            <img
                                   src={methodModel.userImg(
                                     itm?.sender_image
                                   )}
-                                  className="h-32 w-32 rounded-full mb-4 object-contain "
-                                /></div>
+                                  className="h-10 w-10 rounded-full mb-4 object-contain "
+                                />
+                          </div>
+                        </> :
+                          <div class="flex w-full mt-2 space-x-3 max-w-xs">
+                             <img
+                                  src={methodModel.userImg(
+                                    itm?.sender_image
+                                  )}
+                                  className="h-10 w-10 rounded-full mb-4 object-contain "
+                                />
                             <div>
                               <div class="bg-white p-3 rounded-r-lg rounded-bl-lg">
                                 <p class="text-sm">{itm?.content}</p>
