@@ -611,7 +611,7 @@ const Profile = () => {
                             </div>
                             <input
                               type="text"
-                              className="pl-2"
+                              className="pl-2 w-full"
                               placeholder="Enter Name"
                               value={
                                 form.fullName
@@ -643,7 +643,7 @@ const Profile = () => {
                               </div>
                               <input
                                 type="email"
-                                className="pl-2"
+                                className="pl-2 w-full"
                                 placeholder="Enter Name"
                                 value={
                                   form.email ? form.email : ''
@@ -693,7 +693,7 @@ const Profile = () => {
                                         <div>
                                           <input
                                             type="text"
-                                            className="pl-2"
+                                            className="pl-2 w-full"
                                             placeholder="Enter Carrier ID"
                                             value={form.identification_number}
                                             disabled
@@ -744,7 +744,7 @@ const Profile = () => {
                                         <div>
                                           <input
                                             type="text"
-                                            className="pl-2"
+                                            className="pl-2 w-full"
                                             placeholder="Enter Name"
                                             value={methodModel.capitalizeFirstLetter(
                                               form?.role
@@ -781,7 +781,7 @@ const Profile = () => {
                                   return false;
                                 }
                               }}
-                              className="pl-2"
+                              className="pl-2 w-full"
                               placeholder="Enter Fax"
                               value={form.fax_number}
                               onChange={(e) =>
@@ -819,7 +819,7 @@ const Profile = () => {
                                   return false;
                                 }
                               }}
-                              className="pl-2"
+                              className="pl-2 w-full"
                               placeholder="Enter Tax ID"
                               value={
                                 form.tax_number
@@ -856,7 +856,7 @@ const Profile = () => {
                     )}
                     {nextForm && (
                       <>
-                        <div className="row ">
+                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                           {/* <div className="col-md-6 mb-3">
                                         <label className="label_profile">Truck Number</label>
                                         <div>
@@ -871,7 +871,7 @@ const Profile = () => {
                                                 return false;
                                               }
                                             }}
-                                            className="pl-2"
+                                            className="pl-2 w-full"
                                             placeholder="Enter Number"
                                             value={form?.truck_number}
                                             onChange={(e) =>
@@ -884,7 +884,7 @@ const Profile = () => {
                             <label className="label_profile">
                               Trailer Number
                             </label>
-                            <div>
+                            <div className="">
                               <input
                                 type="text"
                                 pattern="^[a-zA-Z0-9]+$"
@@ -903,7 +903,7 @@ const Profile = () => {
                                     return false;
                                   }
                                 }}
-                                className="pl-2"
+                                className="pl-2 w-full h-[45px] border border-gray-200 flex items-center rounded-lg bg-gray-50"
                                 placeholder="Enter Number"
                                 value={form?.trailers_number}
                                 onChange={(e) =>
@@ -924,7 +924,7 @@ const Profile = () => {
                               <input
                                 min={0}
                                 type="number"
-                                className="pl-2"
+                                className="pl-2 w-full h-[45px] border border-gray-200 flex items-center rounded-lg bg-gray-50"
                                 placeholder="Enter Number"
                                 value={form?.team_truck}
                                 onChange={(e) =>
@@ -945,7 +945,7 @@ const Profile = () => {
                               <input
                                 min={0}
                                 type="number"
-                                className="pl-2"
+                                className="pl-2 w-full h-[45px] border border-gray-200 flex items-center rounded-lg bg-gray-50"
                                 placeholder="Enter Number"
                                 value={form?.solo_truck}
                                 onChange={(e) =>
@@ -960,13 +960,13 @@ const Profile = () => {
                           </div>
 
                           <div className="">
-                            <label className="form-label ml-2">
+                            <label className="form-label ">
                               Trailer Type
                               <span className="text-danger">
                                 *
                               </span>
                             </label>
-                            <div className="row">
+                            <div className="grid grid-cols-1 md:grid-cols-2 h-[45px] border border-gray-200  items-center rounded-lg bg-gray-50 px-4">
                               <div className="col-md-6 ">
                                 <div className="d-flex ">
                                   <input
@@ -995,8 +995,8 @@ const Profile = () => {
                                               *
                                             </span>
                                           </label>
-                                          <div className="row">
-                                            <div className="col-md-6 ">
+                                          <div className="grid grid-cols-1 md:grid-cols-2">
+                                            <div className=" ">
                                               <input
                                                 id="dry_van"
                                                 type="checkbox"
@@ -1045,7 +1045,7 @@ const Profile = () => {
                                                 Dry-Van
                                               </label>
                                             </div>
-                                            <div className="col-md-6">
+                                            <div className="">
                                               <input
                                                 id="dry_van"
                                                 type="checkbox"
@@ -1164,25 +1164,26 @@ const Profile = () => {
                             </div>
                           </div>
 
-                          <div className="col-md-12 d-flex justify-content-end gap-2">
+                  
+                        </div>{' '}
+                        <div className="flex justify-end gap-2">
                             <button
                               onClick={() => {
                                 // SetEdit(false)
                                 SetNextForm(false);
                               }}
-                              className=" btn-save width-set"
+                              className=" bg-gray-200 px-4 py-2 text-black rounded-lg mt-4"
                             >
                               Discard
                             </button>
 
                             <button
                               type="submit"
-                              className="btn dark-btn width-set"
+                              className="bg-primary px-4 py-2 text-white rounded-lg mt-4"
                             >
                               Update
                             </button>
                           </div>
-                        </div>{' '}
                       </>
                     )}
                   </div>
