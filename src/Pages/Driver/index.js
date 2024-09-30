@@ -84,7 +84,7 @@ const Features = () => {
 
   const ChatUser=(id)=>
   {
-      history(`/chat?assignment_id=${id}`)
+      history(`/chat?id=${id}`)
   }
 
   const deleteItem = (id) => {
