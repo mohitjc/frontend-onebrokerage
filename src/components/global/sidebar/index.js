@@ -20,7 +20,7 @@ const Sidebar = ({ isOpen }) => {
     customer: ['customer'],
     template: ['/dynamicpricelist', '/crm', '/waiver', '/emailtemplate', 'costing'],
     settings: ['/department', '/holidays', '/currency', '/continents', '/countries', '/regions', '/cities', '/refund-reason', '/web/settings'],
-    carriers: ['/carriers', "customers/add", "/acceptedcarriers" ,'/approvedSubCarrier',"/rejectedcarriers"],
+    carriers: ['/carriers', "/approvedcarriers" ,'/pendingcarrier',"/rejectedcarrier"],
     // plan:["/plans "]
   };
 
