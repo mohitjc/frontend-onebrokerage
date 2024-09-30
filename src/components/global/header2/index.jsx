@@ -20,7 +20,7 @@ const navigation = [
   { name: 'About', href: '#', current: window.location.pathname=="/"?true:false },
   { name: 'Blog', href: '#', current: false },
   {name:'Plan',href:"/plan", current:window.location.pathname=="/plan"?true:false},
-  { name: 'Chat', href: '#', current: window.location.pathname=="/chat"?true:false },
+  { name: 'Chat', href: '/chat', current: window.location.pathname=="/chat"?true:false },
   { name: 'Contact', href: '#', current: false },
 ]
 
