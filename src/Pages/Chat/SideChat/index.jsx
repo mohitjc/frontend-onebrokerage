@@ -97,7 +97,7 @@ export default function SideChat(sidechat) {
                  
                     <div className="">
                       <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{item?.room_members?.map((itm)=>itm?.user_name)}<TbRosetteDiscountCheckFilled className="text-blue-500" />  </h4>
-                      <p className="line-clamp-1 text-[12px] xl:text-[15px] text-[#707991]">{item?.last_message?.type=="TEXT"?item?.last_message?.content:<><ImImages /> Photos</>}</p>
+                      <p className="line-clamp-1 text-[12px] xl:text-[15px] text-[#707991]">{item?.last_message?.type=="TEXT"?item?.last_message?.content:<><span className='flex gap-1 items-center'><ImImages /> Photos</span></>}</p>
                     </div>
                   </div>
                   <div className=" ">
