@@ -35,8 +35,9 @@ const [ChatWithUser,setChatWithUser]=useState(null);
 
   const messages = useRef()
   const [chatMessages, setChatMessages] = useState([]);
+  const [currentchatdata,setcurrentchatdata]=useState()
 
-console.log(chatMessages,"chatMessages")
+console.log(currentchatdata,"chatMessages")
   const [sidechat, setsidechat] = useState([]);
   const [chatRoomId, setChatRoomId] = useState("");
   const [isonline, setonline] = useState(false);
@@ -102,7 +103,7 @@ console.log(chatMessages,"chatMessages")
   {
     ApiClient.get(`user/detail`, { id: id }).then((res) => {
       if (res.success) {
-       console.log(res.data,"===============")
+       setcurrentchatdata(res?.data)
       }
   
     });
@@ -144,6 +145,8 @@ console.log(chatMessages,"chatMessages")
       setonline(false)
     }
   });
+
+  allroommemeber()
   }, [])
 
 
@@ -181,7 +184,7 @@ useEffect(()=>{
       // socketModel.emit("read-all-message", value);
 
       getChatMessages(chatRoomId);
-      allroommemeber(chatRoomId)
+
 
     }
   }, [chatRoomId]);
@@ -271,10 +274,15 @@ useEffect(()=>{
               <div className="flex items-center gap-4">
                 <HiMiniBars3 onClick={toggleSidebar} className="text-xl xl:text-3xl ml-2 text-[#707991] block lg:hidden" />
                 <div className="flex gap-2 xl:gap-4 ">
-                  <img src="assets/img/d1.png" className="h-12 w-12 xl:h-12 xl:w-12 object-contain" />
+                <img
+                                  src={methodModel.userImg(
+                                    currentchatdata?.image
+                                  )}
+                                  className="h-12 w-12 rounded-full mb-4 object-contain "
+                                />
                   <div className="">
-                    <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">David Moore  </h4>
-                    <p className=" text-[12px] xl:text-[15px] text-[#707991]">last seen 5 mins ago</p>
+                    <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{currentchatdata?.fullName}</h4>
+                    <p className=" text-[12px] xl:text-[15px] text-[#707991]">{currentchatdata?.isOnline?"Online":"Offline"}</p>
                   </div>
                 </div>
               </div>
