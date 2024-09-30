@@ -44,10 +44,15 @@ const userImg = (img,modal='img') => {
   return value;
 };
 
-const noImg = (img, modal = "img") => {
+const noImg = (img,idd, modal = "img") => {
+  let imageURL="images/users/"
+  if(idd=="LicenceImage")
+  {
+     imageURL="documents/"
+  }
   let value = "/assets/img/placeholder.png";
   // if (img) value = environment.api + 'img/' + img
-  if (img) value = `${environment.api}images/users/${img}`;
+  if (img) value = `${environment.api}${imageURL}${img}`;
   return value;
 };
 
