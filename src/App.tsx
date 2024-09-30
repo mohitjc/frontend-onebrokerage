@@ -57,8 +57,8 @@ function App() {
     { url: "/carrierstaff/edit/:id", path: "CarrierStaff/AddEdit" },
     { url: "/carrierstaff/add", path: "CarrierStaff/AddEdit" },
     { url: "/carrierstaff/detail/:id", path: "CarrierStaff/View" },
-
-
+    { url: "/successpage", path: "SuccessPage/html" },
+    { url: "/canclepage", path: "CanclePage/html" },
       //  { url: "/profile/:tab", path: "Settings" },
     // { url: "/assignment", path: "Assignment" },
     // { url: "/assignment/detail/:id", path: "Assignment/View" },
