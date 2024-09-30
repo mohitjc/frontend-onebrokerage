@@ -26,7 +26,7 @@ const generatekeysArr = (arr, key = "typeofresult") => {
 };
 
 const userImg = (img,modal='img') => {
-  console.log(img,"modalmodal")
+
   let value = "/assets/img/person.jpg";
   // if (img) value = environment.api + 'img/' + img
   

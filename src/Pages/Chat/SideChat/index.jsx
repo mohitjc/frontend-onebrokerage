@@ -8,7 +8,9 @@ import { IoMdClose } from 'react-icons/io';
 import methodModel from '../../../methods/methods';
 import { useNavigate } from 'react-router-dom';
 import { ImImages } from "react-icons/im";
-export default function SideChat(sidechat) {
+import moment from 'moment';
+export default function SideChat({sidechat,ChatSelectorHandler}) {
+  
   console.log(sidechat,"sidechat")
 
   const history=useNavigate()
@@ -80,10 +82,10 @@ export default function SideChat(sidechat) {
 
               <div className="mt-4 flex flex-col gap-2 h-[calc(100vh-80px)] tailwind-scrollbar overflow-y-auto">
 
-                {sidechat?.sidechat?.map((item)=>
+                {sidechat?.map((item)=>
                 
-                        <div className="flex justify-between gap-4 bg-white px-4 py-2 ">
-                  <div className="flex gap-2 xl:gap-4 ">
+                        <div className="flex justify-between gap-4 bg-white px-4 py-2 " >
+                  <div className="flex gap-2 xl:gap-4 cursor-pointer" onClick={e=>ChatSelectorHandler(item)}>
                     {
                       item?.room_members?.map((itm)=>
                         <img
@@ -101,7 +103,7 @@ export default function SideChat(sidechat) {
                     </div>
                   </div>
                   <div className=" ">
-                    <h4 className="flex items-center gap-2 text-[13px] text-[#707991]">19:48    </h4>
+                    <h4 className="flex items-center gap-2 text-[13px] text-[#707991]">{moment(item?.last_message_at).format("DD-MM-YYYY")}</h4>
                     <p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">2</p>
 
                   </div>

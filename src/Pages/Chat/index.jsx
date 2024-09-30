@@ -25,16 +25,23 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Chat() {
 
+const [ChatWithUser,setChatWithUser]=useState(null);
+// const obj={Data:'here'};
+// ChatWithUser.current=obj
   const [darkMode, setDarkMode] = useState(false);
   const history=useNavigate()
   const user = useSelector(state => state.user)
   const currectChat = useRef()
+
   const messages = useRef()
   const [chatMessages, setChatMessages] = useState([]);
+
 console.log(chatMessages,"chatMessages")
   const [sidechat, setsidechat] = useState([]);
   const [chatRoomId, setChatRoomId] = useState("");
-  const [search, setSearch] = useState('');
+  const [isonline, setonline] = useState(false);
+
+  console.log(isonline,"???????????????")
   const [text, setText] = useState('');
   const [cloader, setCLoader] = useState('');
   const [assignment, setAssignment] = useState();
@@ -48,16 +55,7 @@ console.log(chatMessages,"chatMessages")
     if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
   };
 
-  // const MintTime=(time)=>
-  // {
-  //   const date=moment(time).format("DD-MM-YYYY")
-  //   const dateTime=date.getTime()/6000
-  //   console.log(dateTime,"dateTime")
-  //    const Newdate = new Date();
 
-  //    const now = ((date.getTime()) / (60000));
-
-  // }
 
   const getChatMessages = (id) => {
     // loader(true);
@@ -80,6 +78,7 @@ console.log(chatMessages,"chatMessages")
       chat_by: user._id || user?.id,
       chat_with: id
     }
+
     loader(true)
     ApiClient.post('chat/user/join-group', payload, {}, environment.chat_api).then(res => {
       loader(false)
@@ -97,6 +96,16 @@ console.log(chatMessages,"chatMessages")
         setsidechat(res?.data?.data)
       }
     })
+  }
+
+  const getUserDetail=(id)=>
+  {
+    ApiClient.get(`user/detail`, { id: id }).then((res) => {
+      if (res.success) {
+       console.log(res.data,"===============")
+      }
+  
+    });
   }
 
 
@@ -119,14 +128,38 @@ console.log(chatMessages,"chatMessages")
       }
     });
 
-    let id = methodModel.getPrams('id')
-    if (id) {
-      // assignmentDetail(id)
-      joinChat(id)
-    }
 
+    let id = methodModel.getPrams('id')
+ 
+
+
+  socketModel.on("user-online", (data) => {   
+    if (id == data.data.user_id) {
+      setonline(true)
+    }
+  });
+
+  socketModel.on("user-offline", (data) => {   
+    if (id == data.data.user_id) {
+      setonline(false)
+    }
+  });
   }, [])
 
+
+  let id = methodModel.getPrams('id')
+
+
+useEffect(()=>{ 
+  if (id) {
+    // assignmentDetail(id)
+  joinChat(id)
+  getUserDetail(id)
+  }
+  else if(ChatWithUser?.id){
+    
+  }
+},[ChatWithUser,id])
 
 
   useEffect(() => {
@@ -214,12 +247,22 @@ console.log(chatMessages,"chatMessages")
     setIsOpen(false);
   };
 
+
+  const ChatSelectorHandler=(data)=>{
+    console.log(data?.room_members[0],"datadatadatadata")
+    history("/chat")
+    joinChat(data?.room_members[0].user_id)
+    getUserDetail(data?.room_members[0].user_id)
+    setChatWithUser(data);  
+  }
+
+
   return (
     <>
       <div className="main_chats h-screen overflow-hidden">
         <div className="flex">
          
-          <SideChat sidechat={sidechat}/>
+          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler}/>
 
           <div className="rigtsie_inners h-screen w-full">
             <div className="headres_names flex items-center justify-between p-4 bg-white dark:bg-black ">

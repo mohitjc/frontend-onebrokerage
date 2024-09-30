@@ -4,6 +4,8 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import methodModel from '../../../methods/methods';
+import socketModel from '../../../models/socketModel';
+import { useEffect } from 'react';
 import {
   ArchiveBoxXMarkIcon,
   ChevronDownIcon,
@@ -36,6 +38,14 @@ const Header = () => {
     localStorage.removeItem("token")
     history('/login');
   };
+
+  useEffect(() => {
+    socketModel.emit(`user-online`, { user_id: user.id });
+    return () => {
+      socketModel.emit(`user-offline`, { user_id: user.id });
+    };
+  }, []);
+  
 
   return (
     <header className="">
