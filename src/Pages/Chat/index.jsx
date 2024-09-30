@@ -30,7 +30,7 @@ export default function Chat() {
   const currectChat = useRef()
   const messages = useRef()
   const [chatMessages, setChatMessages] = useState([]);
-  console.log(chatMessages,"chatMessageschatMessages")
+
   const [chatRooms, setChatRooms] = useState([]);
   const [chatRoomId, setChatRoomId] = useState("");
   const [search, setSearch] = useState('');
@@ -173,7 +173,6 @@ export default function Chat() {
       e.target.value = ''
       loader(false)
       if (res.success) {
-        console.log(res, "===========")
         let value = {
           room_id: chatRoomId,
           type: 'IMAGE',

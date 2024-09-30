@@ -110,7 +110,7 @@ export default function FormControl({
             type="text"
             name={name}
             className="relative  bg-white w-full rounded-lg h-10 flex items-center gap-2 overflow-hidden border border-[#00000036] px-3"
-            required={required}
+            // required={required}
             placeholder={placeholder}
             value={value || ""}
             maxLength={maxlength}
@@ -180,7 +180,7 @@ export default function FormControl({
         <textarea
             name={name}
             className="relative border border-[#00000036] bg-white w-full rounded-lg h-[150px] flex items-center gap-2 overflow-hidden px-3 pt-2"
-            required={required}
+            // required={required}
             placeholder={placeholder}
             value={value || ""}
             maxLength={maxlength}
@@ -217,7 +217,7 @@ export default function FormControl({
             type={type}
             name={name}
             className=" bg-white w-full rounded-lg h-10 flex items-center gap-2  border border-[#00000036] px-3"
-            required={required}
+            // required={required}
             placeholder={placeholder}
             value={value || ""}
             maxLength={maxlength}

@@ -251,6 +251,11 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, firstName: e })}
                 required
               />
+                   {!form.firstName && submitted && (
+                <div className="invalid-feedback d-block">
+                  First Name is required.
+                </div>
+              )}
             </div>
             <div className="">
               <FormControl
@@ -259,6 +264,7 @@ const AddEdit = () => {
                 value={form.lastName}
                 onChange={(e) => setForm({ ...form, lastName: e })}
               />
+           
             </div>
             <div className="">
               <FormControl
@@ -269,7 +275,7 @@ const AddEdit = () => {
                 required
                 disabled={id ? true : false}
               />
-              {form.email && submitted && (
+              {!form.email && submitted && (
                 <div className="invalid-feedback d-block">
                   Please enter a valid email
                 </div>
@@ -299,7 +305,7 @@ const AddEdit = () => {
                       mobileNo: phonenumber,
                     });
                   }}
-                  required
+                  // required
                 />
 
 
@@ -325,7 +331,7 @@ const AddEdit = () => {
                     }
                   }}
                   className=" bg-white w-full rounded-lg h-10 flex items-center gap-2  border border-[#00000036] px-3"
-                  required
+                  // required
                   value={form.licence_number}
                   onChange={(e) =>
                     setForm({
@@ -334,15 +340,14 @@ const AddEdit = () => {
                     })
                   }
                 />
+                  {!form.licence_number && submitted && (
+                <div className="invalid-feedback d-block">
+                  Licence Number is required.
+                </div>
+              )}
               </div>
 
-              {submitted && !form.licence_number ? (
-                <div className="invalid-feedback d-block">
-                  licence number is Required
-                </div>
-              ) : (
-                <></>
-              )}
+            
             </div>
             <div className="col-md-12 ">
               <label> License Upload <span className="text-danger">*</span></label>
@@ -358,12 +363,13 @@ const AddEdit = () => {
                 />
                 {submitted && !form.license_image ? (
                   <div className="invalid-feedback d-block">
-                    license Image is Required
+                    License Image is Required
                   </div>
                 ) : (
                   <></>
                 )}
               </div>
+             
             </div>
 
 
@@ -416,6 +422,13 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, city: e })}
                 required
               />
+                {submitted && !form.city ? (
+                  <div className="invalid-feedback d-block">
+                   City is Required
+                  </div>
+                ) : (
+                  <></>
+                )}
             </div>
             <div className="">
               <FormControl
@@ -425,6 +438,13 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, state: e })}
                 required
               />
+               {submitted && !form.state ? (
+                  <div className="invalid-feedback d-block">
+                   State is Required
+                  </div>
+                ) : (
+                  <></>
+                )}
             </div>
             <div className="">
               <FormControl
@@ -434,6 +454,13 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, country: e })}
                 required
               />
+               {submitted && !form.country ? (
+                  <div className="invalid-feedback d-block">
+                   Country is Required
+                  </div>
+                ) : (
+                  <></>
+                )}
             </div>
             <div className="">
               <FormControl
@@ -443,6 +470,13 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, pincode: e })}
                 required
               />
+              {submitted && !form.pincode ? (
+                  <div className="invalid-feedback d-block">
+                   Pincode is Required
+                  </div>
+                ) : (
+                  <></>
+                )}
             </div>
           </div>
 
@@ -454,54 +488,6 @@ const AddEdit = () => {
           <div className="bg-[#1245940a] p-4 border-b flex justify-between">
             <h3 className="text-[20px] font-[500]">Truck Details </h3>
 
-            {/* <div className="relative">
-
-         
-<i className='fa fa-search absolute right-4 top-1/2 -translate-y-1/2'></i>
-<input
-  placeholder="Search Trucks"
-  value={filter?.search}
-  className="form-control"
-  type="text"
-  onChange={(e) => {
-    GetTruck({ search: e.target.value });
-    setfilter({
-      ...filter,
-      search: e.target.value,
-    });
-  }}
-/>
-</div>
-{isSearch && (
-<>
-{Trucks &&
-  Trucks?.map((itm) => {
-    if (itm)
-      return (<div className="dropspdiv dropsdivTwo">
-        <span
-          className="dropspans"
-          onClick={() => {
-            setForm({
-              ...form,
-              truck_id: itm?.id,
-              vin_number: itm?.vin_number,
-            });
-            setVin(itm?.vin_number);
-            setisSearch(false);
-            setfilter({ search: '' });
-          }}
-        >
-          {itm?.truck_number}
-        </span>
-
-
-      </div>);
-    else
-      return <></>
-  })}
-</>
-
-)} */}
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
@@ -540,14 +526,9 @@ const AddEdit = () => {
                   );
                 })}
               </select>
+      
             </div>
-            {submitted && !form.firstName ? (
-              <div className="invalid-feedback d-block">
-                Truck is Required
-              </div>
-            ) : (
-              <></>
-            )}
+          
             <div className="">
               <label>VIN Number</label>
               <input
