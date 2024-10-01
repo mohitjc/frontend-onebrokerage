@@ -25,24 +25,23 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Chat() {
 
-const [ChatWithUser,setChatWithUser]=useState(null);
-// const obj={Data:'here'};
-// ChatWithUser.current=obj
+  const [ChatWithUser, setChatWithUser] = useState(null);
+  // const obj={Data:'here'};
+  // ChatWithUser.current=obj
   const [darkMode, setDarkMode] = useState(false);
-  const history=useNavigate()
+  const history = useNavigate()
   const user = useSelector(state => state.user)
   const currectChat = useRef()
 
   const messages = useRef()
   const [chatMessages, setChatMessages] = useState([]);
-  const [currentchatdata,setcurrentchatdata]=useState()
+  const [currentchatdata, setcurrentchatdata] = useState()
 
-console.log(currentchatdata,"chatMessages")
   const [sidechat, setsidechat] = useState([]);
   const [chatRoomId, setChatRoomId] = useState("");
   const [isonline, setonline] = useState(false);
 
-  console.log(isonline,"???????????????")
+
   const [text, setText] = useState('');
   const [cloader, setCLoader] = useState('');
   const [assignment, setAssignment] = useState();
@@ -60,7 +59,7 @@ console.log(currentchatdata,"chatMessages")
 
   const getChatMessages = (id) => {
     // loader(true);
-    ApiClient.get("chat/user/message/all", { room_id: id }, environment.chat_api).then((res) => {
+    ApiClient.get("chat/user/message/all", {room_id: id }, environment.chat_api).then((res) => {
       if (res.success) {
         let data = res.data.data;
         setChatMessages(data);
@@ -92,20 +91,19 @@ console.log(currentchatdata,"chatMessages")
   }
 
   const allroommemeber = (id) => {
-    ApiClient.get('chat/user/recent-chats/all', { user_id: user?.id||user?._id }, environment.chat_api).then(res => {
+    ApiClient.get('chat/user/recent-chats/all', { user_id: user?.id || user?._id }, environment.chat_api).then(res => {
       if (res.success) {
         setsidechat(res?.data?.data)
       }
     })
   }
 
-  const getUserDetail=(id)=>
-  {
+  const getUserDetail = (id) => {
     ApiClient.get(`user/detail`, { id: id }).then((res) => {
       if (res.success) {
-       setcurrentchatdata(res?.data)
+        setcurrentchatdata(res?.data)
       }
-  
+
     });
   }
 
@@ -131,38 +129,38 @@ console.log(currentchatdata,"chatMessages")
 
 
     let id = methodModel.getPrams('id')
- 
 
 
-  socketModel.on("user-online", (data) => {   
-    if (id == data.data.user_id) {
-      setonline(true)
-    }
-  });
 
-  socketModel.on("user-offline", (data) => {   
-    if (id == data.data.user_id) {
-      setonline(false)
-    }
-  });
+    socketModel.on("user-online", (data) => {
+      if (id == data.data.user_id) {
+        setonline(true)
+      }
+    });
 
-  allroommemeber()
+    socketModel.on("user-offline", (data) => {
+      if (id == data.data.user_id) {
+        setonline(false)
+      }
+    });
+
+    allroommemeber()
   }, [])
 
 
   let id = methodModel.getPrams('id')
 
 
-useEffect(()=>{ 
-  if (id) {
-    // assignmentDetail(id)
-  joinChat(id)
-  getUserDetail(id)
-  }
-  else if(ChatWithUser?.id){
-    
-  }
-},[ChatWithUser,id])
+  useEffect(() => {
+    if (id) {
+      allroommemeber(user?.id)
+      joinChat(id)
+      getUserDetail(id)
+    }
+    else if (ChatWithUser?.id) {
+
+    }
+  }, [ChatWithUser, id])
 
 
   useEffect(() => {
@@ -205,7 +203,7 @@ useEffect(()=>{
 
   const uploadImage = (e) => {
     let files = e.target.files
-    console.log("files", files)
+
     loader(true)
     ApiClient.multiImageUpload('upload/document/multiple', files).then(res => {
       e.target.value = ''
@@ -214,7 +212,7 @@ useEffect(()=>{
         let value = {
           room_id: chatRoomId,
           type: 'IMAGE',
-          media:res?.data?.imagePath
+          media: res?.data?.imagePath
         }
         console.log("value", value)
         socketModel.emit("send-message", value);
@@ -251,12 +249,12 @@ useEffect(()=>{
   };
 
 
-  const ChatSelectorHandler=(data)=>{
-    console.log(data?.room_members[0],"datadatadatadata")
+  const ChatSelectorHandler = (data) => {
+
     history("/chat")
     joinChat(data?.room_members[0].user_id)
     getUserDetail(data?.room_members[0].user_id)
-    setChatWithUser(data);  
+    setChatWithUser(data);
   }
 
 
@@ -264,25 +262,27 @@ useEffect(()=>{
     <>
       <div className="main_chats h-screen overflow-hidden">
         <div className="flex">
-         
-          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler}/>
+
+          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} />
+
+
 
           <div className="rigtsie_inners h-screen w-full">
-            <div className="headres_names flex items-center justify-between p-4 bg-white dark:bg-black ">
+            {chatRoomId ? <> <div className="headres_names flex items-center justify-between p-4 bg-white dark:bg-black ">
 
 
               <div className="flex items-center gap-4">
                 <HiMiniBars3 onClick={toggleSidebar} className="text-xl xl:text-3xl ml-2 text-[#707991] block lg:hidden" />
                 <div className="flex gap-2 xl:gap-4 ">
-                <img
-                                  src={methodModel.userImg(
-                                    currentchatdata?.image
-                                  )}
-                                  className="h-12 w-12 rounded-full mb-4 object-contain "
-                                />
+                  <img
+                    src={methodModel.userImg(
+                      currentchatdata?.image
+                    )}
+                    className="h-12 w-12 rounded-full mb-4 object-contain "
+                  />
                   <div className="">
                     <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{currentchatdata?.fullName}</h4>
-                    <p className=" text-[12px] xl:text-[15px] text-[#707991]">{currentchatdata?.isOnline?"Online":"Offline"}</p>
+                    <p className=" text-[12px] xl:text-[15px] text-[#707991]">{currentchatdata?.isOnline ? "Online" : "Offline"}</p>
                   </div>
                 </div>
               </div>
@@ -349,104 +349,103 @@ useEffect(()=>{
 
             </div>
 
-            <div className="bg-[#E4EBFF]  w-full relative  text-gray-800  overflow-hidden">
-              <div className='flex flex-col items-center justify-center h-[calc(100vh-80px)] py-4 lg:py-8 w-[100%] lg:w-[80%] mx-auto px-4  '>
-                <div class="flex flex-col flex-grow w-full  overflow-hidden">
-                  <div class="flex flex-col flex-grow h-0 p-4 tailwind-scrollbar overflow-auto">
-                    {chatMessages && chatMessages?.map((itm, i) => {
+              <div className="bg-[#E4EBFF]  w-full relative  text-gray-800  overflow-hidden">
+                <div className='flex flex-col items-center justify-center h-[calc(100vh-80px)] py-4 lg:py-8 w-[100%] lg:w-[80%] mx-auto px-4  '>
+                  <div class="flex flex-col flex-grow w-full  overflow-hidden">
+                    <div class="flex flex-col flex-grow h-0 p-4 tailwind-scrollbar overflow-auto">
+                      {chatMessages && chatMessages?.map((itm, i) => {
 
-                      return <>
+                        return <>
 
 
-                        {(itm?.sender == user?.id) ? <>
+                          {(itm?.sender == user?.id) ? <>
 
-                          <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-                            <div>
-                              <div class="bg-primary text-white p-3 rounded-l-lg rounded-br-lg">
-                                {itm?.type == "IMAGE" ? <> 
-                                {itm?.media?.map((item)=>{
-                                  return  <img
-                                  src={methodModel.userImg(
-                                    item,"chat"
-                                  )}
-                                  className="h-32 w-32 rounded-full mb-4 object-contain "
-                                />
-                                })}
-                               
-                                </> : <p class="text-sm">{itm?.content}</p>}
+                            <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+                              <div>
+                                <div class="bg-primary text-white p-3 rounded-l-lg rounded-br-lg">
+                                  {itm?.type == "IMAGE" ? <>
+                                    {itm?.media?.map((item) => {
+                                      return <img
+                                        src={methodModel.userImg(
+                                          item, "chat"
+                                        )}
+                                        className="h-32 w-32 rounded-full mb-4 object-contain "
+                                      />
+                                    })}
 
+                                  </> : <p class="text-sm">{itm?.content}</p>}
+
+                                </div>
+                                <span class="text-xs text-gray-500 leading-none">{moment(itm?.createdAt).fromNow()}</span>
+                                {/* <span class="text-xs text-gray-500 leading-none">{MintTime(itm?.createdAt)}</span> */}
                               </div>
-                              <span class="text-xs text-gray-500 leading-none">2 min ago</span>
-                              {/* <span class="text-xs text-gray-500 leading-none">{MintTime(itm?.createdAt)}</span> */}
+                              <img
+                                src={methodModel.userImg(
+                                  itm?.sender_image
+                                )}
+                                className="h-10 w-10 rounded-full mb-4 object-contain "
+                              />
                             </div>
-                            <img
-                                  src={methodModel.userImg(
-                                    itm?.sender_image
-                                  )}
-                                  className="h-10 w-10 rounded-full mb-4 object-contain "
-                                />
-                          </div>
-                        </> :
-                          <div class="flex w-full mt-2 space-x-3 max-w-xs">
-                             <img
-                                  src={methodModel.userImg(
-                                    itm?.sender_image
-                                  )}
-                                  className="h-10 w-10 rounded-full mb-4 object-contain "
-                                />
-                            <div>
-                              <div class="bg-white p-3 rounded-r-lg rounded-bl-lg">
-                              {itm?.type == "IMAGE" ? <> 
-                                {itm?.media?.map((item)=>{
-                                  return  <img
-                                  src={methodModel.userImg(
-                                    item,"chat"
-                                  )}
-                                  className="h-32 w-32 rounded-full mb-4 object-contain "
-                                />
-                                })}
-                               
-                                </> : <p class="text-sm">{itm?.content}</p>}
-                              </div>
-                              <span class="text-xs text-gray-500 leading-none">2 min ago</span>
-                            </div>
-                          </div>
+                          </> :
+                            <div class="flex w-full mt-2 space-x-3 max-w-xs">
+                              <img
+                                src={methodModel.userImg(
+                                  itm?.sender_image
+                                )}
+                                className="h-10 w-10 rounded-full mb-4 object-contain "
+                              />
+                              <div>
+                                <div class="bg-white p-3 rounded-r-lg rounded-bl-lg">
+                                  {itm?.type == "IMAGE" ? <>
+                                    {itm?.media?.map((item) => {
+                                      return <img
+                                        src={methodModel.userImg(
+                                          item, "chat"
+                                        )}
+                                        className="h-32 w-32 rounded-full mb-4 object-contain "
+                                      />
+                                    })}
 
-                        }
-                      </>
-                    })}
+                                  </> : <p class="text-sm">{itm?.content}</p>}
+                                </div>
+                                <span class="text-xs text-gray-500 leading-none">{moment(itm?.createdAt).fromNow()}</span>
+                              </div>
+                            </div>
+
+                          }
+                        </>
+                      })}
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl flex items-center gap-4 mt-4">
+                      <form className='w-full' onSubmit={e => { e.preventDefault(); handleSubmit() }}>
+                        <div className='flex gap-4 items-center relative'>
+                          <label className="absolute left-[10px] top-1/2 cursor-pointer">
+                            <ImAttachment className='text-xl text-gray-600' />
+                            <input type="file" multiple onChange={uploadImage} accept="image/*" className="d-none" />
+                          </label>
+                          {/* <LuSmile className='text-xl text-gray-600' />
+        <ImAttachment className='text-xl text-gray-600' /> */}
+                        </div>
+
+
+                        <div className='w-full flex items-center gap-2'>
+                          <input
+                            type="text"
+                            value={text}
+                            onChange={e => setText(e.target.value)}
+                            placeholder="Type a message..."
+                            className="flex-grow border border-gray-300 rounded-lg py-3  ps-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                          <button onClick={e => { e.preventDefault(); handleSubmit() }}> <IoSend className='text-2xl text-primary' /></button>
+                        </div>
+
+                      </form>
+                    </div>
                   </div>
 
-                  <div class="bg-white p-4 rounded-xl flex items-center gap-4 mt-4">
-                    <form className='w-full' onSubmit={e => { e.preventDefault(); handleSubmit() }}>
-                      <div className='flex gap-4 items-center relative'>
-                        <label className="absolute left-[10px] top-1/2 cursor-pointer">
-                          <ImAttachment className='text-xl text-gray-600' />
-                          <input type="file" multiple onChange={uploadImage} accept="image/*" className="d-none" />
-                        </label>
-                        {/* <LuSmile className='text-xl text-gray-600' />
-                      <ImAttachment className='text-xl text-gray-600' /> */}
-                      </div>
-
-
-                      <div className='w-full flex items-center gap-2'>
-                        <input
-                          type="text"
-                          value={text}
-                          onChange={e => setText(e.target.value)}
-                          placeholder="Type a message..."
-                          className="flex-grow border border-gray-300 rounded-lg py-3  ps-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                        <button onClick={e => { e.preventDefault(); handleSubmit() }}> <IoSend className='text-2xl text-primary' /></button>
-                      </div>
-
-                    </form>
-                  </div>
                 </div>
-
-              </div>
-            </div>
-
+              </div></> : <>No Messages</>}
           </div>
         </div>
       </div>
