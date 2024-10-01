@@ -144,7 +144,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
                 <div className="flex gap-2 xl:gap-4 cursor-pointer" onClick={e => ChatSelectorHandler(item)}>
                   {item?.isGroupChat?<><img
                         src={methodModel.userImg(
-                          item?.image
+                          item?.room_image
                         )}
                         className="h-10 w-10 rounded-full mb-4 object-contain "
                       /></>:<> {

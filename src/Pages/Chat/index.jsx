@@ -20,31 +20,34 @@ import socketModel from '../../models/socketModel';
 import methodModel from '../../methods/methods';
 import SideChat from './SideChat';
 import moment from 'moment';
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
 import { CiHome } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function Chat() {
 
   const [ChatWithUser, setChatWithUser] = useState(null);
-  // const obj={Data:'here'};
-  // ChatWithUser.current=obj
+  const [ChatWithUserName, setChatWithUserName] = useState({});
   const [darkMode, setDarkMode] = useState(false);
+  const [addmember, setaddmember] = useState(false)
+  const [addmemberlisting,setaddmemberListing]=useState([])
+  console.log(addmemberlisting,"addmemberlisting")
   const history = useNavigate()
   const user = useSelector(state => state.user)
   const currectChat = useRef()
-
+  const [form, setform] = useState({})
   const messages = useRef()
   const [chatMessages, setChatMessages] = useState([]);
   const [currentchatdata, setcurrentchatdata] = useState()
-
+  const [isOpenmodal, setisOpenmodal] = useState(false);
   const [sidechat, setsidechat] = useState([]);
   const [chatRoomId, setChatRoomId] = useState("");
   const [isonline, setonline] = useState(false);
 
 
   const [text, setText] = useState('');
-  const [cloader, setCLoader] = useState('');
-  const [assignment, setAssignment] = useState();
 
   let ar = sessionStorage.getItem("activeRooms");
   const activeRooms = useRef(ar ? JSON.parse(ar) : []);
@@ -55,11 +58,18 @@ export default function Chat() {
     if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
   };
 
+  function closeModal() {
+    setisOpenmodal(false)
+    setaddmember(false)
+  }
 
+  function openModal() {
+    setisOpenmodal(true)
+  }
 
   const getChatMessages = (id) => {
     // loader(true);
-    ApiClient.get("chat/user/message/all", {room_id: id }, environment.chat_api).then((res) => {
+    ApiClient.get("chat/user/message/all", { room_id: id }, environment.chat_api).then((res) => {
       if (res.success) {
         let data = res.data.data;
         setChatMessages(data);
@@ -72,12 +82,30 @@ export default function Chat() {
     });
   };
 
+  const deletgroup = () => {
+    ApiClient.delete(`chat/user/group?room_id=${chatRoomId}`, {}, environment.chat_api).then((res) => {
+      if (res.success) {
+        toast(res?.message)
+        closeModal()
+        allroommemeber()
+      }
+      // loader(false);
+    });
+  }
 
-  const joinChat = (id) => {
 
-    let payload = {
-      chat_by: user._id || user?.id,
-      chat_with: id
+  const joinChat = (chatwithid) => {
+    let payload
+    if (id) {
+      payload = {
+        chat_by: user._id || user?.id,
+        chat_with: chatwithid
+      }
+    }
+    else {
+      payload = {
+        room_id: chatwithid
+      }
     }
 
     loader(true)
@@ -91,10 +119,11 @@ export default function Chat() {
     })
   }
 
-  const allroommemeber = (id) => {
+  const allroommemeber = () => {
     ApiClient.get('chat/user/recent-chats/all', { user_id: user?.id || user?._id }, environment.chat_api).then(res => {
       if (res.success) {
         setsidechat(res?.data?.data)
+        setaddmemberListing(res?.data?.data?.filter((itm)=>!itm?.isGroupChat))
       }
     })
   }
@@ -155,13 +184,14 @@ export default function Chat() {
   useEffect(() => {
     if (id) {
       allroommemeber(user?.id)
-      joinChat(id)
+      setTimeout(()=>{
+        joinChat(id)
+      },2000)
+      
       getUserDetail(id)
     }
-    else if (ChatWithUser?.id) {
-
-    }
-  }, [ChatWithUser, id])
+ 
+  }, [])
 
 
   useEffect(() => {
@@ -183,8 +213,6 @@ export default function Chat() {
       // socketModel.emit("read-all-message", value);
 
       getChatMessages(chatRoomId);
-
-
     }
   }, [chatRoomId]);
 
@@ -252,10 +280,13 @@ export default function Chat() {
 
 
   const ChatSelectorHandler = (data) => {
+    console.log(data, "datadatadata")
     history("/chat")
-    joinChat(data?.room_members[0].user_id)
-    getUserDetail(data?.room_members[0].user_id)
+    getChatMessages(data?.room_id);
+    getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
     setChatWithUser(data);
+    setChatRoomId(data?.room_id)
+    setChatWithUserName({ name: data?.room_name ? data?.room_name : data?.room_members[0].user_name, image: data?.room_image ? data?.room_image : data?.room_members[0]?.user_image, isGroupChat: data?.isGroupChat })
   }
 
 
@@ -264,31 +295,36 @@ export default function Chat() {
       <div className="main_chats h-screen overflow-hidden">
         <div className="flex">
 
-          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber}/>
+          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber} />
 
 
 
           <div className="rigtsie_inners h-screen w-full">
             {chatRoomId ? <> <div className="headres_names flex items-center justify-between p-4 bg-white dark:bg-black ">
-
-
               <div className="flex items-center gap-4">
                 <HiMiniBars3 onClick={toggleSidebar} className="text-xl xl:text-3xl ml-2 text-[#707991] block lg:hidden" />
                 <div className="flex gap-2 xl:gap-4 ">
                   <img
                     src={methodModel.userImg(
-                      currentchatdata?.image
+                      ChatWithUserName?.image
                     )}
                     className="h-12 w-12 rounded-full mb-4 object-contain "
                   />
                   <div className="">
-                    <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{currentchatdata?.fullName}</h4>
+                    <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{ChatWithUserName?.name}</h4>
                     <p className=" text-[12px] xl:text-[15px] text-[#707991]">{currentchatdata?.isOnline ? "Online" : "Offline"}</p>
                   </div>
                 </div>
               </div>
 
               <div className="flex items-center gap-4 ">
+                {ChatWithUserName?.isGroupChat ? <button onClick={() => {
+                  document
+                    .getElementById('OpenaddmemberModel')
+                    .click();
+                  // setform({})
+                }}>Group Info</button> : <></>}
+
                 <div className="darkmode">
 
                   <div className="flex items-center gap-4">
@@ -450,6 +486,125 @@ export default function Chat() {
           </div>
         </div>
       </div>
+
+
+      <div className="fixed inset-0 hidden  items-center justify-center">
+        <button
+          type="button"
+          id="OpenaddmemberModel"
+          onClick={openModal}
+          className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+        >
+          Open dialog
+        </button>
+      </div>
+
+
+
+      <Transition appear show={isOpenmodal} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full relative max-w-md transform  rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
+                  >
+
+
+                  </Dialog.Title>
+                  <div className=" flex items-center justify-center relative">
+
+                    {/* <div className='h-16 w-16 rounded-full absolute -top-16 right-1/2 left-1/2  -translate-x-1/2 text-white flex items-center justify-center bg-red-500 shadow-md mx-auto border-2 border-red-800 p-4'>
+                    <MdClose className='text-4xl font-bold' />
+
+                    </div> */}
+
+
+
+
+                  </div>
+
+                  <div className="mt-5">
+
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        // createGroup();
+                      }}
+                    >
+                      <div class="modal-body">
+                        <label class="mb-2 block">
+                          {' '}
+                          {ChatWithUserName?.name}
+                        </label>
+                        <div className="flex flex-col items-center justify-center">
+
+                          <button onClick={(e) => deletgroup()}>Delete Group</button>
+                          <div>
+
+                          </div>
+
+                        </div>
+                        {addmember ? <div class="mb-3">
+
+                        
+                        </div> : <>{currentchatdata?.fullName}  ~Admin</>}
+
+                      </div>
+                      <div className='flex items-center justify-end gap-2'>
+
+                        {addmember ? <button
+                          type="button"
+                          id=""
+                          className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
+                          onClick={(e) => setaddmember(false)}
+                        >
+                          Back
+                        </button> : <button
+                          type="button"
+                          id="CloseReasonModel"
+                          className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
+                          onClick={closeModal}
+                        >
+                          Close
+                        </button>}
+                        <button type="submit" class="btn btn-primary" onClick={(e) => setaddmember(true)}>
+                          Add Members
+                        </button>
+                      </div>
+
+                    </form>
+
+
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
 
 
 
