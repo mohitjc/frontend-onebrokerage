@@ -3,7 +3,7 @@ import { FaMoon } from "react-icons/fa";
 import { GoHome, GoSearch } from "react-icons/go";
 import { HiMiniBars3 } from "react-icons/hi2";
 import { TbRosetteDiscountCheckFilled } from "react-icons/tb";
-
+import { useSelector } from 'react-redux';
 import { IoMdClose } from 'react-icons/io';
 import methodModel from '../../../methods/methods';
 import { useNavigate } from 'react-router-dom';
@@ -11,40 +11,62 @@ import { ImImages } from "react-icons/im";
 import moment from 'moment';
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-export default function SideChat({ sidechat, ChatSelectorHandler }) {
-
+import ApiClient from '../../../methods/api/apiClient';
+import loader from '../../../methods/loader';
+import { MdClose } from 'react-icons/md';
+import { toast } from "react-toastify";
+import environment from '../../../environment';
+export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber }) {
+  const user = useSelector((state) => state.user);
 
   const history = useNavigate()
+  const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [form,setform]=useState({})
 
-  // const calculateTime = (newdate) => {
-  //   let newgivendate = new Date(newdate)
-  //   let currentdate = new Date;
-  //   console.log(
-  //     moment(newdate).fromNow()
-  //   )
-  //   let Difference_In_Time =
-  //     currentdate.getTime() - newgivendate.getTime();
+  function closeModal() {
+    setisOpenmodal(false)
+  }
 
-  //   let Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24))
-  //   const Difference_In_Hours = Math.floor((Difference_In_Time % (1000 * 3600 * 24)) / (1000 * 3600));
-  //   const Difference_In_Minutes = Math.floor((Difference_In_Time % (1000 * 3600)) / (1000 * 60));
+  function openModal() {
+    setisOpenmodal(true)
+  }
 
-  //   if (Difference_In_Days  ) {
-  //       return Difference_In_Days +" days"
-  //   }
-  //   else if (Difference_In_Hours ) {
-  //      return Difference_In_Hours+" hr"
-  //   }
-  //  else
-  //  {
-  //    return Difference_In_Minutes+" min"
-  //  }
-  // }
+  const uploadImage = (e) => {
+    console.log(e, "images")
+    setform({ ...form, baseImg: e.target.value });
+    let files = e.target.files;
+    let file = files.item(0);
+    loader(true);
+    ApiClient.postFormData('upload/image?modelName=users', { file: file }).then(
+      (res) => {
+        if (res.success) {
 
+          let image = res?.data?.fullpath;
+          setform({ ...form, image: image, baseImg: '' });
+        } else {
+          setform({ ...form, baseImg: '' });
+        }
+        loader(false);
+      }
+    );
+  };
+  const createGroup=()=>
+  {
+    let value = {
+      group_name:form?.group_name,
+      image:form?.image,
+      users:[{user_id:user?.id,role:"Admin"}]
+    };
+    ApiClient.post(`chat/user/group/create`, value,{},environment.chat_api).then((res) => {
+      if (res.success) {
+        allroommemeber()
+        closeModal()
+      }
+      loader(false);
+    });
+  }
 
-
-  // Function to toggle the sidebar
 
   // Function to close the sidebar
   const closeSidebar = () => {
@@ -106,7 +128,12 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
               <GoSearch className="text-xl" />
               <input type="search" className="bg-transparent" />
             </div>
-            <button>Add Group</button>
+            <button  onClick={() => {
+                      document
+                        .getElementById('OpenReasonModel')
+                        .click();
+                      setform({})
+                    }}>Add Group</button>
           </div>
 
           <div className="mt-4 flex flex-col gap-2 h-[calc(100vh-80px)] tailwind-scrollbar overflow-y-auto">
@@ -115,7 +142,12 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
 
               <div className="flex justify-between gap-4 bg-white px-4 py-2 " >
                 <div className="flex gap-2 xl:gap-4 cursor-pointer" onClick={e => ChatSelectorHandler(item)}>
-                  {
+                  {item?.isGroupChat?<><img
+                        src={methodModel.userImg(
+                          item?.image
+                        )}
+                        className="h-10 w-10 rounded-full mb-4 object-contain "
+                      /></>:<> {
                     item?.room_members?.map((itm) =>
                       <img
                         src={methodModel.userImg(
@@ -124,11 +156,12 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
                         className="h-10 w-10 rounded-full mb-4 object-contain "
                       />
                     )
-                  }
+                  }</>}
+                 
 
                   <div className="">
-                    <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{item?.room_members?.map((itm) => itm?.user_name)}<TbRosetteDiscountCheckFilled className="text-blue-500" />  </h4>
-                    <p className="line-clamp-1 text-[12px] xl:text-[15px] text-[#707991]">{item?.last_message?.type == "TEXT" ? item?.last_message?.content : <><span className='flex gap-1 items-center'><ImImages /> Photos</span></>}</p>
+                    <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{item?.isGroupChat?item?.room_name:item?.room_members?.map((itm) => itm?.user_name)}<TbRosetteDiscountCheckFilled className="text-blue-500" />  </h4>
+                    <p className="line-clamp-1 text-[12px] xl:text-[15px] text-[#707991]">{item?.last_message?.type == "TEXT" ? item?.last_message?.content :item?.last_message?.type == "IMAGE"? <><span className='flex gap-1 items-center'><ImImages /> Photos</span></>:<></>}</p>
                   </div>
                 </div>
                 <div className=" ">
@@ -137,8 +170,9 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
                     {/* {calculateTime(item?.last_message_at)} */}
                   {/* 2 min */}
                   </h4>
-
-                  {/* <p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">{item?.unread_count}</p> */}
+                  
+                  {item?.unread_count?<p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">{item?.unread_count}</p>:<></>}
+                  
 
                 </div>
               </div>
@@ -150,7 +184,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
         </div>
       </div>
 
-      {/* <div className="fixed inset-0 hidden  items-center justify-center">
+      <div className="fixed inset-0 hidden  items-center justify-center">
         <button
           type="button"
           id="OpenReasonModel"
@@ -159,11 +193,11 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
         >
           Open dialog
         </button>
-      </div> */}
+      </div>
 
 
 
-      {/* <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={isOpenmodal} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
@@ -198,10 +232,10 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
                   </Dialog.Title>
                   <div className=" flex items-center justify-center relative">
 
-                    <div className='h-16 w-16 rounded-full absolute -top-16 right-1/2 left-1/2  -translate-x-1/2 text-white flex items-center justify-center bg-red-500 shadow-md mx-auto border-2 border-red-800 p-4'>
+                    {/* <div className='h-16 w-16 rounded-full absolute -top-16 right-1/2 left-1/2  -translate-x-1/2 text-white flex items-center justify-center bg-red-500 shadow-md mx-auto border-2 border-red-800 p-4'>
                     <MdClose className='text-4xl font-bold' />
 
-                    </div>
+                    </div> */}
 
                  
 
@@ -213,33 +247,58 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
                     <form
                       onSubmit={(e) => {
                         e.preventDefault();
-                        Reject();
+                        createGroup();
                       }}
                     >
                       <div class="modal-body">
                         <label class="mb-2 block">
                           {' '}
-                          Reason to Reject <span className="text-danger">*</span>
+                         Create a group <span className="text-danger">*</span>
                         </label>
-
-                        <div class="mb-3">
-                 
-                          <textarea
-                            value={Reason}
-                            onChange={(e) => {
-                              setReason(e.target.value);
-                            }}
-                            class="bg-white w-full p-2 focus:outline-0 rounded-lg h-32 text-gray-800 border border-gray-200"
-                            id="message-text"
-                          ></textarea>
-                        </div>
-                        {submitted && !Reason ? (
-                          <div className="invalid-feedback d-block">
-                            Reason is Required
-                          </div>
-                        ) : (
-                          <></>
+                        <div className="flex flex-col items-center justify-center">
+                      <img
+                        src={methodModel.userImg(
+                          form && form.image
                         )}
+                        className="h-32 w-32 rounded-full mb-4 object-contain "
+                      />
+
+                      <div>
+                        <label className="new_images bg-primary bg-white px-6 py-2 rounded-lg inline-flex items-center gap-2 text-white edit">
+                          <input
+                            id="bannerImage"
+                            type="file"
+                            className="d-none "
+                            accept="image/*"
+                            value={
+                              form.baseImg ? form.baseImg : ''
+                            }
+                            onChange={(e) => {
+                              uploadImage(e);
+                            }}
+                          />
+                          <span className="uploader">
+                          {/* <IoCameraSharp className="text-2xl" /> */}
+
+                          </span>
+                         Upload Image
+                        </label>
+                      </div>
+                     
+                    </div>
+                        <div class="mb-3">
+
+                        <input
+                                type="text"
+                                className="pl-2 bg-gray-100"
+                                value={form.group_name}
+                                onChange={(e) =>
+                                  setform({ ...form, group_name: e.target.value })
+                                }
+                                // required
+                              />
+                        </div>
+                   
                       </div>
                       <div className='flex items-center justify-end gap-2'>
 
@@ -253,7 +312,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
                           Close
                         </button>
                         <button type="submit" class="btn btn-primary">
-                          Submit
+                          Create a group
                         </button>
                       </div>
 
@@ -266,7 +325,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
             </div>
           </div>
         </Dialog>
-      </Transition> */}
+      </Transition>
 
 
     </>

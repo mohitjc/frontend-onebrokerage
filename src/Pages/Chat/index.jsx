@@ -74,6 +74,7 @@ export default function Chat() {
 
 
   const joinChat = (id) => {
+
     let payload = {
       chat_by: user._id || user?.id,
       chat_with: id
@@ -197,6 +198,7 @@ export default function Chat() {
     }
     console.log("value", value)
     socketModel.emit("send-message", value);
+    allroommemeber()
     setText('')
   }
 
@@ -250,7 +252,6 @@ export default function Chat() {
 
 
   const ChatSelectorHandler = (data) => {
-
     history("/chat")
     joinChat(data?.room_members[0].user_id)
     getUserDetail(data?.room_members[0].user_id)
@@ -263,7 +264,7 @@ export default function Chat() {
       <div className="main_chats h-screen overflow-hidden">
         <div className="flex">
 
-          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} />
+          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber}/>
 
 
 
