@@ -150,7 +150,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
         </div>
       </div>
 
-      <div className="fixed inset-0 hidden  items-center justify-center">
+      {/* <div className="fixed inset-0 hidden  items-center justify-center">
         <button
           type="button"
           id="OpenReasonModel"
@@ -159,11 +159,11 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
         >
           Open dialog
         </button>
-      </div>
+      </div> */}
 
 
 
-      <Transition appear show={isOpen} as={Fragment}>
+      {/* <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
@@ -223,7 +223,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
                         </label>
 
                         <div class="mb-3">
-                          {/* <label for="message-text" class="col-form-label">Message:</label> */}
+                 
                           <textarea
                             value={Reason}
                             onChange={(e) => {
@@ -260,25 +260,13 @@ export default function SideChat({ sidechat, ChatSelectorHandler }) {
                     </form>
 
 
-                    {/* <div className="flex items-center justify-center">
-                        <button
-                          onClick={() => {
-                            history("/login");
-                            document.getElementById("CloseBidModel").click();
-                          }}
-                          type="submit"
-                          class="bg-primary text-white px-4 py-2 text-sm rounded-lg"
-                        >
-                          Ok
-                        </button>
-                      </div> */}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
           </div>
         </Dialog>
-      </Transition>
+      </Transition> */}
 
 
     </>
