@@ -33,6 +33,7 @@ export default function Chat() {
   const AxiosCancelToken = axios.CancelToken;
   const CancelRefToken = useRef(0)
   const [ChatWithUser, setChatWithUser] = useState(null);
+  console.log(ChatWithUser,"ChatWithUser")
   const [ChatWithUserName, setChatWithUserName] = useState({});
   const [darkMode, setDarkMode] = useState(false);
   const [addmember, setaddmember] = useState(false)
@@ -54,6 +55,7 @@ export default function Chat() {
   const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpenGroupmodal,setisOpenGroupmodal]=useState(false)
   const [sidechat, setsidechat] = useState([]);
+  console.log(sidechat,"sidechat")
   const [chatRoomId, setChatRoomId] = useState("");
   const [isonline, setonline] = useState(false);
 
@@ -76,8 +78,7 @@ export default function Chat() {
 
   function openModal() {
     setisOpenmodal(true)
-    setdriverfilters([])
-    setstafffilters([])
+
   }
 
   function closeGroupModal() {
@@ -101,23 +102,23 @@ export default function Chat() {
     }
     ApiClient.post("chat/user/group/add-member", payload, {}, environment.chat_api).then((res) => {
       if (res.success) {
-        allroommemeber()
-       
+        allroommemeber()        
       }
       closeModal()
     });
   }
 
-  const deleteMembers=(idd)=>
+  const deleteMembers=(data)=>
   {
+    console.log(data,"data")
     const payload = {
       room_id: chatRoomId,
-      user_id: idd
+      user_id: data?.user_id
     }
     ApiClient.put("chat/user/group/remove-member", payload,  environment.chat_api).then((res) => {
       if (res.success) {
         toast.success(res?.message)
-        allroommemeber()      
+        setChatWithUser(ChatWithUser?.room_members?.filter((itm)=>itm?.user_id != data?.user_id))
       }
       closeGroupModal()
     });
@@ -186,8 +187,8 @@ export default function Chat() {
   const allroommemeber = () => {
     ApiClient.get('chat/user/recent-chats/all', { user_id: user?.id || user?._id }, environment.chat_api).then(res => {
       if (res.success) {
-        setsidechat(res?.data?.data)
-       
+        setsidechat(res?.data?.data)    
+        setChatWithUser(res?.data?.data?.find((item)=>item?.room_id==chatRoomId)) 
       }
     })
   }
@@ -662,10 +663,13 @@ export default function Chat() {
                       </div>
                       <p>Members in group</p>
                       <div>
-                        {ChatWithUser?.isGroupChat?<>{ChatWithUser?.room_members?.map((item)=>
-                        <p>{item?.user_name}  <button onClick={(e)=>deleteMembers(item?.user_id)}>Delete</button></p>
+                       {ChatWithUser?.room_members?ChatWithUser?.room_members?.map((item)=>
+                        <p>{item?.user_name}  <button onClick={(e)=>deleteMembers(item)}>Delete</button></p>
                       
-                      )}</>:<></>}
+                      ):<>{ChatWithUser?.map((item)=>
+                        <p>{item?.user_name}  <button onClick={(e)=>deleteMembers(item)}>Delete</button></p>
+                      
+                      )}</>}
                       </div>
                       <div className='flex items-center justify-end gap-2'>
 
@@ -818,7 +822,7 @@ export default function Chat() {
                           Close
                         </button>}
                         {
-                          addmember ? <><button type="submit" class="btn btn-primary" onClick={(e) => AddMember()} >
+                          addmember ? <><button type="submit" class="btn btn-primary" onClick={(e) => AddMember(ChatWithUser)} >
                             Add
                           </button></> : <><button type="button" class="btn btn-primary" onClick={(e) => setaddmember(true)}>
                             Add Member
