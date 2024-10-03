@@ -155,7 +155,6 @@ export default function Chat() {
 
 
   const joinChat = (chatwithid) => {
-
     CancelRefToken.current += 1
     if (CancelRefToken.current > 1) {
       return
@@ -410,19 +409,19 @@ export default function Chat() {
               </div>
 
               <div className="flex items-center gap-4 ">
-                {ChatWithUserName?.isGroupChat && user?.role == "carrier" ? <button onClick={() => {
+                {ChatWithUserName?.isGroupChat && user?.role == "carrier" ? <> <button onClick={() => {
                   document
                     .getElementById('OpenmemberModel')
                     .click();
                   // setform({})
-                }}>Add Members</button> : <></>}
-
-                <button onClick={() => {
+                }}>Add Members</button> <button onClick={() => {
                   document
                     .getElementById('OpengroupdModel')
                     .click();
                   // setform({})
-                }}>Group Detail</button>
+                }}>Group Detail</button></>: <></>}
+
+               
 
                 <div className="darkmode">
 
