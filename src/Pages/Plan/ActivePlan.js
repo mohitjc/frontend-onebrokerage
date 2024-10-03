@@ -45,7 +45,8 @@ const ActivePlan = () => {
         <div className="mx-auto max-w-2xl rounded-3xl bg-white ring-1 ring-gray-200  lg:mx-0 lg:flex lg:max-w-none">
           <div className="p-8 sm:p-10 lg:flex-auto">
             <h3 className="text-2xl font-bold tracking-tight text-gray-900">{methodModel.capitalizeFirstLetter(activeplan?.name)}</h3>
-            
+            <p>Number of carriers:{activeplan?.subscription_plan_id?.number_of_carriers}</p>
+            <p>Number of drivers:{activeplan?.subscription_plan_id?.number_of_drivers}</p>
             <div className="mt-10 flex items-center gap-x-4">
               <h4 className="flex-none text-sm font-semibold leading-6 text-primary">What’s included</h4>
               <div className="h-px flex-auto bg-gray-100" />

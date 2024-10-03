@@ -64,7 +64,7 @@ const View = () => {
                                 </div>
                                 <div className="grid grid-cols-12 p-4 gap-4">
                                 <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Carrier Name :</label>
+                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Carrier Name </label>
                                         <p className="text-[14px] text-black font-medium ">
                                             {" "}
                                             {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
@@ -72,7 +72,7 @@ const View = () => {
                                         </p>
                                     </div>
                                     <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Email :</label>
+                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Email </label>
                                         <p className="text-[14px] text-black font-medium ">
                                             {" "}
                                             {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
@@ -80,7 +80,7 @@ const View = () => {
                                         </p>
                                     </div>
                                     <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Company Name :</label>
+                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Company Name </label>
                                         <p className="text-[14px] text-black font-medium ">
                                             {" "}
                                             {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
@@ -88,7 +88,7 @@ const View = () => {
                                         </p>
                                     </div>
                                     {data && data?.fax_number ?<div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Fax Number:</label>
+                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Fax Number</label>
                                         <p className="text-[14px] text-black font-medium ">
                                             {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
                                             {data && data?.fax_number}
@@ -97,14 +97,14 @@ const View = () => {
                                     
                                  
                                     <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Tax Number:</label>
+                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Tax Number</label>
                                         <p className="text-[14px] text-black font-medium ">
                                             {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
                                             {data && data?.tax_number}
                                         </p>
                                     </div>
                                     <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Trailer Type :</label>
+                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Trailer Type </label>
                                         <p className="text-[14px] text-black font-medium ">
                                             {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
                                             {data?.trailer_type?.map((itm) => {
@@ -131,7 +131,7 @@ const View = () => {
                                 </div>
                                 <div className="grid grid-cols-12 p-4 gap-4">
                                     <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Address :</label>
+                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Address </label>
                                         <p className="text-[14px] text-black font-medium ">
                                             {" "}
                                             {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
@@ -139,7 +139,7 @@ const View = () => {
                                         </p>
                                     </div>
                                     <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">City :</label>
+                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">City </label>
                                         <p className="text-[14px] text-black font-medium ">
                                             {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
                                             {data && data?.city}
@@ -147,14 +147,14 @@ const View = () => {
                                         </p>
                                     </div>
                                     <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">State :</label>
+                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">State </label>
                                         <p className="text-[14px] text-black font-medium ">
                                             {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
                                             {data && data?.state}
                                         </p>
                                     </div>
                                     <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Postal Code :
+                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Postal Code 
                                         </label>
                                         <p className="text-[14px] text-black font-medium ">
                                             {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
@@ -162,7 +162,7 @@ const View = () => {
                                         </p>
                                     </div>
                                     <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
-                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Country :
+                                        <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Country 
                                         </label>
                                         <p className="text-[14px] text-black font-medium ">
                                             {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}

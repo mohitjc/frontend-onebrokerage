@@ -116,6 +116,7 @@ export default function Chat() {
     }
     ApiClient.put("chat/user/group/remove-member", payload,  environment.chat_api).then((res) => {
       if (res.success) {
+        toast.success(res?.message)
         allroommemeber()      
       }
       closeGroupModal()

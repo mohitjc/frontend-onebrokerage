@@ -886,23 +886,8 @@ const Profile = () => {
                             </label>
                             <div className="">
                               <input
-                                type="text"
-                                pattern="^[a-zA-Z0-9]+$"
-                                onKeyPress={(e) => {
-                                  var regex = new RegExp(
-                                    '^[a-zA-Z0-9]+$'
-                                  );
-                                  var key =
-                                    String.fromCharCode(
-                                      !e.charCode
-                                        ? e.which
-                                        : e.charCode
-                                    );
-                                  if (!regex.test(key)) {
-                                    e.preventDefault();
-                                    return false;
-                                  }
-                                }}
+                                type="number"
+                        
                                 className="pl-2 w-full h-[45px] border border-gray-200 flex items-center rounded-lg bg-gray-50"
                                 placeholder="Enter Number"
                                 value={form?.trailers_number}
