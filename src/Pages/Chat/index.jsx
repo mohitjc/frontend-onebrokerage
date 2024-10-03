@@ -38,6 +38,7 @@ export default function Chat() {
   const [addmember, setaddmember] = useState(false)
   const [adddrivermemberlisting, setadddrivermemberListing] = useState([])
   const [addstafmemberlisting, setaddstaffmemberListing] = useState([])
+
   const history = useNavigate()
   const [driverfilters, setdriverfilters] = useState([])
 
@@ -51,6 +52,7 @@ export default function Chat() {
   const [chatMessages, setChatMessages] = useState([]);
   const [currentchatdata, setcurrentchatdata] = useState()
   const [isOpenmodal, setisOpenmodal] = useState(false);
+  const [isOpenGroupmodal,setisOpenGroupmodal]=useState(false)
   const [sidechat, setsidechat] = useState([]);
   const [chatRoomId, setChatRoomId] = useState("");
   const [isonline, setonline] = useState(false);
@@ -78,10 +80,20 @@ export default function Chat() {
     setstafffilters([])
   }
 
+  function closeGroupModal() {
+    setisOpenGroupmodal(false)
+  }
+
+  function openGroupModal() {
+    setisOpenGroupmodal(true)
+   
+  }
+
+
 
 
   const AddMember = () => {
-  const newfilter=driverfilters.concat(stafffilters)
+    const newfilter = driverfilters.concat(stafffilters)
     const payload = {
       users: newfilter,
       group_id: chatRoomId,
@@ -89,9 +101,24 @@ export default function Chat() {
     }
     ApiClient.post("chat/user/group/add-member", payload, {}, environment.chat_api).then((res) => {
       if (res.success) {
-        console.log(res, "|||||||||||||||||||||||")
+        allroommemeber()
+       
       }
       closeModal()
+    });
+  }
+
+  const deleteMembers=(idd)=>
+  {
+    const payload = {
+      room_id: chatRoomId,
+      user_id: idd
+    }
+    ApiClient.put("chat/user/group/remove-member", payload,  environment.chat_api).then((res) => {
+      if (res.success) {
+        allroommemeber()      
+      }
+      closeGroupModal()
     });
   }
 
@@ -117,6 +144,7 @@ export default function Chat() {
         toast(res?.message)
         closeModal()
         allroommemeber()
+        setChatRoomId("")
       }
       // loader(false);
     });
@@ -158,7 +186,7 @@ export default function Chat() {
     ApiClient.get('chat/user/recent-chats/all', { user_id: user?.id || user?._id }, environment.chat_api).then(res => {
       if (res.success) {
         setsidechat(res?.data?.data)
-
+       
       }
     })
   }
@@ -214,6 +242,7 @@ export default function Chat() {
 
         console.log("uniqueMessages", uniqueMessages);
         setChatMessages([...uniqueMessages]);
+        getChatMessages(chatRoomId);
         setTimeout(() => {
           chatScroll();
         }, 100);
@@ -315,7 +344,6 @@ export default function Chat() {
 
   }
 
-
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -344,7 +372,6 @@ export default function Chat() {
 
 
   const ChatSelectorHandler = (data) => {
-
     history("/chat")
     getChatMessages(data?.room_id);
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
@@ -362,7 +389,8 @@ export default function Chat() {
           <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber} />
 
           <div className="rigtsie_inners h-screen w-full">
-            {chatRoomId ? <> <div className="headres_names flex items-center justify-between p-4 bg-white dark:bg-black ">
+            {chatRoomId ? 
+             <> <div className="headres_names flex items-center justify-between p-4 bg-white dark:bg-black ">
               <div className="flex items-center gap-4">
                 <HiMiniBars3 onClick={toggleSidebar} className="text-xl xl:text-3xl ml-2 text-[#707991] block lg:hidden" />
                 <div className="flex gap-2 xl:gap-4 ">
@@ -380,12 +408,19 @@ export default function Chat() {
               </div>
 
               <div className="flex items-center gap-4 ">
-                {ChatWithUserName?.isGroupChat && user?.role=="carrier"? <button onClick={() => {
+                {ChatWithUserName?.isGroupChat && user?.role == "carrier" ? <button onClick={() => {
                   document
-                    .getElementById('OpenaddmemberModel')
+                    .getElementById('OpenmemberModel')
                     .click();
                   // setform({})
-                }}>Group Info</button> : <></>}
+                }}>Add Members</button> : <></>}
+
+                <button onClick={() => {
+                  document
+                    .getElementById('OpengroupdModel')
+                    .click();
+                  // setform({})
+                }}>Group Detail</button>
 
                 <div className="darkmode">
 
@@ -553,7 +588,113 @@ export default function Chat() {
       <div className="fixed inset-0 hidden  items-center justify-center">
         <button
           type="button"
-          id="OpenaddmemberModel"
+          id="OpengroupdModel"
+          onClick={openGroupModal}
+          className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+        >
+          Open dialog
+        </button>
+      </div>
+
+
+
+      <Transition appear show={isOpenGroupmodal} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeGroupModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full relative max-w-md transform  rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
+                  >
+
+
+                  </Dialog.Title>
+                  <div className=" flex items-center justify-center relative">
+
+                    {/* <div className='h-16 w-16 rounded-full absolute -top-16 right-1/2 left-1/2  -translate-x-1/2 text-white flex items-center justify-center bg-red-500 shadow-md mx-auto border-2 border-red-800 p-4'>
+                    <MdClose className='text-4xl font-bold' />
+
+                    </div> */}
+
+
+
+
+                  </div>
+
+                  <div className="mt-5">
+
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+
+                      }}
+                    >
+                      <div class="modal-body">
+                        <label class="mb-2 block">
+                          {' '}
+                          {ChatWithUserName?.name}
+                        </label>
+                        {currentchatdata?.fullName}  ~Admin
+
+                      </div>
+                      <p>Members in group</p>
+                      <div>
+                        {ChatWithUser?.isGroupChat?<>{ChatWithUser?.room_members?.map((item)=>
+                        <p>{item?.user_name}  <button onClick={(e)=>deleteMembers(item?.user_id)}>Delete</button></p>
+                      
+                      )}</>:<></>}
+                      </div>
+                      <div className='flex items-center justify-end gap-2'>
+
+                        <button
+                          type="button"
+                          id="CloseGroupModel"
+                          className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
+                          onClick={closeGroupModal}
+                        >
+                          Ok
+                        </button>
+
+
+                      </div>
+
+                    </form>
+
+
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+
+      <div className="fixed inset-0 hidden  items-center justify-center">
+        <button
+          type="button"
+          id="OpenmemberModel"
           onClick={openModal}
           className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
         >
@@ -613,7 +754,7 @@ export default function Chat() {
                     <form
                       onSubmit={(e) => {
                         e.preventDefault();
-                        
+
                       }}
                     >
                       <div class="modal-body">
@@ -676,13 +817,13 @@ export default function Chat() {
                           Close
                         </button>}
                         {
-                          addmember?<><button type="submit" class="btn btn-primary" onClick={(e) => AddMember()} >
-                          Add 
-                        </button></>:<><button type="button" class="btn btn-primary" onClick={(e) => setaddmember(true)}>
-                          Add Member
-                        </button></>
+                          addmember ? <><button type="submit" class="btn btn-primary" onClick={(e) => AddMember()} >
+                            Add
+                          </button></> : <><button type="button" class="btn btn-primary" onClick={(e) => setaddmember(true)}>
+                            Add Member
+                          </button></>
                         }
-                      
+
                       </div>
 
                     </form>
@@ -695,6 +836,8 @@ export default function Chat() {
           </div>
         </Dialog>
       </Transition>
+
+
 
 
 

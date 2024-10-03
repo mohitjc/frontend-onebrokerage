@@ -56,7 +56,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
     let value = {
       group_name:form?.group_name,
       image:form?.image,
-      users:[{user_id:user?.id,role:"Admin"}]
+      users:[{user_id:user?.id,role:"admin"}]
     };
     ApiClient.post(`chat/user/group/create`, value,{},environment.chat_api).then((res) => {
       if (res.success) {
