@@ -19,6 +19,7 @@ import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { LuImport } from "react-icons/lu";
 import moment from "moment";
 import { toast } from "react-toastify";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import PageLayout from "../../components/global/PageLayout";
 const Html = ({
   sorting,
@@ -29,6 +30,7 @@ const Html = ({
   pageChange,
   setShowActiveModal,
   count,
+  ChatUser,
   deleteItem,
   clear,
   filters,
@@ -160,7 +162,19 @@ const Html = ({
                 >
                   <LiaTrashAlt />
                 </span>
-              </Tooltip></>}
+              </Tooltip>
+              <Tooltip placement="top" title="Chat">
+                  <span
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={() => ChatUser(itm.id)}
+                  >
+                  <IoChatbubbleEllipsesOutline />
+                  </span>
+                </Tooltip>
+              
+              </>
+
+              }
              
 
             </div>

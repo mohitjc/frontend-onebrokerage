@@ -169,6 +169,12 @@ const CarrierStaff = () => {
     });
   };
 
+  const ChatUser=(id)=>
+    {
+        history(`/chat?id=${id}`)
+    }
+  
+
   const pageChange = (e) => {
     setFilter({ ...filters, page: e });
     getData({ page: e });
@@ -275,6 +281,7 @@ const CarrierStaff = () => {
         filter={filter}
         loaging={loaging}
         data={data}
+        ChatUser={ChatUser}
         total={total}
         sampledownload={sampledownload}
         ImportFile={ImportFile}

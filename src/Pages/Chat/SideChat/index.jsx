@@ -128,12 +128,15 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
               <GoSearch className="text-xl" />
               <input type="search" className="bg-transparent" />
             </div>
-            <button  onClick={() => {
-                      document
-                        .getElementById('OpenReasonModel')
-                        .click();
-                      setform({})
-                    }}>Add Group</button>
+            {
+              user?.role=="carrier"?    <button  onClick={() => {
+                document
+                  .getElementById('OpenReasonModel')
+                  .click();
+                setform({})
+              }}>Add Group</button>:<></>
+            }
+        
           </div>
 
           <div className="mt-4 flex flex-col gap-2 h-[calc(100vh-80px)] tailwind-scrollbar overflow-y-auto">

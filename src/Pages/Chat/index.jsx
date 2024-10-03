@@ -18,26 +18,35 @@ import ApiClient from '../../methods/api/apiClient';
 import environment from '../../environment';
 import socketModel from '../../models/socketModel';
 import methodModel from '../../methods/methods';
+import SelectDropdown from '../../components/common/SelectDropdown';
 import SideChat from './SideChat';
+import MultiSelectDropdown from '../../components/common/MultiSelectDropdown';
 import moment from 'moment';
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { CiHome } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 export default function Chat() {
-
+  const AxiosCancelToken = axios.CancelToken;
+  const CancelRefToken = useRef(0)
   const [ChatWithUser, setChatWithUser] = useState(null);
   const [ChatWithUserName, setChatWithUserName] = useState({});
   const [darkMode, setDarkMode] = useState(false);
   const [addmember, setaddmember] = useState(false)
-  const [addmemberlisting,setaddmemberListing]=useState([])
-  console.log(addmemberlisting,"addmemberlisting")
+  const [adddrivermemberlisting, setadddrivermemberListing] = useState([])
+  const [addstafmemberlisting, setaddstaffmemberListing] = useState([])
   const history = useNavigate()
+  const [driverfilters, setdriverfilters] = useState([])
+
+  const [stafffilters, setstafffilters] = useState([])
+
+
   const user = useSelector(state => state.user)
   const currectChat = useRef()
-  const [form, setform] = useState({})
+
   const messages = useRef()
   const [chatMessages, setChatMessages] = useState([]);
   const [currentchatdata, setcurrentchatdata] = useState()
@@ -65,7 +74,27 @@ export default function Chat() {
 
   function openModal() {
     setisOpenmodal(true)
+    setdriverfilters([])
+    setstafffilters([])
   }
+
+
+
+  const AddMember = () => {
+  const newfilter=driverfilters.concat(stafffilters)
+    const payload = {
+      users: newfilter,
+      group_id: chatRoomId,
+      admin_id: user?.id
+    }
+    ApiClient.post("chat/user/group/add-member", payload, {}, environment.chat_api).then((res) => {
+      if (res.success) {
+        console.log(res, "|||||||||||||||||||||||")
+      }
+      closeModal()
+    });
+  }
+
 
   const getChatMessages = (id) => {
     // loader(true);
@@ -94,7 +123,13 @@ export default function Chat() {
   }
 
 
+
   const joinChat = (chatwithid) => {
+
+    CancelRefToken.current += 1
+    if (CancelRefToken.current > 1) {
+      return
+    }
     let payload
     if (id) {
       payload = {
@@ -123,10 +158,38 @@ export default function Chat() {
     ApiClient.get('chat/user/recent-chats/all', { user_id: user?.id || user?._id }, environment.chat_api).then(res => {
       if (res.success) {
         setsidechat(res?.data?.data)
-        setaddmemberListing(res?.data?.data?.filter((itm)=>!itm?.isGroupChat))
+
       }
     })
   }
+
+  const AddDriver = () => {
+    ApiClient.get("users/list", { addedBy: user?.id || user?._id, role: "driver" }).then((res) => {
+      if (res.success) {
+        setadddrivermemberListing(
+          res?.data?.data?.map((item) => ({
+            id: item?.id,
+            name: item?.fullName,
+          }))
+        );
+      }
+    });
+  }
+
+  const AddStaff = () => {
+    ApiClient.get("users/list", { addedBy: user?.id || user?._id, role: "staff" }).then((res) => {
+      if (res.success) {
+        setaddstaffmemberListing(
+          res?.data?.data?.map((item) => ({
+            id: item?.id,
+            name: item?.fullName,
+          }))
+        );
+      }
+    });
+  }
+
+
 
   const getUserDetail = (id) => {
     ApiClient.get(`user/detail`, { id: id }).then((res) => {
@@ -175,7 +238,10 @@ export default function Chat() {
     });
 
     allroommemeber()
+    AddDriver()
+    AddStaff()
   }, [])
+
 
 
   let id = methodModel.getPrams('id')
@@ -183,15 +249,12 @@ export default function Chat() {
 
   useEffect(() => {
     if (id) {
+      joinChat(id)
       allroommemeber(user?.id)
-      setTimeout(()=>{
-        joinChat(id)
-      },2000)
-      
       getUserDetail(id)
     }
- 
-  }, [])
+
+  }, [id])
 
 
   useEffect(() => {
@@ -226,6 +289,7 @@ export default function Chat() {
     }
     console.log("value", value)
     socketModel.emit("send-message", value);
+    getChatMessages(chatRoomId);
     allroommemeber()
     setText('')
   }
@@ -280,7 +344,7 @@ export default function Chat() {
 
 
   const ChatSelectorHandler = (data) => {
-    console.log(data, "datadatadata")
+
     history("/chat")
     getChatMessages(data?.room_id);
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
@@ -297,8 +361,6 @@ export default function Chat() {
 
           <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber} />
 
-
-
           <div className="rigtsie_inners h-screen w-full">
             {chatRoomId ? <> <div className="headres_names flex items-center justify-between p-4 bg-white dark:bg-black ">
               <div className="flex items-center gap-4">
@@ -306,19 +368,19 @@ export default function Chat() {
                 <div className="flex gap-2 xl:gap-4 ">
                   <img
                     src={methodModel.userImg(
-                      ChatWithUserName?.image
+                      ChatWithUserName?.isGroupChat ? ChatWithUserName?.image : currentchatdata?.image
                     )}
                     className="h-12 w-12 rounded-full mb-4 object-contain "
                   />
                   <div className="">
-                    <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{ChatWithUserName?.name}</h4>
+                    <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{ChatWithUserName?.name || currentchatdata?.fullName}</h4>
                     <p className=" text-[12px] xl:text-[15px] text-[#707991]">{currentchatdata?.isOnline ? "Online" : "Offline"}</p>
                   </div>
                 </div>
               </div>
 
               <div className="flex items-center gap-4 ">
-                {ChatWithUserName?.isGroupChat ? <button onClick={() => {
+                {ChatWithUserName?.isGroupChat && user?.role=="carrier"? <button onClick={() => {
                   document
                     .getElementById('OpenaddmemberModel')
                     .click();
@@ -551,7 +613,7 @@ export default function Chat() {
                     <form
                       onSubmit={(e) => {
                         e.preventDefault();
-                        // createGroup();
+                        
                       }}
                     >
                       <div class="modal-body">
@@ -568,8 +630,31 @@ export default function Chat() {
 
                         </div>
                         {addmember ? <div class="mb-3">
+                          <MultiSelectDropdown
+                            id="statusDropdown"
+                            className="role-color"
+                            displayValue="name"
+                            placeholder="Select Load Type"
+                            intialValue={driverfilters}
+                            result={(e) => {
+                              setdriverfilters(e.value);
+                            }}
+                            options={adddrivermemberlisting}
+                            required={true}
+                          />
+                          <MultiSelectDropdown
+                            id="statusDropdown"
+                            className="role-color"
+                            displayValue="name"
+                            placeholder="Select Load Type"
+                            intialValue={stafffilters}
+                            result={(e) => {
+                              setstafffilters(e.value);
+                            }}
+                            options={addstafmemberlisting}
+                            required={true}
+                          />
 
-                        
                         </div> : <>{currentchatdata?.fullName}  ~Admin</>}
 
                       </div>
@@ -590,9 +675,14 @@ export default function Chat() {
                         >
                           Close
                         </button>}
-                        <button type="submit" class="btn btn-primary" onClick={(e) => setaddmember(true)}>
-                          Add Members
-                        </button>
+                        {
+                          addmember?<><button type="submit" class="btn btn-primary" onClick={(e) => AddMember()} >
+                          Add 
+                        </button></>:<><button type="button" class="btn btn-primary" onClick={(e) => setaddmember(true)}>
+                          Add Member
+                        </button></>
+                        }
+                      
                       </div>
 
                     </form>
