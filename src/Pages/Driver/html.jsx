@@ -21,6 +21,8 @@ import moment from "moment";
 import { toast } from "react-toastify";
 import PageLayout from "../../components/global/PageLayout";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import { CiImport } from "react-icons/ci";
+import { CgImport } from "react-icons/cg";
 const Html = ({
   sorting,
   filter,
@@ -77,7 +79,7 @@ const Html = ({
   const columns = [
     {
       key: "fullName",
-      name: "Driver Name",
+      name: "Name",
       sort: true,
       render: (row) => {
         return <span className="capitalize">{row?.fullName}</span>;
@@ -302,20 +304,28 @@ const Html = ({
               <span class="sr-only">Search</span>
             </button>
           </form>
-          <div>
+             
+
+<div className="flex gap-2 ml-auto items-center">
+
+              <div>
                 <button
                   onClick={(e) => sampledownload()}
-                  className="btn dark-btn  btn-set"
+                  className="flex items-center border border-gray-200 px-2 py-2.5 hover:shadow rounded-lg gap-2"
                  >
-                  <i className="fa fa-download me-2"></i>Download
+                  <CgImport />
+
+                 <span className="text-sm"> Download</span>
                 </button>
               </div>
 
-              <div className="result-set">
+              <div className="">
                 <div className="relative text-center">
-                  <label className="cursor-pointer  dark-btn btn">
-                    <i className="fa fa-download me-2"></i>
-                    <span>Import</span>
+                  <label className="cursor-pointer border border-gray-200 px-2 py-2.5 hover:shadow rounded-lg  flex items-center gap-2">
+                  <CgImport />
+
+
+                    <span className="text-sm">Import</span>
                     <input
                       id="bannerImage"
                       type="file"
@@ -329,7 +339,7 @@ const Html = ({
                 </div>
               </div>
 
-<div className="flex gap-2 ml-auto">
+
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"

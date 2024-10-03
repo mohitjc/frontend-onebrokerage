@@ -81,7 +81,7 @@ const View = () => {
                     Basic Information
                   </h3>
                 </div>
-                <div className="grid grid-cols-12 p-4">
+                <div className="grid grid-cols-12 p-4 gap-4">
                   <div className="col-span-12 lg:col-span-6 flex flex-col  ">
                     <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">
                       Name
@@ -124,7 +124,7 @@ const View = () => {
                     Address
                   </h3>
                 </div>
-                <div className="grid grid-cols-12 p-4">
+                <div className="grid grid-cols-12 p-4 gap-4">
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-5">
                     <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">
                       Address

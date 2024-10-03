@@ -61,7 +61,7 @@ const View = () => {
               <div>
                   <h4 className="p-4 bg-[#494f9f1a] font-medium">Contract Information</h4>
                 </div>
-               <div className="grid grid-cols-12 p-4">
+               <div className="grid grid-cols-12 p-4 gap-4">
                <div className="col-span-6 flex  mb-3">
                   <label className="text-[14px] text-[#0000009c] tracking-wider w-[130px]">Title:</label>
                   <p className="text-[14px] text-black font-medium ms-3">

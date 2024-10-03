@@ -322,7 +322,7 @@ const Signup = () => {
             <></>
           )} */}
 
-          <div className="mt-8">
+          <div className="mt-4">
             <button
               type="submit"
               className="px-4 w-full text-sm font-normal text-white h-12 flex items-center justify-center gap-2 !bg-[#494f9f] rounded-xl shadow-btn hover:opacity-80 transition-all focus:ring-2 ring-[#EDEBFC] disabled:bg-[#D0CAF6] disabled:cursor-not-allowed"

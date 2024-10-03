@@ -177,3 +177,19 @@ label.profileheddingcls {
   position: relative;
   z-index: 2; /* Ensures other content inside is above the overlay */
 }
+
+
+
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #ebebeb;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #494f9f;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #dedede;
+}

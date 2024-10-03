@@ -352,8 +352,8 @@ const Html = ({
             >
               <MenuItem>
             
-                  <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"  onClick={() => ChangeRequestStatus("")}>
-                    <FiUsers className="size-4 stroke-black/30 hover:stroke-white" />
+                  <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] group hover:text-white"  onClick={() => ChangeRequestStatus("")}>
+                    <FiUsers className="size-4 stroke-black group-hover:stroke-white" />
                     All Carriers
                   </button>
          
@@ -361,20 +361,20 @@ const Html = ({
               <MenuItem>
          
                   <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"   onClick={() => ChangeRequestStatus("accepted")}>
-                    <IoMdCheckmarkCircleOutline className="size-4 stroke-black/30 hover:stroke-white" />
+                    <IoMdCheckmarkCircleOutline className="size-4 stroke-black group-hover:stroke-white" />
                     Accepted Carriers
                   </button>
       
               </MenuItem>
               <MenuItem>
-                <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"  onClick={() => ChangeRequestStatus("pending")}>
-                  <IoGitPullRequestOutline className="size-4 stroke-black/30 hover:stroke-white" />
+                <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] group hover:text-white"  onClick={() => ChangeRequestStatus("pending")}>
+                  <IoGitPullRequestOutline className="size-4 stroke-black group-hover:stroke-white" />
                   Pending Carriers
                 </button>
               </MenuItem>
               <div className="my-1 h-px bg-gray-200" />
               <MenuItem>
-                <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 text-red-500 hover:bg-[#3E549D] hover:text-white"
+                <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 text-black hover:bg-[#3E549D] hover:text-white"
                  onClick={() => ChangeRequestStatus("rejected")}>
                   <RxCrossCircled className="size-4 stroke-black/30 hover:stroke-white" />
                   Rejected Carriers

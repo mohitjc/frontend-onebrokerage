@@ -20,6 +20,8 @@ import { LuImport } from "react-icons/lu";
 import moment from "moment";
 import PageLayout from "../../components/global/PageLayout";
 import { useNavigate } from "react-router-dom";
+import { CiImport } from "react-icons/ci";
+import { CgImport } from "react-icons/cg";
 const Html = ({
   sorting,
   filter,
@@ -128,7 +130,7 @@ const Html = ({
       </div>
 
       <div className=" w-full bg-white rounded-lg mt-6 border">
-        <div className="flex p-4 items-center flex-wrap">
+        <div className="flex justify-between p-4 items-center flex-wrap">
           <form
             class="flex items-center max-w-sm"
             onSubmit={(e) => {
@@ -183,20 +185,28 @@ const Html = ({
             </button>
           </form>
 
+          <div className="flex items-center gap-4">
+
+          
+
           <div>
                 <button
                   onClick={(e) => sampledownload()}
-                  className="btn dark-btn  btn-set"
+                 className="flex items-center border border-gray-200 px-2 py-2.5 hover:shadow rounded-lg gap-2"
                  >
-                  <i className="fa fa-download me-2"></i>Download
+                <CgImport />
+
+                <span className="text-sm"> Download</span>
                 </button>
               </div>
 
               <div className="result-set">
                 <div className="relative text-center">
-                  <label className="cursor-pointer  dark-btn btn">
-                    <i className="fa fa-download me-2"></i>
-                    <span>Import</span>
+                <label className="cursor-pointer border bg-primary text-white border-gray-200 px-2 py-2.5 hover:shadow rounded-lg  flex items-center gap-2">
+                <CgImport />
+
+
+<span className="text-sm">Import</span>
                     <input
                       id="bannerImage"
                       type="file"
@@ -209,7 +219,7 @@ const Html = ({
                   </label>
                 </div>
               </div>
-
+              </div>
         </div>
 
            

@@ -66,7 +66,7 @@ const View = () => {
                 <div className="bg-[#1245940a] p-4 border-b">
                   <h3 className="text-[20px] font-[500]">Basic Information</h3>
                 </div>
-               <div className="grid grid-cols-12 p-4">
+               <div className="grid grid-cols-12 p-4 gap-4">
                <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                 <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Name</label>
                   <p className="text-[14px] text-black font-medium ">

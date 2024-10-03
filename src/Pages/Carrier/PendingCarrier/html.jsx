@@ -169,7 +169,7 @@ const Html = ({
                     AcceptUser(itm?.id);
                   }}
                 >
-                  <span className="border cursor-pointer  hover:opacity-70 rounded-lg bg-green-400 w-10 h-10 !text-white flex items-center justify-center text-lg">
+                  <span className="border cursor-pointer  hover:opacity-70 rounded-lg bg-primary w-10 h-10 !text-white flex items-center justify-center text-lg">
                     <i
                       color="green"
                       className="fa fa-check"
@@ -187,7 +187,7 @@ const Html = ({
                       setRejectID(itm?.id);
                     }}
                   >
-                    <span className="border cursor-pointer  hover:opacity-70 rounded-lg bg-red-400 w-10 h-10 !text-white flex items-center justify-center text-lg">
+                    <span className="border cursor-pointer  hover:opacity-70 rounded-lg bg-red-500 w-10 h-10 !text-white flex items-center justify-center text-lg">
                       <i color="red" className="fa fa-times"></i>
                     </span>{' '}
                   </a>
