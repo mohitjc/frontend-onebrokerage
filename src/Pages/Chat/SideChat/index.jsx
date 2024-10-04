@@ -156,12 +156,15 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
                         className="h-10 w-10 rounded-full mb-4 object-contain "
                       /></>:<> {
                     item?.room_members?.map((itm) =>
-                      <img
+                      <><img
                         src={methodModel.userImg(
                           itm?.user_image
                         )}
                         className="h-10 w-10 rounded-full mb-4 object-contain "
                       />
+                      {itm?.isOnline?'Online':'Offline'}
+                      </>
+                      
                     )
                   }</>}
                  

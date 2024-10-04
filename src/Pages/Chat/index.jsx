@@ -217,7 +217,7 @@ export default function Chat() {
       }
     });
   }
-
+  const SideChatRef=useRef([]);
   const getUserDetail = (id) => {
     ApiClient.get(`user/detail`, { id: id }).then((res) => {
       if (res.success) {
@@ -226,8 +226,11 @@ export default function Chat() {
 
     });
   }
+  useEffect(()=>{
+    SideChatRef.current=sidechat
+        },[sidechat])
 
-
+        console.log(sidechat,"THIS SI THE SIDESCAHT ")
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
       // console.log(data,"recive data")
@@ -251,18 +254,45 @@ export default function Chat() {
 
 
     let id = methodModel.getPrams('id')
+  
+
 
     socketModel.on("user-online", (data) => {
+      console.error(data,"online user")
+      if(id){   
+        if (id == data.data.user_id) {
+          setonline(true)
 
-      if (id == data.data.user_id) {
-        setonline(true)
+        }
       }
+      let newdata=  SideChatRef.current?.map((item)=>{
+          if(item?.room_members[0]?.user_id==data?.data?.user_id){
+            return {...item,room_members:[{...item?.room_members[0],isOnline:true},...item?.room_members.slice(1)]}
+          }else{
+            return item
+          }
+        });
+        console.error(newdata,"This si the data++++++")
+        setsidechat([...newdata])
+  
     });
 
     socketModel.on("user-offline", (data) => {
-      if (id == data.data.user_id) {
-        setonline(false)
+    
+      if(id){   
+        if (id == data.data.user_id) {
+          setonline(true)
+        }
       }
+      let newdata=  SideChatRef.current?.map((item)=>{
+          if(item?.room_members[0]?.user_id==data?.data?.user_id){
+            return {...item,room_members:[{...item?.room_members[0],isOnline:true},...item?.room_members.slice(1)]}
+          }else{
+            return item
+          }
+        });
+        console.error(newdata,"This si the data++++++")
+        setsidechat([...newdata])
     });
 
 
@@ -376,7 +406,7 @@ export default function Chat() {
 
 
   const ChatSelectorHandler = (data) => {
-    // console.log(data,"jbwe2v")
+    console.log(data,"jbwe2v")
     history("/chat")
     getChatMessages(data?.room_id);
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)

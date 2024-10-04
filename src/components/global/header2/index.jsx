@@ -43,7 +43,8 @@ const Header = () => {
   ]
 
   useEffect(() => {
-    socketModel.emit(`user-online`, { user_id: user.id });
+    socketModel.emit(`user-online`, { user_id: user?.id });
+
     return () => {
       socketModel.emit(`user-offline`, { user_id: user.id });
     };
