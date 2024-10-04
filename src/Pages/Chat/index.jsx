@@ -230,7 +230,8 @@ export default function Chat() {
     SideChatRef.current=sidechat
         },[sidechat])
 
-        console.log(sidechat,"THIS SI THE SIDESCAHT ")
+  console.log(sidechat,"THIS SI THE SIDESCAHT ")
+  
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
       // console.log(data,"recive data")
