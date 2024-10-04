@@ -16,11 +16,11 @@ const Html = ({
 
             
             </div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-4">Thank You!</h1>
-            <p className="text-gray-600 mb-6">Your submission has been received. We will get back to you shortly.</p>
+            <h1 className="text-3xl font-bold text-gray-800 mb-4">Payment Successful!</h1>
+            <p className="text-gray-600 mb-6">Thanks for your purchase</p>
 
-            <a href="/" className="inline-block bg-primary hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out">
-              Go back to Home
+            <a href="/trucks/add" className="inline-block bg-primary hover:bg-green-600 text-white font-semibold py-2 px-4   rounded transition duration-300 ease-in-out">
+             Ok
             </a>
           </div>
         </div>
