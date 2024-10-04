@@ -80,7 +80,8 @@ const View = () => {
                 <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">License Image </label>
                   <p className="text-[14px] text-black font-medium ">
                   <img
-                      src={methodModel.noImg(data && data.license_image)}
+                      
+                      src={methodModel.noImg(data && data.license_image,"LicenceImage")}
                       className="h-36 w-36 rounded-full object-cover mx-auto"
                     />
                   </p>

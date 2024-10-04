@@ -193,11 +193,11 @@ export default function Chat() {
   }
 
   const AddDriver = () => {
-    ApiClient.get("users/list", { addedBy: user?.id || user?._id, role: "driver" }).then((res) => {
+    ApiClient.get("chat/user/group/allusers", { user_id: user?.id || user?._id, role: "driver" ,room_id:chatRoomId}, environment.chat_api).then((res) => {
       if (res.success) {
         setadddrivermemberListing(
-          res?.data?.data?.map((item) => ({
-            id: item?.id,
+          res?.data?.usersNotInRoom?.map((item) => ({
+            id: item?.id||item?._id,
             name: item?.fullName,
           }))
         );
@@ -206,19 +206,17 @@ export default function Chat() {
   }
 
   const AddStaff = () => {
-    ApiClient.get("users/list", { addedBy: user?.id || user?._id, role: "staff" }).then((res) => {
+    ApiClient.get("chat/user/group/allusers", { user_id: user?.id || user?._id, role: "staff",room_id:chatRoomId }, environment.chat_api).then((res) => {
       if (res.success) {
         setaddstaffmemberListing(
-          res?.data?.data?.map((item) => ({
-            id: item?.id,
+          res?.data?.usersNotInRoom?.map((item) => ({
+            id: item?.id||item?._id,
             name: item?.fullName,
           }))
         );
       }
     });
   }
-
-
 
   const getUserDetail = (id) => {
     ApiClient.get(`user/detail`, { id: id }).then((res) => {
@@ -270,8 +268,7 @@ export default function Chat() {
 
 
     allroommemeber()
-    AddDriver()
-    AddStaff()
+
   }, [])
 
 
@@ -309,6 +306,8 @@ export default function Chat() {
       // socketModel.emit("read-all-message", value);
       currectChat.current = chatRoomId
       getChatMessages(chatRoomId);
+      AddDriver()
+      AddStaff()
     }
   }, [chatRoomId]);
 
