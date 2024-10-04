@@ -260,8 +260,6 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
                           {' '}
                          Create a group <span className="text-danger">*</span>
                         </label>
-                        <div className='flex items-center '>
-                        <div>
                         <div className="flex flex-col items-center justify-center">
                       <img
                         src={methodModel.userImg(
@@ -271,7 +269,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
                       />
 
                       <div>
-                        <label className="new_images bg-primary bg-white px-6 py-2 rounded-lg inline-flex items-center gap-2 text-white edit">
+                        <label className="new_images bg-primary bg-white p-2 rounded-lg inline-flex items-center gap-2 text-white edit">
                           <input
                             id="bannerImage"
                             type="file"
@@ -293,14 +291,11 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
                       </div>
                      
                     </div>
-                        </div>
-                    
-                    <div>
                         <div class="mb-3">
 
                         <input
                                 type="text"
-                                className="pl-2 border-[1px] rounded w-[full] bg-gray-100"
+                                className="pl-2 shadow-[rgba(0,_0,_0,_0.16)_0px_10px_36px_0px,_rgba(0,_0,_0,_0.06)_0px_0px_0px_1px] p-2 w-full border-[0px] mt-2 rounded-lg"
                                 value={form.group_name}
                                 onChange={(e) =>
                                   setform({ ...form, group_name: e.target.value })
@@ -308,26 +303,23 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
                                 // required
                               />
                         </div>
-              
-</div>
-</div>
-<div className='flex items-center justify-end gap-2'>
-
-
-<button
-  type="button"
-  id="CloseReasonModel"
-  className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
-  onClick={closeModal}
->
-  Close
-</button>
-<button type="submit" class="btn btn-primary">
-  Create a group
-</button>
-</div>
+                   
                       </div>
-                     
+                      <div className='flex items-center justify-end gap-2'>
+
+
+                        <button
+                          type="button"
+                          id="CloseReasonModel"
+                          className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
+                          onClick={closeModal}
+                        >
+                          Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                          Create a group
+                        </button>
+                      </div>
 
                     </form>
 

@@ -74,6 +74,17 @@ const View = () => {
                     {/* <LiaUserSolid className="text-xl text-[#494f9f]" /> */}
                     {data && data.licence_number}
                   </p>
+                  
+                </div>
+                <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
+                <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">License Image </label>
+                  <p className="text-[14px] text-black font-medium ">
+                  <img
+                      src={methodModel.noImg(data && data.license_image)}
+                      className="h-36 w-36 rounded-full object-cover mx-auto"
+                    />
+                  </p>
+                  
                 </div>
                   <div className="col-span-12 lg:col-span-6 flex flex-col mb-4">
                    <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">Truck Number</label>
