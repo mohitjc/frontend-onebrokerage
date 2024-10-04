@@ -273,26 +273,25 @@ export default function Chat() {
             return item
           }
         });
-        console.error(newdata,"This si the data++++++")
+        console.error(newdata,"This is the data++++++")
         setsidechat([...newdata])
   
     });
 
-    socketModel.on("user-offline", (data) => {
-    
+    socketModel.on("user-offline", (data) => {  
       if(id){   
         if (id == data.data.user_id) {
-          setonline(true)
+          setonline(false)
         }
       }
       let newdata=  SideChatRef.current?.map((item)=>{
           if(item?.room_members[0]?.user_id==data?.data?.user_id){
-            return {...item,room_members:[{...item?.room_members[0],isOnline:true},...item?.room_members.slice(1)]}
+            return {...item,room_members:[{...item?.room_members[0],isOnline:false},...item?.room_members.slice(1)]}
           }else{
             return item
           }
         });
-        console.error(newdata,"This si the data++++++")
+        console.error(newdata,"This is the offline data++++++")
         setsidechat([...newdata])
     });
 
