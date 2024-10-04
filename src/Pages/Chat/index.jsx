@@ -48,9 +48,10 @@ export default function Chat() {
 
   const user = useSelector(state => state.user)
   const currectChat = useRef()
-
+console.log(currectChat,"currectChatcurrectChat")
   const messages = useRef()
   const [chatMessages, setChatMessages] = useState([]);
+  console.log(chatMessages,"chatMessageschatMessageschatMessages")
   const [currentchatdata, setcurrentchatdata] = useState()
   const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpenGroupmodal, setisOpenGroupmodal] = useState(false)
@@ -144,7 +145,7 @@ export default function Chat() {
         toast(res?.message)
         closeModal()
         allroommemeber()
-        setChatRoomId("")
+        // setChatRoomId("")
       }
       // loader(false);
     });
@@ -176,7 +177,7 @@ export default function Chat() {
       if (res.success) {
         let room_id = res.data.room_id
         setChatRoomId(room_id)
-        currectChat.current = room_id
+        
       }
     })
   }
@@ -230,6 +231,7 @@ export default function Chat() {
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
+      console.log(data,"data")
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
 
@@ -302,7 +304,7 @@ export default function Chat() {
       }
       // socketModel.emit("unread-count", value);
       // socketModel.emit("read-all-message", value);
-
+      currectChat.current = chatRoomId
       getChatMessages(chatRoomId);
     }
   }, [chatRoomId]);
