@@ -16,9 +16,11 @@ import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
 import { lazy } from "react";
 
+
 const { persistor, store } = configureStoreProd();
 
 function App() {
+
   
   const routes = [
       { url: "/", path: "Home" },
@@ -98,6 +100,7 @@ function App() {
   ];
 
   sessionStorage.clear();
+
 
   return (
     <>

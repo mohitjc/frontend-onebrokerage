@@ -13,7 +13,6 @@ import environment from "../../environment";
 import { toast } from "react-toastify";
 import addressModel from "../../models/address.model";
 import shared from "./shared";
-
 const Carrier = (p) => {
   const user = useSelector((state) => state.user);
   const [DataLength, setDataLength] = useState(0);
@@ -346,6 +345,7 @@ const Carrier = (p) => {
         isAllow={isAllow}
         tabChange={tabChange}
         tab={tab}
+        
         filter={filter}
         reset={reset}
         add={add}

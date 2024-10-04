@@ -17,6 +17,8 @@ import { MdClose } from 'react-icons/md';
 import { toast } from "react-toastify";
 import { MdGroupAdd } from "react-icons/md";
 import environment from '../../../environment';
+import socketModel from '../../../models/socketModel';
+import Header from '../../../components/global/header2';
 export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber }) {
   const user = useSelector((state) => state.user);
 
@@ -79,7 +81,8 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
 
   return (
     <>
-
+    <div className="hidden"> <Header /></div>
+     
       <div className="block lg:hidden">
         <div className={`chatslefts w-[400px] border-r border-gray-200 shrink-0 py-4 h-screen bg-white fixed top-0 z-50 left-0 transition-transform duration-300 ease-in-out
                   ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
@@ -161,7 +164,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
                         )}
                         className="h-10 w-10 rounded-full mb-4 object-contain "
                       />
-                        {/* {itm?.isOnline ? 'Online' : 'Offline'} */}
+                        {itm?.isOnline ? 'Online' : 'Offline'}
                       </>
 
                     )

@@ -274,8 +274,7 @@ export default function Chat() {
           }
         });
         console.error(newdata,"This is the data++++++")
-        setsidechat([...newdata])
-  
+        setsidechat([...newdata]) 
     });
 
     socketModel.on("user-offline", (data) => {  

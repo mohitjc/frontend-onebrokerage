@@ -34,13 +34,6 @@ const Header = () => {
     history('/login');
   };
 
-  const navigation = [
-    { name: 'About', href: '#', current: window.location.pathname=="/"?true:false },
-    { name: 'Blog', href: '#', current: false },
-    {name:'Plan',href:"/plan", current:window.location.pathname=="/plan"?true:false},
-    { name: 'Chat', href:user?.id?'/chat':'/login', current: window.location.pathname=="/chat"?true:false },
-    { name: 'Contact', href: '#', current: false },
-  ]
 
   useEffect(() => {
     socketModel.emit(`user-online`, { user_id: user?.id });
@@ -49,6 +42,16 @@ const Header = () => {
       socketModel.emit(`user-offline`, { user_id: user.id });
     };
   }, []);
+
+  const navigation = [
+    { name: 'About', href: '#', current: window.location.pathname=="/"?true:false },
+    { name: 'Blog', href: '#', current: false },
+    {name:'Plan',href:"/plan", current:window.location.pathname=="/plan"?true:false},
+    { name: 'Chat', href:user?.id?'/chat':'/login', current: window.location.pathname=="/chat"?true:false },
+    { name: 'Contact', href: '#', current: false },
+  ]
+
+
   
 
   return (
