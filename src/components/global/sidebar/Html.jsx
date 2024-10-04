@@ -174,7 +174,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 </NavLink>
               </tooltip>
             </li> :
-            <li>
+            user?.role=="user"?<></>: <li>
               <Disclosure as="div" defaultOpen={tabclass("carriers")}>
                 {({ open }) => (
                   <>
@@ -302,6 +302,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 )}
               </Disclosure>
             </li>
+           
            }
 
 
