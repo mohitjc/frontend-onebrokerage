@@ -254,9 +254,8 @@ export default function Chat() {
 
     let id = methodModel.getPrams('id')
 
-
-
     socketModel.on("user-online", (data) => {
+
       if (id == data.data.user_id) {
         setonline(true)
       }
@@ -267,6 +266,8 @@ export default function Chat() {
         setonline(false)
       }
     });
+
+
 
     allroommemeber()
     AddDriver()

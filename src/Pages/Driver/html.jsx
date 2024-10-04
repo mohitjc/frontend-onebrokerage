@@ -479,7 +479,6 @@ const Html = ({
                         </label>
                         <div className="flex flex-col items-center justify-center ">
 
-                         
                           <div>
                           If you want to add more drivers , you need to upgrade the plan
                           </div>
