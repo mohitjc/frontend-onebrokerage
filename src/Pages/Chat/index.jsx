@@ -48,10 +48,10 @@ export default function Chat() {
 
   const user = useSelector(state => state.user)
   const currectChat = useRef()
-console.log(currectChat,"currectChatcurrectChat")
+// console.log(currectChat,"currectChatcurrectChat")
   const messages = useRef()
   const [chatMessages, setChatMessages] = useState([]);
-  console.log(chatMessages,"chatMessageschatMessageschatMessages")
+  // console.log(chatMessages,"chatMessageschatMessageschatMessages")
   const [currentchatdata, setcurrentchatdata] = useState()
   const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpenGroupmodal, setisOpenGroupmodal] = useState(false)
@@ -109,7 +109,7 @@ console.log(currectChat,"currectChatcurrectChat")
   }
 
   const deleteMembers = (data) => {
-    console.log(data, "data")
+    // console.log(data, "data")
     const payload = {
       room_id: chatRoomId,
       user_id: data?.user_id
@@ -231,7 +231,7 @@ console.log(currectChat,"currectChatcurrectChat")
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
-      console.log(data,"data")
+      // console.log(data,"recive data")
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
 
@@ -241,7 +241,7 @@ console.log(currectChat,"currectChatcurrectChat")
           return messages.current.find((message) => message._id === id);
         });
 
-        console.log("uniqueMessages", uniqueMessages);
+        // console.log("uniqueMessages", uniqueMessages);
         setChatMessages([...uniqueMessages]);
         // getChatMessages(chatRoomId);
         setTimeout(() => {
@@ -294,12 +294,13 @@ console.log(currectChat,"currectChatcurrectChat")
         user_id: user?._id || user?.id,
       };
       if (!activeRooms.current.includes(chatRoomId)) {
-        console.log("activeRooms inner", activeRooms);
+        // console.log("activeRooms inner", activeRooms);
         activeRooms.current.push(chatRoomId);
         sessionStorage.setItem(
           "activeRooms",
           JSON.stringify(activeRooms.current)
         );
+        // console.log(value,"join socket")
         socketModel.emit("join-room", value);
       }
       // socketModel.emit("unread-count", value);
@@ -317,7 +318,7 @@ console.log(currectChat,"currectChatcurrectChat")
       type: 'TEXT',
       content: text
     }
-    console.log("value", value)
+    // console.log("Send value", value)
     socketModel.emit("send-message", value);
     // getChatMessages(chatRoomId);
     // allroommemeber()
@@ -338,7 +339,7 @@ console.log(currectChat,"currectChatcurrectChat")
           type: 'IMAGE',
           media: res?.data?.imagePath
         }
-        console.log("value", value)
+        // console.log("value", value)
         socketModel.emit("send-message", value);
         // getChatMessages(chatRoomId);
       }
@@ -374,6 +375,7 @@ console.log(currectChat,"currectChatcurrectChat")
 
 
   const ChatSelectorHandler = (data) => {
+    // console.log(data,"jbwe2v")
     history("/chat")
     getChatMessages(data?.room_id);
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
