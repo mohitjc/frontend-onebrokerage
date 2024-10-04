@@ -25,6 +25,7 @@ import MultiSelectDropdown from '../../components/common/MultiSelectDropdown';
 import moment from 'moment';
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import { BsEmojiFrown } from "react-icons/bs";
 import { CiHome } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -555,21 +556,26 @@ export default function Chat() {
                         })}
                       </div>
 
-                      <div class="bg-white p-4 rounded-xl flex items-center gap-4 mt-4">
-                        <form className='w-full' onSubmit={e => { e.preventDefault(); handleSubmit() }}>
-                          <div className='flex gap-4 items-center relative'>
+                      <div class="rounded-xl flex items-center gap-4 mt-4">
+                        <form className='w-full relative' onSubmit={e => { e.preventDefault(); handleSubmit() }}>
+
                             {/* <div>
                               <EmojiPicker 
                               onEmojiClick={e => setText(text+e?.emoji)}
                               />
                             </div> */}
-                            <label className="absolute left-[10px] top-1/2 cursor-pointer">
-                              <ImAttachment className='text-xl text-gray-600' />
-                              <input type="file" multiple onChange={uploadImage} accept="image/*" className="d-none" />
-                            </label>
+                            <div className='absolute items-center left-[17px] top-[17px] flex'>
+                            <BsEmojiFrown className='text-[#707991]' />
+
+<label className=" cursor-pointer ml-4">
+  <ImAttachment className='text-[#707991]' />
+  <input type="file" multiple onChange={uploadImage} accept="image/*" className="d-none" />
+</label>
+                            </div>
+                        
                             {/* <LuSmile className='text-xl text-gray-600' />
         <ImAttachment className='text-xl text-gray-600' /> */}
-                          </div>
+                          
 
 
                           <div className='w-full flex items-center gap-2'>
@@ -577,10 +583,10 @@ export default function Chat() {
                               type="text"
                               value={text}
                               onChange={e => setText(e.target.value)}
-                              placeholder="Type a message..."
-                              className="flex-grow border border-gray-300 rounded-lg py-3  ps-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              // placeholder="Type a message..."
+                              className="flex-grow border border-[0px] rounded-lg py-3 set-up-input ps-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
-                            <button onClick={e => { e.preventDefault(); handleSubmit() }}> <IoSend className='text-2xl text-primary' /></button>
+                            <button className='absolute right-[12px]' onClick={e => { e.preventDefault(); handleSubmit() }}> <IoSend className='text-2xl text-[#8BABD8] text-[12px]'  /></button>
                           </div>
 
                         </form>
