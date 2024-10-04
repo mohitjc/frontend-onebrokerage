@@ -412,7 +412,7 @@ export default function Chat() {
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
     setChatWithUser(data);
     setChatRoomId(data?.room_id)
-    setChatWithUserName({ name: data?.room_name ? data?.room_name : data?.room_members[0].user_name, image: data?.room_image ? data?.room_image : data?.room_members[0]?.user_image, isGroupChat: data?.isGroupChat })
+    setChatWithUserName({ name: data?.room_name ? data?.room_name : data?.room_members[0].user_name, image: data?.room_image ? data?.room_image : data?.room_members[0]?.user_image, isGroupChat: data?.isGroupChat,isOnline:data?.room_members[0]?.isOnline })
   }
 
 
@@ -437,7 +437,7 @@ export default function Chat() {
                     />
                     <div className="">
                       <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{ChatWithUserName?.name || currentchatdata?.fullName}</h4>
-                      <p className=" text-[12px] xl:text-[15px] text-[#707991]">{currentchatdata?.isOnline ? "Online" : "Offline"}</p>
+                      <p className=" text-[12px] xl:text-[15px] text-[#707991]">{ChatWithUserName?.isOnline ? "Online" : "Offline"}</p>
                     </div>
                   </div>
                 </div>

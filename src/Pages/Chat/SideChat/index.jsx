@@ -17,13 +17,13 @@ import { MdClose } from 'react-icons/md';
 import { toast } from "react-toastify";
 import { MdGroupAdd } from "react-icons/md";
 import environment from '../../../environment';
-export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber }) {
+export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber }) {
   const user = useSelector((state) => state.user);
 
   const history = useNavigate()
   const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [form,setform]=useState({})
+  const [form, setform] = useState({})
 
   function closeModal() {
     setisOpenmodal(false)
@@ -54,14 +54,13 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
   };
 
 
-  const createGroup=()=>
-  {
+  const createGroup = () => {
     let value = {
-      group_name:form?.group_name,
-      image:form?.image,
-      users:[{user_id:user?.id,role:"admin"}]
+      group_name: form?.group_name,
+      image: form?.image,
+      users: [{ user_id: user?.id, role: "admin" }]
     };
-    ApiClient.post(`chat/user/group/create`, value,{},environment.chat_api).then((res) => {
+    ApiClient.post(`chat/user/group/create`, value, {}, environment.chat_api).then((res) => {
       if (res.success) {
         allroommemeber()
         closeModal()
@@ -132,15 +131,15 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
               <input type="search" className="bg-transparent" />
             </div>
             {
-              user?.role=="carrier"?    <button  onClick={() => {
+              user?.role == "carrier" ? <button onClick={() => {
                 document
                   .getElementById('OpenReasonModel')
                   .click();
                 setform({})
               }}><MdGroupAdd className='text-[#494f9f] text-[23px]' />
-</button>:<></>
+              </button> : <></>
             }
-        
+
           </div>
 
           <div className="mt-4 flex flex-col gap-2 h-[calc(100vh-80px)] tailwind-scrollbar overflow-y-auto">
@@ -149,12 +148,12 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
 
               <div className="flex justify-between gap-4 bg-white px-4 py-2 " >
                 <div className="flex gap-2 xl:gap-4 cursor-pointer" onClick={e => ChatSelectorHandler(item)}>
-                  {item?.isGroupChat?<><img
-                        src={methodModel.userImg(
-                          item?.room_image
-                        )}
-                        className="h-10 w-10 rounded-full mb-4 object-contain "
-                      /></>:<> {
+                  {item?.isGroupChat ? <><img
+                    src={methodModel.userImg(
+                      item?.room_image
+                    )}
+                    className="h-10 w-10 rounded-full mb-4 object-contain "
+                  /></> : <> {
                     item?.room_members?.map((itm) =>
                       <><img
                         src={methodModel.userImg(
@@ -162,27 +161,27 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
                         )}
                         className="h-10 w-10 rounded-full mb-4 object-contain "
                       />
-                      {itm?.isOnline?'Online':'Offline'}
+                        {/* {itm?.isOnline ? 'Online' : 'Offline'} */}
                       </>
-                      
+
                     )
                   }</>}
-                 
+
 
                   <div className="">
-                    <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{item?.isGroupChat?item?.room_name:item?.room_members?.map((itm) => itm?.user_name)}<TbRosetteDiscountCheckFilled className="text-blue-500" />  </h4>
-                    <p className="line-clamp-1 text-[12px] xl:text-[15px] text-[#707991]">{item?.last_message?.type == "TEXT" ? item?.last_message?.content :item?.last_message?.type == "IMAGE"? <><span className='flex gap-1 items-center'><ImImages /> Photos</span></>:<></>}</p>
+                    <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{item?.isGroupChat ? item?.room_name : item?.room_members?.map((itm) => itm?.user_name)}<TbRosetteDiscountCheckFilled className="text-blue-500" />  </h4>
+                    <p className="line-clamp-1 text-[12px] xl:text-[15px] text-[#707991]">{item?.last_message?.type == "TEXT" ? item?.last_message?.content : item?.last_message?.type == "IMAGE" ? <><span className='flex gap-1 items-center'><ImImages /> Photos</span></> : <></>}</p>
                   </div>
                 </div>
                 <div className=" ">
                   <h4 className="flex items-center gap-2 text-[13px] text-[#707991]">
-                    {moment(item?.last_message_at).fromNow()=="a day ago"?"1 day ago":moment(item?.last_message_at).fromNow()}
+                    {moment(item?.last_message_at).fromNow() == "a day ago" ? "1 day ago" : moment(item?.last_message_at).fromNow()}
                     {/* {calculateTime(item?.last_message_at)} */}
-                  {/* 2 min */}
+                    {/* 2 min */}
                   </h4>
-                  
-                  {item?.unread_count?<p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">{item?.unread_count}</p>:<></>}
-                  
+
+                  {item?.unread_count ? <p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">{item?.unread_count}</p> : <></>}
+
 
                 </div>
               </div>
@@ -247,7 +246,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
 
                     </div> */}
 
-                 
+
 
 
                   </div>
@@ -263,52 +262,52 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
                       <div class="modal-body">
                         <label class="mb-2 block">
                           {' '}
-                         Create a group <span className="text-danger">*</span>
+                          Create a group <span className="text-danger">*</span>
                         </label>
                         <div className="flex flex-col items-center justify-center">
-                      <img
-                        src={methodModel.userImg(
-                          form && form.image
-                        )}
-                        className="h-[100px] w-[100px] rounded-full mb-4 object-contain "
-                      />
-
-                      <div>
-                        <label className="new_images bg-primary bg-white p-2 rounded-lg inline-flex items-center gap-2 text-white edit">
-                          <input
-                            id="bannerImage"
-                            type="file"
-                            className="d-none "
-                            accept="image/*"
-                            value={
-                              form.baseImg ? form.baseImg : ''
-                            }
-                            onChange={(e) => {
-                              uploadImage(e);
-                            }}
+                          <img
+                            src={methodModel.userImg(
+                              form && form.image
+                            )}
+                            className="h-[100px] w-[100px] rounded-full mb-4 object-contain "
                           />
-                          <span className="uploader">
-                          {/* <IoCameraSharp className="text-2xl" /> */}
 
-                          </span>
-                         Upload Image
-                        </label>
-                      </div>
-                     
-                    </div>
+                          <div>
+                            <label className="new_images bg-primary bg-white p-2 rounded-lg inline-flex items-center gap-2 text-white edit">
+                              <input
+                                id="bannerImage"
+                                type="file"
+                                className="d-none "
+                                accept="image/*"
+                                value={
+                                  form.baseImg ? form.baseImg : ''
+                                }
+                                onChange={(e) => {
+                                  uploadImage(e);
+                                }}
+                              />
+                              <span className="uploader">
+                                {/* <IoCameraSharp className="text-2xl" /> */}
+
+                              </span>
+                              Upload Image
+                            </label>
+                          </div>
+
+                        </div>
                         <div class="mb-3">
 
-                        <input
-                                type="text"
-                                className="pl-2 shadow-[rgba(0,_0,_0,_0.16)_0px_10px_36px_0px,_rgba(0,_0,_0,_0.06)_0px_0px_0px_1px] p-2 w-full border-[0px] mt-2 rounded-lg"
-                                value={form.group_name}
-                                onChange={(e) =>
-                                  setform({ ...form, group_name: e.target.value })
-                                }
-                                // required
-                              />
+                          <input
+                            type="text"
+                            className="pl-2 shadow-[rgba(0,_0,_0,_0.16)_0px_10px_36px_0px,_rgba(0,_0,_0,_0.06)_0px_0px_0px_1px] p-2 w-full border-[0px] mt-2 rounded-lg"
+                            value={form.group_name}
+                            onChange={(e) =>
+                              setform({ ...form, group_name: e.target.value })
+                            }
+                          // required
+                          />
                         </div>
-                   
+
                       </div>
                       <div className='flex items-center justify-end gap-2'>
 
