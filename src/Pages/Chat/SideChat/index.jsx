@@ -15,6 +15,7 @@ import ApiClient from '../../../methods/api/apiClient';
 import loader from '../../../methods/loader';
 import { MdClose } from 'react-icons/md';
 import { toast } from "react-toastify";
+import { MdGroupAdd } from "react-icons/md";
 import environment from '../../../environment';
 export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber }) {
   const user = useSelector((state) => state.user);
@@ -136,7 +137,8 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
                   .getElementById('OpenReasonModel')
                   .click();
                 setform({})
-              }}>Add Group</button>:<></>
+              }}><MdGroupAdd className='text-[#494f9f] text-[23px]' />
+</button>:<></>
             }
         
           </div>
@@ -265,11 +267,11 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
                         src={methodModel.userImg(
                           form && form.image
                         )}
-                        className="h-32 w-32 rounded-full mb-4 object-contain "
+                        className="h-[100px] w-[100px] rounded-full mb-4 object-contain "
                       />
 
                       <div>
-                        <label className="new_images bg-primary bg-white px-6 py-2 rounded-lg inline-flex items-center gap-2 text-white edit">
+                        <label className="new_images bg-primary bg-white p-2 rounded-lg inline-flex items-center gap-2 text-white edit">
                           <input
                             id="bannerImage"
                             type="file"
@@ -295,7 +297,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler,allroommemeber 
 
                         <input
                                 type="text"
-                                className="pl-2 bg-gray-100"
+                                className="pl-2 shadow-[rgba(0,_0,_0,_0.16)_0px_10px_36px_0px,_rgba(0,_0,_0,_0.06)_0px_0px_0px_1px] p-2 w-full border-[0px] mt-2 rounded-lg"
                                 value={form.group_name}
                                 onChange={(e) =>
                                   setform({ ...form, group_name: e.target.value })
