@@ -104,7 +104,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
             <li>
               <tooltip placement="right" title="Dashboard">
                 <NavLink
-                  to={`${user?.plan_id || user?.role == "driver" ? "/dashboard" : ""}`}
+                  to={`${user?.plan_id || user?.role == "driver"  || (user?.role=="staff" && user?.addedBy?.plan_id)? "/dashboard" : ""}`}
                   // to={`/dashboard`}
                   className={(isActive) =>
                     "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
@@ -122,7 +122,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
             {user?.role == "driver" ? <></> : <>  <li>
               <tooltip placement="right" title="Trucks">
                 <NavLink
-                  to={`${user?.plan_id ? "/trucks" : ""}`}
+                  to={`${user?.plan_id || (user?.role=="staff" && user?.addedBy?.plan_id) ? "/trucks" : ""}`}
                   // to={`trucks`}
                   className={(isActive) =>
                     "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
@@ -140,7 +140,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Drivers">
                   <NavLink
-                    to={`${user?.plan_id ? "/drivers" : ""}`}
+                    to={`${user?.plan_id || (user?.role=="staff" && user?.addedBy?.plan_id) ? "/drivers" : ""}`}
                     // to={`/drivers`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
@@ -159,7 +159,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
            {user?.role == "driver" ?    <li>
               <tooltip placement="right" title="Carriers">
                 <NavLink
-                  to={`${user?.plan_id || user?.role == "driver" ? "/carriers" : ""}`}
+                  to={`${user?.plan_id || user?.role == "driver" || (user?.role=="staff" && user?.addedBy?.plan_id)? "/carriers" : ""}`}
                   // to={`/transaction`}
                   className={(isActive) =>
                     "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
@@ -210,7 +210,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                               title="Carrier"
                             >
                               <NavLink
-                                to={`${user?.plan_id || user?.role == "driver" ? "/carriers" : ""}`}
+                                to={`${user?.plan_id || user?.role == "driver" || (user?.role=="staff" && user?.addedBy?.plan_id)? "/carriers" : ""}`}
                                 className={(isActive) =>
                                   "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group" +
                                   (location?.pathname == "/carriers" &&
@@ -232,7 +232,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                               title=" Accepted Carrier"
                             >
                               <NavLink
-                                to={`${user?.plan_id || user?.role == "driver" ? "/approvedcarriers" : ""}`}
+                                to={`${user?.plan_id || user?.role == "driver" || (user?.role=="staff" && user?.addedBy?.plan_id)? "/approvedcarriers" : ""}`}
                                 className={(isActive) =>
                                   "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                   (location?.pathname == "/approvedcarriers" &&
@@ -256,7 +256,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 title=" Reject Carrier"
                               >
                                 <NavLink
-                                  to={`${user?.plan_id || user?.role == "driver" ? "/rejectedcarrier" : ""}`}
+                                  to={`${user?.plan_id || user?.role == "driver" || (user?.role=="staff" && user?.addedBy?.plan_id)? "/rejectedcarrier" : ""}`}
                                   className={(isActive) =>
                                     "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                     (location?.pathname == "/rejectedcarrier" &&
@@ -276,7 +276,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             <li id="/carriers">
                               <tooltip placement="right" title=" Carrier requests">
                                 <NavLink
-                                  to={`${user?.plan_id || user?.role == "driver" ? "/pendingcarrier" : ""}`}
+                                  to={`${user?.plan_id || user?.role == "driver" || (user?.role=="staff" && user?.addedBy?.plan_id)? "/pendingcarrier" : ""}`}
                                   className={(isActive) =>
                                     "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
                                     (location?.pathname == "/pendingcarrier" &&
@@ -309,7 +309,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
             <li>
               <tooltip placement="right" title="Carrier Staff">
                 <NavLink
-                  to={`${user?.plan_id || user?.role == "driver" ? "/carrierstaff" : ""}`}
+                  to={`${user?.plan_id || user?.role == "driver" || (user?.role=="staff" && user?.addedBy?.plan_id)? "/carrierstaff" : ""}`}
                   // to={`/transaction`}
                   className={(isActive) =>
                     "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
@@ -327,7 +327,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
             {user?.role == "driver" ? <></> : <>  <li>
               <tooltip placement="right" title="Active Plan">
                 <NavLink
-                  to={`${user?.plan_id ? "/activeplan" : ""}`}
+                  to={`${user?.plan_id || (user?.role=="staff" && user?.addedBy?.plan_id)? "/activeplan" : ""}`}
                   // to={`/activeplan`}
                   className={(isActive) =>
                     "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
@@ -345,7 +345,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
               <li>
                 <tooltip placement="right" title="Transaction">
                   <NavLink
-                    to={`${user?.plan_id ? "/transaction" : ""}`}
+                    to={`${user?.plan_id || (user?.role=="staff" && user?.addedBy?.plan_id)? "/transaction" : ""}`}
                     // to={`/transaction`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
@@ -365,426 +365,6 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
 
         </div>
       </div>
-
-
-
-      {/* <div
-        className={` pt-[60px] mx-[10px] h-full pb-4  ${isOpen && styles.sm_sidebar}`}
-        component="siderbar"
-      >
-       <div className="px-[8px] pt-12  p-4 rounded-lg  bg-[#494f9f17] h-full border border-[#474e9c33]">
-
-
-        <ul className="space-y-2  ">
-          <li>
-            <tooltip placement="right" title="Dashboard">
-              <NavLink
-                to="/dashboard"
-             
-                className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                  (location?.pathname == "/dashboard" &&
-                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                }
-              >
-                <RiHome6Line className="text-black shrink-0 text-lg group-hover:text-white " />
-                <span className="text-inherit leading-none sidebar_text">
-                  Dashboard
-                </span>
-              </NavLink>
-            </tooltip>
-          </li>
-          <li>
-            <Disclosure as="div" defaultOpen={tabclass("carriers")}>
-              {({ open }) => (
-                <>
-                  <tooltip placement="right" title="Carriers">
-                    <Disclosure.Button className="w-full p-2.5 rounded-lg bg-gray-50 flex items-center justify-between text-black hover:!text-[#fff] gap-[12px] hover:bg-[#494f9f] transition-all duration-300  group">
-                      <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
-                        <FiUsers className="text-black shrink-0 text-lg group-hover:text-white" />
-                        <span className=" text-inherit leading-none sidebar_text">
-                          {" "}
-                          Carriers
-                        </span>
-                      </span>
-
-                      <TiArrowSortedDown
-                        className={`${
-                          open ? "" : "-rotate-90 transform"
-                        } h-4 w-4 transition-all duration-500  text-[#494f9f] group-hover:text-white`}
-                      />
-                    </Disclosure.Button>
-                  </tooltip>
-                  <Transition
-                    enter="transition duration-300 ease-in-out"
-                    enterFrom="transform scale-95 opacity-0"
-                    enterTo="transform scale-300 opacity-300"
-                    leave="transition duration-300 ease-in-out"
-                    leaveFrom="transform scale-300 opacity-300"
-                    leaveTo="transform scale-95 opacity-0"
-                  >
-                      <Disclosure.Panel className=" mt-[4px] ">
-                      <ul className="space-y-2 ">
-                      <li id="/carriers">
-                          <tooltip
-                            placement="right"
-                            title="Carrier"
-                          >
-                            <NavLink
-                              to={`/carriers`}
-                              className={(isActive) =>
-                                "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group" +
-                                (location?.pathname == "/carriers" &&
-                                  " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                              }
-                            >
-                              <FiUsers className="text-black shrink-0 text-lg group-hover:text-white" />
-                              <span className="text-inherit leading-none sidebar_text">
-                                Carriers
-                              </span>
-                            </NavLink>
-                          </tooltip>
-                        </li>
-                        <li id="/carriers">
-                          <tooltip
-                            placement="right"
-                            title=" Accepted Carrier"
-                          >
-                            <NavLink
-                              to={`/acceptedcarriers`}
-                              className={(isActive) =>
-                                "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                                (location?.pathname == "/acceptedcarriers" &&
-                                  " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                              }
-                            >
-                              <IoMdCheckmarkCircleOutline className="text-black shrink-0 text-lg group-hover:text-white "/>
-
-                              
-                              <span className="text-inherit leading-none sidebar_text">
-                                Accepted Carrier
-                              </span>
-                            </NavLink>
-                          </tooltip>
-                        </li>
-
-                        {urlAllow("carriers") ? (
-                          <li id="/carriers">
-                            <tooltip
-                              placement="right"
-                              title=" Reject Carrier"
-                            >
-                              <NavLink
-                                to={`/rejectedcarriers`}
-                                className={(isActive) =>
-                                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                                  (location?.pathname == "/rejectedcarriers" &&
-                                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                                }
-                              >
-                                <RxCrossCircled className="text-black shrink-0 text-lg group-hover:text-white" />
-
-                                <span className="text-inherit leading-none sidebar_text">
-                                  Rejected Carrier
-                                </span>
-                              </NavLink>
-                            </tooltip>
-                          </li>
-                        ) : (
-                          <></>
-                        )}
-
-                        {urlAllow("carriers") ? (
-                          <>
-                            <li>
-                              <tooltip placement="right" title=" Carrier requests">
-                                <NavLink
-                                  to="/carriersrequest"
-                                  className={(isActive) =>
-                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                                    (location?.pathname == "/carriersrequest" &&
-                                      " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                                  }
-                                >
-                                  <IoGitPullRequestOutline className="text-black shrink-0 text-lg group-hover:text-white"/>
-
-
-                                  <span className="text-inherit leading-none sidebar_text">
-                                    Carrier requests
-                                  </span>
-                                </NavLink>
-                              </tooltip>
-                            </li>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-
-                        {urlAllow("carriers") ? (
-                          <>
-                            <li>
-                              <tooltip placement="right" title="Carrier's Staff">
-                                <NavLink
-                                  to="/carrierstaff"
-                                  className={(isActive) =>
-                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                                    (location?.pathname == "/carrierstaff" &&
-                                      " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                                  }
-                                >
-                                 
-                                  <TbUserShield className="text-black shrink-0 text-lg group-hover:text-white"/>
-
-                                  <span className="text-inherit leading-none sidebar_text">
-                                    Carrier's Staff
-                                  </span>
-                                </NavLink>
-                              </tooltip>
-                            </li>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                        {urlAllow("carriers") ? (
-                          <>
-                            <li>
-                              <tooltip placement="right" title="Approved Sub-Carrier">
-                                <NavLink
-                                  to="/approvedSubCarrier"
-                                  className={(isActive) =>
-                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                                    (location?.pathname == "/approvedSubCarrier" &&
-                                      " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                                  }
-                                >
-                                
-                                  <IoCheckmarkDoneSharp className="text-black shrink-0 text-lg group-hover:text-white"/>
-
-                                  <span className="text-inherit leading-none sidebar_text">
-                                    Approved Sub-Carrier
-                                  </span>
-                                </NavLink>
-                              </tooltip>
-                            </li>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </ul>
-                    </Disclosure.Panel>
-                  </Transition>
-                </>
-              )}
-            </Disclosure>
-          </li>
-          <li>
-            <tooltip placement="right" title="Features">
-              <NavLink
-                to="/feature"
-              
-                className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                  (location?.pathname == "/feature" &&
-                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                }
-              >
-                <MdOutlineFeaturedPlayList  className="text-black shrink-0 text-lg group-hover:text-white "/>
-
-                <span className="text-inherit leading-none sidebar_text">
-                Features
-                </span>
-              </NavLink>
-            </tooltip>
-          </li>
-        
-          <li>
-            <tooltip placement="right" title="Groups">
-              <NavLink
-                to="/groups"
-            
-                className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                  (location?.pathname == "/groups" &&
-                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                }
-              >
-                <MdOutlineFeaturedPlayList  className="text-black shrink-0 text-lg group-hover:text-white "/>
-
-                <span className="text-inherit leading-none sidebar_text">
-                Groups
-                </span>
-              </NavLink>
-            </tooltip>
-          </li>
-    
-          <li>
-            <tooltip placement="right" title="Plans">
-              <NavLink
-                to="/plans"
-          
-                className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                  (location?.pathname == "/plans" &&
-                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                }
-              >
-                <LuCircleDot className="text-black shrink-0 text-lg group-hover:text-white "/>
-              
-                <span className="text-inherit leading-none sidebar_text">
-                  Plan
-                </span>
-              </NavLink>
-            </tooltip>
-          </li>
-          
-
-          <li>
-            <tooltip placement="right" title="Trucks">
-              <NavLink
-                to="/trucks"
-           
-                className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                  (location?.pathname == "/trucks" &&
-                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                }
-              >
-
-                <LiaTruckSolid className="text-black shrink-0 text-lg group-hover:text-white " />
-                <span className="text-inherit leading-none sidebar_text">
-                Trucks
-                </span>
-              </NavLink>
-            </tooltip>
-          </li>
-
-
-          <li>
-            <tooltip placement="right" title="Drivers">
-              <NavLink
-                to="/drivers"
-             
-                className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                  (location?.pathname == "/drivers" &&
-                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                }
-              >
-
-                <LiaTruckSolid className="text-black shrink-0 text-lg group-hover:text-white " />
-                <span className="text-inherit leading-none sidebar_text">
-                Driver
-                </span>
-              </NavLink>
-            </tooltip>
-          </li>
-
-          <li>
-            <tooltip placement="right" title="Transaction">
-              <NavLink
-                to="/transaction"
-                
-                className={(isActive) =>
-                  "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                  (location?.pathname == "/transaction" &&
-                    " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                }
-              >
-                <MdOutlineFeaturedPlayList  className="text-black shrink-0 text-lg group-hover:text-white "/>
-                <span className="text-inherit leading-none sidebar_text">
-                Transactions
-                </span>
-              </NavLink>
-            </tooltip>
-          </li>
-
-      
-
-          {urlAllow("roles,users") ? (
-            <li>
-              <Disclosure as="div" defaultOpen={tabclass("user")}>
-                {({ open }) => (
-                  <>
-                    <tooltip placement="right" title="Internal Users">
-                      <Disclosure.Button className="w-full p-2.5 rounded-md flex items-center justify-between text-[#4A545E]  hover:!text-[#5577FF] gap-[12px] hover:bg-[#5577FF]/10 transition-all duration-300">
-                        <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
-                          <FiUsers className="text-[#5577FF] shrink-0 text-lg" />
-                          <span className=" text-inherit leading-none sidebar_text">
-                            {" "}
-                            Internal Users
-                          </span>
-                        </span>
-
-                        <TiArrowSortedDown
-                          className={`${
-                            open ? "" : "-rotate-90 transform"
-                          } h-4 w-4 transition-all duration-500  text-[#7E8B99]`}
-                        />
-                      </Disclosure.Button>
-                    </tooltip>
-                    <Transition
-                      enter="transition duration-300 ease-in-out"
-                      enterFrom="transform scale-95 opacity-0"
-                      enterTo="transform scale-300 opacity-300"
-                      leave="transition duration-300 ease-in-out"
-                      leaveFrom="transform scale-300 opacity-300"
-                      leaveTo="transform scale-95 opacity-0"
-                    >
-                      <Disclosure.Panel className="pl-[30px] mt-[4px] ">
-                        <ul className="space-y-2">
-                          {urlAllow("users") ? (
-                            <li>
-                              {" "}
-                              <NavLink
-                                className={(isActive) =>
-                                  "p-2.5 rounded-md block text-sm font-normal text-[#4A545E] cursor-pointer hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
-                                  (location?.pathname == "/users" &&
-                                    " !text-[#5577FF] !bg-[#5577FF]/10 !font-medium")
-                                }
-                                to="/users"
-                              >
-                                <span
-                                  className="text-inherit leading-none sidebar_text"
-                                  title="Users"
-                                >
-                                  {" "}
-                                  Users
-                                </span>
-                              </NavLink>
-                            </li>
-                          ) : null}
-                          {urlAllow("roles") ? (
-                            <li>
-                              {" "}
-                              <NavLink
-                                className={(isActive) =>
-                                  "p-2.5 rounded-md block text-sm font-normal text-[#4A545E] cursor-pointer hover:!text-[#5577FF] hover:bg-[#5577FF]/10 !no-underline transition-all " +
-                                  (location?.pathname == "/roles" &&
-                                    " !text-[#5577FF] !bg-[#5577FF]/10 !font-medium")
-                                }
-                                to="/roles"
-                              >
-                                <span
-                                  className="text-inherit leading-none sidebar_text"
-                                  title="Roles"
-                                >
-                                  {" "}
-                                  Roles
-                                </span>
-                              </NavLink>
-                            </li>
-                          ) : null}
-                        </ul>
-                      </Disclosure.Panel>
-                    </Transition>
-                  </>
-                )}
-              </Disclosure>
-            </li>
-          ) : null}
-        </ul>
-       </div>
-      </div> */}
     </>
   );
 };
