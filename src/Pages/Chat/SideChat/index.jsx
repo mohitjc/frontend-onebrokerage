@@ -19,6 +19,7 @@ import { MdGroupAdd } from "react-icons/md";
 import environment from '../../../environment';
 import socketModel from '../../../models/socketModel';
 import Header from '../../../components/global/header2';
+import { FaCircle } from "react-icons/fa";
 export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber }) {
   const user = useSelector((state) => state.user);
 
@@ -163,7 +164,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
                         )}
                         className="h-10 w-10 rounded-full mb-4 object-contain "
                       />
-                        {itm?.isOnline ? 'Online' : 'Offline'}
+                        {itm?.isOnline ? <FaCircle /> : <></>}
                       </>
 
                     )
