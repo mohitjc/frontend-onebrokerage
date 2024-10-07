@@ -30,6 +30,7 @@ import { CiHome } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { MdDelete } from "react-icons/md";
 
 export default function Chat() {
   const AxiosCancelToken = axios.CancelToken;
@@ -689,7 +690,7 @@ export default function Chat() {
                           {' '}
                           {ChatWithUserName?.name}
                         </label>
-                        {currentchatdata?.fullName}  ~Admin
+                        {/* {currentchatdata?.fullName}  ~Admin */}
 
                       </div>
                       <p>Members in group</p>
@@ -765,7 +766,7 @@ export default function Chat() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full relative max-w-md transform  rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full relative max-w-md transform  rounded-2xl bg-white p-3 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
@@ -785,7 +786,7 @@ export default function Chat() {
 
                   </div>
 
-                  <div className="mt-5">
+                  <div className="">
 
                     <form
                       onSubmit={(e) => {
@@ -793,23 +794,22 @@ export default function Chat() {
 
                       }}
                     >
+                      <div className='modal-header'>
+                     
+                        <div className="flex  items-center justify-end">
+                       
+                        <MdDelete onClick={(e) => deletgroup()} className=' text-[27px] text-[red] cursor-pointer'/>
+                        </div>
+                      </div>
                       <div class="modal-body">
-                        <label class="mb-2 block">
+                      <label class="mb-5 mt-5 block text-center">
                           {' '}
                           {ChatWithUserName?.name}
                         </label>
-                        <div className="flex flex-col items-center justify-center">
-
-                          <button onClick={(e) => deletgroup()}>Delete Group</button>
-                          <div>
-
-                          </div>
-
-                        </div>
                         {addmember ? <div class="mb-3">
                           <MultiSelectDropdown
                             id="statusDropdown"
-                            className="role-color"
+                            className="role-color "
                             displayValue="name"
                             placeholder="Select Load Type"
                             intialValue={driverfilters}
@@ -819,6 +819,7 @@ export default function Chat() {
                             options={adddrivermemberlisting}
                             required={true}
                           />
+                          <div className='mt-4'>
                           <MultiSelectDropdown
                             id="statusDropdown"
                             className="role-color"
@@ -831,8 +832,11 @@ export default function Chat() {
                             options={addstafmemberlisting}
                             required={true}
                           />
-
-                        </div> : <>{currentchatdata?.fullName}  ~Admin</>}
+</div>
+                        </div> :
+                        //  <>{currentchatdata?.fullName}  ~Admin</>
+                        <></>
+                         }
 
                       </div>
                       <div className='flex items-center justify-end gap-2'>
