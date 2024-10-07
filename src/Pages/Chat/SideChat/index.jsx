@@ -150,7 +150,8 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
             {sidechat?.map((item) =>
 
               <div className="flex justify-between gap-4 bg-white px-4 py-2 " >
-                <div className="flex gap-2 xl:gap-4 cursor-pointer" onClick={e => ChatSelectorHandler(item)}>
+                <div className="flex gap-2 xl:gap-4 cursor-pointer " onClick={e => ChatSelectorHandler(item)}>
+                 <div className='relative'>
                   {item?.isGroupChat ? <><img
                     src={methodModel.userImg(
                       item?.room_image
@@ -164,12 +165,12 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
                         )}
                         className="h-10 w-10 rounded-full mb-4 object-contain "
                       />
-                        {itm?.isOnline ? <FaCircle /> : <></>}
+                        {itm?.isOnline ? <FaCircle className='text-[green] online-icon text-[10px]' /> : <></>}
                       </>
 
                     )
                   }</>}
-
+</div>
 
                   <div className="">
                     <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{item?.isGroupChat ? item?.room_name : item?.room_members?.map((itm) => itm?.user_name)}<TbRosetteDiscountCheckFilled className="text-blue-500" />  </h4>
