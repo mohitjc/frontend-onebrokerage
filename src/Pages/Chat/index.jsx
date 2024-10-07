@@ -25,7 +25,7 @@ import MultiSelectDropdown from '../../components/common/MultiSelectDropdown';
 import moment from 'moment';
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { BsEmojiFrown } from "react-icons/bs";
+import { BsEmojiSmile } from "react-icons/bs";
 import { CiHome } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -35,6 +35,7 @@ import { MdDelete } from "react-icons/md";
 export default function Chat() {
   const AxiosCancelToken = axios.CancelToken;
   const CancelRefToken = useRef(0)
+  const [emoji,setemoji]=useState(false)
   const [ChatWithUser, setChatWithUser] = useState(null);
   const [ChatWithUserName, setChatWithUserName] = useState({});
   const [darkMode, setDarkMode] = useState(false);
@@ -61,7 +62,7 @@ export default function Chat() {
 
 
   const [text, setText] = useState('');
-
+  console.log(text,"===========")
   let ar = sessionStorage.getItem("activeRooms");
   const activeRooms = useRef(ar ? JSON.parse(ar) : []);
 
@@ -191,11 +192,11 @@ export default function Chat() {
   }
 
   const AddDriver = () => {
-    ApiClient.get("chat/user/group/allusers", { user_id: user?.id || user?._id, role: "driver" ,room_id:chatRoomId}, environment.chat_api).then((res) => {
+    ApiClient.get("chat/user/group/allusers", { user_id: user?.id || user?._id, role: "driver", room_id: chatRoomId }, environment.chat_api).then((res) => {
       if (res.success) {
         setadddrivermemberListing(
           res?.data?.usersNotInRoom?.map((item) => ({
-            id: item?.id||item?._id,
+            id: item?.id || item?._id,
             name: item?.fullName,
           }))
         );
@@ -204,18 +205,18 @@ export default function Chat() {
   }
 
   const AddStaff = () => {
-    ApiClient.get("chat/user/group/allusers", { user_id: user?.id || user?._id, role: "staff",room_id:chatRoomId }, environment.chat_api).then((res) => {
+    ApiClient.get("chat/user/group/allusers", { user_id: user?.id || user?._id, role: "staff", room_id: chatRoomId }, environment.chat_api).then((res) => {
       if (res.success) {
         setaddstaffmemberListing(
           res?.data?.usersNotInRoom?.map((item) => ({
-            id: item?.id||item?._id,
+            id: item?.id || item?._id,
             name: item?.fullName,
           }))
         );
       }
     });
   }
-  const SideChatRef=useRef([]);
+  const SideChatRef = useRef([]);
   const getUserDetail = (id) => {
     ApiClient.get(`user/detail`, { id: id }).then((res) => {
       if (res.success) {
@@ -224,11 +225,11 @@ export default function Chat() {
 
     });
   }
-  useEffect(()=>{
-    SideChatRef.current=sidechat
-        },[sidechat])
+  useEffect(() => {
+    SideChatRef.current = sidechat
+  }, [sidechat])
 
-  
+
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
       if (currectChat.current == data.data.room_id) {
@@ -251,42 +252,42 @@ export default function Chat() {
 
 
     let id = methodModel.getPrams('id')
-  
+
 
 
     socketModel.on("user-online", (data) => {
 
-      if(id){   
+      if (id) {
         if (id == data.data.user_id) {
           setonline(true)
 
         }
       }
-      let newdata=  SideChatRef.current?.map((item)=>{
-          if(item?.room_members[0]?.user_id==data?.data?.user_id){
-            return {...item,room_members:[{...item?.room_members[0],isOnline:true},...item?.room_members.slice(1)]}
-          }else{
-            return item
-          }
-        });
-        setsidechat([...newdata]) 
+      let newdata = SideChatRef.current?.map((item) => {
+        if (item?.room_members[0]?.user_id == data?.data?.user_id) {
+          return { ...item, room_members: [{ ...item?.room_members[0], isOnline: true }, ...item?.room_members.slice(1)] }
+        } else {
+          return item
+        }
+      });
+      setsidechat([...newdata])
     });
 
-    socketModel.on("user-offline", (data) => {  
-      if(id){   
+    socketModel.on("user-offline", (data) => {
+      if (id) {
         if (id == data.data.user_id) {
           setonline(false)
         }
       }
-      let newdata=  SideChatRef.current?.map((item)=>{
-          if(item?.room_members[0]?.user_id==data?.data?.user_id){
-            return {...item,room_members:[{...item?.room_members[0],isOnline:false},...item?.room_members.slice(1)]}
-          }else{
-            return item
-          }
-        });
+      let newdata = SideChatRef.current?.map((item) => {
+        if (item?.room_members[0]?.user_id == data?.data?.user_id) {
+          return { ...item, room_members: [{ ...item?.room_members[0], isOnline: false }, ...item?.room_members.slice(1)] }
+        } else {
+          return item
+        }
+      });
 
-        setsidechat([...newdata])
+      setsidechat([...newdata])
     });
     allroommemeber()
 
@@ -314,17 +315,17 @@ export default function Chat() {
         user_id: user?._id || user?.id,
       };
       // if (!activeRooms.current.includes(chatRoomId)) {
-        activeRooms.current.push(chatRoomId);
-        sessionStorage.setItem(
-          "activeRooms",
-          JSON.stringify(activeRooms.current)
-        );
-        socketModel.emit("join-room", value);
+      activeRooms.current.push(chatRoomId);
+      sessionStorage.setItem(
+        "activeRooms",
+        JSON.stringify(activeRooms.current)
+      );
+      socketModel.emit("join-room", value);
       // }
       // socketModel.emit("unread-count", value);
       // socketModel.emit("read-all-message", value);
       currectChat.current = chatRoomId
-      getChatMessages(chatRoomId);   
+      getChatMessages(chatRoomId);
       AddDriver()
       AddStaff()
     }
@@ -341,7 +342,7 @@ export default function Chat() {
     socketModel.emit("send-message", value);
     // getChatMessages(chatRoomId);
     allroommemeber()
-    setText('')
+    setText("")
   }
 
 
@@ -397,7 +398,7 @@ export default function Chat() {
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
     setChatWithUser(data);
     setChatRoomId(data?.room_id)
-    setChatWithUserName({ name: data?.room_name ? data?.room_name : data?.room_members[0].user_name, image: data?.room_image ? data?.room_image : data?.room_members[0]?.user_image, isGroupChat: data?.isGroupChat,isOnline:data?.room_members[0]?.isOnline })
+    setChatWithUserName({ name: data?.room_name ? data?.room_name : data?.room_members[0].user_name, image: data?.room_image ? data?.room_image : data?.room_members[0]?.user_image, isGroupChat: data?.isGroupChat, isOnline: data?.room_members[0]?.isOnline })
     history("/chat")
   }
 
@@ -574,24 +575,24 @@ export default function Chat() {
 
                       <div class="rounded-xl flex items-center gap-4 mt-4">
                         <form className='w-full relative' onSubmit={e => { e.preventDefault(); handleSubmit() }}>
-
-                            {/* <div>
+                          {emoji?  <div>
                               <EmojiPicker 
-                              onEmojiClick={e => setText(text+e?.emoji)}
+                             onEmojiClick={e => setText(prevText => `${prevText} ${e?.emoji}`)}
                               />
-                            </div> */}
-                            <div className='absolute items-center left-[17px] top-[17px] flex'>
-                            <BsEmojiFrown className='text-[#707991]' />
-
-<label className=" cursor-pointer ml-4">
-  <ImAttachment className='text-[#707991]' />
-  <input type="file" multiple onChange={uploadImage} accept="image/*" className="d-none" />
-</label>
-                            </div>
+                            </div>:<></>}
                         
-                            {/* <LuSmile className='text-xl text-gray-600' />
+                          <div className='absolute items-center left-[17px] top-[17px] flex'>
+                            <BsEmojiSmile  onClick={(e)=>setemoji(true)} className='text-[#707991]' />
+
+                            <label className=" cursor-pointer ml-4">
+                              <ImAttachment className='text-[#707991]' />
+                              <input type="file" multiple onChange={uploadImage} accept="image/*" className="d-none" />
+                            </label>
+                          </div>
+
+                          {/* <LuSmile className='text-xl text-gray-600' />
         <ImAttachment className='text-xl text-gray-600' /> */}
-                          
+
 
 
                           <div className='w-full flex items-center gap-2'>
@@ -602,7 +603,7 @@ export default function Chat() {
                               // placeholder="Type a message..."
                               className="flex-grow border border-[0px] rounded-lg py-3 set-up-input ps-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
-                            <button className='absolute right-[12px]' onClick={e => { e.preventDefault(); handleSubmit() }}> <IoSend className='text-2xl text-[#8BABD8] text-[12px]'  /></button>
+                            <button className='absolute right-[12px]' onClick={e => { e.preventDefault(); handleSubmit() }}> <IoSend className='text-2xl text-[#8BABD8] text-[12px]' /></button>
                           </div>
 
                         </form>
@@ -610,9 +611,9 @@ export default function Chat() {
                     </div>
 
                   </div>
-                </div></> : 
-                <div className='flex justify-center	 items-center	h-full '>
-                  <img  className='w-[200px] h-[200px]' src='assets/img/no-msg.png'></img></div>}
+                </div></> :
+              <div className='flex justify-center	 items-center	h-full '>
+                <img className='w-[200px] h-[200px]' src='assets/img/no-msg.png'></img></div>}
           </div>
         </div>
       </div>
@@ -794,14 +795,14 @@ export default function Chat() {
                       }}
                     >
                       <div className='modal-header'>
-                     
+
                         <div className="flex  items-center justify-end">
-                       
-                        <MdDelete onClick={(e) => deletgroup()} className=' text-[27px] text-[red] cursor-pointer'/>
+
+                          <MdDelete title="Delete Group" onClick={(e) => deletgroup()} className=' text-[27px] text-[red] cursor-pointer' />
                         </div>
                       </div>
                       <div class="modal-body">
-                      <label class="mb-5 mt-5 block text-center">
+                        <label class="mb-5 mt-5 block text-center">
                           {' '}
                           {ChatWithUserName?.name}
                         </label>
@@ -819,23 +820,23 @@ export default function Chat() {
                             required={true}
                           />
                           <div className='mt-4'>
-                          <MultiSelectDropdown
-                            id="statusDropdown"
-                            className="role-color"
-                            displayValue="name"
-                            placeholder="Select Load Type"
-                            intialValue={stafffilters}
-                            result={(e) => {
-                              setstafffilters(e.value);
-                            }}
-                            options={addstafmemberlisting}
-                            required={true}
-                          />
-</div>
+                            <MultiSelectDropdown
+                              id="statusDropdown"
+                              className="role-color"
+                              displayValue="name"
+                              placeholder="Select Load Type"
+                              intialValue={stafffilters}
+                              result={(e) => {
+                                setstafffilters(e.value);
+                              }}
+                              options={addstafmemberlisting}
+                              required={true}
+                            />
+                          </div>
                         </div> :
-                        //  <>{currentchatdata?.fullName}  ~Admin</>
-                        <></>
-                         }
+                          //  <>{currentchatdata?.fullName}  ~Admin</>
+                          <></>
+                        }
 
                       </div>
                       <div className='flex items-center justify-end gap-2'>
