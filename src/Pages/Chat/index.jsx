@@ -287,9 +287,6 @@ export default function Chat() {
 
         setsidechat([...newdata])
     });
-
-
-
     allroommemeber()
 
   }, [])
@@ -342,7 +339,7 @@ export default function Chat() {
     }
     socketModel.emit("send-message", value);
     // getChatMessages(chatRoomId);
-    // allroommemeber()
+    allroommemeber()
     setText('')
   }
 
