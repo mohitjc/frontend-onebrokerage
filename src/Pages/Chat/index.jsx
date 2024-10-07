@@ -49,10 +49,8 @@ export default function Chat() {
 
   const user = useSelector(state => state.user)
   const currectChat = useRef()
-// console.log(currectChat,"currectChatcurrectChat")
   const messages = useRef()
   const [chatMessages, setChatMessages] = useState([]);
-  // console.log(chatMessages,"chatMessageschatMessageschatMessages")
   const [currentchatdata, setcurrentchatdata] = useState()
   const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpenGroupmodal, setisOpenGroupmodal] = useState(false)
@@ -110,7 +108,6 @@ export default function Chat() {
   }
 
   const deleteMembers = (data) => {
-    // console.log(data, "data")
     const payload = {
       room_id: chatRoomId,
       user_id: data?.user_id
@@ -168,7 +165,7 @@ export default function Chat() {
     }
     else {
       payload = {
-        room_id: chatwithid
+        room_id: chatRoomId
       }
     }
 
@@ -178,7 +175,7 @@ export default function Chat() {
       if (res.success) {
         let room_id = res.data.room_id
         setChatRoomId(room_id)
-        
+        // currectChat.current=room_id
       }
     })
   }
@@ -230,11 +227,9 @@ export default function Chat() {
     SideChatRef.current=sidechat
         },[sidechat])
 
-  console.log(sidechat,"THIS SI THE SIDESCAHT ")
   
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
-      // console.log(data,"recive data")
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
 
@@ -259,7 +254,7 @@ export default function Chat() {
 
 
     socketModel.on("user-online", (data) => {
-      console.error(data,"online user")
+
       if(id){   
         if (id == data.data.user_id) {
           setonline(true)
@@ -273,7 +268,6 @@ export default function Chat() {
             return item
           }
         });
-        console.error(newdata,"This is the data++++++")
         setsidechat([...newdata]) 
     });
 
@@ -290,7 +284,7 @@ export default function Chat() {
             return item
           }
         });
-        console.error(newdata,"This is the offline data++++++")
+
         setsidechat([...newdata])
     });
 
@@ -321,21 +315,18 @@ export default function Chat() {
         room_id: chatRoomId,
         user_id: user?._id || user?.id,
       };
-      if (!activeRooms.current.includes(chatRoomId)) {
-        // console.log("activeRooms inner", activeRooms);
+      // if (!activeRooms.current.includes(chatRoomId)) {
         activeRooms.current.push(chatRoomId);
         sessionStorage.setItem(
           "activeRooms",
           JSON.stringify(activeRooms.current)
         );
-        // console.log(value,"join socket")
         socketModel.emit("join-room", value);
-      }
+      // }
       // socketModel.emit("unread-count", value);
       // socketModel.emit("read-all-message", value);
       currectChat.current = chatRoomId
-      getChatMessages(chatRoomId);
-    
+      getChatMessages(chatRoomId);   
       AddDriver()
       AddStaff()
     }
@@ -349,7 +340,6 @@ export default function Chat() {
       type: 'TEXT',
       content: text
     }
-    // console.log("Send value", value)
     socketModel.emit("send-message", value);
     // getChatMessages(chatRoomId);
     // allroommemeber()
@@ -370,7 +360,6 @@ export default function Chat() {
           type: 'IMAGE',
           media: res?.data?.imagePath
         }
-        // console.log("value", value)
         socketModel.emit("send-message", value);
         // getChatMessages(chatRoomId);
       }
@@ -406,12 +395,12 @@ export default function Chat() {
 
 
   const ChatSelectorHandler = (data) => {
-    history("/chat")
     getChatMessages(data?.room_id);
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
     setChatWithUser(data);
     setChatRoomId(data?.room_id)
     setChatWithUserName({ name: data?.room_name ? data?.room_name : data?.room_members[0].user_name, image: data?.room_image ? data?.room_image : data?.room_members[0]?.user_image, isGroupChat: data?.isGroupChat,isOnline:data?.room_members[0]?.isOnline })
+    history("/chat")
   }
 
 
