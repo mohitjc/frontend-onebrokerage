@@ -613,7 +613,9 @@ export default function Chat() {
                     </div>
 
                   </div>
-                </div></> : <>No Messages</>}
+                </div></> : 
+                <div className='flex justify-center	 items-center	h-full '>
+                  <img  className='w-[200px] h-[200px]' src='assets/img/no-msg.png'></img></div>}
           </div>
         </div>
       </div>
