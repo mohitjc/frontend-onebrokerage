@@ -335,6 +335,7 @@ export default function Chat() {
       // socketModel.emit("read-all-message", value);
       currectChat.current = chatRoomId
       getChatMessages(chatRoomId);
+    
       AddDriver()
       AddStaff()
     }
@@ -405,7 +406,6 @@ export default function Chat() {
 
 
   const ChatSelectorHandler = (data) => {
-    console.log(data,"jbwe2v")
     history("/chat")
     getChatMessages(data?.room_id);
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
