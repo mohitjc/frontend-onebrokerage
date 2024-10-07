@@ -81,8 +81,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
 
   return (
     <>
-    <div className="hidden"> <Header /></div>
-     
+    <div className="hidden"> <Header /></div>    
       <div className="block lg:hidden">
         <div className={`chatslefts w-[400px] border-r border-gray-200 shrink-0 py-4 h-screen bg-white fixed top-0 z-50 left-0 transition-transform duration-300 ease-in-out
                   ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
