@@ -35,7 +35,7 @@ import { MdDelete } from "react-icons/md";
 export default function Chat() {
   const AxiosCancelToken = axios.CancelToken;
   const CancelRefToken = useRef(0)
-  const [emoji,setemoji]=useState(false)
+  const [emoji, setemoji] = useState(false)
   const [ChatWithUser, setChatWithUser] = useState(null);
   const [ChatWithUserName, setChatWithUserName] = useState({});
   const [darkMode, setDarkMode] = useState(false);
@@ -62,7 +62,7 @@ export default function Chat() {
 
 
   const [text, setText] = useState('');
-  console.log(text,"===========")
+  console.log(text, "===========")
   let ar = sessionStorage.getItem("activeRooms");
   const activeRooms = useRef(ar ? JSON.parse(ar) : []);
 
@@ -394,11 +394,12 @@ export default function Chat() {
 
 
   const ChatSelectorHandler = (data) => {
+    console.log(data,"data")
     getChatMessages(data?.room_id);
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
     setChatWithUser(data);
     setChatRoomId(data?.room_id)
-    setChatWithUserName({ name: data?.room_name ? data?.room_name : data?.room_members[0].user_name, image: data?.room_image ? data?.room_image : data?.room_members[0]?.user_image, isGroupChat: data?.isGroupChat, isOnline: data?.room_members[0]?.isOnline })
+    setChatWithUserName({ name: data?.room_name ? data?.room_name : data?.room_members[0].user_name, image: data?.isGroupChat ? data?.room_image : data?.room_members[0]?.user_image, isGroupChat: data?.isGroupChat, isOnline: data?.room_members[0]?.isOnline })
     history("/chat")
   }
 
@@ -575,14 +576,14 @@ export default function Chat() {
 
                       <div class="rounded-xl flex items-center gap-4 mt-4">
                         <form className='w-full relative' onSubmit={e => { e.preventDefault(); handleSubmit() }}>
-                          {emoji?  <div>
-                              <EmojiPicker 
-                             onEmojiClick={e => setText(prevText => `${prevText} ${e?.emoji}`)}
-                              />
-                            </div>:<></>}
-                        
+                          {emoji ? <div>
+                            <EmojiPicker
+                              onEmojiClick={e => setText(prevText => `${prevText} ${e?.emoji}`)}
+                            />
+                          </div> : <></>}
+
                           <div className='absolute items-center left-[17px] top-[17px] flex'>
-                            <BsEmojiSmile  onClick={(e)=>setemoji(true)} className='text-[#707991]' />
+                            <BsEmojiSmile onClick={(e) => setemoji(true)} className='text-[#707991]' />
 
                             <label className=" cursor-pointer ml-4">
                               <ImAttachment className='text-[#707991]' />
@@ -685,21 +686,37 @@ export default function Chat() {
 
                       }}
                     >
-                      <div class="modal-body">
-                        <label class="mb-2 block">
+                      <div class="modal-body text-center">
+                        <img
+                          src={methodModel.userImg(
+                            ChatWithUserName?.image
+                          )}
+                          className="h-32 w-32 rounded-full object-contain "
+                        />
+                        <label class="mb-2 block text-[20px]">
                           {' '}
                           {ChatWithUserName?.name}
                         </label>
-                        {/* {currentchatdata?.fullName}  ~Admin */}
+                       Created by {currentchatdata?.fullName} 
 
                       </div>
-                      <p>Members in group</p>
+                      <p className='text-[20px]'>{ChatWithUser?.room_members?.length} Participants </p>
                       <div>
                         {ChatWithUser?.room_members ? ChatWithUser?.room_members?.map((item) =>
-                          <p>{item?.user_name}  <button onClick={(e) => deleteMembers(item)}>Delete</button></p>
+                          <p>  <img
+                          src={methodModel.userImg(
+                            item?.user_image
+                          )}
+                          className="h-6 w-6"
+                        />{item?.user_name}  <button onClick={(e) => deleteMembers(item)}>Delete</button></p>
 
                         ) : <>{ChatWithUser?.map((item) =>
-                          <p>{item?.user_name}  <button onClick={(e) => deleteMembers(item)}>Delete</button></p>
+                          <p><img
+                          src={methodModel.userImg(
+                            item?.user_image
+                          )}
+                          className="h-6 w-6"
+                        />{item?.user_name}  <button onClick={(e) => deleteMembers(item)}>Delete</button></p>
 
                         )}</>}
                       </div>
