@@ -78,11 +78,11 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
         <div className=" rounded-t-lg bg-gray-50 ">
           <div className="flex  items-center gap-4 flex-wrap relative px-4 pt-4 pb-4">
 
-            <div className="shrink-0">
+            <div className="shrink-0 m-auto">
 
               <img
                 src={methodModel.userImg(user && user.image)}
-                className="h-16 w-16 rounded-full object-cover mx-auto"
+                className="h-[100px] w-[100px] rounded-full object-cover mx-auto  border-[2px-solid-#fff] shadow-[2px_1px_10px_0px_#dfdfdf]"
               />
             </div>
 

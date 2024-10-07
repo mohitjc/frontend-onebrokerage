@@ -254,7 +254,7 @@ const Profile = () => {
                   <div className="">
                     <img
                       src={methodModel.userImg(data && data.image)}
-                      className="h-36 w-36 rounded-full object-cover mx-auto"
+                      className="h-[100px] w-[100px] rounded-full object-cover mx-auto border-[2px-solid-#fff] shadow-[2px_1px_10px_0px_#dfdfdf]"
                     />
                   </div>
                 
