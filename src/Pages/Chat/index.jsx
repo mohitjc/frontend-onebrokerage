@@ -19,6 +19,7 @@ import ApiClient from '../../methods/api/apiClient';
 import environment from '../../environment';
 import socketModel from '../../models/socketModel';
 import methodModel from '../../methods/methods';
+import { IoIosArrowUp } from "react-icons/io";
 import SelectDropdown from '../../components/common/SelectDropdown';
 import SideChat from './SideChat';
 import MultiSelectDropdown from '../../components/common/MultiSelectDropdown';
@@ -394,7 +395,7 @@ export default function Chat() {
 
 
   const ChatSelectorHandler = (data) => {
-    console.log(data,"data")
+    console.log(data, "data")
     getChatMessages(data?.room_id);
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
     setChatWithUser(data);
@@ -581,17 +582,20 @@ export default function Chat() {
                               onEmojiClick={e => setText(prevText => `${prevText} ${e?.emoji}`)}
                             />
                           </div> : <></>}
-<div className='relative'>
-<div className='absolute items-center left-[17px] top-[17px] flex'>
-                            <BsEmojiSmile onClick={(e) => setemoji(true)} className='text-[#707991]' />
+                          <div className='relative'>
+                            <div className='absolute items-center left-[17px] top-[17px] flex'>
+                              {
+                                emoji? <IoIosArrowUp onClick={(e) => setemoji(false)} className='text-[#707991]' />: <BsEmojiSmile onClick={(e) => setemoji(true)} className='text-[#707991]' />
+                              }
+                             
 
-                            <label className=" cursor-pointer ml-4">
-                              <ImAttachment className='text-[#707991]' />
-                              <input type="file" multiple onChange={uploadImage} accept="image/*" className="d-none" />
-                            </label>
+                              <label className=" cursor-pointer ml-4">
+                                <ImAttachment className='text-[#707991]' />
+                                <input type="file" multiple onChange={uploadImage} accept="image/*" className="d-none" />
+                              </label>
+                            </div>
                           </div>
-</div>
-                         
+
 
                           {/* <LuSmile className='text-xl text-gray-600' />
         <ImAttachment className='text-xl text-gray-600' /> */}
@@ -699,38 +703,38 @@ export default function Chat() {
                           {' '}
                           {ChatWithUserName?.name}
                         </label>
-                     <p className='text-[15px] text-[grey]'>Created by {currentchatdata?.fullName} </p>  
+                        <p className='text-[15px] text-[grey]'>Created by {currentchatdata?.fullName} </p>
 
                       </div>
                       <p className='text-[14px] text-[grey] uppercase font-[500]'>{ChatWithUser?.room_members?.length} Participants </p>
                       <div className='mt-3'>
                         {ChatWithUser?.room_members ? ChatWithUser?.room_members?.map((item) =>
-                          <div className='flex justify-between items-center	mt-2'> 
-                          <div className='flex items-center '>
-                           <img
-                          src={methodModel.userImg(
-                            item?.user_image
-                          )}
-                          className="w-[35px] h-[35px] rounded-full object-cover	shadow-[2px_1px_10px_0px_#dfdfdf]"
-                        />
-                        <p className='ml-2 text-[18px] font-[600] capitalize'>
-                        {item?.user_name} 
-                        </p>
-                       </div>
-                         <button className='text-[12px] text-[grey] rounded-full border  border-[grey]  p-[0px_6px]' onClick={(e) => deleteMembers(item)}>Remove</button></div>
+                          <div className='flex justify-between items-center	mt-2'>
+                            <div className='flex items-center '>
+                              <img
+                                src={methodModel.userImg(
+                                  item?.user_image
+                                )}
+                                className="w-[35px] h-[35px] rounded-full object-cover	shadow-[2px_1px_10px_0px_#dfdfdf]"
+                              />
+                              <p className='ml-2 text-[18px] font-[600] capitalize'>
+                                {item?.user_name}
+                              </p>
+                            </div>
+                            <button className='text-[12px] text-[grey] rounded-full border  border-[grey]  p-[0px_6px]' onClick={(e) => deleteMembers(item)}>Remove</button></div>
 
                         ) : <>{ChatWithUser?.map((item) =>
                           <div className='flex justify-between items-center mt-2'>
                             <div className='flex items-center '>
-                            <img
-                          src={methodModel.userImg(
-                            item?.user_image
-                          )}
-                          className="w-[35px] h-[35px] rounded-full object-cover	shadow-[2px_1px_10px_0px_#dfdfdf]"
-                        />
-                        <p className='ml-2'>{item?.user_name} </p> 
-                        </div>
-                        <button className='text-[12px] text-[grey] border-[1px_solid_grey] p-[0px_6px]' onClick={(e) => deleteMembers(item)}>Remove</button></div>
+                              <img
+                                src={methodModel.userImg(
+                                  item?.user_image
+                                )}
+                                className="w-[35px] h-[35px] rounded-full object-cover	shadow-[2px_1px_10px_0px_#dfdfdf]"
+                              />
+                              <p className='ml-2'>{item?.user_name} </p>
+                            </div>
+                            <button className='text-[12px] text-[grey] border-[1px_solid_grey] p-[0px_6px]' onClick={(e) => deleteMembers(item)}>Remove</button></div>
 
                         )}</>}
                       </div>
