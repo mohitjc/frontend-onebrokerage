@@ -56,6 +56,7 @@ const Header = () => {
 
   return (
     <header className="">
+      {/* <div id="handleLogout" className='hidden' onClick={Logout()}></div> */}
       <Disclosure as="nav" className="bg-[#EAEFFF]">
         <div className=" px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-20 items-center justify-between">
@@ -68,7 +69,7 @@ const Header = () => {
                 <XMarkIcon aria-hidden="true" className="hidden h-6 w-6 group-data-[open]:block" />
               </DisclosureButton>
             </div>
-            {/* <div id="handleLogout" onClick={Logout()}></div> */}
+            
             <div className="flex flex-1 items-center justify-start ml-16 sm:ml-0 sm:items-center sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
                 <Link to="/">  <img

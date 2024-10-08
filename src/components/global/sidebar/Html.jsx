@@ -44,6 +44,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
 
   const location = useLocation();
   const user = useSelector(state => state.user)
+  console.log(user,"user")
   const path = window.location.pathname;
   const history = useNavigate()
   const dispatch = useDispatch()
