@@ -575,14 +575,14 @@ export default function Chat() {
                       </div>
 
                       <div class="rounded-xl flex items-center gap-4 mt-4">
-                        <form className='w-full relative' onSubmit={e => { e.preventDefault(); handleSubmit() }}>
+                        <form className='w-full ' onSubmit={e => { e.preventDefault(); handleSubmit() }}>
                           {emoji ? <div>
                             <EmojiPicker
                               onEmojiClick={e => setText(prevText => `${prevText} ${e?.emoji}`)}
                             />
                           </div> : <></>}
-
-                          <div className='absolute items-center left-[17px] top-[17px] flex'>
+<div className='relative'>
+<div className='absolute items-center left-[17px] top-[17px] flex'>
                             <BsEmojiSmile onClick={(e) => setemoji(true)} className='text-[#707991]' />
 
                             <label className=" cursor-pointer ml-4">
@@ -590,6 +590,8 @@ export default function Chat() {
                               <input type="file" multiple onChange={uploadImage} accept="image/*" className="d-none" />
                             </label>
                           </div>
+</div>
+                         
 
                           {/* <LuSmile className='text-xl text-gray-600' />
         <ImAttachment className='text-xl text-gray-600' /> */}
@@ -691,32 +693,44 @@ export default function Chat() {
                           src={methodModel.userImg(
                             ChatWithUserName?.image
                           )}
-                          className="h-32 w-32 rounded-full object-contain "
+                          className="h-32 w-32 m-auto border-[2px_solid_#fff] shadow-[2px_1px_10px_0px_#dfdfdf] rounded-full object-contain "
                         />
-                        <label class="mb-2 block text-[20px]">
+                        <label class="mt-1 block text-[24px] font-[600]">
                           {' '}
                           {ChatWithUserName?.name}
                         </label>
-                       Created by {currentchatdata?.fullName} 
+                     <p className='text-[15px] text-[grey]'>Created by {currentchatdata?.fullName} </p>  
 
                       </div>
-                      <p className='text-[20px]'>{ChatWithUser?.room_members?.length} Participants </p>
-                      <div>
+                      <p className='text-[14px] text-[grey] uppercase font-[500]'>{ChatWithUser?.room_members?.length} Participants </p>
+                      <div className='mt-3'>
                         {ChatWithUser?.room_members ? ChatWithUser?.room_members?.map((item) =>
-                          <p>  <img
+                          <div className='flex justify-between items-center	mt-2'> 
+                          <div className='flex items-center '>
+                           <img
                           src={methodModel.userImg(
                             item?.user_image
                           )}
-                          className="h-6 w-6"
-                        />{item?.user_name}  <button onClick={(e) => deleteMembers(item)}>Delete</button></p>
+                          className="w-[35px] h-[35px] rounded-full object-cover	shadow-[2px_1px_10px_0px_#dfdfdf]"
+                        />
+                        <p className='ml-2 text-[18px] font-[600] capitalize'>
+                        {item?.user_name} 
+                        </p>
+                       </div>
+                         <button className='text-[12px] text-[grey] rounded-full border  border-[grey]  p-[0px_6px]' onClick={(e) => deleteMembers(item)}>Remove</button></div>
 
                         ) : <>{ChatWithUser?.map((item) =>
-                          <p><img
+                          <div className='flex justify-between items-center mt-2'>
+                            <div className='flex items-center '>
+                            <img
                           src={methodModel.userImg(
                             item?.user_image
                           )}
-                          className="h-6 w-6"
-                        />{item?.user_name}  <button onClick={(e) => deleteMembers(item)}>Delete</button></p>
+                          className="w-[35px] h-[35px] rounded-full object-cover	shadow-[2px_1px_10px_0px_#dfdfdf]"
+                        />
+                        <p className='ml-2'>{item?.user_name} </p> 
+                        </div>
+                        <button className='text-[12px] text-[grey] border-[1px_solid_grey] p-[0px_6px]' onClick={(e) => deleteMembers(item)}>Remove</button></div>
 
                         )}</>}
                       </div>
@@ -725,7 +739,7 @@ export default function Chat() {
                         <button
                           type="button"
                           id="CloseGroupModel"
-                          className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
+                          className=" justify-center btn btn-primary mt-3 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
                           onClick={closeGroupModal}
                         >
                           Ok
