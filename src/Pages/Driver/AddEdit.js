@@ -485,12 +485,10 @@ const AddEdit = () => {
 
 
         <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-10 ">
-          <div className="bg-[#1245940a] p-4 border-b flex justify-between">
+          <div className="bg-[#1245940a] p-4 border-b ">
             <h3 className="text-[20px] font-[500] flex">Truck Details  <img src="/assets/img/fast.svg" className='mb-3 w-[30px] h-[30px] ml-3' /></h3>
-            <div className="row search-truck">
-              <div className="col-md-12 ">
-              
-
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4  search-truck ">
+              <div className="col-span-6 ">
                 <div className="input-new-design position-relative">
                   <div className="input-icon">
                     <i className='fa fa-search'></i>
@@ -501,7 +499,7 @@ const AddEdit = () => {
                   <input
                     placeholder="Search Trucks"
                     value={filter?.search}
-                    className="form-control"
+                    className="form-control trucks"
                     type="text"
                     onChange={(e) => {
                       GetTruck({ search: e.target.value });
@@ -518,7 +516,7 @@ const AddEdit = () => {
                       {Trucks &&
                         Trucks?.map((itm) => {
                           if (itm)
-                            return (<div className="dropspdiv dropsdivTwo">
+                            return (<div className="dropspdiv dropsdivTwo bg-[#fff] mt-2 text-[grey] rounded text-[14px] p-1">
                               <span
                                 className="dropspans"
                                 onClick={() => {
