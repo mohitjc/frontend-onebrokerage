@@ -603,6 +603,8 @@ export default function Chat() {
                                 <input type="file" multiple onChange={uploadImage} accept="image/*" className="d-none" />
                               </label>
                             </div>
+                            <button className='absolute right-[12px] top-[12px]' onClick={e => { e.preventDefault(); handleSubmit() }}> <IoSend className='text-2xl text-[#8BABD8] text-[12px]' /></button>
+
                           </div>
 
 
@@ -619,7 +621,6 @@ export default function Chat() {
                               // placeholder="Type a message..."
                               className="flex-grow border border-[0px] rounded-lg py-3 set-up-input ps-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
-                            <button className='absolute right-[12px]' onClick={e => { e.preventDefault(); handleSubmit() }}> <IoSend className='text-2xl text-[#8BABD8] text-[12px]' /></button>
                           </div>
 
                         </form>
@@ -730,7 +731,7 @@ export default function Chat() {
                                 {item?.user_name}
                               </p>
                             </div>
-                            <button className='text-[12px] text-[grey] rounded-full border  border-[grey]  p-[0px_6px]' onClick={(e) => deleteMembers(item)}>Remove</button></div>
+                            <button className='text-[12px] text-[grey] rounded-full border  border-[grey]  p-[0px_6px] hover:bg-[#e7e6e685] ' onClick={(e) => deleteMembers(item)}>Remove</button></div>
 
                         ) : <>{ChatWithUser?.map((item) =>
                           <div className='flex justify-between items-center mt-2'>
