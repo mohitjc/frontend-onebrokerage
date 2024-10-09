@@ -139,7 +139,7 @@ const Header = () => {
                       </MenuItem> */}
                       <div className="my-1 h-px bg-gray-200" />
                       <MenuItem>
-                        <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white" id="handleLogout" onClick={() =>Logout()}>
+                        <button  className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"  onClick={() =>Logout()}>
                           <TrashIcon className="size-4 stroke-black/30 hover:stroke-white" />
                             Logout
                         
