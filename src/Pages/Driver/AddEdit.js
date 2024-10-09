@@ -251,7 +251,7 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, firstName: e })}
                 required
               />
-                   {!form.firstName && submitted && (
+              {!form.firstName && submitted && (
                 <div className="invalid-feedback d-block">
                   First Name is required.
                 </div>
@@ -264,7 +264,7 @@ const AddEdit = () => {
                 value={form.lastName}
                 onChange={(e) => setForm({ ...form, lastName: e })}
               />
-           
+
             </div>
             <div className="">
               <FormControl
@@ -305,7 +305,7 @@ const AddEdit = () => {
                       mobileNo: phonenumber,
                     });
                   }}
-                  // required
+                // required
                 />
 
 
@@ -340,14 +340,14 @@ const AddEdit = () => {
                     })
                   }
                 />
-                  {!form.licence_number && submitted && (
-                <div className="invalid-feedback d-block">
-                  Licence Number is required.
-                </div>
-              )}
+                {!form.licence_number && submitted && (
+                  <div className="invalid-feedback d-block">
+                    Licence Number is required.
+                  </div>
+                )}
               </div>
 
-            
+
             </div>
             <div className="col-md-12 ">
               <label> License Upload <span className="text-danger">*</span></label>
@@ -369,7 +369,7 @@ const AddEdit = () => {
                   <></>
                 )}
               </div>
-             
+
             </div>
 
 
@@ -422,13 +422,13 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, city: e })}
                 required
               />
-                {submitted && !form.city ? (
-                  <div className="invalid-feedback d-block">
-                   City is Required
-                  </div>
-                ) : (
-                  <></>
-                )}
+              {submitted && !form.city ? (
+                <div className="invalid-feedback d-block">
+                  City is Required
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
             <div className="">
               <FormControl
@@ -438,13 +438,13 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, state: e })}
                 required
               />
-               {submitted && !form.state ? (
-                  <div className="invalid-feedback d-block">
-                   State is Required
-                  </div>
-                ) : (
-                  <></>
-                )}
+              {submitted && !form.state ? (
+                <div className="invalid-feedback d-block">
+                  State is Required
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
             <div className="">
               <FormControl
@@ -454,13 +454,13 @@ const AddEdit = () => {
                 onChange={(e) => setForm({ ...form, country: e })}
                 required
               />
-               {submitted && !form.country ? (
-                  <div className="invalid-feedback d-block">
-                   Country is Required
-                  </div>
-                ) : (
-                  <></>
-                )}
+              {submitted && !form.country ? (
+                <div className="invalid-feedback d-block">
+                  Country is Required
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
             <div className="">
               <FormControl
@@ -471,12 +471,12 @@ const AddEdit = () => {
                 required
               />
               {submitted && !form.pincode ? (
-                  <div className="invalid-feedback d-block">
-                   Pincode is Required
-                  </div>
-                ) : (
-                  <></>
-                )}
+                <div className="invalid-feedback d-block">
+                  Pincode is Required
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
 
@@ -487,20 +487,76 @@ const AddEdit = () => {
         <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-10 ">
           <div className="bg-[#1245940a] p-4 border-b flex justify-between">
             <h3 className="text-[20px] font-[500]">Truck Details </h3>
+            <div className="row search-truck">
+              <div className="col-md-12 ">
+                <img src="/assets/img/fast.svg" className='mb-3' />
 
+                <div className="input-new-design position-relative">
+                  <div className="input-icon">
+                    <i className='fa fa-search'></i>
+                  </div>
+                  {' '}
+
+
+                  <input
+                    placeholder="Search Trucks"
+                    value={filter?.search}
+                    className="form-control"
+                    type="text"
+                    onChange={(e) => {
+                      GetTruck({ search: e.target.value });
+                      setfilter({
+                        ...filter,
+                        search: e.target.value,
+                      });
+                    }}
+                  />
+                  {isSearch && (
+                    <>
+                      {Trucks &&
+                        Trucks?.map((itm) => {
+                          if (itm)
+                            return (<div className="dropspdiv dropsdivTwo">
+                              <span
+                                className="dropspans"
+                                onClick={() => {
+                                  setForm({
+                                    ...form,
+                                    truck_id: itm?.id,
+                                    vin_number: itm?.vin_number,
+                                  });
+                                  setVin(itm?.vin_number);
+                                  setisSearch(false);
+                                  setfilter({ search: '' });
+                                }}
+                              >
+                                {itm?.truck_number}
+                              </span>
+
+
+                            </div>);
+                          else
+                            return <></>
+                        })}
+                    </>
+
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
             {/* <img src="/assets/img/fast.svg" className='' /> */}
-           
-           
+
+
             <div className="">
-         
+
               <label>
                 Truck
                 <span className="text-danger">*</span>
               </label>
-          
+
               <select
                 required
                 className="form-control"
@@ -526,9 +582,9 @@ const AddEdit = () => {
                   );
                 })}
               </select>
-      
+
             </div>
-          
+
             <div className="">
               <label>VIN Number</label>
               <input
