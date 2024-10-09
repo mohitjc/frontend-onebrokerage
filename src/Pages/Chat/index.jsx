@@ -58,12 +58,10 @@ export default function Chat() {
   const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpenGroupmodal, setisOpenGroupmodal] = useState(false)
   const [sidechat, setsidechat] = useState([]);
+  console.log(sidechat,"sidechat")
   const [chatRoomId, setChatRoomId] = useState("");
   const [isonline, setonline] = useState(false);
-
-
   const [text, setText] = useState('');
-  console.log(text, "===========")
   let ar = sessionStorage.getItem("activeRooms");
   const activeRooms = useRef(ar ? JSON.parse(ar) : []);
 
@@ -226,6 +224,7 @@ export default function Chat() {
 
     });
   }
+
   useEffect(() => {
     SideChatRef.current = sidechat
   }, [sidechat])
@@ -241,10 +240,25 @@ export default function Chat() {
         ).map((id) => {
           return messages.current.find((message) => message._id === id);
         });
-
-        // console.log("uniqueMessages", uniqueMessages);
         setChatMessages([...uniqueMessages]);
-        // getChatMessages(chatRoomId);
+      
+        const updatedSideChat = SideChatRef.current.map((chat) => {
+         
+          if (chat.room_id === data.data.room_id) {
+            return {
+              ...chat,
+              last_message: {
+                ...chat.last_message,
+                content: data.data.content, 
+              },
+            };
+          }
+          return chat; 
+        });
+
+        setsidechat(updatedSideChat);
+
+
         setTimeout(() => {
           chatScroll();
         }, 100);
@@ -341,8 +355,6 @@ export default function Chat() {
       content: text
     }
     socketModel.emit("send-message", value);
-    // getChatMessages(chatRoomId);
-    allroommemeber()
     setText("")
   }
 
@@ -437,14 +449,14 @@ export default function Chat() {
                       .getElementById('OpenmemberModel')
                       .click();
                     // setform({})
-                  }}>Add Members</button> <button onClick={() => {
+                  }}>Add Members</button> </> : <></>}
+
+                  <button onClick={() => {
                     document
                       .getElementById('OpengroupdModel')
                       .click();
                     // setform({})
-                  }}>Group Detail</button></> : <></>}
-
-
+                  }}>Group Detail</button>
 
                   <div className="darkmode">
 
@@ -512,10 +524,7 @@ export default function Chat() {
                     <div class="flex flex-col flex-grow w-full  overflow-hidden">
                       <div class="flex flex-col flex-grow h-0 p-4 tailwind-scrollbar overflow-auto">
                         {chatMessages && chatMessages?.map((itm, i) => {
-
                           return <>
-
-
                             {(itm?.sender == user?.id) ? <>
 
                               <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
@@ -585,9 +594,9 @@ export default function Chat() {
                           <div className='relative'>
                             <div className='absolute items-center left-[17px] top-[17px] flex'>
                               {
-                                emoji? <IoIosArrowUp onClick={(e) => setemoji(false)} className='text-[#707991]' />: <BsEmojiSmile onClick={(e) => setemoji(true)} className='text-[#707991]' />
+                                emoji ? <IoIosArrowUp onClick={(e) => setemoji(false)} className='text-[#707991]' /> : <BsEmojiSmile onClick={(e) => setemoji(true)} className='text-[#707991]' />
                               }
-                             
+
 
                               <label className=" cursor-pointer ml-4">
                                 <ImAttachment className='text-[#707991]' />

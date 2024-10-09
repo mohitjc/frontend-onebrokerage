@@ -21,6 +21,7 @@ import socketModel from '../../../models/socketModel';
 import Header from '../../../components/global/header2';
 import { FaCircle } from "react-icons/fa";
 export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber }) {
+
   const user = useSelector((state) => state.user);
 
   const history = useNavigate()
@@ -37,7 +38,6 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
   }
 
   const uploadImage = (e) => {
-    console.log(e, "images")
     setform({ ...form, baseImg: e.target.value });
     let files = e.target.files;
     let file = files.item(0);
@@ -82,7 +82,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
 
   return (
     <>
-    <div className="hidden"> <Header /></div>    
+      <div className="hidden"> <Header /></div>
       <div className="block lg:hidden">
         <div className={`chatslefts w-[400px] border-r border-gray-200 shrink-0 py-4 h-screen bg-white fixed top-0 z-50 left-0 transition-transform duration-300 ease-in-out
                   ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
@@ -151,26 +151,26 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
 
               <div className="flex justify-between gap-4 bg-white px-4 py-2 " >
                 <div className="flex gap-2 xl:gap-4 cursor-pointer " onClick={e => ChatSelectorHandler(item)}>
-                 <div className='relative'>
-                  {item?.isGroupChat ? <><img
-                    src={methodModel.userImg(
-                      item?.room_image
-                    )}
-                    className="h-10 w-10 rounded-full mb-4 object-contain "
-                  /></> : <> {
-                    item?.room_members?.map((itm) =>
-                      <><img
-                        src={methodModel.userImg(
-                          itm?.user_image
-                        )}
-                        className="h-10 w-10 rounded-full mb-4 object-contain "
-                      />
-                        {itm?.isOnline ? <FaCircle className='text-[green] online-icon text-[10px]' /> : <></>}
-                      </>
+                  <div className='relative'>
+                    {item?.isGroupChat ? <><img
+                      src={methodModel.userImg(
+                        item?.room_image
+                      )}
+                      className="h-10 w-10 rounded-full mb-4 object-contain "
+                    /></> : <> {
+                      item?.room_members?.map((itm) =>
+                        <><img
+                          src={methodModel.userImg(
+                            itm?.user_image
+                          )}
+                          className="h-10 w-10 rounded-full mb-4 object-contain "
+                        />
+                          {itm?.isOnline ? <FaCircle className='text-[green] online-icon text-[10px]' /> : <></>}
+                        </>
 
-                    )
-                  }</>}
-</div>
+                      )
+                    }</>}
+                  </div>
 
                   <div className="">
                     <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{item?.isGroupChat ? item?.room_name : item?.room_members?.map((itm) => itm?.user_name)}<TbRosetteDiscountCheckFilled className="text-blue-500" />  </h4>

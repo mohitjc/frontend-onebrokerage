@@ -94,7 +94,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
           </div>
           <div  className="flex  items-center">
             <button className="bg-primary px-4 py-2 text-white flex-grow text-xs flex items-center gap-1 justify-center font-medium"><LuEye /><Link to="/profile">View profile</Link></button>
-            <button  id="handleLogout" className="bg-red-500 px-4 py-2 text-white flex-grow text-xs flex items-center gap-1 justify-center font-medium" onClick={() => Logout()}> <CgLogOut /> Logout</button>
+            <button  id="handleLogout"className="bg-red-500 px-4 py-2 text-white flex-grow text-xs flex items-center gap-1 justify-center font-medium" onClick={() => Logout()}> <CgLogOut /> Logout</button>
           </div>
         </div>
 

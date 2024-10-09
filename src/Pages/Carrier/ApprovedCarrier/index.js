@@ -283,13 +283,14 @@ const ApprovedCarrier = (p) => {
   };
 
   const isAllow = (key = "") => {
-    return true;
+    // return true;
     let permissions = user.role?.permissions;
     let value = permissions?.[key];
     if (user?.role?.id == environment.adminRoleId) value = true;
 
     return value;
   };
+
   const filter = (p = {}) => {
     setFilter({ ...filters, ...p });
     getData({ ...p, page: filters?.page });
