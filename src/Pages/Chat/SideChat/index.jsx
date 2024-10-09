@@ -179,7 +179,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
                 </div>
                 <div className=" ">
                   <h4 className="flex items-center gap-2 text-[13px] text-[#707991]">
-                    {moment(item?.last_message_at).fromNow() == "a day ago" ? "1 day ago" : moment(item?.last_message_at).fromNow()}
+                    {moment(item?.last_message?.createdAt).fromNow() == "a day ago" ? "1 day ago" : moment(item?.last_message?.createdAt).fromNow()}
                     {/* {calculateTime(item?.last_message_at)} */}
                     {/* 2 min */}
                   </h4>
