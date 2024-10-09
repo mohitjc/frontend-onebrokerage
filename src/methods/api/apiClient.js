@@ -22,9 +22,10 @@ const handleError = (err, hideError) => {
   let message = "";
   if (err) {
     if (err && err.error && err.error.code == 401) {
+      // dispatch(logout());
       localStorage.removeItem("persist:admin-app");
       localStorage.removeItem("token");
-      // document.getElementById("handleLogout")?.click();
+      document.getElementById("handleLogout")?.click();
       hideError = true;
       methodModel.route("/");
     }

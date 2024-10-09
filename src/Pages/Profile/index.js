@@ -569,7 +569,7 @@ const Profile = () => {
                           <IoCameraSharp className="text-2xl" />
 
                           </span>
-                          Change Profile
+                          {form.image?"Change Profile":"Upload Profile"}
                         </label>
                       </div>
                      
