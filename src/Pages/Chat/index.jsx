@@ -58,7 +58,7 @@ export default function Chat() {
   const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpenGroupmodal, setisOpenGroupmodal] = useState(false)
   const [sidechat, setsidechat] = useState([]);
-  console.log(sidechat, "sidechat")
+
   const [chatRoomId, setChatRoomId] = useState("");
   const [isonline, setonline] = useState(false);
   const [text, setText] = useState('');
