@@ -585,7 +585,7 @@ export default function Chat() {
                         })}
                       </div>
 
-                      <div class="rounded-xl flex items-center gap-4 mt-4">
+                      <div class="rounded-xl flex relative items-center gap-4 mt-4">
                         <form className='w-full ' onSubmit={e => { e.preventDefault(); handleSubmit() }}>
                           {emoji ? <div>
                             <EmojiPicker
