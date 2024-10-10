@@ -43,7 +43,7 @@ const Sidebar = ({ isOpen }) => {
 
   const tabclass = (tab) => {
     const currentPath = location.pathname;
-    return menus[tab].some(itm => currentPath.includes(itm));
+    return menus[tab].some(itm => currentPath==itm);
   };
 
   const urlAllow = (url) => {
