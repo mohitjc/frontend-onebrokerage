@@ -286,7 +286,7 @@ export default function Chat() {
       });
       setsidechat([...newdata])
     });
-    
+
 
     socketModel.on("user-offline", (data) => {
       if (id) {
@@ -294,7 +294,7 @@ export default function Chat() {
           setonline(false)
         }
       }
-      
+
       let newdata = SideChatRef.current?.map((item) => {
         if (item?.room_members[0]?.user_id == data?.data?.user_id) {
           return { ...item, room_members: [{ ...item?.room_members[0], isOnline: false }, ...item?.room_members.slice(1)] }
@@ -439,7 +439,7 @@ export default function Chat() {
                     />
                     <div className="">
                       <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{ChatWithUserName?.name || currentchatdata?.fullName}</h4>
-                      <p className=" text-[12px] xl:text-[15px] text-[#707991]">{ChatWithUserName?.isOnline ? "Online" : "Offline"}</p>
+                      <p className=" text-[12px] xl:text-[15px] text-[#707991]">{ChatWithUserName?.isGroupChat ? `${ChatWithUser?.room_members?.length} Participants` : ChatWithUserName?.isOnline ? "Online" : "Offline"}</p>
                     </div>
                   </div>
                 </div>
@@ -451,13 +451,13 @@ export default function Chat() {
                       .click();
                     // setform({})
                   }}>Add Members</button> </> : <></>}
-
-                  <button onClick={() => {
+                  {ChatWithUserName?.isGroupChat ? <button onClick={() => {
                     document
                       .getElementById('OpengroupdModel')
                       .click();
                     // setform({})
-                  }}>Group Detail</button>
+                  }}>Group Detail</button> : <></>}
+
 
                   <div className="darkmode">
 
