@@ -61,42 +61,10 @@ function App() {
     { url: "/carrierstaff/detail/:id", path: "CarrierStaff/View" },
     { url: "/successpage", path: "SuccessPage/html" },
     { url: "/cancelpage", path: "CancelPage/html" },
-      //  { url: "/profile/:tab", path: "Settings" },
-    // { url: "/assignment", path: "Assignment" },
-    // { url: "/assignment/detail/:id", path: "Assignment/View" },
-    // {
-    //   url: "/assignment/counter-offer/detail/:id",
-    //   path: "Assignment/Counteroffer",
-    // },
-    // { url: "*", path: "NotFoundPage" },
- 
-  
- 
-    // { url: "/resetpassword", path: "Resetpassword" },
-    // { url: "/user", path: "Users" },
-    // { url: "/user/edit/:id", path: "Users/AddEdit" },
-    // { url: "/user/add", path: "Users/AddEdit" },
-    // { url: "/user/detail/:id", path: "Users/View" },
-    // { url: "/", element: <Navigate to="/login" /> },
-  
-    // { url: "/word-estimate", path: "WordCount/AddEdit" },
-    // { url: "/word-estimate/detail/:id", path: "WordCount/View" },
-    // { url: "/word-estimate/add", path: "WordCount/AddEdit" },
-    // { url: "/word-estimate/edit/:id", path: "WordCount/AddEdit" },
-    // { url: "/content", path: "Content" },
-    // { url: "/content/detail/:slug", path: "Content/View" },
-    // { url: "/content/add", path: "Content/AddEdit" },
-    // { url: "/content/edit/:slug", path: "Content/AddEdit" },
-    // { url: "/feature", path: "Features" },
-    // { url: "/feature/edit/:id", path: "Features/AddEdit" },
-    // { url: "/feature/add", path: "Features/AddEdit" },
-    // { url: "/feature/detail/:id", path: "Features/View" },
-    // { url: "/carriersrequest", path: "Carrier/CarriersRequest" },
-    // { url: "/carrierstaff", path: "Carrier/CarrierStaff" },
-    // { url: "/groups", path: "Group" },
-    // { url: "/groups/edit/:id", path: "Group/AddEdit" },
-    // { url: "/groups/add", path: "Group/AddEdit" },
-    // { url: "/groups/detail/:id", path: "Group/View" },
+    { url: "/loads", path: "Loads" },
+    { url: "/loads/edit/:id", path: "Loads/AddEdit" },
+    { url: "/loads/add", path: "Loads/AddEdit" },
+    { url: "/loads/detail/:id", path: "Loads/View" },
   ];
 
   sessionStorage.clear();

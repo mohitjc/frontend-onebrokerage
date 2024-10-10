@@ -294,6 +294,7 @@ export default function Chat() {
           setonline(false)
         }
       }
+      
       let newdata = SideChatRef.current?.map((item) => {
         if (item?.room_members[0]?.user_id == data?.data?.user_id) {
           return { ...item, room_members: [{ ...item?.room_members[0], isOnline: false }, ...item?.room_members.slice(1)] }
