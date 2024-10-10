@@ -184,7 +184,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
                     {/* 2 min */}
                   </h4>
 
-                  {item?.unread_count ? <p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">{item?.unread_count}</p> : <></>}
+                  {/* {item?.unread_count ? <p className="bg-primary rounded-full h-4 w-4 mt-1 flex items-center text-white text-xs justify-center">{item?.unread_count}</p> : <></>} */}
 
 
                 </div>
