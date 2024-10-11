@@ -20,10 +20,7 @@ const Loads = () => {
     isDeleted: false,
     sorder: '',
     state: "",
-    origin_location_city: "",
-    origin_location_state: "",
-    destination_location_city: "",
-    destination_location_state: ""
+   
   });
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
@@ -55,11 +52,11 @@ const Loads = () => {
 
   const getData = (p = {}) => {
     setLoader(true);
-    let filter = { ...filters, ...p ,request_status:"awarded"};
-    filter.destination_location_state = filter.destination_location_state?.toString()
-    filter.destination_location_city = filter.destination_location_city?.toString()
-    filter.origin_location_state = filter.origin_location_state?.toString()
-    filter.origin_location_city = filter.origin_location_city?.toString()
+    let filter = { ...filters, ...p ,request_status:"awarded",addedBy:user?.addedBy?.id};
+    // filter.destination_location_state = filter.destination_location_state?.toString()
+    // filter.destination_location_city = filter.destination_location_city?.toString()
+    // filter.origin_location_state = filter.origin_location_state?.toString()
+    // filter.origin_location_city = filter.origin_location_city?.toString()
     ApiClient.get(shared.listApi, filter).then((res) => {
       if (res.success) {
         setData(

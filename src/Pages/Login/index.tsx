@@ -121,9 +121,12 @@ const Login = () => {
           dispatch(login_success(res1?.data?.data));
           const newdata = res1.data?.data;
           toast.success(res1?.data?.message)
-          if(res1?.data?.data?.role=="driver" || res1?.data?.data?.plan_id ||( res1?.data?.data?.role=="staff" && res1?.data?.data?.addedBy?.plan_id))
+          if(res1?.data?.data?.plan_id ||( res1?.data?.data?.role=="staff" && res1?.data?.data?.addedBy?.plan_id))
           {
             history("/dashboard");
+          }else if(res1?.data?.data?.role=="driver" )
+          {
+            history("/task");
           }
          else
             {

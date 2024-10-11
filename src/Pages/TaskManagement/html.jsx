@@ -408,132 +408,10 @@ const Html = ({
                     />
                   </div>
                 </Menu.Button>
-                <div className=" ">
-                <button
-                  type="button"
-                  id="OpenReasonModel"
-                  onClick={openModal}
-                  className="  bg-primary leading-10  h-[42px] flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg "
-                >
-                 Filter
-                </button>
-              </div>
+               
               </div>
               
-              <Transition appear show={isOpen} as={Fragment}>
-                <Dialog
-                  as="div"
-                  className="relative z-[99]"
-                  onClose={closeModal}
-                >
-                  <Transition.Child
-                    as={Fragment}
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <div className="fixed inset-0 bg-black/25" />
-                  </Transition.Child>
-
-                  <div className="fixed inset-0 overflow-y-auto">
-                    <div className="flex items-center h-full justify-end  text-center">
-                      <Transition.Child
-                        as={Fragment}
-                        enter="ease-out duration-300"
-                        enterFrom="opacity-0 scale-95"
-                        enterTo="opacity-100 scale-100"
-                        leave="ease-in duration-200"
-                        leaveFrom="opacity-100 scale-100"
-                        leaveTo="opacity-0 scale-95"
-                      >
-                        <Dialog.Panel className="w-full max-w-md h-full transform overflow-hidden rounded-tl-2xl rounded-bl-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                          <Dialog.Title
-                            as="h3"
-                            className="text-lg font-medium leading-6 text-gray-900"
-                          ></Dialog.Title>
-                          <div className="mt-2 text-center">
-                            <h5 className="text-lg font-semibold">Filter</h5>
-                          </div>
-                          <div className="mt-5">
-                            <form>
-                              <div class="modal-body">
-                                <div className="mb-4">
-                                  <label className="mb-1 block">Select Destination State</label>
-                                  <MultiSelectDropdown
-                                    id="statusDropdown"
-                                    displayValue="name"
-                                    placeholder="Select Destination State"
-                                    intialValue={
-                                      filters?.destination_location_state
-                                    }
-                                    result={handledestination}
-                                    options={DesitinationStates}
-                                    theme="search"
-                                  />
-                                </div>
-                                 <div className="mb-4">
-                                  <label className="mb-1 block">Select Destination City</label>
-                                  <MultiSelectDropdown
-                                    id="statusDropdown"
-                                    displayValue="name"
-                                    placeholder="Select Destination City"
-                                    intialValue={
-                                      filters?.destination_location_city
-                                    }
-                                    result={handledestinationCity}
-                                    options={DesitinationCity}
-                                    theme="search"
-                                  />
-                                </div>
-                                 <div className="mb-4">
-                                  <label className="mb-1 block">Select Origin State</label>
-                                  <MultiSelectDropdown
-                                    id="statusDropdown"
-                                    displayValue="name"
-                                    placeholder="Select Origin State"
-                                    intialValue={filters?.origin_location_state}
-                                    result={handleOriginState}
-                                    options={OriginStates}
-                                    theme="search"
-                                  />
-                                </div>
-                                <div className="mb-4">
-                                  <label className="mb-1 block">Select Origin City</label>
-                                  <MultiSelectDropdown
-                                    id="statusDropdown"
-                                    displayValue="name"
-                                    placeholder="Select Origin City"
-                                    intialValue={filters?.origin_location_city}
-                                    result={handleOriginCity}
-                                    options={OriginCities}
-                                    theme="search"
-                                  />
-                                </div>
-                              </div>
-                              <div className="flex items-center justify-end gap-2">
-                                <button
-                                  type="button"
-                                  id="CloseReasonModel"
-                                  className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
-                                  onClick={closeModal}
-                                >
-                                  Close
-                                </button>
-                                <button type="submit" class="btn btn-primary">
-                                  Submit
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </Dialog.Panel>
-                      </Transition.Child>
-                    </div>
-                  </div>
-                </Dialog>
-              </Transition>
+        
 
               <Transition
                 as={Fragment}
@@ -582,7 +460,7 @@ const Html = ({
                       return (
                         <>
                           <div className="flex items-center justify-start gap-1.5">
-                            {isAllow(`${shared.check}_get`) ? (
+                          
                               <Tooltip placement="top" title="View">
                                 <a
                                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -591,9 +469,7 @@ const Html = ({
                                   <PiEyeLight />
                                 </a>
                               </Tooltip>
-                             ) : (
-                              <></>
-                            )} 
+                 
                  
                           </div>
                         </>
