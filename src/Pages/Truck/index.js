@@ -237,7 +237,7 @@ const Features = () => {
   };
 
   const isAllow = (key = "") => {
-    let permissions = user?.permissions?.[0];
+    let permissions = user?.permissions;
     let value = permissions?.[key];
     if(user.role=='admin') value=true
     // return true;

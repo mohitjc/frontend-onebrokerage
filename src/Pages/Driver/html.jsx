@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/global/layout";
 // import "./style.scss";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loader from "../../methods/loader";
 import { Tooltip } from "antd";
 import { FiEdit3, FiPlus } from "react-icons/fi";
@@ -64,7 +64,7 @@ const Html = ({
   }
   useEffect(() => {
     // loader(true);
-    ApiClient.get("active-plan").then((res) => {   
+    ApiClient.get("active-plan").then((res) => {
       if (res.success) {
         setActivePlan(res.data);
         if (!res.data.id) {
@@ -76,17 +76,15 @@ const Html = ({
 
   }, []);
 
-  const adddriver=()=>
-    {
-      if(activeplan?.subscription_plan_id?.number_of_drivers>total)
-      {
-        history(`/${shared.url}/add`)
-      }
-      else{
-        document.getElementById("OpenmemberModel").click()
-      }
-      
+  const adddriver = () => {
+    if (activeplan?.subscription_plan_id?.number_of_drivers > total) {
+      history(`/${shared.url}/add`)
     }
+    else {
+      document.getElementById("OpenmemberModel").click()
+    }
+
+  }
   const columns = [
     {
       key: "fullName",
@@ -95,7 +93,7 @@ const Html = ({
       render: (row) => {
         return <span className="capitalize">{row?.fullName}</span>;
       },
-    
+
     },
     {
       key: "email",
@@ -111,8 +109,8 @@ const Html = ({
       render: (row) => {
         return (
           <>
-          <span className="">{row?.licence_number}</span>
-           </>
+            <span className="">{row?.licence_number}</span>
+          </>
         );
       },
     },
@@ -135,11 +133,10 @@ const Html = ({
             <div className="w-32" onClick={() => statusChange(row)}>
               <span
                 className={`bg-[#494f9f] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-                          ${
-                            row.status == "deactive"
-                              ? " bg-gray-200 text-black"
-                              : "bg-[#494f9f] text-white"
-                          }`}
+                          ${row.status == "deactive"
+                    ? " bg-gray-200 text-black"
+                    : "bg-[#494f9f] text-white"
+                  }`}
               >
                 {row.status == "deactive" ? "inactive" : "active"}
               </span>
@@ -155,7 +152,7 @@ const Html = ({
         return (
           <>
             <div className="flex items-center justify-start gap-1.5">
-              {/* {isAllow(`read${shared.check}`) ? ( */}
+              {isAllow(`${shared.check}_get`) ? (
                 <Tooltip placement="top" title="View">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -164,10 +161,10 @@ const Html = ({
                     <PiEyeLight />
                   </a>
                 </Tooltip>
-              {/* ) : (
+              ) : (
                 <></>
-              )} */}
-              {/* {isAllow(`edit${shared.check}`) ? ( */}
+              )}
+              {isAllow(`${shared.check}_edit`) ? (
                 <Tooltip placement="top" title="Edit">
                   <a
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -176,11 +173,11 @@ const Html = ({
                     <LiaEdit />
                   </a>
                 </Tooltip>
-            {/* //   ) : (
-            //     <></>
-            //   )} */}
-              {/* {isAllow(`delete${shared.check}`) ? ( */}
-                <Tooltip placement="top" title="Delete">
+              ) : (
+                <></>
+              )}
+              {isAllow(`${shared.check}_`) ? (
+                <> <Tooltip placement="top" title="Delete">
                   <span
                     className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                     onClick={() => deleteItem(itm.id)}
@@ -188,17 +185,19 @@ const Html = ({
                     <LiaTrashAlt />
                   </span>
                 </Tooltip>
-                <Tooltip placement="top" title="Chat">
-                  <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={() => ChatUser(itm.driver_user_id)}
-                  >
-                  <IoChatbubbleEllipsesOutline />
-                  </span>
-                </Tooltip>
-              {/* ) : (
+                </>
+
+              ) : (
                 <></>
-              )} */}
+              )}
+              <Tooltip placement="top" title="Chat">
+                <span
+                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                  onClick={() => ChatUser(itm.driver_user_id)}
+                >
+                  <IoChatbubbleEllipsesOutline />
+                </span>
+              </Tooltip>
             </div>
           </>
         );
@@ -242,17 +241,17 @@ const Html = ({
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
                     </button> */}
 
-          {/* {isAllow(`add${shared.check}`) ? ( */}
-            <button
-              className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
-              onClick={adddriver}
-         
-            >
-              <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
-            </button>
-          {/* ) : (
+          {isAllow(`${shared.check}_add`) ? (
+          <button
+            className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
+            onClick={adddriver}
+
+          >
+            <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
+          </button>
+           ) : (
             <></>
-          )} */}
+          )} 
         </div>
       </div>
 
@@ -283,7 +282,7 @@ const Html = ({
                 }}
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#494f9f]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                 placeholder="Search"
-                // required
+              // required
               />
               {filters?.search && (
                 <i
@@ -315,40 +314,40 @@ const Html = ({
               <span class="sr-only">Search</span>
             </button>
           </form>
-             
 
-<div className="flex gap-2 ml-auto items-center">
 
-              <div>
-                <button
-                  onClick={(e) => sampledownload()}
-                  className="flex items-center border border-gray-200 px-2 py-2.5 hover:shadow rounded-lg gap-2"
-                 >
+          <div className="flex gap-2 ml-auto items-center">
+
+            <div>
+              <button
+                onClick={(e) => sampledownload()}
+                className="flex items-center border border-gray-200 px-2 py-2.5 hover:shadow rounded-lg gap-2"
+              >
+                <CgImport />
+
+                <span className="text-sm"> Download</span>
+              </button>
+            </div>
+
+            <div className="">
+              <div className="relative text-center">
+                <label className="cursor-pointer border border-gray-200 px-2 py-2.5 hover:shadow rounded-lg  flex items-center gap-2">
                   <CgImport />
 
-                 <span className="text-sm"> Download</span>
-                </button>
+
+                  <span className="text-sm">Import</span>
+                  <input
+                    id="bannerImage"
+                    type="file"
+                    className="hidden"
+                    accept=".xlsx,.csv"
+                    onChange={(e) => {
+                      ImportFile(e);
+                    }}
+                  />
+                </label>
               </div>
-
-              <div className="">
-                <div className="relative text-center">
-                  <label className="cursor-pointer border border-gray-200 px-2 py-2.5 hover:shadow rounded-lg  flex items-center gap-2">
-                  <CgImport />
-
-
-                    <span className="text-sm">Import</span>
-                    <input
-                      id="bannerImage"
-                      type="file"
-                      className="hidden"
-                      accept=".xlsx,.csv"
-                      onChange={(e) => {
-                        ImportFile(e);
-                      }}
-                    />
-                  </label>
-                </div>
-              </div>
+            </div>
 
 
             <SelectDropdown
@@ -361,20 +360,20 @@ const Html = ({
               }}
               options={statusModel.list}
             />
-           
+
             {filters.status || filters.groupId ? (
               <>
-              <button
-                className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
-                onClick={() => clear()}
-              >
+                <button
+                  className="bg-primary leading-10 h-10 inline-block shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg flex items-center w-fit "
+                  onClick={() => clear()}
+                >
 
-          <IoIosRefresh class="me-2"/>
+                  <IoIosRefresh class="me-2" />
 
 
-                Reset
-              </button>
-            </>
+                  Reset
+                </button>
+              </>
             ) : (
               <></>
             )}
@@ -383,28 +382,28 @@ const Html = ({
 
         {!loaging ? (
           <>
-           <div className="">
-          <Table
-              className=""
-              data={data}
-              sort_key={filters?.key}
-              sorter={filters?.sorder}
-              modelName={shared?.title}
-              columns={columns}
-              page={filters.page}
-              count={filters.count}
-              filters={filters}
-              total={total}
-              result={(e) => {
-                if (e.event == "page") pageChange(e.value);
-                if (e.event == "sort") {
-                  sorting(e.value);
-                  sortClass(e.value);
-                }
-                if (e.event == "count") count(e.value);
-              }}
-            />
-          </div>
+            <div className="">
+              <Table
+                className=""
+                data={data}
+                sort_key={filters?.key}
+                sorter={filters?.sorder}
+                modelName={shared?.title}
+                columns={columns}
+                page={filters.page}
+                count={filters.count}
+                filters={filters}
+                total={total}
+                result={(e) => {
+                  if (e.event == "page") pageChange(e.value);
+                  if (e.event == "sort") {
+                    sorting(e.value);
+                    sortClass(e.value);
+                  }
+                  if (e.event == "count") count(e.value);
+                }}
+              />
+            </div>
           </>
         ) : (
           <></>
@@ -465,30 +464,30 @@ const Html = ({
 
                   </Dialog.Title>
                   <div className=" flex items-center justify-center relative">
-               </div>
+                  </div>
 
                   <div className="mt-5">
 
                     <form
-                      
+
                     >
                       <div class="modal-body">
                         <label class="mb-2 block">
-                       
+
                         </label>
                         <div className="flex flex-col items-center justify-center ">
 
                           <div>
-                          If you want to add more drivers , you need to upgrade the plan
+                            If you want to add more drivers , you need to upgrade the plan
                           </div>
 
                         </div>
-       
+
 
                       </div>
                       <div className='flex items-center justify-end gap-2'>
 
-                     <button
+                        <button
                           type="button"
                           id="CloseReasonModel"
                           className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
@@ -496,7 +495,7 @@ const Html = ({
                         >
                           Ok
                         </button>
-                       
+
                       </div>
 
                     </form>
