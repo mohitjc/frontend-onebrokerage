@@ -243,29 +243,46 @@ export default function Chat() {
         });
         setChatMessages([...uniqueMessages]);
 
-        const updatedSideChat = SideChatRef.current.map((chat) => {
-          if (chat?.room_id == data?.data?.room_id) {
-            return {
-              ...chat,
-              unread_count:currectChat.current == data.data.room_id?0:chat?.unread_count+1,
-              last_message: {
-                ...chat.last_message,
-                content: data.data.content,
-                createdAt: data.data.createdAt
-              },
+        // const updatedSideChat = SideChatRef.current.map((chat) => {
+        //   if (chat?.room_id == data?.data?.room_id) {
+        //     return {
+        //       ...chat,
+        //       unread_count:currectChat.current == data.data.room_id?0:chat?.unread_count+1,
+        //       last_message: {
+        //         ...chat.last_message,
+        //         content: data.data.content,
+        //         createdAt: data.data.createdAt
+        //       },
              
-            };
-          }
-          return chat;
-        });
-        setsidechat(updatedSideChat);
-        console.log(updatedSideChat,"updatedSideChat")
+        //     };
+        //   }
+        //   return chat;
+        // });
+        // setsidechat(updatedSideChat);
 
         setTimeout(() => {
           chatScroll();
         }, 100);
       }
     });
+
+    socketModel.on("receive-message1", (data) => {  
+      const updatedSideChat = SideChatRef.current.map((chat) => {  
+          if (chat?.room_id == data?.data?.room_id) {
+              return {
+                  ...chat,
+                  last_message: {
+                      ...chat.last_message,
+                      content: data?.data?.content,
+                      createdAt: data.data.createdAt,
+                  },
+              };
+          }
+          return chat;
+      });
+      setsidechat(updatedSideChat);
+  });
+
 
 
 
@@ -438,7 +455,7 @@ export default function Chat() {
       <div className="main_chats h-screen overflow-hidden">
         <div className="flex">
 
-          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber} />
+          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber} setsidechat={setsidechat}/>
 
           <div className="rigtsie_inners h-screen w-full">
             {chatRoomId ?
