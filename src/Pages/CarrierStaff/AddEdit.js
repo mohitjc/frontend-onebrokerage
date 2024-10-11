@@ -291,7 +291,7 @@ const AddEdit = () => {
           plan_edit: res?.data?.plan_edit,
           plan_get: res?.data?.plan_get,
 
-          active_plan_get:res?.data?.active_plan_get,
+          active_plan_get: res?.data?.active_plan_get,
 
           driver_add: res?.data?.driver_add,
           driver_delete: res?.data?.driver_delete,
@@ -413,7 +413,7 @@ const AddEdit = () => {
               plan_edit: false,
               plan_get: false,
 
-              active_plan_get:false,
+              active_plan_get: false,
 
               driver_add: false,
               driver_delete: false,
@@ -537,17 +537,17 @@ const AddEdit = () => {
     // setpermission('carrier_complete_access',value)
   };
 
-  const handleCarrierStaff = (check) => {
+  const handleLoad = (check) => {
     let value = check ? true : false;
     setForm({
       ...form,
       permissions: {
         ...form.permissions,
-        carrier_staff_add: value,
-        carrier_staff_edit: value,
-        carrier_staff_get: value,
-        carrier_staff_delete: value,
-        carrier_staff_complete_access: value,
+        load_add: value,
+        load_edit: value,
+        load_get: value,
+        load_delete: value,
+        load_complete_access: value,
       },
     });
     // setpermission('carrier_complete_access',value)
@@ -603,17 +603,22 @@ const AddEdit = () => {
       carrier_get: form?.permissions?.carrier_get,
 
       carrier_staff_add: form.permissions?.carrier_staff_add,
-      carrier_staff_edit:  form.permissions?.carrier_staff_edit,
+      carrier_staff_edit: form.permissions?.carrier_staff_edit,
       carrier_staff_delete: form.permissions?.carrier_staff_delete,
-      carrier_staff_get:  form.permissions?.carrier_staff_get,
+      carrier_staff_get: form.permissions?.carrier_staff_get,
 
 
-      active_plan_get:form?.permissions?.active_plan_get,
+      active_plan_get: form?.permissions?.active_plan_get,
 
       driver_add: form.permissions?.driver_add,
       driver_delete: form?.permissions?.driver_delete,
       driver_edit: form?.permissions?.driver_edit,
       driver_get: form?.permissions?.driver_get,
+
+      load_add: form.permissions?.load_add,
+      load_delete: form?.permissions?.load_delete,
+      load_edit: form?.permissions?.load_edit,
+      load_get: form?.permissions?.load_get,
 
 
       truck_add: form.permissions?.truck_add,
@@ -622,7 +627,7 @@ const AddEdit = () => {
       transaction_get: form?.permissions?.transaction_get,
 
       dashboard_get: form?.permissions?.dashboard_get,
-     
+
     };
     Object.keys(permissions).map((itm) => {
       if (!permissions[itm]) value = false
@@ -672,13 +677,13 @@ const AddEdit = () => {
     return result;
   };
 
-  const handlecompleteAccessCarrierStaff = () => {
+  const handlecompleteAccessLoad = () => {
     let result = false;
     if (
-      form?.permissions?.carrier_staff_add &&
-      form?.permissions?.carrier_staff_delete &&
-      form?.permissions?.carrier_staff_edit &&
-      form?.permissions?.carrier_staff_get
+      form?.permissions?.load_add &&
+      form?.permissions?.load_delete &&
+      form?.permissions?.load_edit &&
+      form?.permissions?.load_get
     ) {
       result = true;
     }
@@ -726,10 +731,11 @@ const AddEdit = () => {
       permissions: {
         ...form.permissions,
         carrier_get: value,
-        carrier_staff_get:value,
+        carrier_staff_get: value,
         plan_get: value,
-        active_plan_get:value,
+        active_plan_get: value,
         driver_get: value,
+        load_get:value,
         group_get: value,
         truck_get: value,
         transaction_get: value,
@@ -742,7 +748,6 @@ const AddEdit = () => {
         board_get: value,
         content_management_get: value,
         bid_get: value,
-        load_get: value,
         faq_get: value,
         news_letter_get: value,
         notifications_get: value,
@@ -761,7 +766,7 @@ const AddEdit = () => {
       permissions: {
         ...form.permissions,
         carrier_add: value,
-        carrier_staff_add:value,
+        carrier_staff_add: value,
         plan_add: value,
         driver_add: value,
         truck_add: value,
@@ -771,7 +776,7 @@ const AddEdit = () => {
         bid_add: value,
         board_add: value,
         carrier_get: value,
-        carrier_staff_get:value,
+        carrier_staff_get: value,
         faq_get: value,
         load_get: value,
         bid_get: value,
@@ -795,8 +800,8 @@ const AddEdit = () => {
       permissions: {
         ...form.permissions,
         carrier_edit: value,
-        carrier_staff_get:value,
-        carrier_staff_edit:value,
+        carrier_staff_get: value,
+        carrier_staff_edit: value,
         plan_edit: value,
         driver_edit: value,
         group_edit: value,
@@ -843,8 +848,8 @@ const AddEdit = () => {
         bid_get: value,
         load_get: value,
         faq_get: value,
-        carrier_staff_delete:value,
-        carrier_staff_get:value
+        carrier_staff_delete: value,
+        carrier_staff_get: value
       },
     });
     setAllDelete(value);
@@ -1384,23 +1389,23 @@ const AddEdit = () => {
                 </tr>
                 <tr>
                   <td className="border border-gray px-2 py-2 ">
-                    <span className="font-semibold text-sm">Carrier's Staff</span>
+                    <span className="font-semibold text-sm">Loads</span>
                   </td>
 
                   <td className="border border-gray px-4 py-2 text-left">
                     <input
                       type="checkbox"
                       onChange={(e) => {
-                        handleCarrierStaff(e.target.checked);
+                        handleLoad(e.target.checked);
                         // if(e.target?.checked){
                         // setform({...form,permissions:{...form?.permissions,carrier_complete_access:true}})
                         // }else
                       }}
-                      checked={handlecompleteAccessCarrierStaff()}
+                      checked={handlecompleteAccessLoad()}
                     />
                   </td>
 
-                  <td className="border border-gray px-4 py-2 text-left">
+                  {/* <td className="border border-gray px-4 py-2 text-left">
                     <input
                       type="checkbox"
                       checked={form?.permissions?.carrier_staff_get}
@@ -1412,15 +1417,29 @@ const AddEdit = () => {
                       }
                       disabled={form?.permissions?.carrier_staff_add || form?.permissions?.carrier_staff_edit || form?.permissions?.carrier_staff_delete}
                     />
+                  </td> */}
+
+                  <td className="border border-gray px-4 py-2 text-left">
+                    <input
+                      type="checkbox"
+                      checked={form?.permissions?.load_get}
+                      onChange={(e) =>
+                        setpermission(
+                          "load_get",
+                          e.target.checked
+                        )
+                      }
+                      disabled={form?.permissions?.load_add || form?.permissions?.load_edit || form?.permissions?.load_delete}
+                    />
                   </td>
 
                   <td className="border border-gray px-4 py-2 text-left">
                     <input
                       type="checkbox"
-                      checked={form?.permissions?.carrier_staff_add}
+                      checked={form?.permissions?.load_add}
                       onChange={(e) =>
                         setpermission(
-                          "carrier_staff_add",
+                          "load_add",
                           e.target.checked
                         )
                       }
@@ -1430,10 +1449,10 @@ const AddEdit = () => {
                   <td className="border border-gray px-4 py-2 text-left">
                     <input
                       type="checkbox"
-                      checked={form?.permissions?.carrier_staff_edit}
+                      checked={form?.permissions?.load_edit}
                       onChange={(e) =>
                         setpermission(
-                          "carrier_staff_edit",
+                          "load_edit",
                           e.target.checked
                         )
                       }
@@ -1443,10 +1462,10 @@ const AddEdit = () => {
                   <td className="border border-gray px-4 py-2 text-left">
                     <input
                       type="checkbox"
-                      checked={form?.permissions?.carrier_staff_delete}
+                      checked={form?.permissions?.load_delete}
                       onChange={(e) =>
                         setpermission(
-                          "carrier_staff_delete",
+                          "load_delete",
                           e.target.checked
                         )
                       }

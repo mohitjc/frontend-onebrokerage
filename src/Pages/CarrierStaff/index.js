@@ -111,7 +111,7 @@ const CarrierStaff = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         loader(true);
-        ApiClient.delete(shared.deleteApi, { id: id ,model:"driver"}).then((res) => {
+        ApiClient.delete(shared.deleteApi, { id: id ,model:"users"}).then((res) => {
           if (res.success) {
             // ToastsStore.success(res.message)
             toast.success(res.message)
@@ -250,8 +250,10 @@ const CarrierStaff = () => {
   };
 
   const isAllow = (key = "") => {
-    let permissions = user?.permissions?.[0];
+    let permissions = user?.permissions;
+    console.log(permissions,"permissions")
     let value = permissions?.[key];
+    console.log(value,"value")
     if(user.role=='admin') value=true
     // return true;
     return value;

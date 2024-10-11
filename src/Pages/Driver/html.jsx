@@ -84,7 +84,6 @@ const Html = ({
       }
       else{
         document.getElementById("OpenmemberModel").click()
-        // toast.error(`If you want to add more drivers , you need to upgrade the plan`)
       }
       
     }

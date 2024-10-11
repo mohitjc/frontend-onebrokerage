@@ -288,6 +288,8 @@ const AddEdit = () => {
       getLicence(form.licence_number);
     }
   }, [form.licence_number]);
+
+  
   return (
     <PageLayout>
       <form onSubmit={handleSubmit}>

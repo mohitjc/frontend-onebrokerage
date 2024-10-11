@@ -18,6 +18,8 @@ import { PiEyeLight } from "react-icons/pi";
 import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { LuImport } from "react-icons/lu";
 import moment from "moment";
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
 import { toast } from "react-toastify";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import PageLayout from "../../components/global/PageLayout";
@@ -46,7 +48,17 @@ const Html = ({
   uploadFile,
 }) => {
   const user = useSelector((state) => state.user);
+  const [isOpenmodal, setisOpenmodal] = useState(false);
   const [activeplan, setActivePlan] = useState();
+
+  function closeModal() {
+    setisOpenmodal(false)
+  }
+
+  function openModal() {
+    setisOpenmodal(true)
+
+  }
   const history = useNavigate();
   useEffect(() => {
     // loader(true);
@@ -70,10 +82,8 @@ const Html = ({
     if (activeplan?.subscription_plan_id?.number_of_carriers > total) {
       history(`/${shared.url}/add`)
     }
-
-    else {
-
-      toast.error(`If you want to add more Carrier Staff, you need to upgrade the plan`)
+    else{
+      document.getElementById("OpenmemberModel").click()
     }
 
   }
@@ -135,7 +145,7 @@ const Html = ({
         return (
           <>
             <div className="flex items-center justify-start gap-1.5">
-              {/* {isAllow(`read${shared.check}`) ? ( */}
+              {isAllow(`${shared.check}_get`) ? (
               <Tooltip placement="top" title="View">
                 <a
                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -144,9 +154,9 @@ const Html = ({
                   <PiEyeLight />
                 </a>
               </Tooltip>
-              {/* ) : (
+              ) : (
                 <></>
-              )} */}
+              )} 
               {/* {isAllow(`edit${shared.check}`) ? ( */}
               {user?.role=="driver"?<></>:<> <Tooltip placement="top" title="Edit">
                 <a
@@ -389,6 +399,97 @@ const Html = ({
           <></>
         )}
       </div>
+      <div className="fixed inset-0 hidden  items-center justify-center">
+        <button
+          type="button"
+          id="OpenmemberModel"
+          onClick={openModal}
+          className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+        >
+          Open dialog
+        </button>
+      </div>
+
+
+
+      <Transition appear show={isOpenmodal} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full relative max-w-md transform  rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
+                  >
+
+
+                  </Dialog.Title>
+                  <div className=" flex items-center justify-center relative">
+               </div>
+
+                  <div className="mt-5">
+
+                    <form
+                      
+                    >
+                      <div class="modal-body">
+                        <label class="mb-2 block">
+                       
+                        </label>
+                        <div className="flex flex-col items-center justify-center ">
+
+                          <div>
+                          If you want to add more Carrier Staff , you need to upgrade the plan
+                          </div>
+
+                        </div>
+       
+
+                      </div>
+                      <div className='flex items-center justify-end gap-2'>
+
+                     <button
+                          type="button"
+                          id="CloseReasonModel"
+                          className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
+                          onClick={closeModal}
+                        >
+                          Ok
+                        </button>
+                       
+                      </div>
+
+                    </form>
+
+
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     </PageLayout>
   );
 };
