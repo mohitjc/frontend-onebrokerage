@@ -37,6 +37,8 @@ import loader from "../../../methods/loader";
 import ApiClient from "../../../methods/api/apiClient";
 import { useSelector, useDispatch } from "react-redux";
 import { HiOutlineTruck } from "react-icons/hi";
+import { FaTruckLoading } from "react-icons/fa";
+import { FaTasks } from "react-icons/fa";
 // import { CostingURL } from '../../../pages/CostingTemplate/Api';
 // import { CostingTourURL } from '../../../pages/CostPerTourTemplate/Api';
 
@@ -336,7 +338,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                       " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                   }
                 >
-                  <HiOutlineUserGroup className="text-black shrink-0 text-lg group-hover:text-white " />
+                  <FaTasks className="text-black shrink-0 text-lg group-hover:text-white " />
                   <span className="text-inherit leading-none sidebar_text">
                     Tasks
                   </span>
@@ -356,7 +358,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                       " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                   }
                 >
-                  <HiOutlineUserGroup className="text-black shrink-0 text-lg group-hover:text-white " />
+                  <FaTruckLoading className="text-black shrink-0 text-lg group-hover:text-white " />
                   <span className="text-inherit leading-none sidebar_text">
                     Loads
                   </span>
