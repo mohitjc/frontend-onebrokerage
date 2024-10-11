@@ -3,7 +3,7 @@ import ApiClient from "../../methods/api/apiClient";
 import loader from "../../methods/loader";
 import methodModel from "../../methods/methods";
 import { useParams } from "react-router-dom";
-import Layout from "../../components/global/layout";
+import PageLayout from "../../components/global/PageLayout";
 import { Tooltip } from "antd";
 import FormControl from "../../components/common/FormControl";
 import shared from "./shared";
@@ -289,7 +289,7 @@ const AddEdit = () => {
     }
   }, [form.licence_number]);
   return (
-    <Layout>
+    <PageLayout>
       <form onSubmit={handleSubmit}>
         <div className="flex items-center mb-8">
           <Tooltip placement="top" title="Back">
@@ -947,7 +947,7 @@ const AddEdit = () => {
           </button>
         </div>
       </form>
-    </Layout>
+    </PageLayout>
   );
 };
 

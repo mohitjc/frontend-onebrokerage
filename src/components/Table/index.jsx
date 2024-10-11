@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { HiOutlineArrowDown,HiOutlineArrowUp } from "react-icons/hi";
 import Pagination from "react-pagination-js";
 import { FaArrowsAltV } from 'react-icons/fa';
+import { RxCross2 } from 'react-icons/rx';
 
 const Table = ({ className = '', data = [], sort_key,sorter='desc', theme = 'table', ListHtml = (e) => { }, rowClass = '', columns = [], topHead = [], count = 50, total = 0, page = 1, result = (e) => { }, nodata = 'No Responses Yet' }) => {
     const [pageSize, setPageSize] = useState(count);
@@ -24,6 +25,14 @@ const Table = ({ className = '', data = [], sort_key,sorter='desc', theme = 'tab
             result({ event: 'sort', value: itm.key })
         }
     }
+    const crossclick=(itm)=>
+        {
+            if(itm.isClose)
+                {
+                    console.log(itm,"itm")
+                    result({ event: 'isClose', value: itm }) 
+                }
+        }
 
     // Generate options array based on the total value
     // const generateOptions = () => {
@@ -71,6 +80,11 @@ const generateOptions = () => {
                                                     {itm.name} {itm.sort ? (
                                                         <span className='ml-2  inline-block' onClick={() => headclick(itm)} >{sorter=='asc' && sort_key==itm.key ?<HiOutlineArrowUp className="shrink-0 inline text-sm" />:sorter=='desc' && sort_key==itm.key ?<HiOutlineArrowDown className="shrink-0 inline text-sm"/>:<FaArrowsAltV />}</span>
                                                     ) : null}
+                                                      {
+                                                        itm?.isClose?
+                                                        <> <span onClick={() => crossclick(itm)} >{itm?.isClose?<RxCross2 />:<></>}</span></>
+                                                        :null
+                                                    }
                                                 </th>
                                             ))}
                                         </tr>

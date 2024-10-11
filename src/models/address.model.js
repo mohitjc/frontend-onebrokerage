@@ -71,6 +71,84 @@ const getAddress=(address)=>{
     let aaddress = {lat,lng, address:address.formatted_address, country:getCountry(), state:getState(), city:getCity(), zipcode:getPostalCode(), locality:getLocality()}
     return aaddress
   }
+  const getAddress2 = (address) => {
+
+    let lat = address.geometry.location.lat();
+    let lng = address.geometry.location.lng();
+    let aArray = address.address_components;
+  
+    const getCountry = () => {
+      let value = "";
+  
+      aArray.map((item) => {
+        if (item.types[0] == "country") {
+          value = item.long_name;
+        }
+      });
+      return value;
+    };
+  
+    const getCity = () => {
+      let value = "";
+      aArray.map((item) => {
+        if (item.types[0] == "locality") {
+          value = item.long_name;
+        }
+      });
+      return value;
+    };
+  
+    const getLocality = () => {
+      let value = "";
+      aArray.map((item) => {
+        if (item.types[0] == "sublocality_level_2") {
+          value = item.long_name;
+        }
+      });
+      return value ? value : getSubLocality();
+    };
+  
+    const getSubLocality = () => {
+      let value = "";
+      aArray.map((item) => {
+        if (item.types[0] == "locality") {
+          value = item.long_name;
+        }
+      });
+      return value;
+    };
+  
+    const getState = () => {
+      let value = "";
+      aArray.map((item) => {
+        if (item.types[0] == "administrative_area_level_1") {
+          value = item.short_name;
+        }
+      });
+      return value;
+    };
+  
+    const getPostalCode = () => {
+      let value = "";
+      aArray.map((item) => {
+        if (item.types[0] == "postal_code") {
+          value = item.long_name;
+        }
+      });
+      return value;
+    };
+    let aaddress = {
+      lat,
+      lng,
+      address: address.formatted_address,
+      country: getCountry(),
+      state: getState(),
+      city: getCity(),
+      zipcode: getPostalCode(),
+      locality: getLocality(),
+    };
+    return aaddress;
+  };
 
   const gettimeZone= async(place)=>{
    return await axios.get(`${environment.api}api/timezone`,{params:{
@@ -87,5 +165,5 @@ const getAddress=(address)=>{
   })
   }
 
-  const addressModel={getAddress,gettimeZone}
+  const addressModel={getAddress,gettimeZone,getAddress2}
   export default addressModel
