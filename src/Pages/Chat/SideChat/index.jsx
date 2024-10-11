@@ -20,8 +20,7 @@ import environment from '../../../environment';
 import socketModel from '../../../models/socketModel';
 import Header from '../../../components/global/header2';
 import { FaCircle } from "react-icons/fa";
-export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber }) {
-
+export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber,setsidechat }) {
   const user = useSelector((state) => state.user);
 
   const history = useNavigate()
@@ -36,6 +35,9 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
   function openModal() {
     setisOpenmodal(true)
   }
+
+
+
 
   const uploadImage = (e) => {
     setform({ ...form, baseImg: e.target.value });
