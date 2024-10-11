@@ -94,7 +94,7 @@ const generateOptions = () => {
                                         {data.map((itm) => (
                                             <tr onClick={() => view(itm)} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={itm.id}>
                                                 {columns.map(citm => (
-                                                    <td className="px-6 py-4" key={citm.key}>
+                                                    <td className="px-6 py-4 " key={citm.key}>
                                                         {citm.render(itm) || '--'}
                                                     </td>
                                                 ))}
