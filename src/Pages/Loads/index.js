@@ -248,8 +248,10 @@ const Loads = () => {
   };
 
   const isAllow = (key = "") => {
-    let permissions = user?.permissions?.[0];
+    let permissions = user?.permissions;
+    console.log(permissions,"permissions")
     let value = permissions?.[key];
+    console.log(value,"permission value")
     if (user.role == "admin") value = true;
     // return true;
     return value;

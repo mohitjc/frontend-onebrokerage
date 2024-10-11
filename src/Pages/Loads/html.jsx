@@ -89,7 +89,11 @@ const Html = ({
           <span
             className="capitalize cursor-pointer"
             onClick={(e) => {
-              view(row.id);
+              if(isAllow(`${shared.check}_add`))
+              {
+                view(row.id);
+              }
+             
             }}
           >
             {row?.load_id || row?.lane_id}
@@ -326,17 +330,17 @@ const Html = ({
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
                     </button> */}
 
-          {/* {isAllow(`add${shared.check}`) ? ( */}
+          {isAllow(`${shared.check}_add`) ? (
             <Link
               className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
               to={`/${shared.url}/add`}
             >
               <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
             </Link>
-          {/* ) 
+          ) 
           : (
             <></>
-          )} */}
+          )} 
         </div>
       </div>
 
@@ -589,7 +593,7 @@ const Html = ({
                       return (
                         <>
                           <div className="flex items-center justify-start gap-1.5">
-                            {/* {isAllow(`read${shared.check}`) ? ( */}
+                            {isAllow(`${shared.check}_get`) ? (
                               <Tooltip placement="top" title="View">
                                 <a
                                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -598,9 +602,9 @@ const Html = ({
                                   <PiEyeLight />
                                 </a>
                               </Tooltip>
-                            {/* ) : (
+                             ) : (
                               <></>
-                            )} */}
+                            )} 
                             {/* {isAllow(`edit${shared.check}`) ? (
                             <Tooltip placement="top" title="Edit">
                               <a
@@ -613,7 +617,7 @@ const Html = ({
                           ) : (
                             <></>
                           )} */}
-                            {/* {isAllow(`delete${shared.check}`) ? ( */}
+                            {isAllow(`${shared.check}_delete`) ? (
                               <Tooltip placement="top" title="Delete">
                                 <span
                                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
@@ -622,9 +626,9 @@ const Html = ({
                                   <LiaTrashAlt />
                                 </span>
                               </Tooltip>
-                            {/* ) : (
+                            ) : (
                               <></>
-                            )} */}
+                            )} 
                           </div>
                         </>
                       );
