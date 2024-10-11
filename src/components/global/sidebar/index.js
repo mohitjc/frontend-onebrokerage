@@ -47,7 +47,7 @@ const Sidebar = ({ isOpen }) => {
   };
 
   const urlAllow = (url) => {
-    const permissions = user.role?.permissions?.[0];
+    const permissions = user.role?.permissions;
     const arr = url.split(',');
     return arr.some(itm => permissionModel.urlAllow(permissions, itm));
   };

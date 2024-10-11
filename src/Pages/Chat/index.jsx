@@ -422,7 +422,7 @@ export default function Chat() {
     });
     setsidechat(updatedSideChat);
 
-    socketModel.emit(`unread-count`, { user_id: data?.id ,room_id:data?.room_id,unread_count:0}); 
+    socketModel.emit(`unread-count`, { user_id: data?.id ,room_id:data?.room_id}); 
 
     getChatMessages(data?.room_id);
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
