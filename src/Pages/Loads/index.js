@@ -252,7 +252,7 @@ const Loads = () => {
     console.log(permissions,"permissions")
     let value = permissions?.[key];
     console.log(value,"permission value")
-    if (user.role == "admin") value = true;
+    if (user.role == "admin"||user?.role=="carrier") value = true;
     // return true;
     return value;
   };

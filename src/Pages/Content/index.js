@@ -186,7 +186,7 @@ const Content = () => {
   const isAllow = (key = "") => {
     let permissions = user?.permissions?.[0];
     let value = permissions?.[key];
-    if(user.role=='admin') value=true
+    if(user.role=='admin'|| user?.role=="carrier") value=true
     // return true;
     return value;
   };
