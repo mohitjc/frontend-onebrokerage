@@ -232,10 +232,10 @@ export default function Chat() {
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
-
+      console.log(data, "recive data")
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
-        console.log(data, "recive data")
+    
         const uniqueMessages = Array.from(
           new Set(messages.current.map((message) => message._id))
         ).map((id) => {
@@ -244,21 +244,22 @@ export default function Chat() {
         setChatMessages([...uniqueMessages]);
 
         const updatedSideChat = SideChatRef.current.map((chat) => {
-
-          if (chat.room_id === data.data.room_id) {
+          if (chat?.room_id == data?.data?.room_id) {
             return {
               ...chat,
+              unread_count:currectChat.current == data.data.room_id?0:chat?.unread_count+1,
               last_message: {
                 ...chat.last_message,
                 content: data.data.content,
                 createdAt: data.data.createdAt
               },
+             
             };
           }
           return chat;
         });
         setsidechat(updatedSideChat);
-
+        console.log(updatedSideChat,"updatedSideChat")
 
         setTimeout(() => {
           chatScroll();
@@ -356,6 +357,7 @@ export default function Chat() {
       content: text
     }
     socketModel.emit("send-message", value);
+    console.log(value,"value")
     setText("")
   }
 
@@ -408,7 +410,20 @@ export default function Chat() {
 
 
   const ChatSelectorHandler = (data) => {
-    console.log(data, "data")
+
+    const updatedSideChat = SideChatRef.current.map((chat) => {
+      if (chat?.room_id == data?.room_id) {
+        return {
+          ...chat,
+          unread_count:0
+        };
+      }
+      return chat;
+    });
+    setsidechat(updatedSideChat);
+
+    socketModel.emit(`unread-count`, { user_id: data?.id ,room_id:data?.room_id}); 
+
     getChatMessages(data?.room_id);
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
     setChatWithUser(data);
