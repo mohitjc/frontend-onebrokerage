@@ -477,7 +477,6 @@ const Html = ({
         );
       },
     },
-
     {
       key: "origin_address",
       name: "Origin Address",
