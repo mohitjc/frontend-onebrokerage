@@ -128,9 +128,18 @@ const Carrier = (p) => {
     let filter = { ...filters, ...p, addedBy:newaddedBy };
     let url =shared?.listApi;
     ApiClient.get(url, filter).then((res) => {
-      if (res.success) {
-        const data = res?.data?.data;
-        setData(data);
+      if (res.success) {       
+        if(user?.role=="driver")
+        {
+          const data = res?.data?.data.filter((itm)=>itm?.request_status=="accepted");
+          setData(data)
+        }
+        else
+        {
+          const data = res?.data?.data;
+          setData(data)
+        }
+        // setData(data);
         setDataLength(data.length);
         setTotal(res?.data?.total);
       }

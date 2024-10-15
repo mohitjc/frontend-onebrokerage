@@ -20,6 +20,7 @@ import environment from '../../environment';
 import socketModel from '../../models/socketModel';
 import methodModel from '../../methods/methods';
 import { IoIosArrowUp } from "react-icons/io";
+import { MdVideoCall } from "react-icons/md";
 import SelectDropdown from '../../components/common/SelectDropdown';
 import SideChat from './SideChat';
 import MultiSelectDropdown from '../../components/common/MultiSelectDropdown';
@@ -32,12 +33,14 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { MdDelete } from "react-icons/md";
+import AgoraUIKit from 'agora-react-uikit';
+import AgoraRTC from "agora-rtc-sdk-ng";
 
 export default function Chat() {
   const AxiosCancelToken = axios.CancelToken;
   const CancelRefToken = useRef(0)
   const [emoji, setemoji] = useState(false)
-  const [ChatWithUser, setChatWithUser] = useState(null);
+  const [ChatWithUser, setChatWithUser] = useState(null); 
   const [ChatWithUserName, setChatWithUserName] = useState({});
   const [darkMode, setDarkMode] = useState(false);
   const [addmember, setaddmember] = useState(false)
@@ -64,6 +67,119 @@ export default function Chat() {
   const [text, setText] = useState('');
   let ar = sessionStorage.getItem("activeRooms");
   const activeRooms = useRef(ar ? JSON.parse(ar) : []);
+
+
+// **************************************vedio call**********************
+
+const [inCall, setInCall] = useState(false);  // To track whether the user is in a call
+const [channelName, setChannelName] = useState('');  // To store the channel name
+const [rtcProps, setRtcProps] = useState({});  // RTC props including token and channel name
+const [client, setClient] = useState(null);  // Store Agora RTC client
+const [screenTrack, setScreenTrack] = useState(null); // Store screen sharing track
+const [isJoining, setIsJoining] = useState(false); // Track if a user is in the process of joining the call
+const [token, setToken] = useState(''); 
+// Your Agora App ID (replace with your actual App ID)
+const appId = environment.appId;  // Replace with your Agora App ID
+
+// Function to check camera permissions
+const checkCameraPermission = async () => {
+  try {
+    await navigator.mediaDevices.getUserMedia({ video: true });
+    return true;  // Camera access granted
+  } catch (error) {
+    console.error("Camera access denied:", error);
+    return false;  // Camera access denied
+  }
+};
+
+// Handle starting the call
+const startCall = async () => {
+  if (isJoining) return; // Prevent multiple join attempts
+
+  const hasPermission = await checkCameraPermission();
+  if (!hasPermission) {
+    alert('Camera access is required to start the call. Please allow camera access in your browser settings.');
+    return;  // Exit the function if camera access is denied
+  }
+
+  if (channelName) {
+    setIsJoining(true); // Set to true while joining the call
+    try {
+      // Get token from your server
+      // const response = await axios.get(`http://localhost:5000/generate-token/${channelName}`);
+      ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id||user?.id}&role=publisher`,{},environment.chat_api).then((res) => {
+        if (res.success) {
+          setToken(res?.data?.token)
+          setChannelName(res?.data?.channelName||channelName)
+        }
+      
+      });
+
+
+      // Log the token to ensure it's correct
+      console.log('Token:', token);
+
+      // Initialize Agora client
+      const agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
+      setClient(agoraClient); // Save the client for later use (e.g., screen sharing)
+
+      setRtcProps({
+        appId: appId,  // Your Agora App ID
+        channel: channelName, 
+        token: token,  // Token from backend or null
+      });
+
+      // Join the Agora channel with the token or null
+      // await agoraClient.join(appId, responseChannelName, token, null);  // Join the Agora channel
+      setInCall(true);  // Mark user as in the call
+    } catch (error) {
+      console.error("Error starting the call:", error);
+      alert('Failed to start the call. Please check the console for more details.');
+    } finally {
+      setIsJoining(false);  
+    }
+  } else {
+    alert('Please enter a valid channel name');
+  }
+};
+
+// Handle ending the call
+const endCall = async () => {
+  if (client) {
+    await client.leave();  // Leave the Agora channel
+  }
+  setInCall(false);  
+};
+
+// Handle screen sharing
+const startScreenShare = async () => {
+  try {
+    if (client) {
+      // Create the screen-sharing track
+      const screenTrack = await AgoraRTC.createScreenVideoTrack();
+      setScreenTrack(screenTrack);
+      // Publish the screen-sharing track
+      await client.publish(screenTrack);
+      console.log("Screen sharing started!");
+    } else {
+      console.error("Agora client not initialized");
+    }
+  } catch (error) {
+    console.error("Error starting screen sharing:", error);
+  }
+};
+
+// Cleanup screen share track when component unmounts or when screen share is stopped
+useEffect(() => {
+  return () => {
+    if (screenTrack) {
+      screenTrack.stop();
+      screenTrack.close();
+    }
+  };
+}, [screenTrack]);
+
+// **************************************vedio call**********************
 
   const chatScroll = () => {
     // Scroll to the bottom after sending a message
@@ -115,7 +231,7 @@ export default function Chat() {
     }
     ApiClient.put("chat/user/group/remove-member", payload, environment.chat_api).then((res) => {
       if (res.success) {
-        toast.success(res?.message)
+        // toast.success(res?.message)
         setChatWithUser(ChatWithUser?.room_members?.filter((itm) => itm?.user_id != data?.user_id))
       }
       closeGroupModal()
@@ -144,7 +260,7 @@ export default function Chat() {
         toast(res?.message)
         closeModal()
         allroommemeber()
-        // setChatRoomId("")
+        setChatRoomId("")
       }
       // loader(false);
     });
@@ -232,10 +348,9 @@ export default function Chat() {
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
-      console.log(data, "recive data")
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
-    
+
         const uniqueMessages = Array.from(
           new Set(messages.current.map((message) => message._id))
         ).map((id) => {
@@ -253,7 +368,7 @@ export default function Chat() {
         //         content: data.data.content,
         //         createdAt: data.data.createdAt
         //       },
-             
+
         //     };
         //   }
         //   return chat;
@@ -266,22 +381,22 @@ export default function Chat() {
       }
     });
 
-    socketModel.on("receive-message1", (data) => {  
-      const updatedSideChat = SideChatRef.current.map((chat) => {  
-          if (chat?.room_id == data?.data?.room_id) {
-              return {
-                  ...chat,
-                  last_message: {
-                      ...chat.last_message,
-                      content: data?.data?.content,
-                      createdAt: data.data.createdAt,
-                  },
-              };
-          }
-          return chat;
+    socketModel.on("receive-message1", (data) => {
+      const updatedSideChat = SideChatRef.current.map((chat) => {
+        if (chat?.room_id == data?.data?.room_id) {
+          return {
+            ...chat,
+            last_message: {
+              ...chat.last_message,
+              content: data?.data?.content,
+              createdAt: data.data.createdAt,
+            },
+          };
+        }
+        return chat;
       });
       setsidechat(updatedSideChat);
-  });
+    });
 
 
 
@@ -358,10 +473,12 @@ export default function Chat() {
       // }
       // socketModel.emit("unread-count", value);
       // socketModel.emit("read-all-message", value);
+      setChannelName(chatRoomId)
       currectChat.current = chatRoomId
       getChatMessages(chatRoomId);
       AddDriver()
       AddStaff()
+
     }
   }, [chatRoomId]);
 
@@ -374,7 +491,6 @@ export default function Chat() {
       content: text
     }
     socketModel.emit("send-message", value);
-    console.log(value,"value")
     setText("")
   }
 
@@ -432,14 +548,14 @@ export default function Chat() {
       if (chat?.room_id == data?.room_id) {
         return {
           ...chat,
-          unread_count:0
+          unread_count: 0
         };
       }
       return chat;
     });
     setsidechat(updatedSideChat);
 
-    socketModel.emit(`unread-count`, { user_id: data?.id ,room_id:data?.room_id}); 
+    socketModel.emit(`unread-count`, { user_id: data?.id, room_id: data?.room_id });
 
     getChatMessages(data?.room_id);
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
@@ -455,7 +571,7 @@ export default function Chat() {
       <div className="main_chats h-screen overflow-hidden">
         <div className="flex">
 
-          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber} setsidechat={setsidechat}/>
+          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber} setsidechat={setsidechat} />
 
           <div className="rigtsie_inners h-screen w-full">
             {chatRoomId ?
@@ -471,7 +587,7 @@ export default function Chat() {
                     />
                     <div className="">
                       <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{ChatWithUserName?.name || currentchatdata?.fullName}</h4>
-                      <p className=" text-[12px] xl:text-[15px] text-[#707991]">{ChatWithUserName?.isGroupChat ? `${ChatWithUser?.room_members?.length} Participants` : ChatWithUserName?.isOnline ? "Online" : "Offline"}</p>
+                      <p className=" text-[12px] xl:text-[15px] text-[#707991]">{ChatWithUserName?.isGroupChat ? `${ChatWithUser?.room_members?.length || 0} Participants` : ChatWithUserName?.isOnline ? "Online" : "Offline"}</p>
                     </div>
                   </div>
                 </div>
@@ -490,7 +606,24 @@ export default function Chat() {
                     // setform({})
                   }}>Group Detail</button> : <></>}
 
+                 
+                  {/* ***********************************vedio call  */}
 
+                  {!inCall ? (
+                    <div>
+                       <MdVideoCall onClick={startCall} disabled={isJoining}/>
+                    </div>
+                  ) : (
+                    <div>
+                      <AgoraUIKit rtcProps={rtcProps} />
+                      <div>
+                        <button onClick={endCall}>End Call</button>
+                        {/* <button onClick={startScreenShare}>Start Screen Share</button> */}
+                      </div>
+                    </div>
+                  )}
+
+                   {/* ***********************************vedio call  */}
                   <div className="darkmode">
 
                     <div className="flex items-center gap-4">
@@ -563,6 +696,7 @@ export default function Chat() {
                               <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
                                 <div>
                                   <div class="bg-primary text-white p-3 rounded-l-lg rounded-br-lg">
+                              
                                     {itm?.type == "IMAGE" ? <>
                                       {itm?.media?.map((item) => {
                                         return <img
@@ -576,7 +710,8 @@ export default function Chat() {
                                     </> : <p class="text-sm">{itm?.content}</p>}
 
                                   </div>
-                                  <span class="text-xs text-gray-500 leading-none">{moment(itm?.createdAt).fromNow()}</span>
+
+                                  <span class="text-xs text-gray-500 leading-none">{itm?.sender_name}, {moment(itm?.createdAt).fromNow()}</span>
                                   {/* <span class="text-xs text-gray-500 leading-none">{MintTime(itm?.createdAt)}</span> */}
                                 </div>
                                 <img
@@ -608,7 +743,8 @@ export default function Chat() {
 
                                     </> : <p class="text-sm">{itm?.content}</p>}
                                   </div>
-                                  <span class="text-xs text-gray-500 leading-none">{moment(itm?.createdAt).fromNow()}</span>
+                                  
+                                  <span class="text-xs text-gray-500 leading-none">{itm?.sender_name}, {moment(itm?.createdAt).fromNow()}</span>
                                 </div>
                               </div>
 
@@ -883,7 +1019,7 @@ export default function Chat() {
                           {' '}
                           {ChatWithUserName?.name}
                         </label>
-                        {addmember ? <div class="mb-3">
+                         {addmember ? <div class="mb-3">
                           <MultiSelectDropdown
                             id="statusDropdown"
                             className="role-color "

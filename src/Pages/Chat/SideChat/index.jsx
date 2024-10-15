@@ -20,8 +20,9 @@ import environment from '../../../environment';
 import socketModel from '../../../models/socketModel';
 import Header from '../../../components/global/header2';
 import { FaCircle } from "react-icons/fa";
-export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber,setsidechat }) {
+export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber, setsidechat }) {
   const user = useSelector((state) => state.user);
+ const [submitted,setsubmitted]=useState(false)
 
   const history = useNavigate()
   const [isOpenmodal, setisOpenmodal] = useState(false);
@@ -35,7 +36,6 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
   function openModal() {
     setisOpenmodal(true)
   }
-
 
 
 
@@ -60,6 +60,10 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
 
 
   const createGroup = () => {
+    setsubmitted(true)
+    if(!form?.group_name)
+      return
+  
     let value = {
       group_name: form?.group_name,
       image: form?.image,
@@ -71,6 +75,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
         closeModal()
       }
       loader(false);
+      setsubmitted(false)
     });
   }
 
@@ -312,6 +317,13 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
                             }
                           // required
                           />
+                          {!form.group_name && submitted ? (
+                            <div className="invalid-feedback d-block star text-[12px]">
+                              Group name is Required
+                            </div>
+                          ) : (
+                            <></>
+                          )}
                         </div>
 
                       </div>

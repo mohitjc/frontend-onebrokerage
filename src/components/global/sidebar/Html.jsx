@@ -367,9 +367,9 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 </tooltip>
               </li>
               <li>
-                <tooltip placement="right" title={`${user?.permissions?.active_plan_get ? "Active Plan" : "You have not valid permission to access this  module"}`}>
+                <tooltip placement="right" title={`${user?.role=="carrier" || user?.permissions?.active_plan_get ? "Active Plan" : "You have not valid permission to access this  module"}`}>
                   <NavLink
-                    to={`${(user?.plan_id || (user?.role == "staff" && user?.addedBy?.plan_id)) && user?.permissions?.active_plan_get ? "/activeplan" : ""}`}
+                    to={`${ (user?.role == "staff" && user?.addedBy?.plan_id)&& user?.permissions?.active_plan_get || user?.plan_id ? "/activeplan" : ""}`}
                     // to={`/activeplan`}
                     className={(isActive) =>
                       "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
