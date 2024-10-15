@@ -81,6 +81,7 @@ const [token, setToken] = useState('');
 // Your Agora App ID (replace with your actual App ID)
 const appId = environment.appId;  // Replace with your Agora App ID
 
+
 // Function to check camera permissions
 const checkCameraPermission = async () => {
   try {
@@ -348,6 +349,7 @@ useEffect(() => {
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
+      // console.log(data,"recive msg")
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
 
@@ -382,6 +384,7 @@ useEffect(() => {
     });
 
     socketModel.on("receive-message1", (data) => {
+      console.log(data,"========")
       const updatedSideChat = SideChatRef.current.map((chat) => {
         if (chat?.room_id == data?.data?.room_id) {
           return {
@@ -557,7 +560,6 @@ useEffect(() => {
 
 
   const ChatSelectorHandler = (data) => {
-
     const updatedSideChat = SideChatRef.current.map((chat) => {
       if (chat?.room_id == data?.room_id) {
         return {
@@ -599,6 +601,7 @@ useEffect(() => {
                       )}
                       className="h-12 w-12 rounded-full mb-4 object-contain "
                     />
+
                     <div className="">
                       <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{ChatWithUserName?.name || currentchatdata?.fullName}</h4>
                       <p className=" text-[12px] xl:text-[15px] text-[#707991]">{ChatWithUserName?.isGroupChat ? `${ChatWithUser?.room_members?.length || 0} Participants` : ChatWithUserName?.isOnline ? "Online" : "Offline"}</p>
@@ -621,7 +624,7 @@ useEffect(() => {
                   }}>Group Detail</button> : <></>}
 
                  
-                  {/* ***********************************vedio call  */}
+                  {/* ***********************************vedio call**********************************/}
 
                   {!inCall ? (
                     <div>
@@ -895,7 +898,7 @@ useEffect(() => {
                           {' '}
                           {ChatWithUserName?.name}
                         </label>
-                        <p className='text-[15px] text-[grey]'>Created by {currentchatdata?.fullName} </p>
+                        <p className='text-[15px] text-[grey]'>Created by {ChatWithUser?.role=="admin"} </p>
 
                       </div>
                       <p className='text-[14px] text-[grey] uppercase font-[500]'>{ChatWithUser?.room_members?.length} Participants </p>
@@ -905,12 +908,12 @@ useEffect(() => {
                             <div className='flex items-center '>
                               <img
                                 src={methodModel.userImg(
-                                  item?.user_image
+                                  ChatWithUser?.role=="admin"?ChatWithUser?.user_id?.image:item?.user_image
                                 )}
                                 className="w-[35px] h-[35px] rounded-full object-cover	shadow-[2px_1px_10px_0px_#dfdfdf]"
                               />
                               <p className='ml-2 text-[18px] font-[600] capitalize'>
-                                {item?.user_name}
+                                {ChatWithUser?.role=="admin"?ChatWithUser?.user_id?.fullName:item?.user_name}
                               </p>
                             </div>
                             <button className='text-[12px] text-[grey] rounded-full border  border-[grey]  p-[0px_6px]' onClick={(e) => deleteMembers(item)}>Remove</button></div>
