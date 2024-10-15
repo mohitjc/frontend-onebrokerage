@@ -105,9 +105,9 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
 
           <ul className="space-y-2  ">
             <li>
-              <tooltip placement="right" title={`${user?.permissions?.dashboard_get?"Dashboard":"You have not valid permission to access this module"}`}>
+              <tooltip placement="right" title={`${user?.permissions?.dashboard_get ? "Dashboard" : "You have not valid permission to access this module"}`}>
                 <NavLink
-                  to={`${(user?.plan_id || user?.role == "driver" || (user?.role == "staff" && user?.addedBy?.plan_id)&& user?.permissions?.dashboard_get) ? "/dashboard" : ""}`}
+                  to={`${(user?.plan_id || user?.role == "driver" || (user?.role == "staff" && user?.addedBy?.plan_id) && user?.permissions?.dashboard_get) ? "/dashboard" : ""}`}
                   // to={`/dashboard`}
                   className={(isActive) =>
                     "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
@@ -177,7 +177,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 </NavLink>
               </tooltip>
             </li> :
-              user?.role == "user" || user?.role=="staff" ? <></> : <li>
+              user?.role == "user" || user?.role == "staff" ? <></> : <li>
                 <Disclosure as="div" defaultOpen={tabclass("carriers")}>
                   {({ open }) => (
                     <>
@@ -308,7 +308,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
 
             }
 
-            {user?.role=="staff"?<></>:    <li>
+            {user?.role == "staff" ? <></> : <li>
               <tooltip placement="right" title="Carrier Staff">
                 <NavLink
                   to={`${user?.plan_id || user?.role == "driver" || (user?.role == "staff" && user?.addedBy?.plan_id) ? "/carrierstaff" : ""}`}
@@ -326,10 +326,10 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 </NavLink>
               </tooltip>
             </li>}
-            {user?.role=="driver"? <li>
+            {user?.role == "driver" ? <li>
               <tooltip placement="right" title="Tasks">
                 <NavLink
-                  to={`${user?.role=="driver" ? "/task" : ""}`}
+                  to={`${user?.role == "driver" ? "/task" : ""}`}
                   // to={`/transaction`}
                   className={(isActive) =>
                     "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
@@ -343,46 +343,46 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                   </span>
                 </NavLink>
               </tooltip>
-            </li>:<></>}
-      
-        
+            </li> : <></>}
+
+
             {user?.role == "driver" ? <></> : <>
               <li>
-              <tooltip placement="right" title="Loads">
-                <NavLink
-                  to={`${user?.plan_id || (user?.role == "staff" && user?.addedBy?.plan_id) ? "/loads" : ""}`}
-                  // to={`/transaction`}
-                  className={(isActive) =>
-                    "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
-                    (location?.pathname == "/loads" &&
-                      " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                  }
-                >
-                  <FaTruckLoading className="text-black shrink-0 text-lg group-hover:text-white " />
-                  <span className="text-inherit leading-none sidebar_text">
-                    Loads
-                  </span>
-                </NavLink>
-              </tooltip>
-            </li>
-             <li>
-              <tooltip placement="right" title={`${user?.permissions?.active_plan_get?"Active Plan":"You have not valid permission to access this  module"}`}>
-                <NavLink
-                  to={`${(user?.plan_id || (user?.role == "staff" && user?.addedBy?.plan_id)) && user?.permissions?.active_plan_get ? "/activeplan" : ""}`}
-                  // to={`/activeplan`}
-                  className={(isActive) =>
-                    "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
-                    (location?.pathname == "/activeplan" &&
-                      " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                  }
-                >
-                  <RiMoneyDollarCircleLine className="text-black shrink-0 text-lg group-hover:text-white " />
-                  <span className="text-inherit leading-none sidebar_text">
-                    Active Plan
-                  </span>
-                </NavLink>
-              </tooltip>
-            </li>
+                <tooltip placement="right" title="Loads">
+                  <NavLink
+                    to={`${user?.plan_id || (user?.role == "staff" && user?.addedBy?.plan_id) ? "/loads" : ""}`}
+                    // to={`/transaction`}
+                    className={(isActive) =>
+                      "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
+                      (location?.pathname == "/loads" &&
+                        " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                    }
+                  >
+                    <FaTruckLoading className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <span className="text-inherit leading-none sidebar_text">
+                      Loads
+                    </span>
+                  </NavLink>
+                </tooltip>
+              </li>
+              <li>
+                <tooltip placement="right" title={`${user?.permissions?.active_plan_get ? "Active Plan" : "You have not valid permission to access this  module"}`}>
+                  <NavLink
+                    to={`${(user?.plan_id || (user?.role == "staff" && user?.addedBy?.plan_id)) && user?.permissions?.active_plan_get ? "/activeplan" : ""}`}
+                    // to={`/activeplan`}
+                    className={(isActive) =>
+                      "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
+                      (location?.pathname == "/activeplan" &&
+                        " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                    }
+                  >
+                    <RiMoneyDollarCircleLine className="text-black shrink-0 text-lg group-hover:text-white " />
+                    <span className="text-inherit leading-none sidebar_text">
+                      Active Plan
+                    </span>
+                  </NavLink>
+                </tooltip>
+              </li>
               <li>
                 <tooltip placement="right" title="Transaction">
                   <NavLink
