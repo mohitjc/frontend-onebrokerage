@@ -541,6 +541,20 @@ useEffect(() => {
     setIsOpen(false);
   };
 
+  const readmessages=(roomId)=>
+  {
+    ApiClient.put("chat/user/read-all-messages", { user_id: user?.id || user?._id, room_id: roomId }, environment.chat_api).then((res) => {
+      if (res.success) {
+        setaddstaffmemberListing(
+          res?.data?.usersNotInRoom?.map((item) => ({
+            id: item?.id || item?._id,
+            name: item?.fullName,
+          }))
+        );
+      }
+    });
+  }
+
 
   const ChatSelectorHandler = (data) => {
 
@@ -555,8 +569,8 @@ useEffect(() => {
     });
     setsidechat(updatedSideChat);
 
-    socketModel.emit(`unread-count`, { user_id: data?.id, room_id: data?.room_id });
-
+    // socketModel.emit(`unread-count`, { user_id: data?.id, room_id: data?.room_id });
+    readmessages(data?.room_id)
     getChatMessages(data?.room_id);
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
     setChatWithUser(data);
