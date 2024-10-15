@@ -27,7 +27,7 @@ import { RiWeightFill } from "react-icons/ri";
 const AddEdit = () => {
   const { role, id } = useParams();
 
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({stops:[]});
   const [submitted, setSubmitted] = useState(false);
   const history = useNavigate();
   const [Vin, setVin] = useState("");
@@ -674,15 +674,16 @@ const AddEdit = () => {
               })}
             </div>
 
-            {submitted && form?.stops?.length == 0 ? (
-              <div className="invalid-feedback d-block">
+          
+          </div>
+        </div>
+        {submitted && form?.stops?.length == 0 ? (
+              <div className="invalid-feedback d-block star text-[12px]">
                 Stop Address is Required
               </div>
             ) : (
               <></>
             )}
-          </div>
-        </div>
 
         <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 mb-10 ">
           <div className=" p-3 border-b flex items-center border-[#474e9c3b] border-dashed">
@@ -786,6 +787,13 @@ const AddEdit = () => {
                   }
                 }}
               />
+                 {submitted && !form?.est_volume ? (
+              <div className="invalid-feedback d-block star text-[12px]">
+               EST Volume is Required
+              </div>
+            ) : (
+              <></>
+            )}
             </div>
             <div className="mb-3 lg:col-span-6 col-span-12">
               <label className="text-sm mb-2 block">

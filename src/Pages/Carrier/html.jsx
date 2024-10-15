@@ -302,34 +302,8 @@ const Html = ({
               <span class="sr-only">Search</span>
             </button>
           </form>
-          {/* <div>
-                <button
-                  onClick={(e) => sampledownload()}
-                  className="btn dark-btn  btn-set"
-                 >
-                  <i className="fa fa-download me-2"></i>Download
-                </button>
-              </div> */}
 
-          {/* <div className="result-set">
-                <div className="relative text-center">
-                  <label className="cursor-pointer  dark-btn btn">
-                    <i className="fa fa-download me-2"></i>
-                    <span>Import</span>
-                    <input
-                      id="bannerImage"
-                      type="file"
-                      className="hidden"
-                      accept=".xlsx,.csv"
-                      onChange={(e) => {
-                        ImportFile(e);
-                      }}
-                    />
-                  </label>
-                </div>
-              </div> */}
-        
-         
+      
 
           <div className="flex gap-2 ml-auto">
 

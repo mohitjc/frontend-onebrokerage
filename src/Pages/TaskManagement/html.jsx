@@ -23,6 +23,9 @@ import { Fragment } from "react";
 import { GoDotFill } from "react-icons/go";
 import MultiSelectDropdown from "../../components/common/MultiSelectDropdown";
 import { Dialog } from "@headlessui/react";
+import { IoArrowBackCircleSharp } from "react-icons/io5";
+import { BsThreeDots } from "react-icons/bs";
+import moment from "moment";
 
 const Html = ({
   sorting,
@@ -48,7 +51,7 @@ const Html = ({
   getData,
 }) => {
   const user = useSelector((state) => state.user);
-
+  const [form, setform] = useState({ agreed_rate: '', id: '' });
   const handleColumnToggle = (columnName) => {
     const isColumnVisible = visibleColumns.find(
       (item) => item.key == columnName.key
@@ -65,6 +68,47 @@ const Html = ({
 
     // setVisibleColumns([...visibleColumns,columnName])
   };
+
+  // const CheckIn = (stop_id, load_id, prevoiusStop, index, data) => {
+  //   setLoading('d-flex');
+  //   if (index == data?.length && Document?.length == 0) {
+  //     return setLoadDetails({ stop_id, load_id, prevoiusStop, data });
+  //   }
+
+  //   if (prevoiusStop) {
+  //     ApiClient.put('load-status', {
+  //       load_id,
+  //       shipment_status: 'in_transit',
+  //       stop_id: prevoiusStop,
+  //       checkout: moment(),
+  //     }).then((res) => { });
+  //   }
+
+  //   setLoading('d-flex');
+  //   let payload = {
+  //     load_id,
+  //     shipment_status: index == data?.length ? 'delivered' : 'in_transit',
+  //     stop_id,
+
+  //     checkin: moment(),
+  //   };
+  //   if (index == 0) {
+  //     payload = { ...payload, bol_doc: Document };
+  //   }
+
+  //   ApiClient.put('load-status', payload).then((res) => {
+  //     if (res.success) {
+  //       toast.success(res?.message);
+  //       getData();
+  //       setdocuments([]);
+  //       setFileInputs([{ id: 1, file: null }]);
+
+  //       setLoading('d-none');
+  //     }
+  //     setLoading('d-none');
+  //   });
+  //   setTimeout(() => { }, 1000);
+  // };
 
   function findUniqueElements(arr1, arr2) {
     const uniqueInArr1 = arr1.filter((item) =>
@@ -105,19 +149,334 @@ const Html = ({
       key: "stops",
       name: "Stops",
       // sort: true,
-      render: (row) => {
+      render: (itm) => {
         return (
           <ul>
-            <span className="">
-              {row?.stops.length > 0
-                ? row?.stops?.map((itm) => <li>{itm?.address}</li>)
-                : "--"}
-            </span>
+              <span>{itm?.stops.map((item=>
+                <li>{item?.address}</li>
+              ))}</span>
+               {/* {itm?.shipment_status == 'pending' &&
+                          itm?.status == 'awarded' ? (
+                          <>
+                            <div className="d-flex  mb-1 justify-content-between flex-column">
+
+                              {itm?.stops_details?.length != 0
+                                ? itm?.stops_details?.map((item, index) => {
+                                  return (
+                                    <Tooltip title={item?.address}>
+                                      {index < 3 ? (
+                                        <>
+                                          <div className="  d-flex align-items-center w-80">
+                                            <span className=" mb-0 destspan">
+                                              <IoArrowBackCircleSharp />
+                                              {item?.address}
+                                            </span>
+                                          </div>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </Tooltip>
+                                  );
+                                })
+                                : ''}
+
+
+                            </div>
+                            <div className='d-flex justify-content-end'>
+                              <div
+                                class="dropdown dotsbtn2 text-center p-0"
+                                title="Options"
+                              >
+                                <button
+                                  class="btn dropdown-toggle "
+                                  type="button"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                >
+                                 <div>
+                                 <BsThreeDots />
+                                 </div>
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a
+                                    class="dropdown-item"
+                                    onClick={() => {
+                                      document
+                                        .getElementById('OpenBOLDocumentsModal')
+                                        .click();
+
+                                      setform({
+                                        ...form,
+                                        load_id: itm?.load_id,
+                                      });
+                                    }}
+                                  >
+                                    Picked Up
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                            {itm?.stops_details?.length > 3 ? (
+                              <Tooltip
+                                title={
+                                  <div className=''>
+                                    <ul className='all-stops-tool'>
+                                      {itm?.stops_details?.map((item) => (
+                                        <li>
+                                          {itm?.status == 'awarded' ? (
+                                            <>
+                                              {item?.checkin ?(
+                                                <Tooltip
+                                                  title={`Reached ${item?.address
+                                                    } at  ${moment(
+                                                      item?.checkin
+                                                    ).format(
+                                                      'DD-MMM-YYYY h:mm A'
+                                                    )}`}
+                                                >
+                                                  <span
+                                                    onMouseEnter={(e) => { }}
+                                                    className="tableficon"
+                                                  >
+                                                    <i
+                                                      class="fa fa-map-marker text-success"
+                                                      aria-hidden="true"
+                                                    ></i>
+                                                  </span>
+                                                </Tooltip>
+                                              ):<i
+                                              class="fa fa-truck me-2"
+                                              // title="In-Transit"
+                                              aria-hidden="true"
+                                            ></i>}
+                                            </>
+                                          ) : <span className='tableficon'> <i
+                                          class="fa fa-truck  text-success"
+                                          // title="In-Transit"
+                                          aria-hidden="true"
+                                        ></i></span>}
+                                          {item?.address}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                }
+                              >
+                                <div className="all-stops-list">
+                                  <span className="">All Stops</span>
+                                </div>
+                              </Tooltip>
+                            ) : (
+                              ''
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            {itm?.stops_details?.length != 0
+                              ? itm?.stops_details?.map((item, index) => {
+                                return (
+                                  <>
+                                    <div className='d-flex align-items-center '>
+                                      <Tooltip
+                                        title={`${item?.checkin ? 'CheckedIn-' : ''
+                                          } ${item?.address} ${item?.checkout ? '-CheckedOut' : ''
+                                          }`}
+                                      >
+                                        {index < 3 ? (
+                                          <span className=" mb-1 destspan">
+                                            {' '}
+                                            <IoArrowBackCircleSharp />{' '}
+                                            {item?.address}
+                                          </span>
+                                        ) : (
+                                          ''
+                                        )}
+                                      </Tooltip>
+
+                                      {itm?.status == 'awarded' ? (
+                                        <>
+                                          {item?.checkin ||
+                                            (!itm?.stops_details[index - 1]
+                                              ?.checkin &&
+                                              index > 0) ? null : (
+                                            <Tooltip>
+                                              <div
+                                                class="dropdown dotsbtn dots-end dots-set"
+                                                title="Options"
+                                              >
+                                                <button
+                                                  class="btn dropdown-toggle icon-end"
+                                                  type="button"
+                                                  data-bs-toggle="dropdown"
+                                                  aria-expanded="false"
+                                                >
+                                                  <BsThreeDots
+                                                    onClick={() => {
+                                                      console.log(fileInputs);
+                                                    }}
+                                                  />
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                  <a
+                                                    class="dropdown-item"
+                                                    data-bs-toggle={
+                                                      index + 1 ==
+                                                        itm?.stops_details?.length
+                                                        ? 'modal'
+                                                        : ''
+                                                    }
+                                                    data-bs-target={
+                                                      index + 1 ==
+                                                        itm?.stops_details?.length
+                                                        ? '#DocumentModal'
+                                                        : ''
+                                                    }
+                                                    title="Checkin"
+                                                    onClick={() => {
+                                                      clearUploadForm();
+                                                      // console.log(
+                                                      //   fileInputs,
+                                                      //   '==============DATA'
+                                                      // );
+                                                      // console.log(
+                                                      //   fileInputs,
+                                                      //   '==============DATA'
+                                                      // );
+                                                      setFileInputs([{}]);
+                                                      if (
+                                                        index + 1 ==
+                                                        itm?.stops_details
+                                                          ?.length
+                                                      ) {
+                                                        return setLoadDetails({
+                                                          stop_id: item?._id,
+                                                          load_id: itm?.load_id,
+                                                          prevoiusStop:
+                                                            itm?.stops_details[
+                                                              index - 1
+                                                            ]?._id,
+                                                          data: itm?.stops_details,
+                                                        });
+                                                      }
+                                                      CheckIn(
+                                                        item?._id,
+                                                        itm?.load_id,
+                                                        itm?.stops_details[
+                                                          index - 1
+                                                        ]?._id,
+                                                        index + 1,
+                                                        itm?.stops_details
+                                                      );
+                                                    }}
+                                                  >
+                                                    Checkin
+                                                  </a>
+                                                  <a
+                                                    class="dropdown-item"
+                                                    title="Shipment Notes"
+                                                    onClick={() => {
+                                                      document
+                                                        .getElementById(
+                                                          'OpenNotesModal'
+                                                        )
+                                                        .click();
+                                                      SetNotes({
+                                                        ...Notes,
+                                                        load_id: itm?.load_id,
+                                                        stop_id: item?._id,
+                                                      });
+                                                    }}
+                                                  >
+                                                    Add Note
+                                                  </a>
+                                                </div>
+                                              </div>
+                                            </Tooltip>
+                                          )}
+                                          {index < 3 ? (
+                                            <>
+                                              {' '}
+                                              {item?.checkin && (
+                                                <Tooltip
+                                                  title={`Reached ${item?.address
+                                                    } at  ${moment(
+                                                      item?.checkin
+                                                    ).format(
+                                                      'DD-MMM-YYYY h:m A'
+                                                    )}`}
+                                                >
+                                                  <span
+                                                    onMouseEnter={(e) => { }}
+                                                    className="tableficon"
+                                                  >
+                                                    <i
+                                                      class="fa fa-map-marker text-success"
+                                                      aria-hidden="true"
+                                                    ></i>
+                                                  </span>
+                                                </Tooltip>
+                                              )}
+                                            </>
+                                          ) : null}
+                                        </>
+                                      ) : null}
+                                    </div>
+                                  </>
+                                );
+                              })
+                              : '--'}{' '}
+                            {itm?.stops_details?.length > 3 ? (
+                              <Tooltip
+                                title={
+                                  <div>
+                                    <ul className="all-stops-tool">
+                                      {itm?.stops_details?.map((item) => (
+                                        <li>
+                                          {itm?.status == 'awarded' ? (
+                                            <>
+                                              {item?.checkin ? (
+                                                <span
+                                                  onMouseEnter={(e) => { }}
+                                                  className="tableficon"
+                                                >
+                                                  <i
+                                                    class="fa fa-map-marker text-success"
+                                                    aria-hidden="true"
+                                                  ></i>
+                                                </span>
+                                              ):<i
+                                              class="fa fa-truck me-2"
+                                              // title="In-Transit"
+                                              aria-hidden="true"
+                                            ></i>}
+                                            </>
+                                          ) :<span className='tableficon'> <i
+                                          class="fa fa-truck  text-success"
+                                          // title="In-Transit"
+                                          aria-hidden="true"
+                                        ></i></span>}
+                                          {item?.address}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                }
+
+                              >
+                                <div className="all-stops-list">
+                                  <span className="">All Stops</span>
+                                </div>
+                              </Tooltip>
+                            ) : (
+                              ''
+                            )}
+                          </>
+                        )} */}
           </ul>
         );
       },
     },
-
     {
       key: "origin_address",
       name: "Origin Address",
