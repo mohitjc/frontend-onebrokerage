@@ -2147,6 +2147,11 @@ th span, td span{
 .tailwind-scrollbar::-webkit-scrollbar {
   width: 8px;
 }
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+
 
 .tailwind-scrollbar::-webkit-scrollbar-track {
   background: #f0f0f0;
@@ -2219,4 +2224,10 @@ th span, td span{
 
 input.form-control.trucks {
   border: none;
+}
+.react-datepicker-wrapper {
+  width: 100%;
+}
+th.px-6.py-3 {
+  text-wrap: nowrap;
 }

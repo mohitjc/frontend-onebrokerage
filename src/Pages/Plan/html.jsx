@@ -141,7 +141,7 @@ const Html = ({
 
                   <button className={`mt-8 block w-full  rounded-md py-2 text-sm font-semibold text-white text-center ${getPrice(itm)==0?'cursor-not-allowed bg-gray-300 text-black':'bg-primary'} ${checkActiveplan(itm)=="Active Plan"?"cursor-not-allowed":""}`} disabled={getPrice(itm)==0||checkActiveplan(itm)=="Active Plan" } onClick={(e)=>payment(itm,getPrice(itm))}>{checkActiveplan(itm)}</button>              
                 </div>
-                <div className="pt-6 pb-8 px-6">
+                <div className="pt-6 pb-8 px-3">
                   <h3 className="text-sm font-bold text-slate-900 tracking-wide uppercase">What's included</h3>
                   <ul role="list" className="mt-4 space-y-3 h-72 overflow-auto">
                     {itm?.features.map((item) => {
