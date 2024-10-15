@@ -40,7 +40,7 @@ export default function Chat() {
   const AxiosCancelToken = axios.CancelToken;
   const CancelRefToken = useRef(0)
   const [emoji, setemoji] = useState(false)
-  const [ChatWithUser, setChatWithUser] = useState(null);
+  const [ChatWithUser, setChatWithUser] = useState(null); 
   const [ChatWithUserName, setChatWithUserName] = useState({});
   const [darkMode, setDarkMode] = useState(false);
   const [addmember, setaddmember] = useState(false)
@@ -57,6 +57,7 @@ export default function Chat() {
   const currectChat = useRef()
   const messages = useRef()
   const [chatMessages, setChatMessages] = useState([]);
+  console.log(chatMessages,"chatmessage")
   const [currentchatdata, setcurrentchatdata] = useState()
   const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpenGroupmodal, setisOpenGroupmodal] = useState(false)
@@ -231,7 +232,7 @@ useEffect(() => {
     }
     ApiClient.put("chat/user/group/remove-member", payload, environment.chat_api).then((res) => {
       if (res.success) {
-        toast.success(res?.message)
+        // toast.success(res?.message)
         setChatWithUser(ChatWithUser?.room_members?.filter((itm) => itm?.user_id != data?.user_id))
       }
       closeGroupModal()
@@ -260,7 +261,7 @@ useEffect(() => {
         toast(res?.message)
         closeModal()
         allroommemeber()
-        // setChatRoomId("")
+        setChatRoomId("")
       }
       // loader(false);
     });
@@ -589,7 +590,7 @@ useEffect(() => {
                     />
                     <div className="">
                       <h4 className="flex items-center gap-2 font-semibold text-[14px] xl:text-[18px]">{ChatWithUserName?.name || currentchatdata?.fullName}</h4>
-                      <p className=" text-[12px] xl:text-[15px] text-[#707991]">{ChatWithUserName?.isGroupChat ? `${ChatWithUser?.room_members?.length} Participants` : ChatWithUserName?.isOnline ? "Online" : "Offline"}</p>
+                      <p className=" text-[12px] xl:text-[15px] text-[#707991]">{ChatWithUserName?.isGroupChat ? `${ChatWithUser?.room_members?.length || 0} Participants` : ChatWithUserName?.isOnline ? "Online" : "Offline"}</p>
                     </div>
                   </div>
                 </div>
@@ -698,6 +699,7 @@ useEffect(() => {
                               <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
                                 <div>
                                   <div class="bg-primary text-white p-3 rounded-l-lg rounded-br-lg">
+                              
                                     {itm?.type == "IMAGE" ? <>
                                       {itm?.media?.map((item) => {
                                         return <img
@@ -711,7 +713,8 @@ useEffect(() => {
                                     </> : <p class="text-sm">{itm?.content}</p>}
 
                                   </div>
-                                  <span class="text-xs text-gray-500 leading-none">{moment(itm?.createdAt).fromNow()}</span>
+
+                                  <span class="text-xs text-gray-500 leading-none">{itm?.sender_name}, {moment(itm?.createdAt).fromNow()}</span>
                                   {/* <span class="text-xs text-gray-500 leading-none">{MintTime(itm?.createdAt)}</span> */}
                                 </div>
                                 <img
@@ -743,7 +746,8 @@ useEffect(() => {
 
                                     </> : <p class="text-sm">{itm?.content}</p>}
                                   </div>
-                                  <span class="text-xs text-gray-500 leading-none">{moment(itm?.createdAt).fromNow()}</span>
+                                  
+                                  <span class="text-xs text-gray-500 leading-none">{itm?.sender_name}, {moment(itm?.createdAt).fromNow()}</span>
                                 </div>
                               </div>
 
@@ -1018,7 +1022,7 @@ useEffect(() => {
                           {' '}
                           {ChatWithUserName?.name}
                         </label>
-                        {addmember ? <div class="mb-3">
+                         {addmember ? <div class="mb-3">
                           <MultiSelectDropdown
                             id="statusDropdown"
                             className="role-color "

@@ -76,7 +76,7 @@ const View = () => {
             <div className="col-span-12">
               <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
                 <div className="bg-[#1245940a] p-4 border-b">
-                
+
                   <h3 className="text-[20px] font-[500]">
                     Basic Information
                   </h3>
@@ -119,7 +119,7 @@ const View = () => {
             <div className="col-span-12">
               <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
                 <div className="bg-[#1245940a] p-4 border-b">
-                  
+
                   <h3 className="text-[20px] font-[500]">
                     Address
                   </h3>
@@ -177,7 +177,7 @@ const View = () => {
             <div className="col-span-12">
               <div className="border overflow-hidden rounded-lg bg-white  gap-4 shrink-0 ">
                 <div className="bg-[#1245940a] p-4 border-b">
-                 
+
                   <h3 className="text-[20px] font-[500]">
                     Permissions
                   </h3>
@@ -204,7 +204,8 @@ const View = () => {
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="border border-gray px-4 py-2 ">                    <span className="font-semibold text-sm">Dashboard</span>
+                        <td className="border border-gray px-4 py-2 ">                
+                              <span className="font-semibold text-sm">Dashboard</span>
                         </td>
 
 
@@ -248,48 +249,48 @@ const View = () => {
                       </tr>
 
                       <tr>
-                        <td className="border border-gray px-4 py-2 ">                   <span className="font-semibold text-sm">Plan</span>
+                        <td className="border border-gray px-4 py-2 ">                   <span className="font-semibold text-sm">Active Plan</span>
                         </td>
 
 
 
                         <td className="border border-gray px-4 py-2 text-left ">
-                          {Permission?.plan_get ? <IoMdCheckmark /> : <IoClose />}
+                          {Permission?.active_plan_get ? <IoMdCheckmark /> : <IoClose />}
                         </td>
 
                         <td className="border border-gray px-4 py-2 text-left ">
-                          {Permission?.plan_add ? <IoMdCheckmark /> : <IoClose />}
+                          
                         </td>
 
                         <td className="border border-gray px-4 py-2 text-left ">
-                          {Permission?.plan_edit ? <IoMdCheckmark /> : <IoClose />}
+                        
                         </td>
 
                         <td className="border border-gray px-4 py-2 text-left ">
-                          {Permission?.plan_delete ? <IoMdCheckmark /> : <IoClose />}
+                          
                         </td>
                       </tr>
 
                       <tr>
-                        <td className="border border-gray px-4 py-2 ">                  <span className="font-semibold text-sm">Group</span>
+                        <td className="border border-gray px-4 py-2 ">                  <span className="font-semibold text-sm">Loads</span>
                         </td>
 
 
 
                         <td className="border border-gray px-4 py-2 text-left ">
-                          {Permission?.group_get ? <IoMdCheckmark /> : <IoClose />}
+                          {Permission?.load_get ? <IoMdCheckmark /> : <IoClose />}
                         </td>
 
                         <td className="border border-gray px-4 py-2 text-left ">
-                          {Permission?.group_add ? <IoMdCheckmark /> : <IoClose />}
+                          {Permission?.load_add ? <IoMdCheckmark /> : <IoClose />}
                         </td>
 
                         <td className="border border-gray px-4 py-2 text-left ">
-                          {Permission?.group_edit ? <IoMdCheckmark /> : <IoClose />}
+                          {Permission?.load_edit ? <IoMdCheckmark /> : <IoClose />}
                         </td>
 
                         <td className="border border-gray px-4 py-2 text-left ">
-                          {Permission?.group_delete ? <IoMdCheckmark /> : <IoClose />}
+                          {Permission?.load_delete ? <IoMdCheckmark /> : <IoClose />}
                         </td>
                       </tr>
 
