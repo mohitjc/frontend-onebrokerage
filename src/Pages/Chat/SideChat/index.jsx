@@ -23,12 +23,12 @@ import { FaCircle } from "react-icons/fa";
 export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber, setsidechat }) {
   const user = useSelector((state) => state.user);
  const [submitted,setsubmitted]=useState(false)
- console.log(submitted,"submitted")
+
   const history = useNavigate()
   const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [form, setform] = useState({})
-console.log(form,"form")
+
   function closeModal() {
     setisOpenmodal(false)
   }

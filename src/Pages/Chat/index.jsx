@@ -57,7 +57,6 @@ export default function Chat() {
   const currectChat = useRef()
   const messages = useRef()
   const [chatMessages, setChatMessages] = useState([]);
-  console.log(chatMessages,"chatmessage")
   const [currentchatdata, setcurrentchatdata] = useState()
   const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpenGroupmodal, setisOpenGroupmodal] = useState(false)
@@ -349,7 +348,6 @@ useEffect(() => {
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
-      console.log(data, "recive data")
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
 
@@ -493,7 +491,6 @@ useEffect(() => {
       content: text
     }
     socketModel.emit("send-message", value);
-    console.log(value, "value")
     setText("")
   }
 
