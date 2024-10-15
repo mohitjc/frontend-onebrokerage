@@ -876,7 +876,7 @@ const Profile = () => {
                     )}
                     {nextForm && (
                       <>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div className="">
                           {user?.role == "carrier" ? <>   <div className="col-md-6 mb-3">
                             <label className="label_profile">
                               Trailer Number
@@ -1209,10 +1209,9 @@ const Profile = () => {
                           </> : <></>}
 
                           {user?.role == "staff"?<>      <div className="">
-                          <h4 className="mb-2 text-white">Address </h4>
-                          <div className=" ">
-                            <div className="w-full">
-                             
+                          <div className="grid grid-cols-12 gap-4 p-4">
+                            <div className="lg:col-span-6 col-span-12 mb-3">
+                             <label>Address</label>
                               <GooglePlacesAutocomplete
                                 value={form?.address}
                                 result={DestinationAddress}
@@ -1220,8 +1219,8 @@ const Profile = () => {
                                 className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                               />
                             </div>
-                            <div className="">
-                             
+                            <div className="lg:col-span-6 col-span-12 mb-3">
+                             <label>State</label>
                               <input
                                 type="text"
                                 value={form?.state}
@@ -1235,8 +1234,8 @@ const Profile = () => {
                                 className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                               />
                             </div>
-                            <div className="">
-                            
+                            <div className="lg:col-span-6 col-span-12 mb-3">
+                            <label>City</label>
                               <input
                                 type="text"
                                 value={form?.city}
@@ -1250,8 +1249,8 @@ const Profile = () => {
                                 className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                               />
                             </div>
-                            <div className="">
-                             
+                            <div className="lg:col-span-6 col-span-12 mb-3">
+                             <label>Zip Code</label>
                               <input
                                 type="text"
                                 pattern="^[a-zA-Z0-9]+$"
@@ -1277,8 +1276,8 @@ const Profile = () => {
                                 className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
                               />
                             </div>
-                            <div className="">
-                              
+                            <div className="lg:col-span-6 col-span-12 mb-3">
+                              <label>Country</label>
                               <input
                                 type="text"
                                 value={form?.country}
