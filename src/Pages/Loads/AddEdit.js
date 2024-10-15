@@ -393,7 +393,7 @@ const AddEdit = () => {
               <label className="text-sm mb-2 block">
                 Load Start Date<span className="star">*</span>
               </label>
-              <div>
+              <div className="set-input-width">
                 <DatePicker
                   selected={form?.load_start_date}
                   className="bg-white w-full rounded-lg h-10 flex items-center gap-2  border border-[#00000036] px-3 w-100"
@@ -420,7 +420,7 @@ const AddEdit = () => {
               <label className="text-sm mb-2 block">
                 Load End Date<span className="star">*</span>
               </label>
-              <div>
+              <div className="set-input-width">
                 <DatePicker
                   selected={form?.load_end_date}
                   className="bg-white w-full rounded-lg h-10 flex items-center gap-2  border border-[#00000036] px-3 w-100"

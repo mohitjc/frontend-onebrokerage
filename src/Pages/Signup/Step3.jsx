@@ -181,7 +181,7 @@ export default function Step3() {
   return (
     <AuthLayout>
       <div className="">
-        <form  className="w-full px-6" onSubmit={handleSubmit}>
+        <form  className="w-full px-10" onSubmit={handleSubmit}>
           <div className=" ">
             <div className="">
               <div className="progressbar-num">

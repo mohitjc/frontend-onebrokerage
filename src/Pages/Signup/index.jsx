@@ -99,7 +99,7 @@ const Signup = () => {
           <h4 className="text-white mb-6 text-2xl font-bold">Sign Up</h4>
           <ProgressBar
             percent={percent}
-            filledBackground="linear-gradient(to right,rgb(74 81 155), rgb(24 81 155))"
+            filledBackground="linear-gradient(to right,rgb(73 79 159), rgb(73 79 159))"
           >
             <Step transition="scale">
               {({ accomplished }) => (
