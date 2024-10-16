@@ -46,7 +46,7 @@ const userImg = (img,modal='img') => {
 
 const noImg = (img,idd, modal = "img") => {
   let imageURL="images/users/"
-  if(idd=="LicenceImage")
+  if(idd=="LicenceImage" || idd=="BOLImage" || idd=="PODImage")
   {
      imageURL="documents/"
   }

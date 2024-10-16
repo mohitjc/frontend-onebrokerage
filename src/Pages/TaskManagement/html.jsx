@@ -18,14 +18,20 @@ import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
 import { LuImport } from "react-icons/lu";
 import methodModel from "../../methods/methods";
 import Select from "react-select";
-import { Menu, Transition } from "@headlessui/react";
+import { Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
 import { GoDotFill } from "react-icons/go";
 import MultiSelectDropdown from "../../components/common/MultiSelectDropdown";
 import { Dialog } from "@headlessui/react";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
+import { toast } from "react-toastify";
 import { BsThreeDots } from "react-icons/bs";
+import loader from "../../methods/loader";
 import moment from "moment";
+import ImageUpload from "../../components/common/ImageUpload";
+
 
 const Html = ({
   sorting,
@@ -52,6 +58,38 @@ const Html = ({
 }) => {
   const user = useSelector((state) => state.user);
   const [form, setform] = useState({ agreed_rate: '', id: '' });
+  console.log(form, "form")
+  const [loadDetails, setLoadDetails] = useState({ document: '' });
+  const [Loading, setLoading] = useState("d-none");
+  const [files, setFIles] = useState([]);
+  const [Notes, SetNotes] = useState({ note: '' });
+  const [isOpenmodal, setisOpenmodal] = useState(false);
+  const [isNotesOpenmodal, setisNotesOpenmodal] = useState(false);
+  const [isPodOpenmodal, setisPodOpenmodal] = useState(false);
+  function closenewModal() {
+    setisOpenmodal(false)
+  }
+
+  function openewModal() {
+    setisOpenmodal(true)
+  }
+  function closeNotesModal() {
+    setisNotesOpenmodal(false)
+  }
+
+  function openNotesModal() {
+    setisNotesOpenmodal(true)
+  }
+
+  function closePodModal() {
+    setisPodOpenmodal(false)
+  }
+
+  function openPodModal() {
+    setisPodOpenmodal(true)
+  }
+
+
   const handleColumnToggle = (columnName) => {
     const isColumnVisible = visibleColumns.find(
       (item) => item.key == columnName.key
@@ -69,46 +107,186 @@ const Html = ({
     // setVisibleColumns([...visibleColumns,columnName])
   };
 
-  // const CheckIn = (stop_id, load_id, prevoiusStop, index, data) => {
-  //   setLoading('d-flex');
-  //   if (index == data?.length && Document?.length == 0) {
-  //     return setLoadDetails({ stop_id, load_id, prevoiusStop, data });
-  //   }
+  const [Document, setdocuments] = useState([]);
+  console.log(Document?.length, "documnet")
+  const [fileInputs, setFileInputs] = useState([{ id: 1, file: null }]);
 
-  //   if (prevoiusStop) {
-  //     ApiClient.put('load-status', {
-  //       load_id,
-  //       shipment_status: 'in_transit',
-  //       stop_id: prevoiusStop,
-  //       checkout: moment(),
-  //     }).then((res) => { });
-  //   }
+  const addFileInput = () => {
+    setFileInputs([...fileInputs, { id: fileInputs.length + 1, file: null }]);
+  };
+  const removeFileInput = (id, file) => {
+    setFileInputs(fileInputs.filter((input) => input.id !== id));
+    setdocuments(Document.filter((itm) => itm != file));
+    // if (file) {
+    //   ApiClient.delete(`delete/document?fileName=${file}`).then((res) => {});
+    // }
+    if (id == 1) {
+      setFileInputs([{ id: 1, file: null }]);
+    }
+  };
 
-  //   setLoading('d-flex');
-  //   let payload = {
-  //     load_id,
-  //     shipment_status: index == data?.length ? 'delivered' : 'in_transit',
-  //     stop_id,
+  const UpdatePickedUpStatus = (e) => {
+    e.preventDefault();
+    if (Document?.length != 0) {
+    } else {
+      alert('Please upload document');
+    }
+    setLoading('d-flex');
+    if (!form?.load_id || Document?.length == 0) {
+      return;
+    }
+    ApiClient.put('load-status', {
+      load_id: form?.load_id,
+      bol_doc: Document,
+      shipment_status: 'pickedup',
+    }).then((res) => {
+      if (res.success) {
+        setLoading('d-none');
 
-  //     checkin: moment(),
-  //   };
-  //   if (index == 0) {
-  //     payload = { ...payload, bol_doc: Document };
-  //   }
+        loader(false);
+        toast.success(res?.message);
+        document.getElementById('CloseBOLDocumentsModal').click();
+        getData();
+        setLoading('d-none');
+      }
+      loader(false);
+    });
+  };
 
-  //   ApiClient.put('load-status', payload).then((res) => {
-  //     if (res.success) {
-  //       toast.success(res?.message);
-  //       getData();
-  //       setdocuments([]);
-  //       setFileInputs([{ id: 1, file: null }]);
 
-  //       setLoading('d-none');
-  //     }
-  //     setLoading('d-none');
-  //   });
-  //   setTimeout(() => { }, 1000);
-  // };
+  const UpdateStopWithDocuments = () => {
+    setLoading('d-flex');
+    // e.preventDefault()
+    if (
+      !loadDetails?.load_id ||
+      !loadDetails?.stop_id ||
+      Document?.length == 0
+    ) {
+      return false;
+    }
+    if (loadDetails?.prevoiusStop) {
+      ApiClient.put('load-status', {
+        load_id: loadDetails?.load_id,
+        shipment_status: 'in_transit',
+        stop_id: loadDetails?.prevoiusStop,
+        checkout: moment(),
+      }).then((res) => { });
+    }
+    let payload = {
+      load_id: loadDetails?.load_id,
+      shipment_status: 'delivered',
+      stop_id: loadDetails?.stop_id,
+      checkin: moment(),
+      pod_doc: Document,
+    };
+    if (loadDetails?.prevoiusStop) {
+      setTimeout(() => {
+        ApiClient.put('load-status', payload).then((res) => {
+          if (res.success) {
+            toast.success(res?.message);
+            setLoading('d-none');
+
+            document.getElementById('ClosePodDocumentModel').click();
+            getData();
+            // completeBid();
+            setdocuments([]);
+            setFileInputs([{ id: 1, file: null }]);
+            setLoadDetails({ document: '' });
+            setFIles(['']);
+            // rejectBid();
+          }
+          setLoading('d-none');
+        });
+      }, 1000);
+    } else {
+      ApiClient.put('load-status', payload).then((res) => {
+        if (res.success) {
+          setLoading('d-none');
+
+          toast.success(res?.message);
+          document.getElementById('ClosePodDocumentModel').click();
+          getData();
+          setdocuments([]);
+          setFileInputs([{ id: 1, file: null }]);
+          setLoadDetails({ document: '' });
+          setFIles([]);
+          // completeBid();
+          // rejectBid();
+        }
+        setLoading('d-none');
+      });
+    }
+  };
+
+
+  const HandleNoteSubmit = (e) => {
+    e.preventDefault();
+    setLoading('d-flex');
+    ApiClient.post('carrier-note', {
+      title: Notes?.title,
+      description: Notes?.description,
+      load_id: Notes?.load_id,
+      stop_id: Notes?.stop_id,
+      new_eta: moment(Notes?.new_eta).format('YYYY-MM-DDTHH:mm'),
+    }).then((res) => {
+      if (res.success) {
+        toast.success(res?.message);
+        document.getElementById('CloseNotesModal').click();
+        setLoading('none');
+      }
+    });
+  };
+
+  const clearUploadForm = () => {
+    setdocuments([]);
+    setFileInputs([{ id: 1, file: null }]);
+    setLoadDetails({ document: '' });
+    setFIles([]);
+    closenewModal()
+    closeNotesModal()
+    closePodModal()
+  };
+
+  const CheckIn = (stop_id, load_id, prevoiusStop, index, data) => {
+    setLoading('d-flex');
+    if (index == data?.length && Document?.length == 0) {
+      return setLoadDetails({ stop_id, load_id, prevoiusStop, data });
+    }
+
+    if (prevoiusStop) {
+      ApiClient.put('load-status', {
+        load_id,
+        shipment_status: 'in_transit',
+        stop_id: prevoiusStop,
+        checkout: moment(),
+      }).then((res) => { });
+    }
+
+    setLoading('d-flex');
+    let payload = {
+      load_id,
+      shipment_status: index == data?.length ? 'delivered' : 'in_transit',
+      stop_id,
+
+      checkin: moment(),
+    };
+    if (index == 0) {
+      payload = { ...payload, bol_doc: Document };
+    }
+
+    ApiClient.put('load-status', payload).then((res) => {
+      if (res.success) {
+        toast.success(res?.message);
+        getData();
+        setdocuments([]);
+        setFileInputs([{ id: 1, file: null }]);
+
+        setLoading('d-none');
+      }
+      setLoading('d-none');
+    });
+    setTimeout(() => { }, 1000);
+  };
 
   function findUniqueElements(arr1, arr2) {
     const uniqueInArr1 = arr1.filter((item) =>
@@ -133,11 +311,10 @@ const Html = ({
           <span
             className="capitalize cursor-pointer"
             onClick={(e) => {
-              if(isAllow(`${shared.check}_add`))
-              {
+              if (isAllow(`${shared.check}_add`)) {
                 view(row.id);
               }
-             
+
             }}
           >
             {row?.load_id || row?.lane_id}
@@ -152,327 +329,337 @@ const Html = ({
       render: (itm) => {
         return (
           <ul>
-              <span>{itm?.stops.map((item=>
-                <li>{item?.address}</li>
-              ))}</span>
-               {/* {itm?.shipment_status == 'pending' &&
-                          itm?.status == 'awarded' ? (
-                          <>
-                            <div className="d-flex  mb-1 justify-content-between flex-column">
+            <span>{itm?.stops.map((item =>
+              <li>{item?.address}</li>
+            ))}</span>
+            {itm?.shipment_status == 'pending' &&
+              itm?.request_status == 'awarded' ? (
+              <>
+                <div className="d-flex  mb-1 justify-content-between flex-column">
 
-                              {itm?.stops_details?.length != 0
-                                ? itm?.stops_details?.map((item, index) => {
-                                  return (
-                                    <Tooltip title={item?.address}>
-                                      {index < 3 ? (
-                                        <>
-                                          <div className="  d-flex align-items-center w-80">
-                                            <span className=" mb-0 destspan">
-                                              <IoArrowBackCircleSharp />
-                                              {item?.address}
-                                            </span>
-                                          </div>
-                                        </>
-                                      ) : (
-                                        <></>
-                                      )}
-                                    </Tooltip>
-                                  );
-                                })
-                                : ''}
-
-
-                            </div>
-                            <div className='d-flex justify-content-end'>
-                              <div
-                                class="dropdown dotsbtn2 text-center p-0"
-                                title="Options"
-                              >
-                                <button
-                                  class="btn dropdown-toggle "
-                                  type="button"
-                                  data-bs-toggle="dropdown"
-                                  aria-expanded="false"
-                                >
-                                 <div>
-                                 <BsThreeDots />
-                                 </div>
-                                </button>
-                                <div class="dropdown-menu">
-                                  <a
-                                    class="dropdown-item"
-                                    onClick={() => {
-                                      document
-                                        .getElementById('OpenBOLDocumentsModal')
-                                        .click();
-
-                                      setform({
-                                        ...form,
-                                        load_id: itm?.load_id,
-                                      });
-                                    }}
-                                  >
-                                    Picked Up
-                                  </a>
-                                </div>
+                  {itm?.stops?.length != 0
+                    ? itm?.stops?.map((item, index) => {
+                      return (
+                        <Tooltip title={item?.address}>
+                          {index < 3 ? (
+                            <>
+                              <div className="  d-flex align-items-center w-80">
+                                <span className=" mb-0 destspan">
+                                  <IoArrowBackCircleSharp />
+                                  {item?.address}
+                                </span>
                               </div>
-                            </div>
-                            {itm?.stops_details?.length > 3 ? (
-                              <Tooltip
-                                title={
-                                  <div className=''>
-                                    <ul className='all-stops-tool'>
-                                      {itm?.stops_details?.map((item) => (
-                                        <li>
-                                          {itm?.status == 'awarded' ? (
-                                            <>
-                                              {item?.checkin ?(
-                                                <Tooltip
-                                                  title={`Reached ${item?.address
-                                                    } at  ${moment(
-                                                      item?.checkin
-                                                    ).format(
-                                                      'DD-MMM-YYYY h:mm A'
-                                                    )}`}
-                                                >
-                                                  <span
-                                                    onMouseEnter={(e) => { }}
-                                                    className="tableficon"
-                                                  >
-                                                    <i
-                                                      class="fa fa-map-marker text-success"
-                                                      aria-hidden="true"
-                                                    ></i>
-                                                  </span>
-                                                </Tooltip>
-                                              ):<i
-                                              class="fa fa-truck me-2"
-                                              // title="In-Transit"
-                                              aria-hidden="true"
-                                            ></i>}
-                                            </>
-                                          ) : <span className='tableficon'> <i
-                                          class="fa fa-truck  text-success"
-                                          // title="In-Transit"
-                                          aria-hidden="true"
-                                        ></i></span>}
-                                          {item?.address}
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                }
-                              >
-                                <div className="all-stops-list">
-                                  <span className="">All Stops</span>
-                                </div>
-                              </Tooltip>
-                            ) : (
-                              ''
-                            )}
-                          </>
-                        ) : (
-                          <>
-                            {itm?.stops_details?.length != 0
-                              ? itm?.stops_details?.map((item, index) => {
-                                return (
-                                  <>
-                                    <div className='d-flex align-items-center '>
-                                      <Tooltip
-                                        title={`${item?.checkin ? 'CheckedIn-' : ''
-                                          } ${item?.address} ${item?.checkout ? '-CheckedOut' : ''
-                                          }`}
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </Tooltip>
+                      );
+                    })
+                    : ''}
+
+
+                </div>
+                <Menu as="div" className="relative ">
+                  <div>
+                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <span className="absolute -inset-1.5" />
+                      <span className="sr-only">Open user menu</span>
+                      <BsThreeDots />
+                    </MenuButton>
+                  </div>
+                  <MenuItems
+                    transition
+                    anchor="bottom end"
+                    className="w-52 origin-top-right mt-4 rounded-xl border border-white/5 bg-white shadow p-1 text-sm/6 text-black transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+                  >
+                    <MenuItem>
+                      <a
+                        class=""
+                        onClick={() => {
+                          document
+                            .getElementById('OpenBOLDocumentsModal')
+                            .click();
+                          setform({
+                            ...form,
+                            load_id: itm?.id,
+                          });
+                        }}
+                      >
+                        Picked Up
+                      </a>
+                    </MenuItem>
+
+                    <div className="my-1 h-px bg-gray-200" />
+
+                  </MenuItems>
+
+
+
+                </Menu>
+
+                {itm?.stops?.length > 3 ? (
+
+                  <Tooltip
+                    title={
+                      <div className=''>
+                        <ul className='all-stops-tool'>
+                          {itm?.stops?.map((item) => (
+                            <li>
+                              {itm?.request_status == 'awarded' ? (
+                                <>
+                                  {item?.checkin ? (
+                                    <Tooltip
+                                      title={`Reached ${item?.address
+                                        } at  ${moment(
+                                          item?.checkin
+                                        ).format(
+                                          'DD-MMM-YYYY h:mm A'
+                                        )}`}
+                                    >
+                                      <span
+                                        onMouseEnter={(e) => { }}
+                                        className="tableficon"
                                       >
-                                        {index < 3 ? (
-                                          <span className=" mb-1 destspan">
-                                            {' '}
-                                            <IoArrowBackCircleSharp />{' '}
-                                            {item?.address}
-                                          </span>
-                                        ) : (
-                                          ''
-                                        )}
-                                      </Tooltip>
-
-                                      {itm?.status == 'awarded' ? (
-                                        <>
-                                          {item?.checkin ||
-                                            (!itm?.stops_details[index - 1]
-                                              ?.checkin &&
-                                              index > 0) ? null : (
-                                            <Tooltip>
-                                              <div
-                                                class="dropdown dotsbtn dots-end dots-set"
-                                                title="Options"
-                                              >
-                                                <button
-                                                  class="btn dropdown-toggle icon-end"
-                                                  type="button"
-                                                  data-bs-toggle="dropdown"
-                                                  aria-expanded="false"
-                                                >
-                                                  <BsThreeDots
-                                                    onClick={() => {
-                                                      console.log(fileInputs);
-                                                    }}
-                                                  />
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                  <a
-                                                    class="dropdown-item"
-                                                    data-bs-toggle={
-                                                      index + 1 ==
-                                                        itm?.stops_details?.length
-                                                        ? 'modal'
-                                                        : ''
-                                                    }
-                                                    data-bs-target={
-                                                      index + 1 ==
-                                                        itm?.stops_details?.length
-                                                        ? '#DocumentModal'
-                                                        : ''
-                                                    }
-                                                    title="Checkin"
-                                                    onClick={() => {
-                                                      clearUploadForm();
-                                                      // console.log(
-                                                      //   fileInputs,
-                                                      //   '==============DATA'
-                                                      // );
-                                                      // console.log(
-                                                      //   fileInputs,
-                                                      //   '==============DATA'
-                                                      // );
-                                                      setFileInputs([{}]);
-                                                      if (
-                                                        index + 1 ==
-                                                        itm?.stops_details
-                                                          ?.length
-                                                      ) {
-                                                        return setLoadDetails({
-                                                          stop_id: item?._id,
-                                                          load_id: itm?.load_id,
-                                                          prevoiusStop:
-                                                            itm?.stops_details[
-                                                              index - 1
-                                                            ]?._id,
-                                                          data: itm?.stops_details,
-                                                        });
-                                                      }
-                                                      CheckIn(
-                                                        item?._id,
-                                                        itm?.load_id,
-                                                        itm?.stops_details[
-                                                          index - 1
-                                                        ]?._id,
-                                                        index + 1,
-                                                        itm?.stops_details
-                                                      );
-                                                    }}
-                                                  >
-                                                    Checkin
-                                                  </a>
-                                                  <a
-                                                    class="dropdown-item"
-                                                    title="Shipment Notes"
-                                                    onClick={() => {
-                                                      document
-                                                        .getElementById(
-                                                          'OpenNotesModal'
-                                                        )
-                                                        .click();
-                                                      SetNotes({
-                                                        ...Notes,
-                                                        load_id: itm?.load_id,
-                                                        stop_id: item?._id,
-                                                      });
-                                                    }}
-                                                  >
-                                                    Add Note
-                                                  </a>
-                                                </div>
-                                              </div>
-                                            </Tooltip>
-                                          )}
-                                          {index < 3 ? (
-                                            <>
-                                              {' '}
-                                              {item?.checkin && (
-                                                <Tooltip
-                                                  title={`Reached ${item?.address
-                                                    } at  ${moment(
-                                                      item?.checkin
-                                                    ).format(
-                                                      'DD-MMM-YYYY h:m A'
-                                                    )}`}
-                                                >
-                                                  <span
-                                                    onMouseEnter={(e) => { }}
-                                                    className="tableficon"
-                                                  >
-                                                    <i
-                                                      class="fa fa-map-marker text-success"
-                                                      aria-hidden="true"
-                                                    ></i>
-                                                  </span>
-                                                </Tooltip>
-                                              )}
-                                            </>
-                                          ) : null}
-                                        </>
-                                      ) : null}
-                                    </div>
-                                  </>
-                                );
-                              })
-                              : '--'}{' '}
-                            {itm?.stops_details?.length > 3 ? (
-                              <Tooltip
-                                title={
-                                  <div>
-                                    <ul className="all-stops-tool">
-                                      {itm?.stops_details?.map((item) => (
-                                        <li>
-                                          {itm?.status == 'awarded' ? (
-                                            <>
-                                              {item?.checkin ? (
-                                                <span
-                                                  onMouseEnter={(e) => { }}
-                                                  className="tableficon"
-                                                >
-                                                  <i
-                                                    class="fa fa-map-marker text-success"
-                                                    aria-hidden="true"
-                                                  ></i>
-                                                </span>
-                                              ):<i
-                                              class="fa fa-truck me-2"
-                                              // title="In-Transit"
-                                              aria-hidden="true"
-                                            ></i>}
-                                            </>
-                                          ) :<span className='tableficon'> <i
-                                          class="fa fa-truck  text-success"
-                                          // title="In-Transit"
+                                        <i
+                                          class="fa fa-map-marker text-success"
                                           aria-hidden="true"
-                                        ></i></span>}
-                                          {item?.address}
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                }
-
-                              >
-                                <div className="all-stops-list">
-                                  <span className="">All Stops</span>
-                                </div>
-                              </Tooltip>
+                                        ></i>
+                                      </span>
+                                    </Tooltip>
+                                  ) : <i
+                                    class="fa fa-truck me-2"
+                                    // title="In-Transit"
+                                    aria-hidden="true"
+                                  ></i>}
+                                </>
+                              ) : <span className='tableficon'> <i
+                                class="fa fa-truck  text-success"
+                                // title="In-Transit"
+                                aria-hidden="true"
+                              ></i></span>}
+                              {item?.address}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    }
+                  >
+                    <div className="all-stops-list">
+                      <span className="">All Stops</span>
+                    </div>
+                  </Tooltip>
+                ) : (
+                  ''
+                )}
+              </>
+            ) : (
+              <>
+                {itm?.stops?.length != 0
+                  ? itm?.stops?.map((item, index) => {
+                    return (
+                      <>
+                        <div className='d-flex align-items-center '>
+                          <Tooltip
+                            title={`${item?.checkin ? 'CheckedIn-' : ''
+                              } ${item?.address} ${item?.checkout ? '-CheckedOut' : ''
+                              }`}
+                          >
+                            {index < 3 ? (
+                              <span className=" mb-1 destspan">
+                                {' '}
+                                <IoArrowBackCircleSharp />{' '}
+                                {item?.address}
+                              </span>
                             ) : (
                               ''
                             )}
-                          </>
-                        )} */}
+                          </Tooltip>
+
+                          {itm?.request_status == 'awarded' ? (
+                            <>
+                              {item?.checkin ||
+                                (!itm?.stops[index - 1]
+                                  ?.checkin &&
+                                  index > 0) ? null : (
+                                <Tooltip>
+                                  <Menu as="div" className="relative ">
+                                    <div>
+                                      <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                        <span className="absolute -inset-1.5" />
+                                        <span className="sr-only">Open user menu</span>
+                                        <BsThreeDots
+                                          onClick={() => {
+                                            console.log(fileInputs);
+                                          }}
+                                        />
+                                      </MenuButton>
+                                    </div>
+                                    <MenuItems
+                                      transition
+                                      anchor="bottom end"
+                                      className="w-52 origin-top-right mt-4 rounded-xl border border-white/5 bg-white shadow p-1 text-sm/6 text-black transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+                                    >
+                                      <MenuItem>
+                                        <a
+                                          class=""
+                                     
+                                          title="Checkin"
+                                          onClick={() => {
+                                            clearUploadForm();
+                                            // console.log(
+                                            //   fileInputs,
+                                            //   '==============DATA'
+                                            // );
+                                            // console.log(
+                                            //   fileInputs,
+                                            //   '==============DATA'
+                                            // );
+                                            setFileInputs([{}]);
+                                            if (
+                                              index + 1 ==
+                                              itm?.stops
+                                                ?.length
+                                            ) {
+                                              document.getElementById("PodDocumentModel").click()
+                                              return setLoadDetails({
+                                                stop_id: item?._id,
+                                                load_id: itm?.id,
+                                                prevoiusStop:
+                                                  itm?.stops[
+                                                    index - 1
+                                                  ]?._id,
+                                                data: itm?.stops,
+                                              });
+                                             
+                                            }
+                                            CheckIn(
+                                              item?._id,
+                                              itm?.id,
+                                              itm?.stops[
+                                                index - 1
+                                              ]?._id,
+                                              index + 1,
+                                              itm?.stops
+                                            );
+                                          }}
+                                        >
+                                          Checkin
+                                        </a>
+
+                                      </MenuItem>
+                                      <MenuItem>
+                                        <a
+                                          class=""
+                                          title="Shipment Notes"
+                                          onClick={() => {
+                                            document
+                                              .getElementById(
+                                                'OpenNotesModal'
+                                              )
+                                              .click();
+                                            SetNotes({
+                                              ...Notes,
+                                              load_id: itm?.id,
+                                              stop_id: item?._id,
+                                            });
+                                          }}
+                                        >
+                                          Add Note
+                                        </a>
+                                      </MenuItem>
+
+                                      <div className="my-1 h-px bg-gray-200" />
+
+                                    </MenuItems>
+
+
+
+                                  </Menu>
+
+
+
+                                </Tooltip>
+                              )}
+                              {index < 3 ? (
+                                <>
+                                  {' '}
+                                  {item?.checkin && (
+                                    <Tooltip
+                                      title={`Reached ${item?.address
+                                        } at  ${moment(
+                                          item?.checkin
+                                        ).format(
+                                          'DD-MMM-YYYY h:m A'
+                                        )}`}
+                                    >
+                                      <span
+                                        onMouseEnter={(e) => { }}
+                                        className="tableficon"
+                                      >
+                                        <i
+                                          class="fa fa-map-marker text-success"
+                                          aria-hidden="true"
+                                        ></i>
+                                      </span>
+                                    </Tooltip>
+                                  )}
+                                </>
+                              ) : null}
+                            </>
+                          ) : null}
+                        </div>
+                      </>
+                    );
+                  })
+                  : '--'}{' '}
+                {itm?.stops?.length > 3 ? (
+                  <Tooltip
+                    title={
+                      <div>
+                        <ul className="all-stops-tool">
+                          {itm?.stops?.map((item) => (
+                            <li>
+                              {itm?.request_status == 'awarded' ? (
+                                <>
+                                  {item?.checkin ? (
+                                    <span
+                                      onMouseEnter={(e) => { }}
+                                      className="tableficon"
+                                    >
+                                      <i
+                                        class="fa fa-map-marker text-success"
+                                        aria-hidden="true"
+                                      ></i>
+                                    </span>
+                                  ) : <i
+                                    class="fa fa-truck me-2"
+                                    // title="In-Transit"
+                                    aria-hidden="true"
+                                  ></i>}
+                                </>
+                              ) : <span className='tableficon'> <i
+                                class="fa fa-truck  text-success"
+                                // title="In-Transit"
+                                aria-hidden="true"
+                              ></i></span>}
+                              {item?.address}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    }
+
+                  >
+                    <div className="all-stops-list">
+                      <span className="">All Stops</span>
+                    </div>
+                  </Tooltip>
+                ) : (
+                  ''
+                )}
+              </>
+            )}
           </ul>
         );
       },
@@ -688,7 +875,7 @@ const Html = ({
                         <PiFileCsv className="text-typo text-xl" />  Export CSV
                     </button> */}
 
-        
+
         </div>
       </div>
 
@@ -719,7 +906,7 @@ const Html = ({
                 }}
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-[#494f9f]block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 pr-10"
                 placeholder="Search By Load Id,City,State"
-                // required
+              // required
               />
               {filters?.search && (
                 <i
@@ -767,10 +954,10 @@ const Html = ({
                     />
                   </div>
                 </Menu.Button>
-               
+
               </div>
-              
-        
+
+
 
               <Transition
                 as={Fragment}
@@ -819,17 +1006,17 @@ const Html = ({
                       return (
                         <>
                           <div className="flex items-center justify-start gap-1.5">
-                          
-                              <Tooltip placement="top" title="View">
-                                <a
-                                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                                  onClick={(e) => view(itm.id)}
-                                >
-                                  <PiEyeLight />
-                                </a>
-                              </Tooltip>
-                 
-                 
+
+                            <Tooltip placement="top" title="View">
+                              <a
+                                className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                                onClick={(e) => view(itm.id)}
+                              >
+                                <PiEyeLight />
+                              </a>
+                            </Tooltip>
+
+
                           </div>
                         </>
                       );
@@ -866,6 +1053,381 @@ const Html = ({
           <></>
         )}
       </div>
+
+
+
+      <div className="fixed inset-0 hidden items-center justify-center">
+        <button
+          type="button"
+          id="PodDocumentModel"
+          onClick={openPodModal}
+          className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+        >
+          Open dialog
+        </button>
+      </div>
+
+
+      <Transition appear show={isPodOpenmodal} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closePodModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full relative max-w-md transform  rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
+                  >
+
+
+                  </Dialog.Title>
+                  <div className=" flex items-center justify-center relative">
+                  </div>
+
+                  <div className="mt-5">
+
+                    <div class="">
+                      <label class="">
+                        Upload POD (Proof of Delivery)
+                      </label>
+                      <div className="">
+
+                        <div>
+                          <form onSubmit={UpdateStopWithDocuments}>
+                            <div class="">
+                              <ImageUpload
+                                idd="PODImage"
+                                value={Document}
+                                multiple={true}
+                                result={(e) => {
+                                  setdocuments(e.value);
+                                }}
+                              />
+
+                            </div>
+                            <div class="">
+                            <button
+                                type="button"
+                                id="ClosePodDocumentModel"
+                                className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
+                                onClick={() => {
+                                  clearUploadForm();
+                                }}
+                              >
+                              Close</button>
+                              <button
+                                type="button"
+                                class=""
+                                onClick={() => {
+                                  if (Document?.length != 0) {
+                                    UpdateStopWithDocuments();
+                                  } else {
+                                    alert('Please upload document');
+                                  }
+                                }}
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+
+                      </div>
+
+
+                    </div>
+
+
+
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+
+
+
+
+
+      <div className="fixed inset-0 hidden items-center justify-center">
+        <button
+          type="button"
+          id="OpenBOLDocumentsModal"
+          onClick={openewModal}
+          className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+        >
+          Open dialog
+        </button>
+      </div>
+
+
+      <Transition appear show={isOpenmodal} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closenewModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full relative max-w-md transform  rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
+                  >
+
+
+                  </Dialog.Title>
+                  <div className=" flex items-center justify-center relative">
+                  </div>
+
+                  <div className="mt-5">
+
+                    <div class="">
+                      <label class="">
+                        Upload BOL ( Bill of lading )
+                      </label>
+                      <div className="">
+
+                        <div>
+                          <form onSubmit={UpdatePickedUpStatus}>
+                            <div class="">
+                              <ImageUpload
+                                idd="BOLImage"
+                                value={Document}
+                                multiple={true}
+                                result={(e) => {
+                                  setdocuments(e.value);
+                                }}
+                              />
+
+                            </div>
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                id="CloseBOLDocumentsModal"
+                                className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
+                                onClick={() => {
+                                  clearUploadForm();
+                                }}
+                              >
+                                Close
+                              </button>
+
+                              <button type="submit" class=""
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+
+                      </div>
+
+
+                    </div>
+
+
+
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+
+
+      <div className="fixed inset-0 hidden items-center justify-center">
+        <button
+          type="button"
+          id="OpenNotesModal"
+          onClick={openNotesModal}
+          className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+        >
+          Open dialog
+        </button>
+      </div>
+
+
+      <Transition appear show={isNotesOpenmodal} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeNotesModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full relative max-w-md transform  rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
+                  >
+
+
+                  </Dialog.Title>
+                  <div className=" flex items-center justify-center relative">
+                  </div>
+
+                  <div className="mt-5">
+
+                    <div class="">
+                      <label class="">
+                        Shipment Notes
+                      </label>
+                      <div className="">
+
+                        <div>
+                          <form
+                            onSubmit={(e) => {
+                              HandleNoteSubmit(e);
+                            }}
+                          >
+                            <div class="">
+                              <div className="">
+                                <label>
+                                  Title <label className="text-danger">*</label>
+                                </label>
+                                <input
+                                  placeholder="Enter Title"
+                                  value={Notes?.title}
+                                  type="text"
+                                  required
+                                  onChange={(e) => {
+                                    SetNotes({ ...Notes, title: e.target.value });
+                                  }}
+                                  className=""
+                                />
+                              </div>
+                              <div className="">
+                                <label htmlFor="">
+                                  Description <label className="text-danger">*</label>
+                                </label>
+                                <textarea
+                                  value={Notes?.description}
+                                  cols={10}
+                                  type="text"
+                                  placeholder="Enter Description"
+                                  required
+                                  onChange={(e) => {
+                                    SetNotes({ ...Notes, description: e.target.value });
+                                  }}
+                                  className=""
+                                />
+                              </div>
+                              <div className="">
+                                <span className="">
+                                  {' '}
+                                  <label htmlFor="" className="">
+                                    New ETA <label className="">*</label>
+                                  </label>
+                                </span>
+                                <DatePicker
+                                  selected={Notes?.new_eta}
+                                  className="form-control w-100"
+                                  minDate={Date.now()}
+                                  onChange={(e) => {
+                                    SetNotes({ ...Notes, new_eta: e });
+                                  }}
+                                  showTimeSelect
+                                  dateFormat="dd-MM-yyyy h:mm a"
+                                  required
+                                />
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                id="CloseNotesModal"
+                                className=" justify-center bg-gray-400 text-white rounded-md border border-transparent  px-4 py-2 text-sm font-medium hover:bg-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 "
+                                onClick={() => {
+                                  clearUploadForm();
+                                }}
+                              >
+                                Close
+                              </button>
+
+                              <button type="submit" class="">
+                                Submit
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+
+                      </div>
+
+
+                    </div>
+
+
+
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+
+
+
+
+
     </PageLayout>
   );
 };

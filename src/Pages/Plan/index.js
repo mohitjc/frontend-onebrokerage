@@ -88,7 +88,6 @@ const Plan = () => {
     history("/login")
    }
    loader(false);
-  
   }
 
   const clear = () => {
