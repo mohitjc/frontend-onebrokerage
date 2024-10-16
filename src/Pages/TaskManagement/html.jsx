@@ -390,7 +390,7 @@ const Html = ({
                       </a>
                     </MenuItem>
 
-                    <div className="my-1 h-px bg-gray-200" />
+                    {/* <div className="my-1 h-px bg-gray-200" /> */}
 
                   </MenuItems>
 
@@ -569,7 +569,7 @@ const Html = ({
                                         </a>
                                       </MenuItem>
 
-                                      <div className="my-1 h-px bg-gray-200" />
+                                      {/* <div className="my-1 h-px bg-gray-200" /> */}
 
                                     </MenuItems>
 

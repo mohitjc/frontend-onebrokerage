@@ -2149,6 +2149,7 @@ th span, td span{
 }
 ::-webkit-scrollbar {
   width: 4px !important;
+  height: 4px !important;
 }
 
 
@@ -2230,4 +2231,10 @@ input.form-control.trucks {
 }
 th.px-6.py-3 {
   text-wrap: nowrap;
+}
+.set-inp-brdr{
+  .css-b62m3t-container {
+    border: 1px solid #00000036 !important;
+    border-radius: 7px !important;
+}
 }
