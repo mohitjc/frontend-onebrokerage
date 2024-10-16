@@ -329,9 +329,6 @@ const Html = ({
       render: (itm) => {
         return (
           <ul>
-            <span>{itm?.stops.map((item =>
-              <li>{item?.address}</li>
-            ))}</span>
             {itm?.shipment_status == 'pending' &&
               itm?.request_status == 'awarded' ? (
               <>

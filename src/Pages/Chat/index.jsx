@@ -244,6 +244,7 @@ useEffect(() => {
   const getChatMessages = (id) => {
     // loader(true);
     ApiClient.get("chat/user/message/all", { room_id: id }, environment.chat_api).then((res) => {
+      console.log(res,"response")
       if (res.success) {
         let data = res.data.data;
         setChatMessages(data);
@@ -350,7 +351,7 @@ useEffect(() => {
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
-      // console.log(data,"recive msg")
+      console.log(data,"recive msg")
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
 
@@ -360,23 +361,6 @@ useEffect(() => {
           return messages.current.find((message) => message._id === id);
         });
         setChatMessages([...uniqueMessages]);
-
-        // const updatedSideChat = SideChatRef.current.map((chat) => {
-        //   if (chat?.room_id == data?.data?.room_id) {
-        //     return {
-        //       ...chat,
-        //       unread_count:currectChat.current == data.data.room_id?0:chat?.unread_count+1,
-        //       last_message: {
-        //         ...chat.last_message,
-        //         content: data.data.content,
-        //         createdAt: data.data.createdAt
-        //       },
-
-        //     };
-        //   }
-        //   return chat;
-        // });
-        // setsidechat(updatedSideChat);
 
         setTimeout(() => {
           chatScroll();
@@ -729,12 +713,12 @@ useEffect(() => {
 
                                   </div>
 
-                                  <span class="text-xs text-gray-500 leading-none">{itm?.sender_name}, {moment(itm?.createdAt).fromNow()}</span>
+                                  <span class="text-xs text-gray-500 leading-none">{itm?.sender_details?.fullName}, {moment(itm?.createdAt).fromNow()}</span>
                                   {/* <span class="text-xs text-gray-500 leading-none">{MintTime(itm?.createdAt)}</span> */}
                                 </div>
                                 <img
                                   src={methodModel.userImg(
-                                    itm?.sender_image
+                                    itm?.sender_details?.image
                                   )}
                                   className="h-10 w-10 rounded-full mb-4 object-contain "
                                 />
@@ -743,7 +727,7 @@ useEffect(() => {
                               <div class="flex w-full mt-2 space-x-3 max-w-xs">
                                 <img
                                   src={methodModel.userImg(
-                                    itm?.sender_image
+                                    itm?.send_to_details?.image
                                   )}
                                   className="h-10 w-10 rounded-full mb-4 object-contain "
                                 />
@@ -762,7 +746,7 @@ useEffect(() => {
                                     </> : <p class="text-sm">{itm?.content}</p>}
                                   </div>
                                   
-                                  <span class="text-xs text-gray-500 leading-none">{itm?.sender_name}, {moment(itm?.createdAt).fromNow()}</span>
+                                  <span class="text-xs text-gray-500 leading-none">{itm?.send_to_details?.fullName}, {moment(itm?.createdAt).fromNow()}</span>
                                 </div>
                               </div>
 
