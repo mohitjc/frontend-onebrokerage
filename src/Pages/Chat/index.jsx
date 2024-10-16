@@ -84,6 +84,7 @@ const appId = environment.appId;  // Replace with your Agora App ID
 
 // Function to check camera permissions
 const checkCameraPermission = async () => {
+  return true
   try {
     await navigator.mediaDevices.getUserMedia({ video: true });
     return true;  // Camera access granted
@@ -898,7 +899,7 @@ useEffect(() => {
                           {' '}
                           {ChatWithUserName?.name}
                         </label>
-                        <p className='text-[15px] text-[grey]'>Created by {ChatWithUser?.role=="admin"} </p>
+                        <p className='text-[15px] text-[grey]'>Created by {currentchatdata?.fullName} </p>
 
                       </div>
                       <p className='text-[14px] text-[grey] uppercase font-[500]'>{ChatWithUser?.room_members?.length} Participants </p>

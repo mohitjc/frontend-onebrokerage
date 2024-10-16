@@ -82,11 +82,12 @@ const Plan = () => {
             }else{
               toast.error(res.message)
             }
-        loader(false);
+        // loader(false);
       });
    }else{
     history("/login")
    }
+   loader(false);
   
   }
 
