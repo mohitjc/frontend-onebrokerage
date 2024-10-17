@@ -58,7 +58,6 @@ const Html = ({
 }) => {
   const user = useSelector((state) => state.user);
   const [form, setform] = useState({ agreed_rate: '', id: '' });
-  console.log(form, "form")
   const [loadDetails, setLoadDetails] = useState({ document: '' });
   const [Loading, setLoading] = useState("d-none");
   const [files, setFIles] = useState([]);
@@ -108,7 +107,6 @@ const Html = ({
   };
 
   const [Document, setdocuments] = useState([]);
-  console.log(Document?.length, "documnet")
   const [fileInputs, setFileInputs] = useState([{ id: 1, file: null }]);
 
   const addFileInput = () => {
@@ -311,10 +309,9 @@ const Html = ({
           <span
             className="capitalize cursor-pointer"
             onClick={(e) => {
-              if (isAllow(`${shared.check}_add`)) {
+             
                 view(row.id);
-              }
-
+              
             }}
           >
             {row?.load_id || row?.lane_id}

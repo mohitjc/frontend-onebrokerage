@@ -53,7 +53,7 @@ const Profile = () => {
       lng: `${address.lng}` || "",
     });
   };
-  
+
   const [submitted, setSubmitted] = useState(false);
   const formValidation = [
     {
@@ -175,8 +175,9 @@ const Profile = () => {
   };
 
   const handleSubmit2 = (e) => {
-    console.log("hiii")
     e.preventDefault();
+    setSubmitted(true)
+    if(!form?.fullName || !form?.email ||!form?.address ||!form?.trailers_number  ||!form?.team_truck || !form?.solo_truck ||form?.trailer_type?.length==0) return
     // document.getElementById("closepopup").click()
     let value = {
       id: user?.id,
@@ -205,6 +206,9 @@ const Profile = () => {
         SetEdit(false);
         gallaryData();
         SetNextForm(false);
+        setSubmitted(false
+
+        )
       }
     });
 
@@ -300,7 +304,7 @@ const Profile = () => {
                         {data && data.email}
                       </p>
                     </div>
-                 
+
                     <div className="">
                       <label className="text-gray-500 font-normal ">Address</label>
                       <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
@@ -646,6 +650,13 @@ const Profile = () => {
                                 }
                                 required
                               />
+                              {!form.fullName && submitted ? (
+                                <div className="invalid-feedback d-block star text-[12px]">
+                                  Name is Required
+                                </div>
+                              ) : (
+                                <></>
+                              )}
                             </div>
                           </div>
 
@@ -670,10 +681,17 @@ const Profile = () => {
                                   }
                                   disabled
                                 />
+                                {!form.email && submitted ? (
+                                  <div className="invalid-feedback d-block star text-[12px]">
+                                    Email is Required
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
                               </div>
                             </div>
                           </div>
-                          {user?.role=="carrier" || user?.role=="driver"?    <div className="">
+                          {user?.role == "carrier" || user?.role == "driver" ? <div className="">
                             <label className="label_profile">
                               Address
                               <span className="text-danger">
@@ -694,21 +712,20 @@ const Profile = () => {
                                     className='  w-full  relative break-all  text-sm placeholder:text-gray-500 h-full flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500'
 
                                   />
+                                  {!form.address && submitted ? (
+                                    <div className="invalid-feedback d-block star text-[12px]">
+                                        Please Select Location
+                                        Suggestion
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
                                 </div>
                               </div>
-                              {form.address == '' &&
-                                submitted ? (
-                                <div className="invalid-feedback d-block">
-                                  Please Select Location
-                                  Suggestion
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-
+                             
                             </div>
-                          </div>:<></>}
-                      
+                          </div> : <></>}
+
                           {/* <div className="">
                                         <label className="label_profile">Identification Number</label>
                                         <div>
@@ -812,6 +829,13 @@ const Profile = () => {
                                     })
                                   }
                                 />
+                                  {!form.fax_number && submitted ? (
+                                    <div className="invalid-feedback d-block star text-[12px]">
+                                       Fax Number is required
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
                               </div>
                             </div>
                             <div className="">
@@ -854,6 +878,13 @@ const Profile = () => {
                                     })
                                   }
                                 />
+                                  {!form.tax_number && submitted ? (
+                                    <div className="invalid-feedback d-block star text-[12px]">
+                                      Tax Number is required
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
                               </div>
                             </div>  </> : <></>}
 
@@ -866,7 +897,18 @@ const Profile = () => {
                             Back
                           </a>
                           <a
-                            onClick={() => SetNextForm(true)}
+                            onClick={() => {;
+                              setSubmitted(true)
+                              if(!form?.fullName || !form?.email || !form?.address)
+                              {
+                                SetNextForm(false)
+                              }
+                              else
+                              {
+                                setSubmitted(false)
+                                SetNextForm(true)
+                              }
+                            }}
                             className=" bg-primary px-4 py-2 text-white rounded-lg mt-4"
                           >
                             Next
@@ -896,6 +938,13 @@ const Profile = () => {
                                   })
                                 }
                               />
+                                {!form.trailers_number && submitted ? (
+                                    <div className="invalid-feedback d-block star text-[12px]">
+                                      Trailers Number is required
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
                             </div>
                           </div>
                             <div className="col-md-6 mb-3">
@@ -917,6 +966,13 @@ const Profile = () => {
                                     })
                                   }
                                 />
+                                  {!form.team_truck && submitted ? (
+                                    <div className="invalid-feedback d-block star text-[12px]">
+                                      Team truck is required
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
                               </div>
                             </div>
                             <div className="col-md-6 mb-3">
@@ -938,6 +994,13 @@ const Profile = () => {
                                     })
                                   }
                                 />
+                                  {!form.solo_truck && submitted ? (
+                                    <div className="invalid-feedback d-block star text-[12px]">
+                                       Solo Truck is required
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
                               </div>
                             </div>
 
@@ -1143,6 +1206,8 @@ const Profile = () => {
                                     </label>
                                   </div>
                                 </div>
+                                {submitted && form?.trailer_type?.length==0?  <div className="invalid-feedback d-block star text-[12px]">Please select any trailer type
+                                    </div>:<></>}
                               </div>
                             </div></> : <></>}
                           {user?.role == "driver" ? <>
@@ -1208,91 +1273,91 @@ const Profile = () => {
                             </div>
                           </> : <></>}
 
-                          {user?.role == "staff"?<>      <div className="">
-                          <div className="grid grid-cols-12 gap-4 p-4">
-                            <div className="lg:col-span-6 col-span-12 mb-3">
-                             <label>Address</label>
-                              <GooglePlacesAutocomplete
-                                value={form?.address}
-                                result={DestinationAddress}
-                                placeholder="Address"
-                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
-                              />
+                          {user?.role == "staff" ? <>      <div className="">
+                            <div className="grid grid-cols-12 gap-4 p-4">
+                              <div className="lg:col-span-6 col-span-12 mb-3">
+                                <label>Address</label>
+                                <GooglePlacesAutocomplete
+                                  value={form?.address}
+                                  result={DestinationAddress}
+                                  placeholder="Address"
+                                  className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
+                                />
+                              </div>
+                              <div className="lg:col-span-6 col-span-12 mb-3">
+                                <label>State</label>
+                                <input
+                                  type="text"
+                                  value={form?.state}
+                                  required
+                                  name="state"
+                                  placeholder="State"
+                                  onChange={(e) => {
+                                    setForm({ ...form, state: e.target.value });
+                                  }}
+                                  // onBlur={handleBlur}
+                                  className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
+                                />
+                              </div>
+                              <div className="lg:col-span-6 col-span-12 mb-3">
+                                <label>City</label>
+                                <input
+                                  type="text"
+                                  value={form?.city}
+                                  required
+                                  name="state"
+                                  placeholder="City"
+                                  onChange={(e) => {
+                                    setForm({ ...form, city: e.target.value });
+                                  }}
+                                  // onBlur={handleBlur}
+                                  className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
+                                />
+                              </div>
+                              <div className="lg:col-span-6 col-span-12 mb-3">
+                                <label>Zip Code</label>
+                                <input
+                                  type="text"
+                                  pattern="^[a-zA-Z0-9]+$"
+                                  onKeyPress={(e) => {
+                                    var regex = new RegExp("^[a-zA-Z0-9]+$");
+                                    var key = String.fromCharCode(
+                                      !e.charCode ? e.which : e.charCode
+                                    );
+                                    if (!regex.test(key)) {
+                                      e.preventDefault();
+                                      return false;
+                                    }
+                                  }}
+                                  min={0}
+                                  value={form?.pincode}
+                                  required
+                                  name="pincode"
+                                  placeholder="Zipcode"
+                                  onChange={(e) => {
+                                    setForm({ ...form, pincode: e.target.value });
+                                  }}
+                                  // onBlur={handleBlur}
+                                  className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
+                                />
+                              </div>
+                              <div className="lg:col-span-6 col-span-12 mb-3">
+                                <label>Country</label>
+                                <input
+                                  type="text"
+                                  value={form?.country}
+                                  required
+                                  name="pincode"
+                                  placeholder="Country"
+                                  onChange={(e) => {
+                                    setForm({ ...form, country: e.target.value });
+                                  }}
+                                  // onBlur={handleBlur}
+                                  className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
+                                />
+                              </div>
                             </div>
-                            <div className="lg:col-span-6 col-span-12 mb-3">
-                             <label>State</label>
-                              <input
-                                type="text"
-                                value={form?.state}
-                                required
-                                name="state"
-                                placeholder="State"
-                                onChange={(e) => {
-                                  setForm({ ...form, state: e.target.value });
-                                }}
-                                // onBlur={handleBlur}
-                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
-                              />
-                            </div>
-                            <div className="lg:col-span-6 col-span-12 mb-3">
-                            <label>City</label>
-                              <input
-                                type="text"
-                                value={form?.city}
-                                required
-                                name="state"
-                                placeholder="City"
-                                onChange={(e) => {
-                                  setForm({ ...form, city: e.target.value });
-                                }}
-                                // onBlur={handleBlur}
-                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
-                              />
-                            </div>
-                            <div className="lg:col-span-6 col-span-12 mb-3">
-                             <label>Zip Code</label>
-                              <input
-                                type="text"
-                                pattern="^[a-zA-Z0-9]+$"
-                                onKeyPress={(e) => {
-                                  var regex = new RegExp("^[a-zA-Z0-9]+$");
-                                  var key = String.fromCharCode(
-                                    !e.charCode ? e.which : e.charCode
-                                  );
-                                  if (!regex.test(key)) {
-                                    e.preventDefault();
-                                    return false;
-                                  }
-                                }}
-                                min={0}
-                                value={form?.pincode}
-                                required
-                                name="pincode"
-                                placeholder="Zipcode"
-                                onChange={(e) => {
-                                  setForm({ ...form, pincode: e.target.value });
-                                }}
-                                // onBlur={handleBlur}
-                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
-                              />
-                            </div>
-                            <div className="lg:col-span-6 col-span-12 mb-3">
-                              <label>Country</label>
-                              <input
-                                type="text"
-                                value={form?.country}
-                                required
-                                name="pincode"
-                                placeholder="Country"
-                                onChange={(e) => {
-                                  setForm({ ...form, country: e.target.value });
-                                }}
-                                // onBlur={handleBlur}
-                                className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
-                              />
-                            </div>
-                          </div>
-                        </div></>:<></>}
+                          </div></> : <></>}
                         </div>{' '}
                         <div className="flex justify-end gap-2">
                           <button

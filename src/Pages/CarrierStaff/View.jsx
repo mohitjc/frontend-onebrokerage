@@ -204,10 +204,9 @@ const View = () => {
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="border border-gray px-4 py-2 ">                
-                              <span className="font-semibold text-sm">Dashboard</span>
+                        <td className="border border-gray px-4 py-2 ">
+                          <span className="font-semibold text-sm">Dashboard</span>
                         </td>
-
 
                         <td className="border border-gray px-4 py-2 text-left ">
                           {Permission?.dashboard_get ? <IoMdCheckmark /> : <IoClose />}
@@ -228,7 +227,6 @@ const View = () => {
                       <tr>
                         <td className="border border-gray px-4 py-2 ">                  <span className="font-semibold text-sm">Carrier</span>
                         </td>
-
 
 
                         <td className="border border-gray px-4 py-2 text-left ">
@@ -252,29 +250,26 @@ const View = () => {
                         <td className="border border-gray px-4 py-2 ">                   <span className="font-semibold text-sm">Active Plan</span>
                         </td>
 
-
-
                         <td className="border border-gray px-4 py-2 text-left ">
                           {Permission?.active_plan_get ? <IoMdCheckmark /> : <IoClose />}
                         </td>
 
                         <td className="border border-gray px-4 py-2 text-left ">
-                          
+
                         </td>
 
                         <td className="border border-gray px-4 py-2 text-left ">
-                        
+
                         </td>
 
                         <td className="border border-gray px-4 py-2 text-left ">
-                          
+
                         </td>
                       </tr>
 
                       <tr>
                         <td className="border border-gray px-4 py-2 ">                  <span className="font-semibold text-sm">Loads</span>
                         </td>
-
 
 
                         <td className="border border-gray px-4 py-2 text-left ">
@@ -300,7 +295,6 @@ const View = () => {
                         </td>
 
 
-
                         <td className="border border-gray px-4 py-2 text-left ">
                           {Permission?.driver_get ? <IoMdCheckmark /> : <IoClose />}
                         </td>
@@ -322,7 +316,6 @@ const View = () => {
                         <td className="border border-gray px-4 py-2 ">
                           <span className="font-semibold text-sm">Truck</span>
                         </td>
-
 
 
                         <td className="border border-gray px-4 py-2 text-left ">
@@ -348,7 +341,6 @@ const View = () => {
                         </td>
 
 
-
                         <td className="border border-gray px-4 py-2 text-left ">
                           {Permission?.transaction_get ? <IoMdCheckmark /> : <IoClose />}
                         </td>
@@ -360,7 +352,6 @@ const View = () => {
                         <td className="border border-gray px-4 py-2 text-left ">
 
                         </td>
-
                         <td className="border border-gray px-4 py-2 text-left ">
 
                         </td>

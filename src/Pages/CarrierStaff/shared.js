@@ -1,6 +1,6 @@
 const shared = {
     check: "carrier_staff",
-    title: "Carrier Staffs",
+    title: "Carrier Staff",
     addTitle: "Carrier Staff",
     url: "carrierstaff",
     addApi: "admin/add-user",
