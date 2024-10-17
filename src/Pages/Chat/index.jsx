@@ -61,7 +61,7 @@ export default function Chat() {
   const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpenGroupmodal, setisOpenGroupmodal] = useState(false)
   const [sidechat, setsidechat] = useState([]);
-
+  console.log(sidechat,"sidechat")
   const [chatRoomId, setChatRoomId] = useState("");
   const [isonline, setonline] = useState(false);
   const [text, setText] = useState('');
@@ -350,6 +350,7 @@ useEffect(() => {
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
+      console.log(data,"data")
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
 
@@ -359,7 +360,7 @@ useEffect(() => {
           return messages.current.find((message) => message._id === id);
         });
         setChatMessages([...uniqueMessages]);
-
+  
         setTimeout(() => {
           chatScroll();
         }, 100);
@@ -367,8 +368,9 @@ useEffect(() => {
     });
 
     socketModel.on("receive-message1", (data) => {
+      console.log(data, "==========");
       const updatedSideChat = SideChatRef.current.map((chat) => {
-        if (chat?.room_id == data?.data?.room_id) {
+        if (chat?.room_id === data?.data?.room_id) {
           return {
             ...chat,
             last_message: {
@@ -376,11 +378,17 @@ useEffect(() => {
               content: data?.data?.content,
               createdAt: data.data.createdAt,
             },
+            last_message_at: data.data.createdAt, // Ensure you update this field
           };
         }
         return chat;
       });
-      setsidechat(updatedSideChat);
+
+      const sortedMessages = updatedSideChat
+        .filter(chat => chat.last_message_at) 
+        .sort((a, b) => new Date(b.last_message_at) - new Date(a.last_message_at));
+      setsidechat(sortedMessages);
+
     });
 
 

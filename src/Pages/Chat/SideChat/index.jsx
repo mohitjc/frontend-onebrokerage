@@ -134,7 +134,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
         <div className="chatslefts lg:w-[300px] xl:w-[400px] border-r border-gray-200 shrink-0 py-4 h-screen ">
 
           <div className="hdes_sech flex items-center gap-6 px-4 ">
-            <GoHome onClick={(e) => history("/")} className="text-xl cursor-pointer xl:text-3xl ml-2 text-[#707991] hidden md:block" />
+            <GoHome onClick={(e) => history("/")} title='Go Home' className="text-xl cursor-pointer xl:text-3xl ml-2 text-[#707991] hidden md:block" />
             <IoMdClose onClick={closeSidebar} className="text-xl block md:hidden xl:text-3xl ml-2 text-[#707991]" />
             <div className="bg-gray-100 items-center flex gap-2 py-2 px-4 rounded-full w-full">
               <GoSearch className="text-xl" />
