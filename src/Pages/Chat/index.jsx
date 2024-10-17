@@ -51,7 +51,9 @@ export default function Chat() {
   const [driverfilters, setdriverfilters] = useState([])
 
   const [stafffilters, setstafffilters] = useState([])
-
+  const [filters, setFilter] = useState({
+    search: "",
+  });
 
   const user = useSelector(state => state.user)
   const currectChat = useRef()
@@ -299,8 +301,9 @@ useEffect(() => {
     })
   }
 
-  const allroommemeber = () => {
-    ApiClient.get('chat/user/recent-chats/all', { user_id: user?.id || user?._id }, environment.chat_api).then(res => {
+  const allroommemeber = (p={}) => {
+    let filter = { ...filters, ...p, role: "carrier" ,board_id:"",user_id: user?.id || user?._id};
+    ApiClient.get('chat/user/recent-chats/all',filter, environment.chat_api).then(res => {
       if (res.success) {
         setsidechat(res?.data?.data)
         setChatWithUser(res?.data?.data?.find((item) => item?.room_id == chatRoomId))
@@ -577,7 +580,7 @@ useEffect(() => {
       <div className="main_chats h-screen overflow-hidden">
         <div className="flex">
 
-          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber} setsidechat={setsidechat} />
+          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber} setsidechat={setsidechat} filters={filters} setFilter={setFilter}/>
 
           <div className="rigtsie_inners h-screen w-full">
             {chatRoomId ?

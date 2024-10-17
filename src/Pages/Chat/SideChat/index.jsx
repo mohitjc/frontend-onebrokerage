@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaMoon } from "react-icons/fa";
 import { GoHome, GoSearch } from "react-icons/go";
+import { LuLayoutDashboard } from "react-icons/lu";
 import { HiMiniBars3 } from "react-icons/hi2";
 import { TbRosetteDiscountCheckFilled } from "react-icons/tb";
 import { useSelector } from 'react-redux';
@@ -20,7 +21,8 @@ import environment from '../../../environment';
 import socketModel from '../../../models/socketModel';
 import Header from '../../../components/global/header2';
 import { FaCircle } from "react-icons/fa";
-export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber, setsidechat }) {
+export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber, setsidechat ,filters,setFilter}) {
+  console.log(filters,"filters")
   const user = useSelector((state) => state.user);
  const [submitted,setsubmitted]=useState(false)
 
@@ -28,6 +30,7 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
   const [isOpenmodal, setisOpenmodal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [form, setform] = useState({})
+ 
 
   function closeModal() {
     setisOpenmodal(false)
@@ -37,6 +40,22 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
     setisOpenmodal(true)
   }
 
+  const filter = (p = {}) => {
+    let f = {
+      ...p,
+    };
+    setFilter({ ...filters, ...f });
+    allroommemeber({ ...f });
+  };
+
+  const clear = () => {
+    console.log("hloooo")
+    let f = {
+     search: "",
+    };
+    setFilter({ ...filters, ...f });
+    allroommemeber({ ...f });
+  };
 
 
   const uploadImage = (e) => {
@@ -134,12 +153,64 @@ export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber
         <div className="chatslefts lg:w-[300px] xl:w-[400px] border-r border-gray-200 shrink-0 py-4 h-screen ">
 
           <div className="hdes_sech flex items-center gap-6 px-4 ">
-            <GoHome onClick={(e) => history("/")} title='Go Home' className="text-xl cursor-pointer xl:text-3xl ml-2 text-[#707991] hidden md:block" />
+            <LuLayoutDashboard onClick={(e) => history("/dashboard")} title='Dashboard' className="text-xl cursor-pointer xl:text-3xl ml-2 text-[#707991] hidden md:block" />
             <IoMdClose onClick={closeSidebar} className="text-xl block md:hidden xl:text-3xl ml-2 text-[#707991]" />
-            <div className="bg-gray-100 items-center flex gap-2 py-2 px-4 rounded-full w-full">
+            <form
+            class="bg-gray-100 items-center flex gap-2 py-2 px-4 rounded-full w-full"
+            onSubmit={(e) => {
+              e.preventDefault();
+              filter();
+            }}
+          >
+           <GoSearch className="text-xl" />
+            <div class="">
+            
+              <input
+                type="search"
+                id="simple-search"
+                value={filters.search}
+                onChange={(e) => {
+                  setFilter({ ...filters, search: e.target.value });
+                }}
+                class="bg-transparent"
+                placeholder="Search"
+                // required
+              />
+              {filters?.search && (
+                <div onClick={(e)=>clear()}><i
+                className="fa fa-times absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm cursor-pointer"
+                aria-hidden="true"
+              
+              ></i></div>
+              
+              )}
+            </div>
+            {/* <button
+              type="submit"
+              class="p-2.5 m-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-[#494f9f] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              <svg
+                class="w-4 h-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+              <span class="sr-only">Search</span>
+            </button> */}
+          </form>
+            {/* <div className="bg-gray-100 items-center flex gap-2 py-2 px-4 rounded-full w-full">
               <GoSearch className="text-xl" />
               <input type="search" className="bg-transparent" />
-            </div>
+            </div> */}
             {
               user?.role == "carrier" ? <button onClick={() => {
                 document
