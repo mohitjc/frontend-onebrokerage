@@ -84,7 +84,7 @@ const appId = environment.appId;  // Replace with your Agora App ID
 
 // Function to check camera permissions
 const checkCameraPermission = async () => {
-  return true
+  // return true
   try {
     await navigator.mediaDevices.getUserMedia({ video: true });
     return true;  // Camera access granted

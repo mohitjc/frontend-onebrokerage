@@ -66,6 +66,7 @@ function App() {
     { url: "/loads/add", path: "Loads/AddEdit" },
     { url: "/loads/detail/:id", path: "Loads/View" },
     { url: "/task", path: "TaskManagement" },
+    { url: "/task/detail/:id", path: "TaskManagement/View" },
   ];
 
   sessionStorage.clear();
