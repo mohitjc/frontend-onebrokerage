@@ -145,7 +145,7 @@ const Html = ({
         return (
           <>
             <div className="flex items-center justify-start gap-1.5">
-              {isAllow(`${shared.check}_get`) ? (
+              {user?.role=="driver" || isAllow(`${shared.check}_get`) ? (
               <Tooltip placement="top" title="View">
                 <a
                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"

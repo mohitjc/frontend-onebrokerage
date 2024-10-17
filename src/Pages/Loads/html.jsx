@@ -546,7 +546,7 @@ const Html = ({
                 </Dialog>
               </Transition>
 
-              <Transition
+              {visibleColumns?.length == columns?.length ? <></> :   <Transition
                 as={Fragment}
                 enter="transition ease-out duration-100"
                 enterFrom="transform opacity-0 scale-95"
@@ -571,7 +571,7 @@ const Html = ({
                   })}
                   {/* </Menu.Item>  */}
                 </Menu.Items>
-              </Transition>
+              </Transition>}
             </Menu>
           </div>
         </div>
