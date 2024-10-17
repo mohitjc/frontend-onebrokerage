@@ -664,7 +664,7 @@ useEffect(() => {
                       >
                         <MenuItem>
                           <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
-                            <PencilIcon className="size-4 fill-white/30" />
+                            <PencilIcon className="size-4 text-[#fff]" />
                             Edit
 
                           </button>
@@ -674,7 +674,7 @@ useEffect(() => {
 
                         <MenuItem>
                           <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
-                            <TrashIcon className="size-4 fill-white/30" />
+                            <TrashIcon className="size-4 text-[#fff]" />
                             Delete
 
                           </button>

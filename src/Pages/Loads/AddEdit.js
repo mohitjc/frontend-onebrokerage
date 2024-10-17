@@ -460,7 +460,7 @@ const AddEdit = () => {
               <label className="text-sm mb-2 block">
                 Origin Location<span className="star">*</span>
               </label>
-              <div>
+              <div className="set-inp-brdr">
                 <GooglePlaceAutoComplete
                   value={form.origin_address}
                   result={addressResult}
@@ -531,7 +531,7 @@ const AddEdit = () => {
               <label className="text-sm mb-2 block">
                 Destination Location<span className="star">*</span>
               </label>
-              <div>
+              <div className="set-inp-brdr">
                 <GooglePlaceAutoComplete
                   value={form?.destination_address}
                   result={DestinationAddress}

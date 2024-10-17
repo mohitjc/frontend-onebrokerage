@@ -346,7 +346,7 @@ const Html = ({
                   Pending Carriers
                 </button>
               </MenuItem>
-              <div className="my-1 h-px bg-gray-200" />
+              {/* <div className="my-1 h-px bg-gray-200" /> */}
               <MenuItem>
                 <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 text-black hover:bg-[#3E549D] hover:text-white"
                  onClick={() => ChangeRequestStatus("rejected")}>
