@@ -17,6 +17,7 @@ import { LiaEdit } from 'react-icons/lia';
 import SelectDropdown from '../../../components/common/SelectDropdown';
 import statusModel from '../../../models/status.model';
 import { IoIosRefresh } from 'react-icons/io';
+import Swal from 'sweetalert2';
 const Html = ({
   view,
   addressResult,

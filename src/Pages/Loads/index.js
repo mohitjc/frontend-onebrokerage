@@ -182,7 +182,7 @@ const Loads = () => {
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to ${status == "active" ? "active" : "inactive"
-        } this carrier?`,
+        } this load?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#494f9f",

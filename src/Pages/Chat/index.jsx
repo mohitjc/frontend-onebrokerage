@@ -244,7 +244,6 @@ useEffect(() => {
   const getChatMessages = (id) => {
     // loader(true);
     ApiClient.get("chat/user/message/all", { room_id: id }, environment.chat_api).then((res) => {
-      console.log(res,"response")
       if (res.success) {
         let data = res.data.data;
         setChatMessages(data);
@@ -351,7 +350,6 @@ useEffect(() => {
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
-      console.log(data,"recive msg")
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
 
@@ -369,7 +367,6 @@ useEffect(() => {
     });
 
     socketModel.on("receive-message1", (data) => {
-      console.log(data,"========")
       const updatedSideChat = SideChatRef.current.map((chat) => {
         if (chat?.room_id == data?.data?.room_id) {
           return {

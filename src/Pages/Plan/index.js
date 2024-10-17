@@ -223,7 +223,7 @@ const Plan = () => {
       title: "Are you sure?",
       text: `Do you want to ${
         status == "active" ? "active" : "inactive"
-      } this user?`,
+      } this plan?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#494f9f",

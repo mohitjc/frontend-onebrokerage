@@ -190,25 +190,48 @@ const CarrierStaff = () => {
   };
 
   const statusChange = (itm) => {
-    let modal = "loadmanagement";
+    // if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
+    if (!isAllow(`edit${shared.check}`)) return;
     let status = "active";
     if (itm.status == "active") status = "deactive";
 
-    loader(true);
-    ApiClient.put(
-      shared?.statusApi,{ id: itm?.id, status:status , model:"driver" }
-    ).then((res) => {
-      if (res.success) { 
-        getData();
-        toast.success(
-          ` Driver ${status == "active" ? "Enabled" : "Disabled"} Successfully`
-        );
-        setShowActiveModal("none");
+    // if (window.confirm(`Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`)) {
+    //     loader(true)
+    //     ApiClient.put(shared.statusApi, { id: itm.id, status }).then(res => {
+    //         if (res.success) {
+    //             getData()
+    //         }
+    //         loader(false)
+    //     })
+    // }
+    Swal.fire({
+      title: "Are you sure?",
+      text: `Do you want to ${
+        status == "active" ? "active" : "inactive"
+      } this Carrier staff?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#494f9f",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        loader(true);
+        ApiClient.put(shared.statusApi, { id: itm.id, status , model:"users" }).then((res) => {
+          if (res.success) {
+            getData();
+            toast.success(res.message)
+          }
+          loader(false);
+        });
+        //   Swal.fire({
+
+        //     // text: `Sucessfully ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
+        //     icon: "success"
+        //   });
       }
-      loader(false);
     });
   };
-
   const edit = (id) => {
     history(`/${shared.url}/edit/${id}`);
   };
@@ -251,9 +274,9 @@ const CarrierStaff = () => {
 
   const isAllow = (key = "") => {
     let permissions = user?.permissions;
-    console.log(permissions,"permissions")
+
     let value = permissions?.[key];
-    console.log(value,"value")
+
     if(user.role=='admin'||user?.role=="carrier") value=true
     // return true;
     return value;

@@ -11,7 +11,8 @@ import axios from "axios";
 import environment from "../../../environment";
 import { toast } from "react-toastify";
 import addressModel from "../../../models/address.model";
-
+import shared from "../shared";
+import Swal from "sweetalert2";
 const PendingCarrier = (p) => {
   const user = useSelector((state) => state.user);
   const [DataLength, setDataLength] = useState(0);
@@ -193,22 +194,46 @@ const PendingCarrier = (p) => {
   };
 
   const statusChange = (itm) => {
-    let modal = "loadmanagement";
+    // if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
+    if (!isAllow(`edit${shared.check}`)) return;
     let status = "active";
     if (itm.status == "active") status = "deactive";
 
-    loader(true);
-    ApiClient.put(
-      `change/status?model=users&id=${itm?.id}&status=${status}`
-    ).then((res) => {
-      if (res.success) {
-        getData();
-        toast.success(
-          ` Load ${status == "active" ? "Enabled" : "Disabled"} Successfully`
-        );
-        setShowActiveModal("none");
+    // if (window.confirm(`Do you want to ${status == 'active' ? 'Activate' : 'Deactivate'} this`)) {
+    //     loader(true)
+    //     ApiClient.put(shared.statusApi, { id: itm.id, status }).then(res => {
+    //         if (res.success) {
+    //             getData()
+    //         }
+    //         loader(false)
+    //     })
+    // }
+    Swal.fire({
+      title: "Are you sure?",
+      text: `Do you want to ${
+        status == "active" ? "active" : "inactive"
+      } this pending carrier?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#494f9f",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        loader(true);
+        ApiClient.put(shared.statusApi, { id: itm.id, status , model:"users" }).then((res) => {
+          if (res.success) {
+            getData();
+            toast.success(res.message)
+          }
+          loader(false);
+        });
+        //   Swal.fire({
+
+        //     // text: `Sucessfully ${status == 'active' ? 'Activate' : 'Deactivate'} this`,
+        //     icon: "success"
+        //   });
       }
-      loader(false);
     });
   };
 

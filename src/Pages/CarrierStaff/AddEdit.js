@@ -890,7 +890,6 @@ const AddEdit = () => {
 
   const uploadImage = (e) => {
     setForm({ ...form, baseImg: e.target.value });
-    console.log(e, "=============")
     let files = e.target.files;
     let file = files.item(0);
     loader(true);
