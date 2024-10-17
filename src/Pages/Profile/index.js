@@ -177,7 +177,9 @@ const Profile = () => {
   const handleSubmit2 = (e) => {
     e.preventDefault();
     setSubmitted(true)
-    if(!form?.fullName || !form?.email ||!form?.address ||!form?.trailers_number  ||!form?.team_truck || !form?.solo_truck ||form?.trailer_type?.length==0) return
+    if(user?.role=="carrier" && (!form?.fullName || !form?.email ||!form?.address ||!form?.trailers_number  ||!form?.team_truck || !form?.solo_truck ||form?.trailer_type?.length==0)) return
+    if(user?.role=="staff" &&( !form?.fullName || !form?.email ||!form?.address )) return
+    if(user?.role=="driver" && (!form?.fullName || !form?.email ||!form?.address || !form?.foundDriverDetails?.licence_number || !form?.foundDriverDetails?.license_image)) return
     // document.getElementById("closepopup").click()
     let value = {
       id: user?.id,
@@ -197,7 +199,9 @@ const Profile = () => {
       team_truck: form?.team_truck,
       solo_truck: form?.solo_truck,
       image: form?.image,
-      trailer_type: form?.trailer_type,
+      trailer_type: form?.trailer_type ||[],
+      licence_number:form?.foundDriverDetails?.licence_number,
+      license_image:form?.foundDriverDetails?.license_image
     };
     ApiClient.put('user/profile', value).then((res) => {
       if (res.success) {
@@ -1232,15 +1236,15 @@ const Profile = () => {
                                   }}
                                   className=" bg-white w-full rounded-lg h-10 flex items-center gap-2  border border-[#00000036] px-3"
                                   // required
-                                  value={form.licence_number}
+                                  value={form?.foundDriverDetails?.licence_number}
                                   onChange={(e) =>
                                     setForm({
-                                      ...form,
+                                      ...form?.foundDriverDetails,
                                       licence_number: e.target.value,
                                     })
                                   }
                                 />
-                                {!form.licence_number && submitted && (
+                                {!form?.foundDriverDetails?.licence_number && submitted && (
                                   <div className="invalid-feedback d-block">
                                     Licence Number is required.
                                   </div>
@@ -1255,13 +1259,13 @@ const Profile = () => {
                               <div className='d-block license-upload'>
                                 <ImageUpload
                                   idd="LicenceImage"
-                                  value={form?.license_image}
+                                  value={form?.foundDriverDetails?.license_image}
                                   // multiple={true}
                                   result={(e) => {
-                                    setForm({ ...form, license_image: e.value })
+                                    setForm({ ...form?.foundDriverDetails, license_image: e.value })
                                   }}
                                 />
-                                {submitted && !form.license_image ? (
+                                {submitted && !form?.foundDriverDetails?.license_image ? (
                                   <div className="invalid-feedback d-block">
                                     License Image is Required
                                   </div>
