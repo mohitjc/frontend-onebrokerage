@@ -734,7 +734,7 @@ useEffect(() => {
                               <div class="flex w-full mt-2 space-x-3 max-w-xs">
                                 <img
                                   src={methodModel.userImg(
-                                    itm?.send_to_details?.image
+                                    itm?.sender_details?.image
                                   )}
                                   className="h-10 w-10 rounded-full mb-4 object-contain "
                                 />
@@ -753,7 +753,7 @@ useEffect(() => {
                                     </> : <p class="text-sm">{itm?.content}</p>}
                                   </div>
                                   
-                                  <span class="text-xs text-gray-500 leading-none">{itm?.send_to_details?.fullName}, {moment(itm?.createdAt).fromNow()}</span>
+                                  <span class="text-xs text-gray-500 leading-none">{itm?.sender_details?.fullName}, {moment(itm?.createdAt).fromNow()}</span>
                                 </div>
                               </div>
 
