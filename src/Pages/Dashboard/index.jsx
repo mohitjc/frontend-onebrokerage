@@ -26,10 +26,12 @@ const Dashboard = () => {
     { id: "monthly", name: "Monthly" },
     { id: "yearly", name: "Yearly" },
   ];
-  const getAllCounts = () => {
-    ApiClient.get("dashboard/all-counts").then((res) => {
+
+   const getAllCounts = () => {
+    ApiClient.get("total-loads",{addedBy:user?.id}).then((res) => {
       if (res.success) {
-        setData(res.data?.[0]);
+        console.log(res,"response")
+        setData(res);
       }
     });
   };
@@ -63,7 +65,7 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    // getAllCounts();
+    getAllCounts();
     // getOrders();
   }, []);
 
@@ -129,6 +131,21 @@ const Dashboard = () => {
 
         <div className=" w-full bg-white rounded-lg mt-6 ">
         <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
+              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
+                <img
+                  src="../assets/img/d1.svg"
+                  className="mx-auto  w-[30px]"
+                  alt=""
+                />
+              </div>
+              <dt className="text-base leading-7 text-black/40 mb-1">
+                Total Loads
+              </dt>
+              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
+                {data?.total_loads} 
+              </dd>
+            </div>
             <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
               <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
                 <img
@@ -141,7 +158,7 @@ const Dashboard = () => {
                 Total Trucks
               </dt>
               <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
-                {data?.totalUsers} 34
+                {data?.totalTrucksCount} 
               </dd>
             </div>
             <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
@@ -156,7 +173,7 @@ const Dashboard = () => {
               Total Drivers
               </dt>
               <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
-              {data?.totalProducts} 34
+              {data?.totalDriversCount} 
               </dd>
             </div>
             <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
@@ -171,25 +188,11 @@ const Dashboard = () => {
               Total Carrier's Staff
               </dt>
               <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
-              {data?.totalCategory} 34
+              {data?.totalStaffCount} 
               </dd>
             </div>
 
-            <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
-              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
-                <img
-                  src="../assets/img/d2.svg"
-                  className="mx-auto  w-[30px]"
-                  alt=""
-                />
-              </div>
-              <dt className="text-base leading-7 text-black/40 mb-1">
-              Total Transaction
-              </dt>
-              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
-              {data?.totalReview} 34
-              </dd>
-            </div>
+         
           
             
           </div>
