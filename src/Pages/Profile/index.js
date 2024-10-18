@@ -177,9 +177,9 @@ const Profile = () => {
   const handleSubmit2 = (e) => {
     e.preventDefault();
     setSubmitted(true)
-    if(user?.role=="carrier" && (!form?.fullName || !form?.email ||!form?.address ||!form?.trailers_number  ||!form?.team_truck || !form?.solo_truck ||form?.trailer_type?.length==0)) return
-    if(user?.role=="staff" &&( !form?.fullName || !form?.email ||!form?.address )) return
-    if(user?.role=="driver" && (!form?.fullName || !form?.email ||!form?.address || !form?.foundDriverDetails?.licence_number || !form?.foundDriverDetails?.license_image)) return
+    if (user?.role == "carrier" && (!form?.fullName || !form?.email || !form?.address || !form?.trailers_number || !form?.team_truck || !form?.solo_truck || form?.trailer_type?.length == 0)) return
+    if (user?.role == "staff" && (!form?.fullName || !form?.email || !form?.address)) return
+    if (user?.role == "driver" && (!form?.fullName || !form?.email || !form?.address || !form?.foundDriverDetails?.licence_number || !form?.foundDriverDetails?.license_image)) return
     // document.getElementById("closepopup").click()
     let value = {
       id: user?.id,
@@ -199,9 +199,9 @@ const Profile = () => {
       team_truck: form?.team_truck,
       solo_truck: form?.solo_truck,
       image: form?.image,
-      trailer_type: form?.trailer_type ||[],
-      licence_number:form?.foundDriverDetails?.licence_number,
-      license_image:form?.foundDriverDetails?.license_image
+      trailer_type: form?.trailer_type || [],
+      licence_number: form?.foundDriverDetails?.licence_number,
+      license_image: form?.foundDriverDetails?.license_image
     };
     ApiClient.put('user/profile', value).then((res) => {
       if (res.success) {
@@ -377,7 +377,28 @@ const Profile = () => {
                             )}
                           </p>
                         </div> : <></>}</> : <></>}
+                      {user?.role == "driver" ? <>
+                        {data.foundDriverDetails?.licence_number ? 
+                        <div className="">
+                          <label className="text-gray-500 font-normal ">Licence Number</label>
+                          <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
+                            {/* <MdOutlineEmail className="text-xl" /> */}
+                            {data && data.foundDriverDetails?.licence_number}
+                          </p>
+                        </div> : <></>}
 
+                        {data.foundDriverDetails?.license_image ? 
+                        <div className="">
+                          <label className="text-gray-500 font-normal ">Licence Image</label>
+                          <p className="font-semibold text-gray-700 flex items-center gap-2 text-md">
+                            {/* <MdOutlineEmail className="text-xl" /> */}
+
+                            <img
+                              src={methodModel.userImg(
+                                data && data.foundDriverDetails?.license_image,"chat"
+                              )} />
+                          </p>
+                        </div> : <></>}</> : <></>}
 
 
                     </div>
@@ -718,15 +739,15 @@ const Profile = () => {
                                   />
                                   {!form.address && submitted ? (
                                     <div className="invalid-feedback d-block star text-[12px]">
-                                        Please Select Location
-                                        Suggestion
+                                      Please Select Location
+                                      Suggestion
                                     </div>
                                   ) : (
                                     <></>
                                   )}
                                 </div>
                               </div>
-                             
+
                             </div>
                           </div> : <></>}
 
@@ -833,13 +854,13 @@ const Profile = () => {
                                     })
                                   }
                                 />
-                                  {!form.fax_number && submitted ? (
-                                    <div className="invalid-feedback d-block star text-[12px]">
-                                       Fax Number is required
-                                    </div>
-                                  ) : (
-                                    <></>
-                                  )}
+                                {!form.fax_number && submitted ? (
+                                  <div className="invalid-feedback d-block star text-[12px]">
+                                    Fax Number is required
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
                               </div>
                             </div>
                             <div className="">
@@ -882,13 +903,13 @@ const Profile = () => {
                                     })
                                   }
                                 />
-                                  {!form.tax_number && submitted ? (
-                                    <div className="invalid-feedback d-block star text-[12px]">
-                                      Tax Number is required
-                                    </div>
-                                  ) : (
-                                    <></>
-                                  )}
+                                {!form.tax_number && submitted ? (
+                                  <div className="invalid-feedback d-block star text-[12px]">
+                                    Tax Number is required
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
                               </div>
                             </div>  </> : <></>}
 
@@ -901,14 +922,13 @@ const Profile = () => {
                             Back
                           </a>
                           <a
-                            onClick={() => {;
+                            onClick={() => {
+                              ;
                               setSubmitted(true)
-                              if(!form?.fullName || !form?.email || !form?.address)
-                              {
+                              if (!form?.fullName || !form?.email || !form?.address) {
                                 SetNextForm(false)
                               }
-                              else
-                              {
+                              else {
                                 setSubmitted(false)
                                 SetNextForm(true)
                               }
@@ -942,13 +962,13 @@ const Profile = () => {
                                   })
                                 }
                               />
-                                {!form.trailers_number && submitted ? (
-                                    <div className="invalid-feedback d-block star text-[12px]">
-                                      Trailers Number is required
-                                    </div>
-                                  ) : (
-                                    <></>
-                                  )}
+                              {!form.trailers_number && submitted ? (
+                                <div className="invalid-feedback d-block star text-[12px]">
+                                  Trailers Number is required
+                                </div>
+                              ) : (
+                                <></>
+                              )}
                             </div>
                           </div>
                             <div className="col-md-6 mb-3">
@@ -970,13 +990,13 @@ const Profile = () => {
                                     })
                                   }
                                 />
-                                  {!form.team_truck && submitted ? (
-                                    <div className="invalid-feedback d-block star text-[12px]">
-                                      Team truck is required
-                                    </div>
-                                  ) : (
-                                    <></>
-                                  )}
+                                {!form.team_truck && submitted ? (
+                                  <div className="invalid-feedback d-block star text-[12px]">
+                                    Team truck is required
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
                               </div>
                             </div>
                             <div className="col-md-6 mb-3">
@@ -998,13 +1018,13 @@ const Profile = () => {
                                     })
                                   }
                                 />
-                                  {!form.solo_truck && submitted ? (
-                                    <div className="invalid-feedback d-block star text-[12px]">
-                                       Solo Truck is required
-                                    </div>
-                                  ) : (
-                                    <></>
-                                  )}
+                                {!form.solo_truck && submitted ? (
+                                  <div className="invalid-feedback d-block star text-[12px]">
+                                    Solo Truck is required
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
                               </div>
                             </div>
 
@@ -1210,8 +1230,8 @@ const Profile = () => {
                                     </label>
                                   </div>
                                 </div>
-                                {submitted && form?.trailer_type?.length==0?  <div className="invalid-feedback d-block star text-[12px]">Please select any trailer type
-                                    </div>:<></>}
+                                {submitted && form?.trailer_type?.length == 0 ? <div className="invalid-feedback d-block star text-[12px]">Please select any trailer type
+                                </div> : <></>}
                               </div>
                             </div></> : <></>}
                           {user?.role == "driver" ? <>

@@ -732,19 +732,20 @@ const Html = ({
     },
   ];
 
-  const [visibleColumns, setVisibleColumns] = useState(columns.slice(0, 2));
-  /*  const getGroups = () => {
-    let f = {
-      page: 1,
-      count: 10,
-    };
-    ApiClient.get("api/group/list", f).then((res) => {
-      if (res.success) {
-        setGroup(res.data);
-      }
-    });
+  const getStoredColumns = () => {
+    const storedColumns = JSON.parse(localStorage.getItem("LoadColumn")) || [];
+    return columns.filter(column => 
+      storedColumns.some(stored => stored.key === column.key)
+    );
   };
- */
+  
+  const [visibleColumns, setVisibleColumns] = useState(getStoredColumns()?.length>0?getStoredColumns():columns.slice(0,2));
+
+  useEffect(() => {
+    localStorage.setItem("LoadColumn", JSON.stringify(visibleColumns));
+  }, [visibleColumns]);
+
+  
   useEffect(() => {
     destinationState();
     destinationCity();
