@@ -127,8 +127,7 @@ const Header = () => {
                       <Link to="/profile">
                         <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white">
                           <PencilIcon className="size-4 stroke-black/30 hover:stroke-white" />
-                         Profile
-                       
+                         Profile  
                         </button>
                         </Link>
                       </MenuItem>

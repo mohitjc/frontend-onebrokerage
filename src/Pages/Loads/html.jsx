@@ -66,6 +66,7 @@ const Html = ({
     // setVisibleColumns([...visibleColumns,columnName])
   };
 
+
   function findUniqueElements(arr1, arr2) {
     const uniqueInArr1 = arr1.filter((item) =>
       !arr2.find((itema) => itema.key == item.key) ? true : false
@@ -89,11 +90,7 @@ const Html = ({
           <span
             className="capitalize cursor-pointer"
             onClick={(e) => {
-              if(isAllow(`${shared.check}_add`))
-              {
-                view(row.id);
-              }
-             
+              view(row.id);
             }}
           >
             {row?.load_id || row?.lane_id}
@@ -154,7 +151,6 @@ const Html = ({
         return <span>{row?.destination_location_postal_code}</span>;
       },
     },
-
     {
       key: "destination_address",
       name: "Destination Address",
@@ -192,25 +188,26 @@ const Html = ({
       },
     },
   ];
-
-  const [visibleColumns, setVisibleColumns] = useState(columns.slice(0, 2));
-  /*  const getGroups = () => {
-    let f = {
-      page: 1,
-      count: 10,
-    };
-    ApiClient.get("api/group/list", f).then((res) => {
-      if (res.success) {
-        setGroup(res.data);
-      }
-    });
+  const getStoredColumns = () => {
+    const storedColumns = JSON.parse(localStorage.getItem("LoadColumn")) || [];
+    return columns.filter(column => 
+      storedColumns.some(stored => stored.key === column.key)
+    );
   };
- */
+  
+  const [visibleColumns, setVisibleColumns] = useState(getStoredColumns()?.length>0?getStoredColumns():columns.slice(0,2));
+
+  useEffect(() => {
+    localStorage.setItem("LoadColumn", JSON.stringify(visibleColumns));
+  }, [visibleColumns]);
+
+
   useEffect(() => {
     destinationState();
     destinationCity();
     handleOriginStateList();
   }, []);
+  
   const [DesitinationStates, setDestinationStates] = useState([]);
   const [DesitinationCity, setDestinationCity] = useState([]);
   const destinationState = () => {
@@ -225,6 +222,8 @@ const Html = ({
       }
     });
   };
+
+  
   const destinationCity = () => {
     ApiClient.get("load/destination/city-state", { ...filters }).then((res) => {
       if (res.success) {

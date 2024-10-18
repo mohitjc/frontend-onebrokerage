@@ -103,10 +103,9 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
 
         <div className="border-t  px-2 py-4">
 
-
           <ul className="space-y-2  ">
             <li>
-              <tooltip placement="right" title={`${user?.permissions?.dashboard_get ? "Dashboard" : "You have not valid permission to access this module"}`}>
+              <tooltip placement="right" title={`${user?.role=="carrier" || user?.permissions?.dashboard_get ? "Dashboard" : "You have not valid permission to access this module"}`}>
                 <NavLink
                   to={`${(user?.plan_id || user?.role == "driver" || (user?.role == "staff" && user?.addedBy?.plan_id) && user?.permissions?.dashboard_get) ? "/dashboard" : ""}`}
                   // to={`/dashboard`}
