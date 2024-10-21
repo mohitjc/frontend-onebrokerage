@@ -33,7 +33,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { MdDelete } from "react-icons/md";
-import AgoraUIKit from 'agora-react-uikit';
+import AgoraUIKit, { EndCall } from 'agora-react-uikit';
 import AgoraRTC from "agora-rtc-sdk-ng";
 
 export default function Chat() {
@@ -180,6 +180,10 @@ useEffect(() => {
     }
   };
 }, [screenTrack]);
+
+const callbacks={
+  EndCall:()=>setInCall(false)
+}
 
 // **************************************vedio call**********************
 
@@ -628,8 +632,8 @@ useEffect(() => {
                    </div>
                   
                   ) : (
-                    <div>
-                      <AgoraUIKit rtcProps={rtcProps} className="w-100 h-100"/>
+                    <div className='w-100 h-100 flex'>
+                      <AgoraUIKit rtcProps={rtcProps} callbacks={callbacks}/>
                       <div>
                         {/* <button onClick={endCall}>End Call</button> */}
                         {/* <button onClick={startScreenShare}>Start Screen Share</button> */}
