@@ -11,6 +11,7 @@ import LineChart from "../../components/common/LineChart";
 import { useSelector } from "react-redux";
 import PageLayout from "../../components/global/PageLayout";
 import methodModel from "../../methods/methods";
+import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const user=useSelector(state=>state.user)
   const [data, setData] = useState();
@@ -20,6 +21,7 @@ const Dashboard = () => {
   const [dates, setDates] = useState([]);
   const [filters, setFilter] = useState({monthly:'monthly',type:'monthly',startDate:'',endDate:''});
   const [aggregation, setAggregation] = useState("monthly");
+  const history=useNavigate()
   const list = [
     { id: "daily", name: "Daily" },
     { id: "weekly", name: "Weekly" },
@@ -131,7 +133,7 @@ const Dashboard = () => {
 
         <div className=" w-full bg-white rounded-lg mt-6 ">
         <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
+        <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow cursor-pointer" onClick={(e)=>history("/loads")}>
               <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
                 <img
                   src="../assets/img/d1.svg"
@@ -146,7 +148,7 @@ const Dashboard = () => {
                 {data?.total_loads} 
               </dd>
             </div>
-            <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
+            <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow cursor-pointer" onClick={(e)=>history("/trucks")}>
               <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
                 <img
                   src="../assets/img/d1.svg"
@@ -161,7 +163,7 @@ const Dashboard = () => {
                 {data?.totalTrucksCount} 
               </dd>
             </div>
-            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
+            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow cursor-pointer" onClick={(e)=>history("/drivers")}>
               <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
                 <img
                   src="../assets/img/d1.svg"
@@ -176,7 +178,7 @@ const Dashboard = () => {
               {data?.totalDriversCount} 
               </dd>
             </div>
-            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow">
+            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow  cursor-pointer" onClick={(e)=>history("/carrierstaff")}>
               <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
                 <img
                   src="../assets/img/d4.svg"
