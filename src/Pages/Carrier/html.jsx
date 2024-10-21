@@ -20,7 +20,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Link } from 'react-router-dom';
 import { IoChevronDownSharp, IoGitPullRequestOutline } from 'react-icons/io5';
 import { RxCrossCircled } from 'react-icons/rx';
-import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+
 
 const Html = ({
   view,
@@ -181,14 +181,7 @@ const Html = ({
                   <LiaEdit />
                 </a>
               </Tooltip></>}
-              <Tooltip placement="top" title="Chat">
-                  <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={() => ChatUser(itm.id)}
-                  >
-                  <IoChatbubbleEllipsesOutline />
-                  </span>
-                </Tooltip>
+             
              
      
 

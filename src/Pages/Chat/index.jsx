@@ -76,7 +76,6 @@ export default function Chat() {
 // **************************************vedio call**********************
 
 const [inCall, setInCall] = useState(false);  // To track whether the user is in a call
-console.log(inCall,"incall")
 const [channelName, setChannelName] = useState('');  // To store the channel name
 const [rtcProps, setRtcProps] = useState({});  // RTC props including token and channel name
 const [client, setClient] = useState(null);  // Store Agora RTC client
@@ -145,13 +144,13 @@ const startCall = async () => {
 };
 
 // Handle ending the call
-const endCall = async () => {
-  if (client) {
-    await client.leave();
-    setCallingUser("")  // Leave the Agora channel
-  }
-  setInCall(false);  
-};
+// const endCall = async () => {
+//   if (client) {
+//     await client.leave();
+//     setCallingUser("")  // Leave the Agora channel
+//   }
+//   setInCall(false);  
+// };
 
 // Handle screen sharing
 const startScreenShare = async () => {

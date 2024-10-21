@@ -69,6 +69,13 @@ const ApprovedCarrier = (p) => {
     setTableCols([...tableCols, itm]);
   };
 
+
+  const ChatUser=(id)=>
+    {
+        history(`/chat?id=${id}`)
+    }
+
+
   const addressResult = async (e) => {
     let address = {};
     if (e.place) {
@@ -364,6 +371,7 @@ const ApprovedCarrier = (p) => {
         getData={getData}
         ChangeFilter={ChangeFilter}
         deleteLoad={deleteLoad}
+        ChatUser={ChatUser}
       />
     </>
   );

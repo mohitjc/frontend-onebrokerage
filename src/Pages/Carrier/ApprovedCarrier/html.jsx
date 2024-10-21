@@ -17,6 +17,7 @@ import { LiaEdit } from 'react-icons/lia';
 import SelectDropdown from '../../../components/common/SelectDropdown';
 import statusModel from '../../../models/status.model';
 import { IoIosRefresh } from 'react-icons/io';
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import Swal from 'sweetalert2';
 const Html = ({
   view,
@@ -40,7 +41,7 @@ const Html = ({
   loaging,
   getData,
   data,
-
+  ChatUser,
   total = { total },
 }) => {
   // console.log(user,"useruseruseruser")
@@ -146,6 +147,14 @@ const Html = ({
                   >
                     <LiaEdit />
                   </a>
+                </Tooltip>
+                <Tooltip placement="top" title="Chat">
+                  <span
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={() => ChatUser(itm.id)}
+                  >
+                  <IoChatbubbleEllipsesOutline />
+                  </span>
                 </Tooltip>
             {/* //   ) : (
             //     <></>
