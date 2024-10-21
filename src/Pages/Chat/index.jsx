@@ -40,11 +40,11 @@ export default function Chat() {
   const AxiosCancelToken = axios.CancelToken;
   const CancelRefToken = useRef(0)
   const [emoji, setemoji] = useState(false)
-  const [ChatWithUser, setChatWithUser] = useState(null); 
+  const [ChatWithUser, setChatWithUser] = useState(null);
   const [ChatWithUserName, setChatWithUserName] = useState({});
-  console.log(ChatWithUserName,"ChatWithUserName")
-  const [callingUser,setCallingUser]=useState({})
-  console.log(callingUser,"callingUser")
+  console.log(ChatWithUserName, "ChatWithUserName")
+  const [callingUser, setCallingUser] = useState({})
+  console.log(callingUser, "callingUser")
   const [darkMode, setDarkMode] = useState(false);
   const [addmember, setaddmember] = useState(false)
   const [adddrivermemberlisting, setadddrivermemberListing] = useState([])
@@ -73,115 +73,236 @@ export default function Chat() {
   const activeRooms = useRef(ar ? JSON.parse(ar) : []);
 
 
-// **************************************vedio call**********************
+  // **************************************vedio call**********************
 
-const [inCall, setInCall] = useState(false);  // To track whether the user is in a call
-console.log(inCall,"incall")
-const [channelName, setChannelName] = useState('');  // To store the channel name
-const [rtcProps, setRtcProps] = useState({});  // RTC props including token and channel name
-const [client, setClient] = useState(null);  // Store Agora RTC client
-const [screenTrack, setScreenTrack] = useState(null); // Store screen sharing track
-const [isJoining, setIsJoining] = useState(false); // Track if a user is in the process of joining the call
-const [token, setToken] = useState(''); 
-// Your Agora App ID (replace with your actual App ID)
-const appId = environment.appId;  // Replace with your Agora App ID
+  // const [inCall, setInCall] = useState(false);  // To track whether the user is in a call
+  // console.log(inCall,"incall")
+  // const [channelName, setChannelName] = useState('');  // To store the channel name
+  // const [rtcProps, setRtcProps] = useState({});  // RTC props including token and channel name
+  // const [client, setClient] = useState(null);  // Store Agora RTC client
+  // const [screenTrack, setScreenTrack] = useState(null); // Store screen sharing track
+  // const [isJoining, setIsJoining] = useState(false); // Track if a user is in the process of joining the call
+  // const [token, setToken] = useState(''); 
+  // // Your Agora App ID (replace with your actual App ID)
+  // const appId = environment.appId;  // Replace with your Agora App ID
 
 
-// Function to check camera permissions
-const checkCameraPermission = async () => {
-  // return true
-  try {
-    await navigator.mediaDevices.getUserMedia({ video: true });
-    return true;  // Camera access granted
-  } catch (error) {
-    console.error("Camera access denied:", error);
-    return false;  // Camera access denied
-  }
-};
+  // // Function to check camera permissions
+  // const checkCameraPermission = async () => {
+  //   // return true
+  //   try {
+  //     await navigator.mediaDevices.getUserMedia({ video: true });
+  //     return true;  // Camera access granted
+  //   } catch (error) {
+  //     console.error("Camera access denied:", error);
+  //     return false;  // Camera access denied
+  //   }
+  // };
 
-// Handle starting the call
-const startCall = async () => {
-  if (isJoining) return; // Prevent multiple join attempts
-  const hasPermission = await checkCameraPermission();
-  if (!hasPermission) {
-    alert('Camera access is required to start the call. Please allow camera access in your browser settings.');
-    return;  // Exit the function if camera access is denied
-  }
+  // // Handle starting the call
+  // const startCall = async () => {
+  //   if (isJoining) return; // Prevent multiple join attempts
+  //   const hasPermission = await checkCameraPermission();
+  //   if (!hasPermission) {
+  //     alert('Camera access is required to start the call. Please allow camera access in your browser settings.');
+  //     return;  // Exit the function if camera access is denied
+  //   }
 
-  if (channelName) {
-    setIsJoining(true); // Set to true while joining the call
-    try {
-      ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id||user?.id}&role=publisher`,{},environment.chat_api).then((res) => {
-        if (res.success) {
-          setToken(res?.data?.token)
-          setChannelName(res?.data?.channelName||channelName)
-        }   
-      });
+  //   if (channelName) {
+  //     setIsJoining(true); // Set to true while joining the call
+  //     try {
+  // ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id||user?.id}&role=publisher`,{},environment.chat_api).then((res) => {
+  //   if (res.success) {
+  //     setToken(res?.data?.token)
+  //     setChannelName(res?.data?.channelName||channelName)
+  //   }   
+  // });
 
-      // Log the token to ensure it's correct
-      console.log('Token:', token);
-      // Initialize Agora client
+  //       // Log the token to ensure it's correct
+  //       console.log('Token:', token);
+  //       // Initialize Agora client
+  //       const agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
+  //       console.log(agoraClient,"agoraclient")
+  //       setClient(agoraClient); // Save the client for later use (e.g., screen sharing)
+  //       setRtcProps({
+  //         appId: appId,  // Your Agora App ID
+  //         channel:channelName, 
+  //         token: token,  // Token from backend or null
+  //       });
+  //       // Join the Agora channel with the token or null
+  //       // await agoraClient.join(appId, responseChannelName, token, null);  // Join the Agora channel
+  //       setInCall(true);  // Mark user as in the call
+  //       setCallingUser(user?.id)
+  //     } catch (error) {
+  //       console.error("Error starting the call:", error);
+  //       alert('Failed to start the call. Please check the console for more details.');
+  //     } finally {
+  //       setIsJoining(false);  
+  //     }
+  //   } else {
+  //     alert('Please enter a valid channel name');
+  //   }
+  // };
+
+  // // Handle ending the call
+  // const endCall = async () => {
+  //   if (client) {
+  //     await client.leave();
+  //     setCallingUser("")  // Leave the Agora channel
+  //   }
+  //   setInCall(false);  
+  // };
+
+  // // Handle screen sharing
+  // const startScreenShare = async () => {
+  //   try {
+  //     if (client) {
+  //       // Create the screen-sharing track
+  //       const screenTrack = await AgoraRTC.createScreenVideoTrack();
+  //       setScreenTrack(screenTrack);
+  //       // Publish the screen-sharing track
+  //       await client.publish(screenTrack);
+  //       console.log("Screen sharing started!");
+  //     } else {
+  //       console.error("Agora client not initialized");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error starting screen sharing:", error);
+  //   }
+  // };
+
+  // // Cleanup screen share track when component unmounts or when screen share is stopped
+  // useEffect(() => {
+  //   return () => {
+  //     if (screenTrack) {
+  //       screenTrack.stop();
+  //       screenTrack.close();
+  //     }
+  //   };
+  // }, [screenTrack]);
+
+  // **************************************vedio call**********************
+
+  const appId = environment.appId; 
+  const [joined, setJoined] = useState(false);
+  console.log(joined, "joinedd")
+  const [localTracks, setLocalTracks] = useState({
+    videoTrack: null,
+    audioTrack: null,
+  });
+  const [channelName, setChannelName] = useState('')
+  const [remoteUsers, setRemoteUsers] = useState({});
+  const [client, setClient] = useState(null);
+  const localVideoRef = useRef(null);
+  const remoteVideoRef = useRef(null);
+
+  const [token, setToken] = useState('');
+
+  // Fetch token from your backend 
+  useEffect(() => {
+    ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id || user?.id}&role=publisher`, {}, environment.chat_api).then((res) => {
+      if (res.success) {
+        setToken(res?.data?.token)
+        setChannelName(res?.data?.channelName || channelName)
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    if (token && !joined) {
       const agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
-      console.log(agoraClient,"agoraclient")
-      setClient(agoraClient); // Save the client for later use (e.g., screen sharing)
-      setRtcProps({
-        appId: appId,  // Your Agora App ID
-        channel:channelName, 
-        token: token,  // Token from backend or null
+      console.log(agoraClient, "//////////")
+      setClient(agoraClient);
+      // Event Listener: Remote user published (joined)
+      agoraClient.on('user-published', async (user, mediaType) => {
+        console.log(user, mediaType, "agora publish=======")
+        await agoraClient.subscribe(user, mediaType); // Subscribe to the user
+
+        if (mediaType === 'video') {
+          const remoteVideoTrack = user.videoTrack;
+          remoteVideoTrack.play(remoteVideoRef.current); // Play the remote video
+        }
+        if (mediaType === 'audio') {
+          const remoteAudioTrack = user.audioTrack;
+          remoteAudioTrack.play(); // Play remote audio
+        }
+        setRemoteUsers((prevUsers) => ({ ...prevUsers, [user.uid]: user }));
       });
-      // Join the Agora channel with the token or null
-      // await agoraClient.join(appId, responseChannelName, token, null);  // Join the Agora channel
-      setInCall(true);  // Mark user as in the call
-      setCallingUser(user?.id)
-    } catch (error) {
-      console.error("Error starting the call:", error);
-      alert('Failed to start the call. Please check the console for more details.');
-    } finally {
-      setIsJoining(false);  
+
+      // Event Listener: Remote user left
+      agoraClient.on('user-unpublished', (user) => {
+        console.log(user, "agora unpublish=======")
+        const videoElement = remoteVideoRef.current;
+        if (videoElement) {
+          videoElement.innerHTML = ''; // Clear the video element when the user leaves
+        }
+        setRemoteUsers((prevUsers) => {
+          const newUsers = { ...prevUsers };
+          delete newUsers[user.uid];
+          return newUsers;
+        });
+      });
     }
-  } else {
-    alert('Please enter a valid channel name');
-  }
-};
+  }, [token]);
 
-// Handle ending the call
-const endCall = async () => {
-  if (client) {
-    await client.leave();
-    setCallingUser("")  // Leave the Agora channel
-  }
-  setInCall(false);  
-};
+  useEffect(() => {
+    const checkDevices = async () => {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      console.log(devices, "devices"); // Check the list of devices
+    };
 
-// Handle screen sharing
-const startScreenShare = async () => {
-  try {
-    if (client) {
-      // Create the screen-sharing track
-      const screenTrack = await AgoraRTC.createScreenVideoTrack();
-      setScreenTrack(screenTrack);
-      // Publish the screen-sharing track
-      await client.publish(screenTrack);
-      console.log("Screen sharing started!");
+    checkDevices();
+  }, []);
+
+  const joinCall = async () => {
+    if (client?._clientId && !joined) {
+      try {
+        // alert("hii")
+        // Join the channel using your appId, channel, and token
+        await client.join(appId, channelName, token, user?.id);
+
+        // Create local video and audio tracks
+        const [audioTrack, videoTrack] = await AgoraRTC.createMicrophoneAndCameraTracks();
+        setLocalTracks({ videoTrack, audioTrack });
+
+        console.log(videoTrack, audioTrack, "jhdgfhsgdfgsdfg")
+
+        // Play local video on the page
+        videoTrack.play(localVideoRef.current);
+
+        // Publish local tracks to the channel
+        await client.publish([audioTrack, videoTrack]);
+
+        setJoined(true);
+      } catch (error) {
+        console.error("Error joining the call:", error);
+      }
     } else {
-      console.error("Agora client not initialized");
-    }
-  } catch (error) {
-    console.error("Error starting screen sharing:", error);
-  }
-};
-
-// Cleanup screen share track when component unmounts or when screen share is stopped
-useEffect(() => {
-  return () => {
-    if (screenTrack) {
-      screenTrack.stop();
-      screenTrack.close();
+      console.warn("Already connected or connecting.");
     }
   };
-}, [screenTrack]);
 
-// **************************************vedio call**********************
+  const leaveCall = async () => {
+    if (client?._clientId && joined) {
+      try {
+        // Stop and close local tracks
+        localTracks.videoTrack?.stop();
+        localTracks.audioTrack?.stop();
+        localTracks.videoTrack?.close();
+        localTracks.audioTrack?.close();
+
+        // Unpublish local tracks
+        await client.unpublish([localTracks.audioTrack, localTracks.videoTrack]);
+
+        // Leave the channel
+        await client.leave();
+        setJoined(false);
+        setLocalTracks({ videoTrack: null, audioTrack: null }); // Reset local tracks
+      } catch (error) {
+        console.error("Error leaving the call:", error);
+      }
+    }
+  };
 
   const chatScroll = () => {
     // Scroll to the bottom after sending a message
@@ -299,9 +420,9 @@ useEffect(() => {
     })
   }
 
-  const allroommemeber = (p={}) => {
-    let filter = { ...filters, ...p, role: "carrier" ,board_id:"",user_id: user?.id || user?._id};
-    ApiClient.get('chat/user/recent-chats/all',filter, environment.chat_api).then(res => {
+  const allroommemeber = (p = {}) => {
+    let filter = { ...filters, ...p, role: "carrier", board_id: "", user_id: user?.id || user?._id };
+    ApiClient.get('chat/user/recent-chats/all', filter, environment.chat_api).then(res => {
       if (res.success) {
         setsidechat(res?.data?.data)
         setChatWithUser(res?.data?.data?.find((item) => item?.room_id == chatRoomId))
@@ -351,7 +472,7 @@ useEffect(() => {
 
   useEffect(() => {
     socketModel.on("receive-message", (data) => {
-      console.log(data,"data")
+      console.log(data, "data")
       if (currectChat.current == data.data.room_id) {
         messages.current.push({ ...data.data });
 
@@ -361,7 +482,7 @@ useEffect(() => {
           return messages.current.find((message) => message._id === id);
         });
         setChatMessages([...uniqueMessages]);
-  
+
         setTimeout(() => {
           chatScroll();
         }, 100);
@@ -386,7 +507,7 @@ useEffect(() => {
       });
 
       const sortedMessages = updatedSideChat
-        .filter(chat => chat.last_message_at) 
+        .filter(chat => chat.last_message_at)
         .sort((a, b) => new Date(b.last_message_at) - new Date(a.last_message_at));
       setsidechat(sortedMessages);
 
@@ -536,8 +657,7 @@ useEffect(() => {
     setIsOpen(false);
   };
 
-  const readmessages=(roomId)=>
-  {
+  const readmessages = (roomId) => {
     ApiClient.put("chat/user/read-all-messages", { user_id: user?.id || user?._id, room_id: roomId }, environment.chat_api).then((res) => {
       if (res.success) {
         setaddstaffmemberListing(
@@ -569,7 +689,7 @@ useEffect(() => {
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
     setChatWithUser(data);
     setChatRoomId(data?.room_id)
-    setChatWithUserName({ id:data?.id || data?._id ,name: data?.room_name ? data?.room_name : data?.room_members[0].user_name, image: data?.isGroupChat ? data?.room_image : data?.room_members[0]?.user_image, isGroupChat: data?.isGroupChat, isOnline: data?.room_members[0]?.isOnline })
+    setChatWithUserName({ id: data?.id || data?._id, name: data?.room_name ? data?.room_name : data?.room_members[0].user_name, image: data?.isGroupChat ? data?.room_image : data?.room_members[0]?.user_image, isGroupChat: data?.isGroupChat, isOnline: data?.room_members[0]?.isOnline })
     history("/chat")
   }
 
@@ -579,7 +699,7 @@ useEffect(() => {
       <div className="main_chats h-screen overflow-hidden ">
         <div className="flex">
 
-          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber} setsidechat={setsidechat} filters={filters} setFilter={setFilter}/>
+          <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber} setsidechat={setsidechat} filters={filters} setFilter={setFilter} />
 
           <div className="rigtsie_inners h-screen w-full">
             {chatRoomId ?
@@ -615,10 +735,22 @@ useEffect(() => {
                     // setform({})
                   }}>Group Detail</button> : <></>}
 
-                 
+
                   {/* ***********************************vedio call**********************************/}
 
-                  {!inCall ? (
+                  <div>
+                    <div>
+                      <div ref={localVideoRef} style={{ width: '400px', height: '300px', backgroundColor: 'black' }}></div>
+                      <div ref={remoteVideoRef} style={{ width: '400px', height: '300px', backgroundColor: 'black' }}></div>
+                    </div>
+
+                    <div>
+                      <button onClick={joinCall} disabled={joined}>Join Call</button>
+                      <button onClick={leaveCall} disabled={!joined}>Leave Call</button>
+                    </div>
+                  </div>
+
+                  {/* {!inCall ? (
                     <div>
                     {callingUser?.id==ChatWithUserName?.id  && inCall?  <div  onClick={startCall} disabled={isJoining}>
                       JoinCall    
@@ -628,16 +760,16 @@ useEffect(() => {
                    </div>
                   
                   ) : (
-                    <div>
-                      {/* <AgoraUIKit rtcProps={rtcProps} />
+                    <div> */}
+                  {/* <AgoraUIKit rtcProps={rtcProps} />
                       <div>
                         <button onClick={endCall}>End Call</button> */}
-                        {/* <button onClick={startScreenShare}>Start Screen Share</button> */}
-                      {/* </div> */}
-                    </div>
-                  )}
+                  {/* <button onClick={startScreenShare}>Start Screen Share</button> */}
+                  {/* </div> */}
+                  {/* </div>
+                  )} */}
 
-                   {/* ***********************************vedio call  */}
+                  {/* ***********************************vedio call  */}
                   <div className="darkmode">
 
                     <div className="flex items-center gap-4">
@@ -710,7 +842,7 @@ useEffect(() => {
                               <div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
                                 <div>
                                   <div class="bg-primary text-white p-3 rounded-l-lg rounded-br-lg">
-                              
+
                                     {itm?.type == "IMAGE" ? <>
                                       {itm?.media?.map((item) => {
                                         return <img
@@ -757,7 +889,7 @@ useEffect(() => {
 
                                     </> : <p class="text-sm">{itm?.content}</p>}
                                   </div>
-                                  
+
                                   <span class="text-xs text-gray-500 leading-none">{itm?.sender_details?.fullName}, {moment(itm?.createdAt).fromNow()}</span>
                                 </div>
                               </div>
@@ -905,12 +1037,12 @@ useEffect(() => {
                             <div className='flex items-center '>
                               <img
                                 src={methodModel.userImg(
-                                  ChatWithUser?.role=="admin"?ChatWithUser?.user_id?.image:item?.user_image
+                                  ChatWithUser?.role == "admin" ? ChatWithUser?.user_id?.image : item?.user_image
                                 )}
                                 className="w-[35px] h-[35px] rounded-full object-cover	shadow-[2px_1px_10px_0px_#dfdfdf]"
                               />
                               <p className='ml-2 text-[18px] font-[600] capitalize'>
-                                {ChatWithUser?.role=="admin"?ChatWithUser?.user_id?.fullName:item?.user_name}
+                                {ChatWithUser?.role == "admin" ? ChatWithUser?.user_id?.fullName : item?.user_name}
                               </p>
                             </div>
                             <button className='text-[12px] text-[grey] rounded-full border  border-[grey]  p-[0px_6px]' onClick={(e) => deleteMembers(item)}>Remove</button></div>
@@ -1033,7 +1165,7 @@ useEffect(() => {
                           {' '}
                           {ChatWithUserName?.name}
                         </label>
-                         {addmember ? <div class="mb-3">
+                        {addmember ? <div class="mb-3">
                           <MultiSelectDropdown
                             id="statusDropdown"
                             className="role-color "
