@@ -42,8 +42,9 @@ export default function Chat() {
   const [emoji, setemoji] = useState(false)
   const [ChatWithUser, setChatWithUser] = useState(null); 
   const [ChatWithUserName, setChatWithUserName] = useState({});
+  console.log(ChatWithUserName,"ChatWithUserName")
+  const [callingUser,setCallingUser]=useState({})
   const [darkMode, setDarkMode] = useState(false);
-  console.log(darkMode,"darkMode")
   const [addmember, setaddmember] = useState(false)
   const [adddrivermemberlisting, setadddrivermemberListing] = useState([])
   const [addstafmemberlisting, setaddstaffmemberListing] = useState([])
@@ -129,6 +130,7 @@ const startCall = async () => {
       // Join the Agora channel with the token or null
       // await agoraClient.join(appId, responseChannelName, token, null);  // Join the Agora channel
       setInCall(true);  // Mark user as in the call
+      setCallingUser(ChatWithUserName)
     } catch (error) {
       console.error("Error starting the call:", error);
       alert('Failed to start the call. Please check the console for more details.');
@@ -564,7 +566,7 @@ useEffect(() => {
     getUserDetail(data?.isGroupChat ? data?.user_id : data?.room_members[0]?.user_id)
     setChatWithUser(data);
     setChatRoomId(data?.room_id)
-    setChatWithUserName({ name: data?.room_name ? data?.room_name : data?.room_members[0].user_name, image: data?.isGroupChat ? data?.room_image : data?.room_members[0]?.user_image, isGroupChat: data?.isGroupChat, isOnline: data?.room_members[0]?.isOnline })
+    setChatWithUserName({ id:data?.id || data?._id ,name: data?.room_name ? data?.room_name : data?.room_members[0].user_name, image: data?.isGroupChat ? data?.room_image : data?.room_members[0]?.user_image, isGroupChat: data?.isGroupChat, isOnline: data?.room_members[0]?.isOnline })
     history("/chat")
   }
 
@@ -615,8 +617,14 @@ useEffect(() => {
 
                   {!inCall ? (
                     <div>
-                       <MdVideoCall onClick={startCall} disabled={isJoining}/>
-                    </div>
+                    {callingUser?.id==ChatWithUserName?.id?  <div  onClick={startCall} disabled={isJoining}>
+                      JoinCall
+                     
+                   </div>:  <div>
+                      <MdVideoCall onClick={startCall} disabled={isJoining}/>
+                   </div>}
+                   </div>
+                  
                   ) : (
                     <div>
                       <AgoraUIKit rtcProps={rtcProps} />
