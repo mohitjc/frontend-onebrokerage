@@ -99,7 +99,6 @@ const checkCameraPermission = async () => {
 // Handle starting the call
 const startCall = async () => {
   if (isJoining) return; // Prevent multiple join attempts
-
   const hasPermission = await checkCameraPermission();
   if (!hasPermission) {
     alert('Camera access is required to start the call. Please allow camera access in your browser settings.');
@@ -109,30 +108,24 @@ const startCall = async () => {
   if (channelName) {
     setIsJoining(true); // Set to true while joining the call
     try {
-      // Get token from your server
-      // const response = await axios.get(`http://localhost:5000/generate-token/${channelName}`);
       ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id||user?.id}&role=publisher`,{},environment.chat_api).then((res) => {
         if (res.success) {
           setToken(res?.data?.token)
           setChannelName(res?.data?.channelName||channelName)
-        }
-      
+        }   
       });
-
 
       // Log the token to ensure it's correct
       console.log('Token:', token);
-
       // Initialize Agora client
       const agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
+      console.log(agoraClient,"agoraclient")
       setClient(agoraClient); // Save the client for later use (e.g., screen sharing)
-
       setRtcProps({
         appId: appId,  // Your Agora App ID
-        channel: channelName, 
+        channel:channelName, 
         token: token,  // Token from backend or null
       });
-
       // Join the Agora channel with the token or null
       // await agoraClient.join(appId, responseChannelName, token, null);  // Join the Agora channel
       setInCall(true);  // Mark user as in the call
