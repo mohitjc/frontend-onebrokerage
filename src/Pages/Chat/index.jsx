@@ -44,6 +44,7 @@ export default function Chat() {
   const [ChatWithUserName, setChatWithUserName] = useState({});
   console.log(ChatWithUserName,"ChatWithUserName")
   const [callingUser,setCallingUser]=useState({})
+  console.log(callingUser,"callingUser")
   const [darkMode, setDarkMode] = useState(false);
   const [addmember, setaddmember] = useState(false)
   const [adddrivermemberlisting, setadddrivermemberListing] = useState([])
@@ -75,6 +76,7 @@ export default function Chat() {
 // **************************************vedio call**********************
 
 const [inCall, setInCall] = useState(false);  // To track whether the user is in a call
+console.log(inCall,"incall")
 const [channelName, setChannelName] = useState('');  // To store the channel name
 const [rtcProps, setRtcProps] = useState({});  // RTC props including token and channel name
 const [client, setClient] = useState(null);  // Store Agora RTC client
@@ -618,7 +620,7 @@ useEffect(() => {
 
                   {!inCall ? (
                     <div>
-                    {callingUser?.id==ChatWithUserName?.id && callingUser!=="" && inCall?  <div  onClick={startCall} disabled={isJoining}>
+                    {callingUser?.id==ChatWithUserName?.id  && inCall?  <div  onClick={startCall} disabled={isJoining}>
                       JoinCall    
                    </div>:  <div>
                       <MdVideoCall onClick={startCall} disabled={isJoining}/>
