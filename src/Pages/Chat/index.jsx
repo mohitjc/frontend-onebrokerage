@@ -130,7 +130,7 @@ const startCall = async () => {
       // Join the Agora channel with the token or null
       // await agoraClient.join(appId, responseChannelName, token, null);  // Join the Agora channel
       setInCall(true);  // Mark user as in the call
-      setCallingUser(ChatWithUserName)
+      setCallingUser(user?.id)
     } catch (error) {
       console.error("Error starting the call:", error);
       alert('Failed to start the call. Please check the console for more details.');
@@ -618,8 +618,7 @@ useEffect(() => {
                   {!inCall ? (
                     <div>
                     {callingUser?.id==ChatWithUserName?.id?  <div  onClick={startCall} disabled={isJoining}>
-                      JoinCall
-                     
+                      JoinCall    
                    </div>:  <div>
                       <MdVideoCall onClick={startCall} disabled={isJoining}/>
                    </div>}

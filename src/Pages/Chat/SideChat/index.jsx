@@ -23,6 +23,7 @@ import socketModel from '../../../models/socketModel';
 import Header from '../../../components/global/header2';
 import { FaCircle } from "react-icons/fa";
 export default function SideChat({ sidechat, ChatSelectorHandler, allroommemeber, setsidechat ,filters,setFilter}) {
+  console.log(sidechat,"sidechat")
   const user = useSelector((state) => state.user);
  const [submitted,setsubmitted]=useState(false)
 
