@@ -629,11 +629,11 @@ useEffect(() => {
                   
                   ) : (
                     <div>
-                      <AgoraUIKit rtcProps={rtcProps} />
+                      {/* <AgoraUIKit rtcProps={rtcProps} />
                       <div>
-                        <button onClick={endCall}>End Call</button>
+                        <button onClick={endCall}>End Call</button> */}
                         {/* <button onClick={startScreenShare}>Start Screen Share</button> */}
-                      </div>
+                      {/* </div> */}
                     </div>
                   )}
 
