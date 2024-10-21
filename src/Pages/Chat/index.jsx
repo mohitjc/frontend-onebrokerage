@@ -43,6 +43,7 @@ export default function Chat() {
   const [ChatWithUser, setChatWithUser] = useState(null); 
   const [ChatWithUserName, setChatWithUserName] = useState({});
   const [darkMode, setDarkMode] = useState(false);
+  console.log(darkMode,"darkMode")
   const [addmember, setaddmember] = useState(false)
   const [adddrivermemberlisting, setadddrivermemberListing] = useState([])
   const [addstafmemberlisting, setaddstaffmemberListing] = useState([])
@@ -510,19 +511,20 @@ useEffect(() => {
 
   }
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
+  // const [darkMode, setDarkMode] = useState(false);
 
+  useEffect(() => {
+    // On component mount, check for dark mode preference
+    const isDarkMode = localStorage.getItem('theme') === 'dark';
+    setDarkMode(isDarkMode);
+    document.documentElement.classList.toggle('dark', isDarkMode);
+  }, []);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
+    document.documentElement.classList.toggle('dark', !darkMode);
+    localStorage.setItem('theme', !darkMode ? 'dark' : 'light');
   };
-
   // State to control the visibility of the sidebar
   const [isOpen, setIsOpen] = useState(false);
 
@@ -576,14 +578,14 @@ useEffect(() => {
 
   return (
     <>
-      <div className="main_chats h-screen overflow-hidden">
+      <div className="main_chats h-screen overflow-hidden ">
         <div className="flex">
 
           <SideChat sidechat={sidechat} ChatSelectorHandler={ChatSelectorHandler} allroommemeber={allroommemeber} setsidechat={setsidechat} filters={filters} setFilter={setFilter}/>
 
           <div className="rigtsie_inners h-screen w-full">
             {chatRoomId ?
-              <> <div className="headres_names flex items-center justify-between p-4 bg-white dark:bg-black ">
+              <> <div className="headres_names flex items-center justify-between p-4 bg-white dark:bg-slate-800 ">
                 <div className="flex items-center gap-4">
                   <HiMiniBars3 onClick={toggleSidebar} className="text-xl xl:text-3xl ml-2 text-[#707991] block lg:hidden" />
                   <div className="flex gap-2 xl:gap-4 ">
