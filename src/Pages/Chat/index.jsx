@@ -618,7 +618,7 @@ useEffect(() => {
 
                   {!inCall ? (
                     <div>
-                    {callingUser?.id==ChatWithUserName?.id && callingUser!==""?  <div  onClick={startCall} disabled={isJoining}>
+                    {callingUser?.id==ChatWithUserName?.id && callingUser!=="" && inCall?  <div  onClick={startCall} disabled={isJoining}>
                       JoinCall    
                    </div>:  <div>
                       <MdVideoCall onClick={startCall} disabled={isJoining}/>
