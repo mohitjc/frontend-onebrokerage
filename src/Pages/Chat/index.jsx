@@ -240,18 +240,23 @@ export default function Chat() {
         console.log('Token:', token);
         // Initialize Agora client
         const agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
-        const localStream = AgoraRTC.createStream({
-          audio: true, 
-          video: false 
-      });
+      //   const localStream = AgoraRTC.createStream({
+      //       streamID: user?.id,
+      //       audio: true,
+      //       video: true,
+      //       screen: false,
+      // });
     
-      localStream.init()
+      //  localStream.init()
         console.log(agoraClient, "agoraclient")
         setAudioClient(agoraClient); // Save the client for later use (e.g., screen sharing)
         setAudioRtcProps({
           appId: appId,  // Your Agora App ID
           channel: channelName,
           token: token,  // Token from backend or null
+          video: {
+            defaultOn: false, // Set video off by default
+          },
         });
        
         setInAudioCall(true);  // Mark user as in the call
