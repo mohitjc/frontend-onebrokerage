@@ -211,7 +211,7 @@ const checkAudioPermission = async () => {
 // Handle starting the call
 const startAudioCall = async () => {
   if (isAudioJoining) return; // Prevent multiple join attempts
-  const hasPermission = await checkCameraPermission();
+  const hasPermission = await checkAudioPermission();
   if (!hasPermission) {
     alert('Audio access is required to start the call. Please allow Audio access in your browser settings.');
     return;  // Exit the function if camera access is denied
@@ -722,7 +722,7 @@ const startAudioCall = async () => {
                     {callingUser?.id==ChatWithUserName?.id  && inCall?  <div  onClick={startAudioCall} disabled={isAudioJoining}>
                       JoinCall    
                    </div>:  <div>
-                      <MdCall onClick={startCall} disabled={isJoining}/>
+                      <MdCall onClick={startAudioCall} disabled={isAudioJoining}/>
                    </div>}
                    </div>
                   
