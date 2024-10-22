@@ -65,6 +65,9 @@ function App() {
     { url: "/loads/edit/:id", path: "Loads/AddEdit" },
     { url: "/loads/add", path: "Loads/AddEdit" },
     { url: "/loads/detail/:id", path: "Loads/View" },
+    { url: "/pickeduploads", path: "Loads/PickedupLoads" },
+    { url: "/intransitloads", path: "Loads/IntransitLoads" },
+    { url: "/deliveredloads", path: "Loads/DeliveredLoads" },
     { url: "/task", path: "TaskManagement" },
     { url: "/task/detail/:id", path: "TaskManagement/View" },
   ];

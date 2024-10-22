@@ -276,17 +276,15 @@ export default function Chat() {
           appId: appId,  // Your Agora App ID
           channel: channelName,
           token: token,  // Token from backend or null
-           video: {
-          defaultOn: false, // Ensure video is off
-          mirror: false, // Optionally set mirror if needed
-        },
-        audio: {
-          defaultOn: true, // Ensure audio is on
-        },
         });
        
         setInAudioCall(true);  // Mark user as in the call
-        setCallingUser(user?.id)
+        let value = {
+          room_id: channelName,
+          user_id: user?.id
+        }
+        socketModel.emit("send-video-call", value);
+        console.log(value,value)
       } catch (error) {
         console.error("Error starting the call:", error);
         alert('Failed to start the call. Please check the console for more details.');
@@ -297,6 +295,18 @@ export default function Chat() {
       alert('Please enter a valid channel name');
     }
   };
+
+  useEffect=(()=>{
+    socketModel.on("recieve-video-call", (data) => {
+      console.log(data, "data")
+      if (currectChat.current == data.data.room_id) {
+          setCallingUser(data)
+        setTimeout(() => {
+          chatScroll();
+        }, 100);
+      }
+    });
+  })
 
 
 

@@ -21,6 +21,7 @@ const Sidebar = ({ isOpen }) => {
     template: ['/dynamicpricelist', '/crm', '/waiver', '/emailtemplate', 'costing'],
     settings: ['/department', '/holidays', '/currency', '/continents', '/countries', '/regions', '/cities', '/refund-reason', '/web/settings'],
     carriers: ['/carriers', "/approvedcarriers" ,'/pendingcarrier',"/rejectedcarrier"],
+    loads: ['/loads', "/pickeduploads" ,'/intransitloads',"/deliveredloads"],
     // plan:["/plans "]
   };
 

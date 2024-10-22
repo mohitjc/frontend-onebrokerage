@@ -159,7 +159,8 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 </tooltip>
               </li></>}
 
-            {user?.role == "driver" ? <li>
+            {user?.role == "driver" ? 
+            <li>
               <tooltip placement="right" title="Carriers">
                 <NavLink
                   to={`${user?.plan_id || user?.role == "driver" || (user?.role == "staff" && user?.addedBy?.plan_id) ? "/carriers" : ""}`}
@@ -177,7 +178,8 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                 </NavLink>
               </tooltip>
             </li> :
-              user?.role == "user" || user?.role == "staff" ? <></> : <li>
+              user?.role == "user" || user?.role == "staff" ? <></> :
+               <li>
                 <Disclosure as="div" defaultOpen={tabclass("carriers")}>
                   {({ open }) => (
                     <>
@@ -347,23 +349,134 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
 
 
             {user?.role == "driver" ? <></> : <>
-              <li>
-                <tooltip placement="right" title="Loads">
-                  <NavLink
-                    to={`${user?.plan_id || (user?.role == "staff" && user?.addedBy?.plan_id) ? "/loads" : ""}`}
-                    // to={`/transaction`}
-                    className={(isActive) =>
-                      "p-2.5  flex items-center gap-[12px] text-sm bg-gray-50 font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg group " +
-                      (location?.pathname == "/loads" &&
-                        " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
-                    }
-                  >
-                    <MdManageHistory className="text-black shrink-0 text-lg group-hover:text-white " />
-                    <span className="text-inherit leading-none sidebar_text">
-                      Loads
-                    </span>
-                  </NavLink>
-                </tooltip>
+            
+<li>
+                <Disclosure as="div" defaultOpen={tabclass("loads")}>
+                  {({ open }) => (
+                    <>
+                      <tooltip placement="right" title="Carriers">
+                        <Disclosure.Button className="w-full p-2.5 rounded-lg bg-gray-50 flex items-center justify-between text-black hover:!text-[#fff] gap-[12px] hover:bg-[#494f9f] transition-all duration-300  group">
+                          <span className="text-sm font-normal text-inherit flex items-center gap-[12px] crm">
+                            <LuUser className="text-black shrink-0 text-lg group-hover:text-white" />
+                            <span className=" text-inherit leading-none sidebar_text">
+                              {" "}
+                              Loads
+                            </span>
+                          </span>
+
+                          <TiArrowSortedDown
+                            className={`${open ? "" : "-rotate-90 transform"
+                              } h-4 w-4 transition-all duration-500  text-[#494f9f] group-hover:text-white`}
+                          />
+                        </Disclosure.Button>
+                      </tooltip>
+                      <Transition
+                        enter="transition duration-300 ease-in-out"
+                        enterFrom="transform scale-95 opacity-0"
+                        enterTo="transform scale-300 opacity-300"
+                        leave="transition duration-300 ease-in-out"
+                        leaveFrom="transform scale-300 opacity-300"
+                        leaveTo="transform scale-95 opacity-0"
+                      >
+                        <Disclosure.Panel className=" mt-[4px] ">
+                          <ul className="space-y-2 ">
+                            <li id="/carriers">
+                              <tooltip
+                                placement="right"
+                                title="Carrier"
+                              >
+                                <NavLink
+                                 to={`${user?.plan_id || (user?.role == "staff" && user?.addedBy?.plan_id) ? "/loads" : ""}`}
+                                  className={(isActive) =>
+                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group" +
+                                    (location?.pathname == "/loads" &&
+                                      " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                                  }
+                                >
+                                  <FiUsers className="text-black shrink-0 text-lg group-hover:text-white" />
+                                  <span className="text-inherit leading-none sidebar_text">
+                                    All Loads
+                                  </span>
+                                </NavLink>
+                              </tooltip>
+                            </li>
+
+
+                            <li id="/pickeduploads">
+                              <tooltip
+                                placement="right"
+                                title="Pickedup Loads"
+                              >
+                                <NavLink
+                                to={`${user?.plan_id || (user?.role == "staff" && user?.addedBy?.plan_id) ? "/pickeduploads" : ""}`}
+                                  className={(isActive) =>
+                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
+                                    (location?.pathname == "/pickeduploads" &&
+                                      " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                                  }
+                                >
+                                  <IoMdCheckmarkCircleOutline className="text-black shrink-0 text-lg group-hover:text-white " />
+
+
+                                  <span className="text-inherit leading-none sidebar_text">
+                                   Pickedup Loads
+                                  </span>
+                                </NavLink>
+                              </tooltip>
+                            </li>
+
+
+                            <li id="/intransitloads">
+                              <tooltip
+                                placement="right"
+                                title="Intransit Loads"
+                              >
+                                <NavLink
+                                 to={`${user?.plan_id || (user?.role == "staff" && user?.addedBy?.plan_id) ? "/intransitloads" : ""}`}
+                                  className={(isActive) =>
+                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
+                                    (location?.pathname == "/intransitloads" &&
+                                      " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                                  }
+                                >
+                                  <RxCrossCircled className="text-black shrink-0 text-lg group-hover:text-white" />
+
+                                  <span className="text-inherit leading-none sidebar_text">
+                                   Intransit Loads
+                                  </span>
+                                </NavLink>
+                              </tooltip>
+                            </li>
+
+
+                            <li id="/deliveredloads">
+                              <tooltip placement="right" title="Delivered Loads">
+                                <NavLink
+                                  to={`${user?.plan_id || (user?.role == "staff" && user?.addedBy?.plan_id) ? "/deliveredloads" : ""}`}
+                                  className={(isActive) =>
+                                    "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
+                                    (location?.pathname == "/deliveredloads" &&
+                                      " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
+                                  }
+                                >
+                                  <IoGitPullRequestOutline className="text-black shrink-0 text-lg group-hover:text-white" />
+
+
+                                  <span className="text-inherit leading-none sidebar_text">
+                                  Delivered Loads
+                                  </span>
+                                </NavLink>
+                              </tooltip>
+                            </li>
+
+
+
+                          </ul>
+                        </Disclosure.Panel>
+                      </Transition>
+                    </>
+                  )}
+                </Disclosure>
               </li>
               
               <li>
