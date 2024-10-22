@@ -122,6 +122,7 @@ export default function Chat() {
         console.log('Token:', token);
         // Initialize Agora client
         const agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
+        
         console.log(agoraClient, "agoraclient")
         setClient(agoraClient); // Save the client for later use (e.g., screen sharing)
         setRtcProps({
@@ -193,81 +194,112 @@ export default function Chat() {
 
 
   // **************************************audio call**************************
-
-  const [inAudioCall, setInAudioCall] = useState(false);  // To track whether the user is in a call
+ const [inAudioCall, setInAudioCall] = useState(false);  // To track whether the user is in a call
   const [AudiortcProps, setAudioRtcProps] = useState({});  // RTC props including token and channel name
   const [Audioclient, setAudioClient] = useState(null);  // Store Agora RTC client
   const [isAudioJoining, setIsAudioJoining] = useState(false); // Track if a user is in the process of joining the call
-  // Your Agora App ID (replace with your actual App ID)
-
-  // Function to check camera permissions
-  const checkAudioPermission = async () => {
-    // return true
-    try {
-      await navigator.mediaDevices.getUserMedia({ audio: true });
-      return true;  // Camera access granted
-    } catch (error) {
-      console.error("Audio access denied:", error);
-      return false;  // Camera access denied
-    }
-  };
-
-  // Handle starting the call
   const startAudioCall = async () => {
- 
-    if (isAudioJoining) return; // Prevent multiple join attempts
-    const hasPermission = await checkAudioPermission();
-    if (!hasPermission) {
-      alert('Audio access is required to start the call. Please allow Audio access in your browser settings.');
-      return;  // Exit the function if camera access is denied
+    if(channelName)
+    {
+      ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id || user?.id}&role=publisher`, {}, environment.chat_api).then((res) => {
+        if (res.success) {
+          setToken(res?.data?.token)
+          setChannelName(res?.data?.channelName || channelName)
+        }
+      });
+      await client.initialize(appId);
+  
+      const uid = await client.join(channelName, token, null);
+      const { localAudioTrack } = await createMicrophoneAndCameraTracks();
+      setClients((prev) => [...prev, { uid, track: localAudioTrack }]);
+  
+      await client.publish([localAudioTrack]);
+  
+      client.on('user-published', async (user, mediaType) => {
+        await client.subscribe(user, mediaType);
+        if (mediaType === 'audio') {
+          const remoteAudioTrack = user.audioTrack;
+          setAudioClient((prev) => [...prev, { uid: user.uid, track: remoteAudioTrack }]);
+        }
+      });
     }
-
-    if (channelName) {
-      setIsAudioJoining(true); // Set to true while joining the call
-      try {
-        ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id || user?.id}&role=publisher`, {}, environment.chat_api).then((res) => {
-          if (res.success) {
-            setToken(res?.data?.token)
-            setChannelName(res?.data?.channelName || channelName)
-          }
-        });
-
-        // Log the token to ensure it's correct
-        console.log('Token:', token);
-        // Initialize Agora client
-        const agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
-
-        console.log(agoraClient, "agoraclient")
-        setAudioClient(agoraClient); // Save the client for later use (e.g., screen sharing)
-        setAudioRtcProps({
-          appId: appId,  // Your Agora App ID
-          channel: channelName,
-          token: token,  // Token from backend or null
-           video: {
-          defaultOn: false, // Ensure video is off
-          mirror: false, // Optionally set mirror if needed
-        },
-        audio: {
-          defaultOn: true, // Ensure audio is on
-        },
-        });
-       
-        setInAudioCall(true);  // Mark user as in the call
-        setCallingUser(user?.id)
-      } catch (error) {
-        console.error("Error starting the call:", error);
-        alert('Failed to start the call. Please check the console for more details.');
-      } finally {
-        setIsAudioJoining(false);
-      }
-    } else {
-      alert('Please enter a valid channel name');
-    }
-  };
-
-  const audiocallbacks = {
-    EndCall: () => setInCall(false)
+   
   }
+
+  // const [inAudioCall, setInAudioCall] = useState(false);  // To track whether the user is in a call
+  // const [AudiortcProps, setAudioRtcProps] = useState({});  // RTC props including token and channel name
+  // const [Audioclient, setAudioClient] = useState(null);  // Store Agora RTC client
+  // const [isAudioJoining, setIsAudioJoining] = useState(false); // Track if a user is in the process of joining the call
+  // // Your Agora App ID (replace with your actual App ID)
+
+  // // Function to check camera permissions
+  // const checkAudioPermission = async () => {
+  //   // return true
+  //   try {
+  //     await navigator.mediaDevices.getUserMedia({ audio: true });
+  //     return true;  // Camera access granted
+  //   } catch (error) {
+  //     console.error("Audio access denied:", error);
+  //     return false;  // Camera access denied
+  //   }
+  // };
+
+  // // Handle starting the call
+  // const startAudioCall = async () => {
+ 
+  //   if (isAudioJoining) return; // Prevent multiple join attempts
+  //   const hasPermission = await checkAudioPermission();
+  //   if (!hasPermission) {
+  //     alert('Audio access is required to start the call. Please allow Audio access in your browser settings.');
+  //     return;  // Exit the function if camera access is denied
+  //   }
+
+  //   if (channelName) {
+  //     setIsAudioJoining(true); // Set to true while joining the call
+  //     try {
+  //       ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id || user?.id}&role=publisher`, {}, environment.chat_api).then((res) => {
+  //         if (res.success) {
+  //           setToken(res?.data?.token)
+  //           setChannelName(res?.data?.channelName || channelName)
+  //         }
+  //       });
+
+  //       // Log the token to ensure it's correct
+  //       console.log('Token:', token);
+  //       // Initialize Agora client
+  //       const agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
+
+  //       console.log(agoraClient, "agoraclient")
+  //       setAudioClient(agoraClient); // Save the client for later use (e.g., screen sharing)
+  //       setAudioRtcProps({
+  //         appId: appId,  // Your Agora App ID
+  //         channel: channelName,
+  //         token: token,  // Token from backend or null
+  //          video: {
+  //         defaultOn: false, // Ensure video is off
+  //         mirror: false, // Optionally set mirror if needed
+  //       },
+  //       audio: {
+  //         defaultOn: true, // Ensure audio is on
+  //       },
+  //       });
+       
+  //       setInAudioCall(true);  // Mark user as in the call
+  //       setCallingUser(user?.id)
+  //     } catch (error) {
+  //       console.error("Error starting the call:", error);
+  //       alert('Failed to start the call. Please check the console for more details.');
+  //     } finally {
+  //       setIsAudioJoining(false);
+  //     }
+  //   } else {
+  //     alert('Please enter a valid channel name');
+  //   }
+  // };
+
+  // const audiocallbacks = {
+  //   EndCall: () => setInCall(false)
+  // }
 
 
 
