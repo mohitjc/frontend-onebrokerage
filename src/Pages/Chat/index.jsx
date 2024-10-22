@@ -283,7 +283,7 @@ export default function Chat() {
         await rtc.client.publish([rtc.localAudioTrack]);
     
         console.log("publish success!");
-        setAudioClient(agoraClient); // Save the client for later use (e.g., screen sharing)
+        setAudioClient(rtc.client); // Save the client for later use (e.g., screen sharing)
         setAudioRtcProps({
           appId: appId,  // Your Agora App ID
           channel: channelName,
