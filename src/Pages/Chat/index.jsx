@@ -185,6 +185,10 @@ const callbacks={
   EndCall:()=>setInCall(false)
 }
 
+const Audiocallbacks={
+  EndCall:()=>setInAudioCall(false)
+}
+
 // **************************************vedio call**********************
 
 
@@ -728,7 +732,7 @@ const startAudioCall = async () => {
                   
                   ) : (
                     <div className='w-100 h-100 flex'>
-                      <AgoraUIKit rtcProps={AudiortcProps}/>
+                      <AgoraUIKit rtcProps={AudiortcProps} callbacks={Audiocallbacks}/>
                       <div>
                         {/* <button onClick={endCall}>End Call</button> */}
                         {/* <button onClick={startScreenShare}>Start Screen Share</button> */}
