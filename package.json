@@ -21,7 +21,7 @@
     "@types/react-dom": "^18.2.22",
     "agora-react-uikit": "^1.2.0",
     "agora-rtc-react": "^2.3.0",
-    "agora-rtc-sdk-ng": "^4.3.0",
+    "agora-rtc-sdk-ng": "^4.22.1",
     "antd": "^5.15.3",
     "axios": "^1.6.7",
     "dotenv": "^16.4.5",
