@@ -214,6 +214,11 @@ export default function Chat() {
 
   // Handle starting the call
   const startAudioCall = async () => {
+    let rtc = {
+      // For the local audio track.
+      localAudioTrack: null,
+      client: null,
+  };
     if (isAudioJoining) return; // Prevent multiple join attempts
     const hasPermission = await checkAudioPermission();
     if (!hasPermission) {
@@ -243,8 +248,10 @@ export default function Chat() {
           token: token,  // Token from backend or null
         });
         // Join the Agora channel with the token or null
-        // await agoraClient.join(appId, channelName, token, null);  // Join the Agora channel
-
+        await  rtc.client.join(appId, channelName, token, user?.id);  // Join the Agora channel
+        rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+        // Publish the local audio tracks to the RTC channel.
+        await rtc.client.publish([rtc.localAudioTrack]);
         setInAudioCall(true);  // Mark user as in the call
         setCallingUser(user?.id)
       } catch (error) {
@@ -732,13 +739,8 @@ export default function Chat() {
 
                   ) : (
                     <div className='w-100 h-100 flex'>
-                      <AgoraUIKit audioOnly={true} rtcProps={AudiortcProps} callbacks={Audiocallbacks}
-                        // Prevent the video elements from being shown
-                        renderMainView={(props) => {
-                          return null; // Don't render the video elements at all
-                        }}
-                      
-                      />
+                      {/* <AgoraUIKit audioOnly={true} rtcProps={AudiortcProps} callbacks={Audiocallbacks}     */}
+                      {/* /> */}
                       <div>
                         {/* <button onClick={endCall}>End Call</button> */}
                         {/* <button onClick={startScreenShare}>Start Screen Share</button> */}
