@@ -207,7 +207,7 @@ export default function Chat() {
           setChannelName(res?.data?.channelName || channelName)
         }
       });
-      await client.initialize(appId);
+      // await client.initialize(appId);
   
       const uid = await AgoraRTC.join(channelName, token, null);
       const { localAudioTrack } = await AgoraRTC.createMicrophoneAndCameraTracks();
