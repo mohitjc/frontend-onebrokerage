@@ -244,8 +244,7 @@ const startAudioCall = async () => {
       });
       // Join the Agora channel with the token or null
       await agoraClient.join(appId, channelName, token, null);  // Join the Agora channel
-      const localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
-      await agoraClient.publish([localAudioTrack]);
+
       setInAudioCall(true);  // Mark user as in the call
       setCallingUser(user?.id)
     } catch (error) {
@@ -734,7 +733,7 @@ const startAudioCall = async () => {
                   
                   ) : (
                     <div className='w-100 h-100 flex'>
-                      <AgoraUIKit rtcProps={AudiortcProps} callbacks={Audiocallbacks}/>
+                      <AgoraUIKit  audioOnly={true} rtcProps={AudiortcProps} callbacks={Audiocallbacks}/>
                       <div>
                         {/* <button onClick={endCall}>End Call</button> */}
                         {/* <button onClick={startScreenShare}>Start Screen Share</button> */}
