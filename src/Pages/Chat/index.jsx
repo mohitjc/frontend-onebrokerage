@@ -746,7 +746,7 @@ export default function Chat() {
     </div>
   ) : (
     <div className='w-100 h-100 flex'>
-      <AgoraUIKit audioOnly={true} rtcProps={AudiortcProps} callbacks={audiocallbacks} />
+      <AgoraUIKit audioOnly={true} rtcProps={AudiortcProps} callbacks={Audiocallbacks} />
       <div>
         {/* Additional controls can go here */}
       </div>
