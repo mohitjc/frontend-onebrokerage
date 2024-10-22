@@ -111,7 +111,7 @@ export default function Chat() {
     if (channelName) {
       setIsJoining(true); // Set to true while joining the call
       try {
-        ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id || user?.id}&role=publisher`, {}, environment.chat_api).then((res) => {
+        ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=1&role=publisher`, {}, environment.chat_api).then((res) => {
           if (res.success) {
             setToken(res?.data?.token)
             setChannelName(res?.data?.channelName || channelName)
@@ -194,37 +194,8 @@ export default function Chat() {
 
 
   // **************************************audio call**************************
-//  const [inAudioCall, setInAudioCall] = useState(false);  // To track whether the user is in a call
-//   const [AudiortcProps, setAudioRtcProps] = useState({});  // RTC props including token and channel name
-//   const [Audioclient, setAudioClient] = useState(null);  // Store Agora RTC client
-//   const [isAudioJoining, setIsAudioJoining] = useState(false); // Track if a user is in the process of joining the call
-//   const startAudioCall = async () => {
-//     if(channelName)
-//     {
-//       ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id || user?.id}&role=publisher`, {}, environment.chat_api).then((res) => {
-//         if (res.success) {
-//           setToken(res?.data?.token)
-//           setChannelName(res?.data?.channelName || channelName)
-//         }
-//       });
-//       // await client.initialize(appId);
-  
-//       const uid = await AgoraRTC.join(channelName, token, null);
-//       const { localAudioTrack } = await AgoraRTC.createMicrophoneAndCameraTracks();
-//       setAudioClient((prev) => [...prev, { uid, track: localAudioTrack }]);
-  
-//       await AgoraRTC.publish([localAudioTrack]);
-  
-//       client.on('user-published', async (user, mediaType) => {
-//         await client.subscribe(user, mediaType);
-//         if (mediaType === 'audio') {
-//           const remoteAudioTrack = user.audioTrack;
-//           setAudioClient((prev) => [...prev, { uid: user.uid, track: remoteAudioTrack }]);
-//         }
-//       });
-//     }
-   
-//   }
+
+
 
   const [inAudioCall, setInAudioCall] = useState(false);  // To track whether the user is in a call
   const [AudiortcProps, setAudioRtcProps] = useState({});  // RTC props including token and channel name
