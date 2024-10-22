@@ -87,7 +87,6 @@ export default function Chat() {
   // Your Agora App ID (replace with your actual App ID)
   const appId = environment.appId;  // Replace with your Agora App ID
 
-
   // Function to check camera permissions
   const checkCameraPermission = async () => {
     // return true
@@ -296,17 +295,17 @@ export default function Chat() {
   //   }
   // };
 
-  useEffect=(()=>{
-    socketModel.on("recieve-video-call", (data) => {
-      console.log(data, "data")
-      if (currectChat.current == data.data.room_id) {
-          setCallingUser(data)
-        setTimeout(() => {
-          chatScroll();
-        }, 100);
-      }
-    });
-  })
+  // useEffect=(()=>{
+  //   socketModel.on("recieve-video-call", (data) => {
+  //     console.log(data, "data")
+  //     if (currectChat.current == data.data.room_id) {
+  //         setCallingUser(data)
+  //       setTimeout(() => {
+  //         chatScroll();
+  //       }, 100);
+  //     }
+  //   });
+  // })
 
 
 
