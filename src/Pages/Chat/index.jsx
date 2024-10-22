@@ -240,6 +240,12 @@ export default function Chat() {
         console.log('Token:', token);
         // Initialize Agora client
         const agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
+        const localStream = AgoraRTC.createStream({
+          audio: true, 
+          video: false 
+      });
+    
+      localStream.init()
         console.log(agoraClient, "agoraclient")
         setAudioClient(agoraClient); // Save the client for later use (e.g., screen sharing)
         setAudioRtcProps({
@@ -247,11 +253,7 @@ export default function Chat() {
           channel: channelName,
           token: token,  // Token from backend or null
         });
-        // Join the Agora channel with the token or null
-        await  rtc.client.join(appId, channelName, token, user?.id);  // Join the Agora channel
-        rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
-        // Publish the local audio tracks to the RTC channel.
-        await rtc.client.publish([rtc.localAudioTrack]);
+       
         setInAudioCall(true);  // Mark user as in the call
         setCallingUser(user?.id)
       } catch (error) {
@@ -739,8 +741,8 @@ export default function Chat() {
 
                   ) : (
                     <div className='w-100 h-100 flex'>
-                      {/* <AgoraUIKit audioOnly={true} rtcProps={AudiortcProps} callbacks={Audiocallbacks}     */}
-                      {/* /> */}
+                      <AgoraUIKit audioOnly={true} rtcProps={AudiortcProps} callbacks={Audiocallbacks}    
+                      />
                       <div>
                         {/* <button onClick={endCall}>End Call</button> */}
                         {/* <button onClick={startScreenShare}>Start Screen Share</button> */}
