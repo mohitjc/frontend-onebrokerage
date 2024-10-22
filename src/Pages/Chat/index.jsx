@@ -214,11 +214,7 @@ export default function Chat() {
 
   // Handle starting the call
   const startAudioCall = async () => {
-    let rtc = {
-      // For the local audio track.
-      localAudioTrack: null,
-      client: null,
-  };
+ 
     if (isAudioJoining) return; // Prevent multiple join attempts
     const hasPermission = await checkAudioPermission();
     if (!hasPermission) {
@@ -240,14 +236,7 @@ export default function Chat() {
         console.log('Token:', token);
         // Initialize Agora client
         const agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
-      //   const localStream = AgoraRTC.createStream({
-      //       streamID: user?.id,
-      //       audio: true,
-      //       video: true,
-      //       screen: false,
-      // });
-    
-      //  localStream.init()
+
         console.log(agoraClient, "agoraclient")
         setAudioClient(agoraClient); // Save the client for later use (e.g., screen sharing)
         setAudioRtcProps({
@@ -257,6 +246,7 @@ export default function Chat() {
           video: {
             defaultOn: false, // Set video off by default
           },
+          audio: true,
         });
        
         setInAudioCall(true);  // Mark user as in the call
