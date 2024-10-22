@@ -737,17 +737,7 @@ export default function Chat() {
                         renderMainView={(props) => {
                           return null; // Don't render the video elements at all
                         }}
-                        renderAudioView={(props) => {
-                          return (
-                            <div>
-                              <h3>In an Audio Call with {ChatWithUserName?.name}</h3>
-                              {/* Optionally add a mute button */}
-                              <button onClick={() => localAudioTrack.setEnabled(!localAudioTrack.enabled)}>
-                                {localAudioTrack?.enabled ? "Mute" : "Unmute"}
-                              </button>
-                            </div>
-                          );
-                        }}
+                      
                       />
                       <div>
                         {/* <button onClick={endCall}>End Call</button> */}
