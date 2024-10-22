@@ -230,6 +230,7 @@ export default function Chat() {
   const [AudiortcProps, setAudioRtcProps] = useState({});  // RTC props including token and channel name
   const [Audioclient, setAudioClient] = useState(null);  // Store Agora RTC client
   const [isAudioJoining, setIsAudioJoining] = useState(false); // Track if a user is in the process of joining the call
+  const [audiotoken, setAudioToken] = useState('');
   // Your Agora App ID (replace with your actual App ID)
 
   // Function to check camera permissions
@@ -258,13 +259,13 @@ export default function Chat() {
       try {
         ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id || user?.id}&role=publisher`, {}, environment.chat_api).then((res) => {
           if (res.success) {
-            setToken(res?.data?.token)
+            setAudioToken(res?.data?.token)
             setChannelName(res?.data?.channelName || channelName)
           }
         });
   
         // Log the token to ensure it's correct
-        console.log('Token:', token);
+        console.log('Token:', audiotoken);
         // Initialize Agora client
 
         let rtc = {
