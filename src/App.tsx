@@ -68,6 +68,8 @@ function App() {
     { url: "/pickeduploads", path: "Loads/PickedupLoads" },
     { url: "/intransitloads", path: "Loads/IntransitLoads" },
     { url: "/deliveredloads", path: "Loads/DeliveredLoads" },
+    { url: "/pendingpickuploads", path: "Loads/PendingPickupLoads" },
+    
     { url: "/task", path: "TaskManagement" },
     { url: "/task/detail/:id", path: "TaskManagement/View" },
   ];
