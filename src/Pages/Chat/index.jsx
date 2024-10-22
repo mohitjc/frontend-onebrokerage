@@ -243,7 +243,7 @@ const startAudioCall = async () => {
         token: token,  // Token from backend or null
       });
       // Join the Agora channel with the token or null
-      await agoraClient.join(appId, channelName, token, null);  // Join the Agora channel
+      // await agoraClient.join(appId, channelName, token, null);  // Join the Agora channel
 
       setInAudioCall(true);  // Mark user as in the call
       setCallingUser(user?.id)
