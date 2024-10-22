@@ -308,17 +308,17 @@ export default function Chat() {
     }
   };
 
-  useEffect=(()=>{
-    socketModel.on("recieve-video-call", (data) => {
-      console.log(data, "data")
-      if (currectChat.current == data.data.room_id) {
-          setCallingUser(data)
-        setTimeout(() => {
-          chatScroll();
-        }, 100);
-      }
-    });
-  })
+  // useEffect=(()=>{
+  //   socketModel.on("recieve-video-call", (data) => {
+  //     console.log(data, "data")
+  //     if (currectChat.current == data.data.room_id) {
+  //         setCallingUser(data)
+  //       setTimeout(() => {
+  //         chatScroll();
+  //       }, 100);
+  //     }
+  //   });
+  // })
 
 
   // **********************************************Audio call******************************
