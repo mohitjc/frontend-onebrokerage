@@ -243,10 +243,13 @@ export default function Chat() {
           appId: appId,  // Your Agora App ID
           channel: channelName,
           token: token,  // Token from backend or null
-          video: {
-            defaultOn: false, // Set video off by default
-          },
-          audio: true,
+           video: {
+          defaultOn: false, // Ensure video is off
+          mirror: false, // Optionally set mirror if needed
+        },
+        audio: {
+          defaultOn: true, // Ensure audio is on
+        },
         });
        
         setInAudioCall(true);  // Mark user as in the call
@@ -261,6 +264,10 @@ export default function Chat() {
       alert('Please enter a valid channel name');
     }
   };
+
+  const audiocallbacks = {
+    EndCall: () => setInCall(false)
+  }
 
 
 
@@ -726,24 +733,25 @@ export default function Chat() {
 
                   {/* ***********************************Audiocall */}
                   {!inAudioCall ? (
-                    <div>
-                      {callingUser?.id == ChatWithUserName?.id && inCall ? <div onClick={startAudioCall} disabled={isAudioJoining}>
-                        JoinCall
-                      </div> : <div>
-                        <MdCall onClick={startAudioCall} disabled={isAudioJoining} />
-                      </div>}
-                    </div>
-
-                  ) : (
-                    <div className='w-100 h-100 flex'>
-                      <AgoraUIKit audioOnly={true} rtcProps={AudiortcProps} callbacks={Audiocallbacks}    
-                      />
-                      <div>
-                        {/* <button onClick={endCall}>End Call</button> */}
-                        {/* <button onClick={startScreenShare}>Start Screen Share</button> */}
-                      </div>
-                    </div>
-                  )}
+    <div>
+      {callingUser?.id === ChatWithUserName?.id && inCall ? (
+        <div onClick={startAudioCall} disabled={isAudioJoining}>
+          Join Call
+        </div>
+      ) : (
+        <div>
+          <MdCall onClick={startAudioCall} disabled={isAudioJoining} />
+        </div>
+      )}
+    </div>
+  ) : (
+    <div className='w-100 h-100 flex'>
+      <AgoraUIKit audioOnly={true} rtcProps={AudiortcProps} callbacks={audiocallbacks} />
+      <div>
+        {/* Additional controls can go here */}
+      </div>
+    </div>
+  )}
 
                   {/* ***********************************Audiocall */}
                   <div className="darkmode">
