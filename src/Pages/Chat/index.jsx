@@ -246,7 +246,6 @@ export default function Chat() {
 
   // Handle starting the call
   const startAudioCall = async () => {
- 
     if (isAudioJoining) return; // Prevent multiple join attempts
     const hasPermission = await checkAudioPermission();
     if (!hasPermission) {
@@ -263,20 +262,22 @@ export default function Chat() {
             setChannelName(res?.data?.channelName || channelName)
           }
         });
+  
+        // Log the token to ensure it's correct
+        console.log('Token:', token);
+        // Initialize Agora client
+
         let rtc = {
           // For the local audio track.
           localAudioTrack: null,
           client: null,
-      };
+        };
 
-        // Log the token to ensure it's correct
-        console.log('Token:', token);
-        // Initialize Agora client
          rtc.client = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
 
         console.log(rtc.client, "agoraclient")
 
-        await rtc.client.join(appId,channelName, token,user?.id);
+        await rtc.client.join(appId,channelName, token ,user?.id);
         // Create a local audio track from the audio sampled by a microphone.
         rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
         // Publish the local audio tracks to the RTC channel.
