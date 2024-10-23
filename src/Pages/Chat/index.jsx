@@ -197,8 +197,9 @@ export default function Chat() {
 
 
   const callbacks = {
-    EndCall: () => {setInCall(false);
-      isvedioCallRoomId("")
+    EndCall: () => {
+      setInCall(false);
+      setvedioCallRoomId("")
     }
   }
 
