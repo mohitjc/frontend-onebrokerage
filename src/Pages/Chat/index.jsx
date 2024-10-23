@@ -281,7 +281,9 @@ export default function Chat() {
 
 
   const callbacks = {
-    EndCall: () => setInCall(false)
+    EndCall: () => {setInCall(false);
+      setVedioRequest(false)
+    }
   }
 
   const Audiocallbacks = {
