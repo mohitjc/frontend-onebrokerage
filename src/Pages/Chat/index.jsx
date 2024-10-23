@@ -71,6 +71,7 @@ export default function Chat() {
   const [chatRoomId, setChatRoomId] = useState("");
   const [isonline, setonline] = useState(false);
   const [isVedioRequest, setVedioRequest] = useState(false);
+  console.log(isVedioRequest,"isVedioRequest")
   const [text, setText] = useState('');
   let ar = sessionStorage.getItem("activeRooms");
   const activeRooms = useRef(ar ? JSON.parse(ar) : []);
@@ -79,6 +80,8 @@ export default function Chat() {
   useEffect(() => {
     
     socketModel.on("recieve-video-call", (data) => {
+      console.log(data,"recive vedio call")
+      console.log(currectChat.current,"currectChat.current room id")
       if (currectChat.current == data.data.room_id) {
         setVedioRequest(true)
       }
@@ -219,7 +222,6 @@ export default function Chat() {
           user_id: user?.id
         }
         socketModel.emit("send-video-call", value);
-        console.log(value, "videovalue")
         setClient(agoraClient); // Save the client for later use (e.g., screen sharing)
         setRtcProps({
           appId: appId,  // Your Agora App ID
