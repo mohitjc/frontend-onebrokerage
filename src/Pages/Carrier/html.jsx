@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import ApiClient from '../../methods/api/apiClient';
 import loader from '../../methods/loader';
 import methodModel from '../../methods/methods';
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import SelectDropdown from '../../components/common/SelectDropdown';
 import statusModel from '../../models/status.model';
 import { IoIosRefresh, IoMdCheckmarkCircleOutline } from 'react-icons/io';
@@ -181,8 +182,15 @@ const Html = ({
                   <LiaEdit />
                 </a>
               </Tooltip></>}
-             
-             
+              {itm?.request_status=="accepted"? <Tooltip placement="top" title="Chat">
+                  <span
+                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                    onClick={() => ChatUser(itm.id)}
+                  >
+                  <IoChatbubbleEllipsesOutline />
+                  </span>
+                </Tooltip>:<></>}
+            
      
 
             </div>
