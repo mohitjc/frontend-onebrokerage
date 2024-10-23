@@ -44,9 +44,9 @@ export default function Chat() {
   const [emoji, setemoji] = useState(false)
   const [ChatWithUser, setChatWithUser] = useState(null);
   const [ChatWithUserName, setChatWithUserName] = useState({});
-  console.log(ChatWithUserName, "ChatWithUserName")
-  const [callingUser, setCallingUser] = useState({})
-  console.log(callingUser, "callingUser")
+  // console.log(ChatWithUserName, "ChatWithUserName")
+  // const [callingUser, setCallingUser] = useState({})
+  // console.log(callingUser, "callingUser")
   const [darkMode, setDarkMode] = useState(false);
   const [addmember, setaddmember] = useState(false)
   const [adddrivermemberlisting, setadddrivermemberListing] = useState([])
@@ -122,7 +122,6 @@ export default function Chat() {
         console.log('Token:', token);
         // Initialize Agora client
         const agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
-        
         console.log(agoraClient, "agoraclient")
         setClient(agoraClient); // Save the client for later use (e.g., screen sharing)
         setRtcProps({
@@ -134,13 +133,13 @@ export default function Chat() {
           room_id: channelName,
           user_id: user?.id
         }
-     
+
         socketModel.emit("send-video-call", value);
-        console.log(value,value)
+        console.log(value, "value")
         // Join the Agora channel with the token or null
         // await agoraClient.join(appId, responseChannelName, token, null);  // Join the Agora channel
         setInCall(true);  // Mark user as in the call
-        setCallingUser(user?.id)
+        // setCallingUser(user?.id)
       } catch (error) {
         console.error("Error starting the call:", error);
         alert('Failed to start the call. Please check the console for more details.');
@@ -188,6 +187,7 @@ export default function Chat() {
       }
     };
   }, [screenTrack]);
+
 
   const callbacks = {
     EndCall: () => setInCall(false)
@@ -241,7 +241,7 @@ export default function Chat() {
             setChannelName(res?.data?.channelName || channelName)
           }
         });
-  
+
         // Log the token to ensure it's correct
         console.log('Token:', audiotoken);
         // Initialize Agora client
@@ -252,16 +252,16 @@ export default function Chat() {
           client: null,
         };
 
-         rtc.client = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
+        rtc.client = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
 
         console.log(rtc.client, "agoraclient")
 
-        await rtc.client.join(appId,channelName, token ,user?.id);
+        await rtc.client.join(appId, channelName, token, user?.id);
         // Create a local audio track from the audio sampled by a microphone.
         rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
         // Publish the local audio tracks to the RTC channel.
         await rtc.client.publish([rtc.localAudioTrack]);
-    
+
         console.log("publish success!");
         setAudioClient(rtc.client); // Save the client for later use (e.g., screen sharing)
         setAudioRtcProps({
@@ -269,9 +269,9 @@ export default function Chat() {
           channel: channelName,
           token: token,  // Token from backend or null
         });
-       
+
         setInAudioCall(true);  // Mark user as in the call
- 
+
       } catch (error) {
         console.error("Error starting the call:", error);
         alert('Failed to start the call. Please check the console for more details.');
@@ -510,9 +510,6 @@ export default function Chat() {
 
     });
 
-
-
-
     let id = methodModel.getPrams('id')
     socketModel.on("user-online", (data) => {
 
@@ -550,6 +547,11 @@ export default function Chat() {
 
       setsidechat([...newdata])
     });
+
+    socketModel.on("recieve-video-call", (data) => {
+      console.log(data, "data")
+    });
+
     allroommemeber()
 
   }, [])
@@ -737,11 +739,9 @@ export default function Chat() {
 
                   {!inCall ? (
                     <div>
-                      {callingUser?.id == ChatWithUserName?.id && inCall ? <div onClick={startCall} disabled={isJoining}>
-                        JoinCall
-                      </div> : <div>
+                      <div>
                         <MdVideoCall onClick={startCall} disabled={isJoining} />
-                      </div>}
+                      </div>
                     </div>
 
                   ) : (
@@ -758,25 +758,18 @@ export default function Chat() {
 
                   {/* ***********************************Audiocall */}
                   {!inAudioCall ? (
-    <div>
-      {callingUser?.id === ChatWithUserName?.id && inCall ? (
-        <div onClick={startAudioCall} disabled={isAudioJoining}>
-          Join Call
-        </div>
-      ) : (
-        <div>
-          <MdCall onClick={startAudioCall} disabled={isAudioJoining} />
-        </div>
-      )}
-    </div>
-  ) : (
-    <div className='w-100 h-100 flex'>
-      <AgoraUIKit audioOnly={true} rtcProps={AudiortcProps} callbacks={Audiocallbacks} />
-      <div>
-        {/* Additional controls can go here */}
-      </div>
-    </div>
-  )}
+                    <div>
+                      <MdCall onClick={startAudioCall} disabled={isAudioJoining} />
+                    </div>
+
+                  ) : (
+                    <div className='w-100 h-100 flex'>
+                      <AgoraUIKit audioOnly={true} rtcProps={AudiortcProps} callbacks={Audiocallbacks} />
+                      <div>
+                        {/* Additional controls can go here */}
+                      </div>
+                    </div>
+                  )}
 
                   {/* ***********************************Audiocall */}
                   <div className="darkmode">
