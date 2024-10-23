@@ -75,6 +75,95 @@ export default function Chat() {
   const activeRooms = useRef(ar ? JSON.parse(ar) : []);
 
 
+  useEffect(() => {
+    
+    socketModel.on("recieve-video-call", (data) => {
+      console.log(data, "vediodata")
+    });
+
+    socketModel.on("receive-message", (data) => {
+      if (currectChat.current == data.data.room_id) {
+        messages.current.push({ ...data.data });
+
+        const uniqueMessages = Array.from(
+          new Set(messages.current.map((message) => message._id))
+        ).map((id) => {
+          return messages.current.find((message) => message._id === id);
+        });
+        setChatMessages([...uniqueMessages]);
+
+        setTimeout(() => {
+          chatScroll();
+        }, 100);
+      }
+    });
+
+    socketModel.on("receive-message1", (data) => {
+      const updatedSideChat = SideChatRef.current.map((chat) => {
+        if (chat?.room_id === data?.data?.room_id) {
+          return {
+            ...chat,
+            last_message: {
+              ...chat.last_message,
+              content: data?.data?.content,
+              createdAt: data.data.createdAt,
+            },
+            last_message_at: data.data.createdAt, // Ensure you update this field
+          };
+        }
+        return chat;
+      });
+
+      const sortedMessages = updatedSideChat
+        .filter(chat => chat.last_message_at)
+        .sort((a, b) => new Date(b.last_message_at) - new Date(a.last_message_at));
+      setsidechat(sortedMessages);
+
+    });
+
+    let id = methodModel.getPrams('id')
+    socketModel.on("user-online", (data) => {
+
+      if (id) {
+        if (id == data.data.user_id) {
+          setonline(true)
+
+        }
+      }
+      let newdata = SideChatRef.current?.map((item) => {
+        if (item?.room_members[0]?.user_id == data?.data?.user_id) {
+          return { ...item, room_members: [{ ...item?.room_members[0], isOnline: true }, ...item?.room_members.slice(1)] }
+        } else {
+          return item
+        }
+      });
+      setsidechat([...newdata])
+    });
+
+
+    socketModel.on("user-offline", (data) => {
+      if (id) {
+        if (id == data.data.user_id) {
+          setonline(false)
+        }
+      }
+
+      let newdata = SideChatRef.current?.map((item) => {
+        if (item?.room_members[0]?.user_id == data?.data?.user_id) {
+          return { ...item, room_members: [{ ...item?.room_members[0], isOnline: false }, ...item?.room_members.slice(1)] }
+        } else {
+          return item
+        }
+      });
+
+      setsidechat([...newdata])
+    });
+
+    allroommemeber()
+
+  }, [])
+
+
   // **************************************vedio call**********************
 
   const [inCall, setInCall] = useState(false);  // To track whether the user is in a call
@@ -122,20 +211,20 @@ export default function Chat() {
         console.log('Token:', token);
         // Initialize Agora client
         const agoraClient = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
-        console.log(agoraClient, "agoraclient")
-        setClient(agoraClient); // Save the client for later use (e.g., screen sharing)
-        setRtcProps({
-          appId: appId,  // Your Agora App ID
-          channel: channelName,
-          token: token,  // Token from backend or null
-        });
         let value = {
           room_id: channelName,
           user_id: user?.id
         }
 
         socketModel.emit("send-video-call", value);
-        console.log(value, "value")
+        console.log(value, "videovalue")
+        setClient(agoraClient); // Save the client for later use (e.g., screen sharing)
+        setRtcProps({
+          appId: appId,  // Your Agora App ID
+          channel: channelName,
+          token: token,  // Token from backend or null
+        });
+      
         // Join the Agora channel with the token or null
         // await agoraClient.join(appId, responseChannelName, token, null);  // Join the Agora channel
         setInCall(true);  // Mark user as in the call
@@ -283,17 +372,7 @@ export default function Chat() {
     }
   };
 
-  // useEffect=(()=>{
-  //   socketModel.on("recieve-video-call", (data) => {
-  //     console.log(data, "data")
-  //     if (currectChat.current == data.data.room_id) {
-  //         setCallingUser(data)
-  //       setTimeout(() => {
-  //         chatScroll();
-  //       }, 100);
-  //     }
-  //   });
-  // })
+
 
 
   // **********************************************Audio call******************************
@@ -467,95 +546,6 @@ export default function Chat() {
   }, [sidechat])
 
 
-  useEffect(() => {
-
-    socketModel.on("recieve-video-call", (data) => {
-      console.log(data, "vediodata")
-    });
-
-    socketModel.on("receive-message", (data) => {
-      console.log(data, "data")
-      if (currectChat.current == data.data.room_id) {
-        messages.current.push({ ...data.data });
-
-        const uniqueMessages = Array.from(
-          new Set(messages.current.map((message) => message._id))
-        ).map((id) => {
-          return messages.current.find((message) => message._id === id);
-        });
-        setChatMessages([...uniqueMessages]);
-
-        setTimeout(() => {
-          chatScroll();
-        }, 100);
-      }
-    });
-
-    socketModel.on("receive-message1", (data) => {
-      console.log(data, "==========");
-      const updatedSideChat = SideChatRef.current.map((chat) => {
-        if (chat?.room_id === data?.data?.room_id) {
-          return {
-            ...chat,
-            last_message: {
-              ...chat.last_message,
-              content: data?.data?.content,
-              createdAt: data.data.createdAt,
-            },
-            last_message_at: data.data.createdAt, // Ensure you update this field
-          };
-        }
-        return chat;
-      });
-
-      const sortedMessages = updatedSideChat
-        .filter(chat => chat.last_message_at)
-        .sort((a, b) => new Date(b.last_message_at) - new Date(a.last_message_at));
-      setsidechat(sortedMessages);
-
-    });
-
-    let id = methodModel.getPrams('id')
-    socketModel.on("user-online", (data) => {
-
-      if (id) {
-        if (id == data.data.user_id) {
-          setonline(true)
-
-        }
-      }
-      let newdata = SideChatRef.current?.map((item) => {
-        if (item?.room_members[0]?.user_id == data?.data?.user_id) {
-          return { ...item, room_members: [{ ...item?.room_members[0], isOnline: true }, ...item?.room_members.slice(1)] }
-        } else {
-          return item
-        }
-      });
-      setsidechat([...newdata])
-    });
-
-
-    socketModel.on("user-offline", (data) => {
-      if (id) {
-        if (id == data.data.user_id) {
-          setonline(false)
-        }
-      }
-
-      let newdata = SideChatRef.current?.map((item) => {
-        if (item?.room_members[0]?.user_id == data?.data?.user_id) {
-          return { ...item, room_members: [{ ...item?.room_members[0], isOnline: false }, ...item?.room_members.slice(1)] }
-        } else {
-          return item
-        }
-      });
-
-      setsidechat([...newdata])
-    });
-
-    allroommemeber()
-
-  }, [])
 
 
 
