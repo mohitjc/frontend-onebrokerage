@@ -70,6 +70,7 @@ export default function Chat() {
   const [sidechat, setsidechat] = useState([]);
   const [chatRoomId, setChatRoomId] = useState("");
   const [isonline, setonline] = useState(false);
+  const [isVedioRequest, setVedioRequest] = useState(false);
   const [text, setText] = useState('');
   let ar = sessionStorage.getItem("activeRooms");
   const activeRooms = useRef(ar ? JSON.parse(ar) : []);
@@ -78,7 +79,9 @@ export default function Chat() {
   useEffect(() => {
     
     socketModel.on("recieve-video-call", (data) => {
-      console.log(data, "vediodata")
+      if (currectChat.current == data.data.room_id) {
+        setVedioRequest(true)
+      }
     });
 
     socketModel.on("receive-message", (data) => {
@@ -215,7 +218,6 @@ export default function Chat() {
           room_id: channelName,
           user_id: user?.id
         }
-
         socketModel.emit("send-video-call", value);
         console.log(value, "videovalue")
         setClient(agoraClient); // Save the client for later use (e.g., screen sharing)
@@ -730,9 +732,12 @@ export default function Chat() {
 
                   {!inCall ? (
                     <div>
-                      <div>
+                      {
+                        isVedioRequest?<div onClick={startCall} disabled={isJoining}>Join Call</div>:  <div>
                         <MdVideoCall onClick={startCall} disabled={isJoining} />
                       </div>
+                      }
+                    
                     </div>
 
                   ) : (
