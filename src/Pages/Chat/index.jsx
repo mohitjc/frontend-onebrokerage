@@ -111,7 +111,7 @@ export default function Chat() {
     if (channelName) {
       setIsJoining(true); // Set to true while joining the call
       try {
-        ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=1&role=publisher`, {}, environment.chat_api).then((res) => {
+        ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id || user?.id}&role=publisher`, {}, environment.chat_api).then((res) => {
           if (res.success) {
             setToken(res?.data?.token)
             setChannelName(res?.data?.channelName || channelName)
@@ -228,7 +228,7 @@ export default function Chat() {
     if (channelName) {
       setIsAudioJoining(true); // Set to true while joining the call
       try {
-        ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=${user?._id || user?.id}&role=publisher`, {}, environment.chat_api).then((res) => {
+        ApiClient.get(`chat/user/getagoratoken?channelName=${channelName}&uid=1&role=publisher`, {}, environment.chat_api).then((res) => {
           if (res.success) {
             setAudioToken(res?.data?.token)
             setChannelName(res?.data?.channelName || channelName)
