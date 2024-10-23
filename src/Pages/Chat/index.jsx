@@ -549,7 +549,7 @@ export default function Chat() {
     });
 
     socketModel.on("recieve-video-call", (data) => {
-      console.log(data, "data")
+      console.log(data, "vediodata")
     });
 
     allroommemeber()
