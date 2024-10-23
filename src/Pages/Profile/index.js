@@ -8,7 +8,7 @@ import methodModel from "../../methods/methods";
 import { useSelector, useDispatch } from "react-redux";
 import PageLayout from "../../components/global/PageLayout";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
-import GooglePlacesAutocomplete from "../../components/common/GooglePlaceAutoComplete";
+import GooglePlaceAutoComplete from "../../components/common/GooglePlaceAutoCompleteNew";
 import addressModel from "../../models/address.model";
 import PhoneInput from "react-phone-input-2";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +34,7 @@ const Profile = () => {
     currentPassword: '',
     newPassword: '',
   });
-
+ console.log(form,"formform")
   const DestinationAddress = async (e) => {
 
     let address = {};
@@ -113,6 +113,14 @@ const Profile = () => {
     });
   };
 
+  const handleAddressChange = (value) => {
+    console.log(value,"address value")
+    setForm(prevForm => ({
+      ...prevForm,
+      address: value ? value.label : '' 
+    }));
+  };
+
   useEffect(() => {
     if (user && user.id) {
       gallaryData();
@@ -177,7 +185,7 @@ const Profile = () => {
   const handleSubmit2 = (e) => {
     e.preventDefault();
     setSubmitted(true)
-    if (user?.role == "carrier" && (!form?.fullName || !form?.email || !form?.address || !form?.trailers_number || !form?.team_truck || !form?.solo_truck || form?.trailer_type?.length == 0)) return
+    if (user?.role == "carrier" && (!form?.fullName || !form?.email || !form?.address || !form?.trailers_number || !form?.team_truck || !form?.solo_truck || form?.trailer_type?.length == 0 ||!form.tax_number)) return
     if (user?.role == "staff" && (!form?.fullName || !form?.email || !form?.address)) return
     if (user?.role == "driver" && (!form?.fullName || !form?.email || !form?.address || !form?.foundDriverDetails?.licence_number || !form?.foundDriverDetails?.license_image)) return
     // document.getElementById("closepopup").click()
@@ -729,13 +737,14 @@ const Profile = () => {
                                   <i className="fas fa-address-book"></i>
                                 </div>
                                 <div className='w-full h-full flex items-center'>
-                                  <GooglePlacesAutocomplete
-                                    value={form.address}
+                                  <GooglePlaceAutoComplete
+                                    value={form?.address}
                                     result={addressResult}
+                                        
                                     id="address"
                                     placeholder=""
                                     className='  w-full  relative break-all  text-sm placeholder:text-gray-500 h-full flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500'
-
+                          
                                   />
                                   {!form.address && submitted ? (
                                     <div className="invalid-feedback d-block star text-[12px]">
@@ -854,13 +863,7 @@ const Profile = () => {
                                     })
                                   }
                                 />
-                                {!form.fax_number && submitted ? (
-                                  <div className="invalid-feedback d-block star text-[12px]">
-                                    Fax Number is required
-                                  </div>
-                                ) : (
-                                  <></>
-                                )}
+                                
                               </div>
                             </div>
                             <div className="">
@@ -925,7 +928,7 @@ const Profile = () => {
                             onClick={() => {
                               ;
                               setSubmitted(true)
-                              if (!form?.fullName || !form?.email || !form?.address) {
+                              if (!form?.fullName || !form?.email || !form?.address ||!form?.tax_number) {
                                 SetNextForm(false)
                               }
                               else {
@@ -1301,11 +1304,13 @@ const Profile = () => {
                             <div className="grid grid-cols-12 gap-4 p-4">
                               <div className="lg:col-span-6 col-span-12 mb-3">
                                 <label>Address</label>
-                                <GooglePlacesAutocomplete
+                                <GooglePlaceAutoComplete
                                   value={form?.address}
+                                  onChange={(e) => handleAddressChange(e.target.value)}
                                   result={DestinationAddress}
                                   placeholder="Address"
                                   className="shadow-box border-1 border-gray-300 relative bg-gray-100 mb-3 w-full text-sm placeholder:text-gray-500 rounded-lg h-12 flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500"
+                                  required
                                 />
                               </div>
                               <div className="lg:col-span-6 col-span-12 mb-3">
