@@ -114,7 +114,6 @@ const Profile = () => {
   };
 
   const handleAddressChange = (value) => {
-    console.log(value,"address value")
     setForm(prevForm => ({
       ...prevForm,
       address: value ? value.label : '' 
@@ -137,7 +136,7 @@ const Profile = () => {
     }
     setForm({
       ...form,
-      address: e.value,
+      address: e.formatted_address,
       country: address.country || '',
       city: address.city || '',
       state: address.state || '',
@@ -151,7 +150,7 @@ const Profile = () => {
       // setTimezoneLoader(false)
       setForm({
         ...form,
-        address: e.value,
+        address: e.formatted_address,
         country: address.country || '',
         city: address.city || '',
         state: address.state || '',
@@ -163,7 +162,6 @@ const Profile = () => {
   };
 
   const uploadImage = (e) => {
-    console.log(e, "images")
     setForm({ ...form, baseImg: e.target.value });
     let files = e.target.files;
     let file = files.item(0);
@@ -739,8 +737,7 @@ const Profile = () => {
                                 <div className='w-full h-full flex items-center'>
                                   <GooglePlaceAutoComplete
                                     value={form?.address}
-                                    result={addressResult}
-                                        
+                                    result={addressResult}                        
                                     id="address"
                                     placeholder=""
                                     className='  w-full  relative break-all  text-sm placeholder:text-gray-500 h-full flex items-center gap-2 overflow-hidden px-2 hover:ring-orange-500 focus:border-orange-500'
@@ -1261,10 +1258,12 @@ const Profile = () => {
                                   // required
                                   value={form?.foundDriverDetails?.licence_number}
                                   onChange={(e) =>
-                                    setForm({
-                                      ...form?.foundDriverDetails,
-                                      licence_number: e.target.value,
-                                    })
+                                    setForm({ ...form,
+                                      foundDriverDetails:{
+                                        ...form?.foundDriverDetails,
+                                        licence_number: e.target.value
+                                      }
+                                      })
                                   }
                                 />
                                 {!form?.foundDriverDetails?.licence_number && submitted && (
@@ -1285,7 +1284,13 @@ const Profile = () => {
                                   value={form?.foundDriverDetails?.license_image}
                                   // multiple={true}
                                   result={(e) => {
-                                    setForm({ ...form?.foundDriverDetails, license_image: e.value })
+                                 
+                                    setForm({ ...form,
+                                      foundDriverDetails:{
+                                        ...form?.foundDriverDetails,
+                                        license_image: e.value
+                                      }
+                                      })
                                   }}
                                 />
                                 {submitted && !form?.foundDriverDetails?.license_image ? (

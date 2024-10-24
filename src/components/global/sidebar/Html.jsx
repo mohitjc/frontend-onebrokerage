@@ -402,16 +402,16 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                                 </NavLink>
                               </tooltip>
                             </li>
-                            {/* <li id="/pickeduploads">
+                            <li id="/pickeduptask">
                               <tooltip
                                 placement="right"
-                                title="Pickedup Loads"
+                                title="Pickedup Task"
                               >
                                 <NavLink
-                                to={`${user?.role == "driver" ? "/task" : ""}`}
+                                to={`${user?.role == "driver" ? "/pickeduptask" : ""}`}
                                   className={(isActive) =>
                                     "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                                    (location?.pathname == "/pickeduploads" &&
+                                    (location?.pathname == "/pickeduptask" &&
                                       " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                   }
                                 >
@@ -426,7 +426,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             </li>
 
 
-                            <li id="/intransitloads">
+                            {/* <li id="/intransitloads">
                               <tooltip
                                 placement="right"
                                 title="Intransit Loads"
