@@ -217,15 +217,15 @@ const View = () => {
                       {data && data?.origin_location_postal_code}
                     </p>
                   </div>
-                  { data?.origin_location_country?   <div className="col-span-12 lg:col-span-6 flex flex-col  ">
+
+                  {/* { data?.origin_location_country?   <div className="col-span-12 lg:col-span-6 flex flex-col  ">
                     <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">
                     Origin Country
                     </label>
                     <p className="text-[14px] text-black font-medium ">
-                      {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
                       {data && data?.origin_location_country}
                     </p>
-                  </div>:<></>}
+                  </div>:<></>} */}
                
                 </div>
                 <div className="grid grid-cols-12 p-4 bg-[#f9faff] m-4 border border-[#474e9c0f]">
@@ -269,15 +269,15 @@ const View = () => {
                       {data && data?.destination_location_postal_code}
                     </p>
                   </div>
-                  {data?.destination_location_country? <div className="col-span-12 lg:col-span-6 flex flex-col  ">
+
+                  {/* {data?.destination_location_country? <div className="col-span-12 lg:col-span-6 flex flex-col  ">
                     <label className="text-[14px] text-[#0000009c] tracking-wider  mb-1">
                     Destination Country
                     </label>
                     <p className="text-[14px] text-black font-medium ">
-                      {/* <MdOutlineEmail className="text-xl text-[#494f9f]" /> */}
                       {data && data?.destination_location_country}
                     </p>
-                  </div>:<></>}
+                  </div>:<></>} */}
                  
                 </div>
               </div>

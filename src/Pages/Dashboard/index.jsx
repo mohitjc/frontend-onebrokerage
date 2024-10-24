@@ -133,7 +133,8 @@ const Dashboard = () => {
 
         <div className=" w-full bg-white rounded-lg mt-6 ">
         <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow cursor-pointer" onClick={(e)=>history("/loads")}>
+        {!user?.role=="driver"?<>       
+         <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow cursor-pointer" onClick={(e)=>history("/loads")}>
               <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
                 <img
                   src="../assets/img/d1.svg"
@@ -146,21 +147,6 @@ const Dashboard = () => {
               </dt>
               <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
                 {data?.total_loads} 
-              </dd>
-            </div>
-            <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow cursor-pointer" onClick={(e)=>history("/trucks")}>
-              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
-                <img
-                  src="../assets/img/d1.svg"
-                  className="mx-auto  w-[30px]"
-                  alt=""
-                />
-              </div>
-              <dt className="text-base leading-7 text-black/40 mb-1">
-                Total Trucks
-              </dt>
-              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
-                {data?.totalTrucksCount} 
               </dd>
             </div>
             <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow cursor-pointer" onClick={(e)=>history("/drivers")}>
@@ -178,6 +164,40 @@ const Dashboard = () => {
               {data?.totalDriversCount} 
               </dd>
             </div>
+            <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow cursor-pointer" onClick={(e)=>history("/trucks")}>
+              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
+                <img
+                  src="../assets/img/d1.svg"
+                  className="mx-auto  w-[30px]"
+                  alt=""
+                />
+              </div>
+              <dt className="text-base leading-7 text-black/40 mb-1">
+                Total Trucks
+              </dt>
+              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
+                {data?.totalTrucksCount} 
+              </dd>
+            </div>
+            </>:<>  
+            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow  cursor-pointer" onClick={(e)=>history("/task")}>
+              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
+                <img
+                  src="../assets/img/d4.svg"
+                  className="mx-auto  w-[30px]"
+                  alt=""
+                />
+              </div>
+              <dt className="text-base leading-7 text-black/40 mb-1">
+              Total Tasks
+              </dt>
+              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
+              {data?.totalTaskCount} 
+              </dd>
+            </div></>}
+
+         
+       
             <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow  cursor-pointer" onClick={(e)=>history("/carrierstaff")}>
               <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
                 <img
@@ -194,7 +214,67 @@ const Dashboard = () => {
               </dd>
             </div>
 
-         
+            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow  cursor-pointer" onClick={(e)=>history("/pendingpickuptask")}>
+              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
+                <img
+                  src="../assets/img/d4.svg"
+                  className="mx-auto  w-[30px]"
+                  alt=""
+                />
+              </div>
+              <dt className="text-base leading-7 text-black/40 mb-1">
+              {user?.role=="driver"?"Pending Pickup Tasks":"Pending Pickup Loads"}
+              </dt>
+              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
+              {data?.pending_loads} 
+              </dd>
+            </div>
+            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow  cursor-pointer" onClick={(e)=>history("/pickeduptask")}>
+              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
+                <img
+                  src="../assets/img/d4.svg"
+                  className="mx-auto  w-[30px]"
+                  alt=""
+                />
+              </div>
+              <dt className="text-base leading-7 text-black/40 mb-1">
+              {user?.role=="driver"?"Pickedup Tasks":"Pickedup Loads"}
+              </dt>
+              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
+              {data?.pickedup_loads} 
+              </dd>
+            </div>
+            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow  cursor-pointer" onClick={(e)=>history("/intransittask")}>
+              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
+                <img
+                  src="../assets/img/d4.svg"
+                  className="mx-auto  w-[30px]"
+                  alt=""
+                />
+              </div>
+              <dt className="text-base leading-7 text-black/40 mb-1">
+              {user?.role=="driver"?"Intransit Tasks":"Intransit Loads"}
+              </dt>
+              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
+              {data?.intransit_loads} 
+              </dd>
+            </div>
+
+            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow  cursor-pointer" onClick={(e)=>history("/deliveredtask")}>
+              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
+                <img
+                  src="../assets/img/d4.svg"
+                  className="mx-auto  w-[30px]"
+                  alt=""
+                />
+              </div>
+              <dt className="text-base leading-7 text-black/40 mb-1">
+              {user?.role=="driver"?"Delivered Tasks":"Delivered Loads"}
+              </dt>
+              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
+              {data?.delivered_loads} 
+              </dd>
+            </div>
           
             
           </div>
