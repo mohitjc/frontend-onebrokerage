@@ -299,6 +299,12 @@ export default function Chat() {
   // **********************************************Audio call******************************
 
   useEffect(() => {
+
+    let token = localStorage.getItem("token")
+    if(!token)
+    {
+      history("/login")
+    }
     
     socketModel.on("recieve-video-call", (data) => {
       console.log(data,"recive vedio call")
