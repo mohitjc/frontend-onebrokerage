@@ -46,7 +46,7 @@ const Html = ({
 }) => {
   const [activeplan, setActivePlan] = useState();
   const history = useNavigate();
-  console.log(activeplan, "activeplan")
+ 
   useEffect(() => {
     // loader(true);
     ApiClient.get("active-plan").then((res) => {

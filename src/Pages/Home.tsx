@@ -16,7 +16,7 @@ const Html = ({
 }) => {
  
   const {page}=useParams()
-  console.log(page,"pagepage")
+
   return (
     <>
       <div className="hader_tops">

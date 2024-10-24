@@ -32,7 +32,7 @@ const Dashboard = () => {
    const getAllCounts = () => {
     ApiClient.get("total-loads",{addedBy:user?.id}).then((res) => {
       if (res.success) {
-        console.log(res,"response")
+      
         setData(res);
       }
     });
@@ -96,7 +96,6 @@ const Dashboard = () => {
           }
         }) 
 
-        // console.log("arr",arr)
         setDates(arr)
         // for (const date in res.data) {
         //   if (res.data.hasOwnProperty(date)) {

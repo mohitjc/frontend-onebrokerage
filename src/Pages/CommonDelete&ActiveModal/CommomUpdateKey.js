@@ -8,7 +8,7 @@ export default function CommonUpdateKeyModal({
 }) {
   const [ShowModal, setShowModal] = useState("none");
   const [price, setprice] = useState(0);
-  // console.log(show, "========;;;;;");
+ 
   useEffect(() => {
     setShow(show);
     if (show == "none") {

@@ -65,7 +65,7 @@ const AddEdit = () => {
   };
 
   const updatetag = (index, key, value) => {
-    console.log(value, "value");
+   
     let arr = Stops;
     arr[index][key] = value;
     SetStops([...arr]);

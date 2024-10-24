@@ -22,7 +22,6 @@ const View = () => {
     });
   };
 
-  console.log("DATA", data);
   useEffect(() => {
     getDetail();
   }, []);

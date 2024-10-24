@@ -146,7 +146,7 @@ const AddEdit = () => {
     } else {
       setAddressSellected(false);
     }
-    console.log(address,"address")
+  
     setForm({
       ...form,
       address: e.formatted_address,

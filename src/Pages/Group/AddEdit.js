@@ -76,7 +76,7 @@ const driverList =()=>{
       loader(false);
     });
   };
-console.log(drivers,"driversdriversdrivers")
+
   useEffect(() => {
     driverList()
   }, []);
@@ -84,7 +84,7 @@ console.log(drivers,"driversdriversdrivers")
     id: itm?.id,
     name: itm?.fullName
   }));
-  console.log(form,"formformformformform")
+
   useEffect(() => {
     if (id) {
       loader(true);
@@ -164,7 +164,7 @@ console.log(drivers,"driversdriversdrivers")
                 intialValue={form?.drivers}
                 result={e => {
                   setform({ ...form, drivers: e.value })
-                  console.log("e", e)
+                  
                 }}
                 options={drivers}
                 theme="search"

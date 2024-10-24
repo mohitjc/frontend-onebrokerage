@@ -75,7 +75,7 @@ const Orders = () => {
     ApiClient.get(url, f).then((res) => {
       if (res.success) {
         let data = res?.data?.elements || res?.data || [];
-        // console.log("ApiClient ddd",data)
+
         setOrders(data);
         setTotal(res?.data?.total);
       }

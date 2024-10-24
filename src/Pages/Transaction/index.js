@@ -145,14 +145,14 @@ const Transaction = () => {
     loader(true);
     ApiClient.postFormFileData(url, { file }).then((res) => {
       if (res.success) {
-        console.log("res", res);
+       
       }
       loader(false);
     });
   };
  
   const isAllow = (key = "") => {
-    let permissions = user?.permissions?.[0];
+    let permissions = user?.permissions;
     let value = permissions?.[key];
     if(user.role=='admin'||user?.role=="carrier") value=true
     // return true;

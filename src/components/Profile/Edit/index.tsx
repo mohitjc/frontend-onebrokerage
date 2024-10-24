@@ -108,7 +108,7 @@ const EditProfile = () => {
     }
   }, []);
 
-  console.log("DATA", data);
+
 
   return (
     <>

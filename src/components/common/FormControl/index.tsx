@@ -187,7 +187,7 @@ export default function FormControl({
             minLength={minlength}
             disabled={disabled}
             onChange={(e) => {
-              console.log("e", e.target);
+    
               onChange(e.target.value);
             }}
             onKeyDown={onkeyDown}
@@ -225,7 +225,7 @@ export default function FormControl({
             min={min}
             disabled={disabled}
             onChange={(e) => {
-              console.log("e", e.target);
+          
               onChange(e.target.value);
             }}
             onKeyDown={onkeyDown}

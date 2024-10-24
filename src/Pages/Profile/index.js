@@ -26,7 +26,6 @@ const Profile = () => {
   const [edit, SetEdit] = useState(false);
   const [changepassword, setChangePassword] = useState(false);
 
-  // console.log(edit,"editedit")
   const [addressSelected, setAddressSellected] = useState(false);
   const [form, setForm] = useState({
     trailers_number: '',
@@ -34,7 +33,7 @@ const Profile = () => {
     currentPassword: '',
     newPassword: '',
   });
- console.log(form,"formform")
+
   const DestinationAddress = async (e) => {
 
     let address = {};

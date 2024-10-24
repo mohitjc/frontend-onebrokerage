@@ -20,7 +20,7 @@ const AddEdit = () => {
     id: "",
     truck_data: [{ truck_number: "", vin_number: "" }], // Initialize with one set of fields
   });
-  console.log()
+
   const [submitted, setSubmitted] = useState(false);
   const history = useNavigate();
   const user = useSelector((state) => state.user);

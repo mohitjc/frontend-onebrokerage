@@ -23,7 +23,7 @@ const View = () => {
     const [Stops, setStops] = useState([]);
     const [ActiveStop, setActiveStop] = useState(0);
     const [data, setData] = useState();
-    console.log(data,"data")
+ 
     const [questions, setQuestions] = useState([]);
     
     const styles = {

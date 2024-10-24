@@ -126,7 +126,7 @@ const Features = () => {
     getData({ ...filters, count: e });
   };
   const changestatus = (e) => {
-    // console.log(e,"==============")
+ 
     setFilter({ ...filters, status: e, page: 1 });
     getData({ status: e, page: 1 });
   };
@@ -212,7 +212,7 @@ const Features = () => {
     loader(true);
     ApiClient.postFormFileData(url, { file }).then((res) => {
       if (res.success) {
-        console.log("res", res);
+     
       }
       loader(false);
     });

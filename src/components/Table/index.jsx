@@ -27,7 +27,7 @@ const Table = ({ className = '', data = [], sort_key, sorter = 'desc', theme = '
     }
     const crossclick = (itm) => {
         if (itm.isClose) {
-            console.log(itm, "itm")
+            
             result({ event: 'isClose', value: itm })
         }
     }

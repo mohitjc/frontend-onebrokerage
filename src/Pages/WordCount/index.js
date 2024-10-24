@@ -205,7 +205,7 @@ const Assignment = () => {
     loader(true);
     ApiClient.postFormFileData(url, { file }).then((res) => {
       if (res.success) {
-        console.log("res", res);
+     
       }
       loader(false);
     });
@@ -229,7 +229,7 @@ const Assignment = () => {
   }, []);
 
   const counterOffer=(item)=>{
-    console.log("form",item)
+ 
 
     setCounterForm({counterOffer:'',assignment_id:item?.id||item?._id,message:''})
     setCounterModal(true)

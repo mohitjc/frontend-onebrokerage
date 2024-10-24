@@ -241,7 +241,7 @@ const IntransitLoads = () => {
     loader(true);
     ApiClient.postFormFileData(url, { file }).then((res) => {
       if (res.success) {
-        console.log("res", res);
+     
       }
       loader(false);
     });
@@ -249,9 +249,9 @@ const IntransitLoads = () => {
 
   const isAllow = (key = "") => {
     let permissions = user?.permissions;
-    console.log(permissions,"permissions")
+  
     let value = permissions?.[key];
-    console.log(value,"permission value")
+  
     if (user.role == "admin"||user?.role=="carrier") value = true;
     // return true;
     return value;

@@ -33,7 +33,7 @@ const View = () => {
       }
     });
   };
-console.log(data,"datadatadatadata")
+
   const sortedQuestions = questions?.sort((a, b) => a.order - b.order);
 
   useEffect(() => {

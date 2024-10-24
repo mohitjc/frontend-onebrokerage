@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export default function CommonAcceptModal({ show, confirm, setShow, status }) {
   const [ShowModal, setShowModal] = useState("none");
-  // console.log(show, "========;;;;;");
+
   useEffect(() => {
     setShow(show);
   }, [show]);

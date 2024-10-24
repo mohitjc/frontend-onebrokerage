@@ -44,7 +44,7 @@ const Html = ({
   ChatUser,
   total = { total },
 }) => {
-  // console.log(user,"useruseruseruser")
+
   const Navigate = useNavigate();
   const [Min_rate, setMin_rate] = useState('');
   const [Max_rate, setMax_rate] = useState('');

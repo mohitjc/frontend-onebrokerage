@@ -184,7 +184,7 @@ const Users = () => {
     loader(true);
     ApiClient.postFormFileData(url, { file }).then((res) => {
       if (res.success) {
-        console.log("res", res);
+   
       }
       loader(false);
     });

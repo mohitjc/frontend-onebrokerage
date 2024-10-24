@@ -44,10 +44,7 @@ export default function Chat() {
   const [emoji, setemoji] = useState(false)
   const [ChatWithUser, setChatWithUser] = useState(null);
   const [ChatWithUserName, setChatWithUserName] = useState({});
-  console.log(ChatWithUserName,"ChatWithUserName")
-  // console.log(ChatWithUserName, "ChatWithUserName")
-  // const [callingUser, setCallingUser] = useState({})
-  // console.log(callingUser, "callingUser")
+
   const [darkMode, setDarkMode] = useState(false);
   const [addmember, setaddmember] = useState(false)
   const [adddrivermemberlisting, setadddrivermemberListing] = useState([])
@@ -72,7 +69,6 @@ export default function Chat() {
   const [chatRoomId, setChatRoomId] = useState("");
   const [isonline, setonline] = useState(false);
   const [isVedioRequest, setVedioRequest] = useState(false);
-  console.log(isVedioRequest,"isVedioRequest")
   const [isvedioCallRoomId,setvedioCallRoomId]=useState("")
   const [text, setText] = useState('');
   let ar = sessionStorage.getItem("activeRooms");
