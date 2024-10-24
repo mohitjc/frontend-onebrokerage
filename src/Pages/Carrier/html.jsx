@@ -62,8 +62,6 @@ const Html = ({
   const [Min_rate, setMin_rate] = useState('');
   const [Max_rate, setMax_rate] = useState('');
 
-
-
   //   useEffect(() => {
   //     loader(true);
   //     ApiClient.get("active-plan").then((res) => {   
@@ -124,36 +122,45 @@ const Html = ({
       },
     },
 
-    {
-      key: "request_status",
-      name: "Request Status",
-      // sort: true,
-      render: (row) => {
-        return <span className={`${row?.request_status}`}>{methodModel.capitalizeFirstLetter(row?.request_status)}</span>
-      },
-    },
-
-    {
-      key: "status",
-      name: "Status",
-      render: (row) => {
-        return (
-          <>
-            <div className="w-32" onClick={() => statusChange(row)}>
-              <span
-                className={`bg-[#494f9f] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-                          ${row.status == "deactive"
-                    ? " bg-gray-200 text-black"
-                    : "bg-[#494f9f] text-white"
-                  }`}
-              >
-                {row.status == "deactive" ? "inactive" : "active"}
+    ...(user?.role === "driver"
+      ?
+      []
+      : [
+        {
+          key: "request_status",
+          name: "Request Status",
+          render: (row) => {
+            return (
+              <span className={`${row?.request_status}`}>
+                {methodModel.capitalizeFirstLetter(row?.request_status)}
               </span>
-            </div>
-          </>
-        );
-      },
-    },
+            );
+          },
+        },
+        {
+          key: "status",
+          name: "Status",
+          render: (row) => {
+            return (
+              <>
+                <div className="w-32" onClick={() => statusChange(row)}>
+                  <span
+                    className={`bg-[#494f9f] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                              ${row.status == "deactive"
+                        ? " bg-gray-200 text-black"
+                        : "bg-[#494f9f] text-white"
+                      }`}
+                  >
+                    {row.status == "deactive" ? "inactive" : "active"}
+                  </span>
+                </div>
+              </>
+            );
+          },
+        },
+      ]),
+
+
     {
       key: "action",
       name: "Actions",
@@ -174,7 +181,7 @@ const Html = ({
                 <></>
               )} */}
               {/* {isAllow(`edit${shared.check}`) ? ( */}
-              {user?.role=="driver"?<></>:<> <Tooltip placement="top" title="Edit">
+              {user?.role == "driver" ? <></> : <> <Tooltip placement="top" title="Edit">
                 <a
                   className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
                   onClick={(e) => edit(itm.id)}
@@ -182,16 +189,16 @@ const Html = ({
                   <LiaEdit />
                 </a>
               </Tooltip></>}
-              {itm?.request_status=="accepted"? <Tooltip placement="top" title="Chat">
-                  <span
-                    className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
-                    onClick={() => ChatUser(itm.id)}
-                  >
+              {itm?.request_status == "accepted" ? <Tooltip placement="top" title="Chat">
+                <span
+                  className="border cursor-pointer  hover:opacity-70 rounded-lg bg-[#494f9f14] w-10 h-10 !text-primary flex items-center justify-center text-lg"
+                  onClick={() => ChatUser(itm.id)}
+                >
                   <IoChatbubbleEllipsesOutline />
-                  </span>
-                </Tooltip>:<>--</>}
-            
-     
+                </span>
+              </Tooltip> : <>--</>}
+
+
 
             </div>
           </>
@@ -304,63 +311,62 @@ const Html = ({
             </button>
           </form>
 
-      
 
-          <div className="flex gap-2 ml-auto">
+          {user?.role == "driver" ? <></> : <div className="flex gap-2 ml-auto">
 
             <div className=''>
-            <Menu as="div" className="relative ">
-            <div>
-              <MenuButton className="border-primary border leading-10 h-10 gap-2 inline-flex shadow-btn px-6 hover:opacity-80 text-sm text-primary hover:bg-primary rounded-lg  items-center w-fit">
-                <span className="absolute -inset-1.5" />
-                <span className="sr-only">Open user menu</span>
-                {filters?.request_status
-                  ? filters?.request_status == "accepted" ? "Accepted" : filters?.request_status == "rejected" ? "Rejected" : "Pending"
-                  : "All Request Status"}
-                  <span><IoChevronDownSharp />                  </span>
-              </MenuButton>
-            </div>
-            <MenuItems
-              transition
-              anchor="bottom end"
-              className="w-52 origin-top-right mt-4 rounded-xl border border-white/5 bg-white shadow p-1 text-sm/6 text-black transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
-            >
-              <MenuItem>
-            
-                  <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] group hover:text-white"  onClick={() => ChangeRequestStatus("")}>
-                    <FiUsers className="size-4 stroke-black group-hover:stroke-white" />
-                    All Carriers
-                  </button>
-         
-              </MenuItem>
-              <MenuItem>
-         
-                  <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white"   onClick={() => ChangeRequestStatus("accepted")}>
-                    <IoMdCheckmarkCircleOutline className="size-4 stroke-black group-hover:stroke-white" />
-                    Accepted Carriers
-                  </button>
-      
-              </MenuItem>
-              <MenuItem>
-                <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] group hover:text-white"  onClick={() => ChangeRequestStatus("pending")}>
-                  <IoGitPullRequestOutline className="size-4 stroke-black group-hover:stroke-white" />
-                  Pending Carriers
-                </button>
-              </MenuItem>
-              {/* <div className="my-1 h-px bg-gray-200" /> */}
-              <MenuItem>
-                <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 text-black hover:bg-[#3E549D] hover:text-white"
-                 onClick={() => ChangeRequestStatus("rejected")}>
-                  <RxCrossCircled className="size-4 stroke-black/30 hover:stroke-white" />
-                  Rejected Carriers
+              <Menu as="div" className="relative ">
+                <div>
+                  <MenuButton className="border-primary border leading-10 h-10 gap-2 inline-flex shadow-btn px-6 hover:opacity-80 text-sm text-primary hover:bg-primary rounded-lg  items-center w-fit">
+                    <span className="absolute -inset-1.5" />
+                    <span className="sr-only">Open user menu</span>
+                    {filters?.request_status
+                      ? filters?.request_status == "accepted" ? "Accepted" : filters?.request_status == "rejected" ? "Rejected" : "Pending"
+                      : "All Request Status"}
+                    <span><IoChevronDownSharp />                  </span>
+                  </MenuButton>
+                </div>
+                <MenuItems
+                  transition
+                  anchor="bottom end"
+                  className="w-52 origin-top-right mt-4 rounded-xl border border-white/5 bg-white shadow p-1 text-sm/6 text-black transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+                >
+                  <MenuItem>
 
-                </button>
-              </MenuItem>
-            </MenuItems>
+                    <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] group hover:text-white" onClick={() => ChangeRequestStatus("")}>
+                      <FiUsers className="size-4 stroke-black group-hover:stroke-white" />
+                      All Carriers
+                    </button>
+
+                  </MenuItem>
+                  <MenuItem>
+
+                    <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] hover:text-white" onClick={() => ChangeRequestStatus("accepted")}>
+                      <IoMdCheckmarkCircleOutline className="size-4 stroke-black group-hover:stroke-white" />
+                      Accepted Carriers
+                    </button>
+
+                  </MenuItem>
+                  <MenuItem>
+                    <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 hover:bg-[#3E549D] group hover:text-white" onClick={() => ChangeRequestStatus("pending")}>
+                      <IoGitPullRequestOutline className="size-4 stroke-black group-hover:stroke-white" />
+                      Pending Carriers
+                    </button>
+                  </MenuItem>
+                  {/* <div className="my-1 h-px bg-gray-200" /> */}
+                  <MenuItem>
+                    <button className="flex w-full items-center gap-2 rounded-lg py-1.5 px-3 text-black hover:bg-[#3E549D] hover:text-white"
+                      onClick={() => ChangeRequestStatus("rejected")}>
+                      <RxCrossCircled className="size-4 stroke-black/30 hover:stroke-white" />
+                      Rejected Carriers
+
+                    </button>
+                  </MenuItem>
+                </MenuItems>
 
 
 
-          </Menu>
+              </Menu>
             </div>
 
             <SelectDropdown
@@ -390,7 +396,8 @@ const Html = ({
             ) : (
               <></>
             )}
-          </div>
+          </div>}
+
         </div>
 
         {!loaging ? (

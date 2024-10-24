@@ -116,27 +116,34 @@ const Html = ({
       },
     },
 
-    {
-      key: "status",
-      name: "Status",
-      render: (row) => {
-        return (
-          <>
-            <div className="w-32" onClick={() => statusChange(row)}>
-              <span
-                className={`bg-[#494f9f] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
-                          ${row.status == "deactive"
-                    ? " bg-gray-200 text-black"
-                    : "bg-[#494f9f] text-white"
-                  }`}
-              >
-                {row.status == "deactive" ? "inactive" : "active"}
-              </span>
-            </div>
-          </>
-        );
-      },
-    },
+    ...(user?.role === "driver"
+      ? 
+      []
+      : [
+    
+        {
+          key: "status",
+          name: "Status",
+          render: (row) => {
+            return (
+              <>
+                <div className="w-32" onClick={() => statusChange(row)}>
+                  <span
+                    className={`bg-[#494f9f] cursor-pointer text-sm !px-3 h-[30px] w-[100px] flex items-center justify-center border border-[#EBEBEB] text-[#3C3E49A3] !rounded capitalize 
+                              ${row.status == "deactive"
+                        ? " bg-gray-200 text-black"
+                        : "bg-[#494f9f] text-white"
+                      }`}
+                  >
+                    {row.status == "deactive" ? "inactive" : "active"}
+                  </span>
+                </div>
+              </>
+            );
+          },
+        },
+      ]),
+
     
     {
       key: "action",
@@ -330,8 +337,7 @@ const Html = ({
                   </label>
                 </div>
               </div> */}
-
-          <div className="flex gap-2 ml-auto">
+{user?.role=="driver"?<></>: <div className="flex gap-2 ml-auto">
             <SelectDropdown
               id="statusDropdown"
               displayValue="name"
@@ -359,7 +365,8 @@ const Html = ({
             ) : (
               <></>
             )}
-          </div>
+          </div>}
+         
         </div>
 
         {!loaging ? (
