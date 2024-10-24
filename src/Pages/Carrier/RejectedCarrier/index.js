@@ -184,7 +184,7 @@ const RejectedCarrier = (p) => {
 
   const statusChange = (itm) => {
     // if (!(isAllow(`edit${shared.check}`) && itm.addedBy == user._id)) return;
-    if (!isAllow(`edit${shared.check}`)) return;
+    if (!isAllow(`${shared.check}_edit`)) return;
     let status = "active";
     if (itm.status == "active") status = "deactive";
 

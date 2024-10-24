@@ -245,9 +245,8 @@ const Html = ({
           <button
             className="bg-primary leading-10  h-10 flex items-center shadow-btn px-6 hover:opacity-80 text-sm text-white rounded-lg gap-2"
             onClick={adddriver}
-
           >
-            <FiPlus className="text-xl text-white" /> Add {shared.addTitle}
+            <FiPlus className="text-xl text-white" /> Add {shared?.addTitle}
           </button>
            ) : (
             <></>
