@@ -22,6 +22,7 @@ const Sidebar = ({ isOpen }) => {
     settings: ['/department', '/holidays', '/currency', '/continents', '/countries', '/regions', '/cities', '/refund-reason', '/web/settings'],
     carriers: ['/carriers', "/approvedcarriers" ,'/pendingcarrier',"/rejectedcarrier"],
     loads: ['/loads',"/pendingpickuploads", "/pickeduploads" ,'/intransitloads',"/deliveredloads"],
+    tasks: ['/task',"/pendingpickuptask"],
     // plan:["/plans "]
   };
 
