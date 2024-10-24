@@ -856,10 +856,10 @@ const Html = ({
         <div>
           <h3 className="text-2xl font-semibold text-[#111827]">
             {" "}
-            {shared.title}
+            PendingPickup Task
           </h3>
           <p class="text-sm font-normal text-[#75757A]">
-            Here you can see all about your {shared.title}
+            Here you can see all about your pending pickup task
           </p>
         </div>
 
