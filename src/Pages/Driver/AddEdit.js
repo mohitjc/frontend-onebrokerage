@@ -139,6 +139,7 @@ const AddEdit = () => {
 
 
   const addressResult = async (e) => {
+    console.log(e,"driveraddress")
     let address = {};
     if (e.place) {
       address = addressModel.getAddress(e.place);

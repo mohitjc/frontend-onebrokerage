@@ -426,16 +426,16 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             </li>
 
 
-                            {/* <li id="/intransitloads">
+                            <li id="/intransittask">
                               <tooltip
                                 placement="right"
-                                title="Intransit Loads"
+                                title="Intransit Task"
                               >
                                 <NavLink
-                                 to={`${user?.role == "driver" ? "/task" : ""}`}
+                                 to={`${user?.role == "driver" ? "/intransittask" : ""}`}
                                   className={(isActive) =>
                                     "p-2.5  flex items-center gap-[12px] text-sm font-normal text-black hover:!text-[#fff] hover:bg-[#494f9f] !no-underline transition-all  rounded-lg bg-gray-50 group " +
-                                    (location?.pathname == "/intransitloads" &&
+                                    (location?.pathname == "/intransittask" &&
                                       " !text-[#fff] !bg-[#494f9f] !font-medium active-bg")
                                   }
                                 >
@@ -449,7 +449,7 @@ const Html = ({ ListItemLink, tabclass, urlAllow, route, isOpen }) => {
                             </li>
 
 
-                            <li id="/deliveredloads">
+                            {/* <li id="/deliveredloads">
                               <tooltip placement="right" title="Delivered Loads">
                                 <NavLink
                                  to={`${user?.role == "driver" ? "/task" : ""}`}

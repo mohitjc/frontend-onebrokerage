@@ -36,15 +36,16 @@ const Profile = () => {
   });
  console.log(form,"formform")
   const DestinationAddress = async (e) => {
-
+console.log(e,"Second address")
     let address = {};
-    if (e.place) {
-      address = await addressModel.getAddress(e.place);
+    if (e) {
+      address = await addressModel.getAddress(e);
     }
+    console.log(address,"addresswith city")
 
     setForm({
       ...form,
-      address: e.value || "",
+      address: e.formatted_address || "",
       city: address.city || "",
       state: address.state || "",
       country: address.country || "",
@@ -127,6 +128,7 @@ const Profile = () => {
   }, [user?.id]);
 
   const addressResult = async (e) => {
+    console.log(e,"address")
     let address = {};
     if (e.place) {
       address = addressModel.getAddress(e.place);
@@ -1306,7 +1308,7 @@ const Profile = () => {
                             </div>
                           </> : <></>}
 
-                          {user?.role == "staff" ? <>      <div className="">
+                          {user?.role == "staff" ? <> <div className="">
                             <div className="grid grid-cols-12 gap-4 p-4">
                               <div className="lg:col-span-6 col-span-12 mb-3">
                                 <label>Address</label>

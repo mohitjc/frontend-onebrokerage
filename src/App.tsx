@@ -73,6 +73,7 @@ function App() {
     { url: "/task/detail/:id", path: "TaskManagement/View" },
     { url: "/pendingpickuptask", path: "TaskManagement/PendingPickupTask" },
     { url: "/pickeduptask", path: "TaskManagement/PickedupTask" },
+    { url: "/intransittask", path: "TaskManagement/IntransitTask" },
   ];
 
   sessionStorage.clear();
