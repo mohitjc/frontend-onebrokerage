@@ -928,7 +928,7 @@ const Profile = () => {
                             onClick={() => {
                               ;
                               setSubmitted(true)
-                              if (!form?.fullName || !form?.email || !form?.address ||!form?.tax_number) {
+                              if ((!form?.fullName || !form?.email || !form?.address)||(user?.role=="carrier" && !form?.tax_number)) {
                                 SetNextForm(false)
                               }
                               else {
