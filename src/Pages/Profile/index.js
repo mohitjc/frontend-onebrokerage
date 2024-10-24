@@ -36,12 +36,12 @@ const Profile = () => {
   });
  console.log(form,"formform")
   const DestinationAddress = async (e) => {
-console.log(e,"Second address")
+
     let address = {};
     if (e) {
       address = await addressModel.getAddress(e);
     }
-    console.log(address,"addresswith city")
+
 
     setForm({
       ...form,
