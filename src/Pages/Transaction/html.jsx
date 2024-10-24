@@ -43,7 +43,7 @@ const Html = ({
       },
     },
     {
-      key: "paln name",
+      key: "subscription_plan_name",
       name: "Plan Name",
       sort: true,
       render: (row) => {
@@ -53,7 +53,7 @@ const Html = ({
       },
     },
     {
-      key: "user name",
+      key: "user_id_name",
       name: "Carrier Name",
       sort: true,
       render: (row) => {
@@ -209,6 +209,9 @@ const Html = ({
               <Table
                 className=""
                 data={data}
+                modelName={shared?.title}
+                sort_key={filters?.key}
+                sorter={filters?.sorder}
                 columns={columns}
                 page={filters.page}
                 count={filters.count}
