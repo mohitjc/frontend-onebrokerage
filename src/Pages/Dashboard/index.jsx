@@ -134,21 +134,7 @@ const Dashboard = () => {
         <div className=" w-full bg-white rounded-lg mt-6 ">
         <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {user?.role=="driver"?<>       
-          <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow  cursor-pointer" onClick={(e)=>history("/task")}>
-              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
-                <img
-                  src="../assets/img/d4.svg"
-                  className="mx-auto  w-[30px]"
-                  alt=""
-                />
-              </div>
-              <dt className="text-base leading-7 text-black/40 mb-1">
-              Total Tasks
-              </dt>
-              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
-              {data?.totalTaskCount} 
-              </dd>
-            </div>
+        
             </>:<>  
             <div className="  border text-center border-gray-200 px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow cursor-pointer" onClick={(e)=>history("/loads")}>
               <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
@@ -212,6 +198,22 @@ const Dashboard = () => {
               </dt>
               <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
               {data?.totalStaffCount} 
+              </dd>
+            </div>
+
+            <div className="  border text-center border-gray-200  px-6 py-2 rounded-lg relative bg-[#fff] inner-shadow  cursor-pointer" onClick={(e)=>history("/loads")}>
+              <div className="bg-[#494f9f17] w-[80px] h-[80px] rounded-[50px] p-4 mx-auto flex mb-6 mt-5 ">
+                <img
+                  src="../assets/img/d4.svg"
+                  className="mx-auto  w-[30px]"
+                  alt=""
+                />
+              </div>
+              <dt className="text-base leading-7 text-black/40 mb-1">
+              {user?.role=="driver"?"Total Tasks":"Total Loads"}
+              </dt>
+              <dd className="text-3xl font-bold leading-9  text-black mb-3 ">
+              {data?.total_loads} 
               </dd>
             </div>
 

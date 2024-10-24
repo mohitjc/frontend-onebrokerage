@@ -346,7 +346,7 @@ const View = () => {
                                       >
                                         <Steps.Item
                                           title={
-                                            data?.stops[0]?.checkin
+                                            data?.stops[0]?.checkin || data?.shipment_status=="pickedup"
                                               ? 'Picked Up'
                                               : 'Pickup Pending'
                                           }
