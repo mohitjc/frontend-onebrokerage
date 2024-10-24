@@ -128,10 +128,9 @@ const Profile = () => {
   }, [user?.id]);
 
   const addressResult = async (e) => {
-    console.log(e,"address")
     let address = {};
-    if (e.place) {
-      address = addressModel.getAddress(e.place);
+    if (e) {
+      address = addressModel.getAddress(e);
       setAddressSellected(true);
     } else {
       setAddressSellected(false);

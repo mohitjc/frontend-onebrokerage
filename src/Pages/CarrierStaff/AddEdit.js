@@ -17,7 +17,7 @@ import shared from "./shared";
 import { FaSuperpowers, FaUserAlt } from "react-icons/fa";
 import { FaFileZipper, FaLocationDot } from "react-icons/fa6";
 import { IoIosCamera } from "react-icons/io";
-import GooglePlaceAutoComplete from "../../components/common/GooglePlaceAutoComplete";
+import GooglePlaceAutoComplete from "../../components/common/GooglePlaceAutoCompleteNew";
 const AddEdit = () => {
   const { id, CarrierID } = useParams();
   const [PermissionId, setPermissionId] = useState("");
@@ -869,13 +869,13 @@ const AddEdit = () => {
 
   const addressResult = async (e) => {
     let address = {};
-    if (e.place) {
-      address = await addressModel.getAddress(e.place);
+    if (e) {
+      address = await addressModel.getAddress(e);
     }
 
     setForm({
       ...form,
-      address: e.value,
+      address: e.formatted_address,
       country: address.country || "",
       city: address.city || "",
       state: address.state || "",

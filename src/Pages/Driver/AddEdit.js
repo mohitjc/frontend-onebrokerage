@@ -10,7 +10,7 @@ import shared from "./shared";
 import { useSelector } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import { toast } from "react-toastify";
-import GooglePlaceAutoComplete from "../../components/common/GooglePlaceAutoComplete";
+import GooglePlaceAutoComplete from "../../components/common/GooglePlaceAutoCompleteNew";
 import addressModel from "../../models/address.model";
 import ImageUpload from "../../components/common/ImageUpload";
 import { useNavigate } from "react-router-dom";
@@ -139,35 +139,35 @@ const AddEdit = () => {
 
 
   const addressResult = async (e) => {
-    console.log(e,"driveraddress")
     let address = {};
-    if (e.place) {
-      address = addressModel.getAddress(e.place);
+    if (e) {
+      address = addressModel.getAddress(e);
       setAddressSellected(true);
     } else {
       setAddressSellected(false);
     }
+    console.log(address,"address")
     setForm({
       ...form,
-      address: e.value,
+      address: e.formatted_address,
       country: address.country || "",
       city: address.city || "",
       state: address.state || "",
-      pincode: address.pincode || "",
+      pincode: address.zipcode || "",
       // lat: address.lat || "",
       // lng: address.lng || "",
     });
-    if (e.place) {
+    if (e) {
       // setTimezoneLoader(true)
-      const apires = await addressModel.gettimeZone(e.place);
+      const apires = await addressModel.gettimeZone(e);
       // setTimezoneLoader(false)
       setForm({
         ...form,
-        address: e.value,
+        address: e.formatted_address,
         country: address.country || "",
         city: address.city || "",
         state: address.state || "",
-        pincode: address.pincode || "",
+        pincode: address.zipcode || "",
         // lat: address.lat || "",
         // lng: address.lng || "",
       });
